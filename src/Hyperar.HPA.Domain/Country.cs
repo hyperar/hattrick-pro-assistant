@@ -1,19 +1,18 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IEntity.cs" company="Hyperar">
+// <copyright file="Country.cs" company="Hyperar">
 //     Copyright (c) Hyperar. All rights reserved.
 // </copyright>
 // <author>Matías Ezequiel Sánchez</author>
 //-----------------------------------------------------------------------
-namespace Hyperar.HPA.Domain.Interfaces
+namespace Hyperar.HPA.Domain
 {
-    /// <summary>
-    /// Entity contract.
-    /// </summary>
-    public interface IEntity
+    using Hyperar.HPA.Domain.Interfaces;
+
+    public class Country : HattrickEntityBase, IEntity, IHattrickEntity
     {
         /// <summary>
-        /// Gets or sets the Id.
+        /// Gets or sets the Name.
         /// </summary>
-        int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

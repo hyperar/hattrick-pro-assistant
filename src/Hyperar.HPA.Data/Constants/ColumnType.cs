@@ -17,6 +17,11 @@ namespace Hyperar.HPA.Data.Constants
         internal const string BigInt = "bigint";
 
         /// <summary>
+        /// Date column type constant.
+        /// </summary>
+        internal const string Date = "Date";
+
+        /// <summary>
         /// Int column type constant.
         /// </summary>
         internal const string Int = "int";

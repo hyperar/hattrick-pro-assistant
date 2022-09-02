@@ -24,11 +24,19 @@ namespace Hyperar.HPA.Data.Mappings
         {
             builder.Property(p => p.UserName)
                 .HasColumnName(Constants.ColumnName.UserName)
-                .HasColumnOrder(2)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(128)
                 .IsRequired()
                 .IsUnicode();
+
+            builder.Property(p => p.SupporterTier)
+                .HasColumnName(Constants.ColumnName.SupporterTier)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.Int)
+                .IsRequired();
         }
 
         /// <summary>

@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
+    <Reference Include="Hyperar.OAuthCore">
+      <HintPath>..\Libraries\Hyperar.OAuthCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ namespace Hyperar.HPA.UserInterface
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
@@ -16,20 +16,7 @@ namespace Hyperar.HPA.UserInterface
 
             var serviceProvider = RegisterDependencies();
 
-            var context = serviceProvider.GetRequiredService<Data.DatabaseContext>();
-
-            var managerRepository = serviceProvider.GetRequiredService<Data.Interfaces.IHattrickRepository<Domain.Manager>>();
-
-            if (managerRepository.GetById(1) == null)
-            {
-                managerRepository.Insert(new Domain.Manager
-                {
-                    HattrickId = 123456,
-                    UserName = "test"
-                });
-
-                context.Save();
-            }
+            serviceProvider.GetRequiredService<Data.Interfaces.IDatabaseContext>();
 
             Application.Run(serviceProvider.GetRequiredService<Forms.FormMain>());
         }
@@ -48,6 +35,10 @@ namespace Hyperar.HPA.UserInterface
 
             serviceCollection.AddScoped(typeof(Data.Interfaces.IRepository<>), typeof(Data.Repository<>));
             serviceCollection.AddScoped(typeof(Data.Interfaces.IHattrickRepository<>), typeof(Data.HattrickRepository<>));
+
+            // Register OAuth objects.
+
+            serviceCollection.AddTransient<HattrickClient.ApiClient>();
 
             // Registers forms.
             serviceCollection.AddTransient<Forms.FormMain>();

@@ -3,19 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperar.HPA.Data", "Hyperar.HPA.Data\Hyperar.HPA.Data.csproj", "{80762901-2C64-43B8-9BBA-7C88D0FD64C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.Data", "Hyperar.HPA.Data\Hyperar.HPA.Data.csproj", "{80762901-2C64-43B8-9BBA-7C88D0FD64C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperar.HPA.Business", "Hyperar.HPA.Business\Hyperar.HPA.Business.csproj", "{95BDCA2B-3603-4530-9DB3-F225F2D50395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.Business", "Hyperar.HPA.Business\Hyperar.HPA.Business.csproj", "{95BDCA2B-3603-4530-9DB3-F225F2D50395}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperar.HPA.Domain", "Hyperar.HPA.Domain\Hyperar.HPA.Domain.csproj", "{20525795-6555-4211-80E6-4BA3287319EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.Domain", "Hyperar.HPA.Domain\Hyperar.HPA.Domain.csproj", "{20525795-6555-4211-80E6-4BA3287319EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperar.HPA.Common", "Hyperar.HPA.Common\Hyperar.HPA.Common.csproj", "{0BCAC202-359F-4691-8910-CCE5129D9275}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.Common", "Hyperar.HPA.Common\Hyperar.HPA.Common.csproj", "{0BCAC202-359F-4691-8910-CCE5129D9275}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperar.HPA.Facade", "Hyperar.HPA.Facade\Hyperar.HPA.Facade.csproj", "{E6EBB989-EDA0-438D-B800-235155D32260}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.Facade", "Hyperar.HPA.Facade\Hyperar.HPA.Facade.csproj", "{E6EBB989-EDA0-438D-B800-235155D32260}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperar.HPA.UserInterface", "Hyperar.HPA.UserInterface\Hyperar.HPA.UserInterface.csproj", "{6E616EC0-2345-4F8E-8E09-73FCD8225FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.UserInterface", "Hyperar.HPA.UserInterface\Hyperar.HPA.UserInterface.csproj", "{6E616EC0-2345-4F8E-8E09-73FCD8225FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperar.HPA.Localization", "Hyperar.HPA.Localization\Hyperar.HPA.Localization.csproj", "{4329E22A-EEF7-4C58-8FC6-821DB770549D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.Localization", "Hyperar.HPA.Localization\Hyperar.HPA.Localization.csproj", "{4329E22A-EEF7-4C58-8FC6-821DB770549D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperar.HPA.HattrickClient", "Hyperar.HPA.HattrickClient\Hyperar.HPA.HattrickClient.csproj", "{96D58290-C386-42CA-A333-CC7FB1EF6904}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4766F49-E30A-417D-9215-7EF3FF0B2670}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +58,10 @@ Global
 		{4329E22A-EEF7-4C58-8FC6-821DB770549D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4329E22A-EEF7-4C58-8FC6-821DB770549D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4329E22A-EEF7-4C58-8FC6-821DB770549D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D58290-C386-42CA-A333-CC7FB1EF6904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D58290-C386-42CA-A333-CC7FB1EF6904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D58290-C386-42CA-A333-CC7FB1EF6904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D58290-C386-42CA-A333-CC7FB1EF6904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,17 @@
-﻿namespace Hyperar.HPA.Domain
+﻿//-----------------------------------------------------------------------
+// <copyright file="EntityBase.cs" company="Hyperar">
+//     Copyright (c) Hyperar. All rights reserved.
+// </copyright>
+// <author>Matías Ezequiel Sánchez</author>
+//-----------------------------------------------------------------------
+namespace Hyperar.HPA.Domain
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Hyperar.HPA.Domain.Interfaces;
 
+    /// <summary>
+    /// IEntity base implementation.
+    /// </summary>
     public abstract class EntityBase : IEntity, ICloneable
     {
         /// <summary>
@@ -14,6 +19,10 @@
         /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Creates a shallow copy of the current object.
+        /// </summary>
+        /// <returns>A shallow copy of the current object.</returns>
         public object Clone()
         {
             return this.MemberwiseClone();

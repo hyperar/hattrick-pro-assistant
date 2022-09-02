@@ -16,6 +16,7 @@
     <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
     <ProjectReference Include="..\Hyperar.HPA.Domain\Hyperar.HPA.Domain.csproj" />
     <ProjectReference Include="..\Hyperar.HPA.Facade\Hyperar.HPA.Facade.csproj" />
+    <ProjectReference Include="..\Hyperar.HPA.HattrickClient\Hyperar.HPA.HattrickClient.csproj" />
     <ProjectReference Include="..\Hyperar.HPA.Localization\Hyperar.HPA.Localization.csproj" />
   </ItemGroup>
 

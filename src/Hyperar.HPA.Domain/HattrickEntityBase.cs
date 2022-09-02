@@ -1,12 +1,16 @@
-﻿namespace Hyperar.HPA.Domain
+﻿//-----------------------------------------------------------------------
+// <copyright file="HattrickEntityBase.cs" company="Hyperar">
+//     Copyright (c) Hyperar. All rights reserved.
+// </copyright>
+// <author>Matías Ezequiel Sánchez</author>
+//-----------------------------------------------------------------------
+namespace Hyperar.HPA.Domain
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Hyperar.HPA.Domain.Interfaces;
 
+    /// <summary>
+    /// IHattrickEntity base implementation.
+    /// </summary>
     public class HattrickEntityBase : EntityBase, IEntity, IHattrickEntity
     {
         /// <summary>

@@ -15,5 +15,10 @@ namespace Hyperar.HPA.Data.Constants
         /// Manager table name constant.
         /// </summary>
         internal const string Manager = "Manager";
+
+        /// <summary>
+        /// User table name constant.
+        /// </summary>
+        internal const string User = "User";
     }
 }
