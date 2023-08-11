@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>e093f84d-d5ba-4970-b336-822294a53548</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hyperar.OAuthCore" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hyperar.HPA.BusinessContracts\Hyperar.HPA.BusinessContracts.csproj" />
+    <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
+    <ProjectReference Include="..\Hyperar.HPA.Data\Hyperar.HPA.Data.csproj" />
+    <ProjectReference Include="..\Hyperar.HPA.Domain\Hyperar.HPA.Domain.csproj" />
+    <ProjectReference Include="..\Hyperar.HPA.Localization\Hyperar.HPA.Localization.csproj" />
+  </ItemGroup>
+
+</Project>
