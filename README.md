@@ -1,2 +1,2 @@
 # Hattrick Pro Assistant
-Open Source Assistant Manager Tool for www.hattrick.org.
+Open Source .NET Core Assistant Manager Tool for www.hattrick.org.
