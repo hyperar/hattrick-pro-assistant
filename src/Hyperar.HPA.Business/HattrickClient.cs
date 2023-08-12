@@ -20,10 +20,10 @@
         private const string InvalidateTokenKey = "OAuth:Urls:Base:InvalidateToken";
         private const string RequestTokenKey = "OAuth:Urls:Base:RequestToken";
 
-        private readonly IConfigurationRoot configuration;
+        private readonly IConfiguration configuration;
 
         private readonly IProtectedResourceUrlBuilder protectedResourceUrlBuilder;
-        public HattrickClient(IConfigurationRoot configuration, IProtectedResourceUrlBuilder protectedResourceUrlBuilder)
+        public HattrickClient(IConfiguration configuration, IProtectedResourceUrlBuilder protectedResourceUrlBuilder)
         {
             this.configuration = configuration;
             this.protectedResourceUrlBuilder = protectedResourceUrlBuilder;

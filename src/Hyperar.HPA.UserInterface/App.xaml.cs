@@ -1,63 +1,57 @@
 ﻿namespace Hyperar.HPA.UserInterface
 {
     using System.IO;
+    using System.Linq;
     using System.Windows;
+    using Hyperar.HPA.Data;
+    using Hyperar.HPA.DataContracts;
+    using Hyperar.HPA.UserInterface.HostBuilders;
+    using Hyperar.HPA.UserInterface.State;
+    using Hyperar.HPA.UserInterface.ViewModels;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        private readonly IHost host;
+
+        public App()
+        {
+            this.host = CreateHostBuilder().Build();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[]? args = null)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .AddConfiguration()
+                .AddDbContext()
+                .AddHattrickApi()
+                .AddViewModels()
+                .AddViews();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            var config = this.SetUpConfiguration();
-            var serviceProvider = this.SetUpDependencies(config);
+            this.host.Start();
 
-            var window = serviceProvider.GetRequiredService<MainWindow>();
+            using (var scope = this.host.Services.CreateScope())
+            {
+                using (var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
+
+            var window = this.host.Services.GetRequiredService<MainWindow>();
 
             window.Show();
 
             base.OnStartup(e);
-        }
-
-        private IConfigurationRoot SetUpConfiguration()
-        {
-            var builder = new ConfigurationBuilder();
-            builder.SetBasePath(Directory.GetCurrentDirectory())
-                .AddUserSecrets<App>()
-#if DEBUG
-                .AddJsonFile("appsettings.Debug.json", optional: false);
-#else
-                .AddJsonFile("appsettings.json", optional: false);
-#endif
-
-            return builder.Build();
-        }
-
-        private ServiceProvider SetUpDependencies(IConfigurationRoot configuration)
-        {
-            var serviceCollection = new ServiceCollection();
-
-            serviceCollection.AddSingleton(configuration);
-
-            // Register database objects.
-            serviceCollection.AddSingleton<Data.Strategies.ConnectionStringBuilder.AttachDatabaseFile>();
-            serviceCollection.AddSingleton<Data.Strategies.ConnectionStringBuilder.UseDatabase>();
-            serviceCollection.AddSingleton<DataContracts.IConnectionStringBuilderFactory, Data.Factories.ConnectionStringBuilder>();
-            serviceCollection.AddDbContext<DataContracts.IDatabaseContext, Data.DatabaseContext>();
-            serviceCollection.AddScoped(typeof(DataContracts.IRepository<>), typeof(Data.Repository<>));
-            serviceCollection.AddScoped(typeof(DataContracts.IHattrickRepository<>), typeof(Data.HattrickRepository<>));
-
-            // Register business objects.
-            serviceCollection.AddTransient<BusinessContracts.IHattrickClient, Business.HattrickClient>();
-            serviceCollection.AddSingleton<BusinessContracts.IProtectedResourceUrlBuilder, Business.ProtectedResourceUrlBuilder>();
-
-            // Register windows.
-            serviceCollection.AddTransient(typeof(MainWindow));
-
-            return serviceCollection.BuildServiceProvider();
         }
     }
 }

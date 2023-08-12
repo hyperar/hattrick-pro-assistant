@@ -20,7 +20,6 @@
     <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
     <ProjectReference Include="..\Hyperar.HPA.DataContracts\Hyperar.HPA.DataContracts.csproj" />
     <ProjectReference Include="..\Hyperar.HPA.Domain\Hyperar.HPA.Domain.csproj" />
-    <ProjectReference Include="..\Hyperar.HPA.Localization\Hyperar.HPA.Localization.csproj" />
   </ItemGroup>
 
   <ItemGroup>
