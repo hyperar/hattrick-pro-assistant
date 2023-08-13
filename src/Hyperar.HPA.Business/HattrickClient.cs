@@ -29,11 +29,6 @@
             this.protectedResourceUrlBuilder = protectedResourceUrlBuilder;
         }
 
-        /// <summary>
-        /// Checks the specified Access Token validity.
-        /// </summary>
-        /// <param name="accessToken">Access token.</param>
-        /// <returns>An IXmlEntity objects with the Hattrick response.</returns>
         public string CheckToken(OAuthToken token)
         {
             if (token == null)
@@ -56,11 +51,6 @@
                     session));
         }
 
-        /// <summary>
-        /// Gets the Access Token from Hattrick.
-        /// </summary>
-        /// <param name="request">Request token and verification code.</param>
-        /// <returns>Access Token.</returns>
         public GetAccessTokenResponse GetAccessToken(GetAccessTokenRequest request)
         {
             if (request == null)
@@ -90,10 +80,6 @@
             return result;
         }
 
-        /// <summary>
-        /// Gets a request token and the authorization URL.
-        /// </summary>
-        /// <returns>Request token and Authorization URL.</returns>
         public GetAuthorizationUrlResponse GetAuthorizationUrl()
         {
             var session = this.CreateOAuthSession();
@@ -107,13 +93,6 @@
             return result;
         }
 
-        /// <summary>
-        /// Access the specified protected resource file with the specified parameters.
-        /// </summary>
-        /// <param name="accessToken">Access token.</param>
-        /// <param name="file">File to fetch.</param>
-        /// <param name="parameters">File fetch parameters.</param>
-        /// <returns>IXmlEntity object with the Hattrick response.</returns>
         public string GetProtectedResource(GetProtectedResourceRequest request)
         {
             string url = this.protectedResourceUrlBuilder.BuildUrl(request.FileType, request.Parameters);
@@ -126,11 +105,6 @@
                     session));
         }
 
-        /// <summary>
-        /// Revokes the specified Access Token.
-        /// </summary>
-        /// <param name="accessToken">Access token to revoke.</param>
-        /// <returns>A string object with the Hattrick response.</returns>
         public string RevokeToken(OAuthToken token)
         {
             var session = this.CreateOAuthSession(token.Token, token.TokenSecret);
@@ -148,10 +122,6 @@
                     session));
         }
 
-        /// <summary>
-        /// Creates an unauthorized OAuthSession.
-        /// </summary>
-        /// <returns>Unauthorized OAuthSession object.</returns>
         private OAuthSession CreateOAuthSession()
         {
             string? consumerKey = this.configuration[ConsumerKeyKey];
@@ -216,11 +186,6 @@
                        callbackUrl);
         }
 
-        /// <summary>
-        /// Creates an authorized OAuthSession.
-        /// </summary>
-        /// <param name="accessToken">Access token.</param>
-        /// <returns>Authorized OAuthSession object.</returns>
         private OAuthSession CreateOAuthSession(string token, string tokenSecret)
         {
             var session = this.CreateOAuthSession();
@@ -234,12 +199,6 @@
             return session;
         }
 
-        /// <summary>
-        /// Makes an OAuth request to the specified URL and returns the response in a string object.
-        /// </summary>
-        /// <param name="url">URL to make the request to.</param>
-        /// <param name="session">Authorized OAuth session.</param>
-        /// <returns>Response content.</returns>
         private static Stream GetResponseContentForUrl(string url, OAuthSession session)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -259,11 +218,6 @@
                           .GetResponseStream();
         }
 
-        /// <summary>
-        /// Reads a response stream into a string.
-        /// </summary>
-        /// <param name="stream">Stream to read.</param>
-        /// <returns>A string object with the response content.</returns>
         private static string ReadResponseStream(Stream stream)
         {
             if (stream == null)
