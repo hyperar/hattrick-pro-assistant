@@ -4,12 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
     using System.Web;
     using Hyperar.HPA.BusinessContracts;
     using Hyperar.HPA.Common.Enums;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.VisualBasic.FileIO;
 
     public class ProtectedResourceUrlBuilder : IProtectedResourceUrlBuilder
     {
@@ -17,9 +15,9 @@
         private const string FileAndVersionKey = "OAuth:Urls:ProtectedResources:{0}:FileAndVersion";
         private const string ParametersKey = "OAuth:Urls:ProtectedResources:{0}:Parameters";
 
-        private readonly IConfigurationRoot configuration;
+        private readonly IConfiguration configuration;
 
-        public ProtectedResourceUrlBuilder(IConfigurationRoot configuration)
+        public ProtectedResourceUrlBuilder(IConfiguration configuration)
         {
             this.configuration = configuration;
         }

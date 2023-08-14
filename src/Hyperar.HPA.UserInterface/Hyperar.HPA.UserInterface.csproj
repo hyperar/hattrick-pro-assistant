@@ -6,12 +6,54 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <UserSecretsId>493257c3-5bd4-4503-b4ff-bdb6904b9605</UserSecretsId>
+    <ApplicationIcon>Resources\HPA.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\About_24.png" />
+    <None Remove="Resources\About_32.png" />
+    <None Remove="Resources\Background.jpg" />
+    <None Remove="Resources\Home_24.png" />
+    <None Remove="Resources\Home_32.png" />
+    <None Remove="Resources\Home_32.svg" />
+    <None Remove="Resources\Key_32.png" />
+    <None Remove="Resources\Quit_24.png" />
+    <None Remove="Resources\Quit_32.png" />
+    <None Remove="Resources\ScoreBoard_24.png" />
+    <None Remove="Resources\Scoreboard_32.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\HPA.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\About_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Home_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Key_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Quit_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Scoreboard_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,10 +65,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appSettings.Debug.json">
+    <None Update="appSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="appSettings.json">
+    <None Update="appSettings.Production.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

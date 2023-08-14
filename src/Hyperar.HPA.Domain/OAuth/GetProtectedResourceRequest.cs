@@ -1,10 +1,7 @@
 ﻿namespace Hyperar.HPA.Domain.OAuth
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Hyperar.HPA.Common.Enums;
 
     public class GetProtectedResourceRequest

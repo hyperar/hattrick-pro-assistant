@@ -1,12 +1,7 @@
 ﻿namespace Hyperar.HPA.Domain.Hattrick
 {
     using System;
-    using System.Collections.Generic;
-    using System.Formats.Asn1;
     using System.Globalization;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Xml.Serialization;
 
     [Serializable, XmlRoot("HattrickData")]
