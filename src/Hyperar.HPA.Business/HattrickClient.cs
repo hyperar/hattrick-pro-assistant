@@ -1,12 +1,11 @@
 ﻿namespace Hyperar.HPA.Business
 {
+    using System;
     using Hyperar.HPA.BusinessContracts;
     using Hyperar.HPA.Domain.OAuth;
     using Hyperar.OauthCore.Consumer;
     using Hyperar.OauthCore.Framework;
     using Microsoft.Extensions.Configuration;
-    using System;
-    using System.Collections.Specialized;
 
     public class HattrickClient : IHattrickClient
     {
@@ -130,7 +129,7 @@
             {
                 throw new NullReferenceException(nameof(consumerKey));
             }
-            
+
             string? consumerSecret = this.configuration[ConsumerSecretKey];
 
             if (consumerSecret == null)

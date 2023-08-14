@@ -12,17 +12,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hyperar.HPA.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220803015152_User")]
-    partial class User
+    [Migration("20230813121736_InitialCreate")]
+    partial class InitialCreate
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Manager", b =>
                 {
@@ -32,7 +33,7 @@ namespace Hyperar.HPA.Data.Migrations
                         .HasColumnName("Id")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<long>("HattrickId")
                         .HasColumnType("bigint")
@@ -48,7 +49,7 @@ namespace Hyperar.HPA.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(128)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("nvarchar")
                         .HasColumnName("UserName")
                         .HasColumnOrder(2);
 
@@ -57,7 +58,7 @@ namespace Hyperar.HPA.Data.Migrations
                     b.ToTable("Manager", (string)null);
                 });
 
-            modelBuilder.Entity("Hyperar.HPA.Domain.User", b =>
+            modelBuilder.Entity("Hyperar.HPA.Domain.Token", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,15 +66,7 @@ namespace Hyperar.HPA.Data.Migrations
                         .HasColumnName("Id")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(128)")
-                        .HasColumnName("Token")
-                        .HasColumnOrder(1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("TokenCreatedOn")
                         .HasColumnType("Date")
@@ -85,17 +78,25 @@ namespace Hyperar.HPA.Data.Migrations
                         .HasColumnName("TokenExpiresOn")
                         .HasColumnOrder(4);
 
-                    b.Property<string>("TokenSecret")
+                    b.Property<string>("TokenSecretValue")
                         .IsRequired()
                         .HasMaxLength(128)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(128)")
-                        .HasColumnName("TokenSecret")
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("TokenSecretValue")
                         .HasColumnOrder(2);
+
+                    b.Property<string>("TokenValue")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("TokenValue")
+                        .HasColumnOrder(1);
 
                     b.HasKey("Id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("Token", (string)null);
                 });
 #pragma warning restore 612, 618
         }

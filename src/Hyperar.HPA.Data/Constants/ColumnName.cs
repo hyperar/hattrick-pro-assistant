@@ -8,13 +8,13 @@
 
         internal const string SupporterTier = "SupporterTier";
 
-        internal const string Token = "Token";
+        internal const string TokenValue = "TokenValue";
 
         internal const string TokenCreatedOn = "TokenCreatedOn";
 
         internal const string TokenExpiresOn = "TokenExpiresOn";
 
-        internal const string TokenSecret = "TokenSecret";
+        internal const string TokenSecretValue = "TokenSecretValue";
 
         internal const string UserName = "UserName";
     }

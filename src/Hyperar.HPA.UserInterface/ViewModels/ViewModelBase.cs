@@ -1,13 +1,9 @@
 ﻿namespace Hyperar.HPA.UserInterface.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Hyperar.HPA.UserInterface.ViewModels.Interfaces;
 
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : IViewModel
     {
         public virtual void Dispose() { }
 

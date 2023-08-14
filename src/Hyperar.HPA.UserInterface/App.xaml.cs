@@ -1,13 +1,8 @@
 ﻿namespace Hyperar.HPA.UserInterface
 {
-    using System.IO;
-    using System.Linq;
     using System.Windows;
     using Hyperar.HPA.Data;
-    using Hyperar.HPA.DataContracts;
     using Hyperar.HPA.UserInterface.HostBuilders;
-    using Hyperar.HPA.UserInterface.State;
-    using Hyperar.HPA.UserInterface.ViewModels;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +26,8 @@
                 .AddConfiguration()
                 .AddDbContext()
                 .AddHattrickApi()
+                .AddServices()
+                .AddStores()
                 .AddViewModels()
                 .AddViews();
         }
@@ -39,12 +36,9 @@
         {
             this.host.Start();
 
-            using (var scope = this.host.Services.CreateScope())
+            using (var context = this.host.Services.GetRequiredService<DatabaseContextFactory>().CreateDbContext())
             {
-                using (var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>())
-                {
-                    context.Database.Migrate();
-                }
+                context.Database.Migrate();
             }
 
             var window = this.host.Services.GetRequiredService<MainWindow>();

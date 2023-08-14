@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hyperar.HPA.UserInterface.Factories;
-using Hyperar.HPA.UserInterface.Interfaces;
+using Hyperar.HPA.UserInterface.State.Interfaces;
 using Hyperar.HPA.UserInterface.ViewModels;
+using Hyperar.HPA.UserInterface.ViewModels.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Hyperar.HPA.UserInterface.HostBuilders
 {
-    static class AddViewModelsHostBuilderExtensions
+    public static class AddViewModelsHostBuilderExtensions
     {
         public static IHostBuilder AddViewModels(this IHostBuilder host)
         {
@@ -24,10 +20,17 @@ namespace Hyperar.HPA.UserInterface.HostBuilders
                 services.AddTransient<PermissionsViewModel>();
                 services.AddTransient<QuitViewModel>();
 
+                services.AddSingleton<CreateViewModel<PermissionsViewModel>>(services => () => CreatePermissions(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
 
             return host;
+        }
+
+        private static PermissionsViewModel CreatePermissions(IServiceProvider services)
+        {
+            return new PermissionsViewModel(
+                services.GetRequiredService<IAuthorizer>());
         }
     }
 }

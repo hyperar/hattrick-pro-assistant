@@ -4,12 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
     using System.Web;
     using Hyperar.HPA.BusinessContracts;
     using Hyperar.HPA.Common.Enums;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.VisualBasic.FileIO;
 
     public class ProtectedResourceUrlBuilder : IProtectedResourceUrlBuilder
     {

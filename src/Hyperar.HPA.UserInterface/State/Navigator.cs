@@ -1,11 +1,7 @@
 ﻿namespace Hyperar.HPA.UserInterface.State
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Hyperar.HPA.UserInterface.Interfaces;
+    using Hyperar.HPA.UserInterface.State.Interfaces;
     using Hyperar.HPA.UserInterface.ViewModels;
 
     public class Navigator : INavigator
@@ -27,6 +23,5 @@
         }
 
         public event Action? StateChanged;
-
     }
 }

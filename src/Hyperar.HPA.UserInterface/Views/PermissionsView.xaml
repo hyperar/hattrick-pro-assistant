@@ -4,16 +4,127 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hyperar.HPA.UserInterface.Views"
-             mc:Ignorable="d" 
-                          d:DesignHeight="500" d:DesignWidth="1024">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             xmlns:viewmodels="clr-namespace:Hyperar.HPA.UserInterface.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:PermissionsViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             d:DesignWidth="700">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    <Border Margin="25" Padding="25"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Background="White"
+        BorderBrush="{StaticResource NavButtonTextBrush}"
+        BorderThickness="3"
+        CornerRadius="2">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" Color="Gray"  Opacity="0.4"/>
+        </Border.Effect>
+        <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Style>
+                <Style x:Key="ViewTitle" TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontSize" Value="48" />
+                    <Setter Property="Margin" Value="0 5" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+                <Style x:Key="StepTitle" TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontSize" Value="24" />
+                    <Setter Property="Margin" Value="0 5" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Style>
+                <Style x:Key="StepDescription" TargetType="{x:Type TextBlock}">
+                    <Setter Property="Width" Value="{Binding ActualWidth, ElementName=ViewContainer}" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="Margin" Value="0 5" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Height" Value="32" />
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="MinWidth" Value="200" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="FontSize" Value="13" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="Padding" Value="3" />
+                    <Setter Property="Width" Value="300" />
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
 
-        <TextBlock Grid.Column="0" Grid.Row="0">Permissions</TextBlock>
-    </Grid>
+                <Style x:Key="AuthorizedStatus" TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="Foreground" Value="Green" />
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+                <Style x:Key="UnauthorizedStatus" TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBlock Style="{StaticResource ViewTitle}">Permissions</TextBlock>
+
+            <TextBlock Style="{StaticResource StepTitle}">Step 1</TextBlock>
+
+            <TextBlock Style="{StaticResource StepDescription}">
+                In order to use Hattrick Pro Assistant, you must first authorize it to access your Hattrick account data. Click 'Open Authorization Web Page' to begin the authorization process.
+            </TextBlock>
+
+            <Button Command="{Binding GetRequestTokenCommand}">Open Authorization Web Page</Button>
+
+            <TextBlock Style="{StaticResource StepTitle}">Step 2</TextBlock>
+
+            <TextBlock Style="{StaticResource StepDescription}">
+                Once you logged into your account, Hattrick will provide you with a Verification Code. Copy the code and paste it in the text box below, making sure there's no blank spaces at the beggining or the end of the code.
+            </TextBlock>
+
+            <TextBox IsEnabled="{Binding CanEnterVerificationCode}" Text="{Binding VerificationCode}"></TextBox>
+
+            <TextBlock Style="{StaticResource StepTitle}">Step 3</TextBlock>
+
+            <TextBlock Style="{StaticResource StepDescription}">
+                Once you pasted the Verification Code, you are all set to grant Hattrick Pro Assistant access to your account data. Just click the 'Grant Access' button.
+            </TextBlock>
+
+            <Button Command="{Binding GetAccessTokenCommand}" CommandParameter="{Binding GetAccessTokenRequest}" IsEnabled="{Binding CanGrantAccess}">Grant Access</Button>
+
+            <TextBlock
+                Style="{StaticResource AuthorizedStatus}"
+                Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}">
+                Authorized
+            </TextBlock>
+
+            <TextBlock
+                Style="{StaticResource UnauthorizedStatus}"
+                Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}">
+                Unauthorized
+            </TextBlock>
+
+            <TextBlock
+                Style="{StaticResource StepDescription}"
+                Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}">
+                Now that you have granted Hattrick Pro Assistant access to your account data, if you ever want to stop using it, you can revoke access using the button 'Revoke Access'.
+            </TextBlock>
+
+            <Button
+                Command="{Binding RevokeAccessTokenCommand}"
+                Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}">
+                Revoke Access
+            </Button>
+        </StackPanel>
+    </Border>
 </UserControl>

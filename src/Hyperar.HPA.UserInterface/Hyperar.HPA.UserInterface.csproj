@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Resources\About_24.png" />
     <None Remove="Resources\About_32.png" />
+    <None Remove="Resources\Background.jpg" />
     <None Remove="Resources\Home_24.png" />
     <None Remove="Resources\Home_32.png" />
     <None Remove="Resources\Home_32.svg" />
@@ -28,6 +29,9 @@
 
   <ItemGroup>
     <Resource Include="Resources\About_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Background.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Home_32.png">

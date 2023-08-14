@@ -4,6 +4,6 @@
     {
         internal const string Manager = "Manager";
 
-        internal const string User = "User";
+        internal const string Token = "Token";
     }
 }

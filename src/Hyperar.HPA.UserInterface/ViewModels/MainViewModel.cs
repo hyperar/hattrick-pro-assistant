@@ -1,16 +1,12 @@
 ﻿namespace Hyperar.HPA.UserInterface.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using System.Windows.Input;
     using Hyperar.HPA.UserInterface.Commands;
     using Hyperar.HPA.UserInterface.Enums;
-    using Hyperar.HPA.UserInterface.Interfaces;
-    using System.Windows.Input;
+    using Hyperar.HPA.UserInterface.State.Interfaces;
+    using Hyperar.HPA.UserInterface.ViewModels.Interfaces;
 
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : AuthorizedViewModelBase
     {
         private readonly IViewModelFactory viewModelFactory;
 
@@ -26,25 +22,35 @@
 
         public ICommand UpdateCurrentViewModelCommand { get; }
 
-        public MainViewModel(INavigator navigator, IViewModelFactory viewModelFactory)
+        public MainViewModel(INavigator navigator, IViewModelFactory viewModelFactory, IAuthorizer authorizer) : base(authorizer)
         {
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
 
-            this.navigator.StateChanged += Navigator_StateChanged;
+            this.navigator.StateChanged += this.Navigator_StateChanged;
 
             this.UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, this.viewModelFactory);
-            this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+
+            this.Initialize();
+
+            if (!this.IsAuthorized)
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
+            }
+            else
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+            }
         }
 
         private void Navigator_StateChanged()
         {
-            this.OnPropertyChanged(nameof(CurrentViewModel));
+            this.OnPropertyChanged(nameof(this.CurrentViewModel));
         }
 
         public override void Dispose()
         {
-            this.navigator.StateChanged -= Navigator_StateChanged;
+            this.navigator.StateChanged -= this.Navigator_StateChanged;
 
             base.Dispose();
         }

@@ -1,10 +1,8 @@
 ﻿namespace Hyperar.HPA.UserInterface.HostBuilders
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
@@ -14,12 +12,12 @@
         {
             host.ConfigureServices((context, services) =>
             {
-                services.AddSingleton<Data.Strategies.ConnectionStringBuilder.AttachDatabaseFile>();
-                services.AddSingleton<Data.Strategies.ConnectionStringBuilder.UseDatabase>();
-                services.AddSingleton<DataContracts.IConnectionStringBuilderFactory, Data.Factories.ConnectionStringBuilder>();
-                services.AddDbContext<DataContracts.IDatabaseContext, Data.DatabaseContext>();
-                services.AddScoped(typeof(DataContracts.IRepository<>), typeof(Data.Repository<>));
-                services.AddScoped(typeof(DataContracts.IHattrickRepository<>), typeof(Data.HattrickRepository<>));
+
+                string? connectionString = context.Configuration.GetConnectionString("LocalDb");
+                Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlServer(connectionString);
+
+                services.AddSingleton(new Data.DatabaseContextFactory(configureDbContext));
+                services.AddDbContext<Data.DatabaseContext>(configureDbContext);
             });
 
             return host;

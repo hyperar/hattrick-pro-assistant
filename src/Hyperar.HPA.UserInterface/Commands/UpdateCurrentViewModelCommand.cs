@@ -1,19 +1,17 @@
 ﻿namespace Hyperar.HPA.UserInterface.Commands
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Input;
     using Hyperar.HPA.UserInterface.Enums;
-    using Hyperar.HPA.UserInterface.Interfaces;
+    using Hyperar.HPA.UserInterface.State.Interfaces;
+    using Hyperar.HPA.UserInterface.ViewModels.Interfaces;
 
     public class UpdateCurrentViewModelCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
         private readonly INavigator navigator;
+
         private readonly IViewModelFactory viewModelFactory;
 
         public UpdateCurrentViewModelCommand(INavigator navigator, IViewModelFactory viewModelFactory)

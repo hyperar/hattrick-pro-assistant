@@ -15,7 +15,6 @@
 #else
                 c.AddJsonFile("appSettings.Production.json");
 #endif
-                //c.AddEnvironmentVariables();
             });
 
             return host;
