@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class Manager : HattrickEntity<Domain.Manager>, IEntityMapping<Domain.Manager>
+    internal class Manager : HattrickEntity<Domain.Database.Manager>, IEntityMapping<Domain.Database.Manager>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.Manager> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.Database.Manager> builder)
         {
             builder.Property(p => p.UserName)
                 .HasColumnName(Constants.ColumnName.UserName)
@@ -25,11 +25,11 @@
                 .IsRequired();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.Manager> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.Database.Manager> builder)
         {
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.Manager> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.Database.Manager> builder)
         {
             builder.ToTable(Constants.TableName.Manager);
         }

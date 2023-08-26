@@ -10,13 +10,20 @@
 
         public XmlFileType FileType { get; }
 
-        public Dictionary<string, string> Parameters { get; }
+        public Dictionary<string, string>? Parameters { get; }
 
-        public GetProtectedResourceRequest(string token, string tokenSecret, XmlFileType fileType, params KeyValuePair<string, string>[] parameters)
+        public GetProtectedResourceRequest(string token, string tokenSecret, XmlFileType fileType, Dictionary<string, string>? parameters)
         {
             this.AccessToken = new OAuthToken(token, tokenSecret);
             this.FileType = fileType;
-            this.Parameters = parameters.ToDictionary(x => x.Key, y => y.Value);
+            this.Parameters = parameters;
+        }
+
+        public GetProtectedResourceRequest(string token, string tokenSecret, XmlFileType fileType, params KeyValuePair<string, string>[]? parameters)
+        {
+            this.AccessToken = new OAuthToken(token, tokenSecret);
+            this.FileType = fileType;
+            this.Parameters = parameters?.ToDictionary(x => x.Key, y => y.Value);
         }
     }
 }

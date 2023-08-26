@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.Data
 {
     using System;
+    using Hyperar.HPA.Domain.Database;
     using Microsoft.EntityFrameworkCore;
 
     public class DatabaseContext : DbContext
@@ -43,7 +44,7 @@
             this.SaveChanges();
         }
 
-        public DbSet<Domain.Token> Tokens { get; private set; }
+        public DbSet<Token> Tokens { get; private set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

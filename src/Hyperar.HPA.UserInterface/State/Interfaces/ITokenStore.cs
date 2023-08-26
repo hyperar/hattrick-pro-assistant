@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.UserInterface.State.Interfaces
 {
     using System.ComponentModel;
-    using Hyperar.HPA.Domain;
+    using Hyperar.HPA.Domain.Database;
 
     public interface ITokenStore
     {

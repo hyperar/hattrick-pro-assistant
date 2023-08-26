@@ -13,6 +13,8 @@
     <None Remove="Resources\About_24.png" />
     <None Remove="Resources\About_32.png" />
     <None Remove="Resources\Background.jpg" />
+    <None Remove="Resources\BackgroundDark.jpg" />
+    <None Remove="Resources\Download_32.png" />
     <None Remove="Resources\Home_24.png" />
     <None Remove="Resources\Home_32.png" />
     <None Remove="Resources\Home_32.svg" />
@@ -32,6 +34,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\BackgroundDark.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Download_32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Home_32.png">

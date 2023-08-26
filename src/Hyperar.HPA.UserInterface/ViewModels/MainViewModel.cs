@@ -31,7 +31,7 @@
 
             this.UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, this.viewModelFactory);
 
-            this.Initialize();
+            this.InitializeToken();
 
             if (!this.IsAuthorized)
             {

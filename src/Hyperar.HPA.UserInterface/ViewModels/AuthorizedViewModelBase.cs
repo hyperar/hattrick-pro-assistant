@@ -42,7 +42,7 @@
             }
         }
 
-        public void Initialize()
+        public void InitializeToken()
         {
             if (!this.IsInitialized)
             {

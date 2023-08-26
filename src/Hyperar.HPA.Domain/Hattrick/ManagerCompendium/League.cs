@@ -1,17 +1,11 @@
 ﻿namespace Hyperar.HPA.Domain.Hattrick.ManagerCompendium
 {
-    using System.Xml.Serialization;
-
-    [XmlRoot("League")]
     public class League
     {
-        [XmlElement("LeagueId")]
         public uint LeagueId { get; set; }
 
-        [XmlElement("LeagueName")]
         public string LeagueName { get; set; } = string.Empty;
 
-        [XmlElement("Season")]
         public uint Season { get; set; }
     }
 }

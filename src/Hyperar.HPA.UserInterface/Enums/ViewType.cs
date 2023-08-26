@@ -4,8 +4,9 @@
     {
         Home,
         Matches,
-        About,
+        Download,
         Permissions,
+        About,
         Quit
     }
 }

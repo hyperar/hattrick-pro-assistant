@@ -4,7 +4,7 @@
     using System.Linq;
     using Hyperar.HPA.BusinessContracts;
     using Hyperar.HPA.Data;
-    using Hyperar.HPA.Domain;
+    using Hyperar.HPA.Domain.Database;
 
     public class TokenService : ITokenService
     {

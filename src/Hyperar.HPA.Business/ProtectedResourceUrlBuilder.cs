@@ -22,7 +22,7 @@
             this.configuration = configuration;
         }
 
-        public string BuildUrl(XmlFileType fileType, Dictionary<string, string> parameters)
+        public string BuildUrl(XmlFileType fileType, Dictionary<string, string>? parameters)
         {
             this.ValidateParameters(fileType, parameters);
 
@@ -41,10 +41,15 @@
             return uriBuilder.ToString();
         }
 
-        private void ValidateParameters(XmlFileType fileType, Dictionary<string, string> parameters)
+        private void ValidateParameters(XmlFileType fileType, Dictionary<string, string>? parameters)
         {
-            string[] allowedParametersKeys = this.configuration[string.Format(ParametersKey, fileType.ToString())]?
-                .Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+            if (parameters == null || parameters.Count == 0)
+            {
+                return;
+            }
+
+            string[] allowedParametersKeys = this.configuration.GetSection(string.Format(ParametersKey, fileType.ToString()))
+                .Get<string[]>() ?? Array.Empty<string>();
 
             string[] specifiedParametersKeys = parameters.Keys.ToArray();
 
@@ -59,14 +64,14 @@
 
                 foreach (var key in unrecognizedParameters)
                 {
-                    stringBuilder.AppendLine($"- {key}");
+                    stringBuilder.AppendLine($"- {key}.");
                 }
 
                 throw new ArgumentOutOfRangeException(nameof(parameters), stringBuilder.ToString());
             }
         }
 
-        private string BuildQueryString(XmlFileType fileType, Dictionary<string, string> parameters)
+        private string BuildQueryString(XmlFileType fileType, Dictionary<string, string>? parameters)
         {
             string fileTypeString = fileType.ToString();
 
@@ -74,9 +79,12 @@
 
             stringBuilder.Append(this.configuration[string.Format(FileAndVersionKey, fileTypeString)]);
 
-            foreach (var key in parameters.Keys)
+            if (parameters != null && parameters.Count > 0)
             {
-                stringBuilder.AppendFormat("&{0}={1}", key, HttpUtility.UrlEncode(parameters[key]));
+                foreach (var key in parameters.Keys)
+                {
+                    stringBuilder.AppendFormat("&{0}={1}", key, HttpUtility.UrlEncode(parameters[key]));
+                }
             }
 
             return stringBuilder.ToString();

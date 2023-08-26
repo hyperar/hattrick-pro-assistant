@@ -6,6 +6,10 @@
     [Serializable]
     public class HattrickData : XmlFileBase
     {
+        public HattrickData(string fileName) : base(fileName)
+        {
+        }
+
         [XmlElement("Manager")]
         public Manager Manager { get; set; } = new Manager();
     }

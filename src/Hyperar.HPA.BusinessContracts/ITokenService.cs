@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.BusinessContracts
 {
-    using Hyperar.HPA.Domain;
+    using Hyperar.HPA.Domain.Database;
 
     public interface ITokenService
     {

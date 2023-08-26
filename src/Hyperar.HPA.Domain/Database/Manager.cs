@@ -1,4 +1,4 @@
-﻿namespace Hyperar.HPA.Domain
+﻿namespace Hyperar.HPA.Domain.Database
 {
     using Hyperar.HPA.Common.Enums;
     using Hyperar.HPA.Domain.Interfaces;

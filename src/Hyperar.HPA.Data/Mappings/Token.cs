@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class Token : Entity<Domain.Token>, IEntityMapping<Domain.Token>
+    internal class Token : Entity<Domain.Database.Token>, IEntityMapping<Domain.Database.Token>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.Token> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.Database.Token> builder)
         {
             builder.Property(p => p.TokenValue)
                 .HasColumnName(Constants.ColumnName.TokenValue)
@@ -41,11 +41,11 @@
                 .IsRequired();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.Token> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.Database.Token> builder)
         {
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.Token> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.Database.Token> builder)
         {
             builder.ToTable(Constants.TableName.Token);
         }

@@ -2,7 +2,7 @@
 {
     using Hyperar.HPA.Domain.OAuth;
 
-    public interface IHattrickClient
+    public interface IHattrickService
     {
         string CheckToken(OAuthToken token);
 

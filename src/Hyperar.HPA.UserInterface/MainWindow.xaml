@@ -11,9 +11,9 @@
         mc:Ignorable="d"
         MinHeight="768"
         MinWidth="1024">
-    <Window.Background>
+    <Window.Background >
         <ImageBrush
-            ImageSource="Resources/Background.jpg" 
+            ImageSource="Resources/BackgroundDark.jpg" 
             TileMode="Tile" 
             Stretch="Uniform"
             AlignmentY="Top"

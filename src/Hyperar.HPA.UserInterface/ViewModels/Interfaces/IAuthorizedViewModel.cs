@@ -8,6 +8,6 @@
 
         bool IsInitialized { get; }
 
-        void Initialize();
+        void InitializeToken();
     }
 }

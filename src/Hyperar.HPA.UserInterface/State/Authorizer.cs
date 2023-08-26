@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel;
     using Hyperar.HPA.BusinessContracts;
+    using Hyperar.HPA.Domain;
     using Hyperar.HPA.Domain.OAuth;
     using Hyperar.HPA.UserInterface.State.Interfaces;
 
@@ -10,16 +11,16 @@
     {
         private readonly ITokenStore tokenStore;
 
-        private readonly IHattrickClient hattrickClient;
+        private readonly IHattrickService hattrickService;
 
         private readonly ITokenService tokenService;
 
         private bool isInitialized;
 
-        public Authorizer(ITokenStore tokenStore, IHattrickClient hattrickClient, ITokenService tokenService)
+        public Authorizer(ITokenStore tokenStore, IHattrickService hattrickService, ITokenService tokenService)
         {
             this.tokenStore = tokenStore;
-            this.hattrickClient = hattrickClient;
+            this.hattrickService = hattrickService;
             this.tokenService = tokenService;
 
             this.tokenStore.PropertyChanged += this.Token_PropertyChanged;
@@ -48,6 +49,20 @@
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public GetProtectedResourceRequest BuildProtectedResourseRequest(DownloadTask task)
+        {
+            if (this.tokenStore.CurrentToken == null)
+            {
+                throw new Exception($"Can't create download request because there is no Access Token.");
+            }
+
+            return new GetProtectedResourceRequest(
+                this.tokenStore.CurrentToken.TokenValue,
+                this.tokenStore.CurrentToken.TokenSecretValue,
+                task.FileType,
+                task.Parameters);
+        }
+
         public void CheckToken()
         {
             throw new NotImplementedException();
@@ -60,13 +75,13 @@
 
         public GetAccessTokenResponse GetAccessToken(string verificationCode, string token, string tokenSecret)
         {
-            return this.hattrickClient.GetAccessToken(
+            return this.hattrickService.GetAccessToken(
                 new GetAccessTokenRequest(verificationCode, token, tokenSecret));
         }
 
         public GetAuthorizationUrlResponse GetAuthorizationUrl()
         {
-            return this.hattrickClient.GetAuthorizationUrl();
+            return this.hattrickService.GetAuthorizationUrl();
         }
 
         public void InitializeToken()
@@ -100,7 +115,7 @@
             // This is only here to avoid .NET Core possible null reference message. If IsAuthorized is true, there's a token.
             if (this.tokenStore.CurrentToken != null)
             {
-                this.hattrickClient.RevokeToken(new OAuthToken(this.tokenStore.CurrentToken.TokenValue, this.tokenStore.CurrentToken.TokenSecretValue));
+                this.hattrickService.RevokeToken(new OAuthToken(this.tokenStore.CurrentToken.TokenValue, this.tokenStore.CurrentToken.TokenSecretValue));
                 this.tokenService.DeleteToken(this.tokenStore.CurrentToken.TokenValue, this.tokenStore.CurrentToken.TokenSecretValue);
 
                 this.InitializeToken();

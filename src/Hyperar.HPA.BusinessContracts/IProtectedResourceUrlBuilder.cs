@@ -5,6 +5,6 @@
 
     public interface IProtectedResourceUrlBuilder
     {
-        string BuildUrl(XmlFileType fileType, Dictionary<string, string> parameters);
+        string BuildUrl(XmlFileType fileType, Dictionary<string, string>? parameters);
     }
 }

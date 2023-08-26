@@ -7,7 +7,7 @@
     using Hyperar.OauthCore.Framework;
     using Microsoft.Extensions.Configuration;
 
-    public class HattrickClient : IHattrickClient
+    public class HattrickService : IHattrickService
     {
         private const string ConsumerKeyKey = "OAUTH_CONSUMER_KEY";
         private const string ConsumerSecretKey = "OAUTH_CONSUMER_SECRET";
@@ -22,7 +22,7 @@
         private readonly IConfiguration configuration;
 
         private readonly IProtectedResourceUrlBuilder protectedResourceUrlBuilder;
-        public HattrickClient(IConfiguration configuration, IProtectedResourceUrlBuilder protectedResourceUrlBuilder)
+        public HattrickService(IConfiguration configuration, IProtectedResourceUrlBuilder protectedResourceUrlBuilder)
         {
             this.configuration = configuration;
             this.protectedResourceUrlBuilder = protectedResourceUrlBuilder;

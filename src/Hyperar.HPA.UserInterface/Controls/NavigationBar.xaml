@@ -20,12 +20,13 @@
             <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <RadioButton 
@@ -43,9 +44,17 @@
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Matches}"
             IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:MatchesViewModel}}" />
-        
+
         <RadioButton
             Grid.Column="3"
+            ToolTip="Download"
+            Content="{StaticResource DownloadIcon32}"
+            Command="{Binding UpdateCurrentViewModelCommand}"
+            CommandParameter="{x:Static enums:ViewType.Download}"
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:DownloadViewModel}}" />
+        
+        <RadioButton
+            Grid.Column="4"
             ToolTip="Permissions"
             Content="{StaticResource KeyIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
@@ -53,7 +62,7 @@
             IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:PermissionsViewModel}}" />
         
         <RadioButton
-            Grid.Column="4"
+            Grid.Column="5"
             ToolTip="About"
             Content="{StaticResource AboutIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
@@ -61,7 +70,7 @@
             IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:AboutViewModel}}" />
         
         <RadioButton
-            Grid.Column="5"
+            Grid.Column="6"
             ToolTip="Quit"
             Content="{StaticResource QuitIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"

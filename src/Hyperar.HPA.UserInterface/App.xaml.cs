@@ -25,7 +25,6 @@
             return Host.CreateDefaultBuilder(args)
                 .AddConfiguration()
                 .AddDbContext()
-                .AddHattrickApi()
                 .AddServices()
                 .AddStores()
                 .AddViewModels()
@@ -35,6 +34,11 @@
         protected override void OnStartup(StartupEventArgs e)
         {
             this.host.Start();
+
+            //using (var stream = File.OpenRead("C:\\Users\\matia\\Desktop\\TeamDetails_2.xml"))
+            //{
+            //    var result = this.host.Services.GetRequiredService<IXmlFileService>().ParseFile(stream);
+            //}
 
             using (var context = this.host.Services.GetRequiredService<DatabaseContextFactory>().CreateDbContext())
             {

@@ -1,20 +1,21 @@
 ﻿namespace Hyperar.HPA.Domain.Hattrick.TeamDetails
 {
-    using System.Xml.Serialization;
-
-    [XmlRoot("Cup")]
     public class Cup
     {
-        [XmlElement("StillInCup")]
-        public string StillInCupString { get; set; } = string.Empty;
+        public bool StillInCup { get; set; }
 
-        [XmlIgnore]
-        public bool StillInCup
-        {
-            get
-            {
-                return bool.Parse(this.StillInCupString.ToLower());
-            }
-        }
+        public uint? CupId { get; set; }
+
+        public string? CupName { get; set; }
+
+        public uint? CupLeagueLevel { get; set; }
+
+        public uint? CupLevel { get; set; }
+
+        public uint? CupLeagueLevelIndex { get; set; }
+
+        public uint? MatchRound { get; set; }
+
+        public uint? MatchRoundsLeft { get; set; }
     }
 }

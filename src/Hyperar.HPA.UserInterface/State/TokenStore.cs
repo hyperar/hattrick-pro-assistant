@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.UserInterface.State
 {
     using System.ComponentModel;
-    using Hyperar.HPA.Domain;
+    using Hyperar.HPA.Domain.Database;
     using Hyperar.HPA.UserInterface.State.Interfaces;
 
     public class TokenStore : ITokenStore, INotifyPropertyChanged

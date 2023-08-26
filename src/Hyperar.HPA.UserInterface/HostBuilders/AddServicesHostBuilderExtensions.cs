@@ -11,7 +11,13 @@
         {
             host.ConfigureServices(services =>
             {
+                services.AddSingleton<IHattrickService, HattrickService>();
+                services.AddSingleton<IProtectedResourceUrlBuilder, ProtectedResourceUrlBuilder>();
                 services.AddSingleton<ITokenService, TokenService>();
+                services.AddSingleton<IXmlChildDownloadTaskBuilderFactory, XmlChildDownloadTaskBuilderFactory>();
+                services.AddSingleton<IXmlEntityFactory, XmlEntityFactory>();
+                services.AddSingleton<IXmlFileParserFactory, XmlFileParserFactory>();
+                services.AddSingleton<IXmlFileService, XmlFileService>();
             });
 
             return host;

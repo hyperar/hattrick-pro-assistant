@@ -7,6 +7,10 @@
     [Serializable]
     public class HattrickData : XmlFileBase
     {
+        public HattrickData(string fileName) : base(fileName)
+        {
+        }
+
         [XmlArray("LeagueList"), XmlArrayItem("League")]
         public List<League> LeagueList { get; set; } = new List<League>();
     }

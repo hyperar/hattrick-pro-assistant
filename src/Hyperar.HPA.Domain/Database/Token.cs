@@ -1,4 +1,4 @@
-﻿namespace Hyperar.HPA.Domain
+﻿namespace Hyperar.HPA.Domain.Database
 {
     using System;
     using Hyperar.HPA.Domain.Interfaces;

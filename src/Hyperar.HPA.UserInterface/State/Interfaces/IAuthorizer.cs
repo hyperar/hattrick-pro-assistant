@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.UserInterface.State.Interfaces
 {
     using System.ComponentModel;
+    using Hyperar.HPA.Domain;
     using Hyperar.HPA.Domain.OAuth;
 
     public interface IAuthorizer
@@ -22,5 +23,7 @@
         GetAuthorizationUrlResponse GetAuthorizationUrl();
 
         GetAccessTokenResponse GetAccessToken(string verificationCode, string requestToken, string requestTokenSecret);
+
+        GetProtectedResourceRequest BuildProtectedResourseRequest(DownloadTask task);
     }
 }
