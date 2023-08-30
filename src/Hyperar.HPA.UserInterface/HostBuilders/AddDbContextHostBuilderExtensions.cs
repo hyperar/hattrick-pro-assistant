@@ -14,7 +14,11 @@
             {
 
                 string? connectionString = context.Configuration.GetConnectionString("LocalDb");
-                Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlServer(connectionString);
+                Action<DbContextOptionsBuilder> configureDbContext = o =>
+                {
+                    o.UseLazyLoadingProxies();
+                    o.UseSqlServer(connectionString);
+                };
 
                 services.AddSingleton(new Data.DatabaseContextFactory(configureDbContext));
                 services.AddDbContext<Data.DatabaseContext>(configureDbContext);

@@ -21,7 +21,7 @@
             {
                 context.Tokens.Remove(context.Tokens.Single());
 
-                context.Save();
+                context.SaveChanges();
             }
         }
 
@@ -45,7 +45,7 @@
                     TokenExpiresOn = DateTime.MaxValue
                 });
 
-                context.Save();
+                context.SaveChanges();
             }
         }
     }

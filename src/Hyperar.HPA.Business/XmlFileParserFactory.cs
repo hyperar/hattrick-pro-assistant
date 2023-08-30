@@ -16,7 +16,6 @@
 
                 case XmlFileType.TeamDetails:
                     return new TeamDetails();
-                    break;
 
                 case XmlFileType.WorldDetails:
                     return new WorldDetails();

@@ -34,7 +34,8 @@
             return new DownloadViewModel(
                 services.GetRequiredService<IAuthorizer>(),
                 services.GetRequiredService<IHattrickService>(),
-                services.GetRequiredService<IXmlFileService>());
+                services.GetRequiredService<IXmlFileService>(),
+                services.GetRequiredService<IWorldService>());
         }
 
         private static PermissionsViewModel CreatePermissionsViewModel(IServiceProvider services)

@@ -14,17 +14,20 @@
     {
         private readonly IHattrickService hattrickService;
 
+        private readonly IWorldService worldService;
+
         private readonly IXmlFileService xmlFileService;
 
         private List<DownloadTask> downloadTasks;
 
-        public DownloadViewModel(IAuthorizer authorizer, IHattrickService hattrickService, IXmlFileService xmlFileService) : base(authorizer)
+        public DownloadViewModel(IAuthorizer authorizer, IHattrickService hattrickService, IXmlFileService xmlFileService, IWorldService worldService) : base(authorizer)
         {
             this.downloadTasks = new List<DownloadTask>();
 
             this.DownloadFilesCommand = new DownloadFilesCommand(this);
             this.hattrickService = hattrickService;
             this.xmlFileService = xmlFileService;
+            this.worldService = worldService;
         }
 
         public ObservableCollection<DownloadTask> DownloadTasks
@@ -139,7 +142,15 @@
             {
                 task.ParsedEntity = this.xmlFileService.ParseFile(task.Response);
 
-                return this.xmlFileService.GetChildDownloadTaskList(task.ParsedEntity);
+                if (task.ParsedEntity == null)
+                {
+                    this.ChangeTaskStatus(task, DownloadTaskStatus.Error);
+                }
+                else
+                {
+                    return this.xmlFileService.GetChildDownloadTaskList(task.ParsedEntity);
+                }
+
             }
 
             return null;
@@ -147,7 +158,26 @@
 
         private void StoreDownloadTask(DownloadTask task)
         {
+            if (task.Status == DownloadTaskStatus.Error || task.ParsedEntity == null)
+            {
+                return;
+            }
+
             this.ChangeTaskStatus(task, DownloadTaskStatus.Storing);
+
+            switch (task.FileType)
+            {
+                //case XmlFileType.ManagerCompendium:
+                //    break;
+                //case XmlFileType.TeamDetails:
+                //    break;
+                case XmlFileType.WorldDetails:
+                    this.worldService.ProcessWorldDetails(task.ParsedEntity);
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void CompleteTask(DownloadTask task)

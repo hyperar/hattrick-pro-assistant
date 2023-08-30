@@ -39,10 +39,17 @@
             }
         }
 
-        public void Save()
-        {
-            this.SaveChanges();
-        }
+        public DbSet<Country> Countries { get; private set; }
+
+        public DbSet<League> Leagues { get; private set; }
+
+        public DbSet<LeagueCalendar> LeagueCalendars { get; private set; }
+
+        public DbSet<LeagueCup> LeagueCups { get; private set; }
+
+        public DbSet<Manager> Managers { get; private set; }
+
+        public DbSet<Region> Regions { get; private set; }
 
         public DbSet<Token> Tokens { get; private set; }
 
