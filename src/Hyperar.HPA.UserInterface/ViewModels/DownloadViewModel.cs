@@ -56,11 +56,7 @@
             get
             {
                 // To avoid full progress bar on 0% completion.
-                if (this.downloadTasks.Count == 0)
-                {
-                    return 1;
-                }
-                return this.downloadTasks.Count * 4;
+                return this.downloadTasks.Count == 0 ? 1 : this.downloadTasks.Count * 4;
             }
         }
 
@@ -76,12 +72,9 @@
         {
             get
             {
-                if (this.DownloadTaskStepsCount == 0)
-                {
-                    return 0;
-                }
-
-                return (int)(this.CompletedDownloadTaskStepsCount / (decimal)this.DownloadTaskStepsCount * 100m);
+                return this.DownloadTaskStepsCount == 0
+                    ? 0
+                    : (int)(this.CompletedDownloadTaskStepsCount / (decimal)this.DownloadTaskStepsCount * 100m);
             }
         }
 
@@ -113,7 +106,7 @@
 
             if (childTasks != null)
             {
-                this.AddChildTasks(task, childTasks);
+                this.AddChildTasks(childTasks);
             }
 
             this.StoreDownloadTask(task);
@@ -150,7 +143,6 @@
                 {
                     return this.xmlFileService.GetChildDownloadTaskList(task.ParsedEntity);
                 }
-
             }
 
             return null;
@@ -197,7 +189,7 @@
             this.OnPropertyChanged(nameof(this.ProgressPercentage));
         }
 
-        private void AddChildTasks(DownloadTask task, List<DownloadTask>? childDownloadTasks)
+        private void AddChildTasks(List<DownloadTask>? childDownloadTasks)
         {
             if (childDownloadTasks == null)
             {

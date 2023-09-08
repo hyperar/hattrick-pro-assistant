@@ -11,9 +11,9 @@
             {
                 c.AddUserSecrets<App>();
 #if DEBUG
-                c.AddJsonFile("appSettings.json");
+                c.AddJsonFile("appSettings.Debug.json");
 #else
-                c.AddJsonFile("appSettings.Production.json");
+                c.AddJsonFile("appSettings.json");
 #endif
             });
 

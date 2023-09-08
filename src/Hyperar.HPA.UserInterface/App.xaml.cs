@@ -35,11 +35,6 @@
         {
             this.host.Start();
 
-            //using (var stream = File.OpenRead("C:\\Users\\matia\\Desktop\\TeamDetails_2.xml"))
-            //{
-            //    var result = this.host.Services.GetRequiredService<IXmlFileService>().ParseFile(stream);
-            //}
-
             using (var context = this.host.Services.GetRequiredService<DatabaseContextFactory>().CreateDbContext())
             {
                 context.Database.Migrate();

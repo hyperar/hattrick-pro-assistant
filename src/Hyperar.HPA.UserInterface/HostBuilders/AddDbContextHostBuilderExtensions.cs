@@ -12,8 +12,8 @@
         {
             host.ConfigureServices((context, services) =>
             {
-
                 string? connectionString = context.Configuration.GetConnectionString("LocalDb");
+
                 Action<DbContextOptionsBuilder> configureDbContext = o =>
                 {
                     o.UseLazyLoadingProxies();
