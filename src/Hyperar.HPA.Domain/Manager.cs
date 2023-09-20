@@ -1,27 +1,20 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="Manager.cs" company="Hyperar">
-//     Copyright (c) Hyperar. All rights reserved.
-// </copyright>
-// <author>Matías Ezequiel Sánchez</author>
-//-----------------------------------------------------------------------
-namespace Hyperar.HPA.Domain
+﻿namespace Hyperar.HPA.Domain
 {
     using Hyperar.HPA.Common.Enums;
     using Hyperar.HPA.Domain.Interfaces;
 
-    /// <summary>
-    /// Team manager class.
-    /// </summary>
-    public class Manager : HattrickEntityBase, IEntity, IHattrickEntity
+    public class Manager : HattrickEntityBase, IHattrickEntity
     {
-        /// <summary>
-        /// Gets or sets the Supporter Tier.
-        /// </summary>
+        public virtual Country Country { get; set; } = new Country();
+
+        public string CurrencyName { get; set; } = string.Empty;
+
+        public decimal CurrencyRate { get; set; }
+
+        public virtual List<SeniorTeam>? SeniorTeams { get; set; }
+
         public SupporterTier SupporterTier { get; set; }
 
-        /// <summary>
-        /// Gets or sets the UserName.
-        /// </summary>
         public string UserName { get; set; } = string.Empty;
     }
 }

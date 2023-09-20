@@ -1,15 +1,15 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    public enum XmlFileType : int
+    public enum XmlFileType : uint
     {
-        ManagerCompendium = 0,
-        TeamDetails = 1,
-        WorldDetails = 2
+        ArenaDetails = 0,
+
+        ManagerCompendium = 1,
+
+        Players = 2,
+
+        TeamDetails = 3,
+
+        WorldDetails = 4
     }
 }
