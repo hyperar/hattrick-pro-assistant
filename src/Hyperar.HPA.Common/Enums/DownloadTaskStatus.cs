@@ -1,12 +1,19 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum DownloadTaskStatus : int
+    public enum DownloadTaskStatus : uint
     {
         Pending = 0,
+
         Downloading = 1,
+
         Processing = 2,
-        Storing = 3,
+
+        Saving = 3,
+
         Done = 4,
-        Error = 5
+
+        Error = 5,
+
+        Cancelled = 6
     }
 }

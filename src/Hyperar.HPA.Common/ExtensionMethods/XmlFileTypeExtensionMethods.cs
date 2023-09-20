@@ -9,8 +9,14 @@
         {
             switch (value)
             {
+                case Constants.XmlFileName.ArenaDetails:
+                    return XmlFileType.ArenaDetails;
+
                 case Constants.XmlFileName.ManagerCompendium:
                     return XmlFileType.ManagerCompendium;
+
+                case Constants.XmlFileName.Players:
+                    return XmlFileType.Players;
 
                 case Constants.XmlFileName.TeamDetails:
                     return XmlFileType.TeamDetails;
