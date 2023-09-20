@@ -2,7 +2,7 @@
 {
     using Hyperar.HPA.Domain.Interfaces;
 
-    public class HattrickEntityBase : EntityBase, IEntity, IHattrickEntity
+    public abstract class HattrickEntityBase : IHattrickEntity
     {
         public uint HattrickId { get; set; }
     }
