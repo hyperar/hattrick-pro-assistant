@@ -65,11 +65,11 @@
         {
             var result = (HattrickData)entity;
 
-            result.User = this.ParseUserNode(reader);
-            result.Teams = this.ParseTeamsNode(reader);
+            result.User = ParseUserNode(reader);
+            result.Teams = ParseTeamsNode(reader);
         }
 
-        private Arena ParseArenaNode(XmlReader reader)
+        private static Arena ParseArenaNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -86,7 +86,7 @@
             return result;
         }
 
-        private BotStatus ParseBotStatusNode(XmlReader reader)
+        private static BotStatus ParseBotStatusNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -102,7 +102,7 @@
             return result;
         }
 
-        private Country ParseCountryNode(XmlReader reader)
+        private static Country ParseCountryNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -119,7 +119,7 @@
             return result;
         }
 
-        private Cup? ParseCupNode(XmlReader reader)
+        private static Cup? ParseCupNode(XmlReader reader)
         {
             Cup? result = null;
 
@@ -151,7 +151,7 @@
             return result;
         }
 
-        private Fanclub ParseFanclubNode(XmlReader reader)
+        private static Fanclub ParseFanclubNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -169,7 +169,7 @@
             return result;
         }
 
-        private List<Flag> ParseFlagListNode(XmlReader reader)
+        private static List<Flag> ParseFlagListNode(XmlReader reader)
         {
             var result = new List<Flag>();
 
@@ -178,7 +178,7 @@
 
             while (reader.Name == flagNodeName)
             {
-                result.Add(this.ParseFlagNode(reader));
+                result.Add(ParseFlagNode(reader));
             }
 
             // Reads closing element.
@@ -187,7 +187,7 @@
             return result;
         }
 
-        private Flag ParseFlagNode(XmlReader reader)
+        private static Flag ParseFlagNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -205,7 +205,7 @@
             return result;
         }
 
-        private Flags ParseFlagsNode(XmlReader reader)
+        private static Flags ParseFlagsNode(XmlReader reader)
         {
             var result = new Flags();
 
@@ -214,12 +214,12 @@
 
             if (reader.Name == awayFlagsNodeName)
             {
-                result.AwayFlags = this.ParseFlagListNode(reader);
+                result.AwayFlags = ParseFlagListNode(reader);
             }
 
             if (reader.Name == homeFlagsNodeName)
             {
-                result.HomeFlags = this.ParseFlagListNode(reader);
+                result.HomeFlags = ParseFlagListNode(reader);
             }
 
             // Reads closing element.
@@ -228,7 +228,7 @@
             return result;
         }
 
-        private Guestbook ParseGuestbookNode(XmlReader reader)
+        private static Guestbook ParseGuestbookNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -244,7 +244,7 @@
             return result;
         }
 
-        private Language ParseLanguageNode(XmlReader reader)
+        private static Language ParseLanguageNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -261,7 +261,7 @@
             return result;
         }
 
-        private LastMatch ParseLastMatchNode(XmlReader reader)
+        private static LastMatch ParseLastMatchNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -284,7 +284,7 @@
             return result;
         }
 
-        private LeagueLevelUnit ParseLeagueLevelUnitNode(XmlReader reader)
+        private static LeagueLevelUnit ParseLeagueLevelUnitNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -302,7 +302,7 @@
             return result;
         }
 
-        private League ParseLeagueNode(XmlReader reader)
+        private static League ParseLeagueNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -319,7 +319,7 @@
             return result;
         }
 
-        private MySupporters ParseMySupportersNode(XmlReader reader)
+        private static MySupporters ParseMySupportersNode(XmlReader reader)
         {
             var result = new MySupporters
             {
@@ -332,7 +332,7 @@
 
             while (reader.Name == supporterTeamNodeName)
             {
-                result.SupporterTeamList.Add(this.ParseSupporterTeamNode(reader));
+                result.SupporterTeamList.Add(ParseSupporterTeamNode(reader));
             }
 
             // Reads opening element.
@@ -341,7 +341,7 @@
             return result;
         }
 
-        private NationalTeam ParseNationalTeamNode(XmlReader reader)
+        private static NationalTeam ParseNationalTeamNode(XmlReader reader)
         {
             var result = new NationalTeam();
 
@@ -363,7 +363,7 @@
             return result;
         }
 
-        private List<NationalTeam>? ParseNationalTeamsNode(XmlReader reader)
+        private static List<NationalTeam>? ParseNationalTeamsNode(XmlReader reader)
         {
             List<NationalTeam>? result = null;
 
@@ -376,7 +376,7 @@
 
                 while (reader.Name == nationalTeamNodeName)
                 {
-                    result.Add(this.ParseNationalTeamNode(reader));
+                    result.Add(ParseNationalTeamNode(reader));
                 }
             }
 
@@ -386,7 +386,7 @@
             return result;
         }
 
-        private NextMatch ParseNextMatchNode(XmlReader reader)
+        private static NextMatch ParseNextMatchNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -407,7 +407,7 @@
             return result;
         }
 
-        private Rating ParsePowerRatingNode(XmlReader reader)
+        private static Rating ParsePowerRatingNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -426,7 +426,7 @@
             return result;
         }
 
-        private PressAnnouncement ParsePressAnnouncementNode(XmlReader reader)
+        private static PressAnnouncement ParsePressAnnouncementNode(XmlReader reader)
         {
             // Since there's multiple PressAnnouncement nodes with the same child elements but in different order, this mehtod is different than the rest.
             var result = new PressAnnouncement();
@@ -465,7 +465,7 @@
             return result;
         }
 
-        private Region ParseRegionNode(XmlReader reader)
+        private static Region ParseRegionNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -482,7 +482,7 @@
             return result;
         }
 
-        private SupportedTeam ParseSupportedTeamNode(XmlReader reader)
+        private static SupportedTeam ParseSupportedTeamNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -497,13 +497,13 @@
                 LeagueName = reader.ReadElementContentAsString(),
                 LeagueLevelUnitId = reader.ReadXmlValueAsUint(),
                 LeagueLevelUnitName = reader.ReadElementContentAsString(),
-                LastMatch = this.ParseLastMatchNode(reader),
-                NextMatch = this.ParseNextMatchNode(reader),
+                LastMatch = ParseLastMatchNode(reader),
+                NextMatch = ParseNextMatchNode(reader),
             };
 
             if (reader.Name == pressAnnouncementNodeName)
             {
-                result.PressAnnouncement = this.ParsePressAnnouncementNode(reader);
+                result.PressAnnouncement = ParsePressAnnouncementNode(reader);
             }
 
             // Reads closing element.
@@ -512,7 +512,7 @@
             return result;
         }
 
-        private SupportedTeams ParseSupportedTeamsNode(XmlReader reader)
+        private static SupportedTeams ParseSupportedTeamsNode(XmlReader reader)
         {
             var result = new SupportedTeams
             {
@@ -525,7 +525,7 @@
 
             while (reader.Name == supportedTeamNodeName)
             {
-                result.SupportedTeamList.Add(this.ParseSupportedTeamNode(reader));
+                result.SupportedTeamList.Add(ParseSupportedTeamNode(reader));
             }
 
             // Reads opening element.
@@ -534,7 +534,7 @@
             return result;
         }
 
-        private SupporterTeam ParseSupporterTeamNode(XmlReader reader)
+        private static SupporterTeam ParseSupporterTeamNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -557,7 +557,7 @@
             return result;
         }
 
-        private TeamColors? ParseTeamColorsNode(XmlReader reader)
+        private static TeamColors? ParseTeamColorsNode(XmlReader reader)
         {
             TeamColors? result = null;
 
@@ -579,7 +579,7 @@
             return result;
         }
 
-        private Team ParseTeamNode(XmlReader reader)
+        private static Team ParseTeamNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -591,18 +591,18 @@
                 ShortTeamName = reader.ReadElementContentAsString(),
                 IsPrimaryClub = reader.ReadXmlValueAsBool(),
                 FoundedDate = reader.ReadXmlValueAsDateTime(),
-                Arena = this.ParseArenaNode(reader),
-                League = this.ParseLeagueNode(reader),
-                Country = this.ParseCountryNode(reader),
-                Region = this.ParseRegionNode(reader),
-                Trainer = this.ParseTrainerNode(reader),
+                Arena = ParseArenaNode(reader),
+                League = ParseLeagueNode(reader),
+                Country = ParseCountryNode(reader),
+                Region = ParseRegionNode(reader),
+                Trainer = ParseTrainerNode(reader),
                 HomePage = reader.ReadElementContentAsString(),
                 DressUri = reader.ReadElementContentAsString(),
                 DressAlternateUri = reader.ReadElementContentAsString(),
-                LeagueLevelUnit = this.ParseLeagueLevelUnitNode(reader),
-                BotStatus = this.ParseBotStatusNode(reader),
-                Cup = this.ParseCupNode(reader),
-                PowerRating = this.ParsePowerRatingNode(reader)
+                LeagueLevelUnit = ParseLeagueLevelUnitNode(reader),
+                BotStatus = ParseBotStatusNode(reader),
+                Cup = ParseCupNode(reader),
+                PowerRating = ParsePowerRatingNode(reader)
             };
 
             // If the team is from Hattrick Special Leagues, these next elements are empty.
@@ -618,22 +618,22 @@
             auxValue = reader.ReadElementContentAsString();
             result.TeamRank = string.IsNullOrWhiteSpace(auxValue) ? null : uint.Parse(auxValue);
 
-            result.Fanclub = this.ParseFanclubNode(reader);
+            result.Fanclub = ParseFanclubNode(reader);
             result.LogoUrl = reader.ReadElementContentAsString();
 
             if (reader.Name == guestbookNodeName)
             {
-                result.Guestbook = this.ParseGuestbookNode(reader);
+                result.Guestbook = ParseGuestbookNode(reader);
             }
 
             if (reader.Name == pressAnnouncementNodeName)
             {
-                result.PressAnnouncement = this.ParsePressAnnouncementNode(reader);
+                result.PressAnnouncement = ParsePressAnnouncementNode(reader);
             }
 
             if (reader.Name == teamColorsNodeName)
             {
-                result.TeamColors = this.ParseTeamColorsNode(reader);
+                result.TeamColors = ParseTeamColorsNode(reader);
             }
 
             result.YouthTeamId = reader.ReadXmlValueAsUint();
@@ -642,22 +642,22 @@
 
             if (reader.Name == flagsNodeName)
             {
-                result.Flags = this.ParseFlagsNode(reader);
+                result.Flags = ParseFlagsNode(reader);
             }
 
             if (reader.Name == trophyListNodeName)
             {
-                result.TrophyList = this.ParseTrophyListNode(reader);
+                result.TrophyList = ParseTrophyListNode(reader);
             }
 
             if (reader.Name == supportedTeamsNodeName)
             {
-                result.SupportedTeams = this.ParseSupportedTeamsNode(reader);
+                result.SupportedTeams = ParseSupportedTeamsNode(reader);
             }
 
             if (reader.Name == mySupportesNodeName)
             {
-                result.MySupporters = this.ParseMySupportersNode(reader);
+                result.MySupporters = ParseMySupportersNode(reader);
             }
 
             result.PossibleToChallengeMidweek = reader.ReadXmlValueAsBool();
@@ -669,7 +669,7 @@
             return result;
         }
 
-        private List<Team> ParseTeamsNode(XmlReader reader)
+        private static List<Team> ParseTeamsNode(XmlReader reader)
         {
             var result = new List<Team>();
 
@@ -678,7 +678,7 @@
 
             while (reader.Name == teamNodeName)
             {
-                result.Add(this.ParseTeamNode(reader));
+                result.Add(ParseTeamNode(reader));
             }
 
             // Reads closing element.
@@ -687,7 +687,7 @@
             return result;
         }
 
-        private Trainer ParseTrainerNode(XmlReader reader)
+        private static Trainer ParseTrainerNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -703,7 +703,7 @@
             return result;
         }
 
-        private List<Trophy>? ParseTrophyListNode(XmlReader reader)
+        private static List<Trophy>? ParseTrophyListNode(XmlReader reader)
         {
             List<Trophy>? result = null;
 
@@ -716,7 +716,7 @@
 
                 while (reader.Name == trophyNodeName)
                 {
-                    result.Add(this.ParseTrophyNode(reader));
+                    result.Add(ParseTrophyNode(reader));
                 }
             }
 
@@ -726,7 +726,7 @@
             return result;
         }
 
-        private Trophy ParseTrophyNode(XmlReader reader)
+        private static Trophy ParseTrophyNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -761,7 +761,7 @@
             return result;
         }
 
-        private User ParseUserNode(XmlReader reader)
+        private static User ParseUserNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -769,7 +769,7 @@
             var result = new User
             {
                 UserId = reader.ReadXmlValueAsUint(),
-                Language = this.ParseLanguageNode(reader),
+                Language = ParseLanguageNode(reader),
                 SupporterTier = reader.ReadElementContentAsString().ToSupporterTier(),
                 LoginName = reader.ReadElementContentAsString(),
                 Name = reader.ReadElementContentAsString(),
@@ -778,7 +778,7 @@
                 ActivationDate = reader.ReadXmlValueAsDateTime(),
                 LastLoginDate = reader.ReadXmlValueAsDateTime(),
                 HasManagerLicense = reader.ReadXmlValueAsBool(),
-                NationalTeams = this.ParseNationalTeamsNode(reader)
+                NationalTeams = ParseNationalTeamsNode(reader)
             };
 
             // Reads closing element.

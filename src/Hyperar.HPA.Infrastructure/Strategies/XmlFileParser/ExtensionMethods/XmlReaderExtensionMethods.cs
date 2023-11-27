@@ -17,7 +17,7 @@
 
             return value.Length == 1
                  ? value == "1"
-                 : value.ToLower() == bool.TrueString.ToLower();
+                 : value.Equals(bool.TrueString, StringComparison.CurrentCultureIgnoreCase);
         }
 
         public static DateTime ReadXmlValueAsDateTime(this XmlReader reader)
@@ -33,9 +33,9 @@
 
             string numberDecimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
-            return value.IndexOf(period) != -1 && numberDecimalSeparator != period
+            return value.Contains(period, StringComparison.CurrentCulture) && numberDecimalSeparator != period
                 ? decimal.Parse(value.Replace(period, numberDecimalSeparator))
-                : value.IndexOf(comma) != -1 && numberDecimalSeparator != comma
+                : value.Contains(comma, StringComparison.CurrentCulture) && numberDecimalSeparator != comma
                 ? decimal.Parse(value.Replace(comma, numberDecimalSeparator))
                 : decimal.Parse(value);
         }

@@ -76,7 +76,7 @@
 
             string[] unrecognizedParameters = specifiedParametersKeys.Except(allowedParametersKeys).ToArray();
 
-            if (unrecognizedParameters.Any())
+            if (unrecognizedParameters.Length != 0)
             {
                 var stringBuilder = new StringBuilder();
 

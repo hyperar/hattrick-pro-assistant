@@ -29,9 +29,7 @@
                               VirtualizingStackPanel.VirtualizationMode="Recycling"
                               VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                               GridLinesVisibility="None"
-                              AlternatingRowBackground="#eeeeee"
-                              FontFamily="Segoe UI"
-                              FontSize="14">
+                              AlternatingRowBackground="#eeeeee">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Player ID" Binding="{Binding HattrickId, Mode=OneWay}" />
                             <DataGridTextColumn Header="First name" Binding="{Binding FirstName, Mode=OneWay}" />

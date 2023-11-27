@@ -35,36 +35,38 @@
             var manager = this.managerRepository.GetByHattrickId(entity.Manager.UserId);
             var country = this.countryRepository.GetByHattrickId(entity.Manager.Country.CountryId);
 
-            if (country == null)
+            if (country != null)
             {
-                throw new Exception($"Country with Hattrick ID \"{entity.Manager.Country.CountryId}\" not found.");
-            }
-
-            if (manager == null)
-            {
-                manager = new Domain.Manager
+                if (manager == null)
                 {
-                    HattrickId = entity.Manager.UserId,
-                    SupporterTier = entity.Manager.SupporterTier,
-                    UserName = entity.Manager.LoginName,
-                    CurrencyName = entity.Manager.Currency.CurrencyName,
-                    CurrencyRate = entity.Manager.Currency.CurrencyRate,
-                    Country = country
-                };
+                    manager = new Domain.Manager
+                    {
+                        HattrickId = entity.Manager.UserId,
+                        SupporterTier = entity.Manager.SupporterTier,
+                        UserName = entity.Manager.LoginName,
+                        CurrencyName = entity.Manager.Currency.CurrencyName,
+                        CurrencyRate = entity.Manager.Currency.CurrencyRate,
+                        Country = country
+                    };
 
-                this.managerRepository.Insert(manager);
+                    this.managerRepository.Insert(manager);
+                }
+                else
+                {
+                    manager.SupporterTier = entity.Manager.SupporterTier;
+                    manager.UserName = entity.Manager.LoginName;
+                    manager.CurrencyName = entity.Manager.Currency.CurrencyName;
+                    manager.CurrencyRate = entity.Manager.Currency.CurrencyRate;
+
+                    this.managerRepository.Update(manager);
+                }
+
+                this.context.Save();
             }
             else
             {
-                manager.SupporterTier = entity.Manager.SupporterTier;
-                manager.UserName = entity.Manager.LoginName;
-                manager.CurrencyName = entity.Manager.Currency.CurrencyName;
-                manager.CurrencyRate = entity.Manager.Currency.CurrencyRate;
-
-                this.managerRepository.Update(manager);
+                throw new Exception($"Country with Hattrick ID \"{entity.Manager.Country.CountryId}\" not found.");
             }
-
-            this.context.Save();
         }
     }
 }

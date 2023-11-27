@@ -14,12 +14,14 @@
         {
             TEntity? entity = this.GetByHattrickId(hattrickId);
 
-            if (entity == null)
+            if (entity != null)
+            {
+                this.EntityCollection.Remove(entity);
+            }
+            else
             {
                 throw new Exception($"Entity of type \"{typeof(TEntity)}\" not found with Hattrick ID \"{hattrickId}\".");
             }
-
-            this.EntityCollection.Remove(entity);
         }
 
         public TEntity? GetByHattrickId(long hattrickId)

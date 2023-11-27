@@ -196,6 +196,8 @@
 
         internal const string TotalSkillIndex = "TotalSkillIndex";
 
+        internal const string UpdatedOn = "UpdatedOn";
+
         internal const string UserName = "UserName";
 
         internal const string VipLoungeCapacity = "VipLoungeCapacity";

@@ -14,13 +14,16 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 name: "LeagueCup");
 
             migrationBuilder.DropTable(
-                name: "SeniorPlayer");
+                name: "SeniorPlayerSkill");
 
             migrationBuilder.DropTable(
                 name: "SeniorTeamArena");
 
             migrationBuilder.DropTable(
                 name: "Token");
+
+            migrationBuilder.DropTable(
+                name: "SeniorPlayer");
 
             migrationBuilder.DropTable(
                 name: "SeniorTeam");
@@ -262,17 +265,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     YouthNationalTeamCaps = table.Column<long>(type: "bigint", nullable: false),
                     BookingStatus = table.Column<long>(type: "bigint", nullable: false),
                     Health = table.Column<int>(type: "int", nullable: false),
-                    Loyalty = table.Column<long>(type: "bigint", nullable: false),
-                    Form = table.Column<long>(type: "bigint", nullable: false),
-                    Stamina = table.Column<long>(type: "bigint", nullable: false),
-                    Keeper = table.Column<long>(type: "bigint", nullable: false),
-                    Defending = table.Column<long>(type: "bigint", nullable: false),
-                    Playmaking = table.Column<long>(type: "bigint", nullable: false),
-                    Winger = table.Column<long>(type: "bigint", nullable: false),
-                    Passing = table.Column<long>(type: "bigint", nullable: false),
-                    Scoring = table.Column<long>(type: "bigint", nullable: false),
-                    SetPieces = table.Column<long>(type: "bigint", nullable: false),
-                    Experience = table.Column<long>(type: "bigint", nullable: false),
                     Category = table.Column<long>(type: "bigint", nullable: false),
                     CountryHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     SeniorTeamHattrickId = table.Column<long>(type: "bigint", nullable: false)
@@ -318,6 +310,36 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SeniorPlayerSkill",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UpdatedOn = table.Column<DateTime>(type: "date", nullable: false),
+                    Form = table.Column<long>(type: "bigint", nullable: false),
+                    Stamina = table.Column<long>(type: "bigint", nullable: false),
+                    Keeper = table.Column<long>(type: "bigint", nullable: false),
+                    Defending = table.Column<long>(type: "bigint", nullable: false),
+                    Playmaking = table.Column<long>(type: "bigint", nullable: false),
+                    Winger = table.Column<long>(type: "bigint", nullable: false),
+                    Passing = table.Column<long>(type: "bigint", nullable: false),
+                    Scoring = table.Column<long>(type: "bigint", nullable: false),
+                    SetPieces = table.Column<long>(type: "bigint", nullable: false),
+                    Experience = table.Column<long>(type: "bigint", nullable: false),
+                    Loyalty = table.Column<long>(type: "bigint", nullable: false),
+                    SeniorPlayerHattrickId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeniorPlayerSkill", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SeniorPlayerSkill_SeniorPlayer_SeniorPlayerHattrickId",
+                        column: x => x.SeniorPlayerHattrickId,
+                        principalTable: "SeniorPlayer",
+                        principalColumn: "HattrickId");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Country_LeagueHattrickId",
                 table: "Country",
@@ -348,6 +370,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 name: "IX_SeniorPlayer_SeniorTeamHattrickId",
                 table: "SeniorPlayer",
                 column: "SeniorTeamHattrickId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SeniorPlayerSkill_SeniorPlayerHattrickId",
+                table: "SeniorPlayerSkill",
+                column: "SeniorPlayerHattrickId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SeniorTeam_LeagueHattrickId",

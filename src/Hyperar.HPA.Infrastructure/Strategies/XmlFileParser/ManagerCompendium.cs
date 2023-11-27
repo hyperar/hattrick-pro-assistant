@@ -35,10 +35,10 @@
         {
             var result = (HattrickData)entity;
 
-            result.Manager = this.ParseManagerNode(reader);
+            result.Manager = ParseManagerNode(reader);
         }
 
-        private Arena ParseArenaNode(XmlReader reader)
+        private static Arena ParseArenaNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -55,7 +55,7 @@
             return result;
         }
 
-        private Avatar? ParseAvatarNode(XmlReader reader)
+        private static Avatar? ParseAvatarNode(XmlReader reader)
         {
             // Reads opening node.
             reader.Read();
@@ -67,7 +67,7 @@
 
             while (reader.Name == layerNodeName)
             {
-                result.Layers.Add(this.ParseLayerNode(reader));
+                result.Layers.Add(ParseLayerNode(reader));
             }
 
             // Reads closing node.
@@ -76,7 +76,7 @@
             return result;
         }
 
-        private Country ParseCountryNode(XmlReader reader)
+        private static Country ParseCountryNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -93,7 +93,7 @@
             return result;
         }
 
-        private Currency ParseCurrencyNode(XmlReader reader)
+        private static Currency ParseCurrencyNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -110,7 +110,7 @@
             return result;
         }
 
-        private Language ParseLanguageNode(XmlReader reader)
+        private static Language ParseLanguageNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -127,7 +127,7 @@
             return result;
         }
 
-        private Layer ParseLayerNode(XmlReader reader)
+        private static Layer ParseLayerNode(XmlReader reader)
         {
             var result = new Layer
             {
@@ -146,7 +146,7 @@
             return result;
         }
 
-        private LeagueLevelUnit ParseLeagueLevelUnitNode(XmlReader reader)
+        private static LeagueLevelUnit ParseLeagueLevelUnitNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -163,7 +163,7 @@
             return result;
         }
 
-        private League ParseLeagueNode(XmlReader reader)
+        private static League ParseLeagueNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -181,7 +181,7 @@
             return result;
         }
 
-        private Manager ParseManagerNode(XmlReader reader)
+        private static Manager ParseManagerNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -207,9 +207,9 @@
                 reader.Read();
             }
 
-            result.Language = this.ParseLanguageNode(reader);
-            result.Country = this.ParseCountryNode(reader);
-            result.Currency = this.ParseCurrencyNode(reader);
+            result.Language = ParseLanguageNode(reader);
+            result.Country = ParseCountryNode(reader);
+            result.Currency = ParseCurrencyNode(reader);
 
             if (reader.Name == teamsNodeName)
             {
@@ -218,7 +218,7 @@
 
                 while (reader.Name == teamNodeName)
                 {
-                    result.Teams.Add(this.ParseTeamNode(reader));
+                    result.Teams.Add(ParseTeamNode(reader));
                 }
 
                 // Reads closing element.
@@ -234,7 +234,7 @@
 
                     while (reader.Name == nationalTeamNodeName)
                     {
-                        result.NationalTeamCoach.Add(this.ParseNationalTeamNode(reader));
+                        result.NationalTeamCoach.Add(ParseNationalTeamNode(reader));
                     }
 
                     // Reads closing element.
@@ -254,7 +254,7 @@
 
                     while (reader.Name == nationalTeamNodeName)
                     {
-                        result.NationalTeamCoach.Add(this.ParseNationalTeamNode(reader));
+                        result.NationalTeamCoach.Add(ParseNationalTeamNode(reader));
                     }
 
                     // Reads closing element.
@@ -264,7 +264,7 @@
 
             if (reader.Name == avatarNodeName && !reader.IsEmptyElement)
             {
-                result.Avatar = this.ParseAvatarNode(reader);
+                result.Avatar = ParseAvatarNode(reader);
             }
 
             // Reads closing element.
@@ -273,7 +273,7 @@
             return result;
         }
 
-        private NationalTeam ParseNationalTeamNode(XmlReader reader)
+        private static NationalTeam ParseNationalTeamNode(XmlReader reader)
         {
             // Reads opening node.
             reader.Read();
@@ -290,7 +290,7 @@
             return result;
         }
 
-        private Region ParseRegionNode(XmlReader reader)
+        private static Region ParseRegionNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -307,7 +307,7 @@
             return result;
         }
 
-        private Team ParseTeamNode(XmlReader reader)
+        private static Team ParseTeamNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -316,12 +316,12 @@
             {
                 TeamId = reader.ReadXmlValueAsUint(),
                 TeamName = reader.ReadElementContentAsString(),
-                Arena = this.ParseArenaNode(reader),
-                League = this.ParseLeagueNode(reader),
-                Country = this.ParseCountryNode(reader),
-                LeagueLevelUnit = this.ParseLeagueLevelUnitNode(reader),
-                Region = this.ParseRegionNode(reader),
-                YouthTeam = this.ParseYouthTeamNode(reader)
+                Arena = ParseArenaNode(reader),
+                League = ParseLeagueNode(reader),
+                Country = ParseCountryNode(reader),
+                LeagueLevelUnit = ParseLeagueLevelUnitNode(reader),
+                Region = ParseRegionNode(reader),
+                YouthTeam = ParseYouthTeamNode(reader)
             };
 
             // Reads closing element.
@@ -330,7 +330,7 @@
             return result;
         }
 
-        private YouthLeague? ParseYouthLeagueNode(XmlReader reader)
+        private static YouthLeague? ParseYouthLeagueNode(XmlReader reader)
         {
             YouthLeague? result = null;
 
@@ -352,7 +352,7 @@
             return result;
         }
 
-        private YouthTeam? ParseYouthTeamNode(XmlReader reader)
+        private static YouthTeam? ParseYouthTeamNode(XmlReader reader)
         {
             YouthTeam? result = null;
 
@@ -365,7 +365,7 @@
                 {
                     YouthTeamId = reader.ReadXmlValueAsUint(),
                     YouthTeamName = reader.ReadElementContentAsString(),
-                    YouthLeague = this.ParseYouthLeagueNode(reader)
+                    YouthLeague = ParseYouthLeagueNode(reader)
                 };
             }
 

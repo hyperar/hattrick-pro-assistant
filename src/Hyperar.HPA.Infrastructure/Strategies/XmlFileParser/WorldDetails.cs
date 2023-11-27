@@ -33,7 +33,7 @@
 
                 while (reader.Name == leagueNodeName)
                 {
-                    result.LeagueList.Add(this.ParseLeagueNode(reader));
+                    result.LeagueList.Add(ParseLeagueNode(reader));
                 }
 
                 // Reads closing element.
@@ -41,7 +41,7 @@
             }
         }
 
-        private Country ParseCountryNode(XmlReader reader)
+        private static Country ParseCountryNode(XmlReader reader)
         {
             var result = new Country
             {
@@ -68,7 +68,7 @@
 
                     while (reader.Name == regionNodeName)
                     {
-                        result.RegionList.Add(this.ParseRegionNode(reader));
+                        result.RegionList.Add(ParseRegionNode(reader));
                     }
 
                     // Reads closing element.
@@ -82,7 +82,7 @@
             return result;
         }
 
-        private Cup ParseCupNode(XmlReader reader)
+        private static Cup ParseCupNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -104,7 +104,7 @@
             return result;
         }
 
-        private League ParseLeagueNode(XmlReader reader)
+        private static League ParseLeagueNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -122,7 +122,7 @@
                 EnglishName = reader.ReadElementContentAsString(),
                 LanguageId = reader.ReadXmlValueAsUint(),
                 LanguageName = reader.ReadElementContentAsString(),
-                Country = this.ParseCountryNode(reader),
+                Country = ParseCountryNode(reader),
             };
 
             if (reader.Name == cupsNodeName)
@@ -132,7 +132,7 @@
 
                 while (reader.Name == cupNodeName)
                 {
-                    result.Cups.Add(this.ParseCupNode(reader));
+                    result.Cups.Add(ParseCupNode(reader));
                 }
 
                 // Reads closing element.
@@ -161,7 +161,7 @@
             return result;
         }
 
-        private Region ParseRegionNode(XmlReader reader)
+        private static Region ParseRegionNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();

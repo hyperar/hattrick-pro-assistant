@@ -45,25 +45,27 @@
             {
                 var seniorTeam = this.seniorTeamRepository.GetByHattrickId(entity.Arena.Team.TeamId);
 
-                if (seniorTeam == null)
+                if (seniorTeam != null)
+                {
+                    arena = new Domain.SeniorTeamArena
+                    {
+                        HattrickId = entity.Arena.ArenaId,
+                        Name = entity.Arena.ArenaName,
+                        BuiltOn = value,
+                        TerracesCapacity = entity.Arena.CurrentCapacity.Terraces,
+                        BasicSeatCapacity = entity.Arena.CurrentCapacity.Basic,
+                        RoofSeatCapacity = entity.Arena.CurrentCapacity.Roof,
+                        VipLoungeCapacity = entity.Arena.CurrentCapacity.Vip,
+                        TotalCapacity = entity.Arena.CurrentCapacity.Total,
+                        SeniorTeam = seniorTeam
+                    };
+
+                    this.seniorTeamArenaRepository.Insert(arena);
+                }
+                else
                 {
                     throw new Exception($"Senior Team with Hattrick ID \"{entity.Arena.Team.TeamId}\" not found.");
                 }
-
-                arena = new Domain.SeniorTeamArena
-                {
-                    HattrickId = entity.Arena.ArenaId,
-                    Name = entity.Arena.ArenaName,
-                    BuiltOn = value,
-                    TerracesCapacity = entity.Arena.CurrentCapacity.Terraces,
-                    BasicSeatCapacity = entity.Arena.CurrentCapacity.Basic,
-                    RoofSeatCapacity = entity.Arena.CurrentCapacity.Roof,
-                    VipLoungeCapacity = entity.Arena.CurrentCapacity.Vip,
-                    TotalCapacity = entity.Arena.CurrentCapacity.Total,
-                    SeniorTeam = seniorTeam
-                };
-
-                this.seniorTeamArenaRepository.Insert(arena);
             }
             else
             {

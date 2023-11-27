@@ -5,7 +5,6 @@
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Domain;
     using Hyperar.HPA.Domain.Interfaces;
-    using Hyperar.HPA.Infrastructure.DataAccess;
 
     public class TokenService : ITokenService
     {
@@ -13,10 +12,10 @@
 
         private readonly IRepository<Token> tokenRepository;
 
-        public TokenService(IDatabaseContext databaseContext)
+        public TokenService(IDatabaseContext databaseContext, IRepository<Token> tokenRepository)
         {
             this.databaseContext = databaseContext;
-            this.tokenRepository = new Repository<Token>(this.databaseContext);
+            this.tokenRepository = tokenRepository;
         }
 
         public void DeleteToken(string token, string tokenSecret)

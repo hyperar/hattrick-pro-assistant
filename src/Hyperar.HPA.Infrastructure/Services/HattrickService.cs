@@ -40,10 +40,7 @@
 
         public string CheckToken(OAuthToken token)
         {
-            if (token == null)
-            {
-                throw new ArgumentNullException(nameof(token));
-            }
+            ArgumentNullException.ThrowIfNull(token);
 
             OAuthSession session = this.CreateOAuthSession(token.Token, token.TokenSecret);
 
@@ -59,10 +56,7 @@
 
         public GetAccessTokenResponse GetAccessToken(GetAccessTokenRequest request)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
+            ArgumentNullException.ThrowIfNull(request);
 
             OAuthSession session = this.CreateOAuthSession();
 
@@ -140,10 +134,7 @@
 
         private static string ReadResponseStream(Stream stream)
         {
-            if (stream == null)
-            {
-                throw new ArgumentNullException(nameof(stream));
-            }
+            ArgumentNullException.ThrowIfNull(stream);
 
             string result;
 

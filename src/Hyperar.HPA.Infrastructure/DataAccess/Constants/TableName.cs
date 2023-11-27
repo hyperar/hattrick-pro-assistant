@@ -14,6 +14,8 @@
 
         internal const string SeniorPlayer = "SeniorPlayer";
 
+        internal const string SeniorPlayerSkill = "SeniorPlayerSkill";
+
         internal const string SeniorTeam = "SeniorTeam";
 
         internal const string SeniorTeamArena = "SeniorTeamArena";

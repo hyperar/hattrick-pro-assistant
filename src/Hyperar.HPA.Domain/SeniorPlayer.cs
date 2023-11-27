@@ -30,15 +30,9 @@
 
         public uint CurrentSeasonLeagueGoals { get; set; }
 
-        public SkillLevel Defending { get; set; }
-
         public bool EnrolledOnNationalTeam { get; set; }
 
-        public SkillLevel Experience { get; set; }
-
         public string FirstName { get; set; } = string.Empty;
-
-        public SkillLevel Form { get; set; }
 
         public uint GoalsOnTeam { get; set; }
 
@@ -56,13 +50,9 @@
 
         public DateTime JoinedTeamOn { get; set; }
 
-        public SkillLevel Keeper { get; set; }
-
         public string LastName { get; set; } = string.Empty;
 
         public SkillLevel Leadership { get; set; }
-
-        public SkillLevel Loyalty { get; set; }
 
         public uint MatchesOnTeam { get; set; }
 
@@ -70,31 +60,21 @@
 
         public string? Notes { get; set; }
 
-        public SkillLevel Passing { get; set; }
-
-        public SkillLevel Playmaking { get; set; }
-
         public uint Salary { get; set; }
-
-        public SkillLevel Scoring { get; set; }
 
         public uint SeniorNationalTeamCaps { get; set; }
 
-        public virtual SeniorTeam SeniorTeam { get; set; } = new SeniorTeam();
+        public virtual List<SeniorPlayerSkill>? SeniorPlayerSkills { get; set; }
 
-        public SkillLevel SetPieces { get; set; }
+        public virtual SeniorTeam SeniorTeam { get; set; } = new SeniorTeam();
 
         public uint? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 
-        public SkillLevel Stamina { get; set; }
-
         public string? Statement { get; set; }
 
         public uint TotalSkillIndex { get; set; }
-
-        public SkillLevel Winger { get; set; }
 
         public uint YouthNationalTeamCaps { get; set; }
     }

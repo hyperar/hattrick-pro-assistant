@@ -14,10 +14,10 @@
         {
             var result = (HattrickData)entity;
 
-            result.Arena = this.ParseArenaNode(reader);
+            result.Arena = ParseArenaNode(reader);
         }
 
-        private Arena ParseArenaNode(XmlReader reader)
+        private static Arena ParseArenaNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -28,11 +28,11 @@
                 ArenaName = reader.ReadElementContentAsString(),
                 ArenaImage = reader.ReadElementContentAsString(),
                 ArenaFallbackImage = reader.ReadElementContentAsString(),
-                Team = this.ParseTeamNode(reader),
-                League = this.ParseLeagueNode(reader),
-                Region = this.ParseRegionNode(reader),
-                CurrentCapacity = this.ParseCurrentCapacityNode(reader),
-                ExpandedCapacity = this.ParseExpandedCapacityNode(reader)
+                Team = ParseTeamNode(reader),
+                League = ParseLeagueNode(reader),
+                Region = ParseRegionNode(reader),
+                CurrentCapacity = ParseCurrentCapacityNode(reader),
+                ExpandedCapacity = ParseExpandedCapacityNode(reader)
             };
 
             // Reads closing element.
@@ -41,7 +41,7 @@
             return result;
         }
 
-        private CurrentCapacity ParseCurrentCapacityNode(XmlReader reader)
+        private static CurrentCapacity ParseCurrentCapacityNode(XmlReader reader)
         {
             // Reads opening element. This could be both opening and closing element if Available attribute is false.
             reader.Read();
@@ -72,7 +72,7 @@
             return result;
         }
 
-        private ExpandedCapacity ParseExpandedCapacityNode(XmlReader reader)
+        private static ExpandedCapacity ParseExpandedCapacityNode(XmlReader reader)
         {
             var result = new ExpandedCapacity
             {
@@ -98,7 +98,7 @@
             return result;
         }
 
-        private League ParseLeagueNode(XmlReader reader)
+        private static League ParseLeagueNode(XmlReader reader)
         {
             // Reads opening node.
             reader.Read();
@@ -115,7 +115,7 @@
             return result;
         }
 
-        private Region ParseRegionNode(XmlReader reader)
+        private static Region ParseRegionNode(XmlReader reader)
         {
             // Reads opening node.
             reader.Read();
@@ -132,7 +132,7 @@
             return result;
         }
 
-        private Team ParseTeamNode(XmlReader reader)
+        private static Team ParseTeamNode(XmlReader reader)
         {
             // Reads opening node.
             reader.Read();

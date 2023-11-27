@@ -26,10 +26,10 @@
             result.IsYouth = reader.ReadXmlValueAsBool();
             result.ActionType = reader.ReadElementContentAsString();
             result.IsPlayingMatch = reader.ReadXmlValueAsBool();
-            result.Team = this.ParseTeamNode(reader);
+            result.Team = ParseTeamNode(reader);
         }
 
-        private LastMatch ParseLastMatchNode(XmlReader reader)
+        private static LastMatch ParseLastMatchNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -50,7 +50,7 @@
             return result;
         }
 
-        private Player ParsePlayerNode(XmlReader reader)
+        private static Player ParsePlayerNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -106,12 +106,12 @@
 
             if (reader.Name == trainerDataNodeName)
             {
-                result.TrainerData = this.ParseTrainerDataNode(reader);
+                result.TrainerData = ParseTrainerDataNode(reader);
             }
 
             if (reader.Name == lastMatchNodeName)
             {
-                result.LastMatch = this.ParseLastMatchNode(reader);
+                result.LastMatch = ParseLastMatchNode(reader);
             }
 
             // Reads closing element.
@@ -120,7 +120,7 @@
             return result;
         }
 
-        private Team ParseTeamNode(XmlReader reader)
+        private static Team ParseTeamNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
@@ -139,7 +139,7 @@
                 while (reader.Name == playerNodeName)
                 {
                     result.PlayerList.Add(
-                        this.ParsePlayerNode(reader));
+                        ParsePlayerNode(reader));
                 }
 
                 // Reads closing element.
@@ -152,7 +152,7 @@
             return result;
         }
 
-        private TrainerData ParseTrainerDataNode(XmlReader reader)
+        private static TrainerData ParseTrainerDataNode(XmlReader reader)
         {
             // Reads opening element.
             reader.Read();
