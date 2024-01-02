@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Hyperar.HPA.Application.Interfaces;
+    using Hyperar.HPA.Application.Services;
 
     public class HomeViewModel : ViewModelBase
     {

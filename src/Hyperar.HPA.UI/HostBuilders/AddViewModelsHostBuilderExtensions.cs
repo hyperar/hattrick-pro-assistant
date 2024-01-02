@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
     using System;
-    using Hyperar.HPA.Application.Interfaces;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.UI.State.Interfaces;
     using Hyperar.HPA.UI.ViewModels;

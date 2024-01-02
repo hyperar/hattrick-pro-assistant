@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Hyperar.HPA.Application.Interfaces;
+    using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Domain.Interfaces;
 
     public class HomeViewService : IHomeViewService

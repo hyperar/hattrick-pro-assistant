@@ -1,4 +1,4 @@
-﻿namespace Hyperar.HPA.Application.Interfaces
+﻿namespace Hyperar.HPA.Application.Services
 {
     using System.Collections.Generic;
 
