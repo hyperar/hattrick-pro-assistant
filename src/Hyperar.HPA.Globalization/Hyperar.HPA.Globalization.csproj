@@ -16,18 +16,18 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Controls.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>Controls.resx</DependentUpon>
-        </Compile>
+      <Compile Update="Strings.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Strings.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Update="Controls.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>Controls.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
+      <EmbeddedResource Update="Strings.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

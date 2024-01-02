@@ -3,17 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Hyperar.HPA.UI.Views"
-             mc:Ignorable="d"
-                          d:DesignHeight="500" d:DesignWidth="1024">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Column="0" Grid.Row="0">Quit</TextBlock>
-    </Grid>
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             mc:Ignorable="d">
+    <Border Style="{StaticResource ViewContainer}">
+        <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
+            <TextBlock Style="{StaticResource ViewTitle}" Text="{x:Static globalization:Strings.Quit}" />
+        </StackPanel>
+    </Border>
 </UserControl>

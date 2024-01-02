@@ -117,7 +117,169 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Aggressiveness" xml:space="preserve">
+    <value>Aggressiveness</value>
+  </data>
+  <data name="Agreeability" xml:space="preserve">
+    <value>Agreeability</value>
+  </data>
+  <data name="Authorize" xml:space="preserve">
+    <value>Authorize</value>
+  </data>
+  <data name="Authorized" xml:space="preserve">
+    <value>Authorized</value>
+  </data>
+  <data name="AuthorizeMessage" xml:space="preserve">
+    <value>Once you have pasted the Verification Code, click on 'Authorize'.</value>
+  </data>
+  <data name="Bookings" xml:space="preserve">
+    <value>Bookings</value>
+  </data>
+  <data name="CareerGoals" xml:space="preserve">
+    <value>Career Goals</value>
+  </data>
+  <data name="CareerHattricks" xml:space="preserve">
+    <value>Career Hattricks</value>
+  </data>
+  <data name="CopyAndPasteVerificationCodeMessage" xml:space="preserve">
+    <value>Once you have logged in into your Hattrick account, you will be provided with a Verification Code. Copy the code and paste it below, making sure there's no blank spaces at the beggining or the end of the code.</value>
+  </data>
+  <data name="CupGoals" xml:space="preserve">
+    <value>Cup Goals</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Deauthorize" xml:space="preserve">
+    <value>De-authorize</value>
+  </data>
+  <data name="DeAuthorizeMessage" xml:space="preserve">
+    <value>If at any point you want to de-authorize Hattrick Pro Assistant, you can do so by clicking on 'De-authorize'.</value>
+  </data>
+  <data name="Defending" xml:space="preserve">
+    <value>Defending</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Download</value>
+  </data>
+  <data name="Experience" xml:space="preserve">
+    <value>Experience</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="FriendlyGoals" xml:space="preserve">
+    <value>Friendly Goals</value>
+  </data>
+  <data name="GoalsOnTeam" xml:space="preserve">
+    <value>Goals On Team</value>
+  </data>
+  <data name="Health" xml:space="preserve">
+    <value>Health</value>
+  </data>
+  <data name="Honesty" xml:space="preserve">
+    <value>Honesty</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Keeper" xml:space="preserve">
+    <value>Keeper</value>
+  </data>
+  <data name="Lastname" xml:space="preserve">
+    <value>Lastname</value>
+  </data>
+  <data name="Leadership" xml:space="preserve">
+    <value>Leadership</value>
+  </data>
+  <data name="LeagueGoals" xml:space="preserve">
+    <value>League Goals</value>
+  </data>
+  <data name="Loyalty" xml:space="preserve">
+    <value>Loyalty</value>
+  </data>
+  <data name="Matches" xml:space="preserve">
+    <value>Matches</value>
+  </data>
+  <data name="MatchesOnTeam" xml:space="preserve">
+    <value>Matches On Team</value>
+  </data>
+  <data name="MotherclubBonus" xml:space="preserve">
+    <value>MC Bonus</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Nickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="NotAuthorized" xml:space="preserve">
+    <value>Not Authorized</value>
+  </data>
+  <data name="OpenAuthorizationWebPage" xml:space="preserve">
+    <value>Open Authorization Web Page</value>
+  </data>
+  <data name="OpenAuthorizationWebPageMessage" xml:space="preserve">
+    <value>In order to use Hattrick Pro Assistant, you have to authorize it first. Click on 'Open Authorization Web Page' to begin the authorization process.</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="Passing" xml:space="preserve">
+    <value>Passing</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="Playmaking" xml:space="preserve">
+    <value>Playmaking</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Quit</value>
+  </data>
+  <data name="Salary" xml:space="preserve">
+    <value>Salary</value>
+  </data>
+  <data name="Scoring" xml:space="preserve">
+    <value>Scoring</value>
+  </data>
+  <data name="SetPieces" xml:space="preserve">
+    <value>Set Pieces</value>
+  </data>
+  <data name="ShirtNumber" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="Specialty" xml:space="preserve">
+    <value>Specialty</value>
+  </data>
+  <data name="Stamina" xml:space="preserve">
+    <value>Stamina</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StepOne" xml:space="preserve">
+    <value>Step 1</value>
+  </data>
+  <data name="StepThree" xml:space="preserve">
+    <value>Step 3</value>
+  </data>
+  <data name="StepTwo" xml:space="preserve">
+    <value>Step 2</value>
+  </data>
+  <data name="TotalSkillIndex" xml:space="preserve">
+    <value>TSI</value>
+  </data>
+  <data name="Winger" xml:space="preserve">
+    <value>Winger</value>
   </data>
 </root>
