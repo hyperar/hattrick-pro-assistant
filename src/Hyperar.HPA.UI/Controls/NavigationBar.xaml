@@ -1,17 +1,15 @@
 ﻿<UserControl x:Class="Hyperar.HPA.UI.Controls.NavigationBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="clr-namespace:Hyperar.HPA.UI.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Hyperar.HPA.UI.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:nav="clr-namespace:Hyperar.HPA.UI.State"
+             xmlns:converters="clr-namespace:Hyperar.HPA.UI.Converters"
              xmlns:enums="clr-namespace:Hyperar.HPA.UI.Enums"
              xmlns:viewModels="clr-namespace:Hyperar.HPA.UI.ViewModels"
-             Height="48"
-             d:DesignHeight="48"
-	     d:DesignWidth="1024"
-	     mc:Ignorable="d">
+             Width="48"
+             d:DesignWidth="48"
+             d:DesignHeight="900"
+             mc:Ignorable="d">
     <UserControl.Resources>
         <converters:EqualValueToParameterConverter x:Key="EqualValueToParameterConverter" />
     </UserControl.Resources>
@@ -19,62 +17,68 @@
         <Grid.Resources>
             <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton" />
         </Grid.Resources>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
 
         <RadioButton
-            Grid.Column="0"
+            Grid.Row="0"
             ToolTip="Home"
             Content="{StaticResource HomeIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Home}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:HomeViewModel}}" />
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:HomeViewModel}}"
+            IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Column="1"
+            Grid.Row="1"
             ToolTip="Matches"
             Content="{StaticResource ScoreBoardIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Matches}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:MatchesViewModel}}" />
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:MatchesViewModel}}"
+            IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Column="3"
+            Grid.Row="3"
             ToolTip="Download"
             Content="{StaticResource DownloadIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Download}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:DownloadViewModel}}" />
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:DownloadViewModel}}"
+            IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Column="4"
+            Grid.Row="4"
             ToolTip="Permissions"
             Content="{StaticResource KeyIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Permissions}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:PermissionsViewModel}}" />
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:PermissionsViewModel}}"
+            IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Column="5"
+            Grid.Row="5"
             ToolTip="About"
             Content="{StaticResource AboutIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.About}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:AboutViewModel}}" />
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:AboutViewModel}}"
+            IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Column="6"
+            Grid.Row="6"
             ToolTip="Quit"
             Content="{StaticResource QuitIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Quit}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:QuitViewModel}}" />
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:QuitViewModel}}"
+            IsEnabled="{Binding CanNavigate}" />
     </Grid>
 </UserControl>

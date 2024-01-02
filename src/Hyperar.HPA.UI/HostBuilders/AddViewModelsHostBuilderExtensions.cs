@@ -38,7 +38,8 @@
             return new DownloadViewModel(
                 scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
                 services.GetRequiredService<IHattrickService>(),
-                scope.ServiceProvider.GetRequiredService<IXmlFileService>());
+                scope.ServiceProvider.GetRequiredService<IXmlFileService>(),
+                services.GetRequiredService<INavigator>());
         }
 
         private static HomeViewModel CreateHomeViewModel(IServiceProvider services)

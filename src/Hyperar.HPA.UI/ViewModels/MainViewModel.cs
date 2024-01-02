@@ -34,6 +34,14 @@
             }
         }
 
+        public bool CanNavigate
+        {
+            get
+            {
+                return this.navigator.CanNavigate;
+            }
+        }
+
         public ViewModelBase? CurrentViewModel
         {
             get
@@ -53,6 +61,7 @@
 
         private void Navigator_StateChanged()
         {
+            this.OnPropertyChanged(nameof(this.CanNavigate));
             this.OnPropertyChanged(nameof(this.CurrentViewModel));
         }
     }

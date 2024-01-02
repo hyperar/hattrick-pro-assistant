@@ -18,11 +18,15 @@
 
         private List<DownloadTask> downloadTasks;
 
-        public DownloadViewModel(IAuthorizer authorizer, IHattrickService hattrickService, IXmlFileService xmlFileService/*, IWorldService worldService*/) : base(authorizer)
+        public DownloadViewModel(
+            IAuthorizer authorizer,
+            IHattrickService hattrickService,
+            IXmlFileService xmlFileService,
+            INavigator navigator) : base(authorizer)
         {
             this.downloadTasks = new List<DownloadTask>();
 
-            this.DownloadFilesCommand = new DownloadFilesCommand(this);
+            this.DownloadFilesCommand = new DownloadFilesCommand(this, navigator);
             this.hattrickService = hattrickService;
             this.xmlFileService = xmlFileService;
         }

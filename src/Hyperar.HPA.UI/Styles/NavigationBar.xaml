@@ -4,12 +4,14 @@
     <Color x:Key="NavButtonPrimaryColor">#277f31</Color>
     <Color x:Key="NavButtonHighlightedColor">#52995a</Color>
     <Color x:Key="NavButtonSelectedColor">#79a777</Color>
+    <Color x:Key="NavButtonDisabledColor">#949494</Color>
     <Color x:Key="NavButtonTextColor">#ffffff</Color>
 
     <!--Brushes-->
     <SolidColorBrush x:Key="NavButtonPrimaryBrush" Color="{StaticResource NavButtonPrimaryColor}" />
     <SolidColorBrush x:Key="NavButtonHighlightedBrush" Color="{StaticResource NavButtonHighlightedColor}" />
     <SolidColorBrush x:Key="NavButtonSelectedBrush" Color="{StaticResource NavButtonSelectedColor}" />
+    <SolidColorBrush x:Key="NavButtonDisabledBrush" Color="{StaticResource NavButtonDisabledColor}" />
     <SolidColorBrush x:Key="NavButtonTextBrush" Color="{StaticResource NavButtonTextColor}" />
 
     <Style x:Key="NavButton" TargetType="RadioButton">
@@ -32,6 +34,9 @@
                             VerticalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{StaticResource NavButtonDisabledBrush}" TargetName="gridMain" />
+                        </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Background" Value="{StaticResource NavButtonSelectedBrush}" TargetName="gridMain" />
                         </Trigger>

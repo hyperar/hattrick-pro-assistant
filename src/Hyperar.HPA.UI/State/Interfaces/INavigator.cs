@@ -7,6 +7,8 @@
     {
         event Action? StateChanged;
 
+        bool CanNavigate { get; set; }
+
         ViewModelBase? CurrentViewModel { get; set; }
     }
 }
