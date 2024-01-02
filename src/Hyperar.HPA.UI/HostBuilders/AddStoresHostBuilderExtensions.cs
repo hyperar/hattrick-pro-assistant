@@ -11,7 +11,7 @@
         {
             host.ConfigureServices(services =>
             {
-                services.AddScoped<INavigator, Navigator>();
+                services.AddSingleton<INavigator, Navigator>();
                 services.AddScoped<IAuthorizer, Authorizer>();
                 services.AddScoped<ITokenStore, TokenStore>();
             });

@@ -1,6 +1,8 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
+    using Hyperar.HPA.UI.State.Interfaces;
     using Hyperar.HPA.UI.ViewModels;
+    using Hyperar.HPA.UI.ViewModels.Interfaces;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -11,7 +13,15 @@
         {
             host.ConfigureServices(services =>
             {
-                services.AddSingleton(s => new MainWindow(s.GetRequiredService<IConfiguration>(), s.GetRequiredService<MainViewModel>()));
+                services.AddSingleton(s =>
+                {
+                    return new MainWindow(
+                        s.GetRequiredService<IConfiguration>(),
+                        new MainViewModel(
+                            s.GetRequiredService<INavigator>(),
+                            s.GetRequiredService<IViewModelFactory>(),
+                            s.CreateScope().ServiceProvider.GetRequiredService<IAuthorizer>()));
+                });
             });
 
             return host;

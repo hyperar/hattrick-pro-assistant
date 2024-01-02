@@ -12,7 +12,10 @@
 
         private readonly IViewModelFactory viewModelFactory;
 
-        public MainViewModel(INavigator navigator, IViewModelFactory viewModelFactory, IAuthorizer authorizer) : base(authorizer)
+        public MainViewModel(
+            INavigator navigator,
+            IViewModelFactory viewModelFactory,
+            IAuthorizer authorizer) : base(authorizer)
         {
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;

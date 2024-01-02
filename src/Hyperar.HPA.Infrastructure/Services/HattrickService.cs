@@ -18,9 +18,9 @@
 
         private const string CheckTokenKey = "OAuth:Urls:Base:CheckToken";
 
-        private const string ConsumerKeyKey = "OAUTH_CONSUMER_KEY";
+        private const string ConsumerKeyKey = "OAuth:ConsumerKey";
 
-        private const string ConsumerSecretKey = "OAUTH_CONSUMER_SECRET";
+        private const string ConsumerSecretKey = "OAuth:ConsumerSecret";
 
         private const string InvalidateTokenKey = "OAuth:Urls:Base:InvalidateToken";
 
