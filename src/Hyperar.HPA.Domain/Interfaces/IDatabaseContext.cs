@@ -4,16 +4,16 @@
 
     public interface IDatabaseContext
     {
-        void BeginTransaction();
+        Task BeginTransactionAsync();
 
         void Cancel();
 
         DbSet<TEntity> CreateSet<TEntity>() where TEntity : class;
 
-        void EndTransaction();
+        Task EndTransactionAsync();
 
-        void Migrate();
+        Task MigrateAsync();
 
-        void Save();
+        Task SaveAsync();
     }
 }

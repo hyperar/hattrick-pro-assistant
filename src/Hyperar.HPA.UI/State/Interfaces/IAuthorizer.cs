@@ -1,28 +1,33 @@
 ﻿namespace Hyperar.HPA.UI.State.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
     using Hyperar.HPA.Application.OAuth;
 
     public interface IAuthorizer
     {
         event PropertyChangedEventHandler? PropertyChanged;
 
-        bool IsAuthorized { get; }
+        bool? IsAuthorized { get; }
 
         bool IsInitialized { get; }
 
         GetProtectedResourceRequest BuildProtectedResourseRequest(DownloadTask task);
 
-        void CheckToken();
+        Task CheckTokenAsync();
 
-        GetAccessTokenResponse GetAccessToken(string verificationCode, string requestToken, string requestTokenSecret);
+        Task<GetAccessTokenResponse> GetAccessTokenAsync(string verificationCode, string requestToken, string requestTokenSecret);
 
-        GetAuthorizationUrlResponse GetAuthorizationUrl();
+        Task<GetAuthorizationUrlResponse> GetAuthorizationUrlAsync();
 
-        void InitializeToken();
+        Task InitializeAsync();
 
-        void PersistToken(string accessToken, string accessTokenSecret);
+        Task PersistTokenAsync(string accessToken, string accessTokenSecret);
 
-        void RevokeToken();
+        Task RevokeTokenAsync();
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.State
 {
     using System;
-    using System.Windows.Controls;
     using Hyperar.HPA.UI.State.Interfaces;
     using Hyperar.HPA.UI.ViewModels;
 

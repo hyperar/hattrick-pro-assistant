@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using Hyperar.HPA.Application.Services;
 
     public class HomeViewModel : ViewModelBase
@@ -10,13 +11,11 @@
 
         private int? selectedTabIndex;
 
-        private List<Domain.SeniorTeam>? seniorTeams;
+        private ObservableCollection<Domain.SeniorTeam>? seniorTeams;
 
         public HomeViewModel(IHomeViewService homeViewService)
         {
             this.homeViewService = homeViewService;
-
-            this.Initialize();
         }
 
         public int SelectedTabIndex
@@ -43,9 +42,11 @@
             }
         }
 
-        private void Initialize()
+        public override async Task InitializeAsync()
         {
-            this.seniorTeams = this.homeViewService.GetSeniorTeams();
+            var result = await this.homeViewService.GetSeniorTeamsAsync();
+
+            this.seniorTeams = new ObservableCollection<Domain.SeniorTeam>(result ?? new List<Domain.SeniorTeam>());
 
             this.OnPropertyChanged(nameof(this.SeniorTeams));
         }

@@ -5,17 +5,17 @@
     using Hyperar.HPA.UI.State.Interfaces;
     using Hyperar.HPA.UI.ViewModels;
 
-    public class DownloadFilesCommand : AsyncCommandBase
+    public class DownloadFilesAsyncCommand : AsyncCommandBase
     {
         private readonly DownloadViewModel downloadViewModel;
 
         private readonly INavigator navigator;
 
-        public DownloadFilesCommand(
-            DownloadViewModel downloadViewModel,
+        public DownloadFilesAsyncCommand(
+            DownloadViewModel downloadAsyncViewModel,
             INavigator navigator)
         {
-            this.downloadViewModel = downloadViewModel;
+            this.downloadViewModel = downloadAsyncViewModel;
             this.navigator = navigator;
         }
 

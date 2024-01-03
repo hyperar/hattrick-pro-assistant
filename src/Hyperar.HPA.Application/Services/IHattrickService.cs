@@ -4,14 +4,14 @@
 
     public interface IHattrickService
     {
-        string CheckToken(OAuthToken token);
+        Task<string> CheckTokenAsync(OAuthToken token);
 
-        GetAccessTokenResponse GetAccessToken(GetAccessTokenRequest request);
+        Task<GetAccessTokenResponse> GetAccessTokenAsync(GetAccessTokenRequest request);
 
-        GetAuthorizationUrlResponse GetAuthorizationUrl();
+        Task<GetAuthorizationUrlResponse> GetAuthorizationUrlAsync();
 
-        string GetProtectedResource(GetProtectedResourceRequest request);
+        Task<string> GetProtectedResourceAsync(GetProtectedResourceRequest request);
 
-        string RevokeToken(OAuthToken token);
+        Task<string> RevokeTokenAsync(OAuthToken token);
     }
 }

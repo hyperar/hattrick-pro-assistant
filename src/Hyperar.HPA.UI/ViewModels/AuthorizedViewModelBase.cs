@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel;
-    using Hyperar.HPA.UI.State;
+    using System.Threading.Tasks;
     using Hyperar.HPA.UI.State.Interfaces;
     using Hyperar.HPA.UI.ViewModels.Interfaces;
 
@@ -10,16 +10,16 @@
     {
         public AuthorizedViewModelBase(IAuthorizer authorizer)
         {
+            this.IsInitialized = false;
+
             this.Authorizer = authorizer;
 
             this.Authorizer.PropertyChanged += this.Authorizer_PropertyChanged;
-
-            this.InitializeToken();
         }
 
-        public IAuthorizer Authorizer { get; set; }
+        public IAuthorizer Authorizer { get; private set; }
 
-        public bool IsAuthorized
+        public bool? IsAuthorized
         {
             get
             {
@@ -27,15 +27,7 @@
             }
         }
 
-        public bool IsInitialized
-        {
-            get
-            {
-                return this.Authorizer.IsInitialized;
-            }
-        }
-
-        public bool IsNotAuthorized
+        public bool? IsNotAuthorized
         {
             get
             {
@@ -50,21 +42,15 @@
             base.Dispose();
         }
 
-        public void InitializeToken()
+        public override async Task InitializeAsync()
         {
-            if (!this.IsInitialized)
-            {
-                this.Authorizer.InitializeToken();
-            }
+            await this.Authorizer.InitializeAsync();
         }
 
         private void Authorizer_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(TokenStore.CurrentToken))
-            {
-                this.OnPropertyChanged(nameof(this.IsAuthorized));
-                this.OnPropertyChanged(nameof(this.IsNotAuthorized));
-            }
+            this.OnPropertyChanged(nameof(this.IsAuthorized));
+            this.OnPropertyChanged(nameof(this.IsNotAuthorized));
         }
     }
 }

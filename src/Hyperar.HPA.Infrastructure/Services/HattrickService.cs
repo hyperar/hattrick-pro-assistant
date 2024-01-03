@@ -1,32 +1,34 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System;
+    using System.Threading.Tasks;
     using Hyperar.HPA.Application.Interfaces;
     using Hyperar.HPA.Application.OAuth;
     using Hyperar.HPA.Application.Services;
     using Hyperar.OauthCore.Consumer;
     using Hyperar.OauthCore.Framework;
     using Microsoft.Extensions.Configuration;
+    using static System.Collections.Specialized.BitVector32;
 
     public class HattrickService : IHattrickService
     {
-        private const string AccessTokenKey = "OAuth:Urls:Base:AccessToken";
+        private const string AccessTokenKeyName = "OAuth:Urls:Base:AccessToken";
 
-        private const string AuthorizeKey = "OAuth:Urls:Base:Authorize";
+        private const string AuthorizeKeyName = "OAuth:Urls:Base:Authorize";
 
-        private const string CallbackKry = "OAuth:Urls:Base:Callback";
+        private const string CallbackKeyName = "OAuth:Urls:Base:Callback";
 
-        private const string CheckTokenKey = "OAuth:Urls:Base:CheckToken";
+        private const string CheckTokenKeyName = "OAuth:Urls:Base:CheckToken";
 
-        private const string ConsumerKeyKey = "OAuth:ConsumerKey";
+        private const string ConsumerKeyKeyName = "OAuth:ConsumerKey";
 
-        private const string ConsumerSecretKey = "OAuth:ConsumerSecret";
+        private const string ConsumerSecretKeyName = "OAuth:ConsumerSecret";
 
-        private const string InvalidateTokenKey = "OAuth:Urls:Base:InvalidateToken";
+        private const string InvalidateTokenKeyName = "OAuth:Urls:Base:InvalidateToken";
 
-        private const string RequestTokenKey = "OAuth:Urls:Base:RequestToken";
+        private const string RequestTokenKeyName = "OAuth:Urls:Base:RequestToken";
 
-        private const string UserAgentKey = "OAuth:UserAgent";
+        private const string UserAgentKeyName = "OAuth:UserAgent";
 
         private readonly IConfiguration configuration;
 
@@ -38,109 +40,119 @@
             this.protectedResourceUrlBuilder = protectedResourceUrlBuilder;
         }
 
-        public string CheckToken(OAuthToken token)
+        public async Task<string> CheckTokenAsync(OAuthToken token)
         {
             ArgumentNullException.ThrowIfNull(token);
 
-            OAuthSession session = this.CreateOAuthSession(token.Token, token.TokenSecret);
+            OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
 
-            string? checkTokenUrl = this.configuration[CheckTokenKey];
+            string? checkTokenUrl = this.configuration[CheckTokenKeyName];
 
-            return checkTokenUrl == null
-                ? throw new NullReferenceException(nameof(checkTokenUrl))
-                : ReadResponseStream(
-                GetResponseContentForUrl(
-                    checkTokenUrl,
-                    session));
+            ArgumentException.ThrowIfNullOrWhiteSpace(checkTokenUrl);
+
+            var responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
+
+            return await ReadResponseStreamAsync(responseStream);
         }
 
-        public GetAccessTokenResponse GetAccessToken(GetAccessTokenRequest request)
+        public async Task<GetAccessTokenResponse> GetAccessTokenAsync(GetAccessTokenRequest request)
         {
             ArgumentNullException.ThrowIfNull(request);
 
             OAuthSession session = this.CreateOAuthSession();
 
-            var requestToken = new TokenBase()
+            ArgumentNullException.ThrowIfNull(session);
+
+            var requestToken = new TokenBase
             {
                 Token = request.RequestToken.Token,
                 TokenSecret = request.RequestToken.TokenSecret
             };
 
-            IToken accessToken = session.ExchangeRequestTokenForAccessToken(
-                                          requestToken,
-                                          HttpMethod.Get.ToString(),
-                                          request.VerificationCode);
+            IToken accessToken = await Task.Run(() => session.ExchangeRequestTokenForAccessToken(
+                requestToken,
+                HttpMethod.Get.ToString(),
+                request.VerificationCode));
 
-            GetAccessTokenResponse result = new(
+            return new GetAccessTokenResponse(
                 accessToken.Token,
                 accessToken.TokenSecret,
                 DateTime.Now,
                 DateTime.MaxValue);
-
-            return result;
         }
 
-        public GetAuthorizationUrlResponse GetAuthorizationUrl()
+        public async Task<GetAuthorizationUrlResponse> GetAuthorizationUrlAsync()
         {
             OAuthSession session = this.CreateOAuthSession();
 
-            IToken requestToken = session.GetRequestToken(HttpMethod.Get.ToString());
+            ArgumentNullException.ThrowIfNull(session);
 
-            string url = session.GetUserAuthorizationUrlForToken(requestToken);
+            IToken requestToken = await Task.Run(() => session.GetRequestToken(HttpMethod.Get.ToString()));
 
-            GetAuthorizationUrlResponse result = new(url, requestToken.Token, requestToken.TokenSecret);
+            ArgumentNullException.ThrowIfNull(requestToken);
 
-            return result;
+            string url = await Task.Run(() => session.GetUserAuthorizationUrlForToken(requestToken));
+
+            ArgumentNullException.ThrowIfNull(url);
+
+            return new GetAuthorizationUrlResponse(url, requestToken.Token, requestToken.TokenSecret);
         }
 
-        public string GetProtectedResource(GetProtectedResourceRequest request)
+        public async Task<string> GetProtectedResourceAsync(GetProtectedResourceRequest request)
         {
             string url = this.protectedResourceUrlBuilder.BuildUrl(request.FileType, request.Parameters);
 
-            OAuthSession session = this.CreateOAuthSession(request.AccessToken.Token, request.AccessToken.TokenSecret);
+            ArgumentException.ThrowIfNullOrWhiteSpace(url);
 
-            return ReadResponseStream(
-                GetResponseContentForUrl(
-                    url,
-                    session));
+            OAuthSession session = this.CreateSignedOAuthSession(request.AccessToken.Token, request.AccessToken.TokenSecret);
+
+            ArgumentNullException.ThrowIfNull(session);
+
+            var responseStream = await GetResponseStreamForUrlAsync(url, session);
+
+            return await ReadResponseStreamAsync(responseStream);
         }
 
-        public string RevokeToken(OAuthToken token)
+        public async Task<string> RevokeTokenAsync(OAuthToken token)
         {
-            OAuthSession session = this.CreateOAuthSession(token.Token, token.TokenSecret);
+            ArgumentNullException.ThrowIfNull(token);
 
-            string? invalidateTokenUrl = this.configuration[InvalidateTokenKey];
+            string? invalidateTokenUrl = this.configuration[InvalidateTokenKeyName];
 
-            return invalidateTokenUrl == null
-                ? throw new NullReferenceException(nameof(invalidateTokenUrl))
-                : ReadResponseStream(
-                GetResponseContentForUrl(
-                    invalidateTokenUrl,
-                    session));
+            ArgumentException.ThrowIfNullOrWhiteSpace(invalidateTokenUrl);
+
+            OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
+
+            var responseStream = await GetResponseStreamForUrlAsync(invalidateTokenUrl, session);
+
+            return await ReadResponseStreamAsync(responseStream);
         }
 
-        private static Stream GetResponseContentForUrl(string url, OAuthSession session)
+        private static async Task<Stream> GetResponseStreamForUrlAsync(string url, OAuthSession session)
         {
-            return string.IsNullOrWhiteSpace(url)
-                ? throw new ArgumentNullException(nameof(url))
-                : session == null || session.AccessToken == null
-                ? throw new ArgumentException("Incorrect OAuthSession configuration.", nameof(session))
-                : session.Request()
-                          .ForUrl(url)
-                          .ForMethod(HttpMethod.Get.ToString())
-                          .ToWebResponse()
-                          .GetResponseStream();
+            ArgumentException.ThrowIfNullOrWhiteSpace(url);
+
+            ArgumentNullException.ThrowIfNull(session);
+
+            var webRequest = session.Request()
+                .ForUrl(url)
+                .ForMethod(HttpMethod.Get.ToString())
+                .ToWebRequest();
+
+            var response = await webRequest.GetResponseAsync();
+
+            return response.GetResponseStream();
         }
 
-        private static string ReadResponseStream(Stream stream)
+        private static async Task<string> ReadResponseStreamAsync(Stream responseStream)
         {
-            ArgumentNullException.ThrowIfNull(stream);
+            ArgumentNullException.ThrowIfNull(responseStream);
 
             string result;
 
-            using (StreamReader reader = new(stream))
+            using (StreamReader reader = new StreamReader(responseStream))
             {
-                result = reader.ReadToEnd();
+                result = await reader.ReadToEndAsync();
             }
 
             return result;
@@ -148,67 +160,37 @@
 
         private OAuthSession CreateOAuthSession()
         {
-            string? consumerKey = this.configuration[ConsumerKeyKey];
+            string? accessTokenUrl = this.configuration[AccessTokenKeyName];
+            string? authorizeUrl = this.configuration[AuthorizeKeyName];
+            string? callbackUrl = this.configuration[CallbackKeyName];
+            string? consumerKey = this.configuration[ConsumerKeyKeyName];
+            string? consumerSecret = this.configuration[ConsumerSecretKeyName];
+            string? requestTokenUrl = this.configuration[RequestTokenKeyName];
+            string? userAgent = this.configuration[UserAgentKeyName];
 
-            if (consumerKey == null)
-            {
-                throw new NullReferenceException(nameof(consumerKey));
-            }
+            ArgumentException.ThrowIfNullOrEmpty(accessTokenUrl);
+            ArgumentException.ThrowIfNullOrEmpty(authorizeUrl);
+            ArgumentException.ThrowIfNullOrEmpty(callbackUrl);
+            ArgumentException.ThrowIfNullOrEmpty(consumerKey);
+            ArgumentException.ThrowIfNullOrEmpty(consumerSecret);
+            ArgumentException.ThrowIfNullOrEmpty(requestTokenUrl);
+            ArgumentException.ThrowIfNullOrEmpty(userAgent);
 
-            string? consumerSecret = this.configuration[ConsumerSecretKey];
-
-            if (consumerSecret == null)
-            {
-                throw new NullReferenceException(nameof(consumerSecret));
-            }
-
-            string? requestTokenUrl = this.configuration[RequestTokenKey];
-
-            if (requestTokenUrl == null)
-            {
-                throw new NullReferenceException(nameof(requestTokenUrl));
-            }
-
-            string? authorizeUrl = this.configuration[AuthorizeKey];
-
-            if (authorizeUrl == null)
-            {
-                throw new NullReferenceException(nameof(authorizeUrl));
-            }
-
-            string? accessTokenUrl = this.configuration[AccessTokenKey];
-
-            if (accessTokenUrl == null)
-            {
-                throw new NullReferenceException(nameof(accessTokenUrl));
-            }
-
-            string? callbackUrl = this.configuration[CallbackKry];
-
-            if (callbackUrl == null)
-            {
-                throw new NullReferenceException(nameof(callbackUrl));
-            }
-
-            string? userAgent = this.configuration[UserAgentKey];
-
-            return userAgent == null
-                ? throw new NullReferenceException(nameof(callbackUrl))
-                : new OAuthSession(
-                       new OAuthConsumerContext
-                       {
-                           ConsumerKey = consumerKey,
-                           ConsumerSecret = consumerSecret,
-                           SignatureMethod = SignatureMethod.HmacSha1,
-                           UserAgent = userAgent
-                       },
-                       requestTokenUrl,
-                       authorizeUrl,
-                       accessTokenUrl,
-                       callbackUrl);
+            return new OAuthSession(
+                new OAuthConsumerContext
+                {
+                    ConsumerKey = consumerKey,
+                    ConsumerSecret = consumerSecret,
+                    SignatureMethod = SignatureMethod.HmacSha1,
+                    UserAgent = userAgent
+                },
+                requestTokenUrl,
+                authorizeUrl,
+                accessTokenUrl,
+                callbackUrl);
         }
 
-        private OAuthSession CreateOAuthSession(string token, string tokenSecret)
+        private OAuthSession CreateSignedOAuthSession(string token, string tokenSecret)
         {
             OAuthSession session = this.CreateOAuthSession();
 

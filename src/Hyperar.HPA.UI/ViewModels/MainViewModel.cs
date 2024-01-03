@@ -1,5 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
+    using System.Threading.Tasks;
     using System.Windows.Input;
     using Hyperar.HPA.UI.Commands;
     using Hyperar.HPA.UI.Enums;
@@ -23,15 +24,6 @@
             this.navigator.StateChanged += this.Navigator_StateChanged;
 
             this.UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, this.viewModelFactory);
-
-            if (this.IsAuthorized)
-            {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
-            }
-            else
-            {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
-            }
         }
 
         public bool CanNavigate
@@ -57,6 +49,20 @@
             this.navigator.StateChanged -= this.Navigator_StateChanged;
 
             base.Dispose();
+        }
+
+        public override async Task InitializeAsync()
+        {
+            await base.InitializeAsync();
+
+            if (this.IsAuthorized.HasValue && this.IsAuthorized.Value)
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+            }
+            else
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
+            }
         }
 
         private void Navigator_StateChanged()

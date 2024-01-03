@@ -15,12 +15,16 @@
             {
                 services.AddSingleton(s =>
                 {
-                    return new MainWindow(
-                        s.GetRequiredService<IConfiguration>(),
-                        new MainViewModel(
+                    var viewModel = new MainViewModel(
                             s.GetRequiredService<INavigator>(),
                             s.GetRequiredService<IViewModelFactory>(),
-                            s.CreateScope().ServiceProvider.GetRequiredService<IAuthorizer>()));
+                            s.CreateScope().ServiceProvider.GetRequiredService<IAuthorizer>());
+
+                    viewModel.InitializeAsync().ConfigureAwait(false);
+
+                    return new MainWindow(
+                        s.GetRequiredService<IConfiguration>(),
+                        viewModel);
                 });
             });
 

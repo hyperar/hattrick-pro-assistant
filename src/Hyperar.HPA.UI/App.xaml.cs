@@ -32,13 +32,13 @@
                 .AddViews();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected async override void OnStartup(StartupEventArgs e)
         {
             this.host.Start();
 
             using (var scope = this.host.Services.CreateScope())
             {
-                scope.ServiceProvider.GetRequiredService<IDatabaseContext>().Migrate();
+                await scope.ServiceProvider.GetRequiredService<IDatabaseContext>().MigrateAsync();
             }
 
             MainWindow window = this.host.Services.GetRequiredService<MainWindow>();

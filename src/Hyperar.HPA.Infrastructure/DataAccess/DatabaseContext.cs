@@ -18,14 +18,14 @@
             this.cancelled = false;
         }
 
-        public void BeginTransaction()
+        public async Task BeginTransactionAsync()
         {
             if (this.Database.CurrentTransaction != null)
             {
                 throw new InvalidOperationException("Cannot start a new transaction. \r\nThere is an active transaction already.");
             }
 
-            this.Database.BeginTransaction();
+            await this.Database.BeginTransactionAsync();
         }
 
         public void Cancel()
@@ -38,28 +38,28 @@
             return this.Set<TEntity>();
         }
 
-        public void EndTransaction()
+        public async Task EndTransactionAsync()
         {
             if (this.cancelled)
             {
-                this.Rollback();
+                await this.RollbackAsync();
             }
             else
             {
-                this.Commit();
+                await this.CommitAsync();
             }
         }
 
-        public void Migrate()
+        public async Task MigrateAsync()
         {
-            EnsureDatabaseInstanceIsReady();
+            await EnsureDatabaseInstanceIsReadyAsync();
 
-            this.Database.Migrate();
+            await this.Database.MigrateAsync();
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            this.SaveChanges();
+            await this.SaveChangesAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
         }
 
-        private static void EnsureDatabaseInstanceIsReady()
+        private async static Task EnsureDatabaseInstanceIsReadyAsync()
         {
             var process = new Process
             {
@@ -86,23 +86,27 @@
 
             process.Start();
 
-            process.WaitForExit();
+            await process.WaitForExitAsync();
         }
 
-        private void Commit()
+        private async Task CommitAsync()
         {
-            this.SaveChanges();
+            await this.SaveChangesAsync();
 
-            this.Database.CurrentTransaction?.Commit();
+            if (this.Database.CurrentTransaction != null)
+            {
+                await this.Database.CurrentTransaction.CommitAsync();
+            }
         }
 
-        private void Rollback()
+        private async Task RollbackAsync()
         {
             this.ChangeTracker.Clear();
 
-            this.Database.CurrentTransaction?.Rollback();
-
-            this.cancelled = false;
+            if (this.Database.CurrentTransaction != null)
+            {
+                await this.Database.CurrentTransaction.RollbackAsync();
+            }
 
             this.cancelled = false;
         }

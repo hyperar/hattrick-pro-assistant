@@ -11,6 +11,6 @@
 
         IXmlFile ParseFile(string fileContent);
 
-        void Persist(IXmlFile xmlFile);
+        Task PersistAsync(IXmlFile xmlFile);
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System.Collections.Generic;
-    using System.Linq;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class HomeViewService : IHomeViewService
     {
@@ -14,9 +14,9 @@
             this.seniorTeamRepository = seniorTeamRepository;
         }
 
-        public List<Domain.SeniorTeam>? GetSeniorTeams()
+        public async Task<List<Domain.SeniorTeam>?> GetSeniorTeamsAsync()
         {
-            return this.seniorTeamRepository.Query().ToList();
+            return await this.seniorTeamRepository.Query().ToListAsync();
         }
     }
 }

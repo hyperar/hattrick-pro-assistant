@@ -1,30 +1,31 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
     using System;
+    using System.Threading.Tasks;
     using Hyperar.HPA.UI.Enums;
     using Hyperar.HPA.UI.ViewModels.Interfaces;
 
-    public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
+    public delegate Task<TViewModel> CreateAsyncViewModel<TViewModel>() where TViewModel : ViewModelBase;
 
     public class ViewModelFactory : IViewModelFactory
     {
-        private readonly CreateViewModel<DownloadViewModel> createDownloadViewModel;
+        private readonly CreateAsyncViewModel<DownloadViewModel> createDownloadViewModel;
 
-        private readonly CreateViewModel<HomeViewModel> createHomeViewModel;
+        private readonly CreateAsyncViewModel<HomeViewModel> createHomeViewModel;
 
-        private readonly CreateViewModel<PermissionsViewModel> createPermissionsViewModel;
+        private readonly CreateAsyncViewModel<PermissionsViewModel> createPermissionsViewModel;
 
         public ViewModelFactory(
-            CreateViewModel<DownloadViewModel> createDownloadViewModel,
-            CreateViewModel<HomeViewModel> createHomeViewModel,
-            CreateViewModel<PermissionsViewModel> createPermissionsViewModel)
+            CreateAsyncViewModel<DownloadViewModel> createDownloadViewModel,
+            CreateAsyncViewModel<HomeViewModel> createHomeViewModel,
+            CreateAsyncViewModel<PermissionsViewModel> createPermissionsViewModel)
         {
-            this.createPermissionsViewModel = createPermissionsViewModel;
-            this.createHomeViewModel = createHomeViewModel;
             this.createDownloadViewModel = createDownloadViewModel;
+            this.createHomeViewModel = createHomeViewModel;
+            this.createPermissionsViewModel = createPermissionsViewModel;
         }
 
-        public ViewModelBase CreateViewModel(ViewType viewType)
+        public async Task<ViewModelBase> CreateAsyncViewModel(ViewType viewType)
         {
             switch (viewType)
             {
@@ -32,16 +33,16 @@
                     return new AboutViewModel();
 
                 case ViewType.Download:
-                    return this.createDownloadViewModel();
+                    return await this.createDownloadViewModel();
 
                 case ViewType.Home:
-                    return this.createHomeViewModel();
+                    return await this.createHomeViewModel();
 
                 case ViewType.Matches:
                     return new MatchesViewModel();
 
                 case ViewType.Permissions:
-                    return this.createPermissionsViewModel();
+                    return await this.createPermissionsViewModel();
 
                 case ViewType.Quit:
                     return new QuitViewModel();

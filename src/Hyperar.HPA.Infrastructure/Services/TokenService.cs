@@ -1,38 +1,40 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System;
-    using System.Linq;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Domain;
     using Hyperar.HPA.Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class TokenService : ITokenService
     {
-        private readonly IDatabaseContext databaseContext;
+        private readonly IDatabaseContext context;
 
         private readonly IRepository<Token> tokenRepository;
 
-        public TokenService(IDatabaseContext databaseContext, IRepository<Token> tokenRepository)
+        public TokenService(IDatabaseContext context, IRepository<Token> tokenRepository)
         {
-            this.databaseContext = databaseContext;
+            this.context = context;
             this.tokenRepository = tokenRepository;
         }
 
-        public void DeleteToken(string token, string tokenSecret)
+        public async Task DeleteTokenAsync(string token, string tokenSecret)
         {
-            this.tokenRepository.Delete(this.tokenRepository.Query().Single().Id);
+            var storedToken = await this.tokenRepository.Query().SingleAsync();
 
-            this.databaseContext.Save();
+            await this.tokenRepository.DeleteAsync(storedToken.Id);
+
+            await this.context.SaveAsync();
         }
 
-        public Token? GetToken()
+        public async Task<Token?> GetTokenAsync()
         {
-            return this.tokenRepository.Query().SingleOrDefault();
+            return await this.tokenRepository.Query().SingleOrDefaultAsync();
         }
 
-        public void InsertToken(string token, string tokenSecret)
+        public async Task InsertTokenAsync(string token, string tokenSecret)
         {
-            this.tokenRepository.Insert(
+            await this.tokenRepository.InsertAsync(
                 new Token
                 {
                     TokenValue = token,
@@ -41,7 +43,7 @@
                     TokenExpiresOn = DateTime.MaxValue
                 });
 
-            this.databaseContext.Save();
+            await this.context.SaveAsync();
         }
     }
 }

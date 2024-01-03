@@ -3,6 +3,7 @@
     using System.Linq;
     using Hyperar.HPA.Domain;
     using Hyperar.HPA.Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class HattrickRepository<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IHattrickRepository<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity
     {
@@ -10,9 +11,9 @@
         {
         }
 
-        public void Delete(long hattrickId)
+        public async Task DeleteAsync(long hattrickId)
         {
-            TEntity? entity = this.GetByHattrickId(hattrickId);
+            TEntity? entity = await this.GetByHattrickIdAsync(hattrickId);
 
             if (entity != null)
             {
@@ -24,9 +25,9 @@
             }
         }
 
-        public TEntity? GetByHattrickId(long hattrickId)
+        public async Task<TEntity?> GetByHattrickIdAsync(long hattrickId)
         {
-            return this.EntityCollection.Where(x => x.HattrickId == hattrickId).SingleOrDefault();
+            return await this.EntityCollection.Where(x => x.HattrickId == hattrickId).SingleOrDefaultAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
+    using System.Runtime.CompilerServices;
     using Hyperar.HPA.Application.Hattrick.Interfaces;
     using Hyperar.HPA.Application.Interfaces;
     using Hyperar.HPA.Domain.Interfaces;
@@ -31,14 +32,14 @@
             this.regionRepository = regionRepository;
         }
 
-        public void PersistData(IXmlFile file)
+        public async Task PersistDataAsync(IXmlFile file)
         {
             var entity = (Hattrick.HattrickData)file;
 
-            this.ProcessWorldDetails(entity);
+            await this.ProcessWorldDetails(entity);
         }
 
-        private void ProcessCountry(Hattrick.Country xmlCountry, uint leagueId)
+        private async Task ProcessCountryAsync(Hattrick.Country xmlCountry, uint leagueId)
         {
             if (!xmlCountry.Available ||
                 xmlCountry.CountryId == null ||
@@ -52,7 +53,7 @@
                 return;
             }
 
-            var country = this.countryRepository.GetByHattrickId(xmlCountry.CountryId.Value);
+            var country = await this.countryRepository.GetByHattrickIdAsync(xmlCountry.CountryId.Value);
 
             if (country == null)
             {
@@ -68,7 +69,7 @@
                     TimeFormat = xmlCountry.TimeFormat
                 };
 
-                this.countryRepository.Insert(country);
+                await this.countryRepository.InsertAsync(country);
             }
             else
             {
@@ -82,22 +83,22 @@
                 this.countryRepository.Update(country);
             }
 
-            this.context.Save();
+            await this.context.SaveAsync();
 
             if (xmlCountry.RegionList != null)
             {
                 foreach (var curXmlRegion in xmlCountry.RegionList)
                 {
-                    this.ProcessRegion(curXmlRegion, country.HattrickId);
+                    await this.ProcessRegionAsync(curXmlRegion, country.HattrickId);
                 }
 
-                this.context.Save();
+                await this.context.SaveAsync();
             }
         }
 
-        private void ProcessLeague(Hattrick.League xmlLeague)
+        private async Task ProcessLeagueAsync(Hattrick.League xmlLeague)
         {
-            var league = this.leagueRepository.GetByHattrickId(xmlLeague.LeagueId);
+            var league = await this.leagueRepository.GetByHattrickIdAsync(xmlLeague.LeagueId);
 
             if (league == null)
             {
@@ -131,7 +132,7 @@
                     FifthWeeklyUpdate = xmlLeague.Sequence7
                 };
 
-                this.leagueRepository.Insert(league);
+                await this.leagueRepository.InsertAsync(league);
             }
             else
             {
@@ -155,24 +156,24 @@
                 this.leagueRepository.Update(league);
             }
 
-            this.context.Save();
+            await this.context.SaveAsync();
 
-            this.ProcessCountry(xmlLeague.Country, xmlLeague.LeagueId);
+            await this.ProcessCountryAsync(xmlLeague.Country, xmlLeague.LeagueId);
 
             if (xmlLeague.Cups != null)
             {
                 foreach (var curXmlCup in xmlLeague.Cups)
                 {
-                    this.ProcessLeagueCup(curXmlCup, xmlLeague.LeagueId);
+                    await this.ProcessLeagueCupAsync(curXmlCup, xmlLeague.LeagueId);
                 }
 
-                this.context.Save();
+                await this.context.SaveAsync();
             }
         }
 
-        private void ProcessLeagueCup(Hattrick.Cup xmlCup, uint leagueId)
+        private async Task ProcessLeagueCupAsync(Hattrick.Cup xmlCup, uint leagueId)
         {
-            var cup = this.leagueCupRepository.GetByHattrickId(xmlCup.CupId);
+            var cup = await this.leagueCupRepository.GetByHattrickIdAsync(xmlCup.CupId);
 
             if (cup == null)
             {
@@ -188,7 +189,7 @@
                     RoundsLeft = xmlCup.MatchRoundsLeft
                 };
 
-                this.leagueCupRepository.Insert(cup);
+                await this.leagueCupRepository.InsertAsync(cup);
             }
             else
             {
@@ -203,9 +204,9 @@
             }
         }
 
-        private void ProcessRegion(Hattrick.Region xmlRegion, uint countryId)
+        private async Task ProcessRegionAsync(Hattrick.Region xmlRegion, uint countryId)
         {
-            var region = this.regionRepository.GetByHattrickId(xmlRegion.RegionId);
+            var region = await this.regionRepository.GetByHattrickIdAsync(xmlRegion.RegionId);
 
             if (region == null)
             {
@@ -216,7 +217,7 @@
                     Name = xmlRegion.RegionName
                 };
 
-                regionRepository.Insert(region);
+                await regionRepository.InsertAsync(region);
             }
             else
             {
@@ -226,15 +227,15 @@
             }
         }
 
-        private void ProcessWorldDetails(Hattrick.HattrickData entity)
+        private async Task ProcessWorldDetails(Hattrick.HattrickData entity)
         {
-            this.context.BeginTransaction();
+            await this.context.BeginTransactionAsync();
 
             try
             {
                 foreach (var curXmlLeague in entity.LeagueList)
                 {
-                    this.ProcessLeague(curXmlLeague);
+                    await this.ProcessLeagueAsync(curXmlLeague);
                 }
             }
             catch
@@ -245,7 +246,7 @@
             }
             finally
             {
-                this.context.EndTransaction();
+                await this.context.EndTransactionAsync();
             }
         }
     }

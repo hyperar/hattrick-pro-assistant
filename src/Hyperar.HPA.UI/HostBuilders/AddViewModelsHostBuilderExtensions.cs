@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
     using System;
+    using System.Threading.Tasks;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.UI.State.Interfaces;
     using Hyperar.HPA.UI.ViewModels;
@@ -14,47 +15,52 @@
         {
             host.ConfigureServices(services =>
             {
-                services.AddTransient<AboutViewModel>();
-                services.AddTransient<HomeViewModel>();
-                services.AddTransient<MainViewModel>();
-                services.AddTransient<MatchesViewModel>();
-                services.AddTransient<PermissionsViewModel>();
-                services.AddTransient<QuitViewModel>();
-
-                services.AddTransient<CreateViewModel<DownloadViewModel>>(services => () => CreateDownloadViewModel(services));
-                services.AddTransient<CreateViewModel<HomeViewModel>>(services => () => CreateHomeViewModel(services));
-                services.AddTransient<CreateViewModel<PermissionsViewModel>>(services => () => CreatePermissionsViewModel(services));
+                services.AddTransient<CreateAsyncViewModel<DownloadViewModel>>(services => () => CreateDownloadAsyncViewModel(services));
+                services.AddTransient<CreateAsyncViewModel<HomeViewModel>>(services => () => CreateHomeAsyncViewModel(services));
+                services.AddTransient<CreateAsyncViewModel<PermissionsViewModel>>(services => () => CreatePermissionsAsyncViewModel(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
 
             return host;
         }
 
-        private static DownloadViewModel CreateDownloadViewModel(IServiceProvider services)
+        private static async Task<DownloadViewModel> CreateDownloadAsyncViewModel(IServiceProvider services)
         {
             var scope = services.CreateScope();
 
-            return new DownloadViewModel(
+            var viewModel = new DownloadViewModel(
                 scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
                 services.GetRequiredService<IHattrickService>(),
                 scope.ServiceProvider.GetRequiredService<IXmlFileService>(),
                 services.GetRequiredService<INavigator>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
         }
 
-        private static HomeViewModel CreateHomeViewModel(IServiceProvider services)
+        private static async Task<HomeViewModel> CreateHomeAsyncViewModel(IServiceProvider services)
         {
             var scope = services.CreateScope();
 
-            return new HomeViewModel(
+            var viewModel = new HomeViewModel(
                 scope.ServiceProvider.GetRequiredService<IHomeViewService>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
         }
 
-        private static PermissionsViewModel CreatePermissionsViewModel(IServiceProvider services)
+        private static async Task<PermissionsViewModel> CreatePermissionsAsyncViewModel(IServiceProvider services)
         {
             var scope = services.CreateScope();
 
-            return new PermissionsViewModel(
+            var viewModel = new PermissionsViewModel(
                 scope.ServiceProvider.GetRequiredService<IAuthorizer>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
         }
     }
 }

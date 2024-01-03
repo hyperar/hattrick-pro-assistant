@@ -33,22 +33,22 @@
             this.seniorTeamRepository = seniorTeamRepository;
         }
 
-        public void PersistData(IXmlFile file)
+        public async Task PersistDataAsync(IXmlFile file)
         {
             var entity = (HattrickData)file;
 
-            this.ProcessTeamDetails(entity);
+            await this.ProcessTeamDetailsAsync(entity);
         }
 
-        private void ProcessTeam(Team xmlTeam, Manager manager)
+        private async Task ProcessTeamAsync(Team xmlTeam, Manager manager)
         {
-            var seniorTeam = this.seniorTeamRepository.GetByHattrickId(xmlTeam.TeamId);
+            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlTeam.TeamId);
 
-            var league = this.leagueRepository.GetByHattrickId(xmlTeam.League.LeagueId);
+            var league = await this.leagueRepository.GetByHattrickIdAsync(xmlTeam.League.LeagueId);
 
             if (league != null)
             {
-                var region = this.regionRepository.GetByHattrickId(xmlTeam.Region.RegionId);
+                var region = await this.regionRepository.GetByHattrickIdAsync(xmlTeam.Region.RegionId);
 
                 if (region != null)
                 {
@@ -75,7 +75,7 @@
                             Region = region
                         };
 
-                        this.seniorTeamRepository.Insert(seniorTeam);
+                        await this.seniorTeamRepository.InsertAsync(seniorTeam);
                     }
                     else
                     {
@@ -107,18 +107,18 @@
             }
         }
 
-        private void ProcessTeamDetails(HattrickData entity)
+        private async Task ProcessTeamDetailsAsync(HattrickData entity)
         {
-            var manager = this.managerRepository.GetByHattrickId(entity.User.UserId);
+            var manager = await this.managerRepository.GetByHattrickIdAsync(entity.User.UserId);
 
             if (manager != null)
             {
                 foreach (var curXmlTeam in entity.Teams)
                 {
-                    this.ProcessTeam(curXmlTeam, manager);
+                    await this.ProcessTeamAsync(curXmlTeam, manager);
                 }
 
-                this.context.Save();
+                await this.context.SaveAsync();
             }
             else
             {

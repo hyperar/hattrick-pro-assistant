@@ -15,7 +15,7 @@
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            Application.OAuth.GetAuthorizationUrlResponse result = await Task.Run(() => this.permissionsViewModel.Authorizer.GetAuthorizationUrl());
+            Application.OAuth.GetAuthorizationUrlResponse result = await this.permissionsViewModel.Authorizer.GetAuthorizationUrlAsync();
 
             if (result != null)
             {

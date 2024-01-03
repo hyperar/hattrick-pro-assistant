@@ -4,6 +4,6 @@
 
     public interface IXmlFileDataPersisterStrategy
     {
-        void PersistData(IXmlFile file);
+        Task PersistDataAsync(IXmlFile file);
     }
 }

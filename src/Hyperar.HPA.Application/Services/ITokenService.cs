@@ -4,10 +4,10 @@
 
     public interface ITokenService
     {
-        void DeleteToken(string token, string tokenSecret);
+        Task DeleteTokenAsync(string token, string tokenSecret);
 
-        Token? GetToken();
+        Task<Token?> GetTokenAsync();
 
-        void InsertToken(string token, string tokenSecret);
+        Task InsertTokenAsync(string token, string tokenSecret);
     }
 }

@@ -31,10 +31,10 @@
         {
             if (parameter is GetAccessTokenRequest request)
             {
-                GetAccessTokenResponse response = await Task.Run(() => this.permissionsViewModel.Authorizer.GetAccessToken(
+                GetAccessTokenResponse response = await this.permissionsViewModel.Authorizer.GetAccessTokenAsync(
                     request.VerificationCode,
                     request.RequestToken.Token,
-                    request.RequestToken.TokenSecret));
+                    request.RequestToken.TokenSecret);
 
                 this.permissionsViewModel.AuthorizationUrl =
                 this.permissionsViewModel.RequestToken =
@@ -44,7 +44,7 @@
                 this.permissionsViewModel.AccessToken = response.AccessToken.Token;
                 this.permissionsViewModel.AccessTokenSecret = response.AccessToken.TokenSecret;
 
-                this.permissionsViewModel.Authorizer.PersistToken(response.AccessToken.Token, response.AccessToken.TokenSecret);
+                await this.permissionsViewModel.Authorizer.PersistTokenAsync(response.AccessToken.Token, response.AccessToken.TokenSecret);
             }
         }
 

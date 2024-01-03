@@ -28,7 +28,7 @@
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            await Task.Run(() => this.permissionsViewModel.Authorizer.RevokeToken());
+            await this.permissionsViewModel.Authorizer.RevokeTokenAsync();
 
             this.permissionsViewModel.AccessToken = null;
             this.permissionsViewModel.AccessTokenSecret = null;

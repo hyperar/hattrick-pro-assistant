@@ -23,17 +23,17 @@
             this.managerRepository = managerRepository;
         }
 
-        public void PersistData(IXmlFile file)
+        public async Task PersistDataAsync(IXmlFile file)
         {
             var entity = (HattrickData)file;
 
-            this.ProcessManagerCompendium(entity);
+            await this.ProcessManagerCompendiumAsync(entity);
         }
 
-        private void ProcessManagerCompendium(HattrickData entity)
+        private async Task ProcessManagerCompendiumAsync(HattrickData entity)
         {
-            var manager = this.managerRepository.GetByHattrickId(entity.Manager.UserId);
-            var country = this.countryRepository.GetByHattrickId(entity.Manager.Country.CountryId);
+            var manager = await this.managerRepository.GetByHattrickIdAsync(entity.Manager.UserId);
+            var country = await this.countryRepository.GetByHattrickIdAsync(entity.Manager.Country.CountryId);
 
             if (country != null)
             {
@@ -49,7 +49,7 @@
                         Country = country
                     };
 
-                    this.managerRepository.Insert(manager);
+                    await this.managerRepository.InsertAsync(manager);
                 }
                 else
                 {
@@ -61,7 +61,7 @@
                     this.managerRepository.Update(manager);
                 }
 
-                this.context.Save();
+                await this.context.SaveAsync();
             }
             else
             {

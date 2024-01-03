@@ -1,6 +1,8 @@
 ﻿namespace Hyperar.HPA.UI
 {
+    using System;
     using System.Windows;
+    using Hyperar.HPA.UI.ViewModels;
     using Microsoft.Extensions.Configuration;
 
     /// <summary>

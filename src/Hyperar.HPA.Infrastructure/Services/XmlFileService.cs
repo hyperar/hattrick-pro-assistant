@@ -72,11 +72,11 @@
             return this.ParseFile(memoryStream);
         }
 
-        public void Persist(IXmlFile xmlFile)
+        public async Task PersistAsync(IXmlFile xmlFile)
         {
             var persister = this.xmlFileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
 
-            persister.PersistData(xmlFile);
+            await persister.PersistDataAsync(xmlFile);
         }
     }
 }
