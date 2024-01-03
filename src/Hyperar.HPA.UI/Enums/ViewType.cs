@@ -12,6 +12,8 @@
 
         Permissions,
 
+        TeamSelection,
+
         Quit
     }
 }

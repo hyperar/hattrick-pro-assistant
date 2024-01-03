@@ -268,6 +268,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Honesty.
         /// </summary>
         public static string Honesty {
@@ -534,6 +543,15 @@ namespace Hyperar.HPA.Globalization {
         public static string StepTwo {
             get {
                 return ResourceManager.GetString("StepTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team Selection.
+        /// </summary>
+        public static string TeamSelection {
+            get {
+                return ResourceManager.GetString("TeamSelection", resourceCulture);
             }
         }
         

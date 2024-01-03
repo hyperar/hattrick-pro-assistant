@@ -31,8 +31,9 @@
             var viewModel = new DownloadViewModel(
                 scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
                 services.GetRequiredService<IHattrickService>(),
+                scope.ServiceProvider.GetRequiredService<IUserService>(),
                 scope.ServiceProvider.GetRequiredService<IXmlFileService>(),
-                services.GetRequiredService<INavigator>());
+                navigator: services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
 
@@ -43,8 +44,11 @@
         {
             var scope = services.CreateScope();
 
+            uint selectedTeamId = services.GetRequiredService<INavigator>().SelectedTeamId ?? 0;
+
             var viewModel = new HomeViewModel(
-                scope.ServiceProvider.GetRequiredService<IHomeViewService>());
+                scope.ServiceProvider.GetRequiredService<IHomeViewService>(),
+                selectedTeamId);
 
             await viewModel.InitializeAsync();
 

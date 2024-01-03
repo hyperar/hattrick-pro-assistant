@@ -1,5 +1,7 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
+    using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Hyperar.HPA.UI.Commands;
@@ -55,13 +57,30 @@
         {
             await base.InitializeAsync();
 
-            if (this.IsAuthorized.HasValue && this.IsAuthorized.Value)
+            ArgumentNullException.ThrowIfNull(this.IsAuthorized);
+            ArgumentNullException.ThrowIfNull(this.IsNotAuthorized);
+            ArgumentNullException.ThrowIfNull(this.Authorizer.User);
+
+            if (this.IsNotAuthorized.Value)
             {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
+            }
+            else if (!this.Authorizer.User.LastDownloadDate.HasValue ||
+                this.Authorizer.User.Manager == null ||
+                this.Authorizer.User.Manager.SeniorTeams == null ||
+                this.Authorizer.User.Manager.SeniorTeams.Count == 0)
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Download);
+            }
+            else if (this.Authorizer.User.Manager.SeniorTeams.Count > 1 && !this.Authorizer.User.DefaultTeamId.HasValue)
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.TeamSelection);
             }
             else
             {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
+                this.navigator.SelectedTeamId = this.Authorizer.User.DefaultTeamId ?? this.Authorizer.User.Manager.SeniorTeams.Single(x => x.IsPrimary).HattrickId;
+
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
             }
         }
 

@@ -27,8 +27,10 @@
 
         <controls:NavigationBar Grid.Column="0" />
 
-        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ContentControl Content="{Binding CurrentViewModel}" />
-        </ScrollViewer>
+        <Border Style="{StaticResource MainViewContainer}" Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ContentControl Content="{Binding CurrentViewModel}" />
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Window>

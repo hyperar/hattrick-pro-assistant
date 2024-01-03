@@ -32,7 +32,7 @@
                 .AddViews();
         }
 
-        protected async override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             this.host.Start();
 

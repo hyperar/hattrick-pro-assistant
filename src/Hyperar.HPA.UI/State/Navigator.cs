@@ -10,6 +10,8 @@
 
         private ViewModelBase? currentViewModel;
 
+        private uint? selectedTeamId;
+
         public Navigator()
         {
             this.canNavigate = true;
@@ -42,6 +44,20 @@
                 this.currentViewModel?.Dispose();
 
                 this.currentViewModel = value;
+
+                this.StateChanged?.Invoke();
+            }
+        }
+
+        public uint? SelectedTeamId
+        {
+            get
+            {
+                return this.selectedTeamId;
+            }
+            set
+            {
+                this.selectedTeamId = value;
 
                 this.StateChanged?.Invoke();
             }

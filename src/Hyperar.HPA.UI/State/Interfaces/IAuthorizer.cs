@@ -1,10 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.State.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using Hyperar.HPA.Application.OAuth;
 
@@ -15,6 +11,8 @@
         bool? IsAuthorized { get; }
 
         bool IsInitialized { get; }
+
+        Domain.User? User { get; }
 
         GetProtectedResourceRequest BuildProtectedResourseRequest(DownloadTask task);
 

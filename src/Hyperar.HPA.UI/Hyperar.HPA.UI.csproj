@@ -10,6 +10,7 @@
         <BaseOutputPath>..\bin\</BaseOutputPath>
         <StartupObject>Hyperar.HPA.UI.App</StartupObject>
         <UserSecretsId>687968cf-3b1b-49d9-828b-c13927c9d634</UserSecretsId>
+        <ApplicationIcon>Resources\HPA.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -22,6 +23,11 @@
         <None Remove="Resources\Key_32.png" />
         <None Remove="Resources\Quit_32.png" />
         <None Remove="Resources\Scoreboard_32.png" />
+        <None Remove="Resources\Shield_32.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Resources\HPA.ico" />
     </ItemGroup>
 
     <ItemGroup>
@@ -70,6 +76,9 @@
         </Resource>
         <Resource Include="Resources\Scoreboard_32.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+        <Resource Include="Resources\Shield_32.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Resource>
     </ItemGroup>
 

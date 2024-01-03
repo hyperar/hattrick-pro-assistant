@@ -8,7 +8,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:PermissionsViewModel}"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisible" />
     </UserControl.Resources>
     <Border Style="{StaticResource ViewContainer}">
         <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
@@ -39,15 +39,19 @@
                 <Style x:Key="AuthorizedStatus" TargetType="{x:Type TextBlock}">
                     <Setter Property="Foreground" Value="Green" />
                     <Setter Property="FontSize" Value="24" />
-                    <Setter Property="Margin" Value="0 10 0 0" />
+                    <Setter Property="Margin" Value="0" />
                     <Setter Property="TextAlignment" Value="Center" />
                 </Style>
 
                 <Style x:Key="UnauthorizedStatus" TargetType="{x:Type TextBlock}">
                     <Setter Property="Foreground" Value="Red" />
                     <Setter Property="FontSize" Value="24" />
-                    <Setter Property="Margin" Value="0 10 0 0" />
+                    <Setter Property="Margin" Value="0" />
                     <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+
+                <Style TargetType="{x:Type Separator}">
+                    <Setter Property="Margin" Value="0 10" />
                 </Style>
             </StackPanel.Resources>
 
@@ -69,19 +73,19 @@
 
             <TextBlock Style="{StaticResource StepTitle}" Text="{x:Static globalization:Strings.StepThree}" />
 
-            <TextBlock Style="{StaticResource StepDescription}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVis}}" Text="{x:Static globalization:Strings.AuthorizeMessage}" />
+            <TextBlock Style="{StaticResource StepDescription}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVisible}}" Text="{x:Static globalization:Strings.AuthorizeMessage}" />
 
-            <TextBlock Style="{StaticResource StepDescription}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}" Text="{x:Static globalization:Strings.DeAuthorizeMessage}" />
+            <TextBlock Style="{StaticResource StepDescription}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVisible}, FallbackValue=Hidden}" Text="{x:Static globalization:Strings.DeAuthorizeMessage}" />
 
-            <Button Command="{Binding GetAccessTokenCommand}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVis}}" CommandParameter="{Binding GetAccessTokenRequest}" IsEnabled="{Binding CanGrantAccess}" Content="{x:Static globalization:Strings.Authorize}" />
+            <Button Command="{Binding GetAccessTokenCommand}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVisible}}" CommandParameter="{Binding GetAccessTokenRequest}" IsEnabled="{Binding CanGrantAccess}" Content="{x:Static globalization:Strings.Authorize}" />
 
-            <Button Command="{Binding RevokeAccessTokenCommand}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}" Content="{x:Static globalization:Strings.Deauthorize}" />
+            <Button Command="{Binding RevokeAccessTokenCommand}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVisible}, FallbackValue=Hidden}" Content="{x:Static globalization:Strings.Deauthorize}" />
 
             <Separator />
 
-            <TextBlock Style="{StaticResource AuthorizedStatus}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}" Text="{x:Static globalization:Strings.Authorized}" />
+            <TextBlock Style="{StaticResource AuthorizedStatus}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVisible}, FallbackValue=Hidden}" Text="{x:Static globalization:Strings.Authorized}" />
 
-            <TextBlock Style="{StaticResource UnauthorizedStatus}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVis}}" Text="{x:Static globalization:Strings.NotAuthorized}" />
+            <TextBlock Style="{StaticResource UnauthorizedStatus}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVisible}}" Text="{x:Static globalization:Strings.NotAuthorized}" />
         </StackPanel>
     </Border>
 </UserControl>

@@ -5,12 +5,16 @@
 
     public class Token : EntityBase, IEntity
     {
-        public DateTime TokenCreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-        public DateTime TokenExpiresOn { get; set; }
+        public DateTime ExpiresOn { get; set; }
 
-        public string TokenSecretValue { get; set; } = string.Empty;
+        public string SecretValue { get; set; } = string.Empty;
 
-        public string TokenValue { get; set; } = string.Empty;
+        public virtual User User { get; set; } = new User();
+
+        public int UserId { get; set; }
+
+        public string Value { get; set; } = string.Empty;
     }
 }

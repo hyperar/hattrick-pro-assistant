@@ -89,15 +89,15 @@
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.NumberOfConsecutiveUndefeatedMatches)
-                .HasColumnName(Constants.ColumnName.NumberOfConsecutiveUndefeatedMatches)
+            builder.Property(p => p.UndefeatedStreak)
+                .HasColumnName(Constants.ColumnName.UndefeatedStreak)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.NumberOfConsecutiveWonMatches)
-                .HasColumnName(Constants.ColumnName.NumberOfConsecutiveWonMatches)
+            builder.Property(p => p.WinStreak)
+                .HasColumnName(Constants.ColumnName.WinStreak)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)

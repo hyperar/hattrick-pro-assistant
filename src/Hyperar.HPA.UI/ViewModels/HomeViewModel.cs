@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
-    using System.Collections.Generic;
+    using System;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Hyperar.HPA.Application.Services;
@@ -9,13 +9,14 @@
     {
         private readonly IHomeViewService homeViewService;
 
+        private readonly uint selectedTeamId;
+
         private int? selectedTabIndex;
 
-        private ObservableCollection<Domain.SeniorTeam>? seniorTeams;
-
-        public HomeViewModel(IHomeViewService homeViewService)
+        public HomeViewModel(IHomeViewService homeViewService, uint selectedTeamId)
         {
             this.homeViewService = homeViewService;
+            this.selectedTeamId = selectedTeamId;
         }
 
         public int SelectedTabIndex
@@ -27,28 +28,20 @@
             set
             {
                 this.selectedTabIndex = value;
-                this.OnPropertyChanged(nameof(this.SeniorTeams));
+                this.OnPropertyChanged(nameof(this.SeniorPlayers));
                 this.OnPropertyChanged(nameof(this.SelectedTabIndex));
             }
         }
 
-        public ObservableCollection<Domain.SeniorTeam> SeniorTeams
-        {
-            get
-            {
-                return this.seniorTeams != null
-                     ? new ObservableCollection<Domain.SeniorTeam>(this.seniorTeams)
-                     : new ObservableCollection<Domain.SeniorTeam>();
-            }
-        }
+        public ObservableCollection<Application.Models.SeniorPlayer>? SeniorPlayers { get; private set; }
 
         public override async Task InitializeAsync()
         {
-            var result = await this.homeViewService.GetSeniorTeamsAsync();
+            var result = await this.homeViewService.GetSeniorPlayerAsync(this.selectedTeamId);
 
-            this.seniorTeams = new ObservableCollection<Domain.SeniorTeam>(result ?? new List<Domain.SeniorTeam>());
+            this.SeniorPlayers = new ObservableCollection<Application.Models.SeniorPlayer>(result ?? Array.Empty<Application.Models.SeniorPlayer>());
 
-            this.OnPropertyChanged(nameof(this.SeniorTeams));
+            this.OnPropertyChanged(nameof(this.SeniorPlayers));
         }
     }
 }

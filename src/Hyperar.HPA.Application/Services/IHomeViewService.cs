@@ -4,6 +4,6 @@
 
     public interface IHomeViewService
     {
-        Task<List<Domain.SeniorTeam>?> GetSeniorTeamsAsync();
+        Task<Models.SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId);
     }
 }

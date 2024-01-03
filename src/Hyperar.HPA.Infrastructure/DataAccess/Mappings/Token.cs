@@ -8,8 +8,8 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Token> builder)
         {
-            builder.Property(p => p.TokenValue)
-                .HasColumnName(Constants.ColumnName.TokenValue)
+            builder.Property(p => p.Value)
+                .HasColumnName(Constants.ColumnName.Value)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.NVarChar)
@@ -17,8 +17,8 @@
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(p => p.TokenSecretValue)
-                .HasColumnName(Constants.ColumnName.TokenSecretValue)
+            builder.Property(p => p.SecretValue)
+                .HasColumnName(Constants.ColumnName.SecretValue)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.NVarChar)
@@ -26,15 +26,15 @@
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(p => p.TokenCreatedOn)
-                .HasColumnName(Constants.ColumnName.TokenCreatedOn)
+            builder.Property(p => p.CreatedOn)
+                .HasColumnName(Constants.ColumnName.CreatedOn)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.Date)
                 .IsRequired();
 
-            builder.Property(p => p.TokenExpiresOn)
-                .HasColumnName(Constants.ColumnName.TokenExpiresOn)
+            builder.Property(p => p.ExpiresOn)
+                .HasColumnName(Constants.ColumnName.ExpiresOn)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.Date)

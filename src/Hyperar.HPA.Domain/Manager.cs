@@ -15,6 +15,10 @@
 
         public SupporterTier SupporterTier { get; set; }
 
+        public virtual User User { get; set; } = new User();
+
+        public int UserId { get; set; }
+
         public string UserName { get; set; } = string.Empty;
     }
 }

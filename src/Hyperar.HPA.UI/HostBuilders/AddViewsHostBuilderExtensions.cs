@@ -15,10 +15,12 @@
             {
                 services.AddSingleton(s =>
                 {
+                    var scope = s.CreateScope();
+
                     var viewModel = new MainViewModel(
                             s.GetRequiredService<INavigator>(),
                             s.GetRequiredService<IViewModelFactory>(),
-                            s.CreateScope().ServiceProvider.GetRequiredService<IAuthorizer>());
+                            scope.ServiceProvider.GetRequiredService<IAuthorizer>());
 
                     viewModel.InitializeAsync().ConfigureAwait(false);
 

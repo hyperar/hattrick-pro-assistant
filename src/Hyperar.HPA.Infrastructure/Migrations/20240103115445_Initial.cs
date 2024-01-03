@@ -5,7 +5,7 @@
 namespace Hyperar.HPA.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -33,6 +33,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Region");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Country");
@@ -81,19 +84,17 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Token",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TokenValue = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    TokenSecretValue = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    TokenCreatedOn = table.Column<DateTime>(type: "date", nullable: false),
-                    TokenExpiresOn = table.Column<DateTime>(type: "date", nullable: false)
+                    LastDownloadDate = table.Column<DateTime>(type: "date", nullable: true),
+                    DefaultTeamId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Token", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,6 +146,29 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Token",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    SecretValue = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "date", nullable: false),
+                    ExpiresOn = table.Column<DateTime>(type: "date", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Token", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Token_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Manager",
                 columns: table => new
                 {
@@ -153,7 +177,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     SupporterTier = table.Column<int>(type: "int", nullable: false),
                     CurrencyName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     CurrencyRate = table.Column<decimal>(type: "decimal(10,5)", precision: 10, scale: 5, nullable: false),
-                    CountryHattrickId = table.Column<long>(type: "bigint", nullable: false)
+                    CountryHattrickId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,6 +188,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         column: x => x.CountryHattrickId,
                         principalTable: "Country",
                         principalColumn: "HattrickId");
+                    table.ForeignKey(
+                        name: "FK_Manager_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,8 +231,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     RegionRanking = table.Column<long>(type: "bigint", nullable: false),
                     PowerRanking = table.Column<long>(type: "bigint", nullable: false),
                     TeamRank = table.Column<long>(type: "bigint", nullable: false),
-                    NumberOfConsecutiveUndefeatedMatches = table.Column<long>(type: "bigint", nullable: false),
-                    NumberOfConsecutiveWonMatches = table.Column<long>(type: "bigint", nullable: false),
+                    UndefeatedStreak = table.Column<long>(type: "bigint", nullable: false),
+                    WinStreak = table.Column<long>(type: "bigint", nullable: false),
                     LeagueHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     ManagerHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     RegionHattrickId = table.Column<long>(type: "bigint", nullable: false)
@@ -357,6 +388,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 column: "CountryHattrickId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Manager_UserId",
+                table: "Manager",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Region_CountryHattrickId",
                 table: "Region",
                 column: "CountryHattrickId");
@@ -395,6 +432,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 name: "IX_SeniorTeamArena_SeniorTeamHattrickId",
                 table: "SeniorTeamArena",
                 column: "SeniorTeamHattrickId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Token_UserId",
+                table: "Token",
+                column: "UserId",
                 unique: true);
         }
     }

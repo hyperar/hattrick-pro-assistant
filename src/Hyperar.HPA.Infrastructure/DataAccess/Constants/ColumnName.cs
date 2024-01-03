@@ -32,6 +32,8 @@
 
         internal const string Continent = "Continent";
 
+        internal const string CreatedOn = "CreatedOn";
+
         internal const string CurrencyName = "CurrencyName";
 
         internal const string CurrencyRate = "CurrencyRate";
@@ -46,6 +48,8 @@
 
         internal const string DateFormat = "DateFormat";
 
+        internal const string DefaultTeamId = "DefaultTeamId";
+
         internal const string Defending = "Defending";
 
         internal const string EnglishName = "EnglishName";
@@ -53,6 +57,8 @@
         internal const string EnrolledOnNationalTeam = "EnrolledOnNationalTeam";
 
         internal const string Experience = "Experience";
+
+        internal const string ExpiresOn = "ExpiresOn";
 
         internal const string FifthWeeklyUpdate = "FifthWeeklyUpdate";
 
@@ -100,6 +106,8 @@
 
         internal const string LanguageName = "LanguageName";
 
+        internal const string LastDownloadDate = "LastDownloadDate";
+
         internal const string LastName = "LastName";
 
         internal const string Leadership = "Leadership";
@@ -130,10 +138,6 @@
 
         internal const string Notes = "Notes";
 
-        internal const string NumberOfConsecutiveUndefeatedMatches = "NumberOfConsecutiveUndefeatedMatches";
-
-        internal const string NumberOfConsecutiveWonMatches = "NumberOfConsecutiveWonMatches";
-
         internal const string NumberOfLevels = "NumberOfLevels";
 
         internal const string Passing = "Passing";
@@ -157,6 +161,8 @@
         internal const string SeasonOffset = "SeasonOffset";
 
         internal const string SecondWeeklyUpdate = "SecondWeeklyUpdate";
+
+        internal const string SecretValue = "SecretValue";
 
         internal const string SeniorNationalTeamCaps = "SeniorNationalTeamCaps";
 
@@ -184,27 +190,25 @@
 
         internal const string TimeFormat = "TimeFormat";
 
-        internal const string TokenCreatedOn = "TokenCreatedOn";
-
-        internal const string TokenExpiresOn = "TokenExpiresOn";
-
-        internal const string TokenSecretValue = "TokenSecretValue";
-
-        internal const string TokenValue = "TokenValue";
-
         internal const string TotalCapacity = "TotalCapacity";
 
         internal const string TotalSkillIndex = "TotalSkillIndex";
 
+        internal const string UndefeatedStreak = "UndefeatedStreak";
+
         internal const string UpdatedOn = "UpdatedOn";
 
         internal const string UserName = "UserName";
+
+        internal const string Value = "Value";
 
         internal const string VipLoungeCapacity = "VipLoungeCapacity";
 
         internal const string WaitingUsers = "WaitingUsers";
 
         internal const string Winger = "Winger";
+
+        internal const string WinStreak = "WinStreak";
 
         internal const string YouthNationalTeamCaps = "YouthNationalTeamCaps";
 

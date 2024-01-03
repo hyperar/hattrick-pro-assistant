@@ -10,5 +10,7 @@
         bool CanNavigate { get; set; }
 
         ViewModelBase? CurrentViewModel { get; set; }
+
+        public uint? SelectedTeamId { get; set; }
     }
 }

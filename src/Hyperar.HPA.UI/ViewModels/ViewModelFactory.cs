@@ -44,6 +44,9 @@
                 case ViewType.Permissions:
                     return await this.createPermissionsViewModel();
 
+                case ViewType.TeamSelection:
+                    return new TeamSelectionViewModel();
+
                 case ViewType.Quit:
                     return new QuitViewModel();
 

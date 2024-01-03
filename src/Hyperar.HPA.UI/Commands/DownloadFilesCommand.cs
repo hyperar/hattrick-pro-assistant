@@ -31,10 +31,12 @@
 
                 while (currentTask != null)
                 {
-                    await Task.Run(() => this.downloadViewModel.ExecuteDownloadTaskAsync(currentTask));
+                    await this.downloadViewModel.ExecuteDownloadTaskAsync(currentTask);
 
                     currentTask = this.downloadViewModel.GetNextDownloadTask();
                 }
+
+                await this.downloadViewModel.FinishDownloadAsync();
             }
             catch
             {

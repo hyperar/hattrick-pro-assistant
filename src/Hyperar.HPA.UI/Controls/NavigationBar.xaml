@@ -6,14 +6,16 @@
              xmlns:converters="clr-namespace:Hyperar.HPA.UI.Converters"
              xmlns:enums="clr-namespace:Hyperar.HPA.UI.Enums"
              xmlns:viewModels="clr-namespace:Hyperar.HPA.UI.ViewModels"
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
              Width="48"
+             d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
              d:DesignWidth="48"
-             d:DesignHeight="900"
+             d:DesignHeight="400"
              mc:Ignorable="d">
     <UserControl.Resources>
         <converters:EqualValueToParameterConverter x:Key="EqualValueToParameterConverter" />
     </UserControl.Resources>
-    <Grid Background="{StaticResource NavButtonPrimaryBrush}">
+    <Grid Background="{StaticResource NavButtonBaseColorBrush}">
         <Grid.Resources>
             <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton" />
         </Grid.Resources>
@@ -25,11 +27,12 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <RadioButton
             Grid.Row="0"
-            ToolTip="Home"
+            ToolTip="{x:Static globalization:Strings.Home}"
             Content="{StaticResource HomeIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Home}"
@@ -38,7 +41,7 @@
 
         <RadioButton
             Grid.Row="1"
-            ToolTip="Matches"
+            ToolTip="{x:Static globalization:Strings.Matches}"
             Content="{StaticResource ScoreBoardIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Matches}"
@@ -47,7 +50,16 @@
 
         <RadioButton
             Grid.Row="3"
-            ToolTip="Download"
+            ToolTip="{x:Static globalization:Strings.TeamSelection}"
+            Content="{StaticResource ShieldIcon32}"
+            Command="{Binding UpdateCurrentViewModelCommand}"
+            CommandParameter="{x:Static enums:ViewType.TeamSelection}"
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:TeamSelectionViewModel}}"
+            IsEnabled="{Binding CanNavigate}" />
+
+        <RadioButton
+            Grid.Row="4"
+            ToolTip="{x:Static globalization:Strings.Download}"
             Content="{StaticResource DownloadIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Download}"
@@ -55,8 +67,8 @@
             IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Row="4"
-            ToolTip="Permissions"
+            Grid.Row="5"
+            ToolTip="{x:Static globalization:Strings.Permissions}"
             Content="{StaticResource KeyIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Permissions}"
@@ -64,8 +76,8 @@
             IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Row="5"
-            ToolTip="About"
+            Grid.Row="6"
+            ToolTip="{x:Static globalization:Strings.About}"
             Content="{StaticResource AboutIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.About}"
@@ -73,8 +85,8 @@
             IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
-            Grid.Row="6"
-            ToolTip="Quit"
+            Grid.Row="7"
+            ToolTip="{x:Static globalization:Strings.Quit}"
             Content="{StaticResource QuitIcon32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Quit}"

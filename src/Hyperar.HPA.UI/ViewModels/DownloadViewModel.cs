@@ -1,10 +1,8 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Hyperar.HPA.Application.OAuth;
@@ -17,6 +15,8 @@
     {
         private readonly IHattrickService hattrickService;
 
+        private readonly IUserService userService;
+
         private readonly IXmlFileService xmlFileService;
 
         private List<DownloadTask> downloadTasks;
@@ -24,6 +24,7 @@
         public DownloadViewModel(
             IAuthorizer authorizer,
             IHattrickService hattrickService,
+            IUserService userService,
             IXmlFileService xmlFileService,
             INavigator navigator) : base(authorizer)
         {
@@ -31,6 +32,7 @@
 
             this.DownloadFilesCommand = new DownloadFilesCommand(this, navigator);
             this.hattrickService = hattrickService;
+            this.userService = userService;
             this.xmlFileService = xmlFileService;
         }
 
@@ -111,6 +113,11 @@
             await this.StoreDownloadTaskAsync(task);
 
             this.CompleteTask(task);
+        }
+
+        public async Task FinishDownloadAsync()
+        {
+            await this.userService.UpdateUserLastDownloadDate();
         }
 
         public DownloadTask? GetNextDownloadTask()

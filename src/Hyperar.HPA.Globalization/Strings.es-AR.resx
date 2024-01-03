@@ -186,6 +186,9 @@
   <data name="Health" xml:space="preserve">
     <value>Salud</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
   <data name="Honesty" xml:space="preserve">
     <value>Honestidad</value>
   </data>
@@ -275,6 +278,9 @@
   </data>
   <data name="StepTwo" xml:space="preserve">
     <value>Paso 2</value>
+  </data>
+  <data name="TeamSelection" xml:space="preserve">
+    <value>Selección de Equipo</value>
   </data>
   <data name="TotalSkillIndex" xml:space="preserve">
     <value>TSI</value>

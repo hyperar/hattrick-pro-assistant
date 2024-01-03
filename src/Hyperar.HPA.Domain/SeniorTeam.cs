@@ -23,10 +23,6 @@
 
         public string Name { get; set; } = string.Empty;
 
-        public uint NumberOfConsecutiveUndefeatedMatches { get; set; }
-
-        public uint NumberOfConsecutiveWonMatches { get; set; }
-
         public uint PowerRanking { get; set; }
 
         public virtual Region Region { get; set; } = new Region();
@@ -42,5 +38,9 @@
         public string ShortName { get; set; } = string.Empty;
 
         public uint TeamRank { get; set; }
+
+        public uint UndefeatedStreak { get; set; }
+
+        public uint WinStreak { get; set; }
     }
 }

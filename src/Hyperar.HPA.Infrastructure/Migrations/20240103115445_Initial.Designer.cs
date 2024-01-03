@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hyperar.HPA.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230921201309_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240103115445_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -326,6 +326,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnName("SupporterTier")
                         .HasColumnOrder(2);
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -337,6 +340,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasKey("HattrickId");
 
                     b.HasIndex("CountryHattrickId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Manager", (string)null);
                 });
@@ -694,16 +700,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnName("Name")
                         .HasColumnOrder(1);
 
-                    b.Property<long>("NumberOfConsecutiveUndefeatedMatches")
-                        .HasColumnType("bigint")
-                        .HasColumnName("NumberOfConsecutiveUndefeatedMatches")
-                        .HasColumnOrder(12);
-
-                    b.Property<long>("NumberOfConsecutiveWonMatches")
-                        .HasColumnType("bigint")
-                        .HasColumnName("NumberOfConsecutiveWonMatches")
-                        .HasColumnOrder(13);
-
                     b.Property<long>("PowerRanking")
                         .HasColumnType("bigint")
                         .HasColumnName("PowerRanking")
@@ -729,6 +725,16 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("TeamRank")
                         .HasColumnOrder(11);
+
+                    b.Property<long>("UndefeatedStreak")
+                        .HasColumnType("bigint")
+                        .HasColumnName("UndefeatedStreak")
+                        .HasColumnOrder(12);
+
+                    b.Property<long>("WinStreak")
+                        .HasColumnType("bigint")
+                        .HasColumnName("WinStreak")
+                        .HasColumnOrder(13);
 
                     b.HasKey("HattrickId");
 
@@ -807,35 +813,66 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("TokenCreatedOn")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("date")
-                        .HasColumnName("TokenCreatedOn")
+                        .HasColumnName("CreatedOn")
                         .HasColumnOrder(3);
 
-                    b.Property<DateTime>("TokenExpiresOn")
+                    b.Property<DateTime>("ExpiresOn")
                         .HasColumnType("date")
-                        .HasColumnName("TokenExpiresOn")
+                        .HasColumnName("ExpiresOn")
                         .HasColumnOrder(4);
 
-                    b.Property<string>("TokenSecretValue")
+                    b.Property<string>("SecretValue")
                         .IsRequired()
                         .HasMaxLength(128)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnName("TokenSecretValue")
+                        .HasColumnName("SecretValue")
                         .HasColumnOrder(2);
 
-                    b.Property<string>("TokenValue")
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(128)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnName("TokenValue")
+                        .HasColumnName("Value")
                         .HasColumnOrder(1);
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("Token", (string)null);
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<long?>("DefaultTeamId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("DefaultTeamId")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("LastDownloadDate")
+                        .HasColumnType("date")
+                        .HasColumnName("LastDownloadDate")
+                        .HasColumnOrder(1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Country", b =>
@@ -868,7 +905,15 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Hyperar.HPA.Domain.User", "User")
+                        .WithOne("Manager")
+                        .HasForeignKey("Hyperar.HPA.Domain.Manager", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Country");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Region", b =>
@@ -950,6 +995,17 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Navigation("SeniorTeam");
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.Token", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.User", "User")
+                        .WithOne("Token")
+                        .HasForeignKey("Hyperar.HPA.Domain.Token", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.Country", b =>
                 {
                     b.Navigation("Managers");
@@ -988,6 +1044,13 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Navigation("SeniorPlayers");
 
                     b.Navigation("SeniorTeamArena");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.User", b =>
+                {
+                    b.Navigation("Manager");
+
+                    b.Navigation("Token");
                 });
 #pragma warning restore 612, 618
         }

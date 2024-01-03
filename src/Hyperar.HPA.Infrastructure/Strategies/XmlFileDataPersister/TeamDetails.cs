@@ -4,7 +4,6 @@
     using Hyperar.HPA.Application.Hattrick.Interfaces;
     using Hyperar.HPA.Application.Hattrick.TeamDetails;
     using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Domain;
     using Hyperar.HPA.Domain.Interfaces;
 
     public class TeamDetails : IXmlFileDataPersisterStrategy
@@ -22,9 +21,9 @@
         public TeamDetails(
             IDatabaseContext context,
             IHattrickRepository<Domain.League> leagueRepository,
-            IHattrickRepository<Manager> managerRepository,
+            IHattrickRepository<Domain.Manager> managerRepository,
             IHattrickRepository<Domain.Region> regionRepository,
-            IHattrickRepository<SeniorTeam> seniorTeamRepository)
+            IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
         {
             this.context = context;
             this.leagueRepository = leagueRepository;
@@ -40,7 +39,7 @@
             await this.ProcessTeamDetailsAsync(entity);
         }
 
-        private async Task ProcessTeamAsync(Team xmlTeam, Manager manager)
+        private async Task ProcessTeamAsync(Team xmlTeam, Domain.Manager manager)
         {
             var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlTeam.TeamId);
 
@@ -68,8 +67,8 @@
                             RegionRanking = xmlTeam.PowerRating.RegionRanking,
                             PowerRanking = xmlTeam.PowerRating.PowerRating,
                             TeamRank = xmlTeam.TeamRank ?? 0,
-                            NumberOfConsecutiveUndefeatedMatches = xmlTeam.NumberOfUndefeated ?? 0,
-                            NumberOfConsecutiveWonMatches = xmlTeam.NumberOfVictories ?? 0,
+                            UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0,
+                            WinStreak = xmlTeam.NumberOfVictories ?? 0,
                             League = league,
                             Manager = manager,
                             Region = region
@@ -91,8 +90,8 @@
                         seniorTeam.RegionRanking = xmlTeam.PowerRating.RegionRanking;
                         seniorTeam.PowerRanking = xmlTeam.PowerRating.PowerRating;
                         seniorTeam.TeamRank = xmlTeam.TeamRank ?? 0;
-                        seniorTeam.NumberOfConsecutiveUndefeatedMatches = xmlTeam.NumberOfUndefeated ?? 0;
-                        seniorTeam.NumberOfConsecutiveWonMatches = xmlTeam.NumberOfVictories ?? 0;
+                        seniorTeam.UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0;
+                        seniorTeam.WinStreak = xmlTeam.NumberOfVictories ?? 0;
                         seniorTeam.Region = region;
                     }
                 }
