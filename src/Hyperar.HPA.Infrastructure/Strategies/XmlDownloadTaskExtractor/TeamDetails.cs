@@ -29,7 +29,7 @@
                             XmlFileType.ArenaDetails,
                             new Dictionary<string, string>
                             {
-                            { arenaIdParamKey, curTeam.Arena.ArenaId.ToString() }
+                                { arenaIdParamKey, curTeam.Arena.ArenaId.ToString() }
                             }));
 
                     downloadTasks.Add(
@@ -37,7 +37,7 @@
                             XmlFileType.Players,
                             new Dictionary<string, string>
                             {
-                            { teamIdParamKey, curTeam.TeamId.ToString() }
+                                { teamIdParamKey, curTeam.TeamId.ToString() }
                             }));
                 }
 

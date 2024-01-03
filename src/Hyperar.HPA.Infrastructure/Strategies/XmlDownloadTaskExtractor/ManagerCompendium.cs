@@ -31,8 +31,8 @@
                             XmlFileType.WorldDetails,
                             new Dictionary<string, string>
                             {
-                            { leagueIdParamKey, curTeam.League.LeagueId.ToString() },
-                            { includeRegionsParamKey, bool.TrueString }
+                                { leagueIdParamKey, curTeam.League.LeagueId.ToString() },
+                                { includeRegionsParamKey, bool.TrueString }
                             }));
                 }
 
@@ -41,7 +41,7 @@
                         XmlFileType.TeamDetails,
                         new Dictionary<string, string>
                         {
-                        { userIdParamKey, file.Manager.UserId.ToString() }
+                            { userIdParamKey, file.Manager.UserId.ToString() }
                         }));
 
                 return downloadTasks;

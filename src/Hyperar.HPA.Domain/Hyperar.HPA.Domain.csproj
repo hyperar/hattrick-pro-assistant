@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net8.0-windows</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <BaseOutputPath>..\bin\</BaseOutputPath>
