@@ -7,9 +7,9 @@
     {
         List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile);
 
-        IXmlFile ParseFile(Stream fileStream);
+        Task<IXmlFile> ParseFileAsync(Stream fileStream);
 
-        IXmlFile ParseFile(string fileContent);
+        Task<IXmlFile> ParseFileAsync(string fileContent);
 
         Task PersistAsync(IXmlFile xmlFile);
     }

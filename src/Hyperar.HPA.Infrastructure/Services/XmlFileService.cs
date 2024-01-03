@@ -39,7 +39,7 @@
             return childTaskBuilder.ExtractXmlDownloadTasks(xmlFile);
         }
 
-        public IXmlFile ParseFile(Stream fileStream)
+        public async Task<IXmlFile> ParseFileAsync(Stream fileStream)
         {
             IXmlFile result;
 
@@ -47,6 +47,7 @@
                 fileStream,
                 new XmlReaderSettings
                 {
+                    Async = true,
                     CloseInput = true,
                     IgnoreComments = true,
                     IgnoreProcessingInstructions = true,
@@ -55,21 +56,21 @@
             {
                 reader.ReadToFollowing("FileName");
 
-                result = this.entityFactory.CreateEntity(reader.ReadElementContentAsString());
+                result = this.entityFactory.CreateEntity(await reader.ReadElementContentAsStringAsync());
 
                 IXmlFileParserStrategy parser = this.fileParserFactory.CreateXmlFileParser(result.FileName.ToXmlFileType());
 
-                parser.Parse(reader, ref result);
+                result = await parser.ParseAsync(reader, result);
             }
 
             return result;
         }
 
-        public IXmlFile ParseFile(string fileContent)
+        public async Task<IXmlFile> ParseFileAsync(string fileContent)
         {
             MemoryStream memoryStream = new(Encoding.UTF8.GetBytes(fileContent));
 
-            return this.ParseFile(memoryStream);
+            return await this.ParseFileAsync(memoryStream);
         }
 
         public async Task PersistAsync(IXmlFile xmlFile)

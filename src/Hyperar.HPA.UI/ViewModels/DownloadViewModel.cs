@@ -29,7 +29,7 @@
         {
             this.downloadTasks = new List<DownloadTask>();
 
-            this.DownloadFilesCommand = new DownloadFilesAsyncCommand(this, navigator);
+            this.DownloadFilesCommand = new DownloadFilesCommand(this, navigator);
             this.hattrickService = hattrickService;
             this.xmlFileService = xmlFileService;
         }
@@ -101,7 +101,7 @@
         {
             await this.StartDownloadTaskAsync(task);
 
-            List<DownloadTask>? childTasks = this.ProcessDownloadTaskResult(task);
+            List<DownloadTask>? childTasks = await this.ProcessDownloadTaskResultAsync(task);
 
             if (childTasks != null)
             {
@@ -150,7 +150,7 @@
             this.ChangeTaskStatus(task, DownloadTaskStatus.Done);
         }
 
-        private List<DownloadTask>? ProcessDownloadTaskResult(DownloadTask task)
+        private async Task<List<DownloadTask>?> ProcessDownloadTaskResultAsync(DownloadTask task)
         {
             this.ChangeTaskStatus(task, DownloadTaskStatus.Processing);
 
@@ -160,7 +160,7 @@
             }
             else
             {
-                task.ParsedEntity = this.xmlFileService.ParseFile(task.Response);
+                task.ParsedEntity = await this.xmlFileService.ParseFileAsync(task.Response);
 
                 if (task.ParsedEntity == null)
                 {

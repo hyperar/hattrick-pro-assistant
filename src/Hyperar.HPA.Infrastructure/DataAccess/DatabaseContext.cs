@@ -69,7 +69,7 @@
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
         }
 
-        private async static Task EnsureDatabaseInstanceIsReadyAsync()
+        private static async Task EnsureDatabaseInstanceIsReadyAsync()
         {
             var process = new Process
             {

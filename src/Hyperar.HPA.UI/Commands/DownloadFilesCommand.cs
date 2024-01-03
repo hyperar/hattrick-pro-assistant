@@ -12,10 +12,10 @@
         private readonly INavigator navigator;
 
         public DownloadFilesCommand(
-            DownloadViewModel downloadViewModel,
+            DownloadViewModel downloadAsyncViewModel,
             INavigator navigator)
         {
-            this.downloadViewModel = downloadViewModel;
+            this.downloadViewModel = downloadAsyncViewModel;
             this.navigator = navigator;
         }
 

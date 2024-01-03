@@ -7,15 +7,17 @@
 
     public abstract class XmlFileParserBase : IXmlFileParserStrategy
     {
-        public void Parse(XmlReader reader, ref IXmlFile result)
+        public async Task<IXmlFile> ParseAsync(XmlReader reader, IXmlFile result)
         {
-            result.Version = reader.ReadXmlValueAsDecimal();
-            result.UserId = reader.ReadXmlValueAsUint();
-            result.FetchedDate = reader.ReadXmlValueAsDateTime();
+            result.Version = await reader.ReadXmlValueAsDecimalAsync();
+            result.UserId = await reader.ReadXmlValueAsUintAsync();
+            result.FetchedDate = await reader.ReadXmlValueAsDateTimeAsync();
 
-            this.ParseFileTypeSpecificContent(reader, ref result);
+            result = await this.ParseFileTypeSpecificContentAsync(reader, result);
+
+            return result;
         }
 
-        public abstract void ParseFileTypeSpecificContent(XmlReader reader, ref IXmlFile entity);
+        public abstract Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity);
     }
 }
