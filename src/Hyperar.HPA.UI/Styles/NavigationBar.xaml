@@ -62,6 +62,7 @@
     <BitmapImage x:Key="AboutIcon32" UriSource="../Resources/About_32.png" />
     <BitmapImage x:Key="DownloadIcon32" UriSource="../Resources/Download_32.png" />
     <BitmapImage x:Key="HomeIcon32" UriSource="../Resources/Home_32.png" />
+    <BitmapImage x:Key="JerseyIcon32" UriSource="../Resources/Jersey_32.png" />
     <BitmapImage x:Key="KeyIcon32" UriSource="../Resources/Key_32.png" />
     <BitmapImage x:Key="ShieldIcon32" UriSource="../Resources/Shield_32.png" />
     <BitmapImage x:Key="ScoreBoardIcon32" UriSource="../Resources/ScoreBoard_32.png" />

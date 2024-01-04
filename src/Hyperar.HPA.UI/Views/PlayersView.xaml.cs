@@ -16,13 +16,13 @@
     using System.Windows.Shapes;
 
     /// <summary>
-    /// Interaction logic for TeamSelectionView.xaml
+    /// Interaction logic for PlayersView.xaml
     /// </summary>
-    public partial class TeamSelectionView : UserControl
+    public partial class PlayersView : UserControl
     {
-        public TeamSelectionView()
+        public PlayersView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

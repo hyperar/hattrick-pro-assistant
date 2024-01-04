@@ -30,6 +30,10 @@
                 <views:PermissionsView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:PlayersViewModel}">
+                <views:PlayersView />
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModels:TeamSelectionViewModel}">
                 <views:TeamSelectionView />
             </DataTemplate>

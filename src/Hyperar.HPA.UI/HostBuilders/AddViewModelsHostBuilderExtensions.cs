@@ -16,8 +16,8 @@
             host.ConfigureServices(services =>
             {
                 services.AddTransient<CreateAsyncViewModel<DownloadViewModel>>(services => () => CreateDownloadAsyncViewModel(services));
-                services.AddTransient<CreateAsyncViewModel<HomeViewModel>>(services => () => CreateHomeAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<PermissionsViewModel>>(services => () => CreatePermissionsAsyncViewModel(services));
+                services.AddTransient<CreateAsyncViewModel<PlayersViewModel>>(services => () => CreatePlayersAsyncViewModel(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
 
@@ -41,21 +41,6 @@
             return viewModel;
         }
 
-        private static async Task<HomeViewModel> CreateHomeAsyncViewModel(IServiceProvider services)
-        {
-            var scope = services.CreateScope();
-
-            uint selectedTeamId = services.GetRequiredService<INavigator>().SelectedTeamId ?? 0;
-
-            var viewModel = new HomeViewModel(
-                scope.ServiceProvider.GetRequiredService<IHomeViewService>(),
-                selectedTeamId);
-
-            await viewModel.InitializeAsync();
-
-            return viewModel;
-        }
-
         private static async Task<PermissionsViewModel> CreatePermissionsAsyncViewModel(IServiceProvider services)
         {
             var scope = services.CreateScope();
@@ -64,6 +49,21 @@
                 scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
                 services.GetRequiredService<INavigator>(),
                 services.GetRequiredService<IViewModelFactory>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
+        }
+
+        private static async Task<PlayersViewModel> CreatePlayersAsyncViewModel(IServiceProvider services)
+        {
+            var scope = services.CreateScope();
+
+            uint selectedTeamId = services.GetRequiredService<INavigator>().SelectedTeamId ?? 0;
+
+            var viewModel = new PlayersViewModel(
+                scope.ServiceProvider.GetRequiredService<IPlayersViewService>(),
+                selectedTeamId);
 
             await viewModel.InitializeAsync();
 

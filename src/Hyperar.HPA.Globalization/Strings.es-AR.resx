@@ -243,6 +243,9 @@
   <data name="Permissions" xml:space="preserve">
     <value>Permisos</value>
   </data>
+  <data name="Players" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
   <data name="Playmaking" xml:space="preserve">
     <value>Jugadas</value>
   </data>

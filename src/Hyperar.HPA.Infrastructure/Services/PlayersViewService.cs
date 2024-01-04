@@ -4,11 +4,11 @@
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Domain.Interfaces;
 
-    public class HomeViewService : IHomeViewService
+    public class PlayersViewService : IPlayersViewService
     {
         private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
 
-        public HomeViewService(IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
+        public PlayersViewService(IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
         {
             this.seniorTeamRepository = seniorTeamRepository;
         }

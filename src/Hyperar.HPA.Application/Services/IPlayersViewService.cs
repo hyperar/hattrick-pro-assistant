@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public interface IHomeViewService
+    public interface IPlayersViewService
     {
         Task<Models.SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId);
     }

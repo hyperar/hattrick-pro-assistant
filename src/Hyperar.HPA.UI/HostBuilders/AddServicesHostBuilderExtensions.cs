@@ -14,7 +14,7 @@
             host.ConfigureServices(services =>
             {
                 services.AddSingleton<IHattrickService, HattrickService>();
-                services.AddScoped<IHomeViewService, HomeViewService>();
+                services.AddScoped<IPlayersViewService, PlayersViewService>();
                 services.AddSingleton<IProtectedResourceUrlBuilder, ProtectedResourceUrlBuilder>();
                 services.AddScoped<IUserService, UserService>();
                 services.AddSingleton<IXmlEntityFactory, XmlEntityFactory>();

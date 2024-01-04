@@ -10,6 +10,8 @@
 
         Matches,
 
+        Players,
+
         Permissions,
 
         TeamSelection,

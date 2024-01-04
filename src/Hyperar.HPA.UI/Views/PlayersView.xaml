@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="Hyperar.HPA.UI.Views.PlayersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             xmlns:viewmodels="clr-namespace:Hyperar.HPA.UI.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:PlayersViewModel}"
+             d:DesignHeight="900"
+             d:DesignWidth="1600"
+             mc:Ignorable="d">
+    <StackPanel>
+        <DataGrid ItemsSource="{Binding SeniorPlayers, Mode=OneWay}"
+                              AlternatingRowBackground="#eeeeee"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              CanUserResizeRows="False"
+                              EnableRowVirtualization="True"
+                              EnableColumnVirtualization="True"
+                              GridLinesVisibility="None"
+                              HeadersVisibility="Column"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                              VirtualizingStackPanel.IsVirtualizing="true"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static globalization:Strings.ID}" Binding="{Binding Id, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Name}" Binding="{Binding FirstName, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Nickname}" Binding="{Binding NickName, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Lastname}" Binding="{Binding LastName, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.ShirtNumber}" Binding="{Binding ShirtNumber, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Age}" Binding="{Binding AgeYears, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Days}" Binding="{Binding AgeDays, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.TotalSkillIndex}" Binding="{Binding TotalSkillIndex, Mode=OneWay}" />
+                <DataGridCheckBoxColumn Header="{x:Static globalization:Strings.MotherclubBonus}" Binding="{Binding HasMotherClubBonus, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Salary}" Binding="{Binding Salary, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Specialty}" Binding="{Binding Specialty, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Agreeability}" Binding="{Binding Agreeability, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Aggressiveness}" Binding="{Binding Aggressiveness, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Honesty}" Binding="{Binding Honesty, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Leadership}" Binding="{Binding Leadership, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Bookings}" Binding="{Binding BookingStatus, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Health}" Binding="{Binding Health, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Loyalty}" Binding="{Binding Loyalty, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Form}" Binding="{Binding Form, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Stamina}" Binding="{Binding Stamina, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Keeper}" Binding="{Binding Keeper, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Defending}" Binding="{Binding Defending, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Playmaking}" Binding="{Binding Playmaking, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Winger}" Binding="{Binding Winger, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Passing}" Binding="{Binding Passing, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Scoring}" Binding="{Binding Scoring, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.SetPieces}" Binding="{Binding SetPieces, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Experience}" Binding="{Binding Experience, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.LeagueGoals}" Binding="{Binding SeasonLeagueGoals, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.CupGoals}" Binding="{Binding SeasonCupGoals, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.FriendlyGoals}" Binding="{Binding SeasonFriendlyGoals, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.CareerGoals}" Binding="{Binding CareerLeagueGoals, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.CareerHattricks}" Binding="{Binding CareerHattricks, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.GoalsOnTeam}" Binding="{Binding TeamGoals, Mode=OneWay}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.MatchesOnTeam}" Binding="{Binding TeamMatches, Mode=OneWay}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>
