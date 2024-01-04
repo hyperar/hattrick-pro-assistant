@@ -72,13 +72,9 @@
             {
                 this.UpdateCurrentViewModelCommand.Execute(ViewType.Download);
             }
-            else if (this.Authorizer.User.Manager.SeniorTeams.Count > 1 && !this.Authorizer.User.DefaultTeamId.HasValue)
-            {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.TeamSelection);
-            }
             else
             {
-                this.navigator.SelectedTeamId = this.Authorizer.User.DefaultTeamId ?? this.Authorizer.User.Manager.SeniorTeams.Single(x => x.IsPrimary).HattrickId;
+                this.navigator.SelectedTeamId = this.Authorizer.User.Manager.SeniorTeams.Single(x => x.IsPrimary).HattrickId;
 
                 this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
             }

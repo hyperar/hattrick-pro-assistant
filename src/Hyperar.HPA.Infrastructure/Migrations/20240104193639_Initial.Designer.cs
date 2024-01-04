@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hyperar.HPA.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240103115445_Initial")]
+    [Migration("20240104193639_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -859,11 +859,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<long?>("DefaultTeamId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("DefaultTeamId")
-                        .HasColumnOrder(2);
 
                     b.Property<DateTime?>("LastDownloadDate")
                         .HasColumnType("date")

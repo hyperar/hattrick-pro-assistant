@@ -857,11 +857,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long?>("DefaultTeamId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("DefaultTeamId")
-                        .HasColumnOrder(2);
-
                     b.Property<DateTime?>("LastDownloadDate")
                         .HasColumnType("date")
                         .HasColumnName("LastDownloadDate")

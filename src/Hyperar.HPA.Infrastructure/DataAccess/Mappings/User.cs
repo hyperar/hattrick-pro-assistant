@@ -13,12 +13,6 @@
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.Date);
-
-            builder.Property(p => p.DefaultTeamId)
-                .HasColumnName(Constants.ColumnName.DefaultTeamId)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.User> builder)

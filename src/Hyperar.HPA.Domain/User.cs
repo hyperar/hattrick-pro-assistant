@@ -5,8 +5,6 @@
 
     public class User : EntityBase, IEntity
     {
-        public uint? DefaultTeamId { get; set; }
-
         public DateTime? LastDownloadDate { get; set; }
 
         public virtual Manager? Manager { get; set; }
