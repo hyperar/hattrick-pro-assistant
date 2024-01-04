@@ -25,7 +25,8 @@
             {
                 return this.canNavigate;
             }
-            set
+
+            private set
             {
                 this.canNavigate = value;
 
@@ -61,6 +62,16 @@
 
                 this.StateChanged?.Invoke();
             }
+        }
+
+        public void ResumeNavigation()
+        {
+            this.CanNavigate = true;
+        }
+
+        public void SuspendNavigation()
+        {
+            this.CanNavigate = false;
         }
     }
 }

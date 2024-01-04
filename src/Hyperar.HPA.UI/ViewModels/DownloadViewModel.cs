@@ -10,6 +10,7 @@
     using Hyperar.HPA.Common.Enums;
     using Hyperar.HPA.UI.Commands;
     using Hyperar.HPA.UI.State.Interfaces;
+    using Hyperar.HPA.UI.ViewModels.Interfaces;
 
     public class DownloadViewModel : AuthorizedViewModelBase
     {
@@ -26,14 +27,15 @@
             IHattrickService hattrickService,
             IUserService userService,
             IXmlFileService xmlFileService,
-            INavigator navigator) : base(authorizer)
+            INavigator navigator,
+            IViewModelFactory viewModelFactory) : base(authorizer)
         {
-            this.downloadTasks = new List<DownloadTask>();
-
-            this.DownloadFilesCommand = new DownloadFilesCommand(this, navigator);
             this.hattrickService = hattrickService;
             this.userService = userService;
             this.xmlFileService = xmlFileService;
+
+            this.downloadTasks = new List<DownloadTask>();
+            this.DownloadFilesCommand = new DownloadFilesCommand(this, navigator, viewModelFactory);
         }
 
         public int CompletedDownloadTaskStepsCount

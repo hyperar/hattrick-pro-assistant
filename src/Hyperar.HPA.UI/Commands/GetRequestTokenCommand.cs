@@ -3,19 +3,25 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
     using Hyperar.HPA.Application.Models;
+    using Hyperar.HPA.UI.State.Interfaces;
     using Hyperar.HPA.UI.ViewModels;
 
     public class GetRequestTokenCommand : AsyncCommandBase
     {
+        private readonly INavigator navigator;
+
         private readonly PermissionsViewModel permissionsViewModel;
 
-        public GetRequestTokenCommand(PermissionsViewModel permissionsViewModel)
+        public GetRequestTokenCommand(PermissionsViewModel permissionsViewModel, INavigator navigator)
         {
             this.permissionsViewModel = permissionsViewModel;
+            this.navigator = navigator;
         }
 
         public override async Task ExecuteAsync(object? parameter)
         {
+            this.navigator.SuspendNavigation();
+
             GetAuthorizationUrlResponse result = await this.permissionsViewModel.Authorizer.GetAuthorizationUrlAsync();
 
             if (result != null)
@@ -31,6 +37,8 @@
                         UseShellExecute = true
                     });
             }
+
+            this.navigator.ResumeNavigation();
         }
     }
 }

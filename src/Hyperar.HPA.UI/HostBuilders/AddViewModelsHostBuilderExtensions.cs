@@ -33,7 +33,8 @@
                 services.GetRequiredService<IHattrickService>(),
                 scope.ServiceProvider.GetRequiredService<IUserService>(),
                 scope.ServiceProvider.GetRequiredService<IXmlFileService>(),
-                navigator: services.GetRequiredService<INavigator>());
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IViewModelFactory>());
 
             await viewModel.InitializeAsync();
 
@@ -60,7 +61,9 @@
             var scope = services.CreateScope();
 
             var viewModel = new PermissionsViewModel(
-                scope.ServiceProvider.GetRequiredService<IAuthorizer>());
+                scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IViewModelFactory>());
 
             await viewModel.InitializeAsync();
 

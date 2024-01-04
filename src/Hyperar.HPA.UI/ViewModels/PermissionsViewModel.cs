@@ -4,6 +4,7 @@
     using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.UI.Commands;
     using Hyperar.HPA.UI.State.Interfaces;
+    using Hyperar.HPA.UI.ViewModels.Interfaces;
 
     public class PermissionsViewModel : AuthorizedViewModelBase
     {
@@ -19,11 +20,14 @@
 
         private string? verificationCode;
 
-        public PermissionsViewModel(IAuthorizer authorizer) : base(authorizer)
+        public PermissionsViewModel(
+            IAuthorizer authorizer,
+            INavigator navigator,
+            IViewModelFactory viewModelFactory) : base(authorizer)
         {
-            this.GetRequestTokenCommand = new GetRequestTokenCommand(this);
-            this.GetAccessTokenCommand = new GetAccessTokenCommand(this);
-            this.RevokeAccessTokenCommand = new RevokeAccessTokenCommand(this);
+            this.GetRequestTokenCommand = new GetRequestTokenCommand(this, navigator);
+            this.GetAccessTokenCommand = new GetAccessTokenCommand(this, navigator, viewModelFactory);
+            this.RevokeAccessTokenCommand = new RevokeAccessTokenCommand(this, navigator);
         }
 
         public string? AccessToken
