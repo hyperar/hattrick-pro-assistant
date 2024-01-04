@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.UI.ViewModels;
 
     public class GetRequestTokenCommand : AsyncCommandBase
@@ -15,7 +16,7 @@
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            Application.OAuth.GetAuthorizationUrlResponse result = await this.permissionsViewModel.Authorizer.GetAuthorizationUrlAsync();
+            GetAuthorizationUrlResponse result = await this.permissionsViewModel.Authorizer.GetAuthorizationUrlAsync();
 
             if (result != null)
             {

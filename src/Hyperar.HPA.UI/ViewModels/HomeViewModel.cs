@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Application.Services;
 
     public class HomeViewModel : ViewModelBase
@@ -33,13 +34,13 @@
             }
         }
 
-        public ObservableCollection<Application.Models.SeniorPlayer>? SeniorPlayers { get; private set; }
+        public ObservableCollection<SeniorPlayer>? SeniorPlayers { get; private set; }
 
         public override async Task InitializeAsync()
         {
             var result = await this.homeViewService.GetSeniorPlayerAsync(this.selectedTeamId);
 
-            this.SeniorPlayers = new ObservableCollection<Application.Models.SeniorPlayer>(result ?? Array.Empty<Application.Models.SeniorPlayer>());
+            this.SeniorPlayers = new ObservableCollection<SeniorPlayer>(result ?? Array.Empty<SeniorPlayer>());
 
             this.OnPropertyChanged(nameof(this.SeniorPlayers));
         }

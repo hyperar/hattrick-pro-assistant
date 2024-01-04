@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
     using System.Windows.Input;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.UI.Commands;
     using Hyperar.HPA.UI.State.Interfaces;
 

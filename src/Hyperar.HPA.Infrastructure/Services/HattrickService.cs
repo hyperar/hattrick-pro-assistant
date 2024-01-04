@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Application.Services;
     using Hyperar.OauthCore.Consumer;
     using Hyperar.OauthCore.Framework;
     using Microsoft.Extensions.Configuration;
-    using static System.Collections.Specialized.BitVector32;
 
     public class HattrickService : IHattrickService
     {
@@ -42,13 +41,13 @@
 
         public async Task<string> CheckTokenAsync(OAuthToken token)
         {
-            ArgumentNullException.ThrowIfNull(token);
+            ArgumentNullException.ThrowIfNull(token, nameof(token));
 
             OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
 
             string? checkTokenUrl = this.configuration[CheckTokenKeyName];
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(checkTokenUrl);
+            ArgumentException.ThrowIfNullOrWhiteSpace(checkTokenUrl, nameof(checkTokenUrl));
 
             var responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
 
@@ -57,11 +56,11 @@
 
         public async Task<GetAccessTokenResponse> GetAccessTokenAsync(GetAccessTokenRequest request)
         {
-            ArgumentNullException.ThrowIfNull(request);
+            ArgumentNullException.ThrowIfNull(request, nameof(request));
 
             OAuthSession session = this.CreateOAuthSession();
 
-            ArgumentNullException.ThrowIfNull(session);
+            ArgumentNullException.ThrowIfNull(session, nameof(session));
 
             var requestToken = new TokenBase
             {
@@ -85,15 +84,15 @@
         {
             OAuthSession session = this.CreateOAuthSession();
 
-            ArgumentNullException.ThrowIfNull(session);
+            ArgumentNullException.ThrowIfNull(session, nameof(session));
 
             IToken requestToken = await Task.Run(() => session.GetRequestToken(HttpMethod.Get.ToString()));
 
-            ArgumentNullException.ThrowIfNull(requestToken);
+            ArgumentNullException.ThrowIfNull(requestToken, nameof(requestToken));
 
             string url = await Task.Run(() => session.GetUserAuthorizationUrlForToken(requestToken));
 
-            ArgumentNullException.ThrowIfNull(url);
+            ArgumentNullException.ThrowIfNull(url, nameof(url));
 
             return new GetAuthorizationUrlResponse(url, requestToken.Token, requestToken.TokenSecret);
         }
@@ -102,11 +101,11 @@
         {
             string url = this.protectedResourceUrlBuilder.BuildUrl(request.FileType, request.Parameters);
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(url);
+            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
 
             OAuthSession session = this.CreateSignedOAuthSession(request.AccessToken.Token, request.AccessToken.TokenSecret);
 
-            ArgumentNullException.ThrowIfNull(session);
+            ArgumentNullException.ThrowIfNull(session, nameof(session));
 
             var responseStream = await GetResponseStreamForUrlAsync(url, session);
 
@@ -115,11 +114,11 @@
 
         public async Task<string> RevokeTokenAsync(OAuthToken token)
         {
-            ArgumentNullException.ThrowIfNull(token);
+            ArgumentNullException.ThrowIfNull(token, nameof(token));
 
             string? invalidateTokenUrl = this.configuration[InvalidateTokenKeyName];
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(invalidateTokenUrl);
+            ArgumentException.ThrowIfNullOrWhiteSpace(invalidateTokenUrl, nameof(invalidateTokenUrl));
 
             OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
 
@@ -130,9 +129,9 @@
 
         private static async Task<Stream> GetResponseStreamForUrlAsync(string url, OAuthSession session)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(url);
+            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
 
-            ArgumentNullException.ThrowIfNull(session);
+            ArgumentNullException.ThrowIfNull(session, nameof(session));
 
             var webRequest = session.Request()
                 .ForUrl(url)
@@ -146,7 +145,7 @@
 
         private static async Task<string> ReadResponseStreamAsync(Stream responseStream)
         {
-            ArgumentNullException.ThrowIfNull(responseStream);
+            ArgumentNullException.ThrowIfNull(responseStream, nameof(responseStream));
 
             string result;
 
@@ -168,13 +167,13 @@
             string? requestTokenUrl = this.configuration[RequestTokenKeyName];
             string? userAgent = this.configuration[UserAgentKeyName];
 
-            ArgumentException.ThrowIfNullOrEmpty(accessTokenUrl);
-            ArgumentException.ThrowIfNullOrEmpty(authorizeUrl);
-            ArgumentException.ThrowIfNullOrEmpty(callbackUrl);
-            ArgumentException.ThrowIfNullOrEmpty(consumerKey);
-            ArgumentException.ThrowIfNullOrEmpty(consumerSecret);
-            ArgumentException.ThrowIfNullOrEmpty(requestTokenUrl);
-            ArgumentException.ThrowIfNullOrEmpty(userAgent);
+            ArgumentException.ThrowIfNullOrEmpty(accessTokenUrl, nameof(accessTokenUrl));
+            ArgumentException.ThrowIfNullOrEmpty(authorizeUrl, nameof(authorizeUrl));
+            ArgumentException.ThrowIfNullOrEmpty(callbackUrl, nameof(callbackUrl));
+            ArgumentException.ThrowIfNullOrEmpty(consumerKey, nameof(consumerKey));
+            ArgumentException.ThrowIfNullOrEmpty(consumerSecret, nameof(consumerSecret));
+            ArgumentException.ThrowIfNullOrEmpty(requestTokenUrl, nameof(requestTokenUrl));
+            ArgumentException.ThrowIfNullOrEmpty(userAgent, nameof(userAgent));
 
             return new OAuthSession(
                 new OAuthConsumerContext

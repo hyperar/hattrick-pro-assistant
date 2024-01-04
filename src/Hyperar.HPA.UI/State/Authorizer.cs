@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Domain;
     using Hyperar.HPA.UI.State.Interfaces;
@@ -40,9 +40,8 @@
 
         public GetProtectedResourceRequest BuildProtectedResourseRequest(DownloadTask task)
         {
-            ArgumentNullException.ThrowIfNull(this.User);
-
-            ArgumentNullException.ThrowIfNull(this.User.Token);
+            ArgumentNullException.ThrowIfNull(this.User, nameof(this.User));
+            ArgumentNullException.ThrowIfNull(this.User.Token, nameof(this.User.Token));
 
             return new GetProtectedResourceRequest(
                 this.User.Token.Value,
@@ -53,7 +52,7 @@
 
         public Task CheckTokenAsync()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(nameof(this.CheckTokenAsync));
         }
 
         public async Task<GetAccessTokenResponse> GetAccessTokenAsync(string verificationCode, string requestToken, string requestTokenSecret)
@@ -82,7 +81,7 @@
 
         public async Task PersistTokenAsync(string accessToken, string accessTokenSecret)
         {
-            ArgumentNullException.ThrowIfNull(this.User);
+            ArgumentNullException.ThrowIfNull(this.User, nameof(this.User));
 
             await this.userService.InsertUserTokenAsync(accessToken, accessTokenSecret);
 
@@ -93,7 +92,7 @@
         {
             this.ValidateInitialization();
 
-            ArgumentNullException.ThrowIfNull(this.User);
+            ArgumentNullException.ThrowIfNull(this.User, nameof(this.User));
 
             // This is only here to avoid .NET Core possible null reference message. If IsAuthorized is true, there's a token.
             if (this.User.Token != null)

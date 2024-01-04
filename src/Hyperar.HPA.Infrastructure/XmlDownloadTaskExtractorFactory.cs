@@ -24,17 +24,12 @@
 
         public IXmlDownloadTaskExtractorStrategy CreateDownloadTaskExtractor(XmlFileType fileType)
         {
-            switch (fileType)
+            return fileType switch
             {
-                case XmlFileType.ManagerCompendium:
-                    return this.managerCompendiumExtractor;
-
-                case XmlFileType.TeamDetails:
-                    return this.teamDetailsExtractor;
-
-                default:
-                    return this.defaultExtractor;
-            }
+                XmlFileType.ManagerCompendium => this.managerCompendiumExtractor,
+                XmlFileType.TeamDetails => this.teamDetailsExtractor,
+                _ => this.defaultExtractor,
+            };
         }
     }
 }

@@ -27,32 +27,17 @@
 
         public async Task<ViewModelBase> CreateAsyncViewModel(ViewType viewType)
         {
-            switch (viewType)
+            return viewType switch
             {
-                case ViewType.About:
-                    return new AboutViewModel();
-
-                case ViewType.Download:
-                    return await this.createDownloadViewModel();
-
-                case ViewType.Home:
-                    return await this.createHomeViewModel();
-
-                case ViewType.Matches:
-                    return new MatchesViewModel();
-
-                case ViewType.Permissions:
-                    return await this.createPermissionsViewModel();
-
-                case ViewType.TeamSelection:
-                    return new TeamSelectionViewModel();
-
-                case ViewType.Quit:
-                    return new QuitViewModel();
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(viewType));
-            }
+                ViewType.About => new AboutViewModel(),
+                ViewType.Download => await this.createDownloadViewModel(),
+                ViewType.Home => await this.createHomeViewModel(),
+                ViewType.Matches => new MatchesViewModel(),
+                ViewType.Permissions => await this.createPermissionsViewModel(),
+                ViewType.TeamSelection => new TeamSelectionViewModel(),
+                ViewType.Quit => new QuitViewModel(),
+                _ => throw new ArgumentOutOfRangeException(nameof(viewType))
+            };
         }
     }
 }

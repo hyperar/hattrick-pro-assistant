@@ -1,16 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
     <!--<Project Sdk="Microsoft.NET.Sdk">-->
     <PropertyGroup>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <RootNamespace>Hyperar.HPA.UI</RootNamespace>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0-windows</TargetFramework>
-        <Nullable>enable</Nullable>
-        <UseWPF>true</UseWPF>
-        <BaseOutputPath>..\bin\</BaseOutputPath>
-        <StartupObject>Hyperar.HPA.UI.App</StartupObject>
-        <UserSecretsId>687968cf-3b1b-49d9-828b-c13927c9d634</UserSecretsId>
         <ApplicationIcon>Resources\HPA.ico</ApplicationIcon>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <BaseOutputPath>..\bin\</BaseOutputPath>
+        <Nullable>enable</Nullable>
+        <OutputType>WinExe</OutputType>
+        <PlatformName>windows</PlatformName>
+        <RootNamespace>Hyperar.HPA.UI</RootNamespace>
+        <StartupObject>Hyperar.HPA.UI.App</StartupObject>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <UserSecretsId>687968cf-3b1b-49d9-828b-c13927c9d634</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>

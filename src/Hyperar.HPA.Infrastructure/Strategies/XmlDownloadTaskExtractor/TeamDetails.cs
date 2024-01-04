@@ -5,7 +5,7 @@
     using Hyperar.HPA.Application.Hattrick.Interfaces;
     using Hyperar.HPA.Application.Hattrick.TeamDetails;
     using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Common.Enums;
 
     public class TeamDetails : IXmlDownloadTaskExtractorStrategy
@@ -16,9 +16,7 @@
 
         public List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile)
         {
-            HattrickData file = (HattrickData)xmlFile;
-
-            if (file != null)
+            if (xmlFile is HattrickData file)
             {
                 var downloadTasks = new List<DownloadTask>();
 
@@ -43,8 +41,10 @@
 
                 return downloadTasks;
             }
-
-            throw new ArgumentException($"Specified file is of the incorrect type: '{xmlFile.GetType()}'.");
+            else
+            {
+                throw new ArgumentException(xmlFile.GetType().FullName, nameof(xmlFile));
+            }
         }
     }
 }

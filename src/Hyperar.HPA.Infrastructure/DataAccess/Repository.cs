@@ -16,14 +16,9 @@
         {
             TEntity? entity = await this.GetByIdAsync(id);
 
-            if (entity != null)
-            {
-                this.EntityCollection.Remove(entity);
-            }
-            else
-            {
-                throw new Exception($"Entity of type \"{typeof(TEntity)}\" not found with ID \"{id}\".");
-            }
+            ArgumentNullException.ThrowIfNull(entity, nameof(entity));
+
+            this.EntityCollection.Remove(entity);
         }
 
         public async Task<TEntity?> GetByIdAsync(int id)

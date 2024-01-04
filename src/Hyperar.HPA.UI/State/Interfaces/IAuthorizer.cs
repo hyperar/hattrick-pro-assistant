@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
 
     public interface IAuthorizer
     {

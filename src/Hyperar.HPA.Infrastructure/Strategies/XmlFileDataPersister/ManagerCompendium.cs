@@ -40,41 +40,36 @@
             var manager = await this.managerRepository.GetByHattrickIdAsync(entity.Manager.UserId);
             var country = await this.countryRepository.GetByHattrickIdAsync(entity.Manager.Country.CountryId);
 
-            if (country != null)
+            ArgumentNullException.ThrowIfNull(country, nameof(country));
+
+            if (manager == null)
             {
-                if (manager == null)
+                var user = await this.userRepository.Query().SingleAsync();
+
+                manager = new Domain.Manager
                 {
-                    var user = await this.userRepository.Query().SingleAsync();
+                    HattrickId = entity.Manager.UserId,
+                    SupporterTier = entity.Manager.SupporterTier,
+                    UserName = entity.Manager.LoginName,
+                    CurrencyName = entity.Manager.Currency.CurrencyName,
+                    CurrencyRate = entity.Manager.Currency.CurrencyRate,
+                    Country = country,
+                    User = user
+                };
 
-                    manager = new Domain.Manager
-                    {
-                        HattrickId = entity.Manager.UserId,
-                        SupporterTier = entity.Manager.SupporterTier,
-                        UserName = entity.Manager.LoginName,
-                        CurrencyName = entity.Manager.Currency.CurrencyName,
-                        CurrencyRate = entity.Manager.Currency.CurrencyRate,
-                        Country = country,
-                        User = user
-                    };
-
-                    await this.managerRepository.InsertAsync(manager);
-                }
-                else
-                {
-                    manager.SupporterTier = entity.Manager.SupporterTier;
-                    manager.UserName = entity.Manager.LoginName;
-                    manager.CurrencyName = entity.Manager.Currency.CurrencyName;
-                    manager.CurrencyRate = entity.Manager.Currency.CurrencyRate;
-
-                    this.managerRepository.Update(manager);
-                }
-
-                await this.context.SaveAsync();
+                await this.managerRepository.InsertAsync(manager);
             }
             else
             {
-                throw new Exception($"Country with Hattrick ID \"{entity.Manager.Country.CountryId}\" not found.");
+                manager.SupporterTier = entity.Manager.SupporterTier;
+                manager.UserName = entity.Manager.LoginName;
+                manager.CurrencyName = entity.Manager.Currency.CurrencyName;
+                manager.CurrencyRate = entity.Manager.Currency.CurrencyRate;
+
+                this.managerRepository.Update(manager);
             }
+
+            await this.context.SaveAsync();
         }
     }
 }

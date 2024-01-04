@@ -1,9 +1,8 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.Common.Enums;
     using Hyperar.HPA.Domain.Interfaces;
-    using Microsoft.EntityFrameworkCore;
 
     public class HomeViewService : IHomeViewService
     {
@@ -14,23 +13,23 @@
             this.seniorTeamRepository = seniorTeamRepository;
         }
 
-        public async Task<Application.Models.SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId)
+        public async Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId)
         {
             var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(seniorTeamId);
 
-            ArgumentNullException.ThrowIfNull(seniorTeam);
+            ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
 
-            return seniorTeam.SeniorPlayers?.Select(x => Convert(x)).ToArray() ?? Array.Empty<Application.Models.SeniorPlayer>();
+            return seniorTeam.SeniorPlayers?.Select(x => Convert(x)).ToArray() ?? Array.Empty<SeniorPlayer>();
         }
 
-        private static Application.Models.SeniorPlayer Convert(Domain.SeniorPlayer seniorPlayer)
+        private static SeniorPlayer Convert(Domain.SeniorPlayer seniorPlayer)
         {
-            ArgumentNullException.ThrowIfNull(seniorPlayer.SeniorPlayerSkills);
+            ArgumentNullException.ThrowIfNull(seniorPlayer.SeniorPlayerSkills, nameof(seniorPlayer.SeniorPlayerSkills));
 
             var mostRecentSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.UpdatedOn)
                 .First();
 
-            return new Application.Models.SeniorPlayer
+            return new SeniorPlayer
             {
                 Id = seniorPlayer.HattrickId,
                 FirstName = seniorPlayer.FirstName,

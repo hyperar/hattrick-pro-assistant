@@ -7,26 +7,15 @@
     {
         public static SupporterTier ToSupporterTier(this string value)
         {
-            switch (value)
+            return value switch
             {
-                case Constants.SupporterTier.None:
-                    return SupporterTier.None;
-
-                case Constants.SupporterTier.Silver:
-                    return SupporterTier.Silver;
-
-                case Constants.SupporterTier.Gold:
-                    return SupporterTier.Gold;
-
-                case Constants.SupporterTier.Platinum:
-                    return SupporterTier.Platinum;
-
-                case Constants.SupporterTier.Diamond:
-                    return SupporterTier.Diamond;
-
-                default:
-                    throw new ArgumentException($"Unrecognized Supporter Tier Value: '{value}'.");
-            }
+                Constants.SupporterTier.None => SupporterTier.None,
+                Constants.SupporterTier.Silver => SupporterTier.Silver,
+                Constants.SupporterTier.Gold => SupporterTier.Gold,
+                Constants.SupporterTier.Platinum => SupporterTier.Platinum,
+                Constants.SupporterTier.Diamond => SupporterTier.Diamond,
+                _ => throw new ArgumentOutOfRangeException(nameof(value))
+            };
         }
     }
 }

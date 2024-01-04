@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.UI.ViewModels;
 
     public class GetAccessTokenCommand : AsyncCommandBase, IDisposable

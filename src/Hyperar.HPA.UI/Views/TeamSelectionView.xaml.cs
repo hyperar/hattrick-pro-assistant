@@ -22,7 +22,7 @@
     {
         public TeamSelectionView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

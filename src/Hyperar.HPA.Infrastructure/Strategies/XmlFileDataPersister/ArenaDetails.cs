@@ -45,27 +45,22 @@
             {
                 var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(entity.Arena.Team.TeamId);
 
-                if (seniorTeam != null)
-                {
-                    arena = new Domain.SeniorTeamArena
-                    {
-                        HattrickId = entity.Arena.ArenaId,
-                        Name = entity.Arena.ArenaName,
-                        BuiltOn = value,
-                        TerracesCapacity = entity.Arena.CurrentCapacity.Terraces,
-                        BasicSeatCapacity = entity.Arena.CurrentCapacity.Basic,
-                        RoofSeatCapacity = entity.Arena.CurrentCapacity.Roof,
-                        VipLoungeCapacity = entity.Arena.CurrentCapacity.Vip,
-                        TotalCapacity = entity.Arena.CurrentCapacity.Total,
-                        SeniorTeam = seniorTeam
-                    };
+                ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
 
-                    await this.seniorTeamArenaRepository.InsertAsync(arena);
-                }
-                else
+                arena = new Domain.SeniorTeamArena
                 {
-                    throw new Exception($"Senior Team with Hattrick ID \"{entity.Arena.Team.TeamId}\" not found.");
-                }
+                    HattrickId = entity.Arena.ArenaId,
+                    Name = entity.Arena.ArenaName,
+                    BuiltOn = value,
+                    TerracesCapacity = entity.Arena.CurrentCapacity.Terraces,
+                    BasicSeatCapacity = entity.Arena.CurrentCapacity.Basic,
+                    RoofSeatCapacity = entity.Arena.CurrentCapacity.Roof,
+                    VipLoungeCapacity = entity.Arena.CurrentCapacity.Vip,
+                    TotalCapacity = entity.Arena.CurrentCapacity.Total,
+                    SeniorTeam = seniorTeam
+                };
+
+                await this.seniorTeamArenaRepository.InsertAsync(arena);
             }
             else
             {

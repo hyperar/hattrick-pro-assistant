@@ -57,9 +57,9 @@
         {
             await base.InitializeAsync();
 
-            ArgumentNullException.ThrowIfNull(this.IsAuthorized);
-            ArgumentNullException.ThrowIfNull(this.IsNotAuthorized);
-            ArgumentNullException.ThrowIfNull(this.Authorizer.User);
+            ArgumentNullException.ThrowIfNull(this.IsAuthorized, nameof(this.IsAuthorized));
+            ArgumentNullException.ThrowIfNull(this.IsNotAuthorized, nameof(this.IsNotAuthorized));
+            ArgumentNullException.ThrowIfNull(this.Authorizer.User, nameof(this.Authorizer.User));
 
             if (this.IsNotAuthorized.Value)
             {

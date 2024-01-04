@@ -46,36 +46,31 @@
 
                 var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(entity.Team.TeamId);
 
-                if (seniorTeam != null)
+                ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
+
+                await this.context.BeginTransactionAsync();
+
+                List<uint> xmlPlayerIds = entity.Team.PlayerList.Select(x => x.PlayerId).ToList();
+
+                var seniorPlayersToDelete = await this.seniorPlayerRepository.Query(x => !xmlPlayerIds.Contains(x.HattrickId)).ToListAsync();
+
+                foreach (var curSeniorPlayer in seniorPlayersToDelete)
                 {
-                    await this.context.BeginTransactionAsync();
-
-                    List<uint> xmlPlayerIds = entity.Team.PlayerList.Select(x => x.PlayerId).ToList();
-
-                    var seniorPlayersToDelete = await this.seniorPlayerRepository.Query(x => !xmlPlayerIds.Contains(x.HattrickId)).ToListAsync();
-
-                    foreach (var curSeniorPlayer in seniorPlayersToDelete)
-                    {
-                        await this.seniorPlayerRepository.DeleteAsync(curSeniorPlayer.HattrickId);
-                    }
-
-                    foreach (var curXmlPlayer in entity.Team.PlayerList)
-                    {
-                        await this.ProcessPlayerAsync(curXmlPlayer, seniorTeam);
-                    }
-
-                    await this.context.SaveAsync();
-
-                    await this.context.EndTransactionAsync();
+                    await this.seniorPlayerRepository.DeleteAsync(curSeniorPlayer.HattrickId);
                 }
-                else
+
+                foreach (var curXmlPlayer in entity.Team.PlayerList)
                 {
-                    throw new Exception($"Senior Team with Hattrick ID \"{entity.Team.TeamId}\" not found.");
+                    await this.ProcessPlayerAsync(curXmlPlayer, seniorTeam);
                 }
+
+                await this.context.SaveAsync();
+
+                await this.context.EndTransactionAsync();
             }
             else
             {
-                throw new ArgumentException(null, nameof(file));
+                throw new ArgumentException(file.GetType().FullName, nameof(file));
             }
         }
 
@@ -87,54 +82,48 @@
             {
                 var country = await this.countryRepository.GetByHattrickIdAsync(xmlPlayer.CountryId);
 
-                if (country != null)
+                ArgumentNullException.ThrowIfNull(country, nameof(country));
+                seniorPlayer = new Domain.SeniorPlayer
                 {
-                    seniorPlayer = new Domain.SeniorPlayer
-                    {
-                        HattrickId = xmlPlayer.PlayerId,
-                        FirstName = xmlPlayer.FirstName,
-                        NickName = xmlPlayer.NickName,
-                        LastName = xmlPlayer.LastName,
-                        ShirtNumber = xmlPlayer.PlayerNumber,
-                        IsCoach = xmlPlayer.TrainerData != null,
-                        AgeYears = xmlPlayer.Age,
-                        AgeDays = xmlPlayer.AgeDays,
-                        JoinedTeamOn = xmlPlayer.ArrivalDate,
-                        Notes = xmlPlayer.OwnerNotes,
-                        Statement = xmlPlayer.Statement,
-                        TotalSkillIndex = xmlPlayer.Tsi,
-                        HasMotherClubBonus = xmlPlayer.MotherClubBonus,
-                        Salary = xmlPlayer.Salary,
-                        IsForeign = xmlPlayer.IsAbroad,
-                        Agreeability = xmlPlayer.Agreeability,
-                        Aggressiveness = xmlPlayer.Aggressiveness,
-                        Honesty = xmlPlayer.Honesty,
-                        Leadership = xmlPlayer.Leadership,
-                        Specialty = xmlPlayer.Specialty,
-                        IsTransferListed = xmlPlayer.TransferListed,
-                        EnrolledOnNationalTeam = xmlPlayer.NationalTeamId != null,
-                        CurrentSeasonLeagueGoals = (uint)xmlPlayer.LeagueGoals,
-                        CurrentSeasonCupGoals = (uint)xmlPlayer.CupGoals,
-                        CurrentSeasonFriendlyGoals = (uint)xmlPlayer.FriendliesGoals,
-                        CareerGoals = (uint)xmlPlayer.CareerGoals,
-                        CareerHattricks = (uint)xmlPlayer.CareerHattricks,
-                        GoalsOnTeam = (uint)xmlPlayer.GoalsCurrentTeam,
-                        MatchesOnTeam = (uint)xmlPlayer.MatchesCurrentTeam,
-                        SeniorNationalTeamCaps = xmlPlayer.Caps,
-                        YouthNationalTeamCaps = xmlPlayer.CapsU20,
-                        BookingStatus = (BookingStatus)xmlPlayer.Cards,
-                        Health = xmlPlayer.InjuryLevel,
-                        Category = xmlPlayer.PlayerCategoryId,
-                        Country = country,
-                        SeniorTeam = seniorTeam
-                    };
+                    HattrickId = xmlPlayer.PlayerId,
+                    FirstName = xmlPlayer.FirstName,
+                    NickName = xmlPlayer.NickName,
+                    LastName = xmlPlayer.LastName,
+                    ShirtNumber = xmlPlayer.PlayerNumber,
+                    IsCoach = xmlPlayer.TrainerData != null,
+                    AgeYears = xmlPlayer.Age,
+                    AgeDays = xmlPlayer.AgeDays,
+                    JoinedTeamOn = xmlPlayer.ArrivalDate,
+                    Notes = xmlPlayer.OwnerNotes,
+                    Statement = xmlPlayer.Statement,
+                    TotalSkillIndex = xmlPlayer.Tsi,
+                    HasMotherClubBonus = xmlPlayer.MotherClubBonus,
+                    Salary = xmlPlayer.Salary,
+                    IsForeign = xmlPlayer.IsAbroad,
+                    Agreeability = xmlPlayer.Agreeability,
+                    Aggressiveness = xmlPlayer.Aggressiveness,
+                    Honesty = xmlPlayer.Honesty,
+                    Leadership = xmlPlayer.Leadership,
+                    Specialty = xmlPlayer.Specialty,
+                    IsTransferListed = xmlPlayer.TransferListed,
+                    EnrolledOnNationalTeam = xmlPlayer.NationalTeamId != null,
+                    CurrentSeasonLeagueGoals = (uint)xmlPlayer.LeagueGoals,
+                    CurrentSeasonCupGoals = (uint)xmlPlayer.CupGoals,
+                    CurrentSeasonFriendlyGoals = (uint)xmlPlayer.FriendliesGoals,
+                    CareerGoals = (uint)xmlPlayer.CareerGoals,
+                    CareerHattricks = (uint)xmlPlayer.CareerHattricks,
+                    GoalsOnTeam = (uint)xmlPlayer.GoalsCurrentTeam,
+                    MatchesOnTeam = (uint)xmlPlayer.MatchesCurrentTeam,
+                    SeniorNationalTeamCaps = xmlPlayer.Caps,
+                    YouthNationalTeamCaps = xmlPlayer.CapsU20,
+                    BookingStatus = (BookingStatus)xmlPlayer.Cards,
+                    Health = xmlPlayer.InjuryLevel,
+                    Category = xmlPlayer.PlayerCategoryId,
+                    Country = country,
+                    SeniorTeam = seniorTeam
+                };
 
-                    await this.seniorPlayerRepository.InsertAsync(seniorPlayer);
-                }
-                else
-                {
-                    throw new Exception($"Country with Hattrick ID \"{xmlPlayer.CountryId}\" not found.");
-                }
+                await this.seniorPlayerRepository.InsertAsync(seniorPlayer);
             }
             else
             {

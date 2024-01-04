@@ -1,4 +1,4 @@
-﻿namespace Hyperar.HPA.Application.OAuth
+﻿namespace Hyperar.HPA.Application.Models
 {
     public class GetAuthorizationUrlResponse
     {

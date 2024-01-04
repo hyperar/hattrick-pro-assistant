@@ -22,7 +22,7 @@
         {
             if (this.Database.CurrentTransaction != null)
             {
-                throw new InvalidOperationException("Cannot start a new transaction. \r\nThere is an active transaction already.");
+                throw new InvalidOperationException(nameof(this.BeginTransactionAsync));
             }
 
             await this.Database.BeginTransactionAsync();

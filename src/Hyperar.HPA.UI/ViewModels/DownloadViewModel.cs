@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Common.Enums;
     using Hyperar.HPA.UI.Commands;

@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
     using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
 
     public interface IXmlFileService
     {

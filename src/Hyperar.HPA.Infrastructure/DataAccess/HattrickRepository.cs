@@ -15,14 +15,9 @@
         {
             TEntity? entity = await this.GetByHattrickIdAsync(hattrickId);
 
-            if (entity != null)
-            {
-                this.EntityCollection.Remove(entity);
-            }
-            else
-            {
-                throw new Exception($"Entity of type \"{typeof(TEntity)}\" not found with Hattrick ID \"{hattrickId}\".");
-            }
+            ArgumentNullException.ThrowIfNull(entity, nameof(entity));
+
+            this.EntityCollection.Remove(entity);
         }
 
         public async Task<TEntity?> GetByHattrickIdAsync(long hattrickId)
