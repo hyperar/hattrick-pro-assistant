@@ -10,7 +10,7 @@
     <SolidColorBrush x:Key="NavButtonHighlightedColorBrush" Color="{StaticResource NavButtonHighlightedColor}" />
     <SolidColorBrush x:Key="NavButtonTextColorBrush" Color="{StaticResource NavButtonTextColor}" />
 
-    <Style x:Key="NavButton" TargetType="RadioButton">
+    <Style x:Key="NavRadioButton" TargetType="RadioButton">
         <Setter Property="Foreground" Value="{StaticResource NavButtonTextColorBrush}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Background" Value="{StaticResource NavButtonBaseColorBrush}" />
@@ -58,13 +58,68 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="NavButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource NavButtonTextColorBrush}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Background" Value="{StaticResource NavButtonBaseColorBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="Width" Value="48" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
+                        <Image Source="{TemplateBinding Content}"
+                            Stretch="None"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{StaticResource NavButtonBaseColorBrush}" TargetName="gridMain" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation To="{StaticResource NavButtonHighlightedColor}" Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation To="{StaticResource NavButtonBaseColor}" Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- Icons -->
-    <BitmapImage x:Key="AboutIcon32" UriSource="../Resources/About_32.png" />
+    <BitmapImage x:Key="about-32" UriSource="../Resources/about-32.png" />
+    <BitmapImage x:Key="download-32" UriSource="../Resources/download-32.png" />
+    <BitmapImage x:Key="home-32" UriSource="../Resources/home-32.png" />
+    <BitmapImage x:Key="key-32" UriSource="../Resources/key-32.png" />
+    <BitmapImage x:Key="logout-32" UriSource="../Resources/logout-32.png" />
+    <BitmapImage x:Key="protect-32" UriSource="../Resources/protect-32.png" />
+    <BitmapImage x:Key="scoreboard-32" UriSource="../Resources/scoreboard-32.png" />
+    <BitmapImage x:Key="settings-32" UriSource="../Resources/settings-32.png" />
+    <BitmapImage x:Key="sports-teams-32" UriSource="../Resources/sports-teams-32.png" />
+
+    <!--<BitmapImage x:Key="AboutIcon32" UriSource="../Resources/About_32.png" />
     <BitmapImage x:Key="DownloadIcon32" UriSource="../Resources/Download_32.png" />
     <BitmapImage x:Key="HomeIcon32" UriSource="../Resources/Home_32.png" />
     <BitmapImage x:Key="JerseyIcon32" UriSource="../Resources/Jersey_32.png" />
     <BitmapImage x:Key="KeyIcon32" UriSource="../Resources/Key_32.png" />
     <BitmapImage x:Key="ShieldIcon32" UriSource="../Resources/Shield_32.png" />
     <BitmapImage x:Key="ScoreBoardIcon32" UriSource="../Resources/ScoreBoard_32.png" />
-    <BitmapImage x:Key="QuitIcon32" UriSource="../Resources/Quit_32.png" />
+    <BitmapImage x:Key="QuitIcon32" UriSource="../Resources/Quit_32.png" />-->
 </ResourceDictionary>

@@ -13,22 +13,57 @@
         <UseWPF>true</UseWPF>
         <UserSecretsId>687968cf-3b1b-49d9-828b-c13927c9d634</UserSecretsId>
     </PropertyGroup>
-
     <ItemGroup>
-        <None Remove="Resources\About_32.png" />
-        <None Remove="Resources\Background.jpg" />
-        <None Remove="Resources\BackgroundDark.jpg" />
-        <None Remove="Resources\Download_32.png" />
-        <None Remove="Resources\Home_32.png" />
-        <None Remove="Resources\HPA.ico" />
-        <None Remove="Resources\Key_32.png" />
-        <None Remove="Resources\Quit_32.png" />
-        <None Remove="Resources\Scoreboard_32.png" />
-        <None Remove="Resources\Shield_32.png" />
+      <None Remove="Resources\about-32.png" />
+      <None Remove="Resources\bg-dark.jpg" />
+      <None Remove="Resources\bg.jpg" />
+      <None Remove="Resources\download-32.png" />
+      <None Remove="Resources\home-32.png" />
+      <None Remove="Resources\HPA.ico" />
+      <None Remove="Resources\key-32.png" />
+      <None Remove="Resources\logout-32.png" />
+      <None Remove="Resources\protect-32.png" />
+      <None Remove="Resources\scoreboard-32.png" />
+      <None Remove="Resources\settings-32.png" />
+      <None Remove="Resources\sports-teams-32.png" />
     </ItemGroup>
-
     <ItemGroup>
-      <Content Include="Resources\HPA.ico" />
+      <Resource Include="Resources\about-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\bg-dark.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\bg.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\download-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\home-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\HPA.ico">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\key-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\logout-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\protect-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\scoreboard-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\settings-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\sports-teams-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>
@@ -48,39 +83,6 @@
         <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
         <ProjectReference Include="..\Hyperar.HPA.Globalization\Hyperar.HPA.Globalization.csproj" />
         <ProjectReference Include="..\Hyperar.HPA.Infrastructure\Hyperar.HPA.Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Resource Include="Resources\About_32.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\Background.jpg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\BackgroundDark.jpg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\Download_32.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\Home_32.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\HPA.ico">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\Key_32.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\Quit_32.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\Scoreboard_32.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
-        <Resource Include="Resources\Shield_32.png">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
     </ItemGroup>
 
     <ItemGroup>

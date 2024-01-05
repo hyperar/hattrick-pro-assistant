@@ -1,5 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.Controls
 {
+    using System.Windows;
     using System.Windows.Controls;
 
     /// <summary>
@@ -10,6 +11,13 @@
         public NavigationBar()
         {
             this.InitializeComponent();
+        }
+
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+
+            parentWindow.Close();
         }
     }
 }

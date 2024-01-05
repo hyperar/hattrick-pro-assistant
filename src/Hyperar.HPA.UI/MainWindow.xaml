@@ -12,7 +12,7 @@
         MinWidth="1024">
     <Window.Background>
         <ImageBrush
-            ImageSource="Resources/BackgroundDark.jpg"
+            ImageSource="Resources/bg-dark.jpg"
             TileMode="Tile"
             Stretch="Uniform"
             AlignmentY="Top"

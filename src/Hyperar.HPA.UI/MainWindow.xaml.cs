@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.UI
 {
     using System;
+    using System.ComponentModel;
     using System.Windows;
     using Hyperar.HPA.UI.ViewModels;
     using Microsoft.Extensions.Configuration;
@@ -22,6 +23,16 @@
             this.configuration = configuration;
             this.DataContext = dataContext;
             this.Title = $"{this.configuration[appTitleKeyName]} v{this.configuration[appVersionKeyName]}";
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (this.DataContext is MainViewModel mainViewModel)
+            {
+                e.Cancel = !mainViewModel.CanNavigate;
+            }
+
+            base.OnClosing(e);
         }
     }
 }

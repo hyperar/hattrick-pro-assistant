@@ -36,7 +36,6 @@
                 ViewType.Permissions => await this.createPermissionsViewModel(),
                 ViewType.Players => await this.createPlayersViewModel(),
                 ViewType.TeamSelection => new TeamSelectionViewModel(),
-                ViewType.Quit => new QuitViewModel(),
                 _ => throw new ArgumentOutOfRangeException(nameof(viewType))
             };
         }

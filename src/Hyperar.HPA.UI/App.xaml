@@ -37,10 +37,6 @@
             <DataTemplate DataType="{x:Type viewModels:TeamSelectionViewModel}">
                 <views:TeamSelectionView />
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModels:QuitViewModel}">
-                <views:QuitView />
-            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

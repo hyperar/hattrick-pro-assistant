@@ -261,6 +261,9 @@
   <data name="SetPieces" xml:space="preserve">
     <value>Balón Parado</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Preferencias</value>
+  </data>
   <data name="ShirtNumber" xml:space="preserve">
     <value>#</value>
   </data>
