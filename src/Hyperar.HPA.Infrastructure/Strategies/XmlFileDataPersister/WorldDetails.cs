@@ -1,6 +1,5 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
-    using System.Runtime.CompilerServices;
     using Hyperar.HPA.Application.Hattrick.Interfaces;
     using Hyperar.HPA.Application.Interfaces;
     using Hyperar.HPA.Domain.Interfaces;
@@ -89,7 +88,7 @@
             {
                 foreach (var curXmlRegion in xmlCountry.RegionList)
                 {
-                    await this.ProcessRegionAsync(curXmlRegion, country.HattrickId);
+                    await this.ProcessRegionAsync(curXmlRegion, country);
                 }
 
                 await this.context.SaveAsync();
@@ -204,7 +203,7 @@
             }
         }
 
-        private async Task ProcessRegionAsync(Hattrick.Region xmlRegion, uint countryId)
+        private async Task ProcessRegionAsync(Hattrick.Region xmlRegion, Domain.Country country)
         {
             var region = await this.regionRepository.GetByHattrickIdAsync(xmlRegion.RegionId);
 
@@ -212,7 +211,7 @@
             {
                 region = new Domain.Region
                 {
-                    CountryHattrickId = countryId,
+                    Country = country,
                     HattrickId = xmlRegion.RegionId,
                     Name = xmlRegion.RegionName
                 };
