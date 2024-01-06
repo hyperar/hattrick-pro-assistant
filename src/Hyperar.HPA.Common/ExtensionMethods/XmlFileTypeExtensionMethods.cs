@@ -11,6 +11,7 @@
             {
                 Constants.XmlFileName.ArenaDetails => XmlFileType.ArenaDetails,
                 Constants.XmlFileName.ManagerCompendium => XmlFileType.ManagerCompendium,
+                Constants.XmlFileName.Matches => XmlFileType.Matches,
                 Constants.XmlFileName.Players => XmlFileType.Players,
                 Constants.XmlFileName.TeamDetails => XmlFileType.TeamDetails,
                 Constants.XmlFileName.WorldDetails => XmlFileType.WorldDetails,

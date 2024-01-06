@@ -150,6 +150,9 @@
   <data name="CopyAndPasteVerificationCodeMessage" xml:space="preserve">
     <value>Una vez que haya iniciado sesión en su cuenta Hattrick, se le proporcionará un Código de verificación. Copie el código y péguelo a continuación, asegurándose de que no haya espacios en blanco al principio o al final del código.</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>País</value>
+  </data>
   <data name="CupGoals" xml:space="preserve">
     <value>Goles (Copa)</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Defending" xml:space="preserve">
     <value>Defensa</value>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>Diamante</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Descargar</value>
@@ -182,6 +188,9 @@
   </data>
   <data name="GoalsOnTeam" xml:space="preserve">
     <value>Goles (Equipo)</value>
+  </data>
+  <data name="Gold" xml:space="preserve">
+    <value>Oro</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Salud</value>
@@ -204,6 +213,9 @@
   <data name="Leadership" xml:space="preserve">
     <value>Liderazgo</value>
   </data>
+  <data name="League" xml:space="preserve">
+    <value>Liga</value>
+  </data>
   <data name="LeagueGoals" xml:space="preserve">
     <value>Goles (Liga)</value>
   </data>
@@ -225,6 +237,9 @@
   <data name="Nickname" xml:space="preserve">
     <value>Apodo</value>
   </data>
+  <data name="NoSupporter" xml:space="preserve">
+    <value>No es Supporter</value>
+  </data>
   <data name="NotAuthorized" xml:space="preserve">
     <value>No Autorizado</value>
   </data>
@@ -243,6 +258,9 @@
   <data name="Permissions" xml:space="preserve">
     <value>Permisos</value>
   </data>
+  <data name="Platinum" xml:space="preserve">
+    <value>Platino</value>
+  </data>
   <data name="Players" xml:space="preserve">
     <value>Jugadores</value>
   </data>
@@ -251,6 +269,9 @@
   </data>
   <data name="Quit" xml:space="preserve">
     <value>Salir</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Región</value>
   </data>
   <data name="Salary" xml:space="preserve">
     <value>Salario</value>
@@ -266,6 +287,9 @@
   </data>
   <data name="ShirtNumber" xml:space="preserve">
     <value>#</value>
+  </data>
+  <data name="Silver" xml:space="preserve">
+    <value>Plata</value>
   </data>
   <data name="Specialty" xml:space="preserve">
     <value>Especialidad</value>
@@ -284,6 +308,9 @@
   </data>
   <data name="StepTwo" xml:space="preserve">
     <value>Paso 2</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>Equipo</value>
   </data>
   <data name="TeamSelection" xml:space="preserve">
     <value>Selección de Equipo</value>

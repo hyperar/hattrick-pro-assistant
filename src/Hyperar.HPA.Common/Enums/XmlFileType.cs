@@ -6,10 +6,12 @@
 
         ManagerCompendium = 1,
 
-        Players = 2,
+        Matches = 2,
 
-        TeamDetails = 3,
+        Players = 3,
 
-        WorldDetails = 4
+        TeamDetails = 4,
+
+        WorldDetails = 5
     }
 }

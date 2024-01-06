@@ -24,6 +24,13 @@
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
 
+    <Style x:Key="BlockTitle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Margin" Value="0 5" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+
     <DropShadowEffect x:Key="ViewContainerShadow" BlurRadius="10" Color="Black" Opacity="0.4" />
 
     <Style x:Key="ViewContainer" TargetType="{x:Type Border}">

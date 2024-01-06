@@ -48,13 +48,10 @@
             {
                 ArgumentNullException.ThrowIfNull(this.downloadViewModel.Authorizer.User, nameof(this.downloadViewModel.Authorizer.User));
                 ArgumentNullException.ThrowIfNull(this.downloadViewModel.Authorizer.User.Manager, nameof(this.downloadViewModel.Authorizer.User.Manager));
-                ArgumentNullException.ThrowIfNull(this.downloadViewModel.Authorizer.User.Manager.SeniorTeams, nameof(this.downloadViewModel.Authorizer.User.Manager.SeniorTeams));
 
-#pragma warning disable CS8604 // .NET Core refuses to acknowledge that I'm checking for nulls just before accessing the object.
                 this.navigator.SelectedTeamId = this.downloadViewModel.Authorizer.User.Manager.SeniorTeams.Where(x => x.IsPrimary)
                     .Select(x => x.HattrickId)
                     .Single();
-#pragma warning restore CS8604 // .NET Core refuses to acknowledge that I'm checking for nulls just before accessing the object.
             }
 
             this.navigator.CurrentViewModel = await this.viewModelFactory.CreateAsyncViewModel(ViewType.Home);

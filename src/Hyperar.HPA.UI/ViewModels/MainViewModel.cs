@@ -67,7 +67,6 @@
             }
             else if (!this.Authorizer.User.LastDownloadDate.HasValue ||
                 this.Authorizer.User.Manager == null ||
-                this.Authorizer.User.Manager.SeniorTeams == null ||
                 this.Authorizer.User.Manager.SeniorTeams.Count == 0)
             {
                 this.UpdateCurrentViewModelCommand.Execute(ViewType.Download);

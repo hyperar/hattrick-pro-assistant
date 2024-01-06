@@ -52,7 +52,8 @@
 
                 List<uint> xmlPlayerIds = entity.Team.PlayerList.Select(x => x.PlayerId).ToList();
 
-                var seniorPlayersToDelete = await this.seniorPlayerRepository.Query(x => !xmlPlayerIds.Contains(x.HattrickId)).ToListAsync();
+                var seniorPlayersToDelete = await this.seniorPlayerRepository.Query(x => x.SeniorTeam.HattrickId == seniorTeam.HattrickId
+                                                                                      && !xmlPlayerIds.Contains(x.HattrickId)).ToListAsync();
 
                 foreach (var curSeniorPlayer in seniorPlayersToDelete)
                 {

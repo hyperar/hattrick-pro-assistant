@@ -30,14 +30,14 @@
                 .HasColumnName(Constants.ColumnName.CreatedOn)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Date)
+                .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
             builder.Property(p => p.ExpiresOn)
                 .HasColumnName(Constants.ColumnName.ExpiresOn)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Date)
+                .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
         }
 

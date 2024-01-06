@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
-    using Hyperar.HPA.Application.Models;
+    using Hyperar.HPA.Application.Models.PlayersView;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Domain.Interfaces;
 

@@ -20,6 +20,8 @@
 
         internal const string SeniorTeamArena = "SeniorTeamArena";
 
+        internal const string SeniorTeamOverviewMatch = "SeniorTeamOverviewMatch";
+
         internal const string Token = "Token";
 
         internal const string User = "User";

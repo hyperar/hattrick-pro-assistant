@@ -1,4 +1,4 @@
-﻿namespace Hyperar.HPA.Application.Models
+﻿namespace Hyperar.HPA.Application.Models.PlayersView
 {
     using Hyperar.HPA.Common.Enums;
 

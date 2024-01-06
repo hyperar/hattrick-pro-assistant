@@ -11,6 +11,8 @@
 
         private readonly ManagerCompendium managerCompendiumParser;
 
+        private readonly Matches matchesParser;
+
         private readonly Players playersParser;
 
         private readonly TeamDetails teamDetailsParser;
@@ -20,12 +22,14 @@
         public XmlFileParserFactory(
             ArenaDetails arenaDetailsParser,
             ManagerCompendium managerCompendiumParser,
+            Matches matchesParser,
             Players playersParser,
             TeamDetails teamDetailsParser,
             WorldDetails worldDetailsParser)
         {
             this.arenaDetailsParser = arenaDetailsParser;
             this.managerCompendiumParser = managerCompendiumParser;
+            this.matchesParser = matchesParser;
             this.playersParser = playersParser;
             this.teamDetailsParser = teamDetailsParser;
             this.worldDetailsParser = worldDetailsParser;
@@ -37,6 +41,7 @@
             {
                 XmlFileType.ArenaDetails => this.arenaDetailsParser,
                 XmlFileType.ManagerCompendium => this.managerCompendiumParser,
+                XmlFileType.Matches => this.matchesParser,
                 XmlFileType.Players => this.playersParser,
                 XmlFileType.TeamDetails => this.teamDetailsParser,
                 XmlFileType.WorldDetails => this.worldDetailsParser,

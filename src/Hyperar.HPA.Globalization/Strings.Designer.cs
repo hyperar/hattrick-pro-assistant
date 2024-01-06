@@ -160,6 +160,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cup Goals.
         /// </summary>
         public static string CupGoals {
@@ -201,6 +210,15 @@ namespace Hyperar.HPA.Globalization {
         public static string Defending {
             get {
                 return ResourceManager.GetString("Defending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diamond.
+        /// </summary>
+        public static string Diamond {
+            get {
+                return ResourceManager.GetString("Diamond", resourceCulture);
             }
         }
         
@@ -255,6 +273,15 @@ namespace Hyperar.HPA.Globalization {
         public static string GoalsOnTeam {
             get {
                 return ResourceManager.GetString("GoalsOnTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold.
+        /// </summary>
+        public static string Gold {
+            get {
+                return ResourceManager.GetString("Gold", resourceCulture);
             }
         }
         
@@ -322,6 +349,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to League.
+        /// </summary>
+        public static string League {
+            get {
+                return ResourceManager.GetString("League", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to League Goals.
         /// </summary>
         public static string LeagueGoals {
@@ -385,6 +421,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Supporter.
+        /// </summary>
+        public static string NoSupporter {
+            get {
+                return ResourceManager.GetString("NoSupporter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Authorized.
         /// </summary>
         public static string NotAuthorized {
@@ -439,6 +484,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Platinum.
+        /// </summary>
+        public static string Platinum {
+            get {
+                return ResourceManager.GetString("Platinum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Players.
         /// </summary>
         public static string Players {
@@ -462,6 +516,15 @@ namespace Hyperar.HPA.Globalization {
         public static string Quit {
             get {
                 return ResourceManager.GetString("Quit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Region.
+        /// </summary>
+        public static string Region {
+            get {
+                return ResourceManager.GetString("Region", resourceCulture);
             }
         }
         
@@ -507,6 +570,15 @@ namespace Hyperar.HPA.Globalization {
         public static string ShirtNumber {
             get {
                 return ResourceManager.GetString("ShirtNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver.
+        /// </summary>
+        public static string Silver {
+            get {
+                return ResourceManager.GetString("Silver", resourceCulture);
             }
         }
         
@@ -561,6 +633,15 @@ namespace Hyperar.HPA.Globalization {
         public static string StepTwo {
             get {
                 return ResourceManager.GetString("StepTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team.
+        /// </summary>
+        public static string Team {
+            get {
+                return ResourceManager.GetString("Team", resourceCulture);
             }
         }
         

@@ -32,6 +32,14 @@
 
                     downloadTasks.Add(
                         new DownloadTask(
+                            XmlFileType.Matches,
+                            new Dictionary<string, string>
+                            {
+                                { teamIdParamKey, curTeam.TeamId.ToString() }
+                            }));
+
+                    downloadTasks.Add(
+                        new DownloadTask(
                             XmlFileType.Players,
                             new Dictionary<string, string>
                             {

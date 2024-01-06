@@ -1,9 +1,10 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
     using System.Collections.Generic;
+    using Hyperar.HPA.Application.Models.PlayersView;
 
     public interface IPlayersViewService
     {
-        Task<Models.SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId);
+        Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId);
     }
 }

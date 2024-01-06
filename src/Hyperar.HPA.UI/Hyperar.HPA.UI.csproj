@@ -15,20 +15,57 @@
     </PropertyGroup>
     <ItemGroup>
       <None Remove="Resources\about-32.png" />
+      <None Remove="Resources\bandage-16.png" />
+      <None Remove="Resources\bandage-30.png" />
       <None Remove="Resources\bg-dark.jpg" />
       <None Remove="Resources\bg.jpg" />
+      <None Remove="Resources\clinic-16.png" />
+      <None Remove="Resources\clinic-30.png" />
+      <None Remove="Resources\connection-16.png" />
+      <None Remove="Resources\connection-30.png" />
+      <None Remove="Resources\double-yellow-card-16.png" />
+      <None Remove="Resources\double-yellow-card-30.png" />
       <None Remove="Resources\download-32.png" />
+      <None Remove="Resources\exercise-16.png" />
+      <None Remove="Resources\exercise-30.png" />
+      <None Remove="Resources\gears-16.png" />
+      <None Remove="Resources\gears-30.png" />
+      <None Remove="Resources\head-16.png" />
+      <None Remove="Resources\head-30.png" />
+      <None Remove="Resources\health-16.png" />
+      <None Remove="Resources\health-30.png" />
       <None Remove="Resources\home-32.png" />
       <None Remove="Resources\HPA.ico" />
       <None Remove="Resources\key-32.png" />
       <None Remove="Resources\logout-32.png" />
+      <None Remove="Resources\love-16.png" />
+      <None Remove="Resources\love-30.png" />
+      <None Remove="Resources\no-logo.png" />
+      <None Remove="Resources\price-tag-16.png" />
+      <None Remove="Resources\price-tag-30.png" />
       <None Remove="Resources\protect-32.png" />
+      <None Remove="Resources\red-card-16.png" />
+      <None Remove="Resources\red-card-30.png" />
       <None Remove="Resources\scoreboard-32.png" />
       <None Remove="Resources\settings-32.png" />
+      <None Remove="Resources\sil1_3.png" />
       <None Remove="Resources\sports-teams-32.png" />
+      <None Remove="Resources\strong-16.png" />
+      <None Remove="Resources\strong-30.png" />
+      <None Remove="Resources\swap-16.png" />
+      <None Remove="Resources\swap-30.png" />
+      <None Remove="Resources\transparent.gif" />
+      <None Remove="Resources\yellow-card-16.png" />
+      <None Remove="Resources\yellow-card-30.png" />
     </ItemGroup>
     <ItemGroup>
       <Resource Include="Resources\about-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\bandage-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\bandage-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\bg-dark.jpg">
@@ -37,7 +74,49 @@
       <Resource Include="Resources\bg.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="Resources\clinic-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\clinic-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\connection-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\connection-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\double-yellow-card-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\double-yellow-card-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
       <Resource Include="Resources\download-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\exercise-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\exercise-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\gears-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\gears-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\head-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\head-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\health-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\health-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\home-32.png">
@@ -52,7 +131,28 @@
       <Resource Include="Resources\logout-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="Resources\love-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\love-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\no-logo.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\price-tag-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\price-tag-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
       <Resource Include="Resources\protect-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\red-card-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\red-card-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\scoreboard-32.png">
@@ -61,21 +161,44 @@
       <Resource Include="Resources\settings-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="Resources\sil1_3.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
       <Resource Include="Resources\sports-teams-32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\strong-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\strong-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\swap-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\swap-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\transparent.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\yellow-card-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\yellow-card-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.92" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.10" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>

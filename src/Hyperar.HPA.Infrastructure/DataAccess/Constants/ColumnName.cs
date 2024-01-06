@@ -14,6 +14,18 @@
 
         internal const string Agreeability = "Agreeability";
 
+        internal const string AlternativeMatchKit = "AlternativeMatchKit";
+
+        internal const string AlternativeMatchKitUrl = "AlternativeMatchKitUrl";
+
+        internal const string AwayGoals = "AwayGoals";
+
+        internal const string AwayTeamHattrickId = "AwayTeamHattrickId";
+
+        internal const string AwayTeamName = "AwayTeamName";
+
+        internal const string AwayTeamShortName = "AwayTeamShortName";
+
         internal const string BasicSeatCapacity = "BasicSeatCapacity";
 
         internal const string BookingStatus = "BookingStatus";
@@ -29,6 +41,8 @@
         internal const string CoachPlayerId = "CoachPlayerId";
 
         internal const string Code = "Code";
+
+        internal const string CompetitionId = "CompetitionId";
 
         internal const string Continent = "Continent";
 
@@ -82,6 +96,14 @@
 
         internal const string Health = "Health";
 
+        internal const string HomeGoals = "HomeGoals";
+
+        internal const string HomeTeamHattrickId = "HomeTeamHattrickId";
+
+        internal const string HomeTeamName = "HomeTeamName";
+
+        internal const string HomeTeamShortName = "HomeTeamShortName";
+
         internal const string Honesty = "Honesty";
 
         internal const string Id = "Id";
@@ -120,9 +142,17 @@
 
         internal const string LevelIndex = "LevelIndex";
 
+        internal const string Logo = "Logo";
+
+        internal const string LogoUrl = "LogoUrl";
+
         internal const string Loyalty = "Loyalty";
 
         internal const string MatchesOnTeam = "MatchesOnTeam";
+
+        internal const string MatchKit = "MatchKit";
+
+        internal const string MatchKitUrl = "MatchKitUrl";
 
         internal const string Name = "Name";
 
@@ -168,6 +198,12 @@
 
         internal const string SeniorNationalTeamId = "SeniorNationalTeamId";
 
+        internal const string SeniorSeriesDivision = "SeniorSeriesDivision";
+
+        internal const string SeniorSeriesHattrickId = "SeniorSeriesHattrickId";
+
+        internal const string SeniorSeriesName = "SeniorSeriesName";
+
         internal const string SetPieces = "SetPieces";
 
         internal const string ShirtNumber = "ShirtNumber";
@@ -178,7 +214,11 @@
 
         internal const string Stamina = "Stamina";
 
+        internal const string StartsOn = "StartsOn";
+
         internal const string Statement = "Statement";
+
+        internal const string Status = "Status";
 
         internal const string SupporterTier = "SupporterTier";
 
@@ -193,6 +233,8 @@
         internal const string TotalCapacity = "TotalCapacity";
 
         internal const string TotalSkillIndex = "TotalSkillIndex";
+
+        internal const string Type = "Type";
 
         internal const string UndefeatedStreak = "UndefeatedStreak";
 

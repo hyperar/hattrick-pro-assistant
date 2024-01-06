@@ -16,6 +16,7 @@
             host.ConfigureServices(services =>
             {
                 services.AddTransient<CreateAsyncViewModel<DownloadViewModel>>(services => () => CreateDownloadAsyncViewModel(services));
+                services.AddTransient<CreateAsyncViewModel<HomeViewModel>>(services => () => CreateHomeAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<PermissionsViewModel>>(services => () => CreatePermissionsAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<PlayersViewModel>>(services => () => CreatePlayersAsyncViewModel(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
@@ -35,6 +36,19 @@
                 scope.ServiceProvider.GetRequiredService<IXmlFileService>(),
                 services.GetRequiredService<INavigator>(),
                 services.GetRequiredService<IViewModelFactory>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
+        }
+
+        private static async Task<HomeViewModel> CreateHomeAsyncViewModel(IServiceProvider services)
+        {
+            var scope = services.CreateScope();
+
+            var viewModel = new HomeViewModel(
+                scope.ServiceProvider.GetRequiredService<IHomeViewService>(),
+                services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
 

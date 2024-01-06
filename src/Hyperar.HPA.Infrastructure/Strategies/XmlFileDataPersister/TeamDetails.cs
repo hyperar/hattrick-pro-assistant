@@ -6,7 +6,7 @@
     using Hyperar.HPA.Application.Interfaces;
     using Hyperar.HPA.Domain.Interfaces;
 
-    public class TeamDetails : IXmlFileDataPersisterStrategy
+    public class TeamDetails : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
         private readonly IDatabaseContext context;
 
@@ -32,7 +32,7 @@
             this.seniorTeamRepository = seniorTeamRepository;
         }
 
-        public async Task PersistDataAsync(IXmlFile file)
+        public override async Task PersistDataAsync(IXmlFile file)
         {
             var entity = (HattrickData)file;
 
@@ -69,6 +69,15 @@
                     TeamRank = xmlTeam.TeamRank ?? 0,
                     UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0,
                     WinStreak = xmlTeam.NumberOfVictories ?? 0,
+                    SeniorSeriesHattrickId = xmlTeam.LeagueLevelUnit.LeagueLevelUnitId,
+                    SeniorSeriesName = xmlTeam.LeagueLevelUnit.LeagueLevelUnitName,
+                    SeniorSeriesDivision = xmlTeam.LeagueLevelUnit.LeagueLevel,
+                    LogoUrl = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) ? NormalizeUrl(xmlTeam.LogoUrl) : null,
+                    MatchKitUrl = NormalizeUrl(xmlTeam.DressUri),
+                    AlternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri),
+                    Logo = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) ? await DownloadWebResource(xmlTeam.LogoUrl) : null,
+                    MatchKit = await DownloadWebResource(xmlTeam.DressUri),
+                    AlternativeMatchKit = await DownloadWebResource(xmlTeam.DressAlternateUri),
                     League = league,
                     Manager = manager,
                     Region = region
@@ -92,6 +101,37 @@
                 seniorTeam.TeamRank = xmlTeam.TeamRank ?? 0;
                 seniorTeam.UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0;
                 seniorTeam.WinStreak = xmlTeam.NumberOfVictories ?? 0;
+                seniorTeam.SeniorSeriesHattrickId = xmlTeam.LeagueLevelUnit.LeagueLevelUnitId;
+                seniorTeam.SeniorSeriesName = xmlTeam.LeagueLevelUnit.LeagueLevelUnitName;
+                seniorTeam.SeniorSeriesDivision = xmlTeam.LeagueLevelUnit.LeagueLevel;
+
+                if (string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && !string.IsNullOrWhiteSpace(seniorTeam.LogoUrl))
+                {
+                    seniorTeam.Logo = null;
+                    seniorTeam.LogoUrl = null;
+                }
+                else if (!string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && NormalizeUrl(xmlTeam.LogoUrl) != seniorTeam.LogoUrl)
+                {
+                    seniorTeam.LogoUrl = NormalizeUrl(xmlTeam.LogoUrl);
+                    seniorTeam.Logo = await DownloadWebResource(xmlTeam.LogoUrl);
+                }
+
+                string matchKitUrl = NormalizeUrl(xmlTeam.DressUri);
+
+                if (matchKitUrl != seniorTeam.MatchKitUrl)
+                {
+                    seniorTeam.MatchKitUrl = matchKitUrl;
+                    seniorTeam.MatchKit = await DownloadWebResource(matchKitUrl);
+                }
+
+                string alternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri);
+
+                if (alternativeMatchKitUrl != seniorTeam.AlternativeMatchKitUrl)
+                {
+                    seniorTeam.AlternativeMatchKitUrl = alternativeMatchKitUrl;
+                    seniorTeam.AlternativeMatchKit = await DownloadWebResource(alternativeMatchKitUrl);
+                }
+
                 seniorTeam.Region = region;
             }
         }

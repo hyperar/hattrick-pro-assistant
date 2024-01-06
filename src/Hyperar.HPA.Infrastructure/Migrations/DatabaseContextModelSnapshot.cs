@@ -17,7 +17,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -128,17 +128,17 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(3);
 
                     b.Property<DateTime>("FifthWeeklyUpdate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("FifthWeeklyUpdate")
                         .HasColumnOrder(25);
 
                     b.Property<DateTime>("FirstWeeklyUpdate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("FirstWeeklyUpdate")
                         .HasColumnOrder(21);
 
                     b.Property<DateTime>("FourthWeeklyUpdate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("FourthWeeklyUpdate")
                         .HasColumnOrder(24);
 
@@ -169,22 +169,22 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<DateTime>("NextCupMatchDate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("NextCupMatchDate")
                         .HasColumnOrder(19);
 
                     b.Property<DateTime>("NextEconomyUpdate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("NextEconomyUpdate")
                         .HasColumnOrder(18);
 
                     b.Property<DateTime>("NextSeriesMatchDate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("NextSeriesMatchDate")
                         .HasColumnOrder(20);
 
                     b.Property<DateTime>("NextTrainingUpdate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("NextTrainingUpdate")
                         .HasColumnOrder(17);
 
@@ -204,7 +204,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(7);
 
                     b.Property<DateTime>("SecondWeeklyUpdate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("SecondWeeklyUpdate")
                         .HasColumnOrder(22);
 
@@ -222,7 +222,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(2);
 
                     b.Property<DateTime>("ThirdWeeklyUpdate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("ThirdWeeklyUpdate")
                         .HasColumnOrder(23);
 
@@ -318,8 +318,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnName("CurrencyRate")
                         .HasColumnOrder(4);
 
-                    b.Property<int>("SupporterTier")
-                        .HasColumnType("int")
+                    b.Property<long>("SupporterTier")
+                        .HasColumnType("bigint")
                         .HasColumnName("SupporterTier")
                         .HasColumnOrder(2);
 
@@ -435,7 +435,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(22);
 
                     b.Property<bool>("EnrolledOnNationalTeam")
-                        .HasColumnType("Bit")
+                        .HasColumnType("bit")
                         .HasColumnName("EnrolledOnNationalTeam")
                         .HasColumnOrder(21);
 
@@ -453,7 +453,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(27);
 
                     b.Property<bool>("HasMotherClubBonus")
-                        .HasColumnType("Bit")
+                        .HasColumnType("bit")
                         .HasColumnName("HasMotherClubBonus")
                         .HasColumnOrder(12);
 
@@ -468,22 +468,22 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(17);
 
                     b.Property<bool>("IsCoach")
-                        .HasColumnType("Bit")
+                        .HasColumnType("bit")
                         .HasColumnName("IsCoach")
                         .HasColumnOrder(5);
 
                     b.Property<bool>("IsForeign")
-                        .HasColumnType("Bit")
+                        .HasColumnType("bit")
                         .HasColumnName("IsForeign")
                         .HasColumnOrder(14);
 
                     b.Property<bool>("IsTransferListed")
-                        .HasColumnType("Bit")
+                        .HasColumnType("bit")
                         .HasColumnName("IsTransferListed")
                         .HasColumnOrder(20);
 
                     b.Property<DateTime>("JoinedTeamOn")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("JoinedTeamOn")
                         .HasColumnOrder(8);
 
@@ -630,7 +630,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(3);
 
                     b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("UpdatedOn")
                         .HasColumnOrder(1);
 
@@ -653,13 +653,27 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnName("HattrickId")
                         .HasColumnOrder(0);
 
+                    b.Property<byte[]>("AlternativeMatchKit")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("AlternativeMatchKit")
+                        .HasColumnOrder(22);
+
+                    b.Property<string>("AlternativeMatchKitUrl")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("AlternativeMatchKitUrl")
+                        .HasColumnOrder(19);
+
                     b.Property<long>("CoachPlayerId")
                         .HasColumnType("bigint")
                         .HasColumnName("CoachPlayerId")
                         .HasColumnOrder(5);
 
                     b.Property<DateTime>("FoundedOn")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("FoundedOn")
                         .HasColumnOrder(4);
 
@@ -669,12 +683,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(7);
 
                     b.Property<bool>("IsPlayingCup")
-                        .HasColumnType("Bit")
+                        .HasColumnType("bit")
                         .HasColumnName("IsPlayingCup")
                         .HasColumnOrder(6);
 
                     b.Property<bool>("IsPrimary")
-                        .HasColumnType("Bit")
+                        .HasColumnType("bit")
                         .HasColumnName("IsPrimary")
                         .HasColumnOrder(3);
 
@@ -686,8 +700,34 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnName("LeagueRanking")
                         .HasColumnOrder(8);
 
+                    b.Property<byte[]>("Logo")
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("Logo")
+                        .HasColumnOrder(20);
+
+                    b.Property<string>("LogoUrl")
+                        .HasMaxLength(1024)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("LogoUrl")
+                        .HasColumnOrder(17);
+
                     b.Property<long>("ManagerHattrickId")
                         .HasColumnType("bigint");
+
+                    b.Property<byte[]>("MatchKit")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("MatchKit")
+                        .HasColumnOrder(21);
+
+                    b.Property<string>("MatchKitUrl")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("MatchKitUrl")
+                        .HasColumnOrder(18);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -709,6 +749,24 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("RegionRanking")
                         .HasColumnOrder(9);
+
+                    b.Property<long>("SeniorSeriesDivision")
+                        .HasColumnType("bigint")
+                        .HasColumnName("SeniorSeriesDivision")
+                        .HasColumnOrder(16);
+
+                    b.Property<long>("SeniorSeriesHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("SeniorSeriesHattrickId")
+                        .HasColumnOrder(14);
+
+                    b.Property<string>("SeniorSeriesName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("SeniorSeriesName")
+                        .HasColumnOrder(15);
 
                     b.Property<string>("ShortName")
                         .IsRequired()
@@ -757,7 +815,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(4);
 
                     b.Property<DateTime>("BuiltOn")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("BuiltOn")
                         .HasColumnOrder(2);
 
@@ -800,6 +858,95 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.ToTable("SeniorTeamArena", (string)null);
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.SeniorTeamOverviewMatch", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("HattrickId")
+                        .HasColumnOrder(0);
+
+                    b.Property<long?>("AwayGoals")
+                        .HasColumnType("bigint")
+                        .HasColumnName("AwayGoals")
+                        .HasColumnOrder(8);
+
+                    b.Property<long>("AwayTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("AwayTeamHattrickId")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("AwayTeamName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("AwayTeamName")
+                        .HasColumnOrder(6);
+
+                    b.Property<string>("AwayTeamShortName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("AwayTeamShortName")
+                        .HasColumnOrder(7);
+
+                    b.Property<long?>("CompetitionId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("CompetitionId")
+                        .HasColumnOrder(11);
+
+                    b.Property<long?>("HomeGoals")
+                        .HasColumnType("bigint")
+                        .HasColumnName("HomeGoals")
+                        .HasColumnOrder(4);
+
+                    b.Property<long>("HomeTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("HomeTeamHattrickId")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("HomeTeamName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("HomeTeamName")
+                        .HasColumnOrder(2);
+
+                    b.Property<string>("HomeTeamShortName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("HomeTeamShortName")
+                        .HasColumnOrder(3);
+
+                    b.Property<long>("SeniorTeamHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("StartsOn")
+                        .HasColumnType("datetime")
+                        .HasColumnName("StartsOn")
+                        .HasColumnOrder(9);
+
+                    b.Property<long>("Status")
+                        .HasColumnType("bigint")
+                        .HasColumnName("Status")
+                        .HasColumnOrder(12);
+
+                    b.Property<long>("Type")
+                        .HasColumnType("bigint")
+                        .HasColumnName("Type")
+                        .HasColumnOrder(10);
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("SeniorTeamHattrickId");
+
+                    b.ToTable("SeniorTeamOverviewMatch", (string)null);
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.Token", b =>
                 {
                     b.Property<int>("Id")
@@ -811,12 +958,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("CreatedOn")
                         .HasColumnOrder(3);
 
                     b.Property<DateTime>("ExpiresOn")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("ExpiresOn")
                         .HasColumnOrder(4);
 
@@ -858,7 +1005,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("LastDownloadDate")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("LastDownloadDate")
                         .HasColumnOrder(1);
 
@@ -987,6 +1134,17 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Navigation("SeniorTeam");
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.SeniorTeamOverviewMatch", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.SeniorTeam", "SeniorTeam")
+                        .WithMany("OverviewMatches")
+                        .HasForeignKey("SeniorTeamHattrickId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("SeniorTeam");
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.Token", b =>
                 {
                     b.HasOne("Hyperar.HPA.Domain.User", "User")
@@ -1033,6 +1191,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             modelBuilder.Entity("Hyperar.HPA.Domain.SeniorTeam", b =>
                 {
+                    b.Navigation("OverviewMatches");
+
                     b.Navigation("SeniorPlayers");
 
                     b.Navigation("SeniorTeamArena");

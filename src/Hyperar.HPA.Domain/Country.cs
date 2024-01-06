@@ -17,13 +17,13 @@
 
         public uint LeagueHattrickId { get; set; }
 
-        public virtual List<Manager> Managers { get; set; } = new List<Manager>();
+        public virtual ICollection<Manager> Managers { get; set; } = new HashSet<Manager>();
 
         public string Name { get; set; } = string.Empty;
 
-        public virtual List<Region>? Regions { get; set; }
+        public virtual ICollection<Region> Regions { get; set; } = new HashSet<Region>();
 
-        public virtual List<SeniorPlayer>? SeniorPlayers { get; set; } = new List<SeniorPlayer>();
+        public virtual ICollection<SeniorPlayer>? SeniorPlayers { get; set; } = new HashSet<SeniorPlayer>();
 
         public string TimeFormat { get; set; } = string.Empty;
     }

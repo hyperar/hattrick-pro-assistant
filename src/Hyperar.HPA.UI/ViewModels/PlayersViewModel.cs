@@ -3,7 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Models;
+    using Hyperar.HPA.Application.Models.PlayersView;
     using Hyperar.HPA.Application.Services;
 
     public class PlayersViewModel : ViewModelBase

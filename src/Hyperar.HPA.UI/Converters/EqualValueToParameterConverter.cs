@@ -4,7 +4,7 @@
     using System.Globalization;
     using System.Windows.Data;
 
-    public class EqualValueToParameterConverter : IValueConverter
+    internal class EqualValueToParameterConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

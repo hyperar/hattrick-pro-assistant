@@ -12,7 +12,7 @@
                 .HasColumnName(Constants.ColumnName.LastDownloadDate)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Date);
+                .HasColumnType(Constants.ColumnType.DateTime);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.User> builder)
