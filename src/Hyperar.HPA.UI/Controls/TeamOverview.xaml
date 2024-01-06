@@ -9,30 +9,34 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:HomeViewModel}">
     <UserControl.Resources>
-        <converters:BookingStatusToLargeBitmapImageConverter x:Key="bookingLargeStatusToBitmapImageConverter" />
         <converters:BookingStatusToSmallBitmapImageConverter x:Key="bookingSmallStatusToBitmapImageConverter" />
         <converters:ByteArrayToBitmapImageConverter x:Key="byteToImageConverter" />
         <converters:DateToLocaleShortDateTimeString x:Key="dateToLocaleDateTimeString" />
+        <converters:HasMotherClubBonusToSmallBitmapImageConverter x:Key="hasMotherClubBonusToSmallBitmapImageConverter" />
+        <converters:HealthToSmallBitmapImageConverter x:Key="healthToSmallBitmapImageConverter" />
+        <converters:HealthToWeekStringConverter x:Key="healthToWeekStringConverter" />
+        <converters:IsTransferListedToSmallBitmapImageConverter x:Key="isTransferListedToSmallBitmapImageConverter" />
+        <converters:SpecialtyToSmallBitmapImageConverter x:Key="specialtyToSmallBitmapImageConverter" />
         <converters:SupporterTierToTranslatedString x:Key="supporterTierToTranslatedString" />
     </UserControl.Resources>
 
-    <StackPanel Name="ViewContainer" Orientation="Horizontal">
-        <!-- Manager -->
-        <StackPanel Orientation="Vertical" Margin="25 0">
-            <TextBlock Style="{StaticResource BlockTitle}" Text="Manager" />
-            <Image Height="123" Width="92" Source="{Binding TeamOverview.Manager.Avatar, FallbackValue={StaticResource sil1_3}, TargetNullValue={StaticResource sil1_3}, Converter={StaticResource byteToImageConverter}}" />
-
-            <TextBlock Text="{Binding TeamOverview.Manager}" />
-
-            <TextBlock Text="{Binding TeamOverview.Manager.SupporterTier, Converter={StaticResource supporterTierToTranslatedString}}" />
-        </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
         <!-- Senior Team -->
-        <StackPanel Orientation="Vertical" Margin="25 0">
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="25 0">
             <TextBlock Style="{StaticResource BlockTitle}" Text="Team" />
-            
+
             <Image Height="210" Width="260" Source="{Binding TeamOverview.SeniorTeam.Logo, FallbackValue={StaticResource no-logo}, TargetNullValue={StaticResource no-logo}, Converter={StaticResource byteToImageConverter}}" />
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -60,8 +64,18 @@
             </Grid>
         </StackPanel>
 
+        <!-- Manager -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Margin="25 0">
+            <TextBlock Style="{StaticResource BlockTitle}" Text="Manager" />
+            <Image Height="123" Width="92" Source="{Binding TeamOverview.Manager.Avatar, FallbackValue={StaticResource sil1_3}, TargetNullValue={StaticResource sil1_3}, Converter={StaticResource byteToImageConverter}}" />
+
+            <TextBlock Text="{Binding TeamOverview.Manager}" />
+
+            <TextBlock Text="{Binding TeamOverview.Manager.SupporterTier, Converter={StaticResource supporterTierToTranslatedString}}" />
+        </StackPanel>
+
         <!-- Played Matches -->
-        <StackPanel Orientation="Vertical" MinHeight="250" Margin="25 0">
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" MinHeight="250" Margin="25 0">
             <TextBlock Style="{StaticResource BlockTitle}" Text="Recent Matches" />
 
             <ItemsControl  ItemsSource="{Binding TeamOverview.PlayedMatches, Mode=OneWay}">
@@ -80,7 +94,7 @@
         </StackPanel>
 
         <!-- Upcoming Matches -->
-        <StackPanel Orientation="Vertical" MinHeight="250" Margin="25 0">
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" MinHeight="250" Margin="25 0">
             <TextBlock Style="{StaticResource BlockTitle}" Text="Upcoming Matches" />
 
             <ItemsControl ItemsSource="{Binding TeamOverview.UpcomingMatches, Mode=OneWay}" HorizontalAlignment="Center">
@@ -98,22 +112,76 @@
         </StackPanel>
 
         <!-- Players -->
-        <StackPanel Orientation="Vertical" MinHeight="250" Margin="25 0">
-            <TextBlock Style="{StaticResource BlockTitle}" Text="Booked Players" />
+        <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical" MinHeight="250" Margin="25 0">
+            <TextBlock Style="{StaticResource BlockTitle}" Text="Players" />
 
-            <ItemsControl ItemsSource="{Binding TeamOverview.SeniorPlayers, Mode=OneWay}" HorizontalAlignment="Center">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.SeniorPlayer}" />
-                            <TextBlock Text="{Binding FirstName}" Margin="2" FontSize="14" />
-                            <TextBlock Text="{Binding NickName}" Margin="2" FontSize="14"  />
-                            <TextBlock Text="{Binding LastName}" Margin="2" FontSize="14" />
-                            <Image Stretch="None" Source="{Binding BookingStatus, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource bookingSmallStatusToBitmapImageConverter}}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <DataGrid AlternatingRowBackground="#fff"
+                      AutoGenerateColumns="False"
+                      Background="#fff"
+                      BorderThickness="0"
+                      GridLinesVisibility="None"
+                      HeadersVisibility="None"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding TeamOverview.SeniorPlayers, Mode=OneWay}"
+                      RowBackground="#fff"
+                      SelectionUnit="FullRow">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="IsHitTestVisible" Value="False" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="16" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Binding="{Binding NickName}" />
+                        <DataGridTextColumn Binding="{Binding LastName}" />
+                        <DataGridTemplateColumn Width="SizeToCells">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Stretch="None" Margin="5 0" Source="{Binding BookingStatus, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource bookingSmallStatusToBitmapImageConverter}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="SizeToCells">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Stretch="None" Margin="5 0" Source="{Binding IsTransferListed, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource isTransferListedToSmallBitmapImageConverter}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="SizeToCells">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Stretch="None" Margin="5 0" Source="{Binding HealthStatus, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource healthToSmallBitmapImageConverter}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="SizeToCells">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding HealthStatus, Converter={StaticResource healthToWeekStringConverter}}" FontWeight="Bold" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="SizeToCells">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Stretch="None" Margin="5 0" Source="{Binding HasMotherClubBonus, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource hasMotherClubBonusToSmallBitmapImageConverter}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="SizeToCells">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Stretch="None" Margin="5 0" Source="{Binding Specialty, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource specialtyToSmallBitmapImageConverter}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>

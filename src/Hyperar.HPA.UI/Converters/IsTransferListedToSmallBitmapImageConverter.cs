@@ -3,16 +3,17 @@
     using System;
     using System.Globalization;
     using System.Windows.Data;
-    using Hyperar.HPA.Common.Enums;
 
-    internal abstract class BookingStatusConverterBase : ResourceImageValueConverter, IValueConverter
+    internal class IsTransferListedToSmallBitmapImageConverter : ResourceImageValueConverter, IValueConverter
     {
+        private const string isTransferListedFileName = "price-tag-16.png";
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is BookingStatus bookingStatus
+            return value is bool isTransferListed
                 ? ConvertByteArrayToBitMapImage(
                     ReadImageFromResources(
-                        GetFileNameFromBookingStatus(bookingStatus)))
+                        isTransferListed ? isTransferListedFileName : transparentFileName))
                 : value;
         }
 
@@ -20,7 +21,5 @@
         {
             throw new NotImplementedException();
         }
-
-        protected abstract string GetFileNameFromBookingStatus(BookingStatus bookingStatus);
     }
 }

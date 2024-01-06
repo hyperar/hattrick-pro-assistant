@@ -19,10 +19,10 @@
       <None Remove="Resources\bandage-30.png" />
       <None Remove="Resources\bg-dark.jpg" />
       <None Remove="Resources\bg.jpg" />
-      <None Remove="Resources\clinic-16.png" />
-      <None Remove="Resources\clinic-30.png" />
       <None Remove="Resources\connection-16.png" />
       <None Remove="Resources\connection-30.png" />
+      <None Remove="Resources\doctor-16.png" />
+      <None Remove="Resources\doctor-30.png" />
       <None Remove="Resources\double-yellow-card-16.png" />
       <None Remove="Resources\double-yellow-card-30.png" />
       <None Remove="Resources\download-32.png" />
@@ -74,16 +74,16 @@
       <Resource Include="Resources\bg.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\clinic-16.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\clinic-30.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
       <Resource Include="Resources\connection-16.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\connection-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\doctor-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\doctor-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\double-yellow-card-16.png">

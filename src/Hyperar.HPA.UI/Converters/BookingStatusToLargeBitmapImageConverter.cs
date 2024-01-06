@@ -4,7 +4,7 @@
     using System.Windows.Data;
     using Hyperar.HPA.Common.Enums;
 
-    internal class BookingStatusToLargeBitmapImageConverter : BookingStatusConverterBase, IValueConverter
+    internal class BookingStatusToLargeBitmapImageConverter : BookingStatusToImageConverterBase, IValueConverter
     {
         private const string doubleYellowCardFileName = "double-yellow-card-30.png";
 
