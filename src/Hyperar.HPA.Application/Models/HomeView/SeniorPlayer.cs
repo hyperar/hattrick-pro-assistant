@@ -8,6 +8,16 @@
 
         public string FirstName { get; set; } = string.Empty;
 
+        public string FullName
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(this.NickName)
+                    ? $"{this.FirstName} {this.LastName}"
+                    : $"{this.FirstName} \"{this.NickName}\" {this.LastName}";
+            }
+        }
+
         public bool HasMotherClubBonus { get; set; }
 
         public uint HattrickId { get; set; }
@@ -21,12 +31,5 @@
         public string? NickName { get; set; }
 
         public Specialty Specialty { get; set; }
-
-        public override string ToString()
-        {
-            return string.IsNullOrWhiteSpace(this.NickName)
-                ? $"{this.FirstName} {this.LastName}"
-                : $"{this.FirstName} \"{this.NickName}\" {this.LastName}";
-        }
     }
 }

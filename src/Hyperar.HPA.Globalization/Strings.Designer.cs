@@ -133,6 +133,42 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No bookings.
+        /// </summary>
+        public static string BookingStatus_NoBookings {
+            get {
+                return ResourceManager.GetString("BookingStatus_NoBookings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Booked.
+        /// </summary>
+        public static string BookingStatus_OneYellowCard {
+            get {
+                return ResourceManager.GetString("BookingStatus_OneYellowCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspended.
+        /// </summary>
+        public static string BookingStatus_Suspended {
+            get {
+                return ResourceManager.GetString("BookingStatus_Suspended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two bookings.
+        /// </summary>
+        public static string BookingStatus_TwoYellowCards {
+            get {
+                return ResourceManager.GetString("BookingStatus_TwoYellowCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Career Goals.
         /// </summary>
         public static string CareerGoals {
@@ -633,6 +669,78 @@ namespace Hyperar.HPA.Globalization {
         public static string Specialty {
             get {
                 return ResourceManager.GetString("Specialty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Head Specialist.
+        /// </summary>
+        public static string Specialty_HeadSpecialist {
+            get {
+                return ResourceManager.GetString("Specialty_HeadSpecialist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Specialty.
+        /// </summary>
+        public static string Specialty_NoSpecialty {
+            get {
+                return ResourceManager.GetString("Specialty_NoSpecialty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Powerful.
+        /// </summary>
+        public static string Specialty_Powerful {
+            get {
+                return ResourceManager.GetString("Specialty_Powerful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick.
+        /// </summary>
+        public static string Specialty_Quick {
+            get {
+                return ResourceManager.GetString("Specialty_Quick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resilient.
+        /// </summary>
+        public static string Specialty_Resilient {
+            get {
+                return ResourceManager.GetString("Specialty_Resilient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        public static string Specialty_Support {
+            get {
+                return ResourceManager.GetString("Specialty_Support", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technical.
+        /// </summary>
+        public static string Specialty_Technical {
+            get {
+                return ResourceManager.GetString("Specialty_Technical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unpredictable.
+        /// </summary>
+        public static string Specialty_Unpredictable {
+            get {
+                return ResourceManager.GetString("Specialty_Unpredictable", resourceCulture);
             }
         }
         
