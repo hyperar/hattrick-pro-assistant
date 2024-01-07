@@ -1,12 +1,12 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileParser
 {
     using System.Xml;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.Players;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.Enums;
-    using Hyperar.HPA.Common.ExtensionMethods;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
+    using Application.Hattrick.Interfaces;
+    using Application.Hattrick.Players;
+    using Application.Interfaces;
+    using Common.Enums;
+    using Common.ExtensionMethods;
+    using Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
 
     public class Players : XmlFileParserBase, IXmlFileParserStrategy
     {

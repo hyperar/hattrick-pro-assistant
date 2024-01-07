@@ -2,10 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using Application.Services;
+    using UI.State.Interfaces;
+    using UI.ViewModels;
+    using UI.ViewModels.Interfaces;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 

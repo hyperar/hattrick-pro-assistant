@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Models.PlayersView
 {
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class SeniorPlayer
     {

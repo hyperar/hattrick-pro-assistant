@@ -2,9 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Models.HomeView;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.UI.State.Interfaces;
+    using Application.Models.HomeView;
+    using Application.Services;
+    using UI.State.Interfaces;
 
     public class HomeViewModel : ViewModelBase
     {

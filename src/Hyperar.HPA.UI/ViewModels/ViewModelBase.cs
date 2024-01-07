@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using UI.ViewModels.Interfaces;
 
     public abstract class ViewModelBase : IViewModel, INotifyPropertyChanged
     {

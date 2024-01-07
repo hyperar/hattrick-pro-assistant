@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Text;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Common.Enums;
+    using Application.Hattrick.Interfaces;
+    using Common.Enums;
 
     public class DownloadTask : INotifyPropertyChanged
     {

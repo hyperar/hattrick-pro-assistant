@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Domain.Interfaces
 {
-    using Hyperar.HPA.Domain;
+    using Domain;
 
     public interface IRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase, IEntity
     {

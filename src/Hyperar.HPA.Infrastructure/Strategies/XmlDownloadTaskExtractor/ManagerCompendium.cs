@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.ManagerCompendium;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.Common.Enums;
+    using Application.Hattrick.Interfaces;
+    using Application.Hattrick.ManagerCompendium;
+    using Application.Interfaces;
+    using Application.Models;
+    using Common.Enums;
 
     public class ManagerCompendium : IXmlDownloadTaskExtractorStrategy
     {

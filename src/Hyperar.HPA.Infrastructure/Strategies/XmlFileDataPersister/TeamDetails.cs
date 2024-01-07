@@ -1,14 +1,14 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
     using System;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.TeamDetails;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
+    using Domain.Interfaces;
+    using Hattrick = Application.Hattrick.TeamDetails;
 
     public class TeamDetails : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
-        private readonly IDatabaseContext context;
+        private readonly IDatabaseContext databaseContext;
 
         private readonly IHattrickRepository<Domain.League> leagueRepository;
 
@@ -19,13 +19,13 @@
         private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
 
         public TeamDetails(
-            IDatabaseContext context,
+            IDatabaseContext databaseContext,
             IHattrickRepository<Domain.League> leagueRepository,
             IHattrickRepository<Domain.Manager> managerRepository,
             IHattrickRepository<Domain.Region> regionRepository,
             IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
         {
-            this.context = context;
+            this.databaseContext = databaseContext;
             this.leagueRepository = leagueRepository;
             this.managerRepository = managerRepository;
             this.regionRepository = regionRepository;
@@ -34,12 +34,26 @@
 
         public override async Task PersistDataAsync(IXmlFile file)
         {
-            var entity = (HattrickData)file;
+            try
+            {
+                if (file is Hattrick.HattrickData entity)
+                {
+                    await this.ProcessTeamDetailsAsync(entity);
+                }
+                else
+                {
+                    throw new ArgumentException(file.GetType().FullName, nameof(file));
+                }
+            }
+            catch
+            {
+                this.databaseContext.Cancel();
 
-            await this.ProcessTeamDetailsAsync(entity);
+                throw;
+            }
         }
 
-        private async Task ProcessTeamAsync(Team xmlTeam, Domain.Manager manager)
+        private async Task ProcessTeamAsync(Hattrick.Team xmlTeam, Domain.Manager manager)
         {
             var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlTeam.TeamId);
 
@@ -136,7 +150,7 @@
             }
         }
 
-        private async Task ProcessTeamDetailsAsync(HattrickData entity)
+        private async Task ProcessTeamDetailsAsync(Hattrick.HattrickData entity)
         {
             var manager = await this.managerRepository.GetByHattrickIdAsync(entity.User.UserId);
 
@@ -147,7 +161,7 @@
                 await this.ProcessTeamAsync(curXmlTeam, manager);
             }
 
-            await this.context.SaveAsync();
+            await this.databaseContext.SaveAsync();
         }
     }
 }

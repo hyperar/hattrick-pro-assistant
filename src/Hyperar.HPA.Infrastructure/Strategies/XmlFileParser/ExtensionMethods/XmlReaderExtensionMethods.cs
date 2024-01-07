@@ -3,7 +3,7 @@
     using System;
     using System.Globalization;
     using System.Xml;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public static class XmlReaderExtensionMethods
     {

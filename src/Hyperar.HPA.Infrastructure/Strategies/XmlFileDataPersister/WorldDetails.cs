@@ -1,15 +1,15 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
-    using Hattrick = Hyperar.HPA.Application.Hattrick.WorldDetails;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
+    using Domain.Interfaces;
+    using Hattrick = Application.Hattrick.WorldDetails;
 
     public class WorldDetails : IXmlFileDataPersisterStrategy
     {
-        private readonly IDatabaseContext context;
-
         private readonly IHattrickRepository<Domain.Country> countryRepository;
+
+        private readonly IDatabaseContext databaseContext;
 
         private readonly IHattrickRepository<Domain.LeagueCup> leagueCupRepository;
 
@@ -24,7 +24,7 @@
             IHattrickRepository<Domain.League> leagueRepository,
             IHattrickRepository<Domain.Region> regionRepository)
         {
-            this.context = databaseContext;
+            this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.leagueCupRepository = leagueCupRepository;
             this.leagueRepository = leagueRepository;
@@ -33,9 +33,23 @@
 
         public async Task PersistDataAsync(IXmlFile file)
         {
-            var entity = (Hattrick.HattrickData)file;
+            try
+            {
+                if (file is Hattrick.HattrickData entity)
+                {
+                    await this.ProcessWorldDetailsAsync(entity);
+                }
+                else
+                {
+                    throw new ArgumentException(file.GetType().FullName, nameof(file));
+                }
+            }
+            catch
+            {
+                this.databaseContext.Cancel();
 
-            await this.ProcessWorldDetails(entity);
+                throw;
+            }
         }
 
         private async Task ProcessCountryAsync(Hattrick.Country xmlCountry, uint leagueId)
@@ -82,7 +96,7 @@
                 this.countryRepository.Update(country);
             }
 
-            await this.context.SaveAsync();
+            await this.databaseContext.SaveAsync();
 
             if (xmlCountry.RegionList != null)
             {
@@ -91,7 +105,7 @@
                     await this.ProcessRegionAsync(curXmlRegion, country);
                 }
 
-                await this.context.SaveAsync();
+                await this.databaseContext.SaveAsync();
             }
         }
 
@@ -155,7 +169,7 @@
                 this.leagueRepository.Update(league);
             }
 
-            await this.context.SaveAsync();
+            await this.databaseContext.SaveAsync();
 
             await this.ProcessCountryAsync(xmlLeague.Country, xmlLeague.LeagueId);
 
@@ -166,7 +180,7 @@
                     await this.ProcessLeagueCupAsync(curXmlCup, xmlLeague.LeagueId);
                 }
 
-                await this.context.SaveAsync();
+                await this.databaseContext.SaveAsync();
             }
         }
 
@@ -226,26 +240,11 @@
             }
         }
 
-        private async Task ProcessWorldDetails(Hattrick.HattrickData entity)
+        private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData entity)
         {
-            await this.context.BeginTransactionAsync();
-
-            try
+            foreach (var curXmlLeague in entity.LeagueList)
             {
-                foreach (var curXmlLeague in entity.LeagueList)
-                {
-                    await this.ProcessLeagueAsync(curXmlLeague);
-                }
-            }
-            catch
-            {
-                this.context.Cancel();
-
-                throw;
-            }
-            finally
-            {
-                await this.context.EndTransactionAsync();
+                await this.ProcessLeagueAsync(curXmlLeague);
             }
         }
     }

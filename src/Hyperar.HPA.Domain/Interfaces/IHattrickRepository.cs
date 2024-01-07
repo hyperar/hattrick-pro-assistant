@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Domain.Interfaces
 {
-    using Hyperar.HPA.Domain;
+    using Domain;
 
     public interface IHattrickRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity
     {

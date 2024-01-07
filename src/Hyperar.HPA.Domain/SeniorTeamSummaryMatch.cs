@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.Domain
 {
     using System;
-    using Hyperar.HPA.Common.Enums;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Common.Enums;
+    using Domain.Interfaces;
 
     public class SeniorTeamOverviewMatch : HattrickEntityBase, IHattrickEntity
     {

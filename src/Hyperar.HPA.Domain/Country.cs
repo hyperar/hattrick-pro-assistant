@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Domain
 {
     using System.Collections.Generic;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain.Interfaces;
 
     public class Country : HattrickEntityBase, IHattrickEntity
     {

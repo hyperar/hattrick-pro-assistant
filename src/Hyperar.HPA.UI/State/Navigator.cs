@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.UI.State
 {
     using System;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels;
+    using UI.State.Interfaces;
+    using UI.ViewModels;
 
     public class Navigator : INavigator
     {

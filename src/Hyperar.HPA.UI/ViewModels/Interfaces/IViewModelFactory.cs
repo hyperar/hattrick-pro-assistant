@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Hyperar.HPA.UI.Enums;
+    using UI.Enums;
 
     public interface IViewModelFactory
     {

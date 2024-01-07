@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Hyperar.HPA.UI.Enums;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using UI.Enums;
+    using UI.ViewModels.Interfaces;
 
     public delegate Task<TViewModel> CreateAsyncViewModel<TViewModel>() where TViewModel : ViewModelBase;
 

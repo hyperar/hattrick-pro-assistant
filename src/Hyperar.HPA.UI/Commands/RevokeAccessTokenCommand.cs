@@ -3,8 +3,8 @@
     using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels;
+    using UI.State.Interfaces;
+    using UI.ViewModels;
 
     public class RevokeAccessTokenCommand : AsyncCommandBase, IDisposable
     {

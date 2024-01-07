@@ -3,7 +3,7 @@
     using System;
     using System.Globalization;
     using System.Windows.Data;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     internal class IsTransferListedToLargeBitmapImageConverter : ResourceImageValueConverter, IValueConverter
     {

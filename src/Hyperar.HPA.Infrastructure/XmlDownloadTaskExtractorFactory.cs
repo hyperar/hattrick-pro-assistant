@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.Infrastructure
 {
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.Enums;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlDownloadTaskExtractor;
+    using Application.Interfaces;
+    using Common.Enums;
+    using Infrastructure.Strategies.XmlDownloadTaskExtractor;
 
     public class XmlDownloadTaskExtractorFactory : IXmlDownloadTaskExtractorFactory
     {

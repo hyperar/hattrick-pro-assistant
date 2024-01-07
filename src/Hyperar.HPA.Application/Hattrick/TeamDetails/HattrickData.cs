@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.TeamDetails
 {
     using System.Collections.Generic;
-    using Hyperar.HPA.Application.Hattrick;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
+    using Application.Hattrick;
+    using Application.Hattrick.Interfaces;
 
     public class HattrickData : XmlFileBase, IXmlFile
     {

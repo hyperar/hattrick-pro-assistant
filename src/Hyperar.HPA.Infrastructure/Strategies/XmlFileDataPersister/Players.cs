@@ -2,18 +2,18 @@
 {
     using System;
     using System.Linq;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.Enums;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
+    using Common.Enums;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Hattrick = Application.Hattrick.Players;
 
     public class Players : IXmlFileDataPersisterStrategy
     {
-        private readonly IDatabaseContext context;
-
         private readonly IHattrickRepository<Domain.Country> countryRepository;
+
+        private readonly IDatabaseContext databaseContext;
 
         private readonly IHattrickRepository<Domain.SeniorPlayer> seniorPlayerRepository;
 
@@ -22,13 +22,13 @@
         private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
 
         public Players(
-            IDatabaseContext context,
+            IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
             IHattrickRepository<Domain.SeniorPlayer> seniorPlayerRepository,
             IRepository<Domain.SeniorPlayerSkill> seniorPlayerSkillRepository,
             IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
         {
-            this.context = context;
+            this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.seniorPlayerRepository = seniorPlayerRepository;
             this.seniorPlayerSkillRepository = seniorPlayerSkillRepository;
@@ -37,41 +37,22 @@
 
         public async Task PersistDataAsync(IXmlFile file)
         {
-            if (file is Hattrick.HattrickData entity)
+            try
             {
-                if (entity.IsPlayingMatch)
+                if (file is Hattrick.HattrickData entity)
                 {
-                    return;
+                    await this.ProcessPlayersAsync(entity);
                 }
-
-                var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(entity.Team.TeamId);
-
-                ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
-
-                await this.context.BeginTransactionAsync();
-
-                List<uint> xmlPlayerIds = entity.Team.PlayerList.Select(x => x.PlayerId).ToList();
-
-                var seniorPlayersToDelete = await this.seniorPlayerRepository.Query(x => x.SeniorTeam.HattrickId == seniorTeam.HattrickId
-                                                                                      && !xmlPlayerIds.Contains(x.HattrickId)).ToListAsync();
-
-                foreach (var curSeniorPlayer in seniorPlayersToDelete)
+                else
                 {
-                    await this.seniorPlayerRepository.DeleteAsync(curSeniorPlayer.HattrickId);
+                    throw new ArgumentException(file.GetType().FullName, nameof(file));
                 }
-
-                foreach (var curXmlPlayer in entity.Team.PlayerList)
-                {
-                    await this.ProcessPlayerAsync(curXmlPlayer, seniorTeam);
-                }
-
-                await this.context.SaveAsync();
-
-                await this.context.EndTransactionAsync();
             }
-            else
+            catch
             {
-                throw new ArgumentException(file.GetType().FullName, nameof(file));
+                this.databaseContext.Cancel();
+
+                throw;
             }
         }
 
@@ -159,6 +140,35 @@
             }
 
             await this.ProcessPlayerSkillAsync(xmlPlayer, seniorPlayer);
+        }
+
+        private async Task ProcessPlayersAsync(Hattrick.HattrickData entity)
+        {
+            if (entity.IsPlayingMatch)
+            {
+                return;
+            }
+
+            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(entity.Team.TeamId);
+
+            ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
+
+            List<uint> xmlPlayerIds = entity.Team.PlayerList.Select(x => x.PlayerId).ToList();
+
+            var seniorPlayersToDelete = await this.seniorPlayerRepository.Query(x => x.SeniorTeam.HattrickId == seniorTeam.HattrickId
+                                                                                  && !xmlPlayerIds.Contains(x.HattrickId)).ToListAsync();
+
+            foreach (var curSeniorPlayer in seniorPlayersToDelete)
+            {
+                await this.seniorPlayerRepository.DeleteAsync(curSeniorPlayer.HattrickId);
+            }
+
+            foreach (var curXmlPlayer in entity.Team.PlayerList)
+            {
+                await this.ProcessPlayerAsync(curXmlPlayer, seniorTeam);
+            }
+
+            await this.databaseContext.SaveAsync();
         }
 
         private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.SeniorPlayer seniorPlayer)

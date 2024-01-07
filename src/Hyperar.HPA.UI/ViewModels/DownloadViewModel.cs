@@ -5,12 +5,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.Common.Enums;
-    using Hyperar.HPA.UI.Commands;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using Application.Models;
+    using Application.Services;
+    using Common.Enums;
+    using UI.Commands;
+    using UI.State.Interfaces;
+    using UI.ViewModels.Interfaces;
 
     public class DownloadViewModel : AuthorizedViewModelBase
     {
@@ -88,8 +88,10 @@
             }
         }
 
-        public void BuildInitialDownloadTask()
+        public async Task BeginDownloadProcess()
         {
+            await this.xmlFileService.BeginPersistSession();
+
             this.downloadTasks.Clear();
 
             this.downloadTasks.Add(new DownloadTask(XmlFileType.WorldDetails));
@@ -99,6 +101,13 @@
             this.OnPropertyChanged(nameof(this.CurrentDownloadTask));
             this.OnPropertyChanged(nameof(this.DownloadTaskStepsCount));
             this.OnPropertyChanged(nameof(this.CompletedDownloadTaskStepsCount));
+        }
+
+        public async Task EndDownloadProcessAsync()
+        {
+            await this.userService.UpdateUserLastDownloadDate();
+
+            await this.xmlFileService.EndPersistSession();
         }
 
         public async Task ExecuteDownloadTaskAsync(DownloadTask task)
@@ -115,11 +124,6 @@
             await this.StoreDownloadTaskAsync(task);
 
             this.CompleteTask(task);
-        }
-
-        public async Task FinishDownloadAsync()
-        {
-            await this.userService.UpdateUserLastDownloadDate();
         }
 
         public DownloadTask? GetNextDownloadTask()
@@ -202,7 +206,7 @@
 
             this.ChangeTaskStatus(task, DownloadTaskStatus.Saving);
 
-            await this.xmlFileService.PersistAsync(task.ParsedEntity);
+            await this.xmlFileService.PersistFileAsync(task.ParsedEntity);
         }
     }
 }

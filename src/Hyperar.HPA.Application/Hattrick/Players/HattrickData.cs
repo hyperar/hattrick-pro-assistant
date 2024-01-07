@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.Players
 {
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Common.Enums;
+    using Application.Hattrick.Interfaces;
+    using Common.Enums;
 
     public class HattrickData : XmlFileBase, IXmlFile
     {

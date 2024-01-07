@@ -5,8 +5,8 @@
     using System.Linq;
     using System.Text;
     using System.Web;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.Enums;
+    using Application.Interfaces;
+    using Common.Enums;
     using Microsoft.Extensions.Configuration;
 
     public class ProtectedResourceUrlBuilder : IProtectedResourceUrlBuilder

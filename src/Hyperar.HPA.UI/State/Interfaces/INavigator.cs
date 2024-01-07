@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.UI.State.Interfaces
 {
     using System;
-    using Hyperar.HPA.UI.ViewModels;
+    using UI.ViewModels;
 
     public interface INavigator
     {

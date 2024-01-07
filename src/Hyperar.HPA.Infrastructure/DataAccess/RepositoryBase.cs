@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Linq.Expressions;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class

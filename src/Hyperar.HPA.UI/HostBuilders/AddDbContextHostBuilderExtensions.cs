@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
-    using Hyperar.HPA.Domain.Interfaces;
-    using Hyperar.HPA.Infrastructure.DataAccess;
+    using Domain.Interfaces;
+    using Infrastructure.DataAccess;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
