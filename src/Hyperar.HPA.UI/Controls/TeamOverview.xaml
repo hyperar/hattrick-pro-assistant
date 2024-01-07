@@ -165,6 +165,15 @@
                       ItemsSource="{Binding TeamOverview.PlayedMatches,
                                             Mode=OneWay}">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Width="SizeToCells"
+                                        Binding="{Binding Date,
+                                                          Converter={StaticResource dateToLocaleDateTimeString}}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Width="*"
                                         Binding="{Binding HomeTeam.Name}">
                         <DataGridTextColumn.ElementStyle>
@@ -212,7 +221,6 @@
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
                     Orientation="Vertical"
-                    MinHeight="250"
                     HorizontalAlignment="Stretch"
                     Margin="10 0">
 
@@ -223,6 +231,15 @@
                       ItemsSource="{Binding TeamOverview.UpcomingMatches,
                                             Mode=OneWay}">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Width="SizeToCells"
+                                        Binding="{Binding Date,
+                                                          Converter={StaticResource dateToLocaleDateTimeString}}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Width="*"
                                         Binding="{Binding HomeTeam.Name}">
                         <DataGridTextColumn.ElementStyle>
@@ -234,7 +251,7 @@
                     <DataGridTemplateColumn Width="SizeToCells">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center"  Text="vs" />
+                                <TextBlock HorizontalAlignment="Center" Text="vs" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -256,7 +273,6 @@
                     Grid.RowSpan="2"
                     Orientation="Vertical"
                     HorizontalAlignment="Stretch"
-                    MinHeight="250"
                     Margin="10 0">
 
             <TextBlock Style="{StaticResource BlockTitle}"

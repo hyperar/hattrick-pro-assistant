@@ -3,11 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using Application.Services;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using UI.State.Interfaces;
     using UI.ViewModels;
     using UI.ViewModels.Interfaces;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
 
     public static class AddViewModelsHostBuilderExtensions
     {
@@ -19,6 +19,7 @@
                 services.AddTransient<CreateAsyncViewModel<HomeViewModel>>(services => () => CreateHomeAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<PermissionsViewModel>>(services => () => CreatePermissionsAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<PlayersViewModel>>(services => () => CreatePlayersAsyncViewModel(services));
+                services.AddTransient<CreateAsyncViewModel<TeamSelectionViewModel>>(services => () => CreateTeamSelectionAsyncViewModel(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
 
@@ -78,6 +79,20 @@
             var viewModel = new PlayersViewModel(
                 scope.ServiceProvider.GetRequiredService<IPlayersViewService>(),
                 selectedTeamId);
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
+        }
+
+        private static async Task<TeamSelectionViewModel> CreateTeamSelectionAsyncViewModel(IServiceProvider services)
+        {
+            var scope = services.CreateScope();
+
+            var viewModel = new TeamSelectionViewModel(
+                scope.ServiceProvider.GetRequiredService<ITeamSelectionViewService>(),
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IViewModelFactory>());
 
             await viewModel.InitializeAsync();
 

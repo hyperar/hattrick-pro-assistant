@@ -159,6 +159,9 @@
   <data name="CareerHattricks" xml:space="preserve">
     <value>Hattricks (Carrera)</value>
   </data>
+  <data name="ChangeTeam" xml:space="preserve">
+    <value>Cambiar Equipo</value>
+  </data>
   <data name="CopyAndPasteVerificationCodeMessage" xml:space="preserve">
     <value>Una vez que haya iniciado sesión en su cuenta Hattrick, se le proporcionará un Código de verificación. Copie el código y péguelo a continuación, asegurándose de que no haya espacios en blanco al principio o al final del código.</value>
   </data>

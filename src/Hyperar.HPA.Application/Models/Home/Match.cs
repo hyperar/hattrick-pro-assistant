@@ -1,10 +1,11 @@
-﻿namespace Hyperar.HPA.Application.Models.HomeView
+﻿namespace Hyperar.HPA.Application.Models.Home
 {
-    using System;
     using Common.Enums;
 
     public abstract class Match
     {
+        public DateTime Date { get; set; }
+
         public SeniorTeam AwayTeam { get; set; } = new SeniorTeam();
 
         public SeniorTeam HomeTeam { get; set; } = new SeniorTeam();

@@ -1,12 +1,8 @@
-﻿namespace Hyperar.HPA.Application.Models.HomeView
+﻿namespace Hyperar.HPA.Application.Models.Home
 {
-    using System;
-
-    public class SeniorTeam
+    public class SeniorSeries
     {
         public uint HattrickId { get; set; }
-
-        public byte[]? Logo { get; set; }
 
         public string Name { get; set; } = string.Empty;
 

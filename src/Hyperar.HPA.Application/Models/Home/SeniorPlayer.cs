@@ -1,4 +1,4 @@
-﻿namespace Hyperar.HPA.Application.Models.HomeView
+﻿namespace Hyperar.HPA.Application.Models.Home
 {
     using Common.Enums;
 
