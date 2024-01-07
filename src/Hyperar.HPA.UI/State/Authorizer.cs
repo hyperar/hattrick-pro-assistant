@@ -3,10 +3,10 @@
     using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.Domain;
-    using Hyperar.HPA.UI.State.Interfaces;
+    using Application.Models;
+    using Application.Services;
+    using Domain;
+    using UI.State.Interfaces;
 
     public class Authorizer : IAuthorizer, INotifyPropertyChanged
     {

@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Infrastructure;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister;
+    using Application.Interfaces;
+    using Infrastructure;
+    using Infrastructure.Strategies.XmlFileDataPersister;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 

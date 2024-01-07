@@ -1,37 +1,51 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
     using System;
-    using Hyperar.HPA.Application.Hattrick.ArenaDetails;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Hattrick = Application.Hattrick.ArenaDetails;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
+    using Domain.Interfaces;
 
     public class ArenaDetails : IXmlFileDataPersisterStrategy
     {
-        private readonly IDatabaseContext context;
+        private readonly IDatabaseContext databaseContext;
 
         private readonly IHattrickRepository<Domain.SeniorTeamArena> seniorTeamArenaRepository;
 
         private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
 
         public ArenaDetails(
-            IDatabaseContext context,
+            IDatabaseContext databaseContext,
             IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository,
             IHattrickRepository<Domain.SeniorTeamArena> seniorTeArenaRepository)
         {
-            this.context = context;
+            this.databaseContext = databaseContext;
             this.seniorTeamRepository = seniorTeamRepository;
             this.seniorTeamArenaRepository = seniorTeArenaRepository;
         }
 
         public async Task PersistDataAsync(IXmlFile file)
         {
-            var entity = (HattrickData)file;
+            try
+            {
+                if (file is Hattrick.HattrickData entity)
+                {
+                    await this.ProcessArenaDetailsAsync(entity);
+                }
+                else
+                {
+                    throw new ArgumentException(file.GetType().FullName, nameof(file));
+                }
+            }
+            catch
+            {
+                this.databaseContext.Cancel();
 
-            await this.ProcessArenaDetailsAsync(entity);
+                throw;
+            }
         }
 
-        private async Task ProcessArenaDetailsAsync(HattrickData entity)
+        private async Task ProcessArenaDetailsAsync(Hattrick.HattrickData entity)
         {
             var arena = await this.seniorTeamArenaRepository.GetByHattrickIdAsync(entity.Arena.ArenaId);
 
@@ -75,7 +89,7 @@
                 this.seniorTeamArenaRepository.Update(arena);
             }
 
-            await this.context.SaveAsync();
+            await this.databaseContext.SaveAsync();
         }
     }
 }

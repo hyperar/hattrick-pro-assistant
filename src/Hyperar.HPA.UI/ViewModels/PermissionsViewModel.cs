@@ -1,10 +1,10 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
     using System.Windows.Input;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.UI.Commands;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using Application.Models;
+    using UI.Commands;
+    using UI.State.Interfaces;
+    using UI.ViewModels.Interfaces;
 
     public class PermissionsViewModel : AuthorizedViewModelBase
     {

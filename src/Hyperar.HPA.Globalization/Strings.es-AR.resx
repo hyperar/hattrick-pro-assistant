@@ -141,6 +141,18 @@
   <data name="Bookings" xml:space="preserve">
     <value>Amonestaciones</value>
   </data>
+  <data name="BookingStatus_NoBookings" xml:space="preserve">
+    <value>Sin amonestaciones</value>
+  </data>
+  <data name="BookingStatus_OneYellowCard" xml:space="preserve">
+    <value>Amonestado</value>
+  </data>
+  <data name="BookingStatus_Suspended" xml:space="preserve">
+    <value>Suspendido</value>
+  </data>
+  <data name="BookingStatus_TwoYellowCards" xml:space="preserve">
+    <value>Dos amonestaciones</value>
+  </data>
   <data name="CareerGoals" xml:space="preserve">
     <value>Goles (Carrera)</value>
   </data>
@@ -308,6 +320,30 @@
   </data>
   <data name="Specialty" xml:space="preserve">
     <value>Especialidad</value>
+  </data>
+  <data name="Specialty_HeadSpecialist" xml:space="preserve">
+    <value>Cabeceador</value>
+  </data>
+  <data name="Specialty_NoSpecialty" xml:space="preserve">
+    <value>Sin Especialidad</value>
+  </data>
+  <data name="Specialty_Powerful" xml:space="preserve">
+    <value>Potente</value>
+  </data>
+  <data name="Specialty_Quick" xml:space="preserve">
+    <value>Rápido</value>
+  </data>
+  <data name="Specialty_Resilient" xml:space="preserve">
+    <value>Resiliente</value>
+  </data>
+  <data name="Specialty_Support" xml:space="preserve">
+    <value>Solidario</value>
+  </data>
+  <data name="Specialty_Technical" xml:space="preserve">
+    <value>Técnico</value>
+  </data>
+  <data name="Specialty_Unpredictable" xml:space="preserve">
+    <value>Impredecible</value>
   </data>
   <data name="Stamina" xml:space="preserve">
     <value>Condición</value>

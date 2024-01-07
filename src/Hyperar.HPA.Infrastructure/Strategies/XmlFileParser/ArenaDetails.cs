@@ -1,10 +1,10 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileParser
 {
     using System.Xml;
-    using Hyperar.HPA.Application.Hattrick.ArenaDetails;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
+    using Application.Hattrick.ArenaDetails;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
+    using Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
 
     public class ArenaDetails : XmlFileParserBase, IXmlFileParserStrategy
     {

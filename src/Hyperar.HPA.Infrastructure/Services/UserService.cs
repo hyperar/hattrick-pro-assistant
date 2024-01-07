@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Application.Services;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public class UserService : IUserService

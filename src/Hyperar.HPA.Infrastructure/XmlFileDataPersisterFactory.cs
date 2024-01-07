@@ -1,9 +1,9 @@
 ﻿namespace Hyperar.HPA.Infrastructure
 {
     using System;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.Enums;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister;
+    using Application.Interfaces;
+    using Common.Enums;
+    using Infrastructure.Strategies.XmlFileDataPersister;
 
     public class XmlFileDataPersisterFactory : IXmlFileDataPersisterFactory
     {

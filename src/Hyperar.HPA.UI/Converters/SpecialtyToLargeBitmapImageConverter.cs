@@ -2,7 +2,7 @@
 {
     using System;
     using System.Windows.Data;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     internal class SpecialtyToLargeBitmapImageConverter : SpecialtyToBitmapImageConverterBase, IValueConverter
     {

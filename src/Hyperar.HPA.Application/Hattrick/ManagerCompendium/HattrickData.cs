@@ -2,8 +2,8 @@
 {
     using System;
     using System.Xml.Serialization;
-    using Hyperar.HPA.Application.Hattrick;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
+    using Application.Hattrick;
+    using Application.Hattrick.Interfaces;
 
     [Serializable]
     public class HattrickData : XmlFileBase, IXmlFile

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public class DatabaseContext : DbContext, IDatabaseContext

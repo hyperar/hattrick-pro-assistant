@@ -3,11 +3,11 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.UI.Enums;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using Application.Models;
+    using UI.Enums;
+    using UI.State.Interfaces;
+    using UI.ViewModels;
+    using UI.ViewModels.Interfaces;
 
     public class DownloadFilesCommand : AsyncCommandBase
     {
@@ -31,7 +31,7 @@
         {
             this.navigator.SuspendNavigation();
 
-            this.downloadViewModel.BuildInitialDownloadTask();
+            await this.downloadViewModel.BeginDownloadProcess();
 
             DownloadTask? currentTask = this.downloadViewModel.GetNextDownloadTask();
 
@@ -42,7 +42,7 @@
                 currentTask = this.downloadViewModel.GetNextDownloadTask();
             }
 
-            await this.downloadViewModel.FinishDownloadAsync();
+            await this.downloadViewModel.EndDownloadProcessAsync();
 
             if (!this.navigator.SelectedTeamId.HasValue)
             {

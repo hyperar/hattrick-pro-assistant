@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Interfaces
 {
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
+    using Application.Hattrick.Interfaces;
 
     public interface IXmlFileDataPersisterStrategy
     {

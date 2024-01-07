@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.TeamDetails
 {
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class NationalTeam
     {

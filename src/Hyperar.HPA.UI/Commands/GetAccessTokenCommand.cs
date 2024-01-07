@@ -3,11 +3,11 @@
     using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.UI.Enums;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using Application.Models;
+    using UI.Enums;
+    using UI.State.Interfaces;
+    using UI.ViewModels;
+    using UI.ViewModels.Interfaces;
 
     public class GetAccessTokenCommand : AsyncCommandBase, IDisposable
     {

@@ -2,9 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.Application.Services;
+    using Application.Interfaces;
+    using Application.Models;
+    using Application.Services;
     using Hyperar.OauthCore.Consumer;
     using Hyperar.OauthCore.Framework;
     using Microsoft.Extensions.Configuration;

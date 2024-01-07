@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Common.ExtensionMethods
 {
     using System;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public static class MatchStatusExtensionMethods
     {

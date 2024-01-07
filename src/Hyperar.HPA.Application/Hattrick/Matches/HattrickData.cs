@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.Matches
 {
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
+    using Application.Hattrick.Interfaces;
 
     public class HattrickData : XmlFileBase, IXmlFile
     {

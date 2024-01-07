@@ -4,37 +4,52 @@
     using System.IO;
     using System.Text;
     using System.Xml;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.Common.ExtensionMethods;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
+    using Application.Models;
+    using Application.Services;
+    using Common.ExtensionMethods;
+    using Domain.Interfaces;
 
     public class XmlFileService : IXmlFileService
     {
+        private readonly IDatabaseContext databaseContext;
+
+        private readonly IXmlDownloadTaskExtractorFactory downloadTaskExtractorFactory;
+
         private readonly IXmlEntityFactory entityFactory;
+
+        private readonly IXmlFileDataPersisterFactory fileDataPersisterFactory;
 
         private readonly IXmlFileParserFactory fileParserFactory;
 
-        private readonly IXmlDownloadTaskExtractorFactory xmlDownloadTaskExtractorFactory;
-
-        private readonly IXmlFileDataPersisterFactory xmlFileDataPersisterFactory;
-
         public XmlFileService(
-            IXmlFileParserFactory fileParserFactory,
+            IDatabaseContext databaseContext,
+            IXmlDownloadTaskExtractorFactory downloadTaskExtractorFactory,
             IXmlEntityFactory entityFactory,
-            IXmlDownloadTaskExtractorFactory xmlDownloadTaskExtractorFactory,
-            IXmlFileDataPersisterFactory xmlFileDataPersisterFactory)
+            IXmlFileDataPersisterFactory fileDataPersisterFactory,
+            IXmlFileParserFactory fileParserFactory)
         {
-            this.fileParserFactory = fileParserFactory;
+            this.databaseContext = databaseContext;
+            this.downloadTaskExtractorFactory = downloadTaskExtractorFactory;
             this.entityFactory = entityFactory;
-            this.xmlDownloadTaskExtractorFactory = xmlDownloadTaskExtractorFactory;
-            this.xmlFileDataPersisterFactory = xmlFileDataPersisterFactory;
+            this.fileDataPersisterFactory = fileDataPersisterFactory;
+            this.fileParserFactory = fileParserFactory;
+        }
+
+        public async Task BeginPersistSession()
+        {
+            await this.databaseContext.BeginTransactionAsync();
+        }
+
+        public async Task EndPersistSession()
+        {
+            await this.databaseContext.EndTransactionAsync();
         }
 
         public List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile)
         {
-            IXmlDownloadTaskExtractorStrategy childTaskBuilder = this.xmlDownloadTaskExtractorFactory.CreateDownloadTaskExtractor(xmlFile.FileName.ToXmlFileType());
+            IXmlDownloadTaskExtractorStrategy childTaskBuilder = this.downloadTaskExtractorFactory.CreateDownloadTaskExtractor(xmlFile.FileName.ToXmlFileType());
 
             return childTaskBuilder.ExtractXmlDownloadTasks(xmlFile);
         }
@@ -73,9 +88,9 @@
             return await this.ParseFileAsync(memoryStream);
         }
 
-        public async Task PersistAsync(IXmlFile xmlFile)
+        public async Task PersistFileAsync(IXmlFile xmlFile)
         {
-            var persister = this.xmlFileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
+            var persister = this.fileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
 
             await persister.PersistDataAsync(xmlFile);
         }

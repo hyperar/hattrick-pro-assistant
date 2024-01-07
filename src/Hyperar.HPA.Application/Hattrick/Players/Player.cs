@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.Players
 {
     using System;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class Player
     {

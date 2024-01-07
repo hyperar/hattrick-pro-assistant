@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.Infrastructure.DataAccess
 {
     using System.Linq;
-    using Hyperar.HPA.Domain;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public class HattrickRepository<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IHattrickRepository<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity

@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Windows;
-    using Hyperar.HPA.UI.ViewModels;
+    using UI.ViewModels;
     using Microsoft.Extensions.Configuration;
 
     /// <summary>

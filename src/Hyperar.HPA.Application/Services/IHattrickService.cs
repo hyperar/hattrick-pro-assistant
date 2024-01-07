@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
-    using Hyperar.HPA.Application.Models;
+    using Application.Models;
 
     public interface IHattrickService
     {

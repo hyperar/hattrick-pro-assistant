@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using UI.State.Interfaces;
+    using UI.ViewModels;
+    using UI.ViewModels.Interfaces;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;

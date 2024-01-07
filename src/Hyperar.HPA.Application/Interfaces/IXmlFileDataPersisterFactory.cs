@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Interfaces
 {
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public interface IXmlFileDataPersisterFactory
     {
