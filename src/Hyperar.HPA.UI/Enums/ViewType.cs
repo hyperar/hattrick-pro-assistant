@@ -10,8 +10,10 @@
 
         Matches,
 
+        Players,
+
         Permissions,
 
-        Quit
+        TeamSelection
     }
 }

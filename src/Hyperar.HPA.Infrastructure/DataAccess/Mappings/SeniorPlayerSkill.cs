@@ -12,7 +12,7 @@
                 .HasColumnName(Constants.ColumnName.UpdatedOn)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Date)
+                .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
             builder.Property(p => p.Form)

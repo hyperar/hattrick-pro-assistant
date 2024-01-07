@@ -65,7 +65,7 @@
                 .HasColumnName(Constants.ColumnName.JoinedTeamOn)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Date)
+                .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
             builder.Property(x => x.Notes)

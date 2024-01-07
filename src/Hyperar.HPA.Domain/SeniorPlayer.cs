@@ -64,7 +64,7 @@
 
         public uint SeniorNationalTeamCaps { get; set; }
 
-        public virtual List<SeniorPlayerSkill>? SeniorPlayerSkills { get; set; }
+        public virtual ICollection<SeniorPlayerSkill> SeniorPlayerSkills { get; set; } = new HashSet<SeniorPlayerSkill>();
 
         public virtual SeniorTeam SeniorTeam { get; set; } = new SeniorTeam();
 

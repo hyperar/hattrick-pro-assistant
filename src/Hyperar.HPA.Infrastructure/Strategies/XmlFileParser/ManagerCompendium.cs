@@ -31,103 +31,105 @@
 
         private const string yAttributeName = "y";
 
-        public override void ParseFileTypeSpecificContent(XmlReader reader, ref IXmlFile entity)
+        public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
 
-            result.Manager = ParseManagerNode(reader);
-        }
-
-        private static Arena ParseArenaNode(XmlReader reader)
-        {
-            // Reads opening element.
-            reader.Read();
-
-            var result = new Arena
-            {
-                ArenaId = reader.ReadXmlValueAsUint(),
-                ArenaName = reader.ReadElementContentAsString()
-            };
-
-            // Reads closing element.
-            reader.Read();
+            result.Manager = await ParseManagerNodeAsync(reader);
 
             return result;
         }
 
-        private static Avatar? ParseAvatarNode(XmlReader reader)
+        private static async Task<Arena> ParseArenaNodeAsync(XmlReader reader)
+        {
+            // Reads opening element.
+            await reader.ReadAsync();
+
+            var result = new Arena
+            {
+                ArenaId = await reader.ReadXmlValueAsUintAsync(),
+                ArenaName = await reader.ReadElementContentAsStringAsync()
+            };
+
+            // Reads closing element.
+            await reader.ReadAsync();
+
+            return result;
+        }
+
+        private static async Task<Avatar?> ParseAvatarNodeAsync(XmlReader reader)
         {
             // Reads opening node.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Avatar
             {
-                BackgroundImage = reader.ReadElementContentAsString()
+                BackgroundImage = await reader.ReadElementContentAsStringAsync()
             };
 
             while (reader.Name == layerNodeName)
             {
-                result.Layers.Add(ParseLayerNode(reader));
+                result.Layers.Add(await ParseLayerNodeAsync(reader));
             }
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Country ParseCountryNode(XmlReader reader)
+        private static async Task<Country> ParseCountryNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Country
             {
-                CountryId = reader.ReadXmlValueAsUint(),
-                CountryName = reader.ReadElementContentAsString()
+                CountryId = await reader.ReadXmlValueAsUintAsync(),
+                CountryName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Currency ParseCurrencyNode(XmlReader reader)
+        private static async Task<Currency> ParseCurrencyNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Currency
             {
-                CurrencyName = reader.ReadElementContentAsString(),
-                CurrencyRate = reader.ReadXmlValueAsDecimal()
+                CurrencyName = await reader.ReadElementContentAsStringAsync(),
+                CurrencyRate = await reader.ReadXmlValueAsDecimalAsync()
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Language ParseLanguageNode(XmlReader reader)
+        private static async Task<Language> ParseLanguageNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Language
             {
-                LanguageId = reader.ReadXmlValueAsUint(),
-                LanguageName = reader.ReadElementContentAsString()
+                LanguageId = await reader.ReadXmlValueAsUintAsync(),
+                LanguageName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Layer ParseLayerNode(XmlReader reader)
+        private static async Task<Layer> ParseLayerNodeAsync(XmlReader reader)
         {
             var result = new Layer
             {
@@ -136,93 +138,93 @@
             };
 
             // Reads opening node.
-            reader.Read();
+            await reader.ReadAsync();
 
-            result.Image = reader.ReadElementContentAsString();
+            result.Image = await reader.ReadElementContentAsStringAsync();
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static LeagueLevelUnit ParseLeagueLevelUnitNode(XmlReader reader)
+        private static async Task<LeagueLevelUnit> ParseLeagueLevelUnitNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new LeagueLevelUnit
             {
-                LeagueLevelUnitId = reader.ReadXmlValueAsUint(),
-                LeagueLevelUnitName = reader.ReadElementContentAsString()
+                LeagueLevelUnitId = await reader.ReadXmlValueAsUintAsync(),
+                LeagueLevelUnitName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static League ParseLeagueNode(XmlReader reader)
+        private static async Task<League> ParseLeagueNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new League
             {
-                LeagueId = reader.ReadXmlValueAsUint(),
-                LeagueName = reader.ReadElementContentAsString(),
-                Season = reader.ReadXmlValueAsUint()
+                LeagueId = await reader.ReadXmlValueAsUintAsync(),
+                LeagueName = await reader.ReadElementContentAsStringAsync(),
+                Season = await reader.ReadXmlValueAsUintAsync()
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Manager ParseManagerNode(XmlReader reader)
+        private static async Task<Manager> ParseManagerNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Manager
             {
-                UserId = reader.ReadXmlValueAsUint(),
-                LoginName = reader.ReadElementContentAsString(),
-                SupporterTier = reader.ReadElementContentAsString().ToSupporterTier()
+                UserId = await reader.ReadXmlValueAsUintAsync(),
+                LoginName = await reader.ReadElementContentAsStringAsync(),
+                SupporterTier = (await reader.ReadElementContentAsStringAsync()).ToSupporterTier()
             };
 
             if (reader.Name == lastLoginsNodeName)
             {
                 // Reads opening element.
-                reader.Read();
+                await reader.ReadAsync();
 
                 while (reader.Name == loginTimeNodeName)
                 {
-                    result.LastLogins.Add(reader.ReadElementContentAsString());
+                    result.LastLogins.Add(await reader.ReadElementContentAsStringAsync());
                 }
 
                 // Reads closing element.
-                reader.Read();
+                await reader.ReadAsync();
             }
 
-            result.Language = ParseLanguageNode(reader);
-            result.Country = ParseCountryNode(reader);
-            result.Currency = ParseCurrencyNode(reader);
+            result.Language = await ParseLanguageNodeAsync(reader);
+            result.Country = await ParseCountryNodeAsync(reader);
+            result.Currency = await ParseCurrencyNodeAsync(reader);
 
             if (reader.Name == teamsNodeName)
             {
                 // Reads opening element.
-                reader.Read();
+                await reader.ReadAsync();
 
                 while (reader.Name == teamNodeName)
                 {
-                    result.Teams.Add(ParseTeamNode(reader));
+                    result.Teams.Add(await ParseTeamNodeAsync(reader));
                 }
 
                 // Reads closing element.
-                reader.Read();
+                await reader.ReadAsync();
             }
 
             if (reader.Name == nationalTeamCoachNodeName)
@@ -230,19 +232,19 @@
                 if (!reader.IsEmptyElement)
                 {
                     // Reads opening element.
-                    reader.Read();
+                    await reader.ReadAsync();
 
                     while (reader.Name == nationalTeamNodeName)
                     {
-                        result.NationalTeamCoach.Add(ParseNationalTeamNode(reader));
+                        result.NationalTeamCoach.Add(await ParseNationalTeamNodeAsync(reader));
                     }
 
                     // Reads closing element.
-                    reader.Read();
+                    await reader.ReadAsync();
                 }
 
                 // Reads closing element.
-                reader.Read();
+                await reader.ReadAsync();
             }
 
             if (reader.Name == nationalTeamAssistantNodeName)
@@ -250,127 +252,127 @@
                 if (!reader.IsEmptyElement)
                 {
                     // Reads opening element.
-                    reader.Read();
+                    await reader.ReadAsync();
 
                     while (reader.Name == nationalTeamNodeName)
                     {
-                        result.NationalTeamCoach.Add(ParseNationalTeamNode(reader));
+                        result.NationalTeamCoach.Add(await ParseNationalTeamNodeAsync(reader));
                     }
 
                     // Reads closing element.
-                    reader.Read();
+                    await reader.ReadAsync();
                 }
             }
 
             if (reader.Name == avatarNodeName && !reader.IsEmptyElement)
             {
-                result.Avatar = ParseAvatarNode(reader);
+                result.Avatar = await ParseAvatarNodeAsync(reader);
             }
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static NationalTeam ParseNationalTeamNode(XmlReader reader)
+        private static async Task<NationalTeam> ParseNationalTeamNodeAsync(XmlReader reader)
         {
             // Reads opening node.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new NationalTeam
             {
-                NationalTeamId = reader.ReadXmlValueAsUint(),
-                NationalTeamName = reader.ReadElementContentAsString()
+                NationalTeamId = await reader.ReadXmlValueAsUintAsync(),
+                NationalTeamName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Region ParseRegionNode(XmlReader reader)
+        private static async Task<Region> ParseRegionNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Region
             {
-                RegionId = reader.ReadXmlValueAsUint(),
-                RegionName = reader.ReadElementContentAsString()
+                RegionId = await reader.ReadXmlValueAsUintAsync(),
+                RegionName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Team ParseTeamNode(XmlReader reader)
+        private static async Task<Team> ParseTeamNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Team
             {
-                TeamId = reader.ReadXmlValueAsUint(),
-                TeamName = reader.ReadElementContentAsString(),
-                Arena = ParseArenaNode(reader),
-                League = ParseLeagueNode(reader),
-                Country = ParseCountryNode(reader),
-                LeagueLevelUnit = ParseLeagueLevelUnitNode(reader),
-                Region = ParseRegionNode(reader),
-                YouthTeam = ParseYouthTeamNode(reader)
+                TeamId = await reader.ReadXmlValueAsUintAsync(),
+                TeamName = await reader.ReadElementContentAsStringAsync(),
+                Arena = await ParseArenaNodeAsync(reader),
+                League = await ParseLeagueNodeAsync(reader),
+                Country = await ParseCountryNodeAsync(reader),
+                LeagueLevelUnit = await ParseLeagueLevelUnitNodeAsync(reader),
+                Region = await ParseRegionNodeAsync(reader),
+                YouthTeam = await ParseYouthTeamNodeAsync(reader)
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static YouthLeague? ParseYouthLeagueNode(XmlReader reader)
+        private static async Task<YouthLeague?> ParseYouthLeagueNodeAsync(XmlReader reader)
         {
             YouthLeague? result = null;
 
             if (!reader.IsEmptyElement)
             {
                 // Reads opening node.
-                reader.Read();
+                await reader.ReadAsync();
 
                 result = new YouthLeague
                 {
-                    YouthLeagueId = reader.ReadXmlValueAsUint(),
-                    YouthLeagueName = reader.ReadElementContentAsString()
+                    YouthLeagueId = await reader.ReadXmlValueAsUintAsync(),
+                    YouthLeagueName = await reader.ReadElementContentAsStringAsync()
                 };
             }
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static YouthTeam? ParseYouthTeamNode(XmlReader reader)
+        private static async Task<YouthTeam?> ParseYouthTeamNodeAsync(XmlReader reader)
         {
             YouthTeam? result = null;
 
             if (!reader.IsEmptyElement)
             {
                 // Reads opening node.
-                reader.Read();
+                await reader.ReadAsync();
 
                 result = new YouthTeam
                 {
-                    YouthTeamId = reader.ReadXmlValueAsUint(),
-                    YouthTeamName = reader.ReadElementContentAsString(),
-                    YouthLeague = ParseYouthLeagueNode(reader)
+                    YouthTeamId = await reader.ReadXmlValueAsUintAsync(),
+                    YouthTeamName = await reader.ReadElementContentAsStringAsync(),
+                    YouthLeague = await ParseYouthLeagueNodeAsync(reader)
                 };
             }
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }

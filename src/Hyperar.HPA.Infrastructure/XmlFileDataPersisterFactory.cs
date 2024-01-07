@@ -11,6 +11,8 @@
 
         private readonly ManagerCompendium managerCompendiumPersister;
 
+        private readonly Matches matchesPersister;
+
         private readonly Players playersPersister;
 
         private readonly TeamDetails teamDetailsPersister;
@@ -20,12 +22,14 @@
         public XmlFileDataPersisterFactory(
             ArenaDetails arenaDetailsPersister,
             ManagerCompendium managerCompendiumPersister,
+            Matches matchesPersister,
             Players playersPersister,
             TeamDetails teamDetailsPersister,
             WorldDetails worldDetailsPersister)
         {
             this.arenaDetailsPersister = arenaDetailsPersister;
             this.managerCompendiumPersister = managerCompendiumPersister;
+            this.matchesPersister = matchesPersister;
             this.playersPersister = playersPersister;
             this.teamDetailsPersister = teamDetailsPersister;
             this.worldDetailsPersister = worldDetailsPersister;
@@ -33,26 +37,16 @@
 
         public IXmlFileDataPersisterStrategy GetPersister(XmlFileType fileType)
         {
-            switch (fileType)
+            return fileType switch
             {
-                case XmlFileType.ArenaDetails:
-                    return this.arenaDetailsPersister;
-
-                case XmlFileType.ManagerCompendium:
-                    return this.managerCompendiumPersister;
-
-                case XmlFileType.Players:
-                    return this.playersPersister;
-
-                case XmlFileType.TeamDetails:
-                    return this.teamDetailsPersister;
-
-                case XmlFileType.WorldDetails:
-                    return this.worldDetailsPersister;
-
-                default:
-                    throw new NotImplementedException($"No XmlFileDataPersister strategy found for {fileType}.");
-            }
+                XmlFileType.ArenaDetails => this.arenaDetailsPersister,
+                XmlFileType.ManagerCompendium => this.managerCompendiumPersister,
+                XmlFileType.Matches => this.matchesPersister,
+                XmlFileType.Players => this.playersPersister,
+                XmlFileType.TeamDetails => this.teamDetailsPersister,
+                XmlFileType.WorldDetails => this.worldDetailsPersister,
+                _ => throw new ArgumentOutOfRangeException(nameof(fileType))
+            };
         }
     }
 }

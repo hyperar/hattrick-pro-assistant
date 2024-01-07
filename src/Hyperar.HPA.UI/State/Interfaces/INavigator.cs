@@ -7,6 +7,14 @@
     {
         event Action? StateChanged;
 
+        bool CanNavigate { get; }
+
         ViewModelBase? CurrentViewModel { get; set; }
+
+        public uint? SelectedTeamId { get; set; }
+
+        void ResumeNavigation();
+
+        void SuspendNavigation();
     }
 }

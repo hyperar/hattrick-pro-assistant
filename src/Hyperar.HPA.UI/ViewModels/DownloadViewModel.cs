@@ -3,28 +3,39 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Input;
-    using Hyperar.HPA.Application.OAuth;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Application.Services;
     using Hyperar.HPA.Common.Enums;
     using Hyperar.HPA.UI.Commands;
     using Hyperar.HPA.UI.State.Interfaces;
+    using Hyperar.HPA.UI.ViewModels.Interfaces;
 
     public class DownloadViewModel : AuthorizedViewModelBase
     {
         private readonly IHattrickService hattrickService;
 
+        private readonly IUserService userService;
+
         private readonly IXmlFileService xmlFileService;
 
         private List<DownloadTask> downloadTasks;
 
-        public DownloadViewModel(IAuthorizer authorizer, IHattrickService hattrickService, IXmlFileService xmlFileService/*, IWorldService worldService*/) : base(authorizer)
+        public DownloadViewModel(
+            IAuthorizer authorizer,
+            IHattrickService hattrickService,
+            IUserService userService,
+            IXmlFileService xmlFileService,
+            INavigator navigator,
+            IViewModelFactory viewModelFactory) : base(authorizer)
         {
-            this.downloadTasks = new List<DownloadTask>();
-
-            this.DownloadFilesCommand = new DownloadFilesCommand(this);
             this.hattrickService = hattrickService;
+            this.userService = userService;
             this.xmlFileService = xmlFileService;
+
+            this.downloadTasks = new List<DownloadTask>();
+            this.DownloadFilesCommand = new DownloadFilesCommand(this, navigator, viewModelFactory);
         }
 
         public int CompletedDownloadTaskStepsCount
@@ -90,20 +101,25 @@
             this.OnPropertyChanged(nameof(this.CompletedDownloadTaskStepsCount));
         }
 
-        public void ExecuteDownloadTask(DownloadTask task)
+        public async Task ExecuteDownloadTaskAsync(DownloadTask task)
         {
-            this.StartDownloadTask(task);
+            await this.StartDownloadTaskAsync(task);
 
-            List<DownloadTask>? childTasks = this.ProcessDownloadTaskResult(task);
+            List<DownloadTask>? childTasks = await this.ProcessDownloadTaskResultAsync(task);
 
             if (childTasks != null)
             {
                 this.AddChildTasks(childTasks);
             }
 
-            this.StoreDownloadTask(task);
+            await this.StoreDownloadTaskAsync(task);
 
             this.CompleteTask(task);
+        }
+
+        public async Task FinishDownloadAsync()
+        {
+            await this.userService.UpdateUserLastDownloadDate();
         }
 
         public DownloadTask? GetNextDownloadTask()
@@ -143,7 +159,7 @@
             this.ChangeTaskStatus(task, DownloadTaskStatus.Done);
         }
 
-        private List<DownloadTask>? ProcessDownloadTaskResult(DownloadTask task)
+        private async Task<List<DownloadTask>?> ProcessDownloadTaskResultAsync(DownloadTask task)
         {
             this.ChangeTaskStatus(task, DownloadTaskStatus.Processing);
 
@@ -153,7 +169,7 @@
             }
             else
             {
-                task.ParsedEntity = this.xmlFileService.ParseFile(task.Response);
+                task.ParsedEntity = await this.xmlFileService.ParseFileAsync(task.Response);
 
                 if (task.ParsedEntity == null)
                 {
@@ -168,16 +184,16 @@
             return null;
         }
 
-        private void StartDownloadTask(DownloadTask task)
+        private async Task StartDownloadTaskAsync(DownloadTask task)
         {
             this.ChangeTaskStatus(task, DownloadTaskStatus.Downloading);
 
             GetProtectedResourceRequest request = this.Authorizer.BuildProtectedResourseRequest(task);
 
-            task.Response = this.hattrickService.GetProtectedResource(request);
+            task.Response = await this.hattrickService.GetProtectedResourceAsync(request);
         }
 
-        private void StoreDownloadTask(DownloadTask task)
+        private async Task StoreDownloadTaskAsync(DownloadTask task)
         {
             if (task.Status == DownloadTaskStatus.Error || task.ParsedEntity == null)
             {
@@ -186,7 +202,7 @@
 
             this.ChangeTaskStatus(task, DownloadTaskStatus.Saving);
 
-            this.xmlFileService.Persist(task.ParsedEntity);
+            await this.xmlFileService.PersistAsync(task.ParsedEntity);
         }
     }
 }

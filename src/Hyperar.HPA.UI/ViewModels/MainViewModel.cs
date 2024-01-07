@@ -1,5 +1,8 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Input;
     using Hyperar.HPA.UI.Commands;
     using Hyperar.HPA.UI.Enums;
@@ -12,7 +15,10 @@
 
         private readonly IViewModelFactory viewModelFactory;
 
-        public MainViewModel(INavigator navigator, IViewModelFactory viewModelFactory, IAuthorizer authorizer) : base(authorizer)
+        public MainViewModel(
+            INavigator navigator,
+            IViewModelFactory viewModelFactory,
+            IAuthorizer authorizer) : base(authorizer)
         {
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
@@ -20,14 +26,13 @@
             this.navigator.StateChanged += this.Navigator_StateChanged;
 
             this.UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, this.viewModelFactory);
+        }
 
-            if (this.IsAuthorized)
+        public bool CanNavigate
+        {
+            get
             {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
-            }
-            else
-            {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
+                return this.navigator.CanNavigate;
             }
         }
 
@@ -48,8 +53,35 @@
             base.Dispose();
         }
 
+        public override async Task InitializeAsync()
+        {
+            await base.InitializeAsync();
+
+            ArgumentNullException.ThrowIfNull(this.IsAuthorized, nameof(this.IsAuthorized));
+            ArgumentNullException.ThrowIfNull(this.IsNotAuthorized, nameof(this.IsNotAuthorized));
+            ArgumentNullException.ThrowIfNull(this.Authorizer.User, nameof(this.Authorizer.User));
+
+            if (this.IsNotAuthorized.Value)
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
+            }
+            else if (!this.Authorizer.User.LastDownloadDate.HasValue ||
+                this.Authorizer.User.Manager == null ||
+                this.Authorizer.User.Manager.SeniorTeams.Count == 0)
+            {
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Download);
+            }
+            else
+            {
+                this.navigator.SelectedTeamId = this.Authorizer.User.Manager.SeniorTeams.Single(x => x.IsPrimary).HattrickId;
+
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+            }
+        }
+
         private void Navigator_StateChanged()
         {
+            this.OnPropertyChanged(nameof(this.CanNavigate));
             this.OnPropertyChanged(nameof(this.CurrentViewModel));
         }
     }

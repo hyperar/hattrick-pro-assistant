@@ -4,8 +4,8 @@
 
     public interface IRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase, IEntity
     {
-        void Delete(int id);
+        Task DeleteAsync(int id);
 
-        TEntity? GetById(int id);
+        Task<TEntity?> GetByIdAsync(int id);
     }
 }

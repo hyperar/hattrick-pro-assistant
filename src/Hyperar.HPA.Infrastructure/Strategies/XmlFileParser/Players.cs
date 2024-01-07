@@ -18,153 +18,156 @@
 
         private const string trainerDataNodeName = "TrainerData";
 
-        public override void ParseFileTypeSpecificContent(XmlReader reader, ref IXmlFile entity)
+        public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
 
-            result.UserSupporterTier = reader.ReadElementContentAsString().ToSupporterTier();
-            result.IsYouth = reader.ReadXmlValueAsBool();
-            result.ActionType = reader.ReadElementContentAsString();
-            result.IsPlayingMatch = reader.ReadXmlValueAsBool();
-            result.Team = ParseTeamNode(reader);
-        }
-
-        private static LastMatch ParseLastMatchNode(XmlReader reader)
-        {
-            // Reads opening element.
-            reader.Read();
-
-            var result = new LastMatch
-            {
-                Date = reader.ReadXmlValueAsDateTime(),
-                MatchId = reader.ReadXmlValueAsUint(),
-                PositionCode = (MatchRole)reader.ReadXmlValueAsUint(),
-                PlayedMinutes = reader.ReadXmlValueAsUint(),
-                Rating = reader.ReadXmlValueAsDecimal(),
-                RatingEndOfMatch = reader.ReadXmlValueAsDecimal()
-            };
-
-            // Reads closing element.
-            reader.Read();
+            result.UserSupporterTier = (await reader.ReadElementContentAsStringAsync()).ToSupporterTier();
+            result.IsYouth = await reader.ReadXmlValueAsBoolAsync();
+            result.ActionType = await reader.ReadElementContentAsStringAsync();
+            result.IsPlayingMatch = await reader.ReadXmlValueAsBoolAsync();
+            result.Team = await ParseTeamNodeAsync(reader);
 
             return result;
         }
 
-        private static Player ParsePlayerNode(XmlReader reader)
+        private static async Task<LastMatch> ParseLastMatchNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
+
+            var result = new LastMatch
+            {
+                Date = await reader.ReadXmlValueAsDateTimeAsync(),
+                MatchId = await reader.ReadXmlValueAsUintAsync(),
+                PositionCode = (MatchRole)await reader.ReadXmlValueAsUintAsync(),
+                PlayedMinutes = await reader.ReadXmlValueAsUintAsync(),
+                Rating = await reader.ReadXmlValueAsDecimalAsync(),
+                RatingEndOfMatch = await reader.ReadXmlValueAsDecimalAsync()
+            };
+
+            // Reads closing element.
+            await reader.ReadAsync();
+
+            return result;
+        }
+
+        private static async Task<Player> ParsePlayerNodeAsync(XmlReader reader)
+        {
+            // Reads opening element.
+            await reader.ReadAsync();
 
             var result = new Player
             {
-                PlayerId = reader.ReadXmlValueAsUint(),
-                FirstName = reader.ReadElementContentAsString(),
-                NickName = reader.ReadXmlValueAsNullableString(),
-                LastName = reader.ReadElementContentAsString(),
-                PlayerNumber = reader.ReadXmlValueAsNullableUint(100),
-                Age = reader.ReadXmlValueAsUint(),
-                AgeDays = reader.ReadXmlValueAsUint(),
-                ArrivalDate = reader.ReadXmlValueAsDateTime(),
-                OwnerNotes = reader.ReadXmlValueAsNullableString(),
-                Tsi = reader.ReadXmlValueAsUint(),
-                PlayerForm = reader.ReadXmlValueAsSkillLevel(),
-                Statement = reader.ReadXmlValueAsNullableString(),
-                Experience = reader.ReadXmlValueAsSkillLevel(),
-                Loyalty = reader.ReadXmlValueAsSkillLevel(),
-                MotherClubBonus = reader.ReadXmlValueAsBool(),
-                Leadership = reader.ReadXmlValueAsSkillLevel(),
-                Salary = reader.ReadXmlValueAsUint(),
-                IsAbroad = reader.ReadXmlValueAsBool(),
-                Agreeability = (AgreeabilityLevel)reader.ReadXmlValueAsUint(),
-                Aggressiveness = (AggressivenessLevel)reader.ReadXmlValueAsUint(),
-                Honesty = (HonestyLevel)reader.ReadXmlValueAsUint(),
-                LeagueGoals = reader.ReadXmlValueAsInt(),
-                CupGoals = reader.ReadXmlValueAsInt(),
-                FriendliesGoals = reader.ReadXmlValueAsInt(),
-                CareerGoals = reader.ReadXmlValueAsInt(),
-                CareerHattricks = reader.ReadXmlValueAsInt(),
-                MatchesCurrentTeam = reader.ReadXmlValueAsUint(),
-                GoalsCurrentTeam = reader.ReadXmlValueAsInt(),
-                Specialty = (Specialty)reader.ReadXmlValueAsUint(),
-                TransferListed = reader.ReadXmlValueAsBool(),
-                NationalTeamId = reader.ReadXmlValueAsNullableUint(0),
-                CountryId = reader.ReadXmlValueAsUint(),
-                Caps = reader.ReadXmlValueAsUint(),
-                CapsU20 = reader.ReadXmlValueAsUint(),
-                Cards = reader.ReadXmlValueAsUint(),
-                InjuryLevel = reader.ReadXmlValueAsInt(),
-                StaminaSkill = reader.ReadXmlValueAsSkillLevel(),
-                KeeperSkill = reader.ReadXmlValueAsSkillLevel(),
-                PlaymakerSkill = reader.ReadXmlValueAsSkillLevel(),
-                ScorerSkill = reader.ReadXmlValueAsSkillLevel(),
-                PassingSkill = reader.ReadXmlValueAsSkillLevel(),
-                WingerSkill = reader.ReadXmlValueAsSkillLevel(),
-                DefenderSkill = reader.ReadXmlValueAsSkillLevel(),
-                SetPiecesSkill = reader.ReadXmlValueAsSkillLevel(),
-                PlayerCategoryId = (PlayerCategory)reader.ReadXmlValueAsUint()
+                PlayerId = await reader.ReadXmlValueAsUintAsync(),
+                FirstName = await reader.ReadElementContentAsStringAsync(),
+                NickName = await reader.ReadXmlValueAsNullableStringAsync(),
+                LastName = await reader.ReadElementContentAsStringAsync(),
+                PlayerNumber = await reader.ReadXmlValueAsNullableUintAsync(100),
+                Age = await reader.ReadXmlValueAsUintAsync(),
+                AgeDays = await reader.ReadXmlValueAsUintAsync(),
+                ArrivalDate = await reader.ReadXmlValueAsDateTimeAsync(),
+                OwnerNotes = await reader.ReadXmlValueAsNullableStringAsync(),
+                Tsi = await reader.ReadXmlValueAsUintAsync(),
+                PlayerForm = await reader.ReadXmlValueAsSkillLevelAsync(),
+                Statement = await reader.ReadXmlValueAsNullableStringAsync(),
+                Experience = await reader.ReadXmlValueAsSkillLevelAsync(),
+                Loyalty = await reader.ReadXmlValueAsSkillLevelAsync(),
+                MotherClubBonus = await reader.ReadXmlValueAsBoolAsync(),
+                Leadership = await reader.ReadXmlValueAsSkillLevelAsync(),
+                Salary = await reader.ReadXmlValueAsUintAsync(),
+                IsAbroad = await reader.ReadXmlValueAsBoolAsync(),
+                Agreeability = (AgreeabilityLevel)await reader.ReadXmlValueAsUintAsync(),
+                Aggressiveness = (AggressivenessLevel)await reader.ReadXmlValueAsUintAsync(),
+                Honesty = (HonestyLevel)await reader.ReadXmlValueAsUintAsync(),
+                LeagueGoals = await reader.ReadXmlValueAsIntAsync(),
+                CupGoals = await reader.ReadXmlValueAsIntAsync(),
+                FriendliesGoals = await reader.ReadXmlValueAsIntAsync(),
+                CareerGoals = await reader.ReadXmlValueAsIntAsync(),
+                CareerHattricks = await reader.ReadXmlValueAsIntAsync(),
+                MatchesCurrentTeam = await reader.ReadXmlValueAsUintAsync(),
+                GoalsCurrentTeam = await reader.ReadXmlValueAsIntAsync(),
+                Specialty = (Specialty)await reader.ReadXmlValueAsUintAsync(),
+                TransferListed = await reader.ReadXmlValueAsBoolAsync(),
+                NationalTeamId = await reader.ReadXmlValueAsNullableUintAsync(0),
+                CountryId = await reader.ReadXmlValueAsUintAsync(),
+                Caps = await reader.ReadXmlValueAsUintAsync(),
+                CapsU20 = await reader.ReadXmlValueAsUintAsync(),
+                Cards = await reader.ReadXmlValueAsUintAsync(),
+                InjuryLevel = await reader.ReadXmlValueAsIntAsync(),
+                StaminaSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                KeeperSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                PlaymakerSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                ScorerSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                PassingSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                WingerSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                DefenderSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                SetPiecesSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                PlayerCategoryId = (PlayerCategory)await reader.ReadXmlValueAsUintAsync()
             };
 
             if (reader.Name == trainerDataNodeName)
             {
-                result.TrainerData = ParseTrainerDataNode(reader);
+                result.TrainerData = await ParseTrainerDataNodeAsync(reader);
             }
 
             if (reader.Name == lastMatchNodeName)
             {
-                result.LastMatch = ParseLastMatchNode(reader);
+                result.LastMatch = await ParseLastMatchNodeAsync(reader);
             }
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Team ParseTeamNode(XmlReader reader)
+        private static async Task<Team> ParseTeamNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Team
             {
-                TeamId = reader.ReadXmlValueAsUint(),
-                TeamName = reader.ReadElementContentAsString(),
+                TeamId = await reader.ReadXmlValueAsUintAsync(),
+                TeamName = await reader.ReadElementContentAsStringAsync(),
             };
 
             if (reader.Name == playerListNodeName)
             {
                 // Reads opening element.
-                reader.Read();
+                await reader.ReadAsync();
 
                 while (reader.Name == playerNodeName)
                 {
                     result.PlayerList.Add(
-                        ParsePlayerNode(reader));
+                        await ParsePlayerNodeAsync(
+                            reader));
                 }
 
                 // Reads closing element.
-                reader.Read();
+                await reader.ReadAsync();
             }
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static TrainerData ParseTrainerDataNode(XmlReader reader)
+        private static async Task<TrainerData> ParseTrainerDataNodeAsync(XmlReader reader)
         {
             // Reads opening element.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new TrainerData
             {
-                TrainerType = (TrainerType)reader.ReadXmlValueAsUint(),
-                SkillLevel = reader.ReadXmlValueAsSkillLevel(),
+                TrainerType = (TrainerType)await reader.ReadXmlValueAsUintAsync(),
+                SkillLevel = await reader.ReadXmlValueAsSkillLevelAsync(),
             };
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }

@@ -4,10 +4,8 @@
 
     public interface IAuthorizedViewModel : IViewModel, INotifyPropertyChanged
     {
-        bool IsAuthorized { get; }
+        bool? IsAuthorized { get; }
 
-        bool IsInitialized { get; }
-
-        void InitializeToken();
+        bool? IsNotAuthorized { get; }
     }
 }

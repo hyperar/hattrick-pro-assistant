@@ -7,26 +7,16 @@
     {
         public static XmlFileType ToXmlFileType(this string value)
         {
-            switch (value)
+            return value switch
             {
-                case Constants.XmlFileName.ArenaDetails:
-                    return XmlFileType.ArenaDetails;
-
-                case Constants.XmlFileName.ManagerCompendium:
-                    return XmlFileType.ManagerCompendium;
-
-                case Constants.XmlFileName.Players:
-                    return XmlFileType.Players;
-
-                case Constants.XmlFileName.TeamDetails:
-                    return XmlFileType.TeamDetails;
-
-                case Constants.XmlFileName.WorldDetails:
-                    return XmlFileType.WorldDetails;
-
-                default:
-                    throw new ArgumentException($"Unrecognized XmlFileName value: '{value}'.");
-            }
+                Constants.XmlFileName.ArenaDetails => XmlFileType.ArenaDetails,
+                Constants.XmlFileName.ManagerCompendium => XmlFileType.ManagerCompendium,
+                Constants.XmlFileName.Matches => XmlFileType.Matches,
+                Constants.XmlFileName.Players => XmlFileType.Players,
+                Constants.XmlFileName.TeamDetails => XmlFileType.TeamDetails,
+                Constants.XmlFileName.WorldDetails => XmlFileType.WorldDetails,
+                _ => throw new ArgumentOutOfRangeException(nameof(value))
+            };
         }
     }
 }

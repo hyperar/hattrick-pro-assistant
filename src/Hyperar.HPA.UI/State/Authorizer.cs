@@ -2,121 +2,109 @@
 {
     using System;
     using System.ComponentModel;
-    using Hyperar.HPA.Application.OAuth;
+    using System.Threading.Tasks;
+    using Hyperar.HPA.Application.Models;
     using Hyperar.HPA.Application.Services;
+    using Hyperar.HPA.Domain;
     using Hyperar.HPA.UI.State.Interfaces;
 
-    public class Authorizer : IAuthorizer, INotifyPropertyChanged, IDisposable
+    public class Authorizer : IAuthorizer, INotifyPropertyChanged
     {
         private readonly IHattrickService hattrickService;
 
-        private readonly ITokenService tokenService;
+        private readonly IUserService userService;
 
-        private readonly ITokenStore tokenStore;
-
-        private bool isInitialized;
-
-        public Authorizer(ITokenStore tokenStore, IHattrickService hattrickService, ITokenService tokenService)
+        public Authorizer(
+            IHattrickService hattrickService,
+            IUserService userService)
         {
-            this.tokenStore = tokenStore;
             this.hattrickService = hattrickService;
-            this.tokenService = tokenService;
-
-            this.tokenStore.PropertyChanged += this.Token_PropertyChanged;
+            this.userService = userService;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public bool IsAuthorized
+        public bool? IsAuthorized
         {
             get
             {
-                return this.tokenStore.CurrentToken != null;
+                return !this.IsInitialized
+                    ? null
+                    : this.User != null && this.User.Token != null;
             }
         }
 
-        public bool IsInitialized
-        {
-            get
-            {
-                return this.isInitialized;
-            }
-            private set
-            {
-                this.isInitialized = value;
-                this.OnPropertyChanged(nameof(this.IsInitialized));
-            }
-        }
+        public bool IsInitialized { get; private set; } = false;
+
+        public User? User { get; private set; }
 
         public GetProtectedResourceRequest BuildProtectedResourseRequest(DownloadTask task)
         {
-            return this.tokenStore.CurrentToken == null
-                ? throw new Exception("Can't create download request because there is no Access Token.")
-                : new GetProtectedResourceRequest(
-                this.tokenStore.CurrentToken.TokenValue,
-                this.tokenStore.CurrentToken.TokenSecretValue,
+            ArgumentNullException.ThrowIfNull(this.User, nameof(this.User));
+            ArgumentNullException.ThrowIfNull(this.User.Token, nameof(this.User.Token));
+
+            return new GetProtectedResourceRequest(
+                this.User.Token.Value,
+                this.User.Token.SecretValue,
                 task.FileType,
                 task.Parameters);
         }
 
-        public void CheckToken()
+        public Task CheckTokenAsync()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(nameof(this.CheckTokenAsync));
         }
 
-        public void Dispose()
+        public async Task<GetAccessTokenResponse> GetAccessTokenAsync(string verificationCode, string requestToken, string requestTokenSecret)
         {
-            this.tokenStore.PropertyChanged -= this.Token_PropertyChanged;
-            GC.SuppressFinalize(this);
+            return await this.hattrickService.GetAccessTokenAsync(
+                new GetAccessTokenRequest(
+                    verificationCode,
+                    requestToken,
+                    requestTokenSecret));
         }
 
-        public GetAccessTokenResponse GetAccessToken(string verificationCode, string token, string tokenSecret)
+        public async Task<GetAuthorizationUrlResponse> GetAuthorizationUrlAsync()
         {
-            return this.hattrickService.GetAccessToken(
-                new GetAccessTokenRequest(verificationCode, token, tokenSecret));
+            return await this.hattrickService.GetAuthorizationUrlAsync();
         }
 
-        public GetAuthorizationUrlResponse GetAuthorizationUrl()
+        public async Task InitializeAsync()
         {
-            return this.hattrickService.GetAuthorizationUrl();
-        }
-
-        public void InitializeToken()
-        {
-            Domain.Token? token = this.tokenService.GetToken();
-
-            this.tokenStore.SetCurrentToken(token);
+            this.User = await this.userService.GetUserAsync();
 
             this.IsInitialized = true;
+
+            this.OnPropertyChanged(nameof(this.IsInitialized));
+            this.OnPropertyChanged(nameof(this.IsAuthorized));
         }
 
-        public void PersistToken(string accessToken, string accessTokenSecret)
+        public async Task PersistTokenAsync(string accessToken, string accessTokenSecret)
         {
-            this.tokenService.InsertToken(accessToken, accessTokenSecret);
+            ArgumentNullException.ThrowIfNull(this.User, nameof(this.User));
 
-            this.InitializeToken();
+            await this.userService.InsertUserTokenAsync(accessToken, accessTokenSecret);
+
+            await this.InitializeAsync();
         }
 
-        public void RevokeToken()
+        public async Task RevokeTokenAsync()
         {
-            if (!this.IsInitialized)
-            {
-                throw new InvalidOperationException("Can't revoke Token before initialization.");
-            }
+            this.ValidateInitialization();
 
-            if (!this.IsAuthorized)
-            {
-                throw new InvalidOperationException("Can't revoke Token if not authorized.");
-            }
+            ArgumentNullException.ThrowIfNull(this.User, nameof(this.User));
 
             // This is only here to avoid .NET Core possible null reference message. If IsAuthorized is true, there's a token.
-            if (this.tokenStore.CurrentToken != null)
+            if (this.User.Token != null)
             {
-                this.hattrickService.RevokeToken(new OAuthToken(this.tokenStore.CurrentToken.TokenValue, this.tokenStore.CurrentToken.TokenSecretValue));
+                await this.hattrickService.RevokeTokenAsync(
+                    new OAuthToken(
+                        this.User.Token.Value,
+                        this.User.Token.SecretValue));
 
-                this.tokenService.DeleteToken(this.tokenStore.CurrentToken.TokenValue, this.tokenStore.CurrentToken.TokenSecretValue);
+                await this.userService.DeleteUserTokenAsync(this.User.Id);
 
-                this.InitializeToken();
+                await this.InitializeAsync();
             }
         }
 
@@ -125,11 +113,11 @@
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Token_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void ValidateInitialization()
         {
-            if (e.PropertyName == nameof(TokenStore.CurrentToken))
+            if (!this.IsInitialized)
             {
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
+                throw new InvalidOperationException(nameof(this.IsInitialized));
             }
         }
     }

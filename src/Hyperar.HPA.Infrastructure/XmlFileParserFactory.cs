@@ -11,6 +11,8 @@
 
         private readonly ManagerCompendium managerCompendiumParser;
 
+        private readonly Matches matchesParser;
+
         private readonly Players playersParser;
 
         private readonly TeamDetails teamDetailsParser;
@@ -20,12 +22,14 @@
         public XmlFileParserFactory(
             ArenaDetails arenaDetailsParser,
             ManagerCompendium managerCompendiumParser,
+            Matches matchesParser,
             Players playersParser,
             TeamDetails teamDetailsParser,
             WorldDetails worldDetailsParser)
         {
             this.arenaDetailsParser = arenaDetailsParser;
             this.managerCompendiumParser = managerCompendiumParser;
+            this.matchesParser = matchesParser;
             this.playersParser = playersParser;
             this.teamDetailsParser = teamDetailsParser;
             this.worldDetailsParser = worldDetailsParser;
@@ -33,26 +37,16 @@
 
         public IXmlFileParserStrategy CreateXmlFileParser(XmlFileType fileType)
         {
-            switch (fileType)
+            return fileType switch
             {
-                case XmlFileType.ArenaDetails:
-                    return this.arenaDetailsParser;
-
-                case XmlFileType.ManagerCompendium:
-                    return this.managerCompendiumParser;
-
-                case XmlFileType.Players:
-                    return this.playersParser;
-
-                case XmlFileType.TeamDetails:
-                    return this.teamDetailsParser;
-
-                case XmlFileType.WorldDetails:
-                    return this.worldDetailsParser;
-
-                default:
-                    throw new NotImplementedException($"No implementation for file type: '{fileType}'.");
-            }
+                XmlFileType.ArenaDetails => this.arenaDetailsParser,
+                XmlFileType.ManagerCompendium => this.managerCompendiumParser,
+                XmlFileType.Matches => this.matchesParser,
+                XmlFileType.Players => this.playersParser,
+                XmlFileType.TeamDetails => this.teamDetailsParser,
+                XmlFileType.WorldDetails => this.worldDetailsParser,
+                _ => throw new ArgumentOutOfRangeException(nameof(fileType))
+            };
         }
     }
 }

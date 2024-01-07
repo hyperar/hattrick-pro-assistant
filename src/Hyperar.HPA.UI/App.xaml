@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Common.xaml" />
                 <ResourceDictionary Source="/Styles/NavigationBar.xaml" />
+                <ResourceDictionary Source="/Styles/TeamOverview.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
@@ -30,8 +31,12 @@
                 <views:PermissionsView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:QuitViewModel}">
-                <views:QuitView />
+            <DataTemplate DataType="{x:Type viewModels:PlayersViewModel}">
+                <views:PlayersView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:TeamSelectionViewModel}">
+                <views:TeamSelectionView />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
