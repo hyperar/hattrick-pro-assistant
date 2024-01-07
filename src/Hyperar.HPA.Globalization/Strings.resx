@@ -153,6 +153,9 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CountryLabel" xml:space="preserve">
+    <value>Country:</value>
+  </data>
   <data name="CupGoals" xml:space="preserve">
     <value>Cup Goals</value>
   </data>
@@ -219,8 +222,14 @@
   <data name="LeagueGoals" xml:space="preserve">
     <value>League Goals</value>
   </data>
+  <data name="LeagueLabel" xml:space="preserve">
+    <value>League:</value>
+  </data>
   <data name="Loyalty" xml:space="preserve">
     <value>Loyalty</value>
+  </data>
+  <data name="Manager" xml:space="preserve">
+    <value>Manager</value>
   </data>
   <data name="Matches" xml:space="preserve">
     <value>Matches</value>
@@ -270,8 +279,14 @@
   <data name="Quit" xml:space="preserve">
     <value>Quit</value>
   </data>
+  <data name="RecentMatches" xml:space="preserve">
+    <value>Recent Matches</value>
+  </data>
   <data name="Region" xml:space="preserve">
     <value>Region</value>
+  </data>
+  <data name="RegionLabel" xml:space="preserve">
+    <value>Region:</value>
   </data>
   <data name="Salary" xml:space="preserve">
     <value>Salary</value>
@@ -309,14 +324,26 @@
   <data name="StepTwo" xml:space="preserve">
     <value>Step 2</value>
   </data>
+  <data name="SupporterLabel" xml:space="preserve">
+    <value>Supporter:</value>
+  </data>
   <data name="Team" xml:space="preserve">
     <value>Team</value>
+  </data>
+  <data name="TeamLabel" xml:space="preserve">
+    <value>Team:</value>
   </data>
   <data name="TeamSelection" xml:space="preserve">
     <value>Team Selection</value>
   </data>
   <data name="TotalSkillIndex" xml:space="preserve">
     <value>TSI</value>
+  </data>
+  <data name="UpcomingMatches" xml:space="preserve">
+    <value>Upcoming Matches</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>User:</value>
   </data>
   <data name="Winger" xml:space="preserve">
     <value>Winger</value>

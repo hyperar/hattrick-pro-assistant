@@ -169,6 +169,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country:.
+        /// </summary>
+        public static string CountryLabel {
+            get {
+                return ResourceManager.GetString("CountryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cup Goals.
         /// </summary>
         public static string CupGoals {
@@ -367,11 +376,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to League:.
+        /// </summary>
+        public static string LeagueLabel {
+            get {
+                return ResourceManager.GetString("LeagueLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loyalty.
         /// </summary>
         public static string Loyalty {
             get {
                 return ResourceManager.GetString("Loyalty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager.
+        /// </summary>
+        public static string Manager {
+            get {
+                return ResourceManager.GetString("Manager", resourceCulture);
             }
         }
         
@@ -520,11 +547,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent Matches.
+        /// </summary>
+        public static string RecentMatches {
+            get {
+                return ResourceManager.GetString("RecentMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Region.
         /// </summary>
         public static string Region {
             get {
                 return ResourceManager.GetString("Region", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Region:.
+        /// </summary>
+        public static string RegionLabel {
+            get {
+                return ResourceManager.GetString("RegionLabel", resourceCulture);
             }
         }
         
@@ -637,11 +682,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Supporter:.
+        /// </summary>
+        public static string SupporterLabel {
+            get {
+                return ResourceManager.GetString("SupporterLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Team.
         /// </summary>
         public static string Team {
             get {
                 return ResourceManager.GetString("Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team:.
+        /// </summary>
+        public static string TeamLabel {
+            get {
+                return ResourceManager.GetString("TeamLabel", resourceCulture);
             }
         }
         
@@ -660,6 +723,24 @@ namespace Hyperar.HPA.Globalization {
         public static string TotalSkillIndex {
             get {
                 return ResourceManager.GetString("TotalSkillIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upcoming Matches.
+        /// </summary>
+        public static string UpcomingMatches {
+            get {
+                return ResourceManager.GetString("UpcomingMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User:.
+        /// </summary>
+        public static string UserLabel {
+            get {
+                return ResourceManager.GetString("UserLabel", resourceCulture);
             }
         }
         
