@@ -23,7 +23,7 @@
 
         public uint LeagueRanking { get; set; }
 
-        public byte[]? Logo { get; set; } = Array.Empty<byte>();
+        public byte[]? Logo { get; set; }
 
         public string? LogoUrl { get; set; }
 

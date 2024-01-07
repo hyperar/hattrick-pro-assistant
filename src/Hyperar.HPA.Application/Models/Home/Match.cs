@@ -4,9 +4,9 @@
 
     public abstract class Match
     {
-        public DateTime Date { get; set; }
-
         public SeniorTeam AwayTeam { get; set; } = new SeniorTeam();
+
+        public DateTime Date { get; set; }
 
         public SeniorTeam HomeTeam { get; set; } = new SeniorTeam();
 

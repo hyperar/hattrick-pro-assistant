@@ -1,10 +1,11 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
     using System;
-    using Hattrick = Application.Hattrick.ArenaDetails;
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
     using Domain.Interfaces;
+
+    using Hattrick = Application.Hattrick.ArenaDetails;
 
     public class ArenaDetails : IXmlFileDataPersisterStrategy
     {

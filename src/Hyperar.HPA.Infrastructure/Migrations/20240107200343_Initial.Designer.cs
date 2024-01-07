@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hyperar.HPA.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240105234557_Initial")]
+    [Migration("20240107200343_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -304,6 +304,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnName("HattrickId")
                         .HasColumnOrder(0);
 
+                    b.Property<byte[]>("Avatar")
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("Avatar")
+                        .HasColumnOrder(5);
+
                     b.Property<long>("CountryHattrickId")
                         .HasColumnType("bigint");
 
@@ -345,6 +350,54 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Manager", (string)null);
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.ManagerAvatarLayer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("Image")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("ImageUrl")
+                        .HasColumnOrder(4);
+
+                    b.Property<long>("Index")
+                        .HasColumnType("bigint")
+                        .HasColumnName("Index")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("ManagerHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("XCoordinate")
+                        .HasColumnType("bigint")
+                        .HasColumnName("XCoordinate")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("YCoordinate")
+                        .HasColumnType("bigint")
+                        .HasColumnName("YCoordinate")
+                        .HasColumnOrder(3);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ManagerHattrickId");
+
+                    b.ToTable("ManagerAvatarLayer", (string)null);
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Region", b =>
@@ -1058,6 +1111,17 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.ManagerAvatarLayer", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Manager", "Manager")
+                        .WithMany("AvatarLayers")
+                        .HasForeignKey("ManagerHattrickId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Manager");
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.Region", b =>
                 {
                     b.HasOne("Hyperar.HPA.Domain.Country", "Country")
@@ -1179,6 +1243,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Manager", b =>
                 {
+                    b.Navigation("AvatarLayers");
+
                     b.Navigation("SeniorTeams");
                 });
 

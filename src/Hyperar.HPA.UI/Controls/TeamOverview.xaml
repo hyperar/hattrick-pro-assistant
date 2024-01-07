@@ -42,7 +42,9 @@
             <TextBlock Style="{StaticResource BlockTitle}"
                        Text="{x:Static globalization:Strings.Team}" />
 
-            <Image Stretch="None"
+            <Image Height="260"
+                   Width="210"
+                   Stretch="Fill"
                    Source="{Binding TeamOverview.SeniorTeam.Logo,
                                     FallbackValue={StaticResource no-logo},
                                     TargetNullValue={StaticResource no-logo},
@@ -125,10 +127,12 @@
                 <Image Grid.Column="0"
                        Grid.Row="0"
                        Grid.ColumnSpan="2"
-                       Stretch="None"
+                       Height="155"
+                       Width="110"
+                       Stretch="Fill"
                        Source="{Binding TeamOverview.Manager.Avatar,
-                                        FallbackValue={StaticResource sil1_3},
-                                        TargetNullValue={StaticResource sil1_3},
+                                        FallbackValue={StaticResource default-manager-avatar},
+                                        TargetNullValue={StaticResource default-manager-avatar},
                                         Converter={StaticResource byteToImageConverter}}" />
 
                 <TextBlock Grid.Column="0"
@@ -287,7 +291,9 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None"
+                                    <Image Stretch="Fill"
+                                           Height="16"
+                                           Width="16"
                                            Margin="5 0"
                                            ToolTip="{Binding BookingStatus,
                                                              Converter={StaticResource hattrickEnumToTranslatedStringConverter}}"
@@ -301,7 +307,9 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None"
+                                    <Image Stretch="Fill"
+                                           Height="16"
+                                           Width="16"
                                            Margin="5 0"
                                            Source="{Binding IsTransferListed,
                                                             FallbackValue={StaticResource transparent},
@@ -313,7 +321,9 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None"
+                                    <Image Stretch="Fill"
+                                           Height="16"
+                                           Width="16"
                                            Margin="5 0"
                                            Source="{Binding HealthStatus,
                                                             FallbackValue={StaticResource transparent},
@@ -334,7 +344,9 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None"
+                                    <Image Stretch="Fill"
+                                           Height="16"
+                                           Width="16"
                                            Margin="5 0"
                                            Source="{Binding HasMotherClubBonus,
                                                             FallbackValue={StaticResource transparent},
@@ -346,7 +358,9 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None"
+                                    <Image Stretch="Fill"
+                                           Height="16"
+                                           Width="16"
                                            Margin="5 0"
                                            ToolTip="{Binding Specialty,
                                                              Converter={StaticResource hattrickEnumToTranslatedStringConverter}}"
