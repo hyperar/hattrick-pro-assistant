@@ -133,8 +133,8 @@
         {
             var result = new Layer
             {
-                X = int.Parse(reader.GetAttribute(xAttributeName) ?? "0"),
-                Y = int.Parse(reader.GetAttribute(yAttributeName) ?? "0"),
+                X = uint.Parse(reader.GetAttribute(xAttributeName) ?? "0"),
+                Y = uint.Parse(reader.GetAttribute(yAttributeName) ?? "0"),
             };
 
             // Reads opening node.
@@ -262,6 +262,9 @@
                     // Reads closing element.
                     await reader.ReadAsync();
                 }
+
+                // Reads closing element.
+                await reader.ReadAsync();
             }
 
             if (reader.Name == avatarNodeName && !reader.IsEmptyElement)
