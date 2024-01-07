@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Application.Models.HomeView;
+    using Application.Models.Home;
     using Application.Services;
     using Common.Enums;
     using Domain.Interfaces;
@@ -40,6 +40,7 @@
                                                           .OrderBy(y => y.StartsOn)
                                                           .Select(y => new PlayedMatch
                                                           {
+                                                              Date = y.StartsOn,
                                                               HomeTeam = new SeniorTeam
                                                               {
                                                                   HattrickId = y.HomeTeamHattrickId,

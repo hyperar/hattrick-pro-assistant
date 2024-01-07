@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Application.Models.HomeView;
+    using Application.Models.Home;
     using Application.Services;
     using UI.State.Interfaces;
 

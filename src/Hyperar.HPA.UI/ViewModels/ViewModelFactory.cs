@@ -17,16 +17,20 @@
 
         private readonly CreateAsyncViewModel<PlayersViewModel> createPlayersViewModel;
 
+        private readonly CreateAsyncViewModel<TeamSelectionViewModel> createTeamSelectionViewModel;
+
         public ViewModelFactory(
             CreateAsyncViewModel<DownloadViewModel> createDownloadViewModel,
             CreateAsyncViewModel<HomeViewModel> createHomeViewModel,
             CreateAsyncViewModel<PermissionsViewModel> createPermissionsViewModel,
-            CreateAsyncViewModel<PlayersViewModel> createPlayersViewModel)
+            CreateAsyncViewModel<PlayersViewModel> createPlayersViewModel,
+            CreateAsyncViewModel<TeamSelectionViewModel> createTeamSelectionViewModel)
         {
             this.createDownloadViewModel = createDownloadViewModel;
             this.createPermissionsViewModel = createPermissionsViewModel;
             this.createPlayersViewModel = createPlayersViewModel;
             this.createHomeViewModel = createHomeViewModel;
+            this.createTeamSelectionViewModel = createTeamSelectionViewModel;
         }
 
         public async Task<ViewModelBase> CreateAsyncViewModel(ViewType viewType)
@@ -39,7 +43,7 @@
                 ViewType.Home => await this.createHomeViewModel(),
                 ViewType.Permissions => await this.createPermissionsViewModel(),
                 ViewType.Players => await this.createPlayersViewModel(),
-                ViewType.TeamSelection => new TeamSelectionViewModel(),
+                ViewType.TeamSelection => await this.createTeamSelectionViewModel(),
                 _ => throw new ArgumentOutOfRangeException(nameof(viewType))
             };
         }

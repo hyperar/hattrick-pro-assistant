@@ -3,7 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
-    using Application.Models.PlayersView;
+    using Application.Models.Players;
     using Application.Services;
 
     public class PlayersViewModel : ViewModelBase
