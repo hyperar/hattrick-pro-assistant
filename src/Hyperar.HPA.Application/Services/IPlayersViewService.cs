@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
-    using System.Collections.Generic;
-    using Application.Models.PlayersView;
+    using Application.Models.Players;
 
     public interface IPlayersViewService
     {

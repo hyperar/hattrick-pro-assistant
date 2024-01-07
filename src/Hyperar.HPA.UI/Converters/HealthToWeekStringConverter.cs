@@ -8,12 +8,7 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int health)
-            {
-                return health > 0 ? $"+{health}" : string.Empty;
-            }
-
-            return value;
+            return value is int health ? health > 0 ? $"+{health}" : string.Empty : value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
