@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Linq.Expressions;
     using Hyperar.HPA.Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
@@ -17,21 +18,14 @@
 
         protected DbSet<TEntity> EntityCollection { get; private set; }
 
-        public void Insert(TEntity entity)
+        public async Task InsertAsync(TEntity entity)
         {
-            this.EntityCollection.Add(entity);
+            await this.EntityCollection.AddAsync(entity);
         }
 
-        public IQueryable<TEntity> Query(Func<TEntity, bool>? predicate = null)
+        public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>>? predicate = null)
         {
-            IQueryable<TEntity> query = this.EntityCollection.AsQueryable();
-
-            if (predicate != null)
-            {
-                query = query.Where(predicate).AsQueryable();
-            }
-
-            return query;
+            return this.EntityCollection.Where(predicate ??= x => true);
         }
 
         public void Update(TEntity entity)

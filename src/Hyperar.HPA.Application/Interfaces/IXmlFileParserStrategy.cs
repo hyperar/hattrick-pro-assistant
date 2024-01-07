@@ -5,6 +5,6 @@
 
     public interface IXmlFileParserStrategy
     {
-        void Parse(XmlReader reader, ref IXmlFile result);
+        Task<IXmlFile> ParseAsync(XmlReader reader, IXmlFile result);
     }
 }

@@ -1,6 +1,9 @@
 ﻿namespace Hyperar.HPA.UI
 {
+    using System;
+    using System.ComponentModel;
     using System.Windows;
+    using Hyperar.HPA.UI.ViewModels;
     using Microsoft.Extensions.Configuration;
 
     /// <summary>
@@ -8,6 +11,10 @@
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string appTitleKeyName = "App:Title";
+
+        private const string appVersionKeyName = "App:Version";
+
         private readonly IConfiguration configuration;
 
         public MainWindow(IConfiguration configuration, object dataContext)
@@ -15,7 +22,17 @@
             this.InitializeComponent();
             this.configuration = configuration;
             this.DataContext = dataContext;
-            this.Title = this.configuration["OAuth:UserAgent"];
+            this.Title = $"{this.configuration[appTitleKeyName]} v{this.configuration[appVersionKeyName]}";
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (this.DataContext is MainViewModel mainViewModel)
+            {
+                e.Cancel = !mainViewModel.CanNavigate;
+            }
+
+            base.OnClosing(e);
         }
     }
 }

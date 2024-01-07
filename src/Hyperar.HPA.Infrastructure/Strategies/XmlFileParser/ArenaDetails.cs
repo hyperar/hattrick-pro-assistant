@@ -10,41 +10,43 @@
     {
         private const string availableAttributeName = "Available";
 
-        public override void ParseFileTypeSpecificContent(XmlReader reader, ref IXmlFile entity)
+        public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
 
-            result.Arena = ParseArenaNode(reader);
-        }
-
-        private static Arena ParseArenaNode(XmlReader reader)
-        {
-            // Reads opening element.
-            reader.Read();
-
-            var result = new Arena
-            {
-                ArenaId = reader.ReadXmlValueAsUint(),
-                ArenaName = reader.ReadElementContentAsString(),
-                ArenaImage = reader.ReadElementContentAsString(),
-                ArenaFallbackImage = reader.ReadElementContentAsString(),
-                Team = ParseTeamNode(reader),
-                League = ParseLeagueNode(reader),
-                Region = ParseRegionNode(reader),
-                CurrentCapacity = ParseCurrentCapacityNode(reader),
-                ExpandedCapacity = ParseExpandedCapacityNode(reader)
-            };
-
-            // Reads closing element.
-            reader.Read();
+            result.Arena = await ParseArenaNodeAsync(reader);
 
             return result;
         }
 
-        private static CurrentCapacity ParseCurrentCapacityNode(XmlReader reader)
+        private static async Task<Arena> ParseArenaNodeAsync(XmlReader reader)
+        {
+            // Reads opening element.
+            await reader.ReadAsync();
+
+            var result = new Arena
+            {
+                ArenaId = await reader.ReadXmlValueAsUintAsync(),
+                ArenaName = await reader.ReadElementContentAsStringAsync(),
+                ArenaImage = await reader.ReadElementContentAsStringAsync(),
+                ArenaFallbackImage = await reader.ReadElementContentAsStringAsync(),
+                Team = await ParseTeamNodeAsync(reader),
+                League = await ParseLeagueNodeAsync(reader),
+                Region = await ParseRegionNodeAsync(reader),
+                CurrentCapacity = await ParseCurrentCapacityNodeAsync(reader),
+                ExpandedCapacity = await ParseExpandedCapacityNodeAsync(reader)
+            };
+
+            // Reads closing element.
+            await reader.ReadAsync();
+
+            return result;
+        }
+
+        private static async Task<CurrentCapacity> ParseCurrentCapacityNodeAsync(XmlReader reader)
         {
             // Reads opening element. This could be both opening and closing element if Available attribute is false.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new CurrentCapacity
             {
@@ -53,26 +55,26 @@
 
             if (result.Available)
             {
-                result.RebuiltDate = reader.ReadXmlValueAsDateTime();
+                result.RebuiltDate = await reader.ReadXmlValueAsDateTimeAsync();
             }
             else
             {
-                reader.Read();
+                await reader.ReadAsync();
             }
 
-            result.Terraces = reader.ReadXmlValueAsUint();
-            result.Basic = reader.ReadXmlValueAsUint();
-            result.Roof = reader.ReadXmlValueAsUint();
-            result.Vip = reader.ReadXmlValueAsUint();
-            result.Total = reader.ReadXmlValueAsUint();
+            result.Terraces = await reader.ReadXmlValueAsUintAsync();
+            result.Basic = await reader.ReadXmlValueAsUintAsync();
+            result.Roof = await reader.ReadXmlValueAsUintAsync();
+            result.Vip = await reader.ReadXmlValueAsUintAsync();
+            result.Total = await reader.ReadXmlValueAsUintAsync();
 
             // Reads closing element.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static ExpandedCapacity ParseExpandedCapacityNode(XmlReader reader)
+        private static async Task<ExpandedCapacity> ParseExpandedCapacityNodeAsync(XmlReader reader)
         {
             var result = new ExpandedCapacity
             {
@@ -80,71 +82,71 @@
             };
 
             // Reads opening element. This could be both opening and closing element if Available attribute is false.
-            reader.Read();
+            await reader.ReadAsync();
 
             if (result.Available)
             {
-                result.ExpansionDate = reader.ReadXmlValueAsDateTime();
-                result.Terraces = reader.ReadXmlValueAsUint();
-                result.Basic = reader.ReadXmlValueAsUint();
-                result.Roof = reader.ReadXmlValueAsUint();
-                result.Vip = reader.ReadXmlValueAsUint();
-                result.Total = reader.ReadXmlValueAsUint();
+                result.ExpansionDate = await reader.ReadXmlValueAsDateTimeAsync();
+                result.Terraces = await reader.ReadXmlValueAsUintAsync();
+                result.Basic = await reader.ReadXmlValueAsUintAsync();
+                result.Roof = await reader.ReadXmlValueAsUintAsync();
+                result.Vip = await reader.ReadXmlValueAsUintAsync();
+                result.Total = await reader.ReadXmlValueAsUintAsync();
 
                 // Reads closing element.
-                reader.Read();
+                await reader.ReadAsync();
             }
 
             return result;
         }
 
-        private static League ParseLeagueNode(XmlReader reader)
+        private static async Task<League> ParseLeagueNodeAsync(XmlReader reader)
         {
             // Reads opening node.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new League
             {
-                LeagueId = reader.ReadXmlValueAsUint(),
-                LeagueName = reader.ReadElementContentAsString()
+                LeagueId = await reader.ReadXmlValueAsUintAsync(),
+                LeagueName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Region ParseRegionNode(XmlReader reader)
+        private static async Task<Region> ParseRegionNodeAsync(XmlReader reader)
         {
             // Reads opening node.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Region
             {
-                RegionId = reader.ReadXmlValueAsUint(),
-                RegionName = reader.ReadElementContentAsString()
+                RegionId = await reader.ReadXmlValueAsUintAsync(),
+                RegionName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }
 
-        private static Team ParseTeamNode(XmlReader reader)
+        private static async Task<Team> ParseTeamNodeAsync(XmlReader reader)
         {
             // Reads opening node.
-            reader.Read();
+            await reader.ReadAsync();
 
             var result = new Team
             {
-                TeamId = reader.ReadXmlValueAsUint(),
-                TeamName = reader.ReadElementContentAsString()
+                TeamId = await reader.ReadXmlValueAsUintAsync(),
+                TeamName = await reader.ReadElementContentAsStringAsync()
             };
 
             // Reads closing node.
-            reader.Read();
+            await reader.ReadAsync();
 
             return result;
         }

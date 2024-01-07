@@ -11,25 +11,25 @@
 
         private const string period = ".";
 
-        public static bool ReadXmlValueAsBool(this XmlReader reader)
+        public static async Task<bool> ReadXmlValueAsBoolAsync(this XmlReader reader)
         {
-            string value = reader.ReadElementContentAsString();
+            string value = await reader.ReadElementContentAsStringAsync();
 
             return value.Length == 1
                  ? value == "1"
                  : value.Equals(bool.TrueString, StringComparison.CurrentCultureIgnoreCase);
         }
 
-        public static DateTime ReadXmlValueAsDateTime(this XmlReader reader)
+        public static async Task<DateTime> ReadXmlValueAsDateTimeAsync(this XmlReader reader)
         {
-            string value = reader.ReadElementContentAsString();
+            string value = await reader.ReadElementContentAsStringAsync();
 
             return DateTime.Parse(value);
         }
 
-        public static decimal ReadXmlValueAsDecimal(this XmlReader reader)
+        public static async Task<decimal> ReadXmlValueAsDecimalAsync(this XmlReader reader)
         {
-            string value = reader.ReadElementContentAsString();
+            string value = await reader.ReadElementContentAsStringAsync();
 
             string numberDecimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
@@ -40,33 +40,33 @@
                 : decimal.Parse(value);
         }
 
-        public static int ReadXmlValueAsInt(this XmlReader reader)
+        public static async Task<int> ReadXmlValueAsIntAsync(this XmlReader reader)
         {
-            return int.Parse(reader.ReadElementContentAsString());
+            return int.Parse(await reader.ReadElementContentAsStringAsync());
         }
 
-        public static string? ReadXmlValueAsNullableString(this XmlReader reader)
+        public static async Task<string?> ReadXmlValueAsNullableStringAsync(this XmlReader reader)
         {
-            string? value = reader.ReadElementContentAsString();
+            string? value = await reader.ReadElementContentAsStringAsync();
 
             return string.IsNullOrWhiteSpace(value) ? null : value;
         }
 
-        public static uint? ReadXmlValueAsNullableUint(this XmlReader reader, uint? nullValue = null)
+        public static async Task<uint?> ReadXmlValueAsNullableUintAsync(this XmlReader reader, uint? nullValue = null)
         {
-            string value = reader.ReadElementContentAsString();
+            string value = await reader.ReadElementContentAsStringAsync();
 
             return value == nullValue?.ToString() ? null : uint.Parse(value);
         }
 
-        public static SkillLevel ReadXmlValueAsSkillLevel(this XmlReader reader)
+        public static async Task<SkillLevel> ReadXmlValueAsSkillLevelAsync(this XmlReader reader)
         {
-            return (SkillLevel)reader.ReadXmlValueAsInt();
+            return (SkillLevel)await reader.ReadXmlValueAsIntAsync();
         }
 
-        public static uint ReadXmlValueAsUint(this XmlReader reader)
+        public static async Task<uint> ReadXmlValueAsUintAsync(this XmlReader reader)
         {
-            return uint.Parse(reader.ReadElementContentAsString());
+            return uint.Parse(await reader.ReadElementContentAsStringAsync());
         }
     }
 }

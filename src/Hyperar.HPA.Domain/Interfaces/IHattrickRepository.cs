@@ -4,8 +4,8 @@
 
     public interface IHattrickRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity
     {
-        void Delete(long hattrickId);
+        Task DeleteAsync(long hattrickId);
 
-        TEntity? GetByHattrickId(long hattrickId);
+        Task<TEntity?> GetByHattrickIdAsync(long hattrickId);
     }
 }

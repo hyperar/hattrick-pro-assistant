@@ -3,73 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Hyperar.HPA.UI.Controls"
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
              xmlns:viewmodels="clr-namespace:Hyperar.HPA.UI.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:HomeViewModel}"
-             mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="1024">
+             d:DesignHeight="900"
+             d:DesignWidth="1600"
+             mc:Ignorable="d">
     <StackPanel>
-        <TabControl ItemsSource="{Binding SeniorTeams, Mode=OneWay}" SelectedIndex="{Binding SelectedTabIndex}">
-            <TabControl.ItemTemplate>
-                <DataTemplate DataType="local:MyTab">
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate DataType="local:MyTab">
-                    <DataGrid ItemsSource="{Binding SeniorPlayers, Mode=OneWay}"
-                              AutoGenerateColumns="False"
-                              CanUserAddRows="False"
-                              CanUserDeleteRows="False"
-                              CanUserResizeRows="False"
-                              IsReadOnly="True"
-                              SelectionMode="Single"
-                              VirtualizingStackPanel.IsVirtualizing="true"
-                              EnableRowVirtualization="True"
-                              EnableColumnVirtualization="True"
-                              VirtualizingStackPanel.VirtualizationMode="Recycling"
-                              VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                              GridLinesVisibility="None"
-                              AlternatingRowBackground="#eeeeee">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Player ID" Binding="{Binding HattrickId, Mode=OneWay}" />
-                            <DataGridTextColumn Header="First name" Binding="{Binding FirstName, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Nickname" Binding="{Binding NickName, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Lastname" Binding="{Binding LastName, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Shirt Number" Binding="{Binding ShirtNumber, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Age" Binding="{Binding AgeYears, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Days" Binding="{Binding AgeDays, Mode=OneWay}" />
-                            <DataGridTextColumn Header="TSI" Binding="{Binding TotalSkillIndex, Mode=OneWay}" />
-                            <DataGridCheckBoxColumn Header="MC Bonus" Binding="{Binding HasMotherClubBonus, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Salary" Binding="{Binding Salary, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Specialty" Binding="{Binding Specialty, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Agreeability" Binding="{Binding Agreeability, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Aggressiveness" Binding="{Binding Aggressiveness, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Honesty" Binding="{Binding Honesty, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Leadership" Binding="{Binding Leadership, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Bookings" Binding="{Binding BookingStatus, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Health" Binding="{Binding Health, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Loyalty" Binding="{Binding Loyalty, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Form" Binding="{Binding Form, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Stamina" Binding="{Binding Stamina, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Keeper" Binding="{Binding Keeper, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Defending" Binding="{Binding Defending, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Playmaking" Binding="{Binding Playmaking, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Winger" Binding="{Binding Winger, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Passing" Binding="{Binding Passing, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Scoring" Binding="{Binding Scoring, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Set Pieces" Binding="{Binding SetPieces, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Experience" Binding="{Binding Experience, Mode=OneWay}" />
-                            <DataGridTextColumn Header="League Goals" Binding="{Binding CurrentSeasonLeagueGoals, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Cup Goals" Binding="{Binding CurrentSeasonCupGoals, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Friendly Goals" Binding="{Binding CurrentSeasonFriendlyGoals, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Career Goals" Binding="{Binding CareerGoals, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Career Hattricks" Binding="{Binding CareerHattricks, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Goals On Team" Binding="{Binding GoalsOnTeam, Mode=OneWay}" />
-                            <DataGridTextColumn Header="Matches On Team" Binding="{Binding MatchesOnTeam, Mode=OneWay}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
+        <Border Style="{StaticResource ViewContainer}">
+            <controls:TeamOverview />
+        </Border>
     </StackPanel>
 </UserControl>

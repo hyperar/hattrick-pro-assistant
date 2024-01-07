@@ -30,12 +30,9 @@
 
             string? protectedResourcesUrl = this.configuration[ProtectedResourcesKey];
 
-            if (protectedResourcesUrl == null)
-            {
-                throw new NullReferenceException(nameof(protectedResourcesUrl));
-            }
+            ArgumentNullException.ThrowIfNull(protectedResourcesUrl, nameof(protectedResourcesUrl));
 
-            UriBuilder uriBuilder = new(protectedResourcesUrl)
+            UriBuilder uriBuilder = new UriBuilder(protectedResourcesUrl)
             {
                 Query = this.BuildQueryString(fileType, parameters)
             };
@@ -87,7 +84,7 @@
                     stringBuilder.AppendLine($"- {key}.");
                 }
 
-                throw new ArgumentOutOfRangeException(nameof(parameters), stringBuilder.ToString());
+                throw new ArgumentOutOfRangeException(nameof(parameters));
             }
         }
     }

@@ -15,6 +15,7 @@
                 services.AddSingleton<IXmlFileParserFactory, XmlFileParserFactory>();
                 services.AddSingleton<ArenaDetails>();
                 services.AddSingleton<ManagerCompendium>();
+                services.AddSingleton<Matches>();
                 services.AddSingleton<Players>();
                 services.AddSingleton<TeamDetails>();
                 services.AddSingleton<WorldDetails>();

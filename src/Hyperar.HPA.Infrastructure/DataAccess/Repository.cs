@@ -4,6 +4,7 @@
     using System.Linq;
     using Hyperar.HPA.Domain;
     using Hyperar.HPA.Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class Repository<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IRepository<TEntity> where TEntity : EntityBase, IEntity
     {
@@ -11,23 +12,18 @@
         {
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            TEntity? entity = this.GetById(id);
+            TEntity? entity = await this.GetByIdAsync(id);
 
-            if (entity != null)
-            {
-                this.EntityCollection.Remove(entity);
-            }
-            else
-            {
-                throw new Exception($"Entity of type \"{typeof(TEntity)}\" not found with ID \"{id}\".");
-            }
+            ArgumentNullException.ThrowIfNull(entity, nameof(entity));
+
+            this.EntityCollection.Remove(entity);
         }
 
-        public TEntity? GetById(int id)
+        public async Task<TEntity?> GetByIdAsync(int id)
         {
-            return this.EntityCollection.Where(e => e.Id == id).SingleOrDefault();
+            return await this.EntityCollection.Where(e => e.Id == id).SingleOrDefaultAsync();
         }
     }
 }

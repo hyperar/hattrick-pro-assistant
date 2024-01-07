@@ -1,53 +1,32 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using Hyperar.HPA.Application.Interfaces;
+    using System;
+    using System.Threading.Tasks;
+    using Hyperar.HPA.Application.Models.HomeView;
+    using Hyperar.HPA.Application.Services;
+    using Hyperar.HPA.UI.State.Interfaces;
 
     public class HomeViewModel : ViewModelBase
     {
         private readonly IHomeViewService homeViewService;
 
-        private int? selectedTabIndex;
+        private readonly INavigator navigator;
 
-        private List<Domain.SeniorTeam>? seniorTeams;
-
-        public HomeViewModel(IHomeViewService homeViewService)
+        public HomeViewModel(IHomeViewService homeViewService, INavigator navigator)
         {
             this.homeViewService = homeViewService;
-
-            this.Initialize();
+            this.navigator = navigator;
         }
 
-        public int SelectedTabIndex
-        {
-            get
-            {
-                return this.selectedTabIndex ?? 0;
-            }
-            set
-            {
-                this.selectedTabIndex = value;
-                this.OnPropertyChanged(nameof(this.SeniorTeams));
-                this.OnPropertyChanged(nameof(this.SelectedTabIndex));
-            }
-        }
+        public TeamOverview TeamOverview { get; set; } = new TeamOverview();
 
-        public ObservableCollection<Domain.SeniorTeam> SeniorTeams
+        public override async Task InitializeAsync()
         {
-            get
-            {
-                return this.seniorTeams != null
-                     ? new ObservableCollection<Domain.SeniorTeam>(this.seniorTeams)
-                     : new ObservableCollection<Domain.SeniorTeam>();
-            }
-        }
+            ArgumentNullException.ThrowIfNull(this.navigator.SelectedTeamId, nameof(this.navigator.SelectedTeamId));
 
-        private void Initialize()
-        {
-            this.seniorTeams = this.homeViewService.GetSeniorTeams();
+            this.TeamOverview = await this.homeViewService.GetTeamsOverview(this.navigator.SelectedTeamId.Value);
 
-            this.OnPropertyChanged(nameof(this.SeniorTeams));
+            this.OnPropertyChanged(nameof(this.TeamOverview));
         }
     }
 }

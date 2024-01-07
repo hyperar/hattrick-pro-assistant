@@ -13,7 +13,7 @@
 
         public virtual Country? Country { get; set; }
 
-        public virtual List<LeagueCup> Cups { get; set; } = new List<LeagueCup>();
+        public virtual ICollection<LeagueCup> Cups { get; set; } = new HashSet<LeagueCup>();
 
         public uint CurrentRound { get; set; }
 
@@ -51,7 +51,7 @@
 
         public uint SeniorNationalTeamId { get; set; }
 
-        public virtual List<SeniorTeam>? SeniorTeams { get; set; }
+        public virtual ICollection<SeniorTeam> SeniorTeams { get; set; } = new HashSet<SeniorTeam>();
 
         public string ShortName { get; set; } = string.Empty;
 

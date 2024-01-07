@@ -9,26 +9,16 @@
     {
         public IXmlFile CreateEntity(string fileName)
         {
-            switch (fileName)
+            return fileName switch
             {
-                case XmlFileName.ArenaDetails:
-                    return new Application.Hattrick.ArenaDetails.HattrickData(fileName);
-
-                case XmlFileName.ManagerCompendium:
-                    return new Application.Hattrick.ManagerCompendium.HattrickData(fileName);
-
-                case XmlFileName.Players:
-                    return new Application.Hattrick.Players.HattrickData(fileName);
-
-                case XmlFileName.TeamDetails:
-                    return new Application.Hattrick.TeamDetails.HattrickData(fileName);
-
-                case XmlFileName.WorldDetails:
-                    return new Application.Hattrick.WorldDetails.HattrickData(fileName);
-
-                default:
-                    throw new NotImplementedException($"No implementation for file name: '{fileName}'.");
-            }
+                XmlFileName.ArenaDetails => new Application.Hattrick.ArenaDetails.HattrickData(fileName),
+                XmlFileName.ManagerCompendium => new Application.Hattrick.ManagerCompendium.HattrickData(fileName),
+                XmlFileName.Matches => new Application.Hattrick.Matches.HattrickData(fileName),
+                XmlFileName.Players => new Application.Hattrick.Players.HattrickData(fileName),
+                XmlFileName.TeamDetails => new Application.Hattrick.TeamDetails.HattrickData(fileName),
+                XmlFileName.WorldDetails => new Application.Hattrick.WorldDetails.HattrickData(fileName),
+                _ => throw new ArgumentOutOfRangeException(nameof(fileName))
+            };
         }
     }
 }

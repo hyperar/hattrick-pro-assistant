@@ -37,7 +37,7 @@
                 .HasColumnName(Constants.ColumnName.FoundedOn)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Date)
+                .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
             builder.Property(p => p.CoachPlayerId)
@@ -89,18 +89,87 @@
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.NumberOfConsecutiveUndefeatedMatches)
-                .HasColumnName(Constants.ColumnName.NumberOfConsecutiveUndefeatedMatches)
+            builder.Property(p => p.UndefeatedStreak)
+                .HasColumnName(Constants.ColumnName.UndefeatedStreak)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.NumberOfConsecutiveWonMatches)
-                .HasColumnName(Constants.ColumnName.NumberOfConsecutiveWonMatches)
+            builder.Property(p => p.WinStreak)
+                .HasColumnName(Constants.ColumnName.WinStreak)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(p => p.SeniorSeriesHattrickId)
+                .HasColumnName(Constants.ColumnName.SeniorSeriesHattrickId)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(x => x.SeniorSeriesName)
+                .HasColumnName(Constants.ColumnName.SeniorSeriesName)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(100)
+                .IsRequired()
+                .IsUnicode();
+
+            builder.Property(p => p.SeniorSeriesDivision)
+                .HasColumnName(Constants.ColumnName.SeniorSeriesDivision)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(x => x.LogoUrl)
+                .HasColumnName(Constants.ColumnName.LogoUrl)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(1024)
+                .IsUnicode();
+
+            builder.Property(x => x.MatchKitUrl)
+                .HasColumnName(Constants.ColumnName.MatchKitUrl)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(1024)
+                .IsRequired()
+                .IsUnicode();
+
+            builder.Property(x => x.AlternativeMatchKitUrl)
+                .HasColumnName(Constants.ColumnName.AlternativeMatchKitUrl)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(1024)
+                .IsRequired()
+                .IsUnicode();
+
+            builder.Property(p => p.Logo)
+                .HasColumnName(Constants.ColumnName.Logo)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.VarBinary);
+
+            builder.Property(p => p.MatchKit)
+                .HasColumnName(Constants.ColumnName.MatchKit)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.VarBinary)
+                .IsRequired();
+
+            builder.Property(p => p.AlternativeMatchKit)
+                .HasColumnName(Constants.ColumnName.AlternativeMatchKit)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.VarBinary)
                 .IsRequired();
         }
 

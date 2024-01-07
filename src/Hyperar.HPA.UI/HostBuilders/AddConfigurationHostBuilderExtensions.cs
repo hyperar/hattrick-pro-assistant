@@ -5,19 +5,27 @@
 
     public static class AddConfigurationHostBuilderExtensions
     {
-#if DEBUG
-        private const string configurationFile = "appSettings.debug.json";
+        private const string baseConfigurationFile = "appSettings.json";
 
-#else
-        private const string configurationFile = "appSettings.json";
-#endif
+        private const string developmentConfigurationFile = "appSettings.Development.json";
+
+        private const string productionConfigurationFile = "appSettings.Production.json";
 
         public static IHostBuilder AddConfiguration(this IHostBuilder host)
         {
             host.ConfigureAppConfiguration((context, configurationBuilder) =>
             {
                 configurationBuilder.AddUserSecrets<App>();
-                configurationBuilder.AddJsonFile(configurationFile);
+                configurationBuilder.AddJsonFile(baseConfigurationFile);
+
+                if (context.HostingEnvironment.IsDevelopment())
+                {
+                    configurationBuilder.AddJsonFile(developmentConfigurationFile);
+                }
+                else if (context.HostingEnvironment.IsProduction())
+                {
+                    configurationBuilder.AddJsonFile(productionConfigurationFile);
+                }
             });
 
             return host;

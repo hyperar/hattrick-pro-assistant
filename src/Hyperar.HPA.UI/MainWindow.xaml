@@ -1,9 +1,8 @@
 ﻿<Window x:Class="Hyperar.HPA.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hyperar.HPA.UI"
         xmlns:controls="clr-namespace:Hyperar.HPA.UI.Controls"
         xmlns:viewModels="clr-namespace:Hyperar.HPA.UI.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
@@ -13,7 +12,7 @@
         MinWidth="1024">
     <Window.Background>
         <ImageBrush
-            ImageSource="Resources/BackgroundDark.jpg"
+            ImageSource="Resources/bg-dark.jpg"
             TileMode="Tile"
             Stretch="Uniform"
             AlignmentY="Top"
@@ -21,15 +20,17 @@
             ViewportUnits="Absolute" />
     </Window.Background>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <controls:NavigationBar Grid.Row="0" />
+        <controls:NavigationBar Grid.Column="0" />
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ContentControl Content="{Binding CurrentViewModel}" />
-        </ScrollViewer>
+        <Border Style="{StaticResource MainViewContainer}" Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ContentControl Content="{Binding CurrentViewModel}" />
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Window>

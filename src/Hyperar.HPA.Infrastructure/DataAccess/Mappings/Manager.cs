@@ -21,7 +21,7 @@
                 .HasColumnName(Constants.ColumnName.SupporterTier)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Int)
+                .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(x => x.CurrencyName)
