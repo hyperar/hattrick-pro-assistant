@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Infrastructure.DataAccess.Mappings
 {
-    using Hyperar.HPA.Infrastructure.DataAccess.Interfaces;
+    using Infrastructure.DataAccess.Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

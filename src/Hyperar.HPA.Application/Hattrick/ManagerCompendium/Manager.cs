@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.ManagerCompendium
 {
     using System.Collections.Generic;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class Manager
     {

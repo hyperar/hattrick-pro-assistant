@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Interfaces;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
 
     public abstract class XmlFileDataPersisterBase : IXmlFileDataPersisterStrategy
     {

@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.UI
 {
     using System.Windows;
-    using Hyperar.HPA.Domain.Interfaces;
-    using Hyperar.HPA.UI.HostBuilders;
+    using Domain.Interfaces;
+    using UI.HostBuilders;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 

@@ -2,8 +2,8 @@
 {
     using System;
     using System.Linq;
-    using Hyperar.HPA.Domain;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public class Repository<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IRepository<TEntity> where TEntity : EntityBase, IEntity

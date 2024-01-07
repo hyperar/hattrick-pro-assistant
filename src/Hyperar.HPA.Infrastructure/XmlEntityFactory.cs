@@ -1,9 +1,9 @@
 ﻿namespace Hyperar.HPA.Infrastructure
 {
     using System;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.Constants;
+    using Application.Hattrick.Interfaces;
+    using Application.Interfaces;
+    using Common.Constants;
 
     public class XmlEntityFactory : IXmlEntityFactory
     {

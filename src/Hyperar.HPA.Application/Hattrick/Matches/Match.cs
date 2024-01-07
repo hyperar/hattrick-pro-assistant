@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.Matches
 {
     using System;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class Match
     {

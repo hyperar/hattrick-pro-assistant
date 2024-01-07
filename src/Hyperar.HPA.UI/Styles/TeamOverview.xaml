@@ -5,18 +5,18 @@
     <Color x:Key="White">#fff</Color>
 
     <Style x:Key="OverviewDataGrid" TargetType="DataGrid">
-        <Setter Property="AlternatingRowBackground" Value="#fff" />
+        <Setter Property="AlternatingRowBackground" Value="#f5f5f5" />
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="Background" Value="#fff" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="GridLinesVisibility" Value="None" />
         <Setter Property="HeadersVisibility" Value="None" />
-        <Setter Property="IsReadOnly" Value="False" />
+        <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="RowBackground" Value="#fff" />
+        <Setter Property="SelectionMode" Value="Single" />
         <Setter Property="SelectionUnit" Value="FullRow" />
         <Style.Resources>
             <Style TargetType="DataGridRow">
-                <Setter Property="IsHitTestVisible" Value="False" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="16" />
             </Style>
@@ -42,8 +42,8 @@
         <Setter Property="Margin" Value="2 0" />
         <Setter Property="FontSize" Value="16" />
     </Style>
-    
-    
+
+
     <!-- Icons -->
     <BitmapImage x:Key="transparent" UriSource="../Resources/transparent.gif" />
     <BitmapImage x:Key="yellow-card-16" UriSource="../Resources/yellow-card-16.png" />

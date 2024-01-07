@@ -1,9 +1,9 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.Infrastructure;
-    using Hyperar.HPA.Infrastructure.Services;
+    using Application.Interfaces;
+    using Application.Services;
+    using Infrastructure;
+    using Infrastructure.Services;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 

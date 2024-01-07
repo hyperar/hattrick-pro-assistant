@@ -2,12 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Xml;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.TeamDetails;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.Enums;
-    using Hyperar.HPA.Common.ExtensionMethods;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
+    using Application.Hattrick.Interfaces;
+    using Application.Hattrick.TeamDetails;
+    using Application.Interfaces;
+    using Common.Enums;
+    using Common.ExtensionMethods;
+    using Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
 
     public class TeamDetails : XmlFileParserBase, IXmlFileParserStrategy
     {

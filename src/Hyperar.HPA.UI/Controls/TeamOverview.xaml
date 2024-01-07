@@ -13,6 +13,7 @@
         <converters:ByteArrayToBitmapImageConverter x:Key="byteToImageConverter" />
         <converters:DateToLocaleShortDateTimeString x:Key="dateToLocaleDateTimeString" />
         <converters:HasMotherClubBonusToSmallBitmapImageConverter x:Key="hasMotherClubBonusToSmallBitmapImageConverter" />
+        <converters:HattrickEnumToTranslatedStringConverter x:Key="hattrickEnumToTranslatedStringConverter" />
         <converters:HealthToSmallBitmapImageConverter x:Key="healthToSmallBitmapImageConverter" />
         <converters:HealthToWeekStringConverter x:Key="healthToWeekStringConverter" />
         <converters:IsTransferListedToSmallBitmapImageConverter x:Key="isTransferListedToSmallBitmapImageConverter" />
@@ -32,10 +33,20 @@
         </Grid.RowDefinitions>
 
         <!-- Senior Team -->
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10 0">
-            <TextBlock Style="{StaticResource BlockTitle}" Text="{x:Static globalization:Strings.Team}" />
+        <StackPanel Grid.Column="0"
+                    Grid.Row="0"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    Margin="10 0">
 
-            <Image Height="210" Width="260" Source="{Binding TeamOverview.SeniorTeam.Logo, FallbackValue={StaticResource no-logo}, TargetNullValue={StaticResource no-logo}, Converter={StaticResource byteToImageConverter}}" />
+            <TextBlock Style="{StaticResource BlockTitle}"
+                       Text="{x:Static globalization:Strings.Team}" />
+
+            <Image Stretch="None"
+                   Source="{Binding TeamOverview.SeniorTeam.Logo,
+                                    FallbackValue={StaticResource no-logo},
+                                    TargetNullValue={StaticResource no-logo},
+                                    Converter={StaticResource byteToImageConverter}}" />
 
             <Grid Style="{StaticResource OverviewGrid}">
                 <Grid.ColumnDefinitions>
@@ -50,23 +61,53 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Style="{StaticResource LabelTextBlock}" Grid.Column="0" Grid.Row="0" Text="{x:Static globalization:Strings.TeamLabel}" />
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding TeamOverview.SeniorTeam}" />
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           Style="{StaticResource LabelTextBlock}"
+                           Text="{x:Static globalization:Strings.TeamLabel}" />
 
-                <TextBlock Style="{StaticResource LabelTextBlock}" Grid.Column="0" Grid.Row="1" Text="{x:Static globalization:Strings.CountryLabel}" />
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding TeamOverview.Country}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="0"
+                           Text="{Binding TeamOverview.SeniorTeam}" />
 
-                <TextBlock Style="{StaticResource LabelTextBlock}" Grid.Column="0" Grid.Row="2" Text="{x:Static globalization:Strings.RegionLabel}" />
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding TeamOverview.Region}" />
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           Style="{StaticResource LabelTextBlock}"
+                           Text="{x:Static globalization:Strings.CountryLabel}" />
 
-                <TextBlock Style="{StaticResource LabelTextBlock}" Grid.Column="0" Grid.Row="3" Text="{x:Static globalization:Strings.LeagueLabel}" />
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding TeamOverview.SeniorSeries}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{Binding TeamOverview.Country}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="2"
+                           Style="{StaticResource LabelTextBlock}"
+                           Text="{x:Static globalization:Strings.RegionLabel}" />
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           Text="{Binding TeamOverview.Region}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="3"
+                           Style="{StaticResource LabelTextBlock}"
+                           Text="{x:Static globalization:Strings.LeagueLabel}" />
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="3"
+                           Text="{Binding TeamOverview.SeniorSeries}" />
             </Grid>
         </StackPanel>
 
         <!-- Manager -->
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="10 0">
-            <TextBlock Style="{StaticResource BlockTitle}" Text="{x:Static globalization:Strings.Manager}" />
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    Margin="10 0">
+
+            <TextBlock Style="{StaticResource BlockTitle}"
+                       Text="{x:Static globalization:Strings.Manager}" />
 
             <Grid Style="{StaticResource OverviewGrid}">
                 <Grid.ColumnDefinitions>
@@ -81,123 +122,222 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Image Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Stretch="None" Source="{Binding TeamOverview.Manager.Avatar, FallbackValue={StaticResource sil1_3}, TargetNullValue={StaticResource sil1_3}, Converter={StaticResource byteToImageConverter}}" />
+                <Image Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       Stretch="None"
+                       Source="{Binding TeamOverview.Manager.Avatar,
+                                        FallbackValue={StaticResource sil1_3},
+                                        TargetNullValue={StaticResource sil1_3},
+                                        Converter={StaticResource byteToImageConverter}}" />
 
-                <TextBlock Style="{StaticResource LabelTextBlock}" Grid.Column="0" Grid.Row="1" Text="{x:Static globalization:Strings.UserLabel}" />
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding TeamOverview.Manager}" />
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           Style="{StaticResource LabelTextBlock}"
+                           Text="{x:Static globalization:Strings.UserLabel}" />
 
-                <TextBlock Style="{StaticResource LabelTextBlock}" Grid.Column="0" Grid.Row="2" Text="{x:Static globalization:Strings.SupporterLabel}" />
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding TeamOverview.Manager.SupporterTier, Converter={StaticResource supporterTierToTranslatedString}}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{Binding TeamOverview.Manager}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="2"
+                           Style="{StaticResource LabelTextBlock}"
+                           Text="{x:Static globalization:Strings.SupporterLabel}" />
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           Text="{Binding TeamOverview.Manager.SupporterTier,
+                                          Converter={StaticResource supporterTierToTranslatedString}}" />
             </Grid>
         </StackPanel>
 
         <!-- Recent Matches -->
-        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10 0">
-            <TextBlock Style="{StaticResource BlockTitle}" Text="{x:Static globalization:Strings.RecentMatches}" />
+        <StackPanel Grid.Column="1" Grid.Row="0"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Stretch"
+                    Margin="10 0">
 
-            <DataGrid Style="{StaticResource OverviewDataGrid}" ItemsSource="{Binding TeamOverview.PlayedMatches, Mode=OneWay}">
+            <TextBlock Style="{StaticResource BlockTitle}"
+                       Text="{x:Static globalization:Strings.RecentMatches}" />
+
+            <DataGrid Style="{StaticResource OverviewDataGrid}"
+                      ItemsSource="{Binding TeamOverview.PlayedMatches,
+                                            Mode=OneWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="SizeToCells" Binding="{Binding HomeTeam.Name}" />
-                    <DataGridTextColumn Width="SizeToCells" Binding="{Binding HomeGoals}" />
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding HomeTeam.Name}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="SizeToCells"
+                                        Binding="{Binding HomeGoals}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <DataGridTemplateColumn Width="SizeToCells">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="-" />
+                                <TextBlock HorizontalAlignment="Center" Text="-" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Width="SizeToCells" Binding="{Binding AwayGoals}" />
-                    <DataGridTextColumn Width="SizeToCells" Binding="{Binding AwayTeam.Name}" />
+                    <DataGridTextColumn Width="SizeToCells"
+                                        Binding="{Binding AwayGoals}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding AwayTeam.Name}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
         <!-- Upcoming Matches -->
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" MinHeight="250" HorizontalAlignment="Center" Margin="10 0">
-            <TextBlock Style="{StaticResource BlockTitle}" Text="{x:Static globalization:Strings.UpcomingMatches}" />
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    Orientation="Vertical"
+                    MinHeight="250"
+                    HorizontalAlignment="Stretch"
+                    Margin="10 0">
 
-            <DataGrid Style="{StaticResource OverviewDataGrid}" ItemsSource="{Binding TeamOverview.UpcomingMatches, Mode=OneWay}">
+            <TextBlock Style="{StaticResource BlockTitle}"
+                       Text="{x:Static globalization:Strings.UpcomingMatches}" />
+
+            <DataGrid Style="{StaticResource OverviewDataGrid}"
+                      ItemsSource="{Binding TeamOverview.UpcomingMatches,
+                                            Mode=OneWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="SizeToCells" Binding="{Binding HomeTeam.Name}" />
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding HomeTeam.Name}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <DataGridTemplateColumn Width="SizeToCells">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="-" />
+                                <TextBlock HorizontalAlignment="Center"  Text="vs" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Width="SizeToCells" Binding="{Binding AwayTeam.Name}" />
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding AwayTeam.Name}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
         <!-- Players -->
-        <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical" HorizontalAlignment="Center" MinHeight="250" Margin="10 0">
-            <TextBlock Style="{StaticResource BlockTitle}" Text="{x:Static globalization:Strings.Players}" />
+        <StackPanel Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Stretch"
+                    MinHeight="250"
+                    Margin="10 0">
+
+            <TextBlock Style="{StaticResource BlockTitle}"
+                       Text="{x:Static globalization:Strings.Players}" />
 
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <DataGrid Style="{StaticResource OverviewDataGrid}" ItemsSource="{Binding TeamOverview.SeniorPlayers, Mode=OneWay}">
+                <DataGrid Style="{StaticResource OverviewDataGrid}"
+                          ItemsSource="{Binding TeamOverview.SeniorPlayers,
+                                                Mode=OneWay}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding FirstName}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Left" />
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding NickName}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Left" />
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding LastName}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Left" />
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding FullName}" Width="SizeToCells" />
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None" Margin="5 0" Source="{Binding BookingStatus, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource bookingSmallStatusToBitmapImageConverter}}" />
+                                    <Image Stretch="None"
+                                           Margin="5 0"
+                                           ToolTip="{Binding BookingStatus,
+                                                             Converter={StaticResource hattrickEnumToTranslatedStringConverter}}"
+                                           Source="{Binding BookingStatus,
+                                                            FallbackValue={StaticResource transparent},
+                                                            TargetNullValue={StaticResource transparent},
+                                                            Converter={StaticResource bookingSmallStatusToBitmapImageConverter}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None" Margin="5 0" Source="{Binding IsTransferListed, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource isTransferListedToSmallBitmapImageConverter}}" />
+                                    <Image Stretch="None"
+                                           Margin="5 0"
+                                           Source="{Binding IsTransferListed,
+                                                            FallbackValue={StaticResource transparent},
+                                                            TargetNullValue={StaticResource transparent},
+                                                            Converter={StaticResource isTransferListedToSmallBitmapImageConverter}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None" Margin="5 0" Source="{Binding HealthStatus, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource healthToSmallBitmapImageConverter}}" />
+                                    <Image Stretch="None"
+                                           Margin="5 0"
+                                           Source="{Binding HealthStatus,
+                                                            FallbackValue={StaticResource transparent},
+                                                            TargetNullValue={StaticResource transparent},
+                                                            Converter={StaticResource healthToSmallBitmapImageConverter}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding HealthStatus, Converter={StaticResource healthToWeekStringConverter}}" FontWeight="Bold" />
+                                    <TextBlock FontWeight="Bold"
+                                               Text="{Binding HealthStatus,
+                                                              Converter={StaticResource healthToWeekStringConverter}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None" Margin="5 0" Source="{Binding HasMotherClubBonus, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource hasMotherClubBonusToSmallBitmapImageConverter}}" />
+                                    <Image Stretch="None"
+                                           Margin="5 0"
+                                           Source="{Binding HasMotherClubBonus,
+                                                            FallbackValue={StaticResource transparent},
+                                                            TargetNullValue={StaticResource transparent},
+                                                            Converter={StaticResource hasMotherClubBonusToSmallBitmapImageConverter}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="None" Margin="5 0" Source="{Binding Specialty, FallbackValue={StaticResource transparent}, TargetNullValue={StaticResource transparent}, Converter={StaticResource specialtyToSmallBitmapImageConverter}}" />
+                                    <Image Stretch="None"
+                                           Margin="5 0"
+                                           ToolTip="{Binding Specialty,
+                                                             Converter={StaticResource hattrickEnumToTranslatedStringConverter}}"
+                                           Source="{Binding Specialty,
+                                                            FallbackValue={StaticResource transparent},
+                                                            TargetNullValue={StaticResource transparent},
+                                                            Converter={StaticResource specialtyToSmallBitmapImageConverter}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

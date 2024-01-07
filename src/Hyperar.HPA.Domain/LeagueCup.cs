@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Domain
 {
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain.Interfaces;
 
     public class LeagueCup : HattrickEntityBase, IHattrickEntity
     {

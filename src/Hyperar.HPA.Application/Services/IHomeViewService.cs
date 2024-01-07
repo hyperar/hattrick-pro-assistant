@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Models.HomeView;
+    using Application.Models.HomeView;
 
     public interface IHomeViewService
     {

@@ -1,28 +1,28 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.ManagerCompendium;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Application.Hattrick.Interfaces;
+    using Hattrick = Application.Hattrick.ManagerCompendium;
+    using Application.Interfaces;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public class ManagerCompendium : IXmlFileDataPersisterStrategy
     {
-        private readonly IDatabaseContext context;
-
         private readonly IHattrickRepository<Domain.Country> countryRepository;
+
+        private readonly IDatabaseContext databaseContext;
 
         private readonly IHattrickRepository<Domain.Manager> managerRepository;
 
         private readonly IRepository<Domain.User> userRepository;
 
         public ManagerCompendium(
-            IDatabaseContext context,
+            IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
             IHattrickRepository<Domain.Manager> managerRepository,
             IRepository<Domain.User> userRepository)
         {
-            this.context = context;
+            this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.managerRepository = managerRepository;
             this.userRepository = userRepository;
@@ -30,12 +30,26 @@
 
         public async Task PersistDataAsync(IXmlFile file)
         {
-            var entity = (HattrickData)file;
+            try
+            {
+                if (file is Hattrick.HattrickData entity)
+                {
+                    await this.ProcessManagerCompendiumAsync(entity);
+                }
+                else
+                {
+                    throw new ArgumentException(file.GetType().FullName, nameof(file));
+                }
+            }
+            catch
+            {
+                this.databaseContext.Cancel();
 
-            await this.ProcessManagerCompendiumAsync(entity);
+                throw;
+            }
         }
 
-        private async Task ProcessManagerCompendiumAsync(HattrickData entity)
+        private async Task ProcessManagerCompendiumAsync(Hattrick.HattrickData entity)
         {
             var manager = await this.managerRepository.GetByHattrickIdAsync(entity.Manager.UserId);
             var country = await this.countryRepository.GetByHattrickIdAsync(entity.Manager.Country.CountryId);
@@ -69,7 +83,7 @@
                 this.managerRepository.Update(manager);
             }
 
-            await this.context.SaveAsync();
+            await this.databaseContext.SaveAsync();
         }
     }
 }

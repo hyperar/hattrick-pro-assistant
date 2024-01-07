@@ -1,10 +1,10 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileParser
 {
     using System.Xml;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.WorldDetails;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
+    using Application.Hattrick.Interfaces;
+    using Application.Hattrick.WorldDetails;
+    using Application.Interfaces;
+    using Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
 
     public class WorldDetails : XmlFileParserBase, IXmlFileParserStrategy
     {

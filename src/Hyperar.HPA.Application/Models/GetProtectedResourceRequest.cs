@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class GetProtectedResourceRequest
     {

@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick
 {
     using System;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
+    using Application.Hattrick.Interfaces;
 
     public class XmlFileBase : IXmlFile
     {

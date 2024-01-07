@@ -1,16 +1,20 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Models;
+    using Application.Hattrick.Interfaces;
+    using Application.Models;
 
     public interface IXmlFileService
     {
+        Task BeginPersistSession();
+
+        Task EndPersistSession();
+
         List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile);
 
         Task<IXmlFile> ParseFileAsync(Stream fileStream);
 
         Task<IXmlFile> ParseFileAsync(string fileContent);
 
-        Task PersistAsync(IXmlFile xmlFile);
+        Task PersistFileAsync(IXmlFile xmlFile);
     }
 }

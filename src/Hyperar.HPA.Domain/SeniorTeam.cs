@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.Domain
 {
     using System;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain.Interfaces;
 
     public class SeniorTeam : HattrickEntityBase, IHattrickEntity
     {

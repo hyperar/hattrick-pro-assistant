@@ -2,9 +2,9 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels;
+    using Application.Models;
+    using UI.State.Interfaces;
+    using UI.ViewModels;
 
     public class GetRequestTokenCommand : AsyncCommandBase
     {

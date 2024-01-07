@@ -1,11 +1,11 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileParser
 {
     using System.Xml;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.ManagerCompendium;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Common.ExtensionMethods;
-    using Hyperar.HPA.Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
+    using Application.Hattrick.Interfaces;
+    using Application.Hattrick.ManagerCompendium;
+    using Application.Interfaces;
+    using Common.ExtensionMethods;
+    using Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
 
     public class ManagerCompendium : XmlFileParserBase, IXmlFileParserStrategy
     {

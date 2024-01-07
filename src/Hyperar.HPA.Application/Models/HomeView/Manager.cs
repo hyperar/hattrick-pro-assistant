@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class Manager
     {

@@ -6,9 +6,9 @@
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Input;
-    using Hyperar.HPA.UI.Enums;
-    using Hyperar.HPA.UI.State.Interfaces;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
+    using UI.Enums;
+    using UI.State.Interfaces;
+    using UI.ViewModels.Interfaces;
 
     public class UpdateCurrentViewModelCommand : AsyncCommandBase, ICommand
     {
