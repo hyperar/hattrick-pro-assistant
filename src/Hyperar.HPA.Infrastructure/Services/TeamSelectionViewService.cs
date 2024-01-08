@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System.Threading.Tasks;
-    using System.Xml.Schema;
     using Application.Models.TeamSelection;
     using Application.Services;
     using Domain.Interfaces;

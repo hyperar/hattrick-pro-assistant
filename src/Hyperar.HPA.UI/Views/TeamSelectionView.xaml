@@ -18,6 +18,8 @@
             <TextBlock Style="{StaticResource ViewTitle}"
                        Text="{x:Static globalization:Strings.TeamSelection}" />
 
+            <Separator />
+
             <ItemsControl ItemsSource="{Binding SeniorTeams}" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -89,7 +91,8 @@
                             <Button Grid.Column="0"
                                     Grid.Row="5"
                                     Grid.ColumnSpan="2"
-                                    Content="{x:Static globalization:Strings.ChangeTeam}"
+                                    Margin="15"
+                                    Content="{x:Static globalization:Strings.SelectTeam}"
                                     Command="{Binding DataContext.ChangeSelectedTeamCommand,
                                                       RelativeSource={RelativeSource Mode=FindAncestor,
                                                       AncestorType={x:Type Border}}}"

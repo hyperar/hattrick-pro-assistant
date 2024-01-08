@@ -25,19 +25,29 @@
 
             return new TeamOverview
             {
-                Country = new Country
-                {
-                    HattrickId = seniorTeam.Region.Country.HattrickId,
-                    Name = seniorTeam.Region.Country.Name,
-                },
                 Manager = new Manager
                 {
                     HattrickId = seniorTeam.Manager.HattrickId,
                     UserName = seniorTeam.Manager.UserName,
                     SupporterTier = seniorTeam.Manager.SupporterTier,
-                    Avatar = seniorTeam.Manager.Avatar
+                    Avatar = seniorTeam.Manager.Avatar,
+                    Country = new Country
+                    {
+                        HattrickId = seniorTeam.Manager.Country.HattrickId,
+                        Name = seniorTeam.Manager.Country.Name,
+                    },
                 },
-                PlayedMatches = seniorTeam.OverviewMatches.Where(y => y.Status == MatchStatus.Finished)
+                SeniorTeam = new SeniorTeam
+                {
+                    HattrickId = seniorTeam.HattrickId,
+                    Name = seniorTeam.Name,
+                    Logo = seniorTeam.Logo,
+                    Country = new Country
+                    {
+                        HattrickId = seniorTeam.Region.Country.HattrickId,
+                        Name = seniorTeam.Region.Country.Name,
+                    },
+                    PlayedMatches = seniorTeam.OverviewMatches.Where(y => y.Status == MatchStatus.Finished)
                                                           .OrderBy(y => y.StartsOn)
                                                           .Select(y => new PlayedMatch
                                                           {
@@ -56,12 +66,12 @@
                                                               AwayGoals = y.AwayGoals ?? 0,
                                                               Type = y.Type
                                                           }).ToArray(),
-                Region = new Region
-                {
-                    HattrickId = seniorTeam.Region.HattrickId,
-                    Name = seniorTeam.Region.Name
-                },
-                SeniorPlayers = seniorTeam.SeniorPlayers.OrderBy(x => x.ShirtNumber)
+                    Region = new Region
+                    {
+                        HattrickId = seniorTeam.Region.HattrickId,
+                        Name = seniorTeam.Region.Name
+                    },
+                    SeniorPlayers = seniorTeam.SeniorPlayers.OrderBy(x => x.ShirtNumber)
                                                         .ThenBy(x => x.LastName)
                                                         .ThenBy(x => x.FirstName)
                                                         .ThenBy(x => x.HattrickId)
@@ -77,18 +87,12 @@
                                                             HealthStatus = x.Health,
                                                             Specialty = x.Specialty
                                                         }).ToArray(),
-                SeniorSeries = new SeniorSeries
-                {
-                    HattrickId = seniorTeam.SeniorSeriesHattrickId,
-                    Name = seniorTeam.SeniorSeriesName
-                },
-                SeniorTeam = new SeniorTeam
-                {
-                    HattrickId = seniorTeam.HattrickId,
-                    Name = seniorTeam.Name,
-                    Logo = seniorTeam.Logo
-                },
-                UpcomingMatches = seniorTeam.OverviewMatches.Where(y => y.Status == MatchStatus.Upcoming)
+                    SeniorSeries = new SeniorSeries
+                    {
+                        HattrickId = seniorTeam.SeniorSeriesHattrickId,
+                        Name = seniorTeam.SeniorSeriesName
+                    },
+                    UpcomingMatches = seniorTeam.OverviewMatches.Where(y => y.Status == MatchStatus.Upcoming)
                                                             .OrderBy(y => y.StartsOn)
                                                             .Select(y => new UpcomingMatch
                                                             {
@@ -105,6 +109,7 @@
                                                                 },
                                                                 Type = y.Type
                                                             }).ToArray(),
+                }
             };
         }
     }

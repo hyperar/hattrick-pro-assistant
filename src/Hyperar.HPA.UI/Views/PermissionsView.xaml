@@ -49,43 +49,66 @@
                     <Setter Property="Margin" Value="0" />
                     <Setter Property="TextAlignment" Value="Center" />
                 </Style>
-
-                <Style TargetType="{x:Type Separator}">
-                    <Setter Property="Margin" Value="0 10" />
-                </Style>
             </StackPanel.Resources>
 
-            <TextBlock Style="{StaticResource ViewTitle}" Text="{x:Static globalization:Strings.Permissions}" />
+            <TextBlock Style="{StaticResource ViewTitle}"
+                       Text="{x:Static globalization:Strings.Permissions}" />
 
             <Separator />
 
-            <TextBlock Style="{StaticResource StepTitle}" Text="{x:Static globalization:Strings.StepOne}" />
+            <TextBlock Style="{StaticResource StepTitle}"
+                       Text="{x:Static globalization:Strings.StepOne}" />
 
-            <TextBlock Style="{StaticResource StepDescription}" Text="{x:Static globalization:Strings.OpenAuthorizationWebPageMessage}" />
+            <TextBlock Style="{StaticResource StepDescription}"
+                       Text="{x:Static globalization:Strings.OpenAuthorizationWebPageMessage}" />
 
-            <Button Command="{Binding GetRequestTokenCommand}" Content="{x:Static globalization:Strings.OpenAuthorizationWebPage}" />
+            <Button Command="{Binding GetRequestTokenCommand}"
+                    Content="{x:Static globalization:Strings.OpenAuthorizationWebPage}" />
 
-            <TextBlock Style="{StaticResource StepTitle}" Text="{x:Static globalization:Strings.StepTwo}" />
+            <TextBlock Style="{StaticResource StepTitle}"
+                       Text="{x:Static globalization:Strings.StepTwo}" />
 
-            <TextBlock Style="{StaticResource StepDescription}" Text="{x:Static globalization:Strings.CopyAndPasteVerificationCodeMessage}" />
+            <TextBlock Style="{StaticResource StepDescription}"
+                       Text="{x:Static globalization:Strings.CopyAndPasteVerificationCodeMessage}" />
 
-            <TextBox IsEnabled="{Binding CanEnterVerificationCode}" Text="{Binding VerificationCode}" />
+            <TextBox IsEnabled="{Binding CanEnterVerificationCode}"
+                     Text="{Binding VerificationCode}" />
 
-            <TextBlock Style="{StaticResource StepTitle}" Text="{x:Static globalization:Strings.StepThree}" />
+            <TextBlock Style="{StaticResource StepTitle}"
+                       Text="{x:Static globalization:Strings.StepThree}" />
 
-            <TextBlock Style="{StaticResource StepDescription}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVisible}}" Text="{x:Static globalization:Strings.AuthorizeMessage}" />
+            <TextBlock Style="{StaticResource StepDescription}"
+                       Text="{x:Static globalization:Strings.AuthorizeMessage}" />
 
-            <TextBlock Style="{StaticResource StepDescription}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVisible}, FallbackValue=Hidden}" Text="{x:Static globalization:Strings.DeAuthorizeMessage}" />
+            <Button Command="{Binding GetAccessTokenCommand}"
+                    CommandParameter="{Binding GetAccessTokenRequest}"
+                    IsEnabled="{Binding CanGrantAccess}"
+                    Content="{x:Static globalization:Strings.Authorize}" />
 
-            <Button Command="{Binding GetAccessTokenCommand}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVisible}}" CommandParameter="{Binding GetAccessTokenRequest}" IsEnabled="{Binding CanGrantAccess}" Content="{x:Static globalization:Strings.Authorize}" />
+            <TextBlock Style="{StaticResource StepDescription}"
+                       Visibility="{Binding IsAuthorized,
+                                            Converter={StaticResource BoolToVisible},
+                                            FallbackValue=Hidden}"
+                       Text="{x:Static globalization:Strings.DeAuthorizeMessage}" />
 
-            <Button Command="{Binding RevokeAccessTokenCommand}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVisible}, FallbackValue=Hidden}" Content="{x:Static globalization:Strings.Deauthorize}" />
+            <Button Command="{Binding RevokeAccessTokenCommand}"
+                    Visibility="{Binding IsAuthorized,
+                                         Converter={StaticResource BoolToVisible},
+                                         FallbackValue=Hidden}"
+                    Content="{x:Static globalization:Strings.Deauthorize}" />
 
             <Separator />
 
-            <TextBlock Style="{StaticResource AuthorizedStatus}" Visibility="{Binding IsAuthorized, Converter={StaticResource BoolToVisible}, FallbackValue=Hidden}" Text="{x:Static globalization:Strings.Authorized}" />
+            <TextBlock Style="{StaticResource AuthorizedStatus}"
+                       Visibility="{Binding IsAuthorized,
+                                            Converter={StaticResource BoolToVisible},
+                                            FallbackValue=Hidden}"
+                       Text="{x:Static globalization:Strings.Authorized}" />
 
-            <TextBlock Style="{StaticResource UnauthorizedStatus}" Visibility="{Binding IsNotAuthorized, Converter={StaticResource BoolToVisible}}" Text="{x:Static globalization:Strings.NotAuthorized}" />
+            <TextBlock Style="{StaticResource UnauthorizedStatus}"
+                       Visibility="{Binding IsNotAuthorized,
+                                            Converter={StaticResource BoolToVisible}}"
+                       Text="{x:Static globalization:Strings.NotAuthorized}" />
         </StackPanel>
     </Border>
 </UserControl>

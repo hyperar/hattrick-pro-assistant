@@ -3,8 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Hyperar.HPA.UI.Controls"
              xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             xmlns:controls="clr-namespace:Hyperar.HPA.UI.Controls"
              xmlns:viewmodels="clr-namespace:Hyperar.HPA.UI.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:HomeViewModel}"
              d:DesignHeight="900"
@@ -12,7 +12,14 @@
              mc:Ignorable="d">
     <StackPanel>
         <Border Style="{StaticResource ViewContainer}">
-            <controls:TeamOverview />
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource ViewTitle}"
+                       Text="{x:Static globalization:Strings.Home}" />
+
+                <Separator />
+
+                <controls:TeamOverview />
+            </StackPanel>
         </Border>
     </StackPanel>
 </UserControl>
