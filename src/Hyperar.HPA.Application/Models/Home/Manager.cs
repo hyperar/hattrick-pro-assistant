@@ -6,6 +6,8 @@
     {
         public byte[]? Avatar { get; set; }
 
+        public Country Country { get; set; } = new Country();
+
         public uint HattrickId { get; set; }
 
         public SupporterTier SupporterTier { get; set; }

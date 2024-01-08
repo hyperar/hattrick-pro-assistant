@@ -14,7 +14,11 @@
     </UserControl.Resources>
     <Border Style="{StaticResource ViewContainer}">
         <StackPanel Name="ViewContainer" Orientation="Vertical">
-            <TextBlock Style="{StaticResource ViewTitle}" Text="{x:Static globalization:Strings.TeamSelection}" />
+
+            <TextBlock Style="{StaticResource ViewTitle}"
+                       Text="{x:Static globalization:Strings.TeamSelection}" />
+
+            <Separator />
 
             <ItemsControl ItemsSource="{Binding SeniorTeams}" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
@@ -40,58 +44,59 @@
                             </Grid.RowDefinitions>
 
                             <Image Grid.Column="0"
-                                       Grid.Row="0"
-                                       Grid.ColumnSpan="2"
+                                   Grid.Row="0"
+                                   Grid.ColumnSpan="2"
                                        Stretch="None"
-                                       Source="{Binding Logo,
-                                                        FallbackValue={StaticResource no-logo},
-                                                        TargetNullValue={StaticResource no-logo},
-                                                        Converter={StaticResource byteToImageConverter}}" />
+                                   Source="{Binding Logo,
+                                                    FallbackValue={StaticResource no-logo},
+                                                    TargetNullValue={StaticResource no-logo},
+                                                    Converter={StaticResource byteToImageConverter}}" />
 
                             <TextBlock Grid.Column="0"
-                                           Grid.Row="1"
-                                           Style="{StaticResource LabelTextBlock}"
-                                           Text="{x:Static globalization:Strings.TeamLabel}" />
+                                       Grid.Row="1"
+                                       Style="{StaticResource LabelTextBlock}"
+                                       Text="{x:Static globalization:Strings.TeamLabel}" />
 
                             <TextBlock Grid.Column="1"
-                                           Grid.Row="1"
-                                           Text="{Binding}" />
+                                       Grid.Row="1"
+                                       Text="{Binding}" />
 
                             <TextBlock Grid.Column="0"
-                                           Grid.Row="2"
-                                           Style="{StaticResource LabelTextBlock}"
-                                           Text="{x:Static globalization:Strings.CountryLabel}" />
+                                       Grid.Row="2"
+                                       Style="{StaticResource LabelTextBlock}"
+                                       Text="{x:Static globalization:Strings.CountryLabel}" />
 
                             <TextBlock Grid.Column="1"
-                                           Grid.Row="2"
-                                           Text="{Binding Country}" />
+                                       Grid.Row="2"
+                                       Text="{Binding Country}" />
 
                             <TextBlock Grid.Column="0"
-                                           Grid.Row="3"
-                                           Style="{StaticResource LabelTextBlock}"
-                                           Text="{x:Static globalization:Strings.RegionLabel}" />
+                                       Grid.Row="3"
+                                       Style="{StaticResource LabelTextBlock}"
+                                       Text="{x:Static globalization:Strings.RegionLabel}" />
 
                             <TextBlock Grid.Column="1"
-                                           Grid.Row="3"
-                                           Text="{Binding Region}" />
+                                       Grid.Row="3"
+                                       Text="{Binding Region}" />
 
                             <TextBlock Grid.Column="0"
-                                           Grid.Row="4"
-                                           Style="{StaticResource LabelTextBlock}"
-                                           Text="{x:Static globalization:Strings.LeagueLabel}" />
+                                       Grid.Row="4"
+                                       Style="{StaticResource LabelTextBlock}"
+                                       Text="{x:Static globalization:Strings.LeagueLabel}" />
 
                             <TextBlock Grid.Column="1"
-                                           Grid.Row="4"
-                                           Text="{Binding SeniorSeries}" />
+                                       Grid.Row="4"
+                                       Text="{Binding SeniorSeries}" />
 
                             <Button Grid.Column="0"
-                                            Grid.Row="5"
-                                            Grid.ColumnSpan="2"
-                                            Content="{x:Static globalization:Strings.ChangeTeam}"
-                                            Command="{Binding DataContext.ChangeSelectedTeamCommand,
-                                                              RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                                             AncestorType={x:Type Border}}}"
-                                            CommandParameter="{Binding HattrickId}" />
+                                    Grid.Row="5"
+                                    Grid.ColumnSpan="2"
+                                    Margin="15"
+                                    Content="{x:Static globalization:Strings.SelectTeam}"
+                                    Command="{Binding DataContext.ChangeSelectedTeamCommand,
+                                                      RelativeSource={RelativeSource Mode=FindAncestor,
+                                                      AncestorType={x:Type Border}}}"
+                                    CommandParameter="{Binding HattrickId}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

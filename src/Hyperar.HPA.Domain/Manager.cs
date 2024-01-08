@@ -5,6 +5,10 @@
 
     public class Manager : HattrickEntityBase, IHattrickEntity
     {
+        public byte[]? Avatar { get; set; }
+
+        public virtual ICollection<ManagerAvatarLayer> AvatarLayers { get; set; } = new HashSet<ManagerAvatarLayer>();
+
         public virtual Country Country { get; set; } = new Country();
 
         public string CurrencyName { get; set; } = string.Empty;

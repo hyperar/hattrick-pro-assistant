@@ -1,10 +1,11 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.XmlFileDataPersister
 {
     using System;
-    using Hattrick = Application.Hattrick.ArenaDetails;
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
     using Domain.Interfaces;
+
+    using Hattrick = Application.Hattrick.ArenaDetails;
 
     public class ArenaDetails : IXmlFileDataPersisterStrategy
     {
@@ -28,9 +29,9 @@
         {
             try
             {
-                if (file is Hattrick.HattrickData entity)
+                if (file is Hattrick.HattrickData xmlEntity)
                 {
-                    await this.ProcessArenaDetailsAsync(entity);
+                    await this.ProcessArenaDetailsAsync(xmlEntity);
                 }
                 else
                 {
@@ -45,32 +46,32 @@
             }
         }
 
-        private async Task ProcessArenaDetailsAsync(Hattrick.HattrickData entity)
+        private async Task ProcessArenaDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            var arena = await this.seniorTeamArenaRepository.GetByHattrickIdAsync(entity.Arena.ArenaId);
+            var arena = await this.seniorTeamArenaRepository.GetByHattrickIdAsync(xmlEntity.Arena.ArenaId);
 
-            DateTime value = entity.Arena.CurrentCapacity.RebuiltDate != null
-                           ? entity.Arena.CurrentCapacity.RebuiltDate.Value
-                           : entity.Arena.ExpandedCapacity.ExpansionDate != null
-                           ? entity.Arena.ExpandedCapacity.ExpansionDate.Value
+            DateTime value = xmlEntity.Arena.CurrentCapacity.RebuiltDate != null
+                           ? xmlEntity.Arena.CurrentCapacity.RebuiltDate.Value
+                           : xmlEntity.Arena.ExpandedCapacity.ExpansionDate != null
+                           ? xmlEntity.Arena.ExpandedCapacity.ExpansionDate.Value
                            : DateTime.Now;
 
             if (arena == null)
             {
-                var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(entity.Arena.Team.TeamId);
+                var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlEntity.Arena.Team.TeamId);
 
                 ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
 
                 arena = new Domain.SeniorTeamArena
                 {
-                    HattrickId = entity.Arena.ArenaId,
-                    Name = entity.Arena.ArenaName,
+                    HattrickId = xmlEntity.Arena.ArenaId,
+                    Name = xmlEntity.Arena.ArenaName,
                     BuiltOn = value,
-                    TerracesCapacity = entity.Arena.CurrentCapacity.Terraces,
-                    BasicSeatCapacity = entity.Arena.CurrentCapacity.Basic,
-                    RoofSeatCapacity = entity.Arena.CurrentCapacity.Roof,
-                    VipLoungeCapacity = entity.Arena.CurrentCapacity.Vip,
-                    TotalCapacity = entity.Arena.CurrentCapacity.Total,
+                    TerracesCapacity = xmlEntity.Arena.CurrentCapacity.Terraces,
+                    BasicSeatCapacity = xmlEntity.Arena.CurrentCapacity.Basic,
+                    RoofSeatCapacity = xmlEntity.Arena.CurrentCapacity.Roof,
+                    VipLoungeCapacity = xmlEntity.Arena.CurrentCapacity.Vip,
+                    TotalCapacity = xmlEntity.Arena.CurrentCapacity.Total,
                     SeniorTeam = seniorTeam
                 };
 
@@ -78,13 +79,13 @@
             }
             else
             {
-                arena.Name = entity.Arena.ArenaName;
+                arena.Name = xmlEntity.Arena.ArenaName;
                 arena.BuiltOn = value;
-                arena.TerracesCapacity = entity.Arena.CurrentCapacity.Terraces;
-                arena.BasicSeatCapacity = entity.Arena.CurrentCapacity.Basic;
-                arena.RoofSeatCapacity = entity.Arena.CurrentCapacity.Roof;
-                arena.VipLoungeCapacity = entity.Arena.CurrentCapacity.Vip;
-                arena.TotalCapacity = entity.Arena.CurrentCapacity.Total;
+                arena.TerracesCapacity = xmlEntity.Arena.CurrentCapacity.Terraces;
+                arena.BasicSeatCapacity = xmlEntity.Arena.CurrentCapacity.Basic;
+                arena.RoofSeatCapacity = xmlEntity.Arena.CurrentCapacity.Roof;
+                arena.VipLoungeCapacity = xmlEntity.Arena.CurrentCapacity.Vip;
+                arena.TotalCapacity = xmlEntity.Arena.CurrentCapacity.Total;
 
                 this.seniorTeamArenaRepository.Update(arena);
             }

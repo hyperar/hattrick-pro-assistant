@@ -21,6 +21,7 @@
       <None Remove="Resources\bg.jpg" />
       <None Remove="Resources\connection-16.png" />
       <None Remove="Resources\connection-30.png" />
+      <None Remove="Resources\default-manager-avatar.png" />
       <None Remove="Resources\doctor-16.png" />
       <None Remove="Resources\doctor-30.png" />
       <None Remove="Resources\double-yellow-card-16.png" />
@@ -78,6 +79,9 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\connection-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\default-manager-avatar.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\doctor-16.png">

@@ -14,6 +14,6 @@
 
         Error = 5,
 
-        Cancelled = 6
+        Canceled = 6
     }
 }

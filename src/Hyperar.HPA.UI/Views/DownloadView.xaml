@@ -4,35 +4,90 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             xmlns:converters="clr-namespace:Hyperar.HPA.UI.Converters"
              xmlns:viewmodels="clr-namespace:Hyperar.HPA.UI.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:DownloadViewModel}"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
+    </UserControl.Resources>
+
     <Border Style="{StaticResource ViewContainer}">
-        <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
-            <TextBlock Style="{StaticResource ViewTitle}" Text="{x:Static globalization:Strings.Download}" />
+        <StackPanel Name="ViewContainer" Orientation="Vertical">
 
-            <GroupBox Header="Tasks">
-                <StackPanel>
-                    <ListView Margin="5" Height="400" ItemsSource="{Binding DownloadTasks, Mode=OneWay}" SelectedItem="{Binding CurrentDownloadTask, Mode=OneWay}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="200" Header="{x:Static globalization:Strings.File}" DisplayMemberBinding="{Binding FileTypeString, Mode=OneWay}" />
-                                <GridViewColumn Width="268" Header="{x:Static globalization:Strings.Parameters}" DisplayMemberBinding="{Binding ParametersString, Mode=OneWay}" />
-                                <GridViewColumn Width="100" Header="{x:Static globalization:Strings.Status}" DisplayMemberBinding="{Binding StatusString, Mode=OneWay}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Grid>
-                        <ProgressBar Height="24" Margin="5" Minimum="0" Maximum="{Binding DownloadTaskStepsCount, Mode=OneWay}" Value="{Binding CompletedDownloadTaskStepsCount, Mode=OneWay}" />
+            <TextBlock Style="{StaticResource ViewTitle}"
+                       Text="{x:Static globalization:Strings.Download}" />
 
-                        <TextBlock Margin="5" Text="{Binding ProgressPercentage, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Grid>
-                </StackPanel>
-            </GroupBox>
+            <Separator />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Command="{Binding DownloadFilesCommand}" Content="{x:Static globalization:Strings.Download}" />
-            </StackPanel>
+            <DataGrid Style="{StaticResource OverviewDataGrid}"
+                      ItemsSource="{Binding DownloadTasks,
+                                            Mode=OneWay}"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"
+                      CanUserSortColumns="False"
+                      HeadersVisibility="Column"
+                      MinHeight="250">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static globalization:Strings.File}"
+                                        MinWidth="250"
+                                        Binding="{Binding FileType,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" Width="SizeToCells" />
+
+                    <DataGridTextColumn Header="{x:Static globalization:Strings.Parameters}"
+                                        Binding="{Binding ParametersString,
+                                                          Mode=OneWay}"
+                                        MinWidth="250"
+                                        Width="SizeToCells" />
+
+                    <DataGridTextColumn Header="{x:Static globalization:Strings.Status}"
+                                        Binding="{Binding Status,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}"
+                                        Width="150">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ProgressBar Grid.Column="0"
+                             Grid.Row="0"
+                             Height="24"
+                             Margin="5"
+                             Minimum="0"
+                             Maximum="{Binding DownloadTaskStepsCount,
+                                               Mode=OneWay}"
+                             Value="{Binding CompletedDownloadTaskStepsCount,
+                                             Mode=OneWay}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           Margin="5"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="{Binding ProgressPercentage,
+                                          StringFormat={}{0:0}%}" />
+            </Grid>
+
+            <Button Command="{Binding DownloadFilesCommand}"
+                    Content="{x:Static globalization:Strings.Download}"
+                    Margin="15" />
         </StackPanel>
     </Border>
 </UserControl>

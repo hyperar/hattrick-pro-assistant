@@ -187,15 +187,6 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Team.
-        /// </summary>
-        public static string ChangeTeam {
-            get {
-                return ResourceManager.GetString("ChangeTeam", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Once you have logged in into your Hattrick account, you will be provided with a Verification Code. Copy the code and paste it below, making sure there&apos;s no blank spaces at the beggining or the end of the code..
         /// </summary>
         public static string CopyAndPasteVerificationCodeMessage {
@@ -268,20 +259,74 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diamond.
-        /// </summary>
-        public static string Diamond {
-            get {
-                return ResourceManager.GetString("Diamond", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Download.
         /// </summary>
         public static string Download {
             get {
                 return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string DownloadTaskStatus_Canceled {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string DownloadTaskStatus_Done {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        public static string DownloadTaskStatus_Downloading {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string DownloadTaskStatus_Error {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        public static string DownloadTaskStatus_Pending {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Pending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing.
+        /// </summary>
+        public static string DownloadTaskStatus_Processing {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Processing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving.
+        /// </summary>
+        public static string DownloadTaskStatus_Saving {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Saving", resourceCulture);
             }
         }
         
@@ -327,15 +372,6 @@ namespace Hyperar.HPA.Globalization {
         public static string GoalsOnTeam {
             get {
                 return ResourceManager.GetString("GoalsOnTeam", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gold.
-        /// </summary>
-        public static string Gold {
-            get {
-                return ResourceManager.GetString("Gold", resourceCulture);
             }
         }
         
@@ -493,15 +529,6 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Supporter.
-        /// </summary>
-        public static string NoSupporter {
-            get {
-                return ResourceManager.GetString("NoSupporter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Not Authorized.
         /// </summary>
         public static string NotAuthorized {
@@ -552,15 +579,6 @@ namespace Hyperar.HPA.Globalization {
         public static string Permissions {
             get {
                 return ResourceManager.GetString("Permissions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Platinum.
-        /// </summary>
-        public static string Platinum {
-            get {
-                return ResourceManager.GetString("Platinum", resourceCulture);
             }
         }
         
@@ -637,6 +655,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Team.
+        /// </summary>
+        public static string SelectTeam {
+            get {
+                return ResourceManager.GetString("SelectTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set Pieces.
         /// </summary>
         public static string SetPieces {
@@ -660,15 +687,6 @@ namespace Hyperar.HPA.Globalization {
         public static string ShirtNumber {
             get {
                 return ResourceManager.GetString("ShirtNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Silver.
-        /// </summary>
-        public static string Silver {
-            get {
-                return ResourceManager.GetString("Silver", resourceCulture);
             }
         }
         
@@ -808,6 +826,51 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diamond.
+        /// </summary>
+        public static string SupporterTier_Diamond {
+            get {
+                return ResourceManager.GetString("SupporterTier_Diamond", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold.
+        /// </summary>
+        public static string SupporterTier_Gold {
+            get {
+                return ResourceManager.GetString("SupporterTier_Gold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Supporter.
+        /// </summary>
+        public static string SupporterTier_NoSupporter {
+            get {
+                return ResourceManager.GetString("SupporterTier_NoSupporter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platinum.
+        /// </summary>
+        public static string SupporterTier_Platinum {
+            get {
+                return ResourceManager.GetString("SupporterTier_Platinum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver.
+        /// </summary>
+        public static string SupporterTier_Silver {
+            get {
+                return ResourceManager.GetString("SupporterTier_Silver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Team.
         /// </summary>
         public static string Team {
@@ -867,6 +930,60 @@ namespace Hyperar.HPA.Globalization {
         public static string Winger {
             get {
                 return ResourceManager.GetString("Winger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arena Details.
+        /// </summary>
+        public static string XmlFileType_ArenaDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_ArenaDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager Compendium.
+        /// </summary>
+        public static string XmlFileType_ManagerCompendium {
+            get {
+                return ResourceManager.GetString("XmlFileType_ManagerCompendium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches.
+        /// </summary>
+        public static string XmlFileType_Matches {
+            get {
+                return ResourceManager.GetString("XmlFileType_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        public static string XmlFileType_Players {
+            get {
+                return ResourceManager.GetString("XmlFileType_Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team Details.
+        /// </summary>
+        public static string XmlFileType_TeamDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_TeamDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to World Details.
+        /// </summary>
+        public static string XmlFileType_WorldDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_WorldDetails", resourceCulture);
             }
         }
     }

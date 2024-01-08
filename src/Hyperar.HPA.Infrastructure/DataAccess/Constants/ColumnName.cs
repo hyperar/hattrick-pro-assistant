@@ -18,6 +18,8 @@
 
         internal const string AlternativeMatchKitUrl = "AlternativeMatchKitUrl";
 
+        internal const string Avatar = "Avatar";
+
         internal const string AwayGoals = "AwayGoals";
 
         internal const string AwayTeamHattrickId = "AwayTeamHattrickId";
@@ -107,6 +109,12 @@
         internal const string Honesty = "Honesty";
 
         internal const string Id = "Id";
+
+        internal const string Image = "Image";
+
+        internal const string ImageUrl = "ImageUrl";
+
+        internal const string Index = "Index";
 
         internal const string IsCoach = "IsCoach";
 
@@ -251,6 +259,10 @@
         internal const string Winger = "Winger";
 
         internal const string WinStreak = "WinStreak";
+
+        internal const string XCoordinate = "XCoordinate";
+
+        internal const string YCoordinate = "YCoordinate";
 
         internal const string YouthNationalTeamCaps = "YouthNationalTeamCaps";
 

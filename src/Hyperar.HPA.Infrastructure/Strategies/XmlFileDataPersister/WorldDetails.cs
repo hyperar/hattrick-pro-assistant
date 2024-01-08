@@ -35,9 +35,9 @@
         {
             try
             {
-                if (file is Hattrick.HattrickData entity)
+                if (file is Hattrick.HattrickData xmlEntity)
                 {
-                    await this.ProcessWorldDetailsAsync(entity);
+                    await this.ProcessWorldDetailsAsync(xmlEntity);
                 }
                 else
                 {
@@ -240,9 +240,9 @@
             }
         }
 
-        private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData entity)
+        private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            foreach (var curXmlLeague in entity.LeagueList)
+            foreach (var curXmlLeague in xmlEntity.LeagueList)
             {
                 await this.ProcessLeagueAsync(curXmlLeague);
             }

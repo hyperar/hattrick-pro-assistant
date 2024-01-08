@@ -18,6 +18,8 @@
         public async Task<SeniorTeam[]> GetSeniorTeams()
         {
             return await this.seniorTeamRepository.Query()
+                                                  .OrderByDescending(x => x.IsPrimary)
+                                                  .OrderBy(x => x.Name)
                                                   .Select(x => new SeniorTeam
                                                   {
                                                       HattrickId = x.HattrickId,

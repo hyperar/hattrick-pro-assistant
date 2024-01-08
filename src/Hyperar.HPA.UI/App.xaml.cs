@@ -2,9 +2,10 @@
 {
     using System.Windows;
     using Domain.Interfaces;
-    using UI.HostBuilders;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+
+    using UI.HostBuilders;
 
     /// <summary>
     /// Interaction logic for App.xaml
