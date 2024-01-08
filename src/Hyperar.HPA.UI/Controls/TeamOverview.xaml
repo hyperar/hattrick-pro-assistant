@@ -42,9 +42,7 @@
             <TextBlock Style="{StaticResource BlockTitle}"
                        Text="{x:Static globalization:Strings.Team}" />
 
-            <Image Height="260"
-                   Width="210"
-                   Stretch="Fill"
+            <Image Stretch="None"
                    Source="{Binding TeamOverview.SeniorTeam.Logo,
                                     FallbackValue={StaticResource no-logo},
                                     TargetNullValue={StaticResource no-logo},
@@ -127,9 +125,7 @@
                 <Image Grid.Column="0"
                        Grid.Row="0"
                        Grid.ColumnSpan="2"
-                       Height="155"
-                       Width="110"
-                       Stretch="Fill"
+                       Stretch="None"
                        Source="{Binding TeamOverview.Manager.Avatar,
                                         FallbackValue={StaticResource default-manager-avatar},
                                         TargetNullValue={StaticResource default-manager-avatar},

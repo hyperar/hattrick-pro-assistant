@@ -36,9 +36,9 @@
         {
             try
             {
-                if (file is Hattrick.HattrickData entity)
+                if (file is Hattrick.HattrickData xmlEntity)
                 {
-                    await this.ProcessTeamDetailsAsync(entity);
+                    await this.ProcessTeamDetailsAsync(xmlEntity);
                 }
                 else
                 {
@@ -150,13 +150,13 @@
             }
         }
 
-        private async Task ProcessTeamDetailsAsync(Hattrick.HattrickData entity)
+        private async Task ProcessTeamDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            var manager = await this.managerRepository.GetByHattrickIdAsync(entity.User.UserId);
+            var manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.User.UserId);
 
             ArgumentNullException.ThrowIfNull(manager, nameof(manager));
 
-            foreach (var curXmlTeam in entity.Teams)
+            foreach (var curXmlTeam in xmlEntity.Teams)
             {
                 await this.ProcessTeamAsync(curXmlTeam, manager);
             }

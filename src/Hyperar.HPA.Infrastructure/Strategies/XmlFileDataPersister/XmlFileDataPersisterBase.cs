@@ -19,15 +19,18 @@
         {
             var avatarImage = new Bitmap(110, 155, PixelFormat.Format32bppArgb);
 
-            avatarImage.SetResolution(120, 120);
-
             var graphics = Graphics.FromImage(avatarImage);
 
-            foreach (var curLayer in layers)
+            foreach (var curLayer in layers.OrderBy(x => x.Index))
             {
                 var layerImage = GetImageFromBytes(curLayer.Image);
 
-                graphics.DrawImageUnscaled(layerImage, (int)curLayer.XCoordinate, (int)curLayer.YCoordinate, layerImage.Width, layerImage.Height);
+                graphics.DrawImage(
+                    layerImage,
+                    (int)curLayer.XCoordinate,
+                    (int)curLayer.YCoordinate,
+                    layerImage.Width,
+                    layerImage.Height);
             }
 
             return GetBytesFromImage(avatarImage);

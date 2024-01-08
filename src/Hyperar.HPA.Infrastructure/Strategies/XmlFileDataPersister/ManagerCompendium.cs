@@ -38,9 +38,9 @@
         {
             try
             {
-                if (file is Hattrick.HattrickData entity)
+                if (file is Hattrick.HattrickData xmlEntity)
                 {
-                    await this.ProcessManagerCompendiumAsync(entity);
+                    await this.ProcessManagerCompendiumAsync(xmlEntity);
                 }
                 else
                 {
@@ -55,7 +55,7 @@
             }
         }
 
-        private async Task ProcessManagerAvatar(Hattrick.Avatar avatar, Domain.Manager manager)
+        private async Task ProcessManagerAvatarAsync(Hattrick.Avatar avatar, Domain.Manager manager)
         {
             manager.AvatarLayers.Add(new Domain.ManagerAvatarLayer
             {
@@ -81,10 +81,10 @@
             }
         }
 
-        private async Task ProcessManagerCompendiumAsync(Hattrick.HattrickData entity)
+        private async Task ProcessManagerCompendiumAsync(Hattrick.HattrickData xmlEntity)
         {
-            var manager = await this.managerRepository.GetByHattrickIdAsync(entity.Manager.UserId);
-            var country = await this.countryRepository.GetByHattrickIdAsync(entity.Manager.Country.CountryId);
+            var manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.Manager.UserId);
+            var country = await this.countryRepository.GetByHattrickIdAsync(xmlEntity.Manager.Country.CountryId);
 
             ArgumentNullException.ThrowIfNull(country, nameof(country));
 
@@ -94,18 +94,18 @@
 
                 manager = new Domain.Manager
                 {
-                    HattrickId = entity.Manager.UserId,
-                    SupporterTier = entity.Manager.SupporterTier,
-                    UserName = entity.Manager.LoginName,
-                    CurrencyName = entity.Manager.Currency.CurrencyName,
-                    CurrencyRate = entity.Manager.Currency.CurrencyRate,
+                    HattrickId = xmlEntity.Manager.UserId,
+                    SupporterTier = xmlEntity.Manager.SupporterTier,
+                    UserName = xmlEntity.Manager.LoginName,
+                    CurrencyName = xmlEntity.Manager.Currency.CurrencyName,
+                    CurrencyRate = xmlEntity.Manager.Currency.CurrencyRate,
                     Country = country,
                     User = user
                 };
 
-                if (entity.Manager.Avatar != null)
+                if (xmlEntity.Manager.Avatar != null)
                 {
-                    await this.ProcessManagerAvatar(entity.Manager.Avatar, manager);
+                    await this.ProcessManagerAvatarAsync(xmlEntity.Manager.Avatar, manager);
 
                     manager.Avatar = BuildAvatarFromLayers(manager.AvatarLayers);
                 }
@@ -114,31 +114,25 @@
             }
             else
             {
-                bool avatarPresentInXml = entity.Manager.Avatar != null;
-                bool mustDeleteExistingAvatar = false;
-                bool mustBuildAvatar = avatarPresentInXml && manager.AvatarLayers.Count == 0;
+                bool mustDeleteAvatar = false;
 
-                if (avatarPresentInXml)
+                if (xmlEntity.Manager.Avatar == null)
                 {
-                    // Just to avoid possible NullReferenceException warning, we just checked this.
-                    ArgumentNullException.ThrowIfNull(entity.Manager.Avatar, nameof(entity.Manager.Avatar));
-
-                    var xmlAvatarLayers = new List<string>(entity.Manager.Avatar.Layers.Select(x => NormalizeUrl(x.Image)).ToArray())
-                    {
-                        NormalizeUrl(entity.Manager.Avatar.BackgroundImage),
-                    };
-
-                    mustDeleteExistingAvatar = manager.AvatarLayers.Select(x => x.ImageUrl)
-                                                                   .Except(xmlAvatarLayers)
-                                                                   .Any();
-                    mustBuildAvatar = true;
+                    mustDeleteAvatar = manager.AvatarLayers.Count > 0;
                 }
                 else
                 {
-                    mustDeleteExistingAvatar = manager.AvatarLayers.Count > 0;
+                    var xmlAvatarLayers = new List<string>(xmlEntity.Manager.Avatar.Layers.Select(x => NormalizeUrl(x.Image)).ToArray())
+                    {
+                        NormalizeUrl(xmlEntity.Manager.Avatar.BackgroundImage),
+                    };
+
+                    mustDeleteAvatar = manager.AvatarLayers.Select(x => x.ImageUrl)
+                                                           .Except(xmlAvatarLayers)
+                                                           .Any();
                 }
 
-                if (mustDeleteExistingAvatar)
+                if (mustDeleteAvatar)
                 {
                     var layerIdsToDelete = manager.AvatarLayers.Select(x => x.Id).ToList();
 
@@ -148,22 +142,21 @@
                     }
 
                     manager.Avatar = null;
+
+                    await this.databaseContext.SaveAsync();
                 }
 
-                if (mustBuildAvatar)
+                if (xmlEntity.Manager.Avatar != null && manager.AvatarLayers.Count == 0)
                 {
-                    // Just to avoid possible NullReferenceException warning, we just checked this.
-                    ArgumentNullException.ThrowIfNull(entity.Manager.Avatar, nameof(entity.Manager.Avatar));
-
-                    await this.ProcessManagerAvatar(entity.Manager.Avatar, manager);
+                    await this.ProcessManagerAvatarAsync(xmlEntity.Manager.Avatar, manager);
 
                     manager.Avatar = BuildAvatarFromLayers(manager.AvatarLayers);
                 }
 
-                manager.SupporterTier = entity.Manager.SupporterTier;
-                manager.UserName = entity.Manager.LoginName;
-                manager.CurrencyName = entity.Manager.Currency.CurrencyName;
-                manager.CurrencyRate = entity.Manager.Currency.CurrencyRate;
+                manager.SupporterTier = xmlEntity.Manager.SupporterTier;
+                manager.UserName = xmlEntity.Manager.LoginName;
+                manager.CurrencyName = xmlEntity.Manager.Currency.CurrencyName;
+                manager.CurrencyRate = xmlEntity.Manager.Currency.CurrencyRate;
 
                 this.managerRepository.Update(manager);
             }
