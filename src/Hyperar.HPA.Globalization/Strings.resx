@@ -159,9 +159,6 @@
   <data name="CareerHattricks" xml:space="preserve">
     <value>Career Hattricks</value>
   </data>
-  <data name="ChangeTeam" xml:space="preserve">
-    <value>Change Team</value>
-  </data>
   <data name="CopyAndPasteVerificationCodeMessage" xml:space="preserve">
     <value>Once you have logged in into your Hattrick account, you will be provided with a Verification Code. Copy the code and paste it below, making sure there's no blank spaces at the beggining or the end of the code.</value>
   </data>
@@ -186,11 +183,29 @@
   <data name="Defending" xml:space="preserve">
     <value>Defending</value>
   </data>
-  <data name="Diamond" xml:space="preserve">
-    <value>Diamond</value>
-  </data>
   <data name="Download" xml:space="preserve">
     <value>Download</value>
+  </data>
+  <data name="DownloadTaskStatus_Canceled" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="DownloadTaskStatus_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="DownloadTaskStatus_Downloading" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
+  <data name="DownloadTaskStatus_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="DownloadTaskStatus_Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="DownloadTaskStatus_Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="DownloadTaskStatus_Saving" xml:space="preserve">
+    <value>Saving</value>
   </data>
   <data name="Experience" xml:space="preserve">
     <value>Experience</value>
@@ -206,9 +221,6 @@
   </data>
   <data name="GoalsOnTeam" xml:space="preserve">
     <value>Goals On Team</value>
-  </data>
-  <data name="Gold" xml:space="preserve">
-    <value>Gold</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>
@@ -261,9 +273,6 @@
   <data name="Nickname" xml:space="preserve">
     <value>Nickname</value>
   </data>
-  <data name="NoSupporter" xml:space="preserve">
-    <value>No Supporter</value>
-  </data>
   <data name="NotAuthorized" xml:space="preserve">
     <value>Not Authorized</value>
   </data>
@@ -281,9 +290,6 @@
   </data>
   <data name="Permissions" xml:space="preserve">
     <value>Permissions</value>
-  </data>
-  <data name="Platinum" xml:space="preserve">
-    <value>Platinum</value>
   </data>
   <data name="Players" xml:space="preserve">
     <value>Players</value>
@@ -309,6 +315,9 @@
   <data name="Scoring" xml:space="preserve">
     <value>Scoring</value>
   </data>
+  <data name="SelectTeam" xml:space="preserve">
+    <value>Select Team</value>
+  </data>
   <data name="SetPieces" xml:space="preserve">
     <value>Set Pieces</value>
   </data>
@@ -317,9 +326,6 @@
   </data>
   <data name="ShirtNumber" xml:space="preserve">
     <value>#</value>
-  </data>
-  <data name="Silver" xml:space="preserve">
-    <value>Silver</value>
   </data>
   <data name="Specialty" xml:space="preserve">
     <value>Specialty</value>
@@ -366,6 +372,21 @@
   <data name="SupporterLabel" xml:space="preserve">
     <value>Supporter:</value>
   </data>
+  <data name="SupporterTier_Diamond" xml:space="preserve">
+    <value>Diamond</value>
+  </data>
+  <data name="SupporterTier_Gold" xml:space="preserve">
+    <value>Gold</value>
+  </data>
+  <data name="SupporterTier_NoSupporter" xml:space="preserve">
+    <value>No Supporter</value>
+  </data>
+  <data name="SupporterTier_Platinum" xml:space="preserve">
+    <value>Platinum</value>
+  </data>
+  <data name="SupporterTier_Silver" xml:space="preserve">
+    <value>Silver</value>
+  </data>
   <data name="Team" xml:space="preserve">
     <value>Team</value>
   </data>
@@ -386,5 +407,23 @@
   </data>
   <data name="Winger" xml:space="preserve">
     <value>Winger</value>
+  </data>
+  <data name="XmlFileType_ArenaDetails" xml:space="preserve">
+    <value>Arena Details</value>
+  </data>
+  <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
+    <value>Manager Compendium</value>
+  </data>
+  <data name="XmlFileType_Matches" xml:space="preserve">
+    <value>Matches</value>
+  </data>
+  <data name="XmlFileType_Players" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="XmlFileType_TeamDetails" xml:space="preserve">
+    <value>Team Details</value>
+  </data>
+  <data name="XmlFileType_WorldDetails" xml:space="preserve">
+    <value>World Details</value>
   </data>
 </root>
