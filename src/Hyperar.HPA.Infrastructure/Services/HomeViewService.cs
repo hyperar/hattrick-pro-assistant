@@ -34,7 +34,8 @@
                 {
                     HattrickId = seniorTeam.Manager.HattrickId,
                     UserName = seniorTeam.Manager.UserName,
-                    SupporterTier = seniorTeam.Manager.SupporterTier
+                    SupporterTier = seniorTeam.Manager.SupporterTier,
+                    Avatar = seniorTeam.Manager.Avatar
                 },
                 PlayedMatches = seniorTeam.OverviewMatches.Where(y => y.Status == MatchStatus.Finished)
                                                           .OrderBy(y => y.StartsOn)

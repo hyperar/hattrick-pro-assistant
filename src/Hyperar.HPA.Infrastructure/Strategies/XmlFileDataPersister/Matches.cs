@@ -32,9 +32,9 @@
         {
             try
             {
-                if (file is Hattrick.HattrickData entity)
+                if (file is Hattrick.HattrickData xmlEntity)
                 {
-                    await this.ProcessMatchesAsync(entity);
+                    await this.ProcessMatchesAsync(xmlEntity);
                 }
                 else
                 {
@@ -92,13 +92,13 @@
             await this.databaseContext.SaveAsync();
         }
 
-        private async Task ProcessMatchesAsync(Hattrick.HattrickData entity)
+        private async Task ProcessMatchesAsync(Hattrick.HattrickData xmlEntity)
         {
-            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(entity.Team.TeamId);
+            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlEntity.Team.TeamId);
 
             ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
 
-            List<uint> xmlMatchesIds = entity.Team.MatchList.Select(x => x.MatchId).ToList();
+            List<uint> xmlMatchesIds = xmlEntity.Team.MatchList.Select(x => x.MatchId).ToList();
 
             var seniorOverviewMatchesToDelete = await this.seniorTeamOverviewMatchRepository.Query(x => x.SeniorTeam.HattrickId == seniorTeam.HattrickId
                                                                                                      && !xmlMatchesIds.Contains(x.HattrickId)).ToListAsync();
@@ -108,7 +108,7 @@
                 await this.seniorTeamOverviewMatchRepository.DeleteAsync(curSeniorOverviewMatch.HattrickId);
             }
 
-            foreach (var curXmlMatch in entity.Team.MatchList)
+            foreach (var curXmlMatch in xmlEntity.Team.MatchList)
             {
                 await this.ProcessMatchAsync(curXmlMatch, seniorTeam);
             }

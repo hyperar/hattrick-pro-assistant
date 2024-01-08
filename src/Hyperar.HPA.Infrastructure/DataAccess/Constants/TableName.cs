@@ -10,6 +10,8 @@
 
         internal const string Manager = "Manager";
 
+        internal const string ManagerAvatarLayer = "ManagerAvatarLayer";
+
         internal const string Region = "Region";
 
         internal const string SeniorPlayer = "SeniorPlayer";

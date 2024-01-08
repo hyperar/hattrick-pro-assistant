@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System.Threading.Tasks;
+    using System.Xml.Schema;
     using Application.Models.TeamSelection;
     using Application.Services;
     using Domain.Interfaces;
@@ -18,6 +19,8 @@
         public async Task<SeniorTeam[]> GetSeniorTeams()
         {
             return await this.seniorTeamRepository.Query()
+                                                  .OrderByDescending(x => x.IsPrimary)
+                                                  .OrderBy(x => x.Name)
                                                   .Select(x => new SeniorTeam
                                                   {
                                                       HattrickId = x.HattrickId,

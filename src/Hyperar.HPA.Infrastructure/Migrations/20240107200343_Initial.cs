@@ -14,6 +14,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 name: "LeagueCup");
 
             migrationBuilder.DropTable(
+                name: "ManagerAvatarLayer");
+
+            migrationBuilder.DropTable(
                 name: "SeniorPlayerSkill");
 
             migrationBuilder.DropTable(
@@ -179,6 +182,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     SupporterTier = table.Column<long>(type: "bigint", nullable: false),
                     CurrencyName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     CurrencyRate = table.Column<decimal>(type: "decimal(10,5)", precision: 10, scale: 5, nullable: false),
+                    Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CountryHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -215,6 +219,29 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         principalTable: "Country",
                         principalColumn: "HattrickId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ManagerAvatarLayer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Index = table.Column<long>(type: "bigint", nullable: false),
+                    XCoordinate = table.Column<long>(type: "bigint", nullable: false),
+                    YCoordinate = table.Column<long>(type: "bigint", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ManagerHattrickId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ManagerAvatarLayer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ManagerAvatarLayer_Manager_ManagerHattrickId",
+                        column: x => x.ManagerHattrickId,
+                        principalTable: "Manager",
+                        principalColumn: "HattrickId");
                 });
 
             migrationBuilder.CreateTable(
@@ -432,6 +459,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 table: "Manager",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ManagerAvatarLayer_ManagerHattrickId",
+                table: "ManagerAvatarLayer",
+                column: "ManagerHattrickId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Region_CountryHattrickId",
