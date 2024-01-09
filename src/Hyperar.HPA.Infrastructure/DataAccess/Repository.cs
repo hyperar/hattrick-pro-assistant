@@ -21,6 +21,18 @@
             this.EntityCollection.Remove(entity);
         }
 
+        public async Task DeleteRangeAsync(ICollection<int> ids)
+        {
+            ICollection<TEntity> entities = await this.EntityCollection.Where(x => ids.Contains(x.Id)).ToListAsync();
+
+            if (entities.Count != ids.Count)
+            {
+                throw new ArgumentException(nameof(entities));
+            }
+
+            this.EntityCollection.RemoveRange(entities);
+        }
+
         public async Task<TEntity?> GetByIdAsync(int id)
         {
             return await this.EntityCollection.Where(e => e.Id == id).SingleOrDefaultAsync();

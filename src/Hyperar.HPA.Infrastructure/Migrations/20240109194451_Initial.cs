@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,49 +8,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
     /// <inheritdoc />
     public partial class Initial : Migration
     {
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "LeagueCup");
-
-            migrationBuilder.DropTable(
-                name: "ManagerAvatarLayer");
-
-            migrationBuilder.DropTable(
-                name: "SeniorPlayerSkill");
-
-            migrationBuilder.DropTable(
-                name: "SeniorTeamArena");
-
-            migrationBuilder.DropTable(
-                name: "SeniorTeamOverviewMatch");
-
-            migrationBuilder.DropTable(
-                name: "Token");
-
-            migrationBuilder.DropTable(
-                name: "SeniorPlayer");
-
-            migrationBuilder.DropTable(
-                name: "SeniorTeam");
-
-            migrationBuilder.DropTable(
-                name: "Manager");
-
-            migrationBuilder.DropTable(
-                name: "Region");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
-                name: "League");
-        }
-
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -231,7 +189,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     XCoordinate = table.Column<long>(type: "bigint", nullable: false),
                     YCoordinate = table.Column<long>(type: "bigint", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ManagerHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -516,6 +473,49 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 table: "Token",
                 column: "UserId",
                 unique: true);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "LeagueCup");
+
+            migrationBuilder.DropTable(
+                name: "ManagerAvatarLayer");
+
+            migrationBuilder.DropTable(
+                name: "SeniorPlayerSkill");
+
+            migrationBuilder.DropTable(
+                name: "SeniorTeamArena");
+
+            migrationBuilder.DropTable(
+                name: "SeniorTeamOverviewMatch");
+
+            migrationBuilder.DropTable(
+                name: "Token");
+
+            migrationBuilder.DropTable(
+                name: "SeniorPlayer");
+
+            migrationBuilder.DropTable(
+                name: "SeniorTeam");
+
+            migrationBuilder.DropTable(
+                name: "Manager");
+
+            migrationBuilder.DropTable(
+                name: "Region");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Country");
+
+            migrationBuilder.DropTable(
+                name: "League");
         }
     }
 }

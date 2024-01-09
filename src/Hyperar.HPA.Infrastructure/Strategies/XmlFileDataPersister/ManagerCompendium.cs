@@ -21,7 +21,7 @@
         private uint layerIndex = 1;
 
         public ManagerCompendium(
-                    IDatabaseContext databaseContext,
+            IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
             IRepository<Domain.ManagerAvatarLayer> managerAvatarLayerRepository,
             IHattrickRepository<Domain.Manager> managerRepository,
@@ -55,7 +55,7 @@
             }
         }
 
-        private async Task ProcessManagerAvatarAsync(Hattrick.Avatar avatar, Domain.Manager manager)
+        private void ProcessManagerAvatar(Hattrick.Avatar avatar, Domain.Manager manager)
         {
             manager.AvatarLayers.Add(new Domain.ManagerAvatarLayer
             {
@@ -63,7 +63,6 @@
                 XCoordinate = 0,
                 YCoordinate = 0,
                 ImageUrl = NormalizeUrl(avatar.BackgroundImage),
-                Image = await DownloadWebResource(avatar.BackgroundImage)
             });
 
             foreach (var curLayer in avatar.Layers)
@@ -75,22 +74,24 @@
                     Index = layerIndex,
                     XCoordinate = curLayer.X,
                     YCoordinate = curLayer.Y,
-                    ImageUrl = NormalizeUrl(curLayer.Image),
-                    Image = await DownloadWebResource(curLayer.Image)
+                    ImageUrl = NormalizeUrl(curLayer.Image)
                 });
             }
         }
 
         private async Task ProcessManagerCompendiumAsync(Hattrick.HattrickData xmlEntity)
         {
-            var manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.Manager.UserId);
             var country = await this.countryRepository.GetByHattrickIdAsync(xmlEntity.Manager.Country.CountryId);
 
             ArgumentNullException.ThrowIfNull(country, nameof(country));
 
+            var manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.Manager.UserId);
+
             if (manager == null)
             {
                 var user = await this.userRepository.Query().SingleAsync();
+
+                ArgumentNullException.ThrowIfNull(user, nameof(user));
 
                 manager = new Domain.Manager
                 {
@@ -105,9 +106,9 @@
 
                 if (xmlEntity.Manager.Avatar != null)
                 {
-                    await this.ProcessManagerAvatarAsync(xmlEntity.Manager.Avatar, manager);
+                    this.ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
 
-                    manager.Avatar = BuildAvatarFromLayers(manager.AvatarLayers);
+                    manager.Avatar = await BuildAvatarFromLayers(manager.AvatarLayers);
                 }
 
                 await this.managerRepository.InsertAsync(manager);
@@ -136,10 +137,7 @@
                 {
                     var layerIdsToDelete = manager.AvatarLayers.Select(x => x.Id).ToList();
 
-                    foreach (var layerId in layerIdsToDelete)
-                    {
-                        await this.managerAvatarLayerRepository.DeleteAsync(layerId);
-                    }
+                    await this.managerAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
 
                     manager.Avatar = null;
 
@@ -148,9 +146,9 @@
 
                 if (xmlEntity.Manager.Avatar != null && manager.AvatarLayers.Count == 0)
                 {
-                    await this.ProcessManagerAvatarAsync(xmlEntity.Manager.Avatar, manager);
+                    this.ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
 
-                    manager.Avatar = BuildAvatarFromLayers(manager.AvatarLayers);
+                    manager.Avatar = await BuildAvatarFromLayers(manager.AvatarLayers);
                 }
 
                 manager.SupporterTier = xmlEntity.Manager.SupporterTier;

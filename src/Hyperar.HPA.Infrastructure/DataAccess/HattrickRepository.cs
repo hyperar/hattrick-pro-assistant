@@ -20,6 +20,18 @@
             this.EntityCollection.Remove(entity);
         }
 
+        public async Task DeleteRangeAsync(ICollection<uint> hattrickIds)
+        {
+            ICollection<TEntity> entities = await this.EntityCollection.Where(x => hattrickIds.Contains(x.HattrickId)).ToListAsync();
+
+            if (entities.Count != hattrickIds.Count)
+            {
+                throw new ArgumentException(nameof(entities));
+            }
+
+            this.EntityCollection.RemoveRange(entities);
+        }
+
         public async Task<TEntity?> GetByHattrickIdAsync(long hattrickId)
         {
             return await this.EntityCollection.Where(x => x.HattrickId == hattrickId).SingleOrDefaultAsync();

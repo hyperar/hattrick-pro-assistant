@@ -36,13 +36,6 @@
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(1024)
                 .IsRequired();
-
-            builder.Property(p => p.Image)
-                .HasColumnName(Constants.ColumnName.Image)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.VarBinary)
-                .IsRequired();
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.ManagerAvatarLayer> builder)
