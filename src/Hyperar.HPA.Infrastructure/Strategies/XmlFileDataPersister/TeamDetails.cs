@@ -148,6 +148,8 @@
 
                 seniorTeam.Region = region;
             }
+
+            await this.databaseContext.SaveAsync();
         }
 
         private async Task ProcessTeamDetailsAsync(Hattrick.HattrickData xmlEntity)
