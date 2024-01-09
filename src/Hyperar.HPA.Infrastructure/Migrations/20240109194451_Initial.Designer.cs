@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hyperar.HPA.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240107200343_Initial")]
+    [Migration("20240109194451_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -361,12 +361,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("Image")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnName("Image")
-                        .HasColumnOrder(5);
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()

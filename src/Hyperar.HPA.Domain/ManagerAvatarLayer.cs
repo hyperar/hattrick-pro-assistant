@@ -5,8 +5,6 @@
 
     public class ManagerAvatarLayer : EntityBase, IEntity
     {
-        public byte[] Image { get; set; } = Array.Empty<byte>();
-
         public string ImageUrl { get; set; } = string.Empty;
 
         public uint Index { get; set; }

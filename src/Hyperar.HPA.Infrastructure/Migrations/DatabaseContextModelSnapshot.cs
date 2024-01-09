@@ -359,12 +359,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<byte[]>("Image")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnName("Image")
-                        .HasColumnOrder(5);
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasMaxLength(1024)

@@ -6,6 +6,8 @@
     {
         Task DeleteAsync(int id);
 
+        Task DeleteRangeAsync(ICollection<int> ids);
+
         Task<TEntity?> GetByIdAsync(int id);
     }
 }

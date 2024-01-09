@@ -15,20 +15,37 @@
 
         public abstract Task PersistDataAsync(IXmlFile file);
 
-        protected static byte[] BuildAvatarFromLayers(ICollection<Domain.ManagerAvatarLayer> layers)
+        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<Domain.ManagerAvatarLayer> layers)
         {
-            var avatarImage = new Bitmap(110, 155, PixelFormat.Format32bppArgb);
+            ArgumentNullException.ThrowIfNull(layers, nameof(layers));
+
+            var firstLayer = layers.Single(x => x.Index == 1);
+
+            var firstLayerImage = GetImageFromBytes(
+                await DownloadWebResource(layers.Single(x => x.Index == 1).ImageUrl));
+
+            var avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
 
             var graphics = Graphics.FromImage(avatarImage);
 
-            foreach (var curLayer in layers.OrderBy(x => x.Index))
+            graphics.DrawImage(
+                firstLayerImage,
+                firstLayer.XCoordinate,
+                firstLayer.YCoordinate,
+                firstLayerImage.Width,
+                firstLayerImage.Height);
+
+            for (int i = 2; i < layers.Count; i++)
             {
-                var layerImage = GetImageFromBytes(curLayer.Image);
+                var curLayer = layers.Single(x => x.Index == i);
+
+                var layerImage = GetImageFromBytes(
+                    await DownloadWebResource(curLayer.ImageUrl));
 
                 graphics.DrawImage(
                     layerImage,
-                    (int)curLayer.XCoordinate,
-                    (int)curLayer.YCoordinate,
+                    curLayer.XCoordinate,
+                    curLayer.YCoordinate,
                     layerImage.Width,
                     layerImage.Height);
             }

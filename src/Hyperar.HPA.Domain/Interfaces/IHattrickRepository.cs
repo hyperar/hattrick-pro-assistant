@@ -6,6 +6,8 @@
     {
         Task DeleteAsync(long hattrickId);
 
+        Task DeleteRangeAsync(ICollection<uint> hattrickIds);
+
         Task<TEntity?> GetByHattrickIdAsync(long hattrickId);
     }
 }
