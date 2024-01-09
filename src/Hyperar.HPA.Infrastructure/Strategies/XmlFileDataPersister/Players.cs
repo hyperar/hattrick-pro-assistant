@@ -65,6 +65,7 @@
                 var country = await this.countryRepository.GetByHattrickIdAsync(xmlPlayer.CountryId);
 
                 ArgumentNullException.ThrowIfNull(country, nameof(country));
+
                 seniorPlayer = new Domain.SeniorPlayer
                 {
                     HattrickId = xmlPlayer.PlayerId,
@@ -140,6 +141,8 @@
             }
 
             await this.ProcessPlayerSkillAsync(xmlPlayer, seniorPlayer);
+
+            await this.databaseContext.SaveAsync();
         }
 
         private async Task ProcessPlayersAsync(Hattrick.HattrickData xmlEntity)

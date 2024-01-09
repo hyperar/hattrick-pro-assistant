@@ -98,7 +98,7 @@
 
             await this.databaseContext.SaveAsync();
 
-            if (xmlCountry.RegionList != null)
+            if (xmlCountry.RegionList != null && xmlCountry.RegionList.Count > 0)
             {
                 foreach (var curXmlRegion in xmlCountry.RegionList)
                 {
@@ -173,7 +173,7 @@
 
             await this.ProcessCountryAsync(xmlLeague.Country, xmlLeague.LeagueId);
 
-            if (xmlLeague.Cups != null)
+            if (xmlLeague.Cups != null && xmlLeague.Cups.Count > 0)
             {
                 foreach (var curXmlCup in xmlLeague.Cups)
                 {
@@ -238,6 +238,8 @@
 
                 this.regionRepository.Update(region);
             }
+
+            await this.databaseContext.SaveAsync();
         }
 
         private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData xmlEntity)
