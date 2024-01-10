@@ -12,7 +12,6 @@
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
     </UserControl.Resources>
 
-    <Border Style="{StaticResource ViewContainer}">
         <StackPanel Name="ViewContainer" Orientation="Vertical">
 
             <TextBlock Style="{StaticResource ViewTitle}"
@@ -89,5 +88,4 @@
                     Content="{x:Static globalization:Strings.Download}"
                     Margin="15" />
         </StackPanel>
-    </Border>
 </UserControl>

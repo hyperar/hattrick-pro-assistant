@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Global Styles -->
     <Style TargetType="{x:Type CheckBox}">
-        <Setter Property="FontSize" Value="12" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
@@ -13,7 +12,6 @@
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="13" />
     </Style>
 
     <!-- Styles -->
@@ -43,13 +41,6 @@
         <Setter Property="BorderThickness" Value="3" />
         <Setter Property="CornerRadius" Value="2" />
         <Setter Property="Effect" Value="{StaticResource ViewContainerShadow}" />
-    </Style>
-
-    <Style x:Key="MainViewContainer" TargetType="{x:Type Border}">
-        <Setter Property="Margin" Value="5" />
-        <Setter Property="Padding" Value="5" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="{x:Type Separator}">

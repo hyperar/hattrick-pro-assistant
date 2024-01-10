@@ -14,12 +14,14 @@
         <ImageBrush
             ImageSource="Resources/bg-dark.jpg"
             TileMode="Tile"
-            Stretch="Uniform"
             AlignmentY="Top"
             Viewport="0,0,292,292"
             ViewportUnits="Absolute" />
     </Window.Background>
-    <Grid>
+    <Grid RenderOptions.EdgeMode="Aliased"
+          RenderOptions.ClearTypeHint="Enabled"
+          SnapsToDevicePixels="True"
+          UseLayoutRounding="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="48" />
             <ColumnDefinition Width="*" />
@@ -27,7 +29,7 @@
 
         <controls:NavigationBar Grid.Column="0" />
 
-        <Border Style="{StaticResource MainViewContainer}" Grid.Column="1">
+        <Border Style="{StaticResource ViewContainer}" Grid.Column="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <ContentControl Content="{Binding CurrentViewModel}" />
             </ScrollViewer>

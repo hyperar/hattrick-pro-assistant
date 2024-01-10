@@ -10,7 +10,6 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisible" />
     </UserControl.Resources>
-    <Border Style="{StaticResource ViewContainer}">
         <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
             <StackPanel.Resources>
                 <Style x:Key="StepTitle" TargetType="{x:Type TextBlock}">
@@ -20,7 +19,6 @@
                 </Style>
 
                 <Style x:Key="StepDescription" TargetType="{x:Type TextBlock}">
-                    <Setter Property="FontSize" Value="14" />
                     <Setter Property="Foreground" Value="Black" />
                     <Setter Property="Margin" Value="0 5" />
                     <Setter Property="TextWrapping" Value="Wrap" />
@@ -29,7 +27,6 @@
                 </Style>
 
                 <Style TargetType="TextBox">
-                    <Setter Property="FontSize" Value="14" />
                     <Setter Property="Margin" Value="5" />
                     <Setter Property="Padding" Value="3" />
                     <Setter Property="TextAlignment" Value="Center" />
@@ -110,5 +107,4 @@
                                             Converter={StaticResource BoolToVisible}}"
                        Text="{x:Static globalization:Strings.NotAuthorized}" />
         </StackPanel>
-    </Border>
 </UserControl>

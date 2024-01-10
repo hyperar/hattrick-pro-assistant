@@ -295,10 +295,7 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
+                                    <Image Margin="5 0"
                                            ToolTip="{Binding BookingStatus,
                                                              Converter={StaticResource enumToTranslatedStringConverter}}"
                                            Source="{Binding BookingStatus,
@@ -311,10 +308,7 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
+                                    <Image Margin="5 0"
                                            Source="{Binding IsTransferListed,
                                                             FallbackValue={StaticResource transparent},
                                                             TargetNullValue={StaticResource transparent},
@@ -325,33 +319,22 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Margin="5 0"
                                            Source="{Binding HealthStatus,
                                                             FallbackValue={StaticResource transparent},
                                                             TargetNullValue={StaticResource transparent},
                                                             Converter={StaticResource healthToSmallBitmapImageConverter}}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="SizeToCells">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock FontWeight="Bold"
-                                               Text="{Binding HealthStatus,
+                                        <TextBlock Text="{Binding HealthStatus,
                                                               Converter={StaticResource healthToWeekStringConverter}}" />
+                                    </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
+                                    <Image Margin="5 0"
                                            Source="{Binding HasMotherClubBonus,
                                                             FallbackValue={StaticResource transparent},
                                                             TargetNullValue={StaticResource transparent},
@@ -362,10 +345,7 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
+                                    <Image Margin="5 0"
                                            ToolTip="{Binding Specialty,
                                                              Converter={StaticResource enumToTranslatedStringConverter}}"
                                            Source="{Binding Specialty,

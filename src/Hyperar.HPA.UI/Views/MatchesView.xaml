@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
              mc:Ignorable="d">
-    <Border Style="{StaticResource ViewContainer}">
         <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
-            <TextBlock Style="{StaticResource ViewTitle}" Text="{x:Static globalization:Strings.Matches}" />
+            <TextBlock Style="{StaticResource ViewTitle}"
+                       Text="{x:Static globalization:Strings.Matches}" />
         </StackPanel>
-    </Border>
 </UserControl>
