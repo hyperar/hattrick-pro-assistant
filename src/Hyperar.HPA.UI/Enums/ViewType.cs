@@ -12,7 +12,7 @@
 
         Players,
 
-        Permissions,
+        Authorization,
 
         TeamSelection
     }

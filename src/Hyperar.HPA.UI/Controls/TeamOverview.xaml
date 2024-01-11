@@ -14,8 +14,9 @@
         <converters:DateToLocaleShortDateTimeString x:Key="dateToLocaleDateTimeString" />
         <converters:HasMotherClubBonusToSmallBitmapImageConverter x:Key="hasMotherClubBonusToSmallBitmapImageConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
-        <converters:HealthToSmallBitmapImageConverter x:Key="healthToSmallBitmapImageConverter" />
-        <converters:HealthToWeekStringConverter x:Key="healthToWeekStringConverter" />
+        <converters:HealthIntToSmallBitmapImageConverter x:Key="healthIntToSmallBitmapImageConverter" />
+        <converters:HealthIntToTranslatedStringConverter x:Key="healthIntToTranslatedStringConverter" />
+        <converters:HealthIntToWeekStringConverter x:Key="healthIntToWeekStringConverter" />
         <converters:IsTransferListedToSmallBitmapImageConverter x:Key="isTransferListedToSmallBitmapImageConverter" />
         <converters:SpecialtyToSmallBitmapImageConverter x:Key="specialtyToSmallBitmapImageConverter" />
     </UserControl.Resources>
@@ -319,14 +320,18 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal"
+                                                ToolTip="{Binding HealthStatus,
+                                                                  FallbackValue={StaticResource transparent},
+                                                                  TargetNullValue={StaticResource transparent},
+                                                                  Converter={StaticResource healthIntToTranslatedStringConverter}}">
                                         <Image Margin="5 0"
                                            Source="{Binding HealthStatus,
                                                             FallbackValue={StaticResource transparent},
                                                             TargetNullValue={StaticResource transparent},
-                                                            Converter={StaticResource healthToSmallBitmapImageConverter}}" />
+                                                            Converter={StaticResource healthIntToSmallBitmapImageConverter}}" />
                                         <TextBlock Text="{Binding HealthStatus,
-                                                              Converter={StaticResource healthToWeekStringConverter}}" />
+                                                                  Converter={StaticResource healthIntToWeekStringConverter}}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

@@ -46,7 +46,7 @@
         <RadioButton
             Grid.Row="1"
             ToolTip="{x:Static globalization:Strings.Players}"
-            Content="{StaticResource sports-teams-32}"
+            Content="{StaticResource players-32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Players}"
             IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:PlayersViewModel}}"
@@ -55,7 +55,7 @@
         <RadioButton
             Grid.Row="2"
             ToolTip="{x:Static globalization:Strings.Matches}"
-            Content="{StaticResource scoreboard-32}"
+            Content="{StaticResource matches-32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.Matches}"
             IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:MatchesViewModel}}"
@@ -64,7 +64,7 @@
         <RadioButton
             Grid.Row="4"
             ToolTip="{x:Static globalization:Strings.TeamSelection}"
-            Content="{StaticResource protect-32}"
+            Content="{StaticResource team-selection-32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
             CommandParameter="{x:Static enums:ViewType.TeamSelection}"
             IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:TeamSelectionViewModel}}"
@@ -87,11 +87,11 @@
 
         <RadioButton
             Grid.Row="8"
-            ToolTip="{x:Static globalization:Strings.Permissions}"
-            Content="{StaticResource key-32}"
+            ToolTip="{x:Static globalization:Strings.Authorization}"
+            Content="{StaticResource authorization-32}"
             Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.Permissions}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:PermissionsViewModel}}"
+            CommandParameter="{x:Static enums:ViewType.Authorization}"
+            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:AuthorizationViewModel}}"
             IsEnabled="{Binding CanNavigate}" />
 
         <RadioButton
@@ -105,9 +105,9 @@
 
         <Button
             Grid.Row="10"
-            ToolTip="{x:Static globalization:Strings.Quit}"
-            Content="{StaticResource logout-32}"
-            Click="QuitButton_Click"
+            ToolTip="{x:Static globalization:Strings.Exit}"
+            Content="{StaticResource close-32}"
+            Click="ExitButton_Click"
             IsEnabled="{Binding CanNavigate}" />
     </Grid>
 </UserControl>

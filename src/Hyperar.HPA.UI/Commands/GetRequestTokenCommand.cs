@@ -10,11 +10,11 @@
     {
         private readonly INavigator navigator;
 
-        private readonly PermissionsViewModel permissionsViewModel;
+        private readonly AuthorizationViewModel authorizationViewModel;
 
-        public GetRequestTokenCommand(PermissionsViewModel permissionsViewModel, INavigator navigator)
+        public GetRequestTokenCommand(AuthorizationViewModel authorizationViewModel, INavigator navigator)
         {
-            this.permissionsViewModel = permissionsViewModel;
+            this.authorizationViewModel = authorizationViewModel;
             this.navigator = navigator;
         }
 
@@ -22,13 +22,13 @@
         {
             this.navigator.SuspendNavigation();
 
-            GetAuthorizationUrlResponse result = await this.permissionsViewModel.Authorizer.GetAuthorizationUrlAsync();
+            GetAuthorizationUrlResponse result = await this.authorizationViewModel.Authorizer.GetAuthorizationUrlAsync();
 
             if (result != null)
             {
-                this.permissionsViewModel.AuthorizationUrl = result.AuthorizationUrl;
-                this.permissionsViewModel.RequestToken = result.RequestToken.Token;
-                this.permissionsViewModel.RequestTokenSecret = result.RequestToken.TokenSecret;
+                this.authorizationViewModel.AuthorizationUrl = result.AuthorizationUrl;
+                this.authorizationViewModel.RequestToken = result.RequestToken.Token;
+                this.authorizationViewModel.RequestTokenSecret = result.RequestToken.TokenSecret;
 
                 Process.Start(
                     new ProcessStartInfo(

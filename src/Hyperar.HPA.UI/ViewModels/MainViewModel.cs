@@ -1,9 +1,12 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using Application.Models.Main;
+    using Application.Services;
     using UI.Commands;
     using UI.Enums;
     using UI.State.Interfaces;
@@ -16,16 +19,16 @@
         private readonly IViewModelFactory viewModelFactory;
 
         public MainViewModel(
+            IAuthorizer authorizer,
             INavigator navigator,
-            IViewModelFactory viewModelFactory,
-            IAuthorizer authorizer) : base(authorizer)
+            IViewModelFactory viewModelFactory) : base(authorizer)
         {
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
 
             this.navigator.StateChanged += this.Navigator_StateChanged;
 
-            this.UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, this.viewModelFactory);
+            this.UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this.navigator, this.viewModelFactory);
         }
 
         public bool CanNavigate
@@ -41,6 +44,14 @@
             get
             {
                 return this.navigator.CurrentViewModel;
+            }
+        }
+
+        public uint? SelectedTeamId
+        {
+            get
+            {
+                return this.navigator.SelectedTeamId;
             }
         }
 
@@ -63,7 +74,7 @@
 
             if (this.IsNotAuthorized.Value)
             {
-                this.UpdateCurrentViewModelCommand.Execute(ViewType.Permissions);
+                this.UpdateCurrentViewModelCommand.Execute(ViewType.Authorization);
             }
             else if (!this.Authorizer.User.LastDownloadDate.HasValue ||
                 this.Authorizer.User.Manager == null ||

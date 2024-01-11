@@ -4,11 +4,11 @@
     using System.Globalization;
     using System.Windows.Data;
 
-    internal class HealthToSmallBitmapImageConverter : ResourceImageValueConverter, IValueConverter
+    internal class HealthIntToLargeBitmapImageConverter : ResourceImageValueConverter, IValueConverter
     {
-        private const string bandageFileName = "bandage-16.png";
+        private const string bruisedFileName = "bruised-30.png";
 
-        private const string clinicFileName = "doctor-16.png";
+        private const string clinicFileName = "clinic-30.png";
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -19,7 +19,7 @@
                 fileName = health switch
                 {
                     -1 => transparentFileName,
-                    0 => bandageFileName,
+                    0 => bruisedFileName,
                     _ => clinicFileName
                 };
             }

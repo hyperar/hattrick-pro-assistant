@@ -7,7 +7,7 @@
 
     internal class IsTransferListedToLargeBitmapImageConverter : ResourceImageValueConverter, IValueConverter
     {
-        private const string isTransferListedFileName = "price-tag-30.png";
+        private const string isTransferListedFileName = "transferlisted-30.png";
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

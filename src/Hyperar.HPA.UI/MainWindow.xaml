@@ -9,7 +9,8 @@
         WindowState="Maximized"
         mc:Ignorable="d"
         MinHeight="768"
-        MinWidth="1024">
+        MinWidth="1024"
+        FontSize="14">
     <Window.Background>
         <ImageBrush
             ImageSource="Resources/bg-dark.jpg"
@@ -26,11 +27,18 @@
             <ColumnDefinition Width="48" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <controls:NavigationBar Grid.Column="0" />
+        <controls:NavigationBar Grid.Column="0"
+                                Grid.Row="0" />
 
-        <Border Style="{StaticResource ViewContainer}" Grid.Column="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Border Style="{StaticResource ViewContainer}"
+                Grid.Column="1"
+                Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
                 <ContentControl Content="{Binding CurrentViewModel}" />
             </ScrollViewer>
         </Border>

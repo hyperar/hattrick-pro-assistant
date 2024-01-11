@@ -97,6 +97,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authorization.
+        /// </summary>
+        public static string Authorization {
+            get {
+                return ResourceManager.GetString("Authorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authorize.
         /// </summary>
         public static string Authorize {
@@ -142,7 +151,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Booked.
+        ///   Looks up a localized string similar to One booking.
         /// </summary>
         public static string BookingStatus_OneYellowCard {
             get {
@@ -165,6 +174,15 @@ namespace Hyperar.HPA.Globalization {
         public static string BookingStatus_TwoYellowCards {
             get {
                 return ResourceManager.GetString("BookingStatus_TwoYellowCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bruised.
+        /// </summary>
+        public static string Brusied {
+            get {
+                return ResourceManager.GetString("Brusied", resourceCulture);
             }
         }
         
@@ -331,6 +349,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Experience.
         /// </summary>
         public static string Experience {
@@ -385,6 +412,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Healthy.
+        /// </summary>
+        public static string Healthy {
+            get {
+                return ResourceManager.GetString("Healthy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -408,6 +444,15 @@ namespace Hyperar.HPA.Globalization {
         public static string ID {
             get {
                 return ResourceManager.GetString("ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Injured: {0} week(s).
+        /// </summary>
+        public static string InjuredWeeks {
+            get {
+                return ResourceManager.GetString("InjuredWeeks", resourceCulture);
             }
         }
         
@@ -574,15 +619,6 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Permissions.
-        /// </summary>
-        public static string Permissions {
-            get {
-                return ResourceManager.GetString("Permissions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Players.
         /// </summary>
         public static string Players {
@@ -597,15 +633,6 @@ namespace Hyperar.HPA.Globalization {
         public static string Playmaking {
             get {
                 return ResourceManager.GetString("Playmaking", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Quit.
-        /// </summary>
-        public static string Quit {
-            get {
-                return ResourceManager.GetString("Quit", resourceCulture);
             }
         }
         

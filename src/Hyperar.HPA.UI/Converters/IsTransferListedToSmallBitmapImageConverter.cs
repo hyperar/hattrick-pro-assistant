@@ -6,7 +6,7 @@
 
     internal class IsTransferListedToSmallBitmapImageConverter : ResourceImageValueConverter, IValueConverter
     {
-        private const string isTransferListedFileName = "price-tag-16.png";
+        private const string isTransferListedFileName = "transferlisted-16.png";
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

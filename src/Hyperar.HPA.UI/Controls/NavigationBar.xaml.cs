@@ -13,7 +13,7 @@
             this.InitializeComponent();
         }
 
-        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);
 

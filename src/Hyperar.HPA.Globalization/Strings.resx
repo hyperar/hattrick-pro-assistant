@@ -129,6 +129,9 @@
   <data name="Agreeability" xml:space="preserve">
     <value>Agreeability</value>
   </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
   <data name="Authorize" xml:space="preserve">
     <value>Authorize</value>
   </data>
@@ -145,13 +148,16 @@
     <value>No bookings</value>
   </data>
   <data name="BookingStatus_OneYellowCard" xml:space="preserve">
-    <value>Booked</value>
+    <value>One booking</value>
   </data>
   <data name="BookingStatus_Suspended" xml:space="preserve">
     <value>Suspended</value>
   </data>
   <data name="BookingStatus_TwoYellowCards" xml:space="preserve">
     <value>Two bookings</value>
+  </data>
+  <data name="Brusied" xml:space="preserve">
+    <value>Bruised</value>
   </data>
   <data name="CareerGoals" xml:space="preserve">
     <value>Career Goals</value>
@@ -207,6 +213,9 @@
   <data name="DownloadTaskStatus_Saving" xml:space="preserve">
     <value>Saving</value>
   </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
   <data name="Experience" xml:space="preserve">
     <value>Experience</value>
   </data>
@@ -225,6 +234,9 @@
   <data name="Health" xml:space="preserve">
     <value>Health</value>
   </data>
+  <data name="Healthy" xml:space="preserve">
+    <value>Healthy</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -233,6 +245,9 @@
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="InjuredWeeks" xml:space="preserve">
+    <value>Injured: {0} week(s)</value>
   </data>
   <data name="Keeper" xml:space="preserve">
     <value>Keeper</value>
@@ -288,17 +303,11 @@
   <data name="Passing" xml:space="preserve">
     <value>Passing</value>
   </data>
-  <data name="Permissions" xml:space="preserve">
-    <value>Permissions</value>
-  </data>
   <data name="Players" xml:space="preserve">
     <value>Players</value>
   </data>
   <data name="Playmaking" xml:space="preserve">
     <value>Playmaking</value>
-  </data>
-  <data name="Quit" xml:space="preserve">
-    <value>Quit</value>
   </data>
   <data name="RecentMatches" xml:space="preserve">
     <value>Recent Matches</value>

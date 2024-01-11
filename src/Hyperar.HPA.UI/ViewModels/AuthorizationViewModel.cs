@@ -6,7 +6,7 @@
     using UI.State.Interfaces;
     using UI.ViewModels.Interfaces;
 
-    public class PermissionsViewModel : AuthorizedViewModelBase
+    public class AuthorizationViewModel : AuthorizedViewModelBase
     {
         private string? accessToken;
 
@@ -20,7 +20,7 @@
 
         private string? verificationCode;
 
-        public PermissionsViewModel(
+        public AuthorizationViewModel(
             IAuthorizer authorizer,
             INavigator navigator,
             IViewModelFactory viewModelFactory) : base(authorizer)

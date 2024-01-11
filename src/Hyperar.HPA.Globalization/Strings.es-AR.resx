@@ -129,6 +129,9 @@
   <data name="Agreeability" xml:space="preserve">
     <value>Carácter</value>
   </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Autorización</value>
+  </data>
   <data name="Authorize" xml:space="preserve">
     <value>Autorizar</value>
   </data>
@@ -145,13 +148,16 @@
     <value>Sin amonestaciones</value>
   </data>
   <data name="BookingStatus_OneYellowCard" xml:space="preserve">
-    <value>Amonestado</value>
+    <value>Una amonestación</value>
   </data>
   <data name="BookingStatus_Suspended" xml:space="preserve">
     <value>Suspendido</value>
   </data>
   <data name="BookingStatus_TwoYellowCards" xml:space="preserve">
     <value>Dos amonestaciones</value>
+  </data>
+  <data name="Brusied" xml:space="preserve">
+    <value>Lastimado</value>
   </data>
   <data name="CareerGoals" xml:space="preserve">
     <value>Goles (Carrera)</value>
@@ -207,6 +213,9 @@
   <data name="DownloadTaskStatus_Saving" xml:space="preserve">
     <value>Guardando</value>
   </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
   <data name="Experience" xml:space="preserve">
     <value>Experiencia</value>
   </data>
@@ -243,6 +252,9 @@
   <data name="Health" xml:space="preserve">
     <value>Salud</value>
   </data>
+  <data name="Healthy" xml:space="preserve">
+    <value>Saludable</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
   </data>
@@ -251,6 +263,9 @@
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="InjuredWeeks" xml:space="preserve">
+    <value>Lesionado: {0} semana(s)</value>
   </data>
   <data name="Keeper" xml:space="preserve">
     <value>Portería</value>
@@ -306,17 +321,11 @@
   <data name="Passing" xml:space="preserve">
     <value>Pases</value>
   </data>
-  <data name="Permissions" xml:space="preserve">
-    <value>Permisos</value>
-  </data>
   <data name="Players" xml:space="preserve">
     <value>Jugadores</value>
   </data>
   <data name="Playmaking" xml:space="preserve">
     <value>Jugadas</value>
-  </data>
-  <data name="Quit" xml:space="preserve">
-    <value>Salir</value>
   </data>
   <data name="RecentMatches" xml:space="preserve">
     <value>Partidos Recientes</value>

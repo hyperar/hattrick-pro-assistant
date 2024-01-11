@@ -3,11 +3,11 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for PermissionsView.xaml
+    /// Interaction logic for AuthorizationView.xaml
     /// </summary>
-    public partial class PermissionsView : UserControl
+    public partial class AuthorizationView : UserControl
     {
-        public PermissionsView()
+        public AuthorizationView()
         {
             this.InitializeComponent();
         }

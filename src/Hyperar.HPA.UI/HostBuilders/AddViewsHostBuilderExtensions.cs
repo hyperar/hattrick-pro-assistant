@@ -1,5 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
+    using Hyperar.HPA.Application.Services;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -19,9 +20,9 @@
                     var scope = s.CreateScope();
 
                     var viewModel = new MainViewModel(
+                            scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
                             s.GetRequiredService<INavigator>(),
-                            s.GetRequiredService<IViewModelFactory>(),
-                            scope.ServiceProvider.GetRequiredService<IAuthorizer>());
+                            viewModelFactory: s.GetRequiredService<IViewModelFactory>());
 
                     viewModel.InitializeAsync().ConfigureAwait(false);
 

@@ -6,19 +6,19 @@
 
     internal class SpecialtyToSmallBitmapImageConverter : SpecialtyToBitmapImageConverterBase, IValueConverter
     {
-        private const string headSpecialistFileName = "head-16.png";
+        private const string headSpecialistFileName = "head-specialist-16.png";
 
-        private const string powerfulFileName = "strong-16.png";
+        private const string powerfulFileName = "powerful-16.png";
 
-        private const string quickFileName = "exercise-16.png";
+        private const string quickFileName = "quick-16.png";
 
-        private const string resilientFileName = "health-16.png";
+        private const string resilientFileName = "resilient-16.png";
 
-        private const string supportFileName = "connection-16.png";
+        private const string supportFileName = "support-16.png";
 
-        private const string technicalFileName = "gears-16.png";
+        private const string technicalFileName = "technical-16.png";
 
-        private const string unpredictableFileName = "swap-16.png";
+        private const string unpredictableFileName = "unpredictable-16.png";
 
         protected override string GetFileNameFromSpecialty(Specialty specialty)
         {

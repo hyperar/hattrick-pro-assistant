@@ -4,7 +4,7 @@
     using System.Globalization;
     using System.Windows.Data;
 
-    internal class HealthToWeekStringConverter : IValueConverter
+    internal class HealthIntToWeekStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
