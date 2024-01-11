@@ -126,8 +126,44 @@
   <data name="Aggressiveness" xml:space="preserve">
     <value>Aggressiveness</value>
   </data>
+  <data name="AggressivenessLevel_Balanced" xml:space="preserve">
+    <value>balanced</value>
+  </data>
+  <data name="AggressivenessLevel_Calm" xml:space="preserve">
+    <value>calm</value>
+  </data>
+  <data name="AggressivenessLevel_Fiery" xml:space="preserve">
+    <value>fiery</value>
+  </data>
+  <data name="AggressivenessLevel_Temperamental" xml:space="preserve">
+    <value>temperamental</value>
+  </data>
+  <data name="AggressivenessLevel_Tranquil" xml:space="preserve">
+    <value>tranquil</value>
+  </data>
+  <data name="AggressivenessLevel_Unstable" xml:space="preserve">
+    <value>unstable</value>
+  </data>
   <data name="Agreeability" xml:space="preserve">
     <value>Agreeability</value>
+  </data>
+  <data name="AgreeabilityLevel_BelovedTeamMember" xml:space="preserve">
+    <value>beloved team member</value>
+  </data>
+  <data name="AgreeabilityLevel_ControversialPerson" xml:space="preserve">
+    <value>controversial person</value>
+  </data>
+  <data name="AgreeabilityLevel_NastyFellow" xml:space="preserve">
+    <value>nasty fellow</value>
+  </data>
+  <data name="AgreeabilityLevel_PleasantGuy" xml:space="preserve">
+    <value>pleasant guy</value>
+  </data>
+  <data name="AgreeabilityLevel_PopularGuy" xml:space="preserve">
+    <value>popular guy</value>
+  </data>
+  <data name="AgreeabilityLevel_SympatheticGuy" xml:space="preserve">
+    <value>sympathetic guy</value>
   </data>
   <data name="Authorization" xml:space="preserve">
     <value>Authorization</value>
@@ -243,6 +279,24 @@
   <data name="Honesty" xml:space="preserve">
     <value>Honesty</value>
   </data>
+  <data name="HonestyLevel_Dishonest" xml:space="preserve">
+    <value>dishonest</value>
+  </data>
+  <data name="HonestyLevel_Honest" xml:space="preserve">
+    <value>honest</value>
+  </data>
+  <data name="HonestyLevel_Infamous" xml:space="preserve">
+    <value>infamous</value>
+  </data>
+  <data name="HonestyLevel_Righteous" xml:space="preserve">
+    <value>righteous</value>
+  </data>
+  <data name="HonestyLevel_Saintly" xml:space="preserve">
+    <value>saintly</value>
+  </data>
+  <data name="HonestyLevel_Upright" xml:space="preserve">
+    <value>upright</value>
+  </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
   </data>
@@ -335,6 +389,69 @@
   </data>
   <data name="ShirtNumber" xml:space="preserve">
     <value>#</value>
+  </data>
+  <data name="SkillLevel_Brilliant" xml:space="preserve">
+    <value>brilliant</value>
+  </data>
+  <data name="SkillLevel_Disastrous" xml:space="preserve">
+    <value>disastrous</value>
+  </data>
+  <data name="SkillLevel_Divine" xml:space="preserve">
+    <value>divine</value>
+  </data>
+  <data name="SkillLevel_Excellent" xml:space="preserve">
+    <value>excellent</value>
+  </data>
+  <data name="SkillLevel_ExtraTerrestrial" xml:space="preserve">
+    <value>extra-terrestrial</value>
+  </data>
+  <data name="SkillLevel_Formidable" xml:space="preserve">
+    <value>formidable</value>
+  </data>
+  <data name="SkillLevel_Inadequate" xml:space="preserve">
+    <value>inadequate</value>
+  </data>
+  <data name="SkillLevel_Magical" xml:space="preserve">
+    <value>magical</value>
+  </data>
+  <data name="SkillLevel_Magnificent" xml:space="preserve">
+    <value>magnificent</value>
+  </data>
+  <data name="SkillLevel_Mythical" xml:space="preserve">
+    <value>mythical</value>
+  </data>
+  <data name="SkillLevel_NonExistent" xml:space="preserve">
+    <value>non-existent</value>
+  </data>
+  <data name="SkillLevel_Outstanding" xml:space="preserve">
+    <value>outstanding</value>
+  </data>
+  <data name="SkillLevel_Passable" xml:space="preserve">
+    <value>passable</value>
+  </data>
+  <data name="SkillLevel_Poor" xml:space="preserve">
+    <value>poor</value>
+  </data>
+  <data name="SkillLevel_Solid" xml:space="preserve">
+    <value>solid</value>
+  </data>
+  <data name="SkillLevel_Supernatural" xml:space="preserve">
+    <value>supernatural</value>
+  </data>
+  <data name="SkillLevel_Titanic" xml:space="preserve">
+    <value>titanic</value>
+  </data>
+  <data name="SkillLevel_Utopian" xml:space="preserve">
+    <value>utopian</value>
+  </data>
+  <data name="SkillLevel_Weak" xml:space="preserve">
+    <value>weak</value>
+  </data>
+  <data name="SkillLevel_WorldClass" xml:space="preserve">
+    <value>world class</value>
+  </data>
+  <data name="SkillLevel_Wretched" xml:space="preserve">
+    <value>wretched</value>
   </data>
   <data name="Specialty" xml:space="preserve">
     <value>Specialty</value>

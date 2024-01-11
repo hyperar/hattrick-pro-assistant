@@ -88,11 +88,119 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to balanced.
+        /// </summary>
+        public static string AggressivenessLevel_Balanced {
+            get {
+                return ResourceManager.GetString("AggressivenessLevel_Balanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to calm.
+        /// </summary>
+        public static string AggressivenessLevel_Calm {
+            get {
+                return ResourceManager.GetString("AggressivenessLevel_Calm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fiery.
+        /// </summary>
+        public static string AggressivenessLevel_Fiery {
+            get {
+                return ResourceManager.GetString("AggressivenessLevel_Fiery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to temperamental.
+        /// </summary>
+        public static string AggressivenessLevel_Temperamental {
+            get {
+                return ResourceManager.GetString("AggressivenessLevel_Temperamental", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tranquil.
+        /// </summary>
+        public static string AggressivenessLevel_Tranquil {
+            get {
+                return ResourceManager.GetString("AggressivenessLevel_Tranquil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unstable.
+        /// </summary>
+        public static string AggressivenessLevel_Unstable {
+            get {
+                return ResourceManager.GetString("AggressivenessLevel_Unstable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agreeability.
         /// </summary>
         public static string Agreeability {
             get {
                 return ResourceManager.GetString("Agreeability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to beloved team member.
+        /// </summary>
+        public static string AgreeabilityLevel_BelovedTeamMember {
+            get {
+                return ResourceManager.GetString("AgreeabilityLevel_BelovedTeamMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to controversial person.
+        /// </summary>
+        public static string AgreeabilityLevel_ControversialPerson {
+            get {
+                return ResourceManager.GetString("AgreeabilityLevel_ControversialPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nasty fellow.
+        /// </summary>
+        public static string AgreeabilityLevel_NastyFellow {
+            get {
+                return ResourceManager.GetString("AgreeabilityLevel_NastyFellow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pleasant guy.
+        /// </summary>
+        public static string AgreeabilityLevel_PleasantGuy {
+            get {
+                return ResourceManager.GetString("AgreeabilityLevel_PleasantGuy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to popular guy.
+        /// </summary>
+        public static string AgreeabilityLevel_PopularGuy {
+            get {
+                return ResourceManager.GetString("AgreeabilityLevel_PopularGuy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sympathetic guy.
+        /// </summary>
+        public static string AgreeabilityLevel_SympatheticGuy {
+            get {
+                return ResourceManager.GetString("AgreeabilityLevel_SympatheticGuy", resourceCulture);
             }
         }
         
@@ -439,6 +547,60 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dishonest.
+        /// </summary>
+        public static string HonestyLevel_Dishonest {
+            get {
+                return ResourceManager.GetString("HonestyLevel_Dishonest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to honest.
+        /// </summary>
+        public static string HonestyLevel_Honest {
+            get {
+                return ResourceManager.GetString("HonestyLevel_Honest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to infamous.
+        /// </summary>
+        public static string HonestyLevel_Infamous {
+            get {
+                return ResourceManager.GetString("HonestyLevel_Infamous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to righteous.
+        /// </summary>
+        public static string HonestyLevel_Righteous {
+            get {
+                return ResourceManager.GetString("HonestyLevel_Righteous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to saintly.
+        /// </summary>
+        public static string HonestyLevel_Saintly {
+            get {
+                return ResourceManager.GetString("HonestyLevel_Saintly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to upright.
+        /// </summary>
+        public static string HonestyLevel_Upright {
+            get {
+                return ResourceManager.GetString("HonestyLevel_Upright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ID.
         /// </summary>
         public static string ID {
@@ -714,6 +876,195 @@ namespace Hyperar.HPA.Globalization {
         public static string ShirtNumber {
             get {
                 return ResourceManager.GetString("ShirtNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to brilliant.
+        /// </summary>
+        public static string SkillLevel_Brilliant {
+            get {
+                return ResourceManager.GetString("SkillLevel_Brilliant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to disastrous.
+        /// </summary>
+        public static string SkillLevel_Disastrous {
+            get {
+                return ResourceManager.GetString("SkillLevel_Disastrous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to divine.
+        /// </summary>
+        public static string SkillLevel_Divine {
+            get {
+                return ResourceManager.GetString("SkillLevel_Divine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to excellent.
+        /// </summary>
+        public static string SkillLevel_Excellent {
+            get {
+                return ResourceManager.GetString("SkillLevel_Excellent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to extra-terrestrial.
+        /// </summary>
+        public static string SkillLevel_ExtraTerrestrial {
+            get {
+                return ResourceManager.GetString("SkillLevel_ExtraTerrestrial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to formidable.
+        /// </summary>
+        public static string SkillLevel_Formidable {
+            get {
+                return ResourceManager.GetString("SkillLevel_Formidable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inadequate.
+        /// </summary>
+        public static string SkillLevel_Inadequate {
+            get {
+                return ResourceManager.GetString("SkillLevel_Inadequate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to magical.
+        /// </summary>
+        public static string SkillLevel_Magical {
+            get {
+                return ResourceManager.GetString("SkillLevel_Magical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to magnificent.
+        /// </summary>
+        public static string SkillLevel_Magnificent {
+            get {
+                return ResourceManager.GetString("SkillLevel_Magnificent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mythical.
+        /// </summary>
+        public static string SkillLevel_Mythical {
+            get {
+                return ResourceManager.GetString("SkillLevel_Mythical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to non-existent.
+        /// </summary>
+        public static string SkillLevel_NonExistent {
+            get {
+                return ResourceManager.GetString("SkillLevel_NonExistent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to outstanding.
+        /// </summary>
+        public static string SkillLevel_Outstanding {
+            get {
+                return ResourceManager.GetString("SkillLevel_Outstanding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to passable.
+        /// </summary>
+        public static string SkillLevel_Passable {
+            get {
+                return ResourceManager.GetString("SkillLevel_Passable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to poor.
+        /// </summary>
+        public static string SkillLevel_Poor {
+            get {
+                return ResourceManager.GetString("SkillLevel_Poor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to solid.
+        /// </summary>
+        public static string SkillLevel_Solid {
+            get {
+                return ResourceManager.GetString("SkillLevel_Solid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to supernatural.
+        /// </summary>
+        public static string SkillLevel_Supernatural {
+            get {
+                return ResourceManager.GetString("SkillLevel_Supernatural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to titanic.
+        /// </summary>
+        public static string SkillLevel_Titanic {
+            get {
+                return ResourceManager.GetString("SkillLevel_Titanic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to utopian.
+        /// </summary>
+        public static string SkillLevel_Utopian {
+            get {
+                return ResourceManager.GetString("SkillLevel_Utopian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to weak.
+        /// </summary>
+        public static string SkillLevel_Weak {
+            get {
+                return ResourceManager.GetString("SkillLevel_Weak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to world class.
+        /// </summary>
+        public static string SkillLevel_WorldClass {
+            get {
+                return ResourceManager.GetString("SkillLevel_WorldClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to wretched.
+        /// </summary>
+        public static string SkillLevel_Wretched {
+            get {
+                return ResourceManager.GetString("SkillLevel_Wretched", resourceCulture);
             }
         }
         
