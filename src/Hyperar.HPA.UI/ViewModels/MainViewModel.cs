@@ -1,12 +1,9 @@
 ﻿namespace Hyperar.HPA.UI.ViewModels
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
-    using Application.Models.Main;
-    using Application.Services;
     using UI.Commands;
     using UI.Enums;
     using UI.State.Interfaces;

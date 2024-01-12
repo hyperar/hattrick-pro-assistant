@@ -443,6 +443,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnName("Agreeability")
                         .HasColumnOrder(15);
 
+                    b.Property<byte[]>("Avatar")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("Avatar")
+                        .HasColumnOrder(34);
+
                     b.Property<long>("BookingStatus")
                         .HasColumnType("bigint")
                         .HasColumnName("BookingStatus")
@@ -611,6 +617,48 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasIndex("SeniorTeamHattrickId");
 
                     b.ToTable("SeniorPlayer", (string)null);
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.SeniorPlayerAvatarLayer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar")
+                        .HasColumnName("ImageUrl")
+                        .HasColumnOrder(4);
+
+                    b.Property<long>("Index")
+                        .HasColumnType("bigint")
+                        .HasColumnName("Index")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("SeniorPlayerHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("XCoordinate")
+                        .HasColumnType("bigint")
+                        .HasColumnName("XCoordinate")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("YCoordinate")
+                        .HasColumnType("bigint")
+                        .HasColumnName("YCoordinate")
+                        .HasColumnOrder(3);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SeniorPlayerHattrickId");
+
+                    b.ToTable("SeniorPlayerAvatarLayer", (string)null);
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.SeniorPlayerSkill", b =>
@@ -1143,6 +1191,17 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Navigation("SeniorTeam");
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.SeniorPlayerAvatarLayer", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.SeniorPlayer", "SeniorPlayer")
+                        .WithMany("AvatarLayers")
+                        .HasForeignKey("SeniorPlayerHattrickId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("SeniorPlayer");
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.SeniorPlayerSkill", b =>
                 {
                     b.HasOne("Hyperar.HPA.Domain.SeniorPlayer", "SeniorPlayer")
@@ -1246,6 +1305,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             modelBuilder.Entity("Hyperar.HPA.Domain.SeniorPlayer", b =>
                 {
+                    b.Navigation("AvatarLayers");
+
                     b.Navigation("SeniorPlayerSkills");
                 });
 

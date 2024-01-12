@@ -552,4 +552,25 @@
   <data name="Winger" xml:space="preserve">
     <value>Lateral</value>
   </data>
+  <data name="XmlFileType_ArenaDetails" xml:space="preserve">
+    <value>Detalles del Estadio</value>
+  </data>
+  <data name="XmlFileType_Avatars" xml:space="preserve">
+    <value>Avatares de Jugadores</value>
+  </data>
+  <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
+    <value>Compendio de Manager</value>
+  </data>
+  <data name="XmlFileType_Matches" xml:space="preserve">
+    <value>Partidos</value>
+  </data>
+  <data name="XmlFileType_Players" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="XmlFileType_TeamDetails" xml:space="preserve">
+    <value>Detalles del Equipo</value>
+  </data>
+  <data name="XmlFileType_WorldDetails" xml:space="preserve">
+    <value>Detalles del Mundo</value>
+  </data>
 </root>

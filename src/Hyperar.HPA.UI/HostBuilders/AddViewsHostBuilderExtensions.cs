@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
-    using Hyperar.HPA.Application.Services;
+    using Application.Services;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;

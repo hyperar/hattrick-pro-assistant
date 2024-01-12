@@ -12,6 +12,7 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <converters:BookingStatusToSmallBitmapImageConverter x:Key="bookingSmallStatusToBitmapImageConverter" />
+        <converters:ByteArrayToBitmapImageConverter x:Key="byteArrayToBitmapImageConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
         <converters:HasMotherClubBonusToSmallBitmapImageConverter x:Key="hasMotherClubBonusToSmallBitmapImageConverter" />
         <converters:HealthIntToSmallBitmapImageConverter x:Key="healthIntToSmallBitmapImageConverter" />
@@ -179,6 +180,16 @@
                 <DataGridTextColumn Header="{x:Static globalization:Strings.GoalsOnTeam}" Binding="{Binding TeamGoals, Mode=OneWay}" />
                 <DataGridTextColumn Header="{x:Static globalization:Strings.MatchesOnTeam}" Binding="{Binding TeamMatches, Mode=OneWay}" />
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Avatar,
+                                                FallbackValue={StaticResource transparent},
+                                                TargetNullValue={StaticResource transparent},
+                                                Converter={StaticResource byteArrayToBitmapImageConverter}}" />
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </StackPanel>
 </UserControl>

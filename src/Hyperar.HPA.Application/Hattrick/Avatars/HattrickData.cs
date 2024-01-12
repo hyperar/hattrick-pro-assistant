@@ -1,16 +1,13 @@
-﻿namespace Hyperar.HPA.Application.Hattrick.ManagerCompendium
+﻿namespace Hyperar.HPA.Application.Hattrick.Avatars
 {
-    using System;
-    using Application.Hattrick;
     using Application.Hattrick.Interfaces;
 
-    [Serializable]
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
         {
         }
 
-        public Manager Manager { get; set; } = new Manager();
+        public Team Team { get; set; } = new Team();
     }
 }

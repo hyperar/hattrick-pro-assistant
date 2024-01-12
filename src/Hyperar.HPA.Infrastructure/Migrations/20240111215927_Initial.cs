@@ -292,6 +292,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     BookingStatus = table.Column<long>(type: "bigint", nullable: false),
                     Health = table.Column<int>(type: "int", nullable: false),
                     Category = table.Column<long>(type: "bigint", nullable: false),
+                    Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     CountryHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     SeniorTeamHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
@@ -362,6 +363,28 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         name: "FK_SeniorTeamOverviewMatch_SeniorTeam_SeniorTeamHattrickId",
                         column: x => x.SeniorTeamHattrickId,
                         principalTable: "SeniorTeam",
+                        principalColumn: "HattrickId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SeniorPlayerAvatarLayer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Index = table.Column<long>(type: "bigint", nullable: false),
+                    XCoordinate = table.Column<long>(type: "bigint", nullable: false),
+                    YCoordinate = table.Column<long>(type: "bigint", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    SeniorPlayerHattrickId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeniorPlayerAvatarLayer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SeniorPlayerAvatarLayer_SeniorPlayer_SeniorPlayerHattrickId",
+                        column: x => x.SeniorPlayerHattrickId,
+                        principalTable: "SeniorPlayer",
                         principalColumn: "HattrickId");
                 });
 
@@ -438,6 +461,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 column: "SeniorTeamHattrickId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SeniorPlayerAvatarLayer_SeniorPlayerHattrickId",
+                table: "SeniorPlayerAvatarLayer",
+                column: "SeniorPlayerHattrickId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SeniorPlayerSkill_SeniorPlayerHattrickId",
                 table: "SeniorPlayerSkill",
                 column: "SeniorPlayerHattrickId");
@@ -483,6 +511,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "ManagerAvatarLayer");
+
+            migrationBuilder.DropTable(
+                name: "SeniorPlayerAvatarLayer");
 
             migrationBuilder.DropTable(
                 name: "SeniorPlayerSkill");

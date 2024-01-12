@@ -9,6 +9,8 @@
     {
         private readonly ArenaDetails arenaDetailsPersister;
 
+        private readonly Avatars avatarsPersister;
+
         private readonly ManagerCompendium managerCompendiumPersister;
 
         private readonly Matches matchesPersister;
@@ -21,6 +23,7 @@
 
         public XmlFileDataPersisterFactory(
             ArenaDetails arenaDetailsPersister,
+            Avatars avatarsPersister,
             ManagerCompendium managerCompendiumPersister,
             Matches matchesPersister,
             Players playersPersister,
@@ -28,6 +31,7 @@
             WorldDetails worldDetailsPersister)
         {
             this.arenaDetailsPersister = arenaDetailsPersister;
+            this.avatarsPersister = avatarsPersister;
             this.managerCompendiumPersister = managerCompendiumPersister;
             this.matchesPersister = matchesPersister;
             this.playersPersister = playersPersister;
@@ -40,6 +44,7 @@
             return fileType switch
             {
                 XmlFileType.ArenaDetails => this.arenaDetailsPersister,
+                XmlFileType.Avatars => this.avatarsPersister,
                 XmlFileType.ManagerCompendium => this.managerCompendiumPersister,
                 XmlFileType.Matches => this.matchesPersister,
                 XmlFileType.Players => this.playersPersister,

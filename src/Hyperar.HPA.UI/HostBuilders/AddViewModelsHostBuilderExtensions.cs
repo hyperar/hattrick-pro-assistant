@@ -26,6 +26,20 @@
             return host;
         }
 
+        private static async Task<AuthorizationViewModel> CreateAuthorizationAsyncViewModel(IServiceProvider services)
+        {
+            var scope = services.CreateScope();
+
+            var viewModel = new AuthorizationViewModel(
+                scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IViewModelFactory>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
+        }
+
         private static async Task<DownloadViewModel> CreateDownloadAsyncViewModel(IServiceProvider services)
         {
             var scope = services.CreateScope();
@@ -50,20 +64,6 @@
             var viewModel = new HomeViewModel(
                 scope.ServiceProvider.GetRequiredService<IHomeViewService>(),
                 services.GetRequiredService<INavigator>());
-
-            await viewModel.InitializeAsync();
-
-            return viewModel;
-        }
-
-        private static async Task<AuthorizationViewModel> CreateAuthorizationAsyncViewModel(IServiceProvider services)
-        {
-            var scope = services.CreateScope();
-
-            var viewModel = new AuthorizationViewModel(
-                scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
-                services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<IViewModelFactory>());
 
             await viewModel.InitializeAsync();
 

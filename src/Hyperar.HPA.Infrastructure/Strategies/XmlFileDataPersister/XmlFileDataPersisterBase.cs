@@ -53,6 +53,44 @@
             return GetBytesFromImage(avatarImage);
         }
 
+        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<Domain.SeniorPlayerAvatarLayer> layers)
+        {
+            ArgumentNullException.ThrowIfNull(layers, nameof(layers));
+
+            var firstLayer = layers.Single(x => x.Index == 1);
+
+            var firstLayerImage = GetImageFromBytes(
+                await DownloadWebResource(layers.Single(x => x.Index == 1).ImageUrl));
+
+            var avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
+
+            var graphics = Graphics.FromImage(avatarImage);
+
+            graphics.DrawImage(
+                firstLayerImage,
+                firstLayer.XCoordinate,
+                firstLayer.YCoordinate,
+                firstLayerImage.Width,
+                firstLayerImage.Height);
+
+            for (int i = 2; i < layers.Count; i++)
+            {
+                var curLayer = layers.Single(x => x.Index == i);
+
+                var layerImage = GetImageFromBytes(
+                    await DownloadWebResource(curLayer.ImageUrl));
+
+                graphics.DrawImage(
+                    layerImage,
+                    curLayer.XCoordinate,
+                    curLayer.YCoordinate,
+                    layerImage.Width,
+                    layerImage.Height);
+            }
+
+            return GetBytesFromImage(avatarImage);
+        }
+
         protected static async Task<byte[]> DownloadWebResource(string url)
         {
             using (var httpClient = new HttpClient())

@@ -45,6 +45,14 @@
                             {
                                 { teamIdParamKey, curTeam.TeamId.ToString() }
                             }));
+
+                    downloadTasks.Add(
+                        new DownloadTask(
+                            XmlFileType.Avatars,
+                            new Dictionary<string, string>
+                            {
+                                { teamIdParamKey, curTeam.TeamId.ToString() }
+                            }));
                 }
 
                 return downloadTasks;

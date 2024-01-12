@@ -65,7 +65,8 @@
                 CareerLeagueGoals = seniorPlayer.CareerGoals,
                 CareerHattricks = seniorPlayer.CareerHattricks,
                 TeamGoals = seniorPlayer.GoalsOnTeam,
-                TeamMatches = seniorPlayer.MatchesOnTeam
+                TeamMatches = seniorPlayer.MatchesOnTeam,
+                Avatar = seniorPlayer.Avatar
             };
         }
     }

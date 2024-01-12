@@ -9,6 +9,8 @@
     {
         private readonly ArenaDetails arenaDetailsParser;
 
+        private readonly Avatars avatarsParser;
+
         private readonly ManagerCompendium managerCompendiumParser;
 
         private readonly Matches matchesParser;
@@ -25,9 +27,12 @@
             Matches matchesParser,
             Players playersParser,
             TeamDetails teamDetailsParser,
-            WorldDetails worldDetailsParser)
+            WorldDetails worldDetailsParser,
+            Avatars avatarsParser)
+
         {
             this.arenaDetailsParser = arenaDetailsParser;
+            this.avatarsParser = avatarsParser;
             this.managerCompendiumParser = managerCompendiumParser;
             this.matchesParser = matchesParser;
             this.playersParser = playersParser;
@@ -40,6 +45,7 @@
             return fileType switch
             {
                 XmlFileType.ArenaDetails => this.arenaDetailsParser,
+                XmlFileType.Avatars => this.avatarsParser,
                 XmlFileType.ManagerCompendium => this.managerCompendiumParser,
                 XmlFileType.Matches => this.matchesParser,
                 XmlFileType.Players => this.playersParser,

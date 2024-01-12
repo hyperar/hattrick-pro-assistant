@@ -537,6 +537,9 @@
   <data name="XmlFileType_ArenaDetails" xml:space="preserve">
     <value>Arena Details</value>
   </data>
+  <data name="XmlFileType_Avatars" xml:space="preserve">
+    <value>Player Avatars</value>
+  </data>
   <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
     <value>Manager Compendium</value>
   </data>

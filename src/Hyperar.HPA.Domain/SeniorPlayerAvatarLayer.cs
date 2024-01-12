@@ -1,15 +1,14 @@
 ﻿namespace Hyperar.HPA.Domain
 {
-    using System;
     using Domain.Interfaces;
 
-    public class ManagerAvatarLayer : EntityBase, IEntity
+    public class SeniorPlayerAvatarLayer : EntityBase, IEntity
     {
         public string ImageUrl { get; set; } = string.Empty;
 
         public uint Index { get; set; }
 
-        public virtual Manager Manager { get; set; } = new Manager();
+        public virtual SeniorPlayer SeniorPlayer { get; set; } = new SeniorPlayer();
 
         public uint XCoordinate { get; set; }
 

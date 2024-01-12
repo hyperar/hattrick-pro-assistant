@@ -12,6 +12,8 @@
 
         public AgreeabilityLevel Agreeability { get; set; }
 
+        public byte[] Avatar { get; set; } = Array.Empty<byte>();
+
         public BookingStatus BookingStatus { get; set; }
 
         public uint CareerHattricks { get; set; }

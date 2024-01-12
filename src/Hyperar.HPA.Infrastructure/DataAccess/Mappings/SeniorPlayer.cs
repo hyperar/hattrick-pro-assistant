@@ -242,6 +242,12 @@
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
+
+            builder.Property(p => p.Avatar)
+                .HasColumnName(Constants.ColumnName.Avatar)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.VarBinary);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.SeniorPlayer> builder)

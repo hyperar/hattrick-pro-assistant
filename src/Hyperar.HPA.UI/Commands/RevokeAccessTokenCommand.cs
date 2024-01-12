@@ -8,9 +8,9 @@
 
     public class RevokeAccessTokenCommand : AsyncCommandBase, IDisposable
     {
-        private readonly INavigator navigator;
-
         private readonly AuthorizationViewModel authorizationViewModel;
+
+        private readonly INavigator navigator;
 
         public RevokeAccessTokenCommand(
             AuthorizationViewModel authorizationViewModel,

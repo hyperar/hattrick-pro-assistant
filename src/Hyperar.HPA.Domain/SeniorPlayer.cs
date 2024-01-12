@@ -14,6 +14,10 @@
 
         public AgreeabilityLevel Agreeability { get; set; }
 
+        public byte[] Avatar { get; set; } = Array.Empty<byte>();
+
+        public virtual ICollection<SeniorPlayerAvatarLayer> AvatarLayers { get; set; } = new HashSet<SeniorPlayerAvatarLayer>();
+
         public BookingStatus BookingStatus { get; set; }
 
         public uint CareerGoals { get; set; }

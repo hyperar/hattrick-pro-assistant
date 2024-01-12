@@ -14,6 +14,7 @@
             {
                 services.AddScoped<IXmlFileDataPersisterFactory, XmlFileDataPersisterFactory>();
                 services.AddScoped<ArenaDetails>();
+                services.AddScoped<Avatars>();
                 services.AddScoped<ManagerCompendium>();
                 services.AddScoped<Matches>();
                 services.AddScoped<Players>();

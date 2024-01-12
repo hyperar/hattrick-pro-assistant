@@ -16,6 +16,8 @@
 
         internal const string SeniorPlayer = "SeniorPlayer";
 
+        internal const string SeniorPlayerAvatarLayer = "SeniorPlayerAvatarLayer";
+
         internal const string SeniorPlayerSkill = "SeniorPlayerSkill";
 
         internal const string SeniorTeam = "SeniorTeam";

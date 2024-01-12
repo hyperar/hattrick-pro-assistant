@@ -9,11 +9,11 @@
 
     public class ViewModelFactory : IViewModelFactory
     {
+        private readonly CreateAsyncViewModel<AuthorizationViewModel> createAuthorizationViewModel;
+
         private readonly CreateAsyncViewModel<DownloadViewModel> createDownloadViewModel;
 
         private readonly CreateAsyncViewModel<HomeViewModel> createHomeViewModel;
-
-        private readonly CreateAsyncViewModel<AuthorizationViewModel> createAuthorizationViewModel;
 
         private readonly CreateAsyncViewModel<PlayersViewModel> createPlayersViewModel;
 

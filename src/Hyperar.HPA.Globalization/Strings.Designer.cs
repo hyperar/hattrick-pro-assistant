@@ -1321,6 +1321,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Avatars.
+        /// </summary>
+        public static string XmlFileType_Avatars {
+            get {
+                return ResourceManager.GetString("XmlFileType_Avatars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager Compendium.
         /// </summary>
         public static string XmlFileType_ManagerCompendium {

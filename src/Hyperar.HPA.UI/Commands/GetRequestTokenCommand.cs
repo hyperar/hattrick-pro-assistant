@@ -8,9 +8,9 @@
 
     public class GetRequestTokenCommand : AsyncCommandBase
     {
-        private readonly INavigator navigator;
-
         private readonly AuthorizationViewModel authorizationViewModel;
+
+        private readonly INavigator navigator;
 
         public GetRequestTokenCommand(AuthorizationViewModel authorizationViewModel, INavigator navigator)
         {

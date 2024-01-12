@@ -12,6 +12,7 @@
             return fileName switch
             {
                 XmlFileName.ArenaDetails => new Application.Hattrick.ArenaDetails.HattrickData(fileName),
+                XmlFileName.Avatars => new Application.Hattrick.Avatars.HattrickData(fileName),
                 XmlFileName.ManagerCompendium => new Application.Hattrick.ManagerCompendium.HattrickData(fileName),
                 XmlFileName.Matches => new Application.Hattrick.Matches.HattrickData(fileName),
                 XmlFileName.Players => new Application.Hattrick.Players.HattrickData(fileName),
