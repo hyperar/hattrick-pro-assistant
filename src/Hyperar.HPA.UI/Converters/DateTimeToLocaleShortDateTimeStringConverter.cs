@@ -10,7 +10,7 @@
     using System.Windows.Data;
     using System.Windows.Media.Imaging;
 
-    internal class DateTimeToLocaleShortDateTimeStringConverterConverter : IValueConverter
+    internal class DateTimeToLocaleShortDateTimeStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
