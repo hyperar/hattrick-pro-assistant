@@ -37,10 +37,10 @@
         <Border Style="{StaticResource ViewContainer}"
                 Grid.Column="1"
                 Grid.Row="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Disabled">
-                <ContentControl Content="{Binding CurrentViewModel}" />
-            </ScrollViewer>
+            <!--<ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">-->
+            <ContentControl Content="{Binding CurrentViewModel}" />
+            <!--</ScrollViewer>-->
         </Border>
     </Grid>
 </Window>

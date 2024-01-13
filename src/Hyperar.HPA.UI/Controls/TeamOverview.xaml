@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <converters:BookingStatusToSmallBitmapImageConverter x:Key="bookingSmallStatusToBitmapImageConverter" />
         <converters:ByteArrayToBitmapImageConverter x:Key="byteToImageConverter" />
-        <converters:DateToLocaleShortDateTimeString x:Key="dateToLocaleDateTimeString" />
+        <converters:DateTimeToLocaleShortDateTimeStringConverter x:Key="dateToLocaleDateTimeStringConverter" />
         <converters:HasMotherClubBonusToSmallBitmapImageConverter x:Key="hasMotherClubBonusToSmallBitmapImageConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
         <converters:HealthIntToSmallBitmapImageConverter x:Key="healthIntToSmallBitmapImageConverter" />
@@ -176,7 +176,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="SizeToCells"
                                         Binding="{Binding Date,
-                                                          Converter={StaticResource dateToLocaleDateTimeString}}">
+                                                          Converter={StaticResource dateToLocaleDateTimeStringConverter}}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -242,7 +242,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="SizeToCells"
                                         Binding="{Binding Date,
-                                                          Converter={StaticResource dateToLocaleDateTimeString}}">
+                                                          Converter={StaticResource dateToLocaleDateTimeStringConverter}}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />

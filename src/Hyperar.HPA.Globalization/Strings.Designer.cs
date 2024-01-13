@@ -79,6 +79,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} years and {1} days, next birthday: {2}.
+        /// </summary>
+        public static string AgeAndNextBirthDayMask {
+            get {
+                return ResourceManager.GetString("AgeAndNextBirthDayMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} years and {1} day(s).
         /// </summary>
         public static string AgeMask {
@@ -1106,15 +1115,6 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Specialty.
-        /// </summary>
-        public static string Specialty_NoSpecialty {
-            get {
-                return ResourceManager.GetString("Specialty_NoSpecialty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Powerful.
         /// </summary>
         public static string Specialty_Powerful {
@@ -1318,6 +1318,15 @@ namespace Hyperar.HPA.Globalization {
         public static string UserLabel {
             get {
                 return ResourceManager.GetString("UserLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} {1}/week.
+        /// </summary>
+        public static string WeeklySalary {
+            get {
+                return ResourceManager.GetString("WeeklySalary", resourceCulture);
             }
         }
         

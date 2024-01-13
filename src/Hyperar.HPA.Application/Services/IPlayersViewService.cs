@@ -4,6 +4,8 @@
 
     public interface IPlayersViewService
     {
+        Task<Currency> GetManagerCurrencyAsync();
+
         Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId);
     }
 }

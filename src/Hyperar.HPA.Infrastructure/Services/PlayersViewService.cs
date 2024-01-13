@@ -3,14 +3,34 @@
     using Application.Models.Players;
     using Application.Services;
     using Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class PlayersViewService : IPlayersViewService
     {
         private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
 
-        public PlayersViewService(IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
+        private readonly IRepository<Domain.User> userRepository;
+
+        public PlayersViewService(
+            IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository,
+            IRepository<Domain.User> userRepository)
         {
             this.seniorTeamRepository = seniorTeamRepository;
+            this.userRepository = userRepository;
+        }
+
+        public async Task<Currency> GetManagerCurrencyAsync()
+        {
+            var user = await this.userRepository.Query().SingleOrDefaultAsync();
+
+            ArgumentNullException.ThrowIfNull(user, nameof(user));
+            ArgumentNullException.ThrowIfNull(user.Manager, nameof(user.Manager));
+
+            return new Currency
+            {
+                Name = user.Manager.CurrencyName,
+                Rate = user.Manager.CurrencyRate
+            };
         }
 
         public async Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId)
@@ -20,7 +40,7 @@
             ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
 
             return seniorTeam.SeniorPlayers.Where(x => x.HattrickId != x.SeniorTeam.CoachPlayerId)
-                                           .OrderBy(x => x.ShirtNumber.HasValue)
+                                           .OrderByDescending(x => x.ShirtNumber.HasValue)
                                            .ThenBy(x => x.ShirtNumber)
                                            .Select(Convert)
                                            .ToArray();

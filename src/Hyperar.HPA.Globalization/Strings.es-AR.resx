@@ -123,6 +123,9 @@
   <data name="Age" xml:space="preserve">
     <value>Edad</value>
   </data>
+  <data name="AgeAndNextBirthDayMask" xml:space="preserve">
+    <value>{0} años y {1} día(s), Próximo cumpleaños: {2}</value>
+  </data>
   <data name="AgeMask" xml:space="preserve">
     <value>{0} años y {1} día(s)</value>
   </data>
@@ -484,9 +487,6 @@ Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   <data name="Specialty_HeadSpecialist" xml:space="preserve">
     <value>Cabeceador</value>
   </data>
-  <data name="Specialty_NoSpecialty" xml:space="preserve">
-    <value>Sin Especialidad</value>
-  </data>
   <data name="Specialty_Powerful" xml:space="preserve">
     <value>Potente</value>
   </data>
@@ -555,6 +555,9 @@ Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   </data>
   <data name="UserLabel" xml:space="preserve">
     <value>Usuario:</value>
+  </data>
+  <data name="WeeklySalary" xml:space="preserve">
+    <value>{0} {1}/semana</value>
   </data>
   <data name="Winger" xml:space="preserve">
     <value>Lateral</value>

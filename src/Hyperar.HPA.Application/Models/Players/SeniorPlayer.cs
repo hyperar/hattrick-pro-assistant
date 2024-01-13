@@ -58,6 +58,14 @@
 
         public SkillLevel Loyalty { get; set; }
 
+        public DateTime NextBirthDay
+        {
+            get
+            {
+                return DateTime.Today.AddDays(112 - this.AgeDays);
+            }
+        }
+
         public string? NickName { get; set; }
 
         public SkillLevel Passing { get; set; }
