@@ -29,5 +29,7 @@
         internal const string Token = "Token";
 
         internal const string User = "User";
+
+        internal const string World = "World";
     }
 }

@@ -79,6 +79,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} years and {1} day(s).
+        /// </summary>
+        public static string AgeMask {
+            get {
+                return ResourceManager.GetString("AgeMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aggressiveness.
         /// </summary>
         public static string Aggressiveness {
@@ -777,6 +786,16 @@ namespace Hyperar.HPA.Globalization {
         public static string Passing {
             get {
                 return ResourceManager.GetString("Passing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} who is {1} and {2}.
+        ///Has {3} experience and {4} leadership. Has {5} loyalty..
+        /// </summary>
+        public static string PlayerDetailDescription {
+            get {
+                return ResourceManager.GetString("PlayerDetailDescription", resourceCulture);
             }
         }
         

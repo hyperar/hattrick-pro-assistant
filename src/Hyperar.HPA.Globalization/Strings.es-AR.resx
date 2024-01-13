@@ -123,6 +123,9 @@
   <data name="Age" xml:space="preserve">
     <value>Edad</value>
   </data>
+  <data name="AgeMask" xml:space="preserve">
+    <value>{0} años y {1} día(s)</value>
+  </data>
   <data name="Aggressiveness" xml:space="preserve">
     <value>Agresividad</value>
   </data>
@@ -374,6 +377,10 @@
   </data>
   <data name="Passing" xml:space="preserve">
     <value>Pases</value>
+  </data>
+  <data name="PlayerDetailDescription" xml:space="preserve">
+    <value>Un tipo {0}, que es {1} además de {2}.
+Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   </data>
   <data name="Players" xml:space="preserve">
     <value>Jugadores</value>

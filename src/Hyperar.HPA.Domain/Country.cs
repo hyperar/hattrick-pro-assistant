@@ -13,7 +13,7 @@
 
         public string DateFormat { get; set; } = string.Empty;
 
-        public virtual League? League { get; set; }
+        public virtual League League { get; set; } = new League();
 
         public uint LeagueHattrickId { get; set; }
 

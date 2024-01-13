@@ -22,7 +22,7 @@
             var firstLayer = layers.Single(x => x.Index == 1);
 
             var firstLayerImage = GetImageFromBytes(
-                await DownloadWebResource(layers.Single(x => x.Index == 1).ImageUrl));
+                await DownloadWebResourceAsync(layers.Single(x => x.Index == 1).ImageUrl));
 
             var avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
 
@@ -35,12 +35,12 @@
                 firstLayerImage.Width,
                 firstLayerImage.Height);
 
-            for (int i = 2; i < layers.Count; i++)
+            for (int i = 2; i < layers.Count + 1; i++)
             {
                 var curLayer = layers.Single(x => x.Index == i);
 
                 var layerImage = GetImageFromBytes(
-                    await DownloadWebResource(curLayer.ImageUrl));
+                    await DownloadWebResourceAsync(curLayer.ImageUrl));
 
                 graphics.DrawImage(
                     layerImage,
@@ -60,7 +60,7 @@
             var firstLayer = layers.Single(x => x.Index == 1);
 
             var firstLayerImage = GetImageFromBytes(
-                await DownloadWebResource(layers.Single(x => x.Index == 1).ImageUrl));
+                await DownloadWebResourceAsync(layers.Single(x => x.Index == 1).ImageUrl));
 
             var avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
 
@@ -73,12 +73,12 @@
                 firstLayerImage.Width,
                 firstLayerImage.Height);
 
-            for (int i = 2; i < layers.Count; i++)
+            for (int i = 2; i < layers.Count + 1; i++)
             {
                 var curLayer = layers.Single(x => x.Index == i);
 
                 var layerImage = GetImageFromBytes(
-                    await DownloadWebResource(curLayer.ImageUrl));
+                    await DownloadWebResourceAsync(curLayer.ImageUrl));
 
                 graphics.DrawImage(
                     layerImage,
@@ -91,13 +91,24 @@
             return GetBytesFromImage(avatarImage);
         }
 
-        protected static async Task<byte[]> DownloadWebResource(string url)
+        protected static async Task<byte[]> DownloadWebResourceAsync(string url)
         {
+            var fileContent = await TryGetFileBytesFromCacheAsync(url);
+
+            if (fileContent != null)
+            {
+                return fileContent;
+            }
+
             using (var httpClient = new HttpClient())
             {
-                return await httpClient.GetByteArrayAsync(
+                fileContent = await httpClient.GetByteArrayAsync(
                     NormalizeUrl(url));
             }
+
+            await WriteFileToCacheAsync(url, fileContent);
+
+            return fileContent;
         }
 
         protected static string NormalizeUrl(string rawUrl)
@@ -134,6 +145,19 @@
             }
         }
 
+        private static string GetFilePathFromUrl(string url)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
+
+            string relativePath = new Uri(url).LocalPath.Replace("/", "\\");
+
+            return Path.Combine(
+                Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData),
+                "Hyperar",
+                "HPA") + relativePath;
+        }
+
         private static Bitmap GetImageFromBytes(byte[] imageBytes)
         {
             using (var memoryStream = new MemoryStream(imageBytes))
@@ -144,6 +168,27 @@
 
                 return bitmap;
             }
+        }
+
+        private static async Task<byte[]?> TryGetFileBytesFromCacheAsync(string url)
+        {
+            string filePath = GetFilePathFromUrl(url);
+
+            return File.Exists(filePath)
+                ? await File.ReadAllBytesAsync(filePath)
+                : null;
+        }
+
+        private static async Task WriteFileToCacheAsync(string url, byte[] fileContent)
+        {
+            string filePath = GetFilePathFromUrl(url);
+
+            if (!Directory.Exists(filePath.Substring(0, filePath.LastIndexOf('\\'))))
+            {
+                Directory.CreateDirectory(filePath.Substring(0, filePath.LastIndexOf('\\')));
+            }
+
+            await File.WriteAllBytesAsync(filePath, fileContent);
         }
     }
 }

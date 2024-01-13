@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -8,6 +7,55 @@ namespace Hyperar.HPA.Infrastructure.Migrations
     /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "LeagueCup");
+
+            migrationBuilder.DropTable(
+                name: "ManagerAvatarLayer");
+
+            migrationBuilder.DropTable(
+                name: "SeniorPlayerAvatarLayer");
+
+            migrationBuilder.DropTable(
+                name: "SeniorPlayerSkill");
+
+            migrationBuilder.DropTable(
+                name: "SeniorTeamArena");
+
+            migrationBuilder.DropTable(
+                name: "SeniorTeamOverviewMatch");
+
+            migrationBuilder.DropTable(
+                name: "Token");
+
+            migrationBuilder.DropTable(
+                name: "World");
+
+            migrationBuilder.DropTable(
+                name: "SeniorPlayer");
+
+            migrationBuilder.DropTable(
+                name: "SeniorTeam");
+
+            migrationBuilder.DropTable(
+                name: "Manager");
+
+            migrationBuilder.DropTable(
+                name: "Region");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Country");
+
+            migrationBuilder.DropTable(
+                name: "League");
+        }
+
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,9 +69,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     EnglishName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Continent = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Zone = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Season = table.Column<long>(type: "bigint", nullable: false),
                     SeasonOffset = table.Column<int>(type: "int", nullable: false),
-                    CurrentRound = table.Column<long>(type: "bigint", nullable: false),
                     LanguageId = table.Column<long>(type: "bigint", nullable: false),
                     LanguageName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     SeniorNationalTeamId = table.Column<long>(type: "bigint", nullable: false),
@@ -40,7 +86,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     SecondWeeklyUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ThirdWeeklyUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
                     FourthWeeklyUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    FifthWeeklyUpdate = table.Column<DateTime>(type: "datetime", nullable: false)
+                    FifthWeeklyUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Flag = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,6 +105,20 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "World",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Season = table.Column<long>(type: "bigint", nullable: false),
+                    Week = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_World", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -277,6 +338,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     Aggressiveness = table.Column<long>(type: "bigint", nullable: false),
                     Honesty = table.Column<long>(type: "bigint", nullable: false),
                     Leadership = table.Column<long>(type: "bigint", nullable: false),
+                    Form = table.Column<long>(type: "bigint", nullable: false),
+                    Stamina = table.Column<long>(type: "bigint", nullable: false),
+                    Loyalty = table.Column<long>(type: "bigint", nullable: false),
                     Specialty = table.Column<long>(type: "bigint", nullable: false),
                     IsTransferListed = table.Column<bool>(type: "bit", nullable: false),
                     EnrolledOnNationalTeam = table.Column<bool>(type: "bit", nullable: false),
@@ -394,9 +458,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Form = table.Column<long>(type: "bigint", nullable: false),
-                    Stamina = table.Column<long>(type: "bigint", nullable: false),
+                    Season = table.Column<long>(type: "bigint", nullable: false),
+                    Week = table.Column<long>(type: "bigint", nullable: false),
                     Keeper = table.Column<long>(type: "bigint", nullable: false),
                     Defending = table.Column<long>(type: "bigint", nullable: false),
                     Playmaking = table.Column<long>(type: "bigint", nullable: false),
@@ -405,7 +468,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     Scoring = table.Column<long>(type: "bigint", nullable: false),
                     SetPieces = table.Column<long>(type: "bigint", nullable: false),
                     Experience = table.Column<long>(type: "bigint", nullable: false),
-                    Loyalty = table.Column<long>(type: "bigint", nullable: false),
                     SeniorPlayerHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -501,52 +563,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 table: "Token",
                 column: "UserId",
                 unique: true);
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "LeagueCup");
-
-            migrationBuilder.DropTable(
-                name: "ManagerAvatarLayer");
-
-            migrationBuilder.DropTable(
-                name: "SeniorPlayerAvatarLayer");
-
-            migrationBuilder.DropTable(
-                name: "SeniorPlayerSkill");
-
-            migrationBuilder.DropTable(
-                name: "SeniorTeamArena");
-
-            migrationBuilder.DropTable(
-                name: "SeniorTeamOverviewMatch");
-
-            migrationBuilder.DropTable(
-                name: "Token");
-
-            migrationBuilder.DropTable(
-                name: "SeniorPlayer");
-
-            migrationBuilder.DropTable(
-                name: "SeniorTeam");
-
-            migrationBuilder.DropTable(
-                name: "Manager");
-
-            migrationBuilder.DropTable(
-                name: "Region");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
-                name: "League");
         }
     }
 }

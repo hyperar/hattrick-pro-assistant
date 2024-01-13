@@ -82,6 +82,8 @@
 
         internal const string FirstWeeklyUpdate = "FirstWeeklyUpdate";
 
+        internal const string Flag = "Flag";
+
         internal const string Form = "Form";
 
         internal const string FoundedOn = "FoundedOn";
@@ -255,6 +257,8 @@
         internal const string VipLoungeCapacity = "VipLoungeCapacity";
 
         internal const string WaitingUsers = "WaitingUsers";
+
+        internal const string Week = "Week";
 
         internal const string Winger = "Winger";
 

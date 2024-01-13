@@ -3,7 +3,6 @@
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
     using Domain.Interfaces;
-    using Microsoft.EntityFrameworkCore;
     using Hattrick = Application.Hattrick.Avatars;
 
     public class Avatars : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
@@ -42,6 +41,32 @@
                 this.databaseContext.Cancel();
 
                 throw;
+            }
+        }
+
+        private static void ProcessSeniorPlayerAvatar(Hattrick.Avatar avatar, Domain.SeniorPlayer seniorPlayer)
+        {
+            uint layerIndex = 1;
+
+            seniorPlayer.AvatarLayers.Add(new Domain.SeniorPlayerAvatarLayer
+            {
+                Index = layerIndex,
+                XCoordinate = 0,
+                YCoordinate = 0,
+                ImageUrl = NormalizeUrl(avatar.BackgroundImage),
+            });
+
+            foreach (var curLayer in avatar.Layers)
+            {
+                layerIndex++;
+
+                seniorPlayer.AvatarLayers.Add(new Domain.SeniorPlayerAvatarLayer
+                {
+                    Index = layerIndex,
+                    XCoordinate = curLayer.X,
+                    YCoordinate = curLayer.Y,
+                    ImageUrl = NormalizeUrl(curLayer.Image)
+                });
             }
         }
 
@@ -84,32 +109,6 @@
             }
 
             await this.databaseContext.SaveAsync();
-        }
-
-        private void ProcessSeniorPlayerAvatar(Hattrick.Avatar avatar, Domain.SeniorPlayer seniorPlayer)
-        {
-            uint layerIndex = 1;
-
-            seniorPlayer.AvatarLayers.Add(new Domain.SeniorPlayerAvatarLayer
-            {
-                Index = layerIndex,
-                XCoordinate = 0,
-                YCoordinate = 0,
-                ImageUrl = NormalizeUrl(avatar.BackgroundImage),
-            });
-
-            foreach (var curLayer in avatar.Layers)
-            {
-                layerIndex++;
-
-                seniorPlayer.AvatarLayers.Add(new Domain.SeniorPlayerAvatarLayer
-                {
-                    Index = layerIndex,
-                    XCoordinate = curLayer.X,
-                    YCoordinate = curLayer.Y,
-                    ImageUrl = NormalizeUrl(curLayer.Image)
-                });
-            }
         }
     }
 }

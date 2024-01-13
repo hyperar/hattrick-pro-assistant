@@ -19,15 +19,20 @@
 
             ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
 
-            return seniorTeam.SeniorPlayers?.Select(x => Convert(x)).ToArray() ?? Array.Empty<SeniorPlayer>();
+            return seniorTeam.SeniorPlayers.Where(x => x.HattrickId != x.SeniorTeam.CoachPlayerId)
+                                           .OrderBy(x => x.ShirtNumber.HasValue)
+                                           .ThenBy(x => x.ShirtNumber)
+                                           .Select(Convert)
+                                           .ToArray();
         }
 
         private static SeniorPlayer Convert(Domain.SeniorPlayer seniorPlayer)
         {
             ArgumentNullException.ThrowIfNull(seniorPlayer.SeniorPlayerSkills, nameof(seniorPlayer.SeniorPlayerSkills));
 
-            var mostRecentSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.UpdatedOn)
-                .First();
+            var mostRecentSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
+                                                                  .ThenBy(x => x.Week)
+                                                                  .First();
 
             return new SeniorPlayer
             {
@@ -48,9 +53,9 @@
                 Leadership = seniorPlayer.Leadership,
                 BookingStatus = seniorPlayer.BookingStatus,
                 Health = seniorPlayer.Health,
-                Loyalty = mostRecentSkills.Loyalty,
-                Form = mostRecentSkills.Form,
-                Stamina = mostRecentSkills.Stamina,
+                Loyalty = seniorPlayer.Loyalty,
+                Form = seniorPlayer.Form,
+                Stamina = seniorPlayer.Stamina,
                 Keeper = mostRecentSkills.Keeper,
                 Defending = mostRecentSkills.Defending,
                 Playmaking = mostRecentSkills.Playmaking,
@@ -66,7 +71,9 @@
                 CareerHattricks = seniorPlayer.CareerHattricks,
                 TeamGoals = seniorPlayer.GoalsOnTeam,
                 TeamMatches = seniorPlayer.MatchesOnTeam,
-                Avatar = seniorPlayer.Avatar
+                Avatar = seniorPlayer.Avatar,
+                LeagueFlag = seniorPlayer.Country.League.Flag,
+                CountryName = seniorPlayer.Country.Name
             };
         }
     }

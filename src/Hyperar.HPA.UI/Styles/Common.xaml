@@ -18,6 +18,10 @@
         <Setter Property="Stretch" Value="None" />
     </Style>
 
+    <Style TargetType="{x:Type Separator}">
+        <Setter Property="Margin" Value="0 10" />
+    </Style>
+
     <!-- Styles -->
     <Style x:Key="ViewTitle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="48" />
@@ -47,7 +51,47 @@
         <Setter Property="Effect" Value="{StaticResource ViewContainerShadow}" />
     </Style>
 
-    <Style TargetType="{x:Type Separator}">
-        <Setter Property="Margin" Value="0 10" />
+    <Style x:Key="SkillProgressBar" TargetType="{x:Type ProgressBar}">
+        <Setter Property="Foreground" Value="#79A777" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Margin" Value="0 2" />
+        <Setter Property="Width" Value="150" />
+    </Style>
+
+    <Style x:Key="SkillBarTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Width" Value="150" />
+        <Setter Property="FontWeight" Value="DemiBold" />
+    </Style>
+
+    <Style x:Key="ColoredSkillProgressBar" TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource ResourceKey=SkillProgressBar}">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="1">
+                <Setter Property="Foreground" Value="#DD4140" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="2">
+                <Setter Property="Foreground" Value="#DD4140" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="3">
+                <Setter Property="Foreground" Value="#F5A104" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="4">
+                <Setter Property="Foreground" Value="#F5A104" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="5">
+                <Setter Property="Foreground" Value="#F1C40A" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="6">
+                <Setter Property="Foreground" Value="#F1C40A" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="7">
+                <Setter Property="Foreground" Value="#59965D" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Value}" Value="8">
+                <Setter Property="Foreground" Value="#59965D" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

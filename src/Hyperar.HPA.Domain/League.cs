@@ -15,13 +15,13 @@
 
         public virtual ICollection<LeagueCup> Cups { get; set; } = new HashSet<LeagueCup>();
 
-        public uint CurrentRound { get; set; }
-
         public string EnglishName { get; set; } = string.Empty;
 
         public DateTime FifthWeeklyUpdate { get; set; }
 
         public DateTime FirstWeeklyUpdate { get; set; }
+
+        public byte[] Flag { get; set; } = Array.Empty<byte>();
 
         public DateTime FourthWeeklyUpdate { get; set; }
 
@@ -42,8 +42,6 @@
         public DateTime NextTrainingUpdate { get; set; }
 
         public uint NumberOfLevels { get; set; }
-
-        public uint Season { get; set; }
 
         public int SeasonOffset { get; set; }
 

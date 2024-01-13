@@ -20,6 +20,8 @@
 
         public uint CareerLeagueGoals { get; set; }
 
+        public string CountryName { get; set; } = string.Empty;
+
         public SkillLevel Defending { get; set; }
 
         public SkillLevel Experience { get; set; }
@@ -27,6 +29,16 @@
         public string FirstName { get; set; } = string.Empty;
 
         public SkillLevel Form { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return string.IsNullOrEmpty(this.NickName)
+                    ? $"{this.FirstName} {this.LastName}"
+                    : $"{this.FirstName} \"{this.NickName}\" {this.LastName}";
+            }
+        }
 
         public bool HasMotherClubBonus { get; set; }
 
@@ -41,6 +53,8 @@
         public string LastName { get; set; } = string.Empty;
 
         public SkillLevel Leadership { get; set; }
+
+        public byte[] LeagueFlag { get; set; } = Array.Empty<byte>();
 
         public SkillLevel Loyalty { get; set; }
 
@@ -71,6 +85,16 @@
         public uint TeamGoals { get; set; }
 
         public uint TeamMatches { get; set; }
+
+        public string Title
+        {
+            get
+            {
+                return this.ShirtNumber.HasValue
+                    ? $"{this.ShirtNumber}. {this.FullName} ({this.Id})"
+                    : $"{this.FullName} ({this.Id})";
+            }
+        }
 
         public uint TotalSkillIndex { get; set; }
 

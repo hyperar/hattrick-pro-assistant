@@ -8,22 +8,15 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.SeniorPlayerSkill> builder)
         {
-            builder.Property(x => x.UpdatedOn)
-                .HasColumnName(Constants.ColumnName.UpdatedOn)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.DateTime)
-                .IsRequired();
-
-            builder.Property(p => p.Form)
-                .HasColumnName(Constants.ColumnName.Form)
+            builder.Property(x => x.Season)
+                .HasColumnName(Constants.ColumnName.Season)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.Stamina)
-                .HasColumnName(Constants.ColumnName.Stamina)
+            builder.Property(x => x.Week)
+                .HasColumnName(Constants.ColumnName.Week)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
@@ -80,13 +73,6 @@
 
             builder.Property(p => p.Experience)
                 .HasColumnName(Constants.ColumnName.Experience)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
-                .IsRequired();
-
-            builder.Property(p => p.Loyalty)
-                .HasColumnName(Constants.ColumnName.Loyalty)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)

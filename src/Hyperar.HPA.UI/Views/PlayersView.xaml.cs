@@ -22,7 +22,7 @@
     {
         public PlayersView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

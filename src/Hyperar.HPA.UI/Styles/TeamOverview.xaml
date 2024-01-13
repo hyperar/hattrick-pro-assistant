@@ -37,6 +37,12 @@
 
     <Style x:Key="LabelTextBlock" TargetType="TextBlock">
         <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2 0" />
+    </Style>
+
+    <Style x:Key="ValueTextBlock" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="2 0" />
     </Style>
 
