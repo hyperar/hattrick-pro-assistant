@@ -14,6 +14,15 @@
 
         public byte[] Avatar { get; set; } = Array.Empty<byte>();
 
+        public decimal AgeAux
+        {
+            get
+            {
+                return decimal.Parse(
+                    $"{this.AgeYears}{Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator}{this.AgeDays:000}");
+            }
+        }
+
         public BookingStatus BookingStatus { get; set; }
 
         public uint CareerHattricks { get; set; }
@@ -24,11 +33,17 @@
 
         public SkillLevel Defending { get; set; }
 
+        public int? DefendingDelta { get; set; }
+
         public SkillLevel Experience { get; set; }
+
+        public int? ExperienceDelta { get; set; }
 
         public string FirstName { get; set; } = string.Empty;
 
         public SkillLevel Form { get; set; }
+
+        public int? FormDelta { get; set; }
 
         public string FullName
         {
@@ -50,6 +65,8 @@
 
         public SkillLevel Keeper { get; set; }
 
+        public int? KeeperDelta { get; set; }
+
         public string LastName { get; set; } = string.Empty;
 
         public SkillLevel Leadership { get; set; }
@@ -57,6 +74,8 @@
         public byte[] LeagueFlag { get; set; } = Array.Empty<byte>();
 
         public SkillLevel Loyalty { get; set; }
+
+        public int? LoyaltyDelta { get; set; }
 
         public DateTime NextBirthDay
         {
@@ -70,11 +89,17 @@
 
         public SkillLevel Passing { get; set; }
 
+        public int? PassingDelta { get; set; }
+
         public SkillLevel Playmaking { get; set; }
+
+        public int? PlaymakingDelta { get; set; }
 
         public uint Salary { get; set; }
 
         public SkillLevel Scoring { get; set; }
+
+        public int? ScoringDelta { get; set; }
 
         public uint SeasonCupGoals { get; set; }
 
@@ -84,11 +109,15 @@
 
         public SkillLevel SetPieces { get; set; }
 
+        public int? SetPiecesDelta { get; set; }
+
         public uint? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 
         public SkillLevel Stamina { get; set; }
+
+        public int? StaminaDelta { get; set; }
 
         public uint TeamGoals { get; set; }
 
@@ -107,5 +136,7 @@
         public uint TotalSkillIndex { get; set; }
 
         public SkillLevel Winger { get; set; }
+
+        public int? WingerDelta { get; set; }
     }
 }

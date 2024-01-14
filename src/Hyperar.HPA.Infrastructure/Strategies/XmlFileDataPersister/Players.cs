@@ -94,9 +94,6 @@
                     Agreeability = xmlPlayer.Agreeability,
                     Aggressiveness = xmlPlayer.Aggressiveness,
                     Honesty = xmlPlayer.Honesty,
-                    Form = xmlPlayer.PlayerForm,
-                    Stamina = xmlPlayer.StaminaSkill,
-                    Loyalty = xmlPlayer.Loyalty,
                     Leadership = xmlPlayer.Leadership,
                     Specialty = xmlPlayer.Specialty,
                     IsTransferListed = xmlPlayer.TransferListed,
@@ -133,9 +130,6 @@
                 seniorPlayer.TotalSkillIndex = xmlPlayer.Tsi;
                 seniorPlayer.HasMotherClubBonus = xmlPlayer.MotherClubBonus;
                 seniorPlayer.Salary = xmlPlayer.Salary;
-                seniorPlayer.Form = xmlPlayer.PlayerForm;
-                seniorPlayer.Stamina = xmlPlayer.StaminaSkill;
-                seniorPlayer.Loyalty = xmlPlayer.Loyalty;
                 seniorPlayer.IsTransferListed = xmlPlayer.TransferListed;
                 seniorPlayer.EnrolledOnNationalTeam = xmlPlayer.NationalTeamId != null;
                 seniorPlayer.CurrentSeasonLeagueGoals = (uint)xmlPlayer.LeagueGoals;
@@ -191,15 +185,17 @@
 
         private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.SeniorPlayer seniorPlayer, uint season, uint week)
         {
-            var seniorPlayerSkill = await this.seniorPlayerSkillRepository.Query(x => x.SeniorPlayer.HattrickId == xmlPlayer.PlayerId
-                                                                                   && x.Season == season
-                                                                                   && x.Week == week)
-                                                                          .SingleOrDefaultAsync();
+            var currentWeekSkill = await this.seniorPlayerSkillRepository.Query(x => x.SeniorPlayer.HattrickId == xmlPlayer.PlayerId
+                                                                                  && x.Season == season
+                                                                                  && x.Week == week)
+                                                                         .SingleOrDefaultAsync();
 
-            if (seniorPlayerSkill == null)
+            if (currentWeekSkill == null)
             {
-                seniorPlayerSkill = new Domain.SeniorPlayerSkill
+                currentWeekSkill = new Domain.SeniorPlayerSkill
                 {
+                    Form = xmlPlayer.PlayerForm,
+                    Stamina = xmlPlayer.StaminaSkill,
                     Keeper = xmlPlayer.KeeperSkill,
                     Defending = xmlPlayer.DefenderSkill,
                     Playmaking = xmlPlayer.PlaymakerSkill,
@@ -207,36 +203,30 @@
                     Passing = xmlPlayer.PassingSkill,
                     Scoring = xmlPlayer.ScorerSkill,
                     SetPieces = xmlPlayer.SetPiecesSkill,
+                    Loyalty = xmlPlayer.Loyalty,
                     Experience = xmlPlayer.Experience,
                     Season = season,
                     Week = week,
                     SeniorPlayer = seniorPlayer
                 };
 
-                await this.seniorPlayerSkillRepository.InsertAsync(seniorPlayerSkill);
+                await this.seniorPlayerSkillRepository.InsertAsync(currentWeekSkill);
             }
             else
             {
-                if (seniorPlayerSkill.Keeper != xmlPlayer.KeeperSkill ||
-                    seniorPlayerSkill.Defending != xmlPlayer.DefenderSkill ||
-                    seniorPlayerSkill.Playmaking != xmlPlayer.PlaymakerSkill ||
-                    seniorPlayerSkill.Winger != xmlPlayer.WingerSkill ||
-                    seniorPlayerSkill.Passing != xmlPlayer.PassingSkill ||
-                    seniorPlayerSkill.Scoring != xmlPlayer.ScorerSkill ||
-                    seniorPlayerSkill.SetPieces != xmlPlayer.SetPiecesSkill ||
-                    seniorPlayerSkill.Experience != xmlPlayer.Experience)
-                {
-                    seniorPlayerSkill.Keeper = xmlPlayer.KeeperSkill;
-                    seniorPlayerSkill.Defending = xmlPlayer.DefenderSkill;
-                    seniorPlayerSkill.Playmaking = xmlPlayer.PlaymakerSkill;
-                    seniorPlayerSkill.Winger = xmlPlayer.WingerSkill;
-                    seniorPlayerSkill.Passing = xmlPlayer.PassingSkill;
-                    seniorPlayerSkill.Scoring = xmlPlayer.ScorerSkill;
-                    seniorPlayerSkill.SetPieces = xmlPlayer.SetPiecesSkill;
-                    seniorPlayerSkill.Experience = xmlPlayer.Experience;
+                currentWeekSkill.Form = xmlPlayer.PlayerForm;
+                currentWeekSkill.Stamina = xmlPlayer.StaminaSkill;
+                currentWeekSkill.Keeper = xmlPlayer.KeeperSkill;
+                currentWeekSkill.Defending = xmlPlayer.DefenderSkill;
+                currentWeekSkill.Playmaking = xmlPlayer.PlaymakerSkill;
+                currentWeekSkill.Winger = xmlPlayer.WingerSkill;
+                currentWeekSkill.Passing = xmlPlayer.PassingSkill;
+                currentWeekSkill.Scoring = xmlPlayer.ScorerSkill;
+                currentWeekSkill.SetPieces = xmlPlayer.SetPiecesSkill;
+                currentWeekSkill.Experience = xmlPlayer.Experience;
+                currentWeekSkill.Loyalty = xmlPlayer.Loyalty;
 
-                    this.seniorPlayerSkillRepository.Update(seniorPlayerSkill);
-                }
+                this.seniorPlayerSkillRepository.Update(currentWeekSkill);
             }
 
             await this.databaseContext.SaveAsync();

@@ -38,8 +38,6 @@
 
         public string FirstName { get; set; } = string.Empty;
 
-        public SkillLevel Form { get; set; }
-
         public uint GoalsOnTeam { get; set; }
 
         public bool HasMotherClubBonus { get; set; }
@@ -60,8 +58,6 @@
 
         public SkillLevel Leadership { get; set; }
 
-        public SkillLevel Loyalty { get; set; }
-
         public uint MatchesOnTeam { get; set; }
 
         public string? NickName { get; set; }
@@ -79,8 +75,6 @@
         public uint? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
-
-        public SkillLevel Stamina { get; set; }
 
         public string? Statement { get; set; }
 

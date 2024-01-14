@@ -3,7 +3,6 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
-    using System.Windows.Controls;
     using Application.Models.Players;
     using Application.Services;
 
@@ -12,8 +11,6 @@
         private readonly IPlayersViewService playersViewService;
 
         private readonly uint selectedTeamId;
-
-        private ObservableCollection<SeniorPlayer> selectedSeniorPlayers = new ObservableCollection<SeniorPlayer>();
 
         private int? selectedTabIndex;
 
@@ -26,23 +23,6 @@
         }
 
         public Currency Currency { get; private set; } = new Currency();
-
-        public ObservableCollection<SeniorPlayer> SelectedSeniorPlayers
-        {
-            get
-            {
-                return selectedSeniorPlayers;
-            }
-            set
-            {
-                selectedSeniorPlayers = value;
-            }
-        }
-
-        public void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         public int SelectedTabIndex
         {

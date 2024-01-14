@@ -6,7 +6,6 @@
              xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
              xmlns:converters="clr-namespace:Hyperar.HPA.UI.Converters"
              xmlns:viewmodels="clr-namespace:Hyperar.HPA.UI.ViewModels"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance Type=viewmodels:PlayersViewModel}"
              d:DesignHeight="900"
              d:DesignWidth="1600"
@@ -16,6 +15,7 @@
         <converters:ByteArrayToBitmapImageConverter x:Key="byteArrayToBitmapImageConverter" />
         <converters:DateTimeToLocaleShortDateStringConverter x:Key="dateTimeToLocaleShortDateStringConverter" />
         <converters:DecimalAndCurrencyToCaltulatedTranslatedStringConverter x:Key="decimalAndCurrencyToCaltulatedTranslatedStringConverter" />
+        <converters:DeltaIntToDeltaStringConverter x:Key="deltaIntToDeltaStringConverter" />
         <converters:EnumToIntConverter x:Key="enumToIntConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
         <converters:HasMotherClubBonusToSmallBitmapImageConverter x:Key="hasMotherClubBonusToSmallBitmapImageConverter" />
@@ -53,7 +53,8 @@
                                     Binding="{Binding LastName, Mode=OneWay}" />
                 <DataGridTextColumn Header="{x:Static globalization:Strings.ShirtNumber}"
                                     Binding="{Binding ShirtNumber, Mode=OneWay}" />
-                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Age}">
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Age}"
+                                        SortMemberPath="AgeAux">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -69,11 +70,6 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="{x:Static globalization:Strings.TotalSkillIndex}"
                                     Binding="{Binding TotalSkillIndex, Mode=OneWay, StringFormat={}{0:N0}}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style>
-                            <Setter Property="TextBlock.HorizontalAlignment" Value="Right" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.HorizontalAlignment" Value="Right" />
@@ -183,50 +179,281 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Loyalty}"
-                                    Binding="{Binding Loyalty,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Form}"
-                                    Binding="{Binding Form,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Stamina}"
-                                    Binding="{Binding Stamina,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Keeper}"
-                                    Binding="{Binding Keeper,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Defending}"
-                                    Binding="{Binding Defending,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Playmaking}"
-                                    Binding="{Binding Playmaking,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Winger}"
-                                    Binding="{Binding Winger,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Passing}"
-                                    Binding="{Binding Passing,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Scoring}"
-                                    Binding="{Binding Scoring,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.SetPieces}"
-                                    Binding="{Binding SetPieces,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Experience}"
-                                    Binding="{Binding Experience,
-                                                      Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}" />
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Loyalty}"
+                                        SortMemberPath="Loyalty">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Loyalty,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding LoyaltyDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Form}"
+                                        SortMemberPath="Form">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Form,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding FormDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Stamina}"
+                                        SortMemberPath="Stamina">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Stamina,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding StaminaDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Keeper}"
+                                        SortMemberPath="Keeper">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Keeper,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding KeeperDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Defending}"
+                                        SortMemberPath="Defending">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Defending,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding DefendingDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Playmaking}"
+                                        SortMemberPath="Playmaking">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Playmaking,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                            Margin="4 0"
+                                            Style="{DynamicResource SkillDeltaTextBlock}"
+                                            Text="{Binding PlaymakingDelta,
+                                                            Mode=OneWay,
+                                                            Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Winger}"
+                                        SortMemberPath="Winger">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Winger,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding WingerDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Passing}"
+                                        SortMemberPath="Passing">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Passing,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding PassingDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Scoring}"
+                                        SortMemberPath="Scoring">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Scoring,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding ScoringDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.SetPieces}"
+                                        SortMemberPath="SetPieces">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding SetPieces,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding SetPiecesDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static globalization:Strings.Experience}"
+                                        SortMemberPath="Experience">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Experience,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}" />
+                                <TextBlock Grid.Column="2"
+                                           Margin="4 0"
+                                           Style="{DynamicResource SkillDeltaTextBlock}"
+                                           Text="{Binding ExperienceDelta,
+                                                          Mode=OneWay,
+                                                          Converter={StaticResource deltaIntToDeltaStringConverter}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="{x:Static globalization:Strings.LeagueGoals}" Binding="{Binding SeasonLeagueGoals, Mode=OneWay}" />
                 <DataGridTextColumn Header="{x:Static globalization:Strings.CupGoals}" Binding="{Binding SeasonCupGoals, Mode=OneWay}" />
                 <DataGridTextColumn Header="{x:Static globalization:Strings.FriendlyGoals}" Binding="{Binding SeasonFriendlyGoals, Mode=OneWay}" />

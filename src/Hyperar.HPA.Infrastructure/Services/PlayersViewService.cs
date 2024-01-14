@@ -50,9 +50,14 @@
         {
             ArgumentNullException.ThrowIfNull(seniorPlayer.SeniorPlayerSkills, nameof(seniorPlayer.SeniorPlayerSkills));
 
-            var mostRecentSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
-                                                                  .ThenBy(x => x.Week)
-                                                                  .First();
+            var currentSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
+                                                               .ThenByDescending(x => x.Week)
+                                                               .First();
+
+            var previousSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
+                                                                .ThenByDescending(x => x.Week)
+                                                                .Skip(1)
+                                                                .FirstOrDefault();
 
             return new SeniorPlayer
             {
@@ -73,17 +78,28 @@
                 Leadership = seniorPlayer.Leadership,
                 BookingStatus = seniorPlayer.BookingStatus,
                 Health = seniorPlayer.Health,
-                Loyalty = seniorPlayer.Loyalty,
-                Form = seniorPlayer.Form,
-                Stamina = seniorPlayer.Stamina,
-                Keeper = mostRecentSkills.Keeper,
-                Defending = mostRecentSkills.Defending,
-                Playmaking = mostRecentSkills.Playmaking,
-                Winger = mostRecentSkills.Winger,
-                Passing = mostRecentSkills.Passing,
-                Scoring = mostRecentSkills.Scoring,
-                SetPieces = mostRecentSkills.SetPieces,
-                Experience = mostRecentSkills.Experience,
+                Form = currentSkills.Form,
+                FormDelta = previousSkills == null ? null : currentSkills.Form - previousSkills.Form,
+                Stamina = currentSkills.Stamina,
+                StaminaDelta = previousSkills == null ? null : currentSkills.Stamina - previousSkills.Stamina,
+                Keeper = currentSkills.Keeper,
+                KeeperDelta = previousSkills == null ? null : currentSkills.Keeper - previousSkills.Keeper,
+                Defending = currentSkills.Defending,
+                DefendingDelta = previousSkills == null ? null : currentSkills.Defending - previousSkills.Defending,
+                Playmaking = currentSkills.Playmaking,
+                PlaymakingDelta = previousSkills == null ? null : currentSkills.Playmaking - previousSkills.Playmaking,
+                Winger = currentSkills.Winger,
+                WingerDelta = previousSkills == null ? null : currentSkills.Winger - previousSkills.Winger,
+                Passing = currentSkills.Passing,
+                PassingDelta = previousSkills == null ? null : currentSkills.Passing - previousSkills.Passing,
+                Scoring = currentSkills.Scoring,
+                ScoringDelta = previousSkills == null ? null : currentSkills.Scoring - previousSkills.Scoring,
+                SetPieces = currentSkills.SetPieces,
+                SetPiecesDelta = previousSkills == null ? null : currentSkills.SetPieces - previousSkills.SetPieces,
+                Loyalty = currentSkills.Loyalty,
+                LoyaltyDelta = previousSkills == null ? null : currentSkills.Loyalty - previousSkills.Loyalty,
+                Experience = currentSkills.Experience,
+                ExperienceDelta = previousSkills == null ? null : currentSkills.Experience - previousSkills.Experience,
                 SeasonLeagueGoals = seniorPlayer.CurrentSeasonLeagueGoals,
                 SeasonCupGoals = seniorPlayer.CurrentSeasonCupGoals,
                 SeasonFriendlyGoals = seniorPlayer.CurrentSeasonFriendlyGoals,

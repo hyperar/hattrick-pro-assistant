@@ -138,27 +138,6 @@
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.Form)
-                .HasColumnName(Constants.ColumnName.Form)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
-                .IsRequired();
-
-            builder.Property(p => p.Stamina)
-                .HasColumnName(Constants.ColumnName.Stamina)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
-                .IsRequired();
-
-            builder.Property(p => p.Loyalty)
-                .HasColumnName(Constants.ColumnName.Loyalty)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
-                .IsRequired();
-
             builder.Property(p => p.Specialty)
                 .HasColumnName(Constants.ColumnName.Specialty)
                 .HasColumnOrder(
