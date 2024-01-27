@@ -4,6 +4,15 @@
 
     public class SeniorPlayer
     {
+        public decimal AgeAux
+        {
+            get
+            {
+                return decimal.Parse(
+                    $"{this.AgeYears}{Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator}{this.AgeDays:000}");
+            }
+        }
+
         public uint AgeDays { get; set; }
 
         public uint AgeYears { get; set; }
@@ -13,15 +22,6 @@
         public AgreeabilityLevel Agreeability { get; set; }
 
         public byte[] Avatar { get; set; } = Array.Empty<byte>();
-
-        public decimal AgeAux
-        {
-            get
-            {
-                return decimal.Parse(
-                    $"{this.AgeYears}{Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator}{this.AgeDays:000}");
-            }
-        }
 
         public BookingStatus BookingStatus { get; set; }
 

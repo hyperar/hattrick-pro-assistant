@@ -4,13 +4,13 @@
     using System.Globalization;
     using System.Windows.Data;
 
-    internal class DeltaIntToDeltaStringConverter : IValueConverter
+    internal class UIntEnumToTranslatedStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is int delta
-                ? delta > 0 ? $"+{delta}" : delta
-                : (object)string.Empty;
+            string translatedString = Globalization.Strings.ResourceManager.GetString($"{value.GetType().Name}_{value}") ?? string.Empty;
+
+            return $"{translatedString} ({(uint)value})";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

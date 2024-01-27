@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Threading.Tasks;
     using Application.Models.Players;
     using Application.Services;
@@ -11,6 +12,8 @@
         private readonly IPlayersViewService playersViewService;
 
         private readonly uint selectedTeamId;
+
+        private SeniorPlayer? selectedSeniorPlayer;
 
         private int? selectedTabIndex;
 
@@ -23,6 +26,19 @@
         }
 
         public Currency Currency { get; private set; } = new Currency();
+
+        public SeniorPlayer? SelectedSeniorPlayer
+        {
+            get
+            {
+                return this.selectedSeniorPlayer;
+            }
+            set
+            {
+                this.selectedSeniorPlayer = value;
+                OnPropertyChanged(nameof(this.SelectedSeniorPlayer));
+            }
+        }
 
         public int SelectedTabIndex
         {
@@ -42,11 +58,12 @@
 
         public override async Task InitializeAsync()
         {
+            this.Currency = await this.playersViewService.GetManagerCurrencyAsync();
+
             var result = await this.playersViewService.GetSeniorPlayerAsync(this.selectedTeamId);
 
             this.SeniorPlayers = new ObservableCollection<SeniorPlayer>(result ?? Array.Empty<SeniorPlayer>());
-
-            this.Currency = await this.playersViewService.GetManagerCurrencyAsync();
+            this.SelectedSeniorPlayer = this.SeniorPlayers.FirstOrDefault();
 
             this.OnPropertyChanged(nameof(this.SeniorPlayers));
         }

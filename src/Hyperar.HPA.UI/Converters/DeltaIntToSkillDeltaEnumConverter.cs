@@ -13,14 +13,9 @@
         {
             if (value is string deltaString)
             {
-                if (string.IsNullOrWhiteSpace(deltaString) || deltaString == "0")
-                {
-                    return SkillDelta.None;
-                }
-                else
-                {
-                    return deltaString.StartsWith(plus) ? SkillDelta.Increase : (object)SkillDelta.Decrease;
-                }
+                return string.IsNullOrWhiteSpace(deltaString) || deltaString == "0"
+                    ? SkillDelta.None
+                    : deltaString.StartsWith(plus) ? SkillDelta.Increase : (object)SkillDelta.Decrease;
             }
             else
             {
