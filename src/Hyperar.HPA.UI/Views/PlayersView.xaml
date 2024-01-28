@@ -316,7 +316,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -543,7 +542,6 @@
 
             <WpfPlot Grid.Column="1"
                      Grid.Row="1"
-                     Grid.RowSpan="2"
                      x:Name="SeniorPlayerSkillRadarChart" />
 
             <Grid Grid.Column="2"

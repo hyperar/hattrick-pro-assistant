@@ -146,6 +146,10 @@
             this.SeniorPlayerSkillRadarChart.Configuration.ScrollWheelZoom =
             this.SeniorPlayerSkillRadarChart.Configuration.MiddleClickDragZoom = false;
 
+            this.SeniorPlayerSkillRadarChart.Plot.XAxis.SetBoundary(-1.3, 1.3);
+            this.SeniorPlayerSkillRadarChart.Plot.YAxis.SetBoundary(-1.3, 1.4);
+            this.SeniorPlayerSkillRadarChart.Plot.Frameless(true);
+
             this.SeniorPlayerSkillRadarChart.Plot.Add(radarPlot);
             this.SeniorPlayerSkillRadarChart.Refresh();
         }
