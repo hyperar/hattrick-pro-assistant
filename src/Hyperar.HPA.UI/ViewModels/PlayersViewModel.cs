@@ -4,14 +4,18 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Windows.Input;
     using Application.Models.Players;
     using Application.Services;
+    using Hyperar.HPA.UI.Commands;
 
     public class PlayersViewModel : ViewModelBase
     {
         private readonly IPlayersViewService playersViewService;
 
         private readonly uint selectedTeamId;
+
+        private SeniorPlayer? selectedComparisonSeniorPlayer;
 
         private SeniorPlayer? selectedSeniorPlayer;
 
@@ -26,6 +30,19 @@
         }
 
         public Currency Currency { get; private set; } = new Currency();
+
+        public SeniorPlayer? SelectedComparisonSeniorPlayer
+        {
+            get
+            {
+                return this.selectedComparisonSeniorPlayer;
+            }
+            set
+            {
+                this.selectedComparisonSeniorPlayer = value;
+                OnPropertyChanged(nameof(this.SelectedComparisonSeniorPlayer));
+            }
+        }
 
         public SeniorPlayer? SelectedSeniorPlayer
         {
@@ -63,7 +80,6 @@
             var result = await this.playersViewService.GetSeniorPlayerAsync(this.selectedTeamId);
 
             this.SeniorPlayers = new ObservableCollection<SeniorPlayer>(result ?? Array.Empty<SeniorPlayer>());
-            this.SelectedSeniorPlayer = this.SeniorPlayers.FirstOrDefault();
 
             this.OnPropertyChanged(nameof(this.SeniorPlayers));
         }

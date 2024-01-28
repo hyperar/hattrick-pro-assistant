@@ -138,5 +138,10 @@
         public SkillLevel Winger { get; set; }
 
         public int? WingerDelta { get; set; }
+
+        public override string ToString()
+        {
+            return this.Title;
+        }
     }
 }

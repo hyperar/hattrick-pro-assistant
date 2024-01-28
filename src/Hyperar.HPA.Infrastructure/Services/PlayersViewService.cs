@@ -1,5 +1,6 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
+    using System.Linq;
     using Application.Models.Players;
     using Application.Services;
     using Domain.Interfaces;

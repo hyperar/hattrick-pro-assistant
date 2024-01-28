@@ -55,36 +55,6 @@
         <Setter Property="Effect" Value="{StaticResource ViewContainerShadow}" />
     </Style>
 
-    <Style x:Key="SkillDeltaTextBlock" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="#ffffff" />
-        <Setter Property="TextAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontWeight" Value="DemiBold" />
-        <Setter Property="Padding" Value="2 0" />
-        <Setter Property="MinWidth" Value="2" />
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},
-                                           Path=Text,
-                                           Converter={StaticResource deltaIntToSkillDeltaEnumConverter}}"
-                         Value="{x:Static enums:SkillDelta.None}">
-                <Setter Property="Visibility" Value="Hidden" />
-                <Setter Property="MinWidth" Value="0" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},
-                                           Path=Text,
-                                           Converter={StaticResource deltaIntToSkillDeltaEnumConverter}}"
-                         Value="{x:Static enums:SkillDelta.Increase}">
-                <Setter Property="Background" Value="#59965D" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},
-                                           Path=Text,
-                                           Converter={StaticResource deltaIntToSkillDeltaEnumConverter}}"
-                         Value="{x:Static enums:SkillDelta.Decrease}">
-                <Setter Property="Background" Value="#DD4140" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
     <Style x:Key="SkillProgressBar" TargetType="{x:Type ProgressBar}">
         <Setter Property="Foreground" Value="#79A777" />
         <Setter Property="Margin" Value="2 3" />

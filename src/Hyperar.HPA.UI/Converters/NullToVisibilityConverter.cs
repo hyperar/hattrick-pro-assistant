@@ -1,14 +1,19 @@
 ﻿namespace Hyperar.HPA.UI.Converters
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows;
     using System.Windows.Data;
 
-    internal class DeltaIntToDeltaStringConverter : IValueConverter
+    internal class NullToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is int delta ? Math.Abs(delta) : 0;
+            return value == null ? Visibility.Hidden : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

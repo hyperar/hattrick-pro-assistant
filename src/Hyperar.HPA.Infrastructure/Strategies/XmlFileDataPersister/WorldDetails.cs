@@ -251,24 +251,27 @@
 
         private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            var world = await this.worldRepository.Query().SingleOrDefaultAsync();
-
-            if (world == null)
+            if (xmlEntity.LeagueList.Count > 1)
             {
-                world = new Domain.World
+                var world = await this.worldRepository.Query().SingleOrDefaultAsync();
+
+                if (world == null)
                 {
-                    Season = xmlEntity.LeagueList.First().Season,
-                    Week = xmlEntity.LeagueList.First().MatchRound
-                };
+                    world = new Domain.World
+                    {
+                        Season = xmlEntity.LeagueList.First().Season,
+                        Week = xmlEntity.LeagueList.First().MatchRound
+                    };
 
-                await this.worldRepository.InsertAsync(world);
-            }
-            else
-            {
-                world.Season = xmlEntity.LeagueList.First().Season;
-                world.Week = xmlEntity.LeagueList.First().MatchRound;
+                    await this.worldRepository.InsertAsync(world);
+                }
+                else
+                {
+                    world.Season = xmlEntity.LeagueList.First().Season;
+                    world.Week = xmlEntity.LeagueList.First().MatchRound;
 
-                this.worldRepository.Update(world);
+                    this.worldRepository.Update(world);
+                }
             }
 
             await this.databaseContext.SaveAsync();

@@ -68,6 +68,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+        <PackageReference Include="ScottPlot.WPF" Version="4.1.71" />
     </ItemGroup>
 
     <ItemGroup>

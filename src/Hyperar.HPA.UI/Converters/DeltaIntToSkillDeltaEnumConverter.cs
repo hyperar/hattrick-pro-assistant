@@ -7,20 +7,9 @@
 
     internal class DeltaIntToSkillDeltaEnumConverter : IValueConverter
     {
-        private const string plus = "+";
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string deltaString)
-            {
-                return string.IsNullOrWhiteSpace(deltaString) || deltaString == "0"
-                    ? SkillDelta.None
-                    : deltaString.StartsWith(plus) ? SkillDelta.Increase : (object)SkillDelta.Decrease;
-            }
-            else
-            {
-                return value;
-            }
+            return value is int delta ? delta == 0 ? SkillDelta.None : delta > 0 ? SkillDelta.Increase : (object)SkillDelta.Decrease : value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
