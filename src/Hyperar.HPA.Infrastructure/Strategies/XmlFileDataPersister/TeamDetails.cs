@@ -89,9 +89,15 @@
                     LogoUrl = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) ? NormalizeUrl(xmlTeam.LogoUrl) : null,
                     MatchKitUrl = NormalizeUrl(xmlTeam.DressUri),
                     AlternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri),
-                    Logo = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) ? await DownloadWebResource(xmlTeam.LogoUrl) : null,
-                    MatchKit = await DownloadWebResource(xmlTeam.DressUri),
-                    AlternativeMatchKit = await DownloadWebResource(xmlTeam.DressAlternateUri),
+                    Logo = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl)
+                         ? await DownloadWebResourceAsync(
+                             NormalizeUrl(
+                                 xmlTeam.LogoUrl))
+                         : null,
+                    MatchKit = await DownloadWebResourceAsync(
+                        NormalizeUrl(xmlTeam.DressUri)),
+                    AlternativeMatchKit = await DownloadWebResourceAsync(
+                        NormalizeUrl(xmlTeam.DressAlternateUri)),
                     League = league,
                     Manager = manager,
                     Region = region
@@ -127,7 +133,7 @@
                 else if (!string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && NormalizeUrl(xmlTeam.LogoUrl) != seniorTeam.LogoUrl)
                 {
                     seniorTeam.LogoUrl = NormalizeUrl(xmlTeam.LogoUrl);
-                    seniorTeam.Logo = await DownloadWebResource(xmlTeam.LogoUrl);
+                    seniorTeam.Logo = await DownloadWebResourceAsync(xmlTeam.LogoUrl);
                 }
 
                 string matchKitUrl = NormalizeUrl(xmlTeam.DressUri);
@@ -135,7 +141,7 @@
                 if (matchKitUrl != seniorTeam.MatchKitUrl)
                 {
                     seniorTeam.MatchKitUrl = matchKitUrl;
-                    seniorTeam.MatchKit = await DownloadWebResource(matchKitUrl);
+                    seniorTeam.MatchKit = await DownloadWebResourceAsync(matchKitUrl);
                 }
 
                 string alternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri);
@@ -143,7 +149,7 @@
                 if (alternativeMatchKitUrl != seniorTeam.AlternativeMatchKitUrl)
                 {
                     seniorTeam.AlternativeMatchKitUrl = alternativeMatchKitUrl;
-                    seniorTeam.AlternativeMatchKit = await DownloadWebResource(alternativeMatchKitUrl);
+                    seniorTeam.AlternativeMatchKit = await DownloadWebResourceAsync(alternativeMatchKitUrl);
                 }
 
                 seniorTeam.Region = region;

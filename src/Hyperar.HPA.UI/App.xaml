@@ -27,8 +27,8 @@
                 <views:MatchesView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:PermissionsViewModel}">
-                <views:PermissionsView />
+            <DataTemplate DataType="{x:Type viewModels:AuthorizationViewModel}">
+                <views:AuthorizationView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModels:PlayersViewModel}">

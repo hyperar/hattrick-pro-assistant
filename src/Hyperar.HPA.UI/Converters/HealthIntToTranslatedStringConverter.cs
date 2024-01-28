@@ -1,0 +1,26 @@
+﻿namespace Hyperar.HPA.UI.Converters
+{
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
+
+    internal class HealthIntToTranslatedStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is int healthLevel
+                ? healthLevel switch
+                {
+                    -1 => Globalization.Strings.Healthy,
+                    0 => Globalization.Strings.Brusied,
+                    _ => string.Format(Globalization.Strings.InjuredWeeks, healthLevel)
+                }
+                : value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -11,11 +11,12 @@
     <UserControl.Resources>
         <converters:BookingStatusToSmallBitmapImageConverter x:Key="bookingSmallStatusToBitmapImageConverter" />
         <converters:ByteArrayToBitmapImageConverter x:Key="byteToImageConverter" />
-        <converters:DateToLocaleShortDateTimeString x:Key="dateToLocaleDateTimeString" />
+        <converters:DateTimeToLocaleShortDateTimeStringConverter x:Key="dateToLocaleDateTimeStringConverter" />
         <converters:HasMotherClubBonusToSmallBitmapImageConverter x:Key="hasMotherClubBonusToSmallBitmapImageConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
-        <converters:HealthToSmallBitmapImageConverter x:Key="healthToSmallBitmapImageConverter" />
-        <converters:HealthToWeekStringConverter x:Key="healthToWeekStringConverter" />
+        <converters:HealthIntToSmallBitmapImageConverter x:Key="healthIntToSmallBitmapImageConverter" />
+        <converters:HealthIntToTranslatedStringConverter x:Key="healthIntToTranslatedStringConverter" />
+        <converters:HealthIntToWeekStringConverter x:Key="healthIntToWeekStringConverter" />
         <converters:IsTransferListedToSmallBitmapImageConverter x:Key="isTransferListedToSmallBitmapImageConverter" />
         <converters:SpecialtyToSmallBitmapImageConverter x:Key="specialtyToSmallBitmapImageConverter" />
     </UserControl.Resources>
@@ -175,7 +176,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="SizeToCells"
                                         Binding="{Binding Date,
-                                                          Converter={StaticResource dateToLocaleDateTimeString}}">
+                                                          Converter={StaticResource dateToLocaleDateTimeStringConverter}}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -241,7 +242,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="SizeToCells"
                                         Binding="{Binding Date,
-                                                          Converter={StaticResource dateToLocaleDateTimeString}}">
+                                                          Converter={StaticResource dateToLocaleDateTimeStringConverter}}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -295,11 +296,7 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
-                                           ToolTip="{Binding BookingStatus,
+                                    <Image ToolTip="{Binding BookingStatus,
                                                              Converter={StaticResource enumToTranslatedStringConverter}}"
                                            Source="{Binding BookingStatus,
                                                             FallbackValue={StaticResource transparent},
@@ -311,11 +308,7 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
-                                           Source="{Binding IsTransferListed,
+                                    <Image Source="{Binding IsTransferListed,
                                                             FallbackValue={StaticResource transparent},
                                                             TargetNullValue={StaticResource transparent},
                                                             Converter={StaticResource isTransferListedToSmallBitmapImageConverter}}" />
@@ -325,34 +318,25 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
-                                           Source="{Binding HealthStatus,
-                                                            FallbackValue={StaticResource transparent},
-                                                            TargetNullValue={StaticResource transparent},
-                                                            Converter={StaticResource healthToSmallBitmapImageConverter}}" />
+                                    <StackPanel Orientation="Horizontal"
+                                                ToolTip="{Binding HealthStatus,
+                                                                  FallbackValue={StaticResource transparent},
+                                                                  TargetNullValue={StaticResource transparent},
+                                                                  Converter={StaticResource healthIntToTranslatedStringConverter}}">
+                                        <Image Source="{Binding HealthStatus,
+                                                                FallbackValue={StaticResource transparent},
+                                                                TargetNullValue={StaticResource transparent},
+                                                                Converter={StaticResource healthIntToSmallBitmapImageConverter}}" />
+                                        <TextBlock Text="{Binding HealthStatus,
+                                                                  Converter={StaticResource healthIntToWeekStringConverter}}" />
+                                    </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontWeight="Bold"
-                                               Text="{Binding HealthStatus,
-                                                              Converter={StaticResource healthToWeekStringConverter}}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="SizeToCells">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
-                                           Source="{Binding HasMotherClubBonus,
+                                    <Image Source="{Binding HasMotherClubBonus,
                                                             FallbackValue={StaticResource transparent},
                                                             TargetNullValue={StaticResource transparent},
                                                             Converter={StaticResource hasMotherClubBonusToSmallBitmapImageConverter}}" />
@@ -362,11 +346,7 @@
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Stretch="Fill"
-                                           Height="16"
-                                           Width="16"
-                                           Margin="5 0"
-                                           ToolTip="{Binding Specialty,
+                                    <Image ToolTip="{Binding Specialty,
                                                              Converter={StaticResource enumToTranslatedStringConverter}}"
                                            Source="{Binding Specialty,
                                                             FallbackValue={StaticResource transparent},

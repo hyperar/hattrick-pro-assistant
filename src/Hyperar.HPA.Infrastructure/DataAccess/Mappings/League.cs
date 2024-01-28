@@ -53,25 +53,11 @@
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(p => p.Season)
-                .HasColumnName(Constants.ColumnName.Season)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
-                .IsRequired();
-
             builder.Property(p => p.SeasonOffset)
                 .HasColumnName(Constants.ColumnName.SeasonOffset)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
-                .IsRequired();
-
-            builder.Property(p => p.CurrentRound)
-                .HasColumnName(Constants.ColumnName.CurrentRound)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.LanguageId)
@@ -194,6 +180,12 @@
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
+
+            builder.Property(p => p.Flag)
+                .HasColumnName(Constants.ColumnName.Flag)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.VarBinary);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.League> builder)

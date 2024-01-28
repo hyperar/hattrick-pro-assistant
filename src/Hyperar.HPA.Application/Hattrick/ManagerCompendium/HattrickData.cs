@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.ManagerCompendium
 {
     using System;
-    using System.Xml.Serialization;
     using Application.Hattrick;
     using Application.Hattrick.Interfaces;
 
@@ -12,7 +11,6 @@
         {
         }
 
-        [XmlElement("Manager")]
         public Manager Manager { get; set; } = new Manager();
     }
 }

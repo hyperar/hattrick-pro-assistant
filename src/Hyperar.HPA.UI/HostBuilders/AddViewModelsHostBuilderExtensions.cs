@@ -17,13 +17,27 @@
             {
                 services.AddTransient<CreateAsyncViewModel<DownloadViewModel>>(services => () => CreateDownloadAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<HomeViewModel>>(services => () => CreateHomeAsyncViewModel(services));
-                services.AddTransient<CreateAsyncViewModel<PermissionsViewModel>>(services => () => CreatePermissionsAsyncViewModel(services));
+                services.AddTransient<CreateAsyncViewModel<AuthorizationViewModel>>(services => () => CreateAuthorizationAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<PlayersViewModel>>(services => () => CreatePlayersAsyncViewModel(services));
                 services.AddTransient<CreateAsyncViewModel<TeamSelectionViewModel>>(services => () => CreateTeamSelectionAsyncViewModel(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
 
             return host;
+        }
+
+        private static async Task<AuthorizationViewModel> CreateAuthorizationAsyncViewModel(IServiceProvider services)
+        {
+            var scope = services.CreateScope();
+
+            var viewModel = new AuthorizationViewModel(
+                scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IViewModelFactory>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
         }
 
         private static async Task<DownloadViewModel> CreateDownloadAsyncViewModel(IServiceProvider services)
@@ -50,20 +64,6 @@
             var viewModel = new HomeViewModel(
                 scope.ServiceProvider.GetRequiredService<IHomeViewService>(),
                 services.GetRequiredService<INavigator>());
-
-            await viewModel.InitializeAsync();
-
-            return viewModel;
-        }
-
-        private static async Task<PermissionsViewModel> CreatePermissionsAsyncViewModel(IServiceProvider services)
-        {
-            var scope = services.CreateScope();
-
-            var viewModel = new PermissionsViewModel(
-                scope.ServiceProvider.GetRequiredService<IAuthorizer>(),
-                services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<IViewModelFactory>());
 
             await viewModel.InitializeAsync();
 

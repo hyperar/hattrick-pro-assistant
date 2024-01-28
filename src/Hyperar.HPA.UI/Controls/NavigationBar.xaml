@@ -34,80 +34,92 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <RadioButton
-            Grid.Row="0"
-            ToolTip="{x:Static globalization:Strings.Home}"
-            Content="{StaticResource home-32}"
-            Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.Home}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:HomeViewModel}}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="0"
+                     Content="{StaticResource home-32}"
+                     Command="{Binding UpdateCurrentViewModelCommand}"
+                     CommandParameter="{x:Static enums:ViewType.Home}"
+                     IsChecked="{Binding CurrentViewModel,
+                                         Mode=OneWay,
+                                         Converter={StaticResource EqualValueToParameterConverter},
+                                         ConverterParameter={x:Type viewModels:HomeViewModel}}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.Home}" />
 
-        <RadioButton
-            Grid.Row="1"
-            ToolTip="{x:Static globalization:Strings.Players}"
-            Content="{StaticResource sports-teams-32}"
-            Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.Players}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:PlayersViewModel}}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="1"
+                     Content="{StaticResource players-32}"
+                     Command="{Binding UpdateCurrentViewModelCommand}"
+                     CommandParameter="{x:Static enums:ViewType.Players}"
+                     IsChecked="{Binding CurrentViewModel,
+                                         Mode=OneWay,
+                                         Converter={StaticResource EqualValueToParameterConverter},
+                                         ConverterParameter={x:Type viewModels:PlayersViewModel}}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.Players}" />
 
-        <RadioButton
-            Grid.Row="2"
-            ToolTip="{x:Static globalization:Strings.Matches}"
-            Content="{StaticResource scoreboard-32}"
-            Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.Matches}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:MatchesViewModel}}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="2"
+                     Content="{StaticResource matches-32}"
+                     Command="{Binding UpdateCurrentViewModelCommand}"
+                     CommandParameter="{x:Static enums:ViewType.Matches}"
+                     IsChecked="{Binding CurrentViewModel,
+                                         Mode=OneWay,
+                                         Converter={StaticResource EqualValueToParameterConverter},
+                                         ConverterParameter={x:Type viewModels:MatchesViewModel}}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.Matches}" />
 
-        <RadioButton
-            Grid.Row="4"
-            ToolTip="{x:Static globalization:Strings.TeamSelection}"
-            Content="{StaticResource protect-32}"
-            Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.TeamSelection}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:TeamSelectionViewModel}}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="4"
+                     Content="{StaticResource team-selection-32}"
+                     Command="{Binding UpdateCurrentViewModelCommand}"
+                     CommandParameter="{x:Static enums:ViewType.TeamSelection}"
+                     IsChecked="{Binding CurrentViewModel,
+                                         Mode=OneWay,
+                                         Converter={StaticResource EqualValueToParameterConverter},
+                                         ConverterParameter={x:Type viewModels:TeamSelectionViewModel}}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.TeamSelection}" />
 
-        <RadioButton
-            Grid.Row="5"
-            ToolTip="{x:Static globalization:Strings.Download}"
-            Content="{StaticResource download-32}"
-            Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.Download}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:DownloadViewModel}}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="5"
+                     Content="{StaticResource download-32}"
+                     Command="{Binding UpdateCurrentViewModelCommand}"
+                     CommandParameter="{x:Static enums:ViewType.Download}"
+                     IsChecked="{Binding CurrentViewModel,
+                                         Mode=OneWay,
+                                         Converter={StaticResource EqualValueToParameterConverter},
+                                         ConverterParameter={x:Type viewModels:DownloadViewModel}}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.Download}" />
 
-        <RadioButton
-            Grid.Row="7"
-            ToolTip="{x:Static globalization:Strings.Settings}"
-            Content="{StaticResource settings-32}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="6"
+                     Content="{StaticResource settings-32}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.Settings}" />
 
-        <RadioButton
-            Grid.Row="8"
-            ToolTip="{x:Static globalization:Strings.Permissions}"
-            Content="{StaticResource key-32}"
-            Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.Permissions}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:PermissionsViewModel}}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="7"
+                     Content="{StaticResource authorization-32}"
+                     Command="{Binding UpdateCurrentViewModelCommand}"
+                     CommandParameter="{x:Static enums:ViewType.Authorization}"
+                     IsChecked="{Binding CurrentViewModel,
+                                         Mode=OneWay,
+                                         Converter={StaticResource EqualValueToParameterConverter},
+                                         ConverterParameter={x:Type viewModels:AuthorizationViewModel}}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.Authorization}" />
 
-        <RadioButton
-            Grid.Row="9"
-            ToolTip="{x:Static globalization:Strings.About}"
-            Content="{StaticResource about-32}"
-            Command="{Binding UpdateCurrentViewModelCommand}"
-            CommandParameter="{x:Static enums:ViewType.About}"
-            IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:AboutViewModel}}"
-            IsEnabled="{Binding CanNavigate}" />
+        <RadioButton Grid.Row="8"
+                     Content="{StaticResource about-32}"
+                     Command="{Binding UpdateCurrentViewModelCommand}"
+                     CommandParameter="{x:Static enums:ViewType.About}"
+                     IsChecked="{Binding CurrentViewModel,
+                                         Mode=OneWay,
+                                         Converter={StaticResource EqualValueToParameterConverter},
+                                         ConverterParameter={x:Type viewModels:AboutViewModel}}"
+                     IsEnabled="{Binding CanNavigate}"
+                     ToolTip="{x:Static globalization:Strings.About}" />
 
-        <Button
-            Grid.Row="10"
-            ToolTip="{x:Static globalization:Strings.Quit}"
-            Content="{StaticResource logout-32}"
-            Click="QuitButton_Click"
-            IsEnabled="{Binding CanNavigate}" />
+        <Button Grid.Row="9"
+                Click="ExitButton_Click"
+                Content="{StaticResource close-32}"
+                IsEnabled="{Binding CanNavigate}"
+                ToolTip="{x:Static globalization:Strings.Exit}" />
     </Grid>
 </UserControl>

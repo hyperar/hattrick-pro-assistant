@@ -12,7 +12,6 @@
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
     </UserControl.Resources>
 
-    <Border Style="{StaticResource ViewContainer}">
         <StackPanel Name="ViewContainer" Orientation="Vertical">
 
             <TextBlock Style="{StaticResource ViewTitle}"
@@ -20,9 +19,7 @@
 
             <Separator />
 
-            <DataGrid Style="{StaticResource OverviewDataGrid}"
-                      ItemsSource="{Binding DownloadTasks,
-                                            Mode=OneWay}"
+            <DataGrid BorderThickness="1"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"
                       CanUserReorderColumns="False"
@@ -30,7 +27,10 @@
                       CanUserResizeRows="False"
                       CanUserSortColumns="False"
                       HeadersVisibility="Column"
-                      MinHeight="250">
+                      ItemsSource="{Binding DownloadTasks,
+                                            Mode=OneWay}"
+                      MinHeight="250"
+                      Style="{StaticResource OverviewDataGrid}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{x:Static globalization:Strings.File}"
                                         MinWidth="250"
@@ -69,7 +69,7 @@
                 <ProgressBar Grid.Column="0"
                              Grid.Row="0"
                              Height="24"
-                             Margin="5"
+                             Margin="0 5"
                              Minimum="0"
                              Maximum="{Binding DownloadTaskStepsCount,
                                                Mode=OneWay}"
@@ -78,7 +78,7 @@
 
                 <TextBlock Grid.Column="0"
                            Grid.Row="0"
-                           Margin="5"
+                           Margin="0 5"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Text="{Binding ProgressPercentage,
@@ -89,5 +89,4 @@
                     Content="{x:Static globalization:Strings.Download}"
                     Margin="15" />
         </StackPanel>
-    </Border>
 </UserControl>

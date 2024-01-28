@@ -3,10 +3,13 @@
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
     using Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
     using Hattrick = Application.Hattrick.WorldDetails;
 
-    public class WorldDetails : IXmlFileDataPersisterStrategy
+    public class WorldDetails : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
+        private const string flagUrlMask = "https://www.hattrick.org/Img/flags/{0}.png";
+
         private readonly IHattrickRepository<Domain.Country> countryRepository;
 
         private readonly IDatabaseContext databaseContext;
@@ -17,21 +20,25 @@
 
         private readonly IHattrickRepository<Domain.Region> regionRepository;
 
+        private readonly IRepository<Domain.World> worldRepository;
+
         public WorldDetails(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
             IHattrickRepository<Domain.LeagueCup> leagueCupRepository,
             IHattrickRepository<Domain.League> leagueRepository,
-            IHattrickRepository<Domain.Region> regionRepository)
+            IHattrickRepository<Domain.Region> regionRepository,
+            IRepository<Domain.World> worldRepository)
         {
             this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.leagueCupRepository = leagueCupRepository;
             this.leagueRepository = leagueRepository;
             this.regionRepository = regionRepository;
+            this.worldRepository = worldRepository;
         }
 
-        public async Task PersistDataAsync(IXmlFile file)
+        public override async Task PersistDataAsync(IXmlFile file)
         {
             try
             {
@@ -52,7 +59,7 @@
             }
         }
 
-        private async Task ProcessCountryAsync(Hattrick.Country xmlCountry, uint leagueId)
+        private async Task ProcessCountryAsync(Hattrick.Country xmlCountry, Domain.League league)
         {
             if (!xmlCountry.Available ||
                 xmlCountry.CountryId == null ||
@@ -72,7 +79,7 @@
             {
                 country = new Domain.Country
                 {
-                    LeagueHattrickId = leagueId,
+                    League = league,
                     HattrickId = xmlCountry.CountryId.Value,
                     Name = xmlCountry.CountryName,
                     CurrencyName = xmlCountry.CurrencyName,
@@ -123,9 +130,7 @@
                     EnglishName = xmlLeague.EnglishName,
                     Continent = xmlLeague.Continent,
                     Zone = xmlLeague.ZoneName,
-                    Season = xmlLeague.Season,
                     SeasonOffset = xmlLeague.SeasonOffset,
-                    CurrentRound = xmlLeague.MatchRound,
                     LanguageId = xmlLeague.LanguageId,
                     LanguageName = xmlLeague.LanguageName,
                     SeniorNationalTeamId = xmlLeague.NationalTeamId,
@@ -142,16 +147,18 @@
                     SecondWeeklyUpdate = xmlLeague.Sequence2,
                     ThirdWeeklyUpdate = xmlLeague.Sequence3,
                     FourthWeeklyUpdate = xmlLeague.Sequence5,
-                    FifthWeeklyUpdate = xmlLeague.Sequence7
+                    FifthWeeklyUpdate = xmlLeague.Sequence7,
+                    Flag = await DownloadWebResourceAsync(
+                        string.Format(
+                            flagUrlMask,
+                            xmlLeague.LeagueId))
                 };
 
                 await this.leagueRepository.InsertAsync(league);
             }
             else
             {
-                league.Season = xmlLeague.Season;
                 league.SeasonOffset = xmlLeague.SeasonOffset;
-                league.CurrentRound = xmlLeague.MatchRound;
                 league.ActiveTeams = xmlLeague.ActiveTeams;
                 league.ActiveUsers = xmlLeague.ActiveUsers;
                 league.WaitingUsers = xmlLeague.WaitingUsers;
@@ -171,7 +178,7 @@
 
             await this.databaseContext.SaveAsync();
 
-            await this.ProcessCountryAsync(xmlLeague.Country, xmlLeague.LeagueId);
+            await this.ProcessCountryAsync(xmlLeague.Country, league);
 
             if (xmlLeague.Cups != null && xmlLeague.Cups.Count > 0)
             {
@@ -244,6 +251,31 @@
 
         private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
+            if (xmlEntity.LeagueList.Count > 1)
+            {
+                var world = await this.worldRepository.Query().SingleOrDefaultAsync();
+
+                if (world == null)
+                {
+                    world = new Domain.World
+                    {
+                        Season = xmlEntity.LeagueList.First().Season,
+                        Week = xmlEntity.LeagueList.First().MatchRound
+                    };
+
+                    await this.worldRepository.InsertAsync(world);
+                }
+                else
+                {
+                    world.Season = xmlEntity.LeagueList.First().Season;
+                    world.Week = xmlEntity.LeagueList.First().MatchRound;
+
+                    this.worldRepository.Update(world);
+                }
+            }
+
+            await this.databaseContext.SaveAsync();
+
             foreach (var curXmlLeague in xmlEntity.LeagueList)
             {
                 await this.ProcessLeagueAsync(curXmlLeague);

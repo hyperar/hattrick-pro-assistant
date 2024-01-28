@@ -18,8 +18,6 @@
 
         private readonly IRepository<Domain.User> userRepository;
 
-        private uint layerIndex = 1;
-
         public ManagerCompendium(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
@@ -55,8 +53,10 @@
             }
         }
 
-        private void ProcessManagerAvatar(Hattrick.Avatar avatar, Domain.Manager manager)
+        private static void ProcessManagerAvatar(Hattrick.Avatar avatar, Domain.Manager manager)
         {
+            uint layerIndex = 1;
+
             manager.AvatarLayers.Add(new Domain.ManagerAvatarLayer
             {
                 Index = layerIndex,
@@ -106,7 +106,7 @@
 
                 if (xmlEntity.Manager.Avatar != null)
                 {
-                    this.ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
+                    ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
 
                     manager.Avatar = await BuildAvatarFromLayers(manager.AvatarLayers);
                 }
@@ -146,7 +146,7 @@
 
                 if (xmlEntity.Manager.Avatar != null && manager.AvatarLayers.Count == 0)
                 {
-                    this.ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
+                    ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
 
                     manager.Avatar = await BuildAvatarFromLayers(manager.AvatarLayers);
                 }

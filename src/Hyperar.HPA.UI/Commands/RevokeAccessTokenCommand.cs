@@ -8,18 +8,18 @@
 
     public class RevokeAccessTokenCommand : AsyncCommandBase, IDisposable
     {
+        private readonly AuthorizationViewModel authorizationViewModel;
+
         private readonly INavigator navigator;
 
-        private readonly PermissionsViewModel permissionsViewModel;
-
         public RevokeAccessTokenCommand(
-            PermissionsViewModel permissionsViewModel,
+            AuthorizationViewModel authorizationViewModel,
             INavigator navigator)
         {
-            this.permissionsViewModel = permissionsViewModel;
+            this.authorizationViewModel = authorizationViewModel;
             this.navigator = navigator;
 
-            this.permissionsViewModel.PropertyChanged += this.PermissionsViewModel_PropertyChanged;
+            this.authorizationViewModel.PropertyChanged += this.AuthorizationViewModel_PropertyChanged;
         }
 
         public override bool CanExecute(object? parameter)
@@ -29,7 +29,7 @@
 
         public void Dispose()
         {
-            this.permissionsViewModel.PropertyChanged -= this.PermissionsViewModel_PropertyChanged;
+            this.authorizationViewModel.PropertyChanged -= this.AuthorizationViewModel_PropertyChanged;
             GC.SuppressFinalize(this);
         }
 
@@ -37,17 +37,17 @@
         {
             this.navigator.SuspendNavigation();
 
-            await this.permissionsViewModel.Authorizer.RevokeTokenAsync();
+            await this.authorizationViewModel.Authorizer.RevokeTokenAsync();
 
-            this.permissionsViewModel.AccessToken = null;
-            this.permissionsViewModel.AccessTokenSecret = null;
+            this.authorizationViewModel.AccessToken = null;
+            this.authorizationViewModel.AccessTokenSecret = null;
 
             this.navigator.ResumeNavigation();
         }
 
-        private void PermissionsViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void AuthorizationViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(PermissionsViewModel.CanGrantAccess))
+            if (e.PropertyName == nameof(AuthorizationViewModel.CanGrantAccess))
             {
                 this.OnCanExecuteChanged();
             }

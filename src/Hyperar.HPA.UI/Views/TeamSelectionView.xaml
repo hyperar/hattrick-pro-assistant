@@ -12,7 +12,6 @@
         <converters:ByteArrayToBitmapImageConverter x:Key="byteToImageConverter" />
         <converters:EqualValueToParameterConverter x:Key="EqualValueToParameterConverter" />
     </UserControl.Resources>
-    <Border Style="{StaticResource ViewContainer}">
         <StackPanel Name="ViewContainer" Orientation="Vertical">
 
             <TextBlock Style="{StaticResource ViewTitle}"
@@ -95,12 +94,11 @@
                                     Content="{x:Static globalization:Strings.SelectTeam}"
                                     Command="{Binding DataContext.ChangeSelectedTeamCommand,
                                                       RelativeSource={RelativeSource Mode=FindAncestor,
-                                                      AncestorType={x:Type Border}}}"
+                                                      AncestorType={x:Type StackPanel}}}"
                                     CommandParameter="{Binding HattrickId}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-    </Border>
 </UserControl>

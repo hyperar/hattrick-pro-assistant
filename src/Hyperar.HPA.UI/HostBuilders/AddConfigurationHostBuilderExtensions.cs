@@ -1,5 +1,6 @@
 ﻿namespace Hyperar.HPA.UI.HostBuilders
 {
+    using System;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Hosting;
 
@@ -15,8 +16,9 @@
         {
             host.ConfigureAppConfiguration((context, configurationBuilder) =>
             {
-                configurationBuilder.AddUserSecrets<App>();
+                configurationBuilder.SetBasePath(AppDomain.CurrentDomain.BaseDirectory);
                 configurationBuilder.AddJsonFile(baseConfigurationFile);
+                configurationBuilder.AddUserSecrets<App>();
 
                 if (context.HostingEnvironment.IsDevelopment())
                 {

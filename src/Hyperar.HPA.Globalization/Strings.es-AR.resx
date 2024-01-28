@@ -123,11 +123,56 @@
   <data name="Age" xml:space="preserve">
     <value>Edad</value>
   </data>
+  <data name="AgeAndNextBirthDayMask" xml:space="preserve">
+    <value>{0} años y {1} día(s), Próximo cumpleaños: {2}</value>
+  </data>
+  <data name="AgeMask" xml:space="preserve">
+    <value>{0} años y {1} día(s)</value>
+  </data>
   <data name="Aggressiveness" xml:space="preserve">
     <value>Agresividad</value>
   </data>
+  <data name="AggressivenessLevel_Balanced" xml:space="preserve">
+    <value>estable</value>
+  </data>
+  <data name="AggressivenessLevel_Calm" xml:space="preserve">
+    <value>calmado</value>
+  </data>
+  <data name="AggressivenessLevel_Fiery" xml:space="preserve">
+    <value>iracundo</value>
+  </data>
+  <data name="AggressivenessLevel_Temperamental" xml:space="preserve">
+    <value>temperamental</value>
+  </data>
+  <data name="AggressivenessLevel_Tranquil" xml:space="preserve">
+    <value>tranquilo</value>
+  </data>
+  <data name="AggressivenessLevel_Unstable" xml:space="preserve">
+    <value>inestable</value>
+  </data>
   <data name="Agreeability" xml:space="preserve">
     <value>Carácter</value>
+  </data>
+  <data name="AgreeabilityLevel_BelovedTeamMember" xml:space="preserve">
+    <value>querido compañero de equipo</value>
+  </data>
+  <data name="AgreeabilityLevel_ControversialPerson" xml:space="preserve">
+    <value>polémico</value>
+  </data>
+  <data name="AgreeabilityLevel_NastyFellow" xml:space="preserve">
+    <value>malintencionado</value>
+  </data>
+  <data name="AgreeabilityLevel_PleasantGuy" xml:space="preserve">
+    <value>agradable</value>
+  </data>
+  <data name="AgreeabilityLevel_PopularGuy" xml:space="preserve">
+    <value>popular</value>
+  </data>
+  <data name="AgreeabilityLevel_SympatheticGuy" xml:space="preserve">
+    <value>carismático</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Autorización</value>
   </data>
   <data name="Authorize" xml:space="preserve">
     <value>Autorizar</value>
@@ -145,7 +190,7 @@
     <value>Sin amonestaciones</value>
   </data>
   <data name="BookingStatus_OneYellowCard" xml:space="preserve">
-    <value>Amonestado</value>
+    <value>Una amonestación</value>
   </data>
   <data name="BookingStatus_Suspended" xml:space="preserve">
     <value>Suspendido</value>
@@ -153,11 +198,17 @@
   <data name="BookingStatus_TwoYellowCards" xml:space="preserve">
     <value>Dos amonestaciones</value>
   </data>
+  <data name="Brusied" xml:space="preserve">
+    <value>Lastimado</value>
+  </data>
   <data name="CareerGoals" xml:space="preserve">
     <value>Goles (Carrera)</value>
   </data>
   <data name="CareerHattricks" xml:space="preserve">
     <value>Hattricks (Carrera)</value>
+  </data>
+  <data name="Compare" xml:space="preserve">
+    <value>Comparar</value>
   </data>
   <data name="CopyAndPasteVerificationCodeMessage" xml:space="preserve">
     <value>Una vez que haya iniciado sesión en su cuenta Hattrick, se le proporcionará un Código de verificación. Copie el código y péguelo a continuación, asegurándose de que no haya espacios en blanco al principio o al final del código.</value>
@@ -207,6 +258,9 @@
   <data name="DownloadTaskStatus_Saving" xml:space="preserve">
     <value>Guardando</value>
   </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
   <data name="Experience" xml:space="preserve">
     <value>Experiencia</value>
   </data>
@@ -243,14 +297,38 @@
   <data name="Health" xml:space="preserve">
     <value>Salud</value>
   </data>
+  <data name="Healthy" xml:space="preserve">
+    <value>Saludable</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
   </data>
   <data name="Honesty" xml:space="preserve">
     <value>Honestidad</value>
   </data>
+  <data name="Honesty_Dishonest" xml:space="preserve">
+    <value>deshonesto</value>
+  </data>
+  <data name="Honesty_Honest" xml:space="preserve">
+    <value>honesto</value>
+  </data>
+  <data name="Honesty_Infamous" xml:space="preserve">
+    <value>infame</value>
+  </data>
+  <data name="Honesty_Righteous" xml:space="preserve">
+    <value>honorable</value>
+  </data>
+  <data name="Honesty_Saintly" xml:space="preserve">
+    <value>santo</value>
+  </data>
+  <data name="Honesty_Upright" xml:space="preserve">
+    <value>justo</value>
+  </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="InjuredWeeks" xml:space="preserve">
+    <value>Lesionado: {0} semana(s)</value>
   </data>
   <data name="Keeper" xml:space="preserve">
     <value>Portería</value>
@@ -306,17 +384,15 @@
   <data name="Passing" xml:space="preserve">
     <value>Pases</value>
   </data>
-  <data name="Permissions" xml:space="preserve">
-    <value>Permisos</value>
+  <data name="PlayerDetailDescription" xml:space="preserve">
+    <value>Un tipo {0}, que es {1} además de {2}.
+Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   </data>
   <data name="Players" xml:space="preserve">
     <value>Jugadores</value>
   </data>
   <data name="Playmaking" xml:space="preserve">
     <value>Jugadas</value>
-  </data>
-  <data name="Quit" xml:space="preserve">
-    <value>Salir</value>
   </data>
   <data name="RecentMatches" xml:space="preserve">
     <value>Partidos Recientes</value>
@@ -345,14 +421,74 @@
   <data name="ShirtNumber" xml:space="preserve">
     <value>#</value>
   </data>
+  <data name="SkillLevel_Brilliant" xml:space="preserve">
+    <value>brillante</value>
+  </data>
+  <data name="SkillLevel_Disastrous" xml:space="preserve">
+    <value>desastroso</value>
+  </data>
+  <data name="SkillLevel_Divine" xml:space="preserve">
+    <value>divino</value>
+  </data>
+  <data name="SkillLevel_Excellent" xml:space="preserve">
+    <value>excelente</value>
+  </data>
+  <data name="SkillLevel_ExtraTerrestrial" xml:space="preserve">
+    <value>extraterrestre</value>
+  </data>
+  <data name="SkillLevel_Formidable" xml:space="preserve">
+    <value>formidable</value>
+  </data>
+  <data name="SkillLevel_Inadequate" xml:space="preserve">
+    <value>insuficiente</value>
+  </data>
+  <data name="SkillLevel_Magical" xml:space="preserve">
+    <value>mágico</value>
+  </data>
+  <data name="SkillLevel_Magnificent" xml:space="preserve">
+    <value>magnífico</value>
+  </data>
+  <data name="SkillLevel_Mythical" xml:space="preserve">
+    <value>mítico</value>
+  </data>
+  <data name="SkillLevel_NonExistent" xml:space="preserve">
+    <value>inexistente</value>
+  </data>
+  <data name="SkillLevel_Outstanding" xml:space="preserve">
+    <value>destacado</value>
+  </data>
+  <data name="SkillLevel_Passable" xml:space="preserve">
+    <value>aceptable</value>
+  </data>
+  <data name="SkillLevel_Poor" xml:space="preserve">
+    <value>pobre</value>
+  </data>
+  <data name="SkillLevel_Solid" xml:space="preserve">
+    <value>bueno</value>
+  </data>
+  <data name="SkillLevel_Supernatural" xml:space="preserve">
+    <value>sobrenatural</value>
+  </data>
+  <data name="SkillLevel_Titanic" xml:space="preserve">
+    <value>titánico</value>
+  </data>
+  <data name="SkillLevel_Utopian" xml:space="preserve">
+    <value>utópico</value>
+  </data>
+  <data name="SkillLevel_Weak" xml:space="preserve">
+    <value>débil</value>
+  </data>
+  <data name="SkillLevel_WorldClass" xml:space="preserve">
+    <value>clase mundial</value>
+  </data>
+  <data name="SkillLevel_Wretched" xml:space="preserve">
+    <value>horrible</value>
+  </data>
   <data name="Specialty" xml:space="preserve">
     <value>Especialidad</value>
   </data>
   <data name="Specialty_HeadSpecialist" xml:space="preserve">
     <value>Cabeceador</value>
-  </data>
-  <data name="Specialty_NoSpecialty" xml:space="preserve">
-    <value>Sin Especialidad</value>
   </data>
   <data name="Specialty_Powerful" xml:space="preserve">
     <value>Potente</value>
@@ -423,7 +559,31 @@
   <data name="UserLabel" xml:space="preserve">
     <value>Usuario:</value>
   </data>
+  <data name="WeeklySalary" xml:space="preserve">
+    <value>{0} {1}/semana</value>
+  </data>
   <data name="Winger" xml:space="preserve">
     <value>Lateral</value>
+  </data>
+  <data name="XmlFileType_ArenaDetails" xml:space="preserve">
+    <value>Detalles del Estadio</value>
+  </data>
+  <data name="XmlFileType_Avatars" xml:space="preserve">
+    <value>Avatares de Jugadores</value>
+  </data>
+  <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
+    <value>Compendio de Manager</value>
+  </data>
+  <data name="XmlFileType_Matches" xml:space="preserve">
+    <value>Partidos</value>
+  </data>
+  <data name="XmlFileType_Players" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="XmlFileType_TeamDetails" xml:space="preserve">
+    <value>Detalles del Equipo</value>
+  </data>
+  <data name="XmlFileType_WorldDetails" xml:space="preserve">
+    <value>Detalles del Mundo</value>
   </data>
 </root>

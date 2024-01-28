@@ -1,6 +1,5 @@
 ﻿namespace Hyperar.HPA.Domain
 {
-    using System;
     using Common.Enums;
     using Domain.Interfaces;
 
@@ -22,13 +21,15 @@
 
         public SkillLevel Scoring { get; set; }
 
+        public uint Season { get; set; }
+
         public virtual SeniorPlayer SeniorPlayer { get; set; } = new SeniorPlayer();
 
         public SkillLevel SetPieces { get; set; }
 
         public SkillLevel Stamina { get; set; }
 
-        public DateTime UpdatedOn { get; set; }
+        public uint Week { get; set; }
 
         public SkillLevel Winger { get; set; }
     }

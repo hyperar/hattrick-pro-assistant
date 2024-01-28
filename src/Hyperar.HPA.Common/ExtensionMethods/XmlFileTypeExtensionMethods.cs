@@ -10,6 +10,7 @@
             return value switch
             {
                 Constants.XmlFileName.ArenaDetails => XmlFileType.ArenaDetails,
+                Constants.XmlFileName.Avatars => XmlFileType.Avatars,
                 Constants.XmlFileName.ManagerCompendium => XmlFileType.ManagerCompendium,
                 Constants.XmlFileName.Matches => XmlFileType.Matches,
                 Constants.XmlFileName.Players => XmlFileType.Players,

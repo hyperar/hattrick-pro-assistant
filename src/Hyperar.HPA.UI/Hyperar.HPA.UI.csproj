@@ -15,58 +15,74 @@
     </PropertyGroup>
     <ItemGroup>
       <None Remove="Resources\about-32.png" />
-      <None Remove="Resources\bandage-16.png" />
-      <None Remove="Resources\bandage-30.png" />
+      <None Remove="Resources\authorization-32.png" />
       <None Remove="Resources\bg-dark.jpg" />
       <None Remove="Resources\bg.jpg" />
-      <None Remove="Resources\connection-16.png" />
-      <None Remove="Resources\connection-30.png" />
+      <None Remove="Resources\bruised-16.png" />
+      <None Remove="Resources\bruised-30.png" />
+      <None Remove="Resources\close-32.png" />
       <None Remove="Resources\default-manager-avatar.png" />
-      <None Remove="Resources\doctor-16.png" />
-      <None Remove="Resources\doctor-30.png" />
       <None Remove="Resources\double-yellow-card-16.png" />
       <None Remove="Resources\double-yellow-card-30.png" />
       <None Remove="Resources\download-32.png" />
-      <None Remove="Resources\exercise-16.png" />
-      <None Remove="Resources\exercise-30.png" />
-      <None Remove="Resources\gears-16.png" />
-      <None Remove="Resources\gears-30.png" />
-      <None Remove="Resources\head-16.png" />
-      <None Remove="Resources\head-30.png" />
-      <None Remove="Resources\health-16.png" />
-      <None Remove="Resources\health-30.png" />
+      <None Remove="Resources\head-specialist-16.png" />
+      <None Remove="Resources\head-specialist-30.png" />
       <None Remove="Resources\home-32.png" />
       <None Remove="Resources\HPA.ico" />
-      <None Remove="Resources\key-32.png" />
-      <None Remove="Resources\logout-32.png" />
-      <None Remove="Resources\love-16.png" />
-      <None Remove="Resources\love-30.png" />
+      <None Remove="Resources\injured-16.png" />
+      <None Remove="Resources\injured-30.png" />
+      <None Remove="Resources\matches-32.png" />
+      <None Remove="Resources\mother-club-bonus-16.png" />
+      <None Remove="Resources\mother-club-bonus-30.png" />
       <None Remove="Resources\no-logo.png" />
-      <None Remove="Resources\price-tag-16.png" />
-      <None Remove="Resources\price-tag-30.png" />
-      <None Remove="Resources\protect-32.png" />
+      <None Remove="Resources\players-32.png" />
+      <None Remove="Resources\powerful-16.png" />
+      <None Remove="Resources\powerful-30.png" />
+      <None Remove="Resources\quick-16.png" />
+      <None Remove="Resources\quick-30.png" />
       <None Remove="Resources\red-card-16.png" />
       <None Remove="Resources\red-card-30.png" />
-      <None Remove="Resources\scoreboard-32.png" />
+      <None Remove="Resources\resilient-16.png" />
+      <None Remove="Resources\resilient-30.png" />
       <None Remove="Resources\settings-32.png" />
-      <None Remove="Resources\sil1_3.png" />
-      <None Remove="Resources\sports-teams-32.png" />
-      <None Remove="Resources\strong-16.png" />
-      <None Remove="Resources\strong-30.png" />
-      <None Remove="Resources\swap-16.png" />
-      <None Remove="Resources\swap-30.png" />
+      <None Remove="Resources\support-16.png" />
+      <None Remove="Resources\support-30.png" />
+      <None Remove="Resources\team-selection-32.png" />
+      <None Remove="Resources\technical-16.png" />
+      <None Remove="Resources\technical-30.png" />
+      <None Remove="Resources\transferlisted-16.png" />
+      <None Remove="Resources\transferlisted-30.png" />
       <None Remove="Resources\transparent.gif" />
+      <None Remove="Resources\unpredictable-16.png" />
+      <None Remove="Resources\unpredictable-30.png" />
       <None Remove="Resources\yellow-card-16.png" />
       <None Remove="Resources\yellow-card-30.png" />
     </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+        <PackageReference Include="ScottPlot.WPF" Version="4.1.71" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Hyperar.HPA.Application\Hyperar.HPA.Application.csproj" />
+        <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
+        <ProjectReference Include="..\Hyperar.HPA.Globalization\Hyperar.HPA.Globalization.csproj" />
+        <ProjectReference Include="..\Hyperar.HPA.Infrastructure\Hyperar.HPA.Infrastructure.csproj" />
+    </ItemGroup>
+
     <ItemGroup>
       <Resource Include="Resources\about-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\bandage-16.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\bandage-30.png">
+      <Resource Include="Resources\authorization-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\bg-dark.jpg">
@@ -75,19 +91,16 @@
       <Resource Include="Resources\bg.jpg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\connection-16.png">
+      <Resource Include="Resources\bruised-16.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\connection-30.png">
+      <Resource Include="Resources\bruised-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\close-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\default-manager-avatar.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\doctor-16.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\doctor-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\double-yellow-card-16.png">
@@ -99,28 +112,10 @@
       <Resource Include="Resources\download-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\exercise-16.png">
+      <Resource Include="Resources\head-specialist-16.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\exercise-30.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\gears-16.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\gears-30.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\head-16.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\head-30.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\health-16.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="Resources\health-30.png">
+      <Resource Include="Resources\head-specialist-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\home-32.png">
@@ -129,28 +124,37 @@
       <Resource Include="Resources\HPA.ico">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\key-32.png">
+      <Resource Include="Resources\injured-16.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\logout-32.png">
+      <Resource Include="Resources\injured-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\love-16.png">
+      <Resource Include="Resources\matches-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\love-30.png">
+      <Resource Include="Resources\mother-club-bonus-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\mother-club-bonus-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\no-logo.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\price-tag-16.png">
+      <Resource Include="Resources\players-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\price-tag-30.png">
+      <Resource Include="Resources\powerful-16.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\protect-32.png">
+      <Resource Include="Resources\powerful-30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\quick-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\quick-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\red-card-16.png">
@@ -159,31 +163,43 @@
       <Resource Include="Resources\red-card-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\scoreboard-32.png">
+      <Resource Include="Resources\resilient-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\resilient-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\settings-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\sil1_3.png">
+      <Resource Include="Resources\support-16.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\sports-teams-32.png">
+      <Resource Include="Resources\support-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\strong-16.png">
+      <Resource Include="Resources\team-selection-32.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\strong-30.png">
+      <Resource Include="Resources\technical-16.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\swap-16.png">
+      <Resource Include="Resources\technical-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Resources\swap-30.png">
+      <Resource Include="Resources\transferlisted-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\transferlisted-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\transparent.gif">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\unpredictable-16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\unpredictable-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="Resources\yellow-card-16.png">
@@ -192,24 +208,6 @@
       <Resource Include="Resources\yellow-card-30.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Hyperar.HPA.Application\Hyperar.HPA.Application.csproj" />
-        <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
-        <ProjectReference Include="..\Hyperar.HPA.Globalization\Hyperar.HPA.Globalization.csproj" />
-        <ProjectReference Include="..\Hyperar.HPA.Infrastructure\Hyperar.HPA.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

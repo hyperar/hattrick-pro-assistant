@@ -4,14 +4,16 @@
     {
         ArenaDetails = 0,
 
-        ManagerCompendium = 1,
+        Avatars = 1,
 
-        Matches = 2,
+        ManagerCompendium = 2,
 
-        Players = 3,
+        Matches = 3,
 
-        TeamDetails = 4,
+        Players = 4,
 
-        WorldDetails = 5
+        TeamDetails = 5,
+
+        WorldDetails = 6
     }
 }

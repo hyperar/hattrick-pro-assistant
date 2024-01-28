@@ -11,32 +11,32 @@
 
     public class GetAccessTokenCommand : AsyncCommandBase, IDisposable
     {
-        private readonly INavigator navigator;
+        private readonly AuthorizationViewModel authorizationViewModel;
 
-        private readonly PermissionsViewModel permissionsViewModel;
+        private readonly INavigator navigator;
 
         private readonly IViewModelFactory viewModelFactory;
 
         public GetAccessTokenCommand(
-            PermissionsViewModel permissionsViewModel,
+            AuthorizationViewModel authorizationViewModel,
             INavigator navigator,
             IViewModelFactory viewModelFactory)
         {
-            this.permissionsViewModel = permissionsViewModel;
+            this.authorizationViewModel = authorizationViewModel;
             this.navigator = navigator;
 
-            this.permissionsViewModel.PropertyChanged += this.PermissionsViewModel_PropertyChanged;
+            this.authorizationViewModel.PropertyChanged += this.AuthorizationViewModel_PropertyChanged;
             this.viewModelFactory = viewModelFactory;
         }
 
         public override bool CanExecute(object? parameter)
         {
-            return this.permissionsViewModel.CanGrantAccess && base.CanExecute(parameter);
+            return this.authorizationViewModel.CanGrantAccess && base.CanExecute(parameter);
         }
 
         public void Dispose()
         {
-            this.permissionsViewModel.PropertyChanged -= this.PermissionsViewModel_PropertyChanged;
+            this.authorizationViewModel.PropertyChanged -= this.AuthorizationViewModel_PropertyChanged;
             GC.SuppressFinalize(this);
         }
 
@@ -46,20 +46,20 @@
             {
                 this.navigator.SuspendNavigation();
 
-                GetAccessTokenResponse response = await this.permissionsViewModel.Authorizer.GetAccessTokenAsync(
+                GetAccessTokenResponse response = await this.authorizationViewModel.Authorizer.GetAccessTokenAsync(
                     request.VerificationCode,
                     request.RequestToken.Token,
                     request.RequestToken.TokenSecret);
 
-                this.permissionsViewModel.AuthorizationUrl =
-                this.permissionsViewModel.RequestToken =
-                this.permissionsViewModel.RequestTokenSecret =
-                this.permissionsViewModel.VerificationCode = null;
+                this.authorizationViewModel.AuthorizationUrl =
+                this.authorizationViewModel.RequestToken =
+                this.authorizationViewModel.RequestTokenSecret =
+                this.authorizationViewModel.VerificationCode = null;
 
-                this.permissionsViewModel.AccessToken = response.AccessToken.Token;
-                this.permissionsViewModel.AccessTokenSecret = response.AccessToken.TokenSecret;
+                this.authorizationViewModel.AccessToken = response.AccessToken.Token;
+                this.authorizationViewModel.AccessTokenSecret = response.AccessToken.TokenSecret;
 
-                await this.permissionsViewModel.Authorizer.PersistTokenAsync(response.AccessToken.Token, response.AccessToken.TokenSecret);
+                await this.authorizationViewModel.Authorizer.PersistTokenAsync(response.AccessToken.Token, response.AccessToken.TokenSecret);
 
                 this.navigator.ResumeNavigation();
 
@@ -67,9 +67,9 @@
             }
         }
 
-        private void PermissionsViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void AuthorizationViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(PermissionsViewModel.CanGrantAccess))
+            if (e.PropertyName == nameof(AuthorizationViewModel.CanGrantAccess))
             {
                 this.OnCanExecuteChanged();
             }

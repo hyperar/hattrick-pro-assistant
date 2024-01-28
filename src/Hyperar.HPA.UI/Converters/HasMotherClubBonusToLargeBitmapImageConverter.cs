@@ -7,7 +7,7 @@
 
     internal class HasMotherClubBonusToLargeBitmapImageConverter : ResourceImageValueConverter, IValueConverter
     {
-        private const string isTransferListedFileName = "love-30.png";
+        private const string isTransferListedFileName = "mother-club-bonus-30.png";
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

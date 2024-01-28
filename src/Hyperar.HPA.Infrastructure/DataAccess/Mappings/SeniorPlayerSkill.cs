@@ -8,11 +8,18 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.SeniorPlayerSkill> builder)
         {
-            builder.Property(x => x.UpdatedOn)
-                .HasColumnName(Constants.ColumnName.UpdatedOn)
+            builder.Property(x => x.Season)
+                .HasColumnName(Constants.ColumnName.Season)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.DateTime)
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(x => x.Week)
+                .HasColumnName(Constants.ColumnName.Week)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.Form)
@@ -28,7 +35,6 @@
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
-
             builder.Property(p => p.Keeper)
                 .HasColumnName(Constants.ColumnName.Keeper)
                 .HasColumnOrder(
@@ -78,15 +84,15 @@
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.Experience)
-                .HasColumnName(Constants.ColumnName.Experience)
+            builder.Property(p => p.Loyalty)
+                .HasColumnName(Constants.ColumnName.Loyalty)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.Loyalty)
-                .HasColumnName(Constants.ColumnName.Loyalty)
+            builder.Property(p => p.Experience)
+                .HasColumnName(Constants.ColumnName.Experience)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)

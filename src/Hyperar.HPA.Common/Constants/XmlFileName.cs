@@ -4,6 +4,8 @@
     {
         public const string ArenaDetails = "arenadetails.xml";
 
+        public const string Avatars = "Avatars.xml";
+
         public const string ManagerCompendium = "managercompendium.xml";
 
         public const string Matches = "matches.xml";
