@@ -4,7 +4,7 @@
     using Common.Enums;
     using Domain.Interfaces;
 
-    public class SeniorPlayer : HattrickEntityBase, IHattrickEntity
+    public class Player : HattrickEntityBase, IHattrickEntity
     {
         public uint AgeDays { get; set; }
 
@@ -16,7 +16,7 @@
 
         public byte[] Avatar { get; set; } = Array.Empty<byte>();
 
-        public virtual ICollection<SeniorPlayerAvatarLayer> AvatarLayers { get; set; } = new HashSet<SeniorPlayerAvatarLayer>();
+        public virtual ICollection<PlayerAvatarLayer> AvatarLayers { get; set; } = new HashSet<PlayerAvatarLayer>();
 
         public BookingStatus BookingStatus { get; set; }
 
@@ -66,11 +66,11 @@
 
         public uint Salary { get; set; }
 
-        public uint SeniorNationalTeamCaps { get; set; }
+        public uint NationalTeamCaps { get; set; }
 
-        public virtual ICollection<SeniorPlayerSkill> SeniorPlayerSkills { get; set; } = new HashSet<SeniorPlayerSkill>();
+        public virtual ICollection<PlayerSkillSet> PlayerSkillSets { get; set; } = new HashSet<PlayerSkillSet>();
 
-        public virtual SeniorTeam SeniorTeam { get; set; } = new SeniorTeam();
+        public virtual Team Team { get; set; } = new Team();
 
         public uint? ShirtNumber { get; set; }
 

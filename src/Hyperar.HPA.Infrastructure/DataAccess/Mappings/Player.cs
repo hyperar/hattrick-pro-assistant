@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class SeniorPlayer : HattrickEntityBase<Domain.SeniorPlayer>, IEntityTypeConfiguration<Domain.SeniorPlayer>, IEntityMapping<Domain.SeniorPlayer>
+    internal class Player : HattrickEntityBase<Domain.Player>, IEntityTypeConfiguration<Domain.Player>, IEntityMapping<Domain.Player>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.SeniorPlayer> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.Player> builder)
         {
             builder.Property(x => x.FirstName)
                 .HasColumnName(Constants.ColumnName.FirstName)
@@ -208,8 +208,8 @@
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.SeniorNationalTeamCaps)
-                .HasColumnName(Constants.ColumnName.SeniorNationalTeamCaps)
+            builder.Property(p => p.NationalTeamCaps)
+                .HasColumnName(Constants.ColumnName.NationalTeamCaps)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
@@ -250,19 +250,19 @@
                 .HasColumnType(Constants.ColumnType.VarBinary);
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.SeniorPlayer> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.Player> builder)
         {
             builder.HasOne(x => x.Country)
-                .WithMany(x => x.SeniorPlayers);
+                .WithMany(x => x.Players);
 
-            builder.HasOne(x => x.SeniorTeam)
-                .WithMany(x => x.SeniorPlayers)
+            builder.HasOne(x => x.Team)
+                .WithMany(x => x.Players)
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.SeniorPlayer> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.Player> builder)
         {
-            builder.ToTable(Constants.TableName.SeniorPlayer);
+            builder.ToTable(Constants.TableName.Player);
         }
     }
 }

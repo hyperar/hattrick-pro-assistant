@@ -3,7 +3,7 @@
     using System;
     using Domain.Interfaces;
 
-    public class SeniorTeamArena : HattrickEntityBase, IHattrickEntity
+    public class TeamArena : HattrickEntityBase, IHattrickEntity
     {
         public uint BasicSeatCapacity { get; set; }
 
@@ -13,9 +13,9 @@
 
         public uint RoofSeatCapacity { get; set; }
 
-        public virtual SeniorTeam SeniorTeam { get; set; } = new SeniorTeam();
+        public virtual Team Team { get; set; } = new Team();
 
-        public uint SeniorTeamHattrickId { get; set; }
+        public uint TeamHattrickId { get; set; }
 
         public uint TerracesCapacity { get; set; }
 

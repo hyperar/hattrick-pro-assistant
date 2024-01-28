@@ -1,9 +1,8 @@
-﻿namespace Hyperar.HPA.Domain
+﻿namespace Hyperar.HPA.Application.Models.Players
 {
     using Common.Enums;
-    using Domain.Interfaces;
 
-    public class SeniorPlayerSkill : EntityBase, IEntity
+    public class PlayerSkillSet
     {
         public SkillLevel Defending { get; set; }
 
@@ -21,15 +20,11 @@
 
         public SkillLevel Scoring { get; set; }
 
-        public uint Season { get; set; }
-
-        public virtual SeniorPlayer SeniorPlayer { get; set; } = new SeniorPlayer();
-
         public SkillLevel SetPieces { get; set; }
 
-        public SkillLevel Stamina { get; set; }
+        public Specialty Specialty { get; set; }
 
-        public uint Week { get; set; }
+        public SkillLevel Stamina { get; set; }
 
         public SkillLevel Winger { get; set; }
     }

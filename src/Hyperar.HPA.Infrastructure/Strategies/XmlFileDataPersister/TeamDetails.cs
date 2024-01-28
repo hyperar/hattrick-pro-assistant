@@ -16,20 +16,20 @@
 
         private readonly IHattrickRepository<Domain.Region> regionRepository;
 
-        private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
+        private readonly IHattrickRepository<Domain.Team> teamRepository;
 
         public TeamDetails(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.League> leagueRepository,
             IHattrickRepository<Domain.Manager> managerRepository,
             IHattrickRepository<Domain.Region> regionRepository,
-            IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
+            IHattrickRepository<Domain.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
             this.leagueRepository = leagueRepository;
             this.managerRepository = managerRepository;
             this.regionRepository = regionRepository;
-            this.seniorTeamRepository = seniorTeamRepository;
+            this.teamRepository = teamRepository;
         }
 
         public override async Task PersistDataAsync(IXmlFile file)
@@ -55,7 +55,7 @@
 
         private async Task ProcessTeamAsync(Hattrick.Team xmlTeam, Domain.Manager manager)
         {
-            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlTeam.TeamId);
+            var team = await this.teamRepository.GetByHattrickIdAsync(xmlTeam.TeamId);
 
             var league = await this.leagueRepository.GetByHattrickIdAsync(xmlTeam.League.LeagueId);
 
@@ -65,9 +65,9 @@
 
             ArgumentNullException.ThrowIfNull(region, nameof(region));
 
-            if (seniorTeam == null)
+            if (team == null)
             {
-                seniorTeam = new Domain.SeniorTeam
+                team = new Domain.Team
                 {
                     HattrickId = xmlTeam.TeamId,
                     Name = xmlTeam.TeamName,
@@ -83,9 +83,9 @@
                     TeamRank = xmlTeam.TeamRank ?? 0,
                     UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0,
                     WinStreak = xmlTeam.NumberOfVictories ?? 0,
-                    SeniorSeriesHattrickId = xmlTeam.LeagueLevelUnit.LeagueLevelUnitId,
-                    SeniorSeriesName = xmlTeam.LeagueLevelUnit.LeagueLevelUnitName,
-                    SeniorSeriesDivision = xmlTeam.LeagueLevelUnit.LeagueLevel,
+                    SeriesHattrickId = xmlTeam.LeagueLevelUnit.LeagueLevelUnitId,
+                    SeriesName = xmlTeam.LeagueLevelUnit.LeagueLevelUnitName,
+                    SeriesDivision = xmlTeam.LeagueLevelUnit.LeagueLevel,
                     LogoUrl = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) ? NormalizeUrl(xmlTeam.LogoUrl) : null,
                     MatchKitUrl = NormalizeUrl(xmlTeam.DressUri),
                     AlternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri),
@@ -103,56 +103,56 @@
                     Region = region
                 };
 
-                await this.seniorTeamRepository.InsertAsync(seniorTeam);
+                await this.teamRepository.InsertAsync(team);
             }
             else
             {
-                seniorTeam.HattrickId = xmlTeam.TeamId;
-                seniorTeam.Name = xmlTeam.TeamName;
-                seniorTeam.ShortName = xmlTeam.ShortTeamName;
-                seniorTeam.IsPrimary = xmlTeam.IsPrimaryClub;
-                seniorTeam.FoundedOn = xmlTeam.FoundedDate;
-                seniorTeam.CoachPlayerId = xmlTeam.Trainer.PlayerId;
-                seniorTeam.IsPlayingCup = xmlTeam.Cup != null && xmlTeam.Cup.StillInCup;
-                seniorTeam.GlobalRanking = xmlTeam.PowerRating.GlobalRanking;
-                seniorTeam.LeagueRanking = xmlTeam.PowerRating.LeagueRanking;
-                seniorTeam.RegionRanking = xmlTeam.PowerRating.RegionRanking;
-                seniorTeam.PowerRanking = xmlTeam.PowerRating.PowerRating;
-                seniorTeam.TeamRank = xmlTeam.TeamRank ?? 0;
-                seniorTeam.UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0;
-                seniorTeam.WinStreak = xmlTeam.NumberOfVictories ?? 0;
-                seniorTeam.SeniorSeriesHattrickId = xmlTeam.LeagueLevelUnit.LeagueLevelUnitId;
-                seniorTeam.SeniorSeriesName = xmlTeam.LeagueLevelUnit.LeagueLevelUnitName;
-                seniorTeam.SeniorSeriesDivision = xmlTeam.LeagueLevelUnit.LeagueLevel;
+                team.HattrickId = xmlTeam.TeamId;
+                team.Name = xmlTeam.TeamName;
+                team.ShortName = xmlTeam.ShortTeamName;
+                team.IsPrimary = xmlTeam.IsPrimaryClub;
+                team.FoundedOn = xmlTeam.FoundedDate;
+                team.CoachPlayerId = xmlTeam.Trainer.PlayerId;
+                team.IsPlayingCup = xmlTeam.Cup != null && xmlTeam.Cup.StillInCup;
+                team.GlobalRanking = xmlTeam.PowerRating.GlobalRanking;
+                team.LeagueRanking = xmlTeam.PowerRating.LeagueRanking;
+                team.RegionRanking = xmlTeam.PowerRating.RegionRanking;
+                team.PowerRanking = xmlTeam.PowerRating.PowerRating;
+                team.TeamRank = xmlTeam.TeamRank ?? 0;
+                team.UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0;
+                team.WinStreak = xmlTeam.NumberOfVictories ?? 0;
+                team.SeriesHattrickId = xmlTeam.LeagueLevelUnit.LeagueLevelUnitId;
+                team.SeriesName = xmlTeam.LeagueLevelUnit.LeagueLevelUnitName;
+                team.SeriesDivision = xmlTeam.LeagueLevelUnit.LeagueLevel;
 
-                if (string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && !string.IsNullOrWhiteSpace(seniorTeam.LogoUrl))
+                if (string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && !string.IsNullOrWhiteSpace(team.LogoUrl))
                 {
-                    seniorTeam.Logo = null;
-                    seniorTeam.LogoUrl = null;
+                    team.Logo = null;
+                    team.LogoUrl = null;
                 }
-                else if (!string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && NormalizeUrl(xmlTeam.LogoUrl) != seniorTeam.LogoUrl)
+                else if (!string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && NormalizeUrl(xmlTeam.LogoUrl) != team.LogoUrl)
                 {
-                    seniorTeam.LogoUrl = NormalizeUrl(xmlTeam.LogoUrl);
-                    seniorTeam.Logo = await DownloadWebResourceAsync(xmlTeam.LogoUrl);
+                    team.LogoUrl = NormalizeUrl(xmlTeam.LogoUrl);
+                    team.Logo = await DownloadWebResourceAsync(xmlTeam.LogoUrl);
                 }
 
                 string matchKitUrl = NormalizeUrl(xmlTeam.DressUri);
 
-                if (matchKitUrl != seniorTeam.MatchKitUrl)
+                if (matchKitUrl != team.MatchKitUrl)
                 {
-                    seniorTeam.MatchKitUrl = matchKitUrl;
-                    seniorTeam.MatchKit = await DownloadWebResourceAsync(matchKitUrl);
+                    team.MatchKitUrl = matchKitUrl;
+                    team.MatchKit = await DownloadWebResourceAsync(matchKitUrl);
                 }
 
                 string alternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri);
 
-                if (alternativeMatchKitUrl != seniorTeam.AlternativeMatchKitUrl)
+                if (alternativeMatchKitUrl != team.AlternativeMatchKitUrl)
                 {
-                    seniorTeam.AlternativeMatchKitUrl = alternativeMatchKitUrl;
-                    seniorTeam.AlternativeMatchKit = await DownloadWebResourceAsync(alternativeMatchKitUrl);
+                    team.AlternativeMatchKitUrl = alternativeMatchKitUrl;
+                    team.AlternativeMatchKit = await DownloadWebResourceAsync(alternativeMatchKitUrl);
                 }
 
-                seniorTeam.Region = region;
+                team.Region = region;
             }
 
             await this.databaseContext.SaveAsync();

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Models.Home
 {
-    public class SeniorSeries
+    public class Series
     {
         public uint HattrickId { get; set; }
 

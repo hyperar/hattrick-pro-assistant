@@ -43,19 +43,23 @@
 
         public uint NumberOfLevels { get; set; }
 
+        public uint Season { get; set; }
+
         public int SeasonOffset { get; set; }
 
         public DateTime SecondWeeklyUpdate { get; set; }
 
-        public uint SeniorNationalTeamId { get; set; }
+        public uint NationalTeamId { get; set; }
 
-        public virtual ICollection<SeniorTeam> SeniorTeams { get; set; } = new HashSet<SeniorTeam>();
+        public virtual ICollection<Team> Teams { get; set; } = new HashSet<Team>();
 
         public string ShortName { get; set; } = string.Empty;
 
         public DateTime ThirdWeeklyUpdate { get; set; }
 
         public uint WaitingUsers { get; set; }
+
+        public uint Week { get; set; }
 
         public string Zone { get; set; } = string.Empty;
     }

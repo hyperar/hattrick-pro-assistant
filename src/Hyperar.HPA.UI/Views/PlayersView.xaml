@@ -34,7 +34,7 @@
     <UniformGrid Rows="2">
         <DataGrid Grid.Row="0"
                     Margin="0 5"
-                    ItemsSource="{Binding SeniorPlayers, Mode=OneWay}"
+                    ItemsSource="{Binding Players, Mode=OneWay}"
                     AlternatingRowBackground="#eeeeee"
                     AutoGenerateColumns="False"
                     CanUserAddRows="False"
@@ -47,7 +47,7 @@
                     HorizontalScrollBarVisibility="Auto"
                     IsReadOnly="True"
                     SelectionMode="Single"
-                    SelectedItem="{Binding SelectedSeniorPlayer}"
+                    SelectedItem="{Binding SelectedPlayer}"
                     SelectedCellsChanged="DataGrid_SelectedCellsChanged"
                     VerticalScrollBarVisibility="Auto"
                     VirtualizingPanel.IsVirtualizingWhenGrouping="True"
@@ -308,7 +308,7 @@
         </DataGrid>
 
         <Grid Grid.Row="1"
-              Visibility="{Binding SelectedSeniorPlayer,
+              Visibility="{Binding SelectedPlayer,
                                    Converter={StaticResource nullToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -350,7 +350,7 @@
                 <Image Grid.Column="0"
                        Grid.Row="0"
                        Grid.ColumnSpan="7"
-                       Source="{Binding SelectedSeniorPlayer.Avatar,
+                       Source="{Binding SelectedPlayer.Avatar,
                                         FallbackValue={StaticResource transparent},
                                         TargetNullValue={StaticResource transparent},
                                         Converter={StaticResource byteArrayToBitmapImageConverter}}" />
@@ -360,7 +360,7 @@
                            Grid.Row="1"
                            Grid.ColumnSpan="6"
                            FontSize="24"
-                           Text="{Binding SelectedSeniorPlayer.Title}" />
+                           Text="{Binding SelectedPlayer.Title}" />
 
                 <!-- Row 2 -->
                 <StackPanel Grid.Column="0"
@@ -369,8 +369,8 @@
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
                     <Image Margin="2"
-                           ToolTip="{Binding SelectedSeniorPlayer.CountryName}"
-                           Source="{Binding SelectedSeniorPlayer.LeagueFlag,
+                           ToolTip="{Binding SelectedPlayer.CountryName}"
+                           Source="{Binding SelectedPlayer.LeagueFlag,
                                             FallbackValue={StaticResource transparent},
                                             TargetNullValue={StaticResource transparent},
                                             Converter={StaticResource byteArrayToBitmapImageConverter}}" />
@@ -378,9 +378,9 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{x:Static globalization:Strings.AgeAndNextBirthDayMask}">
-                                <Binding Path="SelectedSeniorPlayer.AgeYears" />
-                                <Binding Path="SelectedSeniorPlayer.AgeDays" />
-                                <Binding Path="SelectedSeniorPlayer.NextBirthDay"
+                                <Binding Path="SelectedPlayer.AgeYears" />
+                                <Binding Path="SelectedPlayer.AgeDays" />
+                                <Binding Path="SelectedPlayer.NextBirthDay"
                                          Converter="{StaticResource dateTimeToLocaleShortDateStringConverter}" />
                             </MultiBinding>
                         </TextBlock.Text>
@@ -393,17 +393,17 @@
                            Grid.ColumnSpan="6">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{x:Static globalization:Strings.PlayerDetailDescription}">
-                            <Binding Path="SelectedSeniorPlayer.Agreeability"
+                            <Binding Path="SelectedPlayer.Agreeability"
                                      Converter="{StaticResource uintEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedSeniorPlayer.Aggressiveness"
+                            <Binding Path="SelectedPlayer.Aggressiveness"
                                      Converter="{StaticResource uintEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedSeniorPlayer.Honesty"
+                            <Binding Path="SelectedPlayer.Honesty"
                                      Converter="{StaticResource uintEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedSeniorPlayer.Experience"
+                            <Binding Path="SelectedPlayer.Experience"
                                      Converter="{StaticResource intEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedSeniorPlayer.Leadership"
+                            <Binding Path="SelectedPlayer.Leadership"
                                      Converter="{StaticResource intEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedSeniorPlayer.Loyalty"
+                            <Binding Path="SelectedPlayer.Loyalty"
                                      Converter="{StaticResource intEnumToTranslatedStringConverter}" />
                         </MultiBinding>
                     </TextBlock.Text>
@@ -418,14 +418,14 @@
                 <TextBlock Grid.Column="1"
                            Grid.Row="4"
                            Style="{StaticResource ValueTextBlock}"
-                           Text="{Binding SelectedSeniorPlayer.TotalSkillIndex, Mode=OneWay, StringFormat={}{0:N0}}" />
+                           Text="{Binding SelectedPlayer.TotalSkillIndex, Mode=OneWay, StringFormat={}{0:N0}}" />
 
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="4"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Keeper}"
-                                                 Value="{Binding SelectedSeniorPlayer.Keeper}" />
+                                                 Value="{Binding SelectedPlayer.Keeper}" />
 
                 <!-- Row 5 -->
                 <TextBlock Grid.Column="0"
@@ -438,7 +438,7 @@
                            Style="{StaticResource ValueTextBlock}">
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource decimalAndCurrencyToCaltulatedTranslatedStringConverter}">
-                            <Binding Path="SelectedSeniorPlayer.Salary" />
+                            <Binding Path="SelectedPlayer.Salary" />
                             <Binding Path="Currency.Rate" />
                             <Binding Path="Currency.Name" />
                         </MultiBinding>
@@ -450,7 +450,7 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Defending}"
-                                                 Value="{Binding SelectedSeniorPlayer.Defending}" />
+                                                 Value="{Binding SelectedPlayer.Defending}" />
 
                 <!-- Row 6 -->
                 <TextBlock Grid.Column="0"
@@ -461,15 +461,15 @@
                 <StackPanel Grid.Column="1"
                             Grid.Row="6"
                             Orientation="Horizontal">
-                    <Image ToolTip="{Binding SelectedSeniorPlayer.Specialty,
+                    <Image ToolTip="{Binding SelectedPlayer.Specialty,
                                              Converter={StaticResource enumToTranslatedStringConverter}}"
-                           Source="{Binding SelectedSeniorPlayer.Specialty,
+                           Source="{Binding SelectedPlayer.Specialty,
                                             FallbackValue={StaticResource transparent},
                                             TargetNullValue={StaticResource transparent},
                                             Converter={StaticResource specialtyToSmallBitmapImageConverter}}" />
 
                     <TextBlock Style="{StaticResource ValueTextBlock}"
-                               Text="{Binding SelectedSeniorPlayer.Specialty,
+                               Text="{Binding SelectedPlayer.Specialty,
                                               Converter={StaticResource enumToTranslatedStringConverter}}" />
                 </StackPanel>
 
@@ -478,7 +478,7 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Playmaking}"
-                                                 Value="{Binding SelectedSeniorPlayer.Playmaking}" />
+                                                 Value="{Binding SelectedPlayer.Playmaking}" />
 
                 <!-- Row 7 -->
                 <controls:SkillDetailProgressBar Grid.Column="0"
@@ -486,14 +486,14 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="8"
                                                  Text="{x:Static globalization:Strings.Form}"
-                                                 Value="{Binding SelectedSeniorPlayer.Form}" />
+                                                 Value="{Binding SelectedPlayer.Form}" />
 
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="7"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Winger}"
-                                                 Value="{Binding SelectedSeniorPlayer.Winger}" />
+                                                 Value="{Binding SelectedPlayer.Winger}" />
 
                 <!-- Row 8 -->
                 <controls:SkillDetailProgressBar Grid.Column="0"
@@ -501,30 +501,30 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="9"
                                                  Text="{x:Static globalization:Strings.Stamina}"
-                                                 Value="{Binding SelectedSeniorPlayer.Stamina}" />
+                                                 Value="{Binding SelectedPlayer.Stamina}" />
 
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="8"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Passing}"
-                                                 Value="{Binding SelectedSeniorPlayer.Passing}" />
+                                                 Value="{Binding SelectedPlayer.Passing}" />
 
                 <!-- Row 9 -->
-                <controls:SkillDetailProgressBar Grid.Column="0"
-                                                 Grid.Row="9"
-                                                 Grid.ColumnSpan="3"
-                                                 Maximum="20"
-                                                 Text="{x:Static globalization:Strings.Scoring}"
-                                                 Value="{Binding SelectedSeniorPlayer.Scoring}" />
-
-                <!-- Row 10 -->
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="9"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
+                                                 Text="{x:Static globalization:Strings.Scoring}"
+                                                 Value="{Binding SelectedPlayer.Scoring}" />
+
+                <!-- Row 10 -->
+                <controls:SkillDetailProgressBar Grid.Column="3"
+                                                 Grid.Row="10"
+                                                 Grid.ColumnSpan="3"
+                                                 Maximum="20"
                                                  Text="{x:Static globalization:Strings.SetPieces}"
-                                                 Value="{Binding SelectedSeniorPlayer.SetPieces}" />
+                                                 Value="{Binding SelectedPlayer.SetPieces}" />
 
                 <!-- Row 11 -->
                 <TextBlock Grid.Column="0"
@@ -536,18 +536,18 @@
                           Grid.ColumnSpan="4"
                           Grid.Row="11"
                           SelectionChanged="ComboBox_SelectionChanged"
-                          ItemsSource="{Binding SeniorPlayers}"
-                          SelectedValue="{Binding SelectedComparisonSeniorPlayer}" />
+                          ItemsSource="{Binding Players}"
+                          SelectedValue="{Binding SelectedComparisonPlayer}" />
             </Grid>
 
             <WpfPlot Grid.Column="1"
                      Grid.Row="1"
-                     x:Name="SeniorPlayerSkillRadarChart" />
+                     x:Name="PlayerSkillSetRadarChart" />
 
             <Grid Grid.Column="2"
                   Grid.Row="2"
                   HorizontalAlignment="Center"
-                  Visibility="{Binding SelectedComparisonSeniorPlayer,
+                  Visibility="{Binding SelectedComparisonPlayer,
                                        Converter={StaticResource nullToVisibilityConverter}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
@@ -576,7 +576,7 @@
                 <Image Grid.Column="0"
                        Grid.Row="0"
                        Grid.ColumnSpan="7"
-                       Source="{Binding SelectedComparisonSeniorPlayer.Avatar,
+                       Source="{Binding SelectedComparisonPlayer.Avatar,
                                         FallbackValue={StaticResource transparent},
                                         TargetNullValue={StaticResource transparent},
                                         Converter={StaticResource byteArrayToBitmapImageConverter}}" />
@@ -586,7 +586,7 @@
                            Grid.Row="1"
                            Grid.ColumnSpan="6"
                            FontSize="24"
-                           Text="{Binding SelectedComparisonSeniorPlayer.Title}" />
+                           Text="{Binding SelectedComparisonPlayer.Title}" />
 
                 <!-- Row 2 -->
                 <StackPanel Grid.Column="0"
@@ -595,8 +595,8 @@
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
                     <Image Margin="2"
-                           ToolTip="{Binding SelectedComparisonSeniorPlayer.CountryName}"
-                           Source="{Binding SelectedComparisonSeniorPlayer.LeagueFlag,
+                           ToolTip="{Binding SelectedComparisonPlayer.CountryName}"
+                           Source="{Binding SelectedComparisonPlayer.LeagueFlag,
                                             FallbackValue={StaticResource transparent},
                                             TargetNullValue={StaticResource transparent},
                                             Converter={StaticResource byteArrayToBitmapImageConverter}}" />
@@ -604,9 +604,9 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{x:Static globalization:Strings.AgeAndNextBirthDayMask}">
-                                <Binding Path="SelectedComparisonSeniorPlayer.AgeYears" />
-                                <Binding Path="SelectedComparisonSeniorPlayer.AgeDays" />
-                                <Binding Path="SelectedComparisonSeniorPlayer.NextBirthDay"
+                                <Binding Path="SelectedComparisonPlayer.AgeYears" />
+                                <Binding Path="SelectedComparisonPlayer.AgeDays" />
+                                <Binding Path="SelectedComparisonPlayer.NextBirthDay"
                                          Converter="{StaticResource dateTimeToLocaleShortDateStringConverter}" />
                             </MultiBinding>
                         </TextBlock.Text>
@@ -619,17 +619,17 @@
                            Grid.ColumnSpan="6">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{x:Static globalization:Strings.PlayerDetailDescription}">
-                            <Binding Path="SelectedComparisonSeniorPlayer.Agreeability"
+                            <Binding Path="SelectedComparisonPlayer.Agreeability"
                                      Converter="{StaticResource uintEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedComparisonSeniorPlayer.Aggressiveness"
+                            <Binding Path="SelectedComparisonPlayer.Aggressiveness"
                                      Converter="{StaticResource uintEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedComparisonSeniorPlayer.Honesty"
+                            <Binding Path="SelectedComparisonPlayer.Honesty"
                                      Converter="{StaticResource uintEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedComparisonSeniorPlayer.Experience"
+                            <Binding Path="SelectedComparisonPlayer.Experience"
                                      Converter="{StaticResource intEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedComparisonSeniorPlayer.Leadership"
+                            <Binding Path="SelectedComparisonPlayer.Leadership"
                                      Converter="{StaticResource intEnumToTranslatedStringConverter}" />
-                            <Binding Path="SelectedComparisonSeniorPlayer.Loyalty"
+                            <Binding Path="SelectedComparisonPlayer.Loyalty"
                                      Converter="{StaticResource intEnumToTranslatedStringConverter}" />
                         </MultiBinding>
                     </TextBlock.Text>
@@ -644,14 +644,14 @@
                 <TextBlock Grid.Column="1"
                            Grid.Row="4"
                            Style="{StaticResource ValueTextBlock}"
-                           Text="{Binding SelectedComparisonSeniorPlayer.TotalSkillIndex, Mode=OneWay, StringFormat={}{0:N0}}" />
+                           Text="{Binding SelectedComparisonPlayer.TotalSkillIndex, Mode=OneWay, StringFormat={}{0:N0}}" />
 
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="4"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Keeper}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Keeper}" />
+                                                 Value="{Binding SelectedComparisonPlayer.Keeper}" />
 
                 <!-- Row 5 -->
                 <TextBlock Grid.Column="0"
@@ -664,7 +664,7 @@
                            Style="{StaticResource ValueTextBlock}">
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource decimalAndCurrencyToCaltulatedTranslatedStringConverter}">
-                            <Binding Path="SelectedComparisonSeniorPlayer.Salary" />
+                            <Binding Path="SelectedComparisonPlayer.Salary" />
                             <Binding Path="Currency.Rate" />
                             <Binding Path="Currency.Name" />
                         </MultiBinding>
@@ -676,7 +676,7 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Defending}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Defending}" />
+                                                 Value="{Binding SelectedComparisonPlayer.Defending}" />
 
                 <!-- Row 6 -->
                 <TextBlock Grid.Column="0"
@@ -687,15 +687,15 @@
                 <StackPanel Grid.Column="1"
                             Grid.Row="6"
                             Orientation="Horizontal">
-                    <Image ToolTip="{Binding SelectedComparisonSeniorPlayer.Specialty,
+                    <Image ToolTip="{Binding SelectedComparisonPlayer.Specialty,
                                              Converter={StaticResource enumToTranslatedStringConverter}}"
-                           Source="{Binding SelectedComparisonSeniorPlayer.Specialty,
+                           Source="{Binding SelectedComparisonPlayer.Specialty,
                                             FallbackValue={StaticResource transparent},
                                             TargetNullValue={StaticResource transparent},
                                             Converter={StaticResource specialtyToSmallBitmapImageConverter}}" />
 
                     <TextBlock Style="{StaticResource ValueTextBlock}"
-                               Text="{Binding SelectedComparisonSeniorPlayer.Specialty,
+                               Text="{Binding SelectedComparisonPlayer.Specialty,
                                               Converter={StaticResource enumToTranslatedStringConverter}}" />
                 </StackPanel>
 
@@ -704,7 +704,7 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Playmaking}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Playmaking}" />
+                                                 Value="{Binding SelectedComparisonPlayer.Playmaking}" />
 
                 <!-- Row 7 -->
                 <controls:SkillDetailProgressBar Grid.Column="0"
@@ -712,14 +712,14 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="8"
                                                  Text="{x:Static globalization:Strings.Form}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Form}" />
+                                                 Value="{Binding SelectedComparisonPlayer.Form}" />
 
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="7"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Winger}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Winger}" />
+                                                 Value="{Binding SelectedComparisonPlayer.Winger}" />
 
                 <!-- Row 8 -->
                 <controls:SkillDetailProgressBar Grid.Column="0"
@@ -727,30 +727,30 @@
                                                  Grid.ColumnSpan="3"
                                                  Maximum="9"
                                                  Text="{x:Static globalization:Strings.Stamina}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Stamina}" />
+                                                 Value="{Binding SelectedComparisonPlayer.Stamina}" />
 
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="8"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
                                                  Text="{x:Static globalization:Strings.Passing}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Passing}" />
+                                                 Value="{Binding SelectedComparisonPlayer.Passing}" />
 
                 <!-- Row 9 -->
-                <controls:SkillDetailProgressBar Grid.Column="0"
-                                                 Grid.Row="9"
-                                                 Grid.ColumnSpan="3"
-                                                 Maximum="20"
-                                                 Text="{x:Static globalization:Strings.Scoring}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.Scoring}" />
-
-                <!-- Row 10 -->
                 <controls:SkillDetailProgressBar Grid.Column="3"
                                                  Grid.Row="9"
                                                  Grid.ColumnSpan="3"
                                                  Maximum="20"
+                                                 Text="{x:Static globalization:Strings.Scoring}"
+                                                 Value="{Binding SelectedComparisonPlayer.Scoring}" />
+
+                <!-- Row 10 -->
+                <controls:SkillDetailProgressBar Grid.Column="3"
+                                                 Grid.Row="10"
+                                                 Grid.ColumnSpan="3"
+                                                 Maximum="20"
                                                  Text="{x:Static globalization:Strings.SetPieces}"
-                                                 Value="{Binding SelectedComparisonSeniorPlayer.SetPieces}" />
+                                                 Value="{Binding SelectedComparisonPlayer.SetPieces}" />
             </Grid>
         </Grid>
     </UniformGrid>

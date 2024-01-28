@@ -10,105 +10,105 @@
 
     public class HomeViewService : IHomeViewService
     {
-        private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
+        private readonly IHattrickRepository<Domain.Team> teamRepository;
 
-        public HomeViewService(IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
+        public HomeViewService(IHattrickRepository<Domain.Team> teamRepository)
         {
-            this.seniorTeamRepository = seniorTeamRepository;
+            this.teamRepository = teamRepository;
         }
 
-        public async Task<TeamOverview> GetTeamsOverview(uint seniorTeamId)
+        public async Task<TeamOverview> GetTeamsOverview(uint teamId)
         {
-            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(seniorTeamId);
+            var team = await this.teamRepository.GetByHattrickIdAsync(teamId);
 
-            ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
+            ArgumentNullException.ThrowIfNull(team, nameof(team));
 
             return new TeamOverview
             {
                 Manager = new Manager
                 {
-                    HattrickId = seniorTeam.Manager.HattrickId,
-                    UserName = seniorTeam.Manager.UserName,
-                    SupporterTier = seniorTeam.Manager.SupporterTier,
-                    Avatar = seniorTeam.Manager.Avatar,
+                    HattrickId = team.Manager.HattrickId,
+                    UserName = team.Manager.UserName,
+                    SupporterTier = team.Manager.SupporterTier,
+                    Avatar = team.Manager.Avatar,
                     Country = new Country
                     {
-                        HattrickId = seniorTeam.Manager.Country.HattrickId,
-                        Name = seniorTeam.Manager.Country.Name,
+                        HattrickId = team.Manager.Country.HattrickId,
+                        Name = team.Manager.Country.Name,
                     },
                 },
-                SeniorTeam = new SeniorTeam
+                Team = new Team
                 {
-                    HattrickId = seniorTeam.HattrickId,
-                    Name = seniorTeam.Name,
-                    Logo = seniorTeam.Logo,
+                    HattrickId = team.HattrickId,
+                    Name = team.Name,
+                    Logo = team.Logo,
                     Country = new Country
                     {
-                        HattrickId = seniorTeam.Region.Country.HattrickId,
-                        Name = seniorTeam.Region.Country.Name,
+                        HattrickId = team.Region.Country.HattrickId,
+                        Name = team.Region.Country.Name,
                     },
-                    PlayedMatches = seniorTeam.OverviewMatches.Where(y => y.Status == MatchStatus.Finished)
+                    PlayedMatches = team.OverviewMatches.Where(y => y.Status == MatchStatus.Finished)
+                                                        .OrderBy(y => y.StartsOn)
+                                                        .Select(y => new PlayedMatch
+                                                        {
+                                                            Date = y.StartsOn,
+                                                            HomeTeam = new Team
+                                                            {
+                                                                HattrickId = y.HomeTeamHattrickId,
+                                                                Name = y.HomeTeamName
+                                                            },
+                                                            HomeGoals = y.HomeGoals ?? 0,
+                                                            AwayTeam = new Team
+                                                            {
+                                                                HattrickId = y.AwayTeamHattrickId,
+                                                                Name = y.AwayTeamName
+                                                            },
+                                                            AwayGoals = y.AwayGoals ?? 0,
+                                                            Type = y.Type
+                                                        }).ToArray(),
+                    Region = new Region
+                    {
+                        HattrickId = team.Region.HattrickId,
+                        Name = team.Region.Name
+                    },
+                    Players = team.Players.OrderBy(x => x.ShirtNumber)
+                                          .ThenBy(x => x.LastName)
+                                          .ThenBy(x => x.FirstName)
+                                          .ThenBy(x => x.HattrickId)
+                                          .Select(x => new Player
+                                          {
+                                              HattrickId = x.HattrickId,
+                                              FirstName = x.FirstName,
+                                              NickName = x.NickName,
+                                              LastName = x.LastName,
+                                              BookingStatus = x.BookingStatus,
+                                              HasMotherClubBonus = x.HasMotherClubBonus,
+                                              IsTransferListed = x.IsTransferListed,
+                                              HealthStatus = x.Health,
+                                              Specialty = x.Specialty
+                                          }).ToArray(),
+                    Series = new Series
+                    {
+                        HattrickId = team.SeriesHattrickId,
+                        Name = team.SeriesName
+                    },
+                    UpcomingMatches = team.OverviewMatches.Where(y => y.Status == MatchStatus.Upcoming)
                                                           .OrderBy(y => y.StartsOn)
-                                                          .Select(y => new PlayedMatch
+                                                          .Select(y => new UpcomingMatch
                                                           {
                                                               Date = y.StartsOn,
-                                                              HomeTeam = new SeniorTeam
+                                                              HomeTeam = new Team
                                                               {
                                                                   HattrickId = y.HomeTeamHattrickId,
                                                                   Name = y.HomeTeamName
                                                               },
-                                                              HomeGoals = y.HomeGoals ?? 0,
-                                                              AwayTeam = new SeniorTeam
+                                                              AwayTeam = new Team
                                                               {
                                                                   HattrickId = y.AwayTeamHattrickId,
                                                                   Name = y.AwayTeamName
                                                               },
-                                                              AwayGoals = y.AwayGoals ?? 0,
                                                               Type = y.Type
                                                           }).ToArray(),
-                    Region = new Region
-                    {
-                        HattrickId = seniorTeam.Region.HattrickId,
-                        Name = seniorTeam.Region.Name
-                    },
-                    SeniorPlayers = seniorTeam.SeniorPlayers.OrderBy(x => x.ShirtNumber)
-                                                        .ThenBy(x => x.LastName)
-                                                        .ThenBy(x => x.FirstName)
-                                                        .ThenBy(x => x.HattrickId)
-                                                        .Select(x => new SeniorPlayer
-                                                        {
-                                                            HattrickId = x.HattrickId,
-                                                            FirstName = x.FirstName,
-                                                            NickName = x.NickName,
-                                                            LastName = x.LastName,
-                                                            BookingStatus = x.BookingStatus,
-                                                            HasMotherClubBonus = x.HasMotherClubBonus,
-                                                            IsTransferListed = x.IsTransferListed,
-                                                            HealthStatus = x.Health,
-                                                            Specialty = x.Specialty
-                                                        }).ToArray(),
-                    SeniorSeries = new SeniorSeries
-                    {
-                        HattrickId = seniorTeam.SeniorSeriesHattrickId,
-                        Name = seniorTeam.SeniorSeriesName
-                    },
-                    UpcomingMatches = seniorTeam.OverviewMatches.Where(y => y.Status == MatchStatus.Upcoming)
-                                                            .OrderBy(y => y.StartsOn)
-                                                            .Select(y => new UpcomingMatch
-                                                            {
-                                                                Date = y.StartsOn,
-                                                                HomeTeam = new SeniorTeam
-                                                                {
-                                                                    HattrickId = y.HomeTeamHattrickId,
-                                                                    Name = y.HomeTeamName
-                                                                },
-                                                                AwayTeam = new SeniorTeam
-                                                                {
-                                                                    HattrickId = y.AwayTeamHattrickId,
-                                                                    Name = y.AwayTeamName
-                                                                },
-                                                                Type = y.Type
-                                                            }).ToArray(),
                 }
             };
         }

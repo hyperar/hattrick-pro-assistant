@@ -6,6 +6,6 @@
     {
         Task<Currency> GetManagerCurrencyAsync();
 
-        Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId);
+        Task<Player[]> GetPlayerAsync(uint teamId);
     }
 }

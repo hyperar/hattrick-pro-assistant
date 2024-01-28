@@ -20,22 +20,18 @@
 
         private readonly IHattrickRepository<Domain.Region> regionRepository;
 
-        private readonly IRepository<Domain.World> worldRepository;
-
         public WorldDetails(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
             IHattrickRepository<Domain.LeagueCup> leagueCupRepository,
             IHattrickRepository<Domain.League> leagueRepository,
-            IHattrickRepository<Domain.Region> regionRepository,
-            IRepository<Domain.World> worldRepository)
+            IHattrickRepository<Domain.Region> regionRepository)
         {
             this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.leagueCupRepository = leagueCupRepository;
             this.leagueRepository = leagueRepository;
             this.regionRepository = regionRepository;
-            this.worldRepository = worldRepository;
         }
 
         public override async Task PersistDataAsync(IXmlFile file)
@@ -130,10 +126,12 @@
                     EnglishName = xmlLeague.EnglishName,
                     Continent = xmlLeague.Continent,
                     Zone = xmlLeague.ZoneName,
+                    Season = xmlLeague.Season,
+                    Week = xmlLeague.MatchRound,
                     SeasonOffset = xmlLeague.SeasonOffset,
                     LanguageId = xmlLeague.LanguageId,
                     LanguageName = xmlLeague.LanguageName,
-                    SeniorNationalTeamId = xmlLeague.NationalTeamId,
+                    NationalTeamId = xmlLeague.NationalTeamId,
                     JuniorNationalTeamId = xmlLeague.U20TeamId,
                     ActiveTeams = xmlLeague.ActiveTeams,
                     ActiveUsers = xmlLeague.ActiveUsers,
@@ -158,6 +156,8 @@
             }
             else
             {
+                league.Season = xmlLeague.Season;
+                league.Week = xmlLeague.MatchRound;
                 league.SeasonOffset = xmlLeague.SeasonOffset;
                 league.ActiveTeams = xmlLeague.ActiveTeams;
                 league.ActiveUsers = xmlLeague.ActiveUsers;
@@ -251,31 +251,6 @@
 
         private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            if (xmlEntity.LeagueList.Count > 1)
-            {
-                var world = await this.worldRepository.Query().SingleOrDefaultAsync();
-
-                if (world == null)
-                {
-                    world = new Domain.World
-                    {
-                        Season = xmlEntity.LeagueList.First().Season,
-                        Week = xmlEntity.LeagueList.First().MatchRound
-                    };
-
-                    await this.worldRepository.InsertAsync(world);
-                }
-                else
-                {
-                    world.Season = xmlEntity.LeagueList.First().Season;
-                    world.Week = xmlEntity.LeagueList.First().MatchRound;
-
-                    this.worldRepository.Update(world);
-                }
-            }
-
-            await this.databaseContext.SaveAsync();
-
             foreach (var curXmlLeague in xmlEntity.LeagueList)
             {
                 await this.ProcessLeagueAsync(curXmlLeague);

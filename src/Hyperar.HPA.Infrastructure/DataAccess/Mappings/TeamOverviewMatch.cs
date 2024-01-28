@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class SeniorTeamOverviewMatch : HattrickEntityBase<Domain.SeniorTeamOverviewMatch>, IEntityTypeConfiguration<Domain.SeniorTeamOverviewMatch>, IEntityMapping<Domain.SeniorTeamOverviewMatch>
+    internal class TeamOverviewMatch : HattrickEntityBase<Domain.TeamOverviewMatch>, IEntityTypeConfiguration<Domain.TeamOverviewMatch>, IEntityMapping<Domain.TeamOverviewMatch>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.SeniorTeamOverviewMatch> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.TeamOverviewMatch> builder)
         {
             builder.Property(p => p.HomeTeamHattrickId)
                 .HasColumnName(Constants.ColumnName.HomeTeamHattrickId)
@@ -98,16 +98,16 @@
                 .IsRequired();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.SeniorTeamOverviewMatch> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.TeamOverviewMatch> builder)
         {
-            builder.HasOne(x => x.SeniorTeam)
+            builder.HasOne(x => x.Team)
                 .WithMany(x => x.OverviewMatches)
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.SeniorTeamOverviewMatch> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.TeamOverviewMatch> builder)
         {
-            builder.ToTable(Constants.TableName.SeniorTeamOverviewMatch);
+            builder.ToTable(Constants.TableName.TeamOverviewMatch);
         }
     }
 }

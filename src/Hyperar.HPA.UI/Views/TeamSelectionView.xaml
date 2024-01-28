@@ -19,7 +19,7 @@
 
             <Separator />
 
-            <ItemsControl ItemsSource="{Binding SeniorTeams}" HorizontalAlignment="Center">
+            <ItemsControl ItemsSource="{Binding Teams}" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
@@ -85,7 +85,7 @@
 
                             <TextBlock Grid.Column="1"
                                        Grid.Row="4"
-                                       Text="{Binding SeniorSeries}" />
+                                       Text="{Binding Series}" />
 
                             <Button Grid.Column="0"
                                     Grid.Row="5"

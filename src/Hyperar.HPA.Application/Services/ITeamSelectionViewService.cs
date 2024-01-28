@@ -9,6 +9,6 @@
 
     public interface ITeamSelectionViewService
     {
-        Task<SeniorTeam[]> GetSeniorTeams();
+        Task<Team[]> GetTeams();
     }
 }

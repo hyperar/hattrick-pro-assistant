@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class SeniorTeam : HattrickEntityBase<Domain.SeniorTeam>, IEntityTypeConfiguration<Domain.SeniorTeam>, IEntityMapping<Domain.SeniorTeam>
+    internal class Team : HattrickEntityBase<Domain.Team>, IEntityTypeConfiguration<Domain.Team>, IEntityMapping<Domain.Team>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.SeniorTeam> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.Team> builder)
         {
             builder.Property(x => x.Name)
                 .HasColumnName(Constants.ColumnName.Name)
@@ -103,15 +103,15 @@
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(p => p.SeniorSeriesHattrickId)
-                .HasColumnName(Constants.ColumnName.SeniorSeriesHattrickId)
+            builder.Property(p => p.SeriesHattrickId)
+                .HasColumnName(Constants.ColumnName.SeriesHattrickId)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(x => x.SeniorSeriesName)
-                .HasColumnName(Constants.ColumnName.SeniorSeriesName)
+            builder.Property(x => x.SeriesName)
+                .HasColumnName(Constants.ColumnName.SeriesName)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.NVarChar)
@@ -119,8 +119,8 @@
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(p => p.SeniorSeriesDivision)
-                .HasColumnName(Constants.ColumnName.SeniorSeriesDivision)
+            builder.Property(p => p.SeriesDivision)
+                .HasColumnName(Constants.ColumnName.SeriesDivision)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
@@ -173,27 +173,27 @@
                 .IsRequired();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.SeniorTeam> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.Team> builder)
         {
             builder.HasOne(x => x.Manager)
-                .WithMany(x => x.SeniorTeams);
+                .WithMany(x => x.Teams);
 
             builder.HasOne(x => x.League)
-                .WithMany(x => x.SeniorTeams);
+                .WithMany(x => x.Teams);
 
-            builder.HasOne(x => x.SeniorTeamArena)
-                .WithOne(x => x.SeniorTeam)
-                .HasForeignKey<Domain.SeniorTeamArena>(x => x.SeniorTeamHattrickId);
+            builder.HasOne(x => x.TeamArena)
+                .WithOne(x => x.Team)
+                .HasForeignKey<Domain.TeamArena>(x => x.TeamHattrickId);
 
             builder.HasOne(x => x.Region)
-                .WithMany(x => x.SeniorTeams)
+                .WithMany(x => x.Teams)
                 .HasForeignKey(x => x.RegionHattrickId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.SeniorTeam> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.Team> builder)
         {
-            builder.ToTable(Constants.TableName.SeniorTeam);
+            builder.ToTable(Constants.TableName.Team);
         }
     }
 }

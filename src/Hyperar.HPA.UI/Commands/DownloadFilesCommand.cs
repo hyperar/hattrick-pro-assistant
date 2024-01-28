@@ -49,9 +49,9 @@
                 ArgumentNullException.ThrowIfNull(this.downloadViewModel.Authorizer.User, nameof(this.downloadViewModel.Authorizer.User));
                 ArgumentNullException.ThrowIfNull(this.downloadViewModel.Authorizer.User.Manager, nameof(this.downloadViewModel.Authorizer.User.Manager));
 
-                this.navigator.SelectedTeamId = this.downloadViewModel.Authorizer.User.Manager.SeniorTeams.Where(x => x.IsPrimary)
-                    .Select(x => x.HattrickId)
-                    .Single();
+                this.navigator.SelectedTeamId = this.downloadViewModel.Authorizer.User.Manager.Teams.Where(x => x.IsPrimary)
+                                                                                                    .Select(x => x.HattrickId)
+                                                                                                    .Single();
             }
 
             this.navigator.CurrentViewModel = await this.viewModelFactory.CreateAsyncViewModel(ViewType.Home);

@@ -5,6 +5,6 @@
 
     public interface IHomeViewService
     {
-        Task<TeamOverview> GetTeamsOverview(uint seniorTeamId);
+        Task<TeamOverview> GetTeamsOverview(uint teamId);
     }
 }

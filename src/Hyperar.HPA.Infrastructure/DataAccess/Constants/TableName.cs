@@ -14,22 +14,20 @@
 
         internal const string Region = "Region";
 
-        internal const string SeniorPlayer = "SeniorPlayer";
+        internal const string Player = "Player";
 
-        internal const string SeniorPlayerAvatarLayer = "SeniorPlayerAvatarLayer";
+        internal const string PlayerAvatarLayer = "PlayerAvatarLayer";
 
-        internal const string SeniorPlayerSkill = "SeniorPlayerSkill";
+        internal const string PlayerSkillSet = "PlayerSkillSet";
 
-        internal const string SeniorTeam = "SeniorTeam";
+        internal const string Team = "Team";
 
-        internal const string SeniorTeamArena = "SeniorTeamArena";
+        internal const string TeamArena = "TeamArena";
 
-        internal const string SeniorTeamOverviewMatch = "SeniorTeamOverviewMatch";
+        internal const string TeamOverviewMatch = "TeamOverviewMatch";
 
         internal const string Token = "Token";
 
         internal const string User = "User";
-
-        internal const string World = "World";
     }
 }

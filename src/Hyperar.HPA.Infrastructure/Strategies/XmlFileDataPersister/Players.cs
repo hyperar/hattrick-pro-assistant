@@ -15,28 +15,24 @@
 
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IHattrickRepository<Domain.SeniorPlayer> seniorPlayerRepository;
+        private readonly IHattrickRepository<Domain.Player> playerRepository;
 
-        private readonly IRepository<Domain.SeniorPlayerSkill> seniorPlayerSkillRepository;
+        private readonly IRepository<Domain.PlayerSkillSet> playerSkillSetRepository;
 
-        private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
-
-        private readonly IRepository<Domain.World> worldRepository;
+        private readonly IHattrickRepository<Domain.Team> teamRepository;
 
         public Players(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
-            IHattrickRepository<Domain.SeniorPlayer> seniorPlayerRepository,
-            IRepository<Domain.SeniorPlayerSkill> seniorPlayerSkillRepository,
-            IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository,
-            IRepository<Domain.World> worldRepository)
+            IHattrickRepository<Domain.Player> playerRepository,
+            IRepository<Domain.PlayerSkillSet> playerSkillSetRepository,
+            IHattrickRepository<Domain.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
-            this.seniorPlayerRepository = seniorPlayerRepository;
-            this.seniorPlayerSkillRepository = seniorPlayerSkillRepository;
-            this.seniorTeamRepository = seniorTeamRepository;
-            this.worldRepository = worldRepository;
+            this.playerRepository = playerRepository;
+            this.playerSkillSetRepository = playerSkillSetRepository;
+            this.teamRepository = teamRepository;
         }
 
         public async Task PersistDataAsync(IXmlFile file)
@@ -60,21 +56,17 @@
             }
         }
 
-        private async Task ProcessPlayerAsync(Hattrick.Player xmlPlayer, Domain.SeniorTeam seniorTeam)
+        private async Task ProcessPlayerAsync(Hattrick.Player xmlPlayer, Domain.Team team)
         {
-            var seniorPlayer = await this.seniorPlayerRepository.GetByHattrickIdAsync(xmlPlayer.PlayerId);
+            var player = await this.playerRepository.GetByHattrickIdAsync(xmlPlayer.PlayerId);
 
-            Domain.World? world = await this.worldRepository.Query().SingleOrDefaultAsync();
-
-            ArgumentNullException.ThrowIfNull(world);
-
-            if (seniorPlayer == null)
+            if (player == null)
             {
                 var country = await this.countryRepository.GetByHattrickIdAsync(xmlPlayer.CountryId);
 
                 ArgumentNullException.ThrowIfNull(country, nameof(country));
 
-                seniorPlayer = new Domain.SeniorPlayer
+                player = new Domain.Player
                 {
                     HattrickId = xmlPlayer.PlayerId,
                     FirstName = xmlPlayer.FirstName,
@@ -105,50 +97,50 @@
                     CareerHattricks = (uint)xmlPlayer.CareerHattricks,
                     GoalsOnTeam = (uint)xmlPlayer.GoalsCurrentTeam,
                     MatchesOnTeam = xmlPlayer.MatchesCurrentTeam,
-                    SeniorNationalTeamCaps = xmlPlayer.Caps,
+                    NationalTeamCaps = xmlPlayer.Caps,
                     YouthNationalTeamCaps = xmlPlayer.CapsU20,
                     BookingStatus = (BookingStatus)xmlPlayer.Cards,
                     Health = xmlPlayer.InjuryLevel,
                     Category = xmlPlayer.PlayerCategoryId,
                     Country = country,
-                    SeniorTeam = seniorTeam
+                    Team = team
                 };
 
-                await this.seniorPlayerRepository.InsertAsync(seniorPlayer);
+                await this.playerRepository.InsertAsync(player);
             }
             else
             {
-                seniorPlayer.FirstName = xmlPlayer.FirstName;
-                seniorPlayer.NickName = xmlPlayer.NickName;
-                seniorPlayer.LastName = xmlPlayer.LastName;
-                seniorPlayer.ShirtNumber = xmlPlayer.PlayerNumber;
-                seniorPlayer.IsCoach = xmlPlayer.TrainerData != null;
-                seniorPlayer.AgeYears = xmlPlayer.Age;
-                seniorPlayer.AgeDays = xmlPlayer.AgeDays;
-                seniorPlayer.Notes = xmlPlayer.OwnerNotes;
-                seniorPlayer.Statement = xmlPlayer.Statement;
-                seniorPlayer.TotalSkillIndex = xmlPlayer.Tsi;
-                seniorPlayer.HasMotherClubBonus = xmlPlayer.MotherClubBonus;
-                seniorPlayer.Salary = xmlPlayer.Salary;
-                seniorPlayer.IsTransferListed = xmlPlayer.TransferListed;
-                seniorPlayer.EnrolledOnNationalTeam = xmlPlayer.NationalTeamId != null;
-                seniorPlayer.CurrentSeasonLeagueGoals = (uint)xmlPlayer.LeagueGoals;
-                seniorPlayer.CurrentSeasonCupGoals = (uint)xmlPlayer.CupGoals;
-                seniorPlayer.CurrentSeasonFriendlyGoals = (uint)xmlPlayer.FriendliesGoals;
-                seniorPlayer.CareerGoals = (uint)xmlPlayer.CareerGoals;
-                seniorPlayer.CareerHattricks = (uint)xmlPlayer.CareerHattricks;
-                seniorPlayer.GoalsOnTeam = (uint)xmlPlayer.GoalsCurrentTeam;
-                seniorPlayer.MatchesOnTeam = xmlPlayer.MatchesCurrentTeam;
-                seniorPlayer.SeniorNationalTeamCaps = xmlPlayer.Caps;
-                seniorPlayer.YouthNationalTeamCaps = xmlPlayer.CapsU20;
-                seniorPlayer.BookingStatus = (BookingStatus)xmlPlayer.Cards;
-                seniorPlayer.Health = xmlPlayer.InjuryLevel;
-                seniorPlayer.Category = xmlPlayer.PlayerCategoryId;
+                player.FirstName = xmlPlayer.FirstName;
+                player.NickName = xmlPlayer.NickName;
+                player.LastName = xmlPlayer.LastName;
+                player.ShirtNumber = xmlPlayer.PlayerNumber;
+                player.IsCoach = xmlPlayer.TrainerData != null;
+                player.AgeYears = xmlPlayer.Age;
+                player.AgeDays = xmlPlayer.AgeDays;
+                player.Notes = xmlPlayer.OwnerNotes;
+                player.Statement = xmlPlayer.Statement;
+                player.TotalSkillIndex = xmlPlayer.Tsi;
+                player.HasMotherClubBonus = xmlPlayer.MotherClubBonus;
+                player.Salary = xmlPlayer.Salary;
+                player.IsTransferListed = xmlPlayer.TransferListed;
+                player.EnrolledOnNationalTeam = xmlPlayer.NationalTeamId != null;
+                player.CurrentSeasonLeagueGoals = (uint)xmlPlayer.LeagueGoals;
+                player.CurrentSeasonCupGoals = (uint)xmlPlayer.CupGoals;
+                player.CurrentSeasonFriendlyGoals = (uint)xmlPlayer.FriendliesGoals;
+                player.CareerGoals = (uint)xmlPlayer.CareerGoals;
+                player.CareerHattricks = (uint)xmlPlayer.CareerHattricks;
+                player.GoalsOnTeam = (uint)xmlPlayer.GoalsCurrentTeam;
+                player.MatchesOnTeam = xmlPlayer.MatchesCurrentTeam;
+                player.NationalTeamCaps = xmlPlayer.Caps;
+                player.YouthNationalTeamCaps = xmlPlayer.CapsU20;
+                player.BookingStatus = (BookingStatus)xmlPlayer.Cards;
+                player.Health = xmlPlayer.InjuryLevel;
+                player.Category = xmlPlayer.PlayerCategoryId;
 
-                this.seniorPlayerRepository.Update(seniorPlayer);
+                this.playerRepository.Update(player);
             }
 
-            await this.ProcessPlayerSkillAsync(xmlPlayer, seniorPlayer, world.Season, world.Week);
+            await this.ProcessPlayerSkillAsync(xmlPlayer, player, team.League.Season, team.League.Week);
 
             await this.databaseContext.SaveAsync();
         }
@@ -160,39 +152,39 @@
                 return;
             }
 
-            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlEntity.Team.TeamId);
+            var team = await this.teamRepository.GetByHattrickIdAsync(xmlEntity.Team.TeamId);
 
-            ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
+            ArgumentNullException.ThrowIfNull(team, nameof(team));
 
             List<uint> xmlPlayerIds = xmlEntity.Team.PlayerList.Select(x => x.PlayerId).ToList();
 
-            var seniorPlayersToDelete = await this.seniorPlayerRepository.Query(x => x.SeniorTeam.HattrickId == seniorTeam.HattrickId
-                                                                                  && !xmlPlayerIds.Contains(x.HattrickId))
-                                                                         .ToListAsync();
+            var playersToDelete = await this.playerRepository.Query(x => x.Team.HattrickId == team.HattrickId
+                                                                      && !xmlPlayerIds.Contains(x.HattrickId))
+                                                             .ToListAsync();
 
-            foreach (var curSeniorPlayer in seniorPlayersToDelete)
+            foreach (var curPlayer in playersToDelete)
             {
-                await this.seniorPlayerRepository.DeleteAsync(curSeniorPlayer.HattrickId);
+                await this.playerRepository.DeleteAsync(curPlayer.HattrickId);
             }
 
             foreach (var curXmlPlayer in xmlEntity.Team.PlayerList)
             {
-                await this.ProcessPlayerAsync(curXmlPlayer, seniorTeam);
+                await this.ProcessPlayerAsync(curXmlPlayer, team);
             }
 
             await this.databaseContext.SaveAsync();
         }
 
-        private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.SeniorPlayer seniorPlayer, uint season, uint week)
+        private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.Player player, uint season, uint week)
         {
-            var currentWeekSkill = await this.seniorPlayerSkillRepository.Query(x => x.SeniorPlayer.HattrickId == xmlPlayer.PlayerId
-                                                                                  && x.Season == season
-                                                                                  && x.Week == week)
-                                                                         .SingleOrDefaultAsync();
+            var currentWeekSkill = await this.playerSkillSetRepository.Query(x => x.Player.HattrickId == xmlPlayer.PlayerId
+                                                                               && x.Season == season
+                                                                               && x.Week == week)
+                                                                      .SingleOrDefaultAsync();
 
             if (currentWeekSkill == null)
             {
-                currentWeekSkill = new Domain.SeniorPlayerSkill
+                currentWeekSkill = new Domain.PlayerSkillSet
                 {
                     Form = xmlPlayer.PlayerForm,
                     Stamina = xmlPlayer.StaminaSkill,
@@ -207,10 +199,10 @@
                     Experience = xmlPlayer.Experience,
                     Season = season,
                     Week = week,
-                    SeniorPlayer = seniorPlayer
+                    Player = player
                 };
 
-                await this.seniorPlayerSkillRepository.InsertAsync(currentWeekSkill);
+                await this.playerSkillSetRepository.InsertAsync(currentWeekSkill);
             }
             else
             {
@@ -226,7 +218,7 @@
                 currentWeekSkill.Experience = xmlPlayer.Experience;
                 currentWeekSkill.Loyalty = xmlPlayer.Loyalty;
 
-                this.seniorPlayerSkillRepository.Update(currentWeekSkill);
+                this.playerSkillSetRepository.Update(currentWeekSkill);
             }
 
             await this.databaseContext.SaveAsync();

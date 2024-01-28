@@ -6,6 +6,6 @@
     {
         public Manager Manager { get; set; } = new Manager();
 
-        public SeniorTeam SeniorTeam { get; set; } = new SeniorTeam();
+        public Team Team { get; set; } = new Team();
     }
 }

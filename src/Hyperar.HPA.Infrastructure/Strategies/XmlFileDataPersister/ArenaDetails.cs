@@ -11,18 +11,18 @@
     {
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IHattrickRepository<Domain.SeniorTeamArena> seniorTeamArenaRepository;
+        private readonly IHattrickRepository<Domain.TeamArena> teamArenaRepository;
 
-        private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
+        private readonly IHattrickRepository<Domain.Team> teamRepository;
 
         public ArenaDetails(
             IDatabaseContext databaseContext,
-            IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository,
-            IHattrickRepository<Domain.SeniorTeamArena> seniorTeArenaRepository)
+            IHattrickRepository<Domain.Team> teamRepository,
+            IHattrickRepository<Domain.TeamArena> teamArenaRepository)
         {
             this.databaseContext = databaseContext;
-            this.seniorTeamRepository = seniorTeamRepository;
-            this.seniorTeamArenaRepository = seniorTeArenaRepository;
+            this.teamRepository = teamRepository;
+            this.teamArenaRepository = teamArenaRepository;
         }
 
         public async Task PersistDataAsync(IXmlFile file)
@@ -48,7 +48,7 @@
 
         private async Task ProcessArenaDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            var arena = await this.seniorTeamArenaRepository.GetByHattrickIdAsync(xmlEntity.Arena.ArenaId);
+            var arena = await this.teamArenaRepository.GetByHattrickIdAsync(xmlEntity.Arena.ArenaId);
 
             DateTime value = xmlEntity.Arena.CurrentCapacity.RebuiltDate != null
                            ? xmlEntity.Arena.CurrentCapacity.RebuiltDate.Value
@@ -58,11 +58,11 @@
 
             if (arena == null)
             {
-                var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(xmlEntity.Arena.Team.TeamId);
+                var team = await this.teamRepository.GetByHattrickIdAsync(xmlEntity.Arena.Team.TeamId);
 
-                ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
+                ArgumentNullException.ThrowIfNull(team, nameof(team));
 
-                arena = new Domain.SeniorTeamArena
+                arena = new Domain.TeamArena
                 {
                     HattrickId = xmlEntity.Arena.ArenaId,
                     Name = xmlEntity.Arena.ArenaName,
@@ -72,10 +72,10 @@
                     RoofSeatCapacity = xmlEntity.Arena.CurrentCapacity.Roof,
                     VipLoungeCapacity = xmlEntity.Arena.CurrentCapacity.Vip,
                     TotalCapacity = xmlEntity.Arena.CurrentCapacity.Total,
-                    SeniorTeam = seniorTeam
+                    Team = team
                 };
 
-                await this.seniorTeamArenaRepository.InsertAsync(arena);
+                await this.teamArenaRepository.InsertAsync(arena);
             }
             else
             {
@@ -87,7 +87,7 @@
                 arena.VipLoungeCapacity = xmlEntity.Arena.CurrentCapacity.Vip;
                 arena.TotalCapacity = xmlEntity.Arena.CurrentCapacity.Total;
 
-                this.seniorTeamArenaRepository.Update(arena);
+                this.teamArenaRepository.Update(arena);
             }
 
             await this.databaseContext.SaveAsync();

@@ -9,18 +9,18 @@
     {
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IRepository<Domain.SeniorPlayerAvatarLayer> seniorPlayerAvatarLayerRepository;
+        private readonly IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository;
 
-        private readonly IHattrickRepository<Domain.SeniorPlayer> seniorPlayerRepository;
+        private readonly IHattrickRepository<Domain.Player> playerRepository;
 
         public Avatars(
             IDatabaseContext databaseContext,
-            IHattrickRepository<Domain.SeniorPlayer> seniorPlayerRepository,
-            IRepository<Domain.SeniorPlayerAvatarLayer> seniorPlayerAvatarLayerRepository)
+            IHattrickRepository<Domain.Player> playerRepository,
+            IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository)
         {
             this.databaseContext = databaseContext;
-            this.seniorPlayerRepository = seniorPlayerRepository;
-            this.seniorPlayerAvatarLayerRepository = seniorPlayerAvatarLayerRepository;
+            this.playerRepository = playerRepository;
+            this.playerAvatarLayerRepository = playerAvatarLayerRepository;
         }
 
         public override async Task PersistDataAsync(IXmlFile file)
@@ -44,11 +44,11 @@
             }
         }
 
-        private static void ProcessSeniorPlayerAvatar(Hattrick.Avatar avatar, Domain.SeniorPlayer seniorPlayer)
+        private static void ProcessPlayerAvatar(Hattrick.Avatar avatar, Domain.Player player)
         {
             uint layerIndex = 1;
 
-            seniorPlayer.AvatarLayers.Add(new Domain.SeniorPlayerAvatarLayer
+            player.AvatarLayers.Add(new Domain.PlayerAvatarLayer
             {
                 Index = layerIndex,
                 XCoordinate = 0,
@@ -60,7 +60,7 @@
             {
                 layerIndex++;
 
-                seniorPlayer.AvatarLayers.Add(new Domain.SeniorPlayerAvatarLayer
+                player.AvatarLayers.Add(new Domain.PlayerAvatarLayer
                 {
                     Index = layerIndex,
                     XCoordinate = curLayer.X,
@@ -74,9 +74,9 @@
         {
             foreach (var curPlayer in xmlEntity.Team.Players)
             {
-                var seniorPlayer = await this.seniorPlayerRepository.GetByHattrickIdAsync(curPlayer.PlayerId);
+                var player = await this.playerRepository.GetByHattrickIdAsync(curPlayer.PlayerId);
 
-                ArgumentNullException.ThrowIfNull(seniorPlayer, nameof(seniorPlayer));
+                ArgumentNullException.ThrowIfNull(player, nameof(player));
 
                 bool mustDeleteAvatar = false;
 
@@ -85,26 +85,26 @@
                     NormalizeUrl(curPlayer.Avatar.BackgroundImage),
                 };
 
-                mustDeleteAvatar = seniorPlayer.AvatarLayers.Select(x => x.ImageUrl)
-                                                            .Except(xmlAvatarLayers)
-                                                            .Any();
+                mustDeleteAvatar = player.AvatarLayers.Select(x => x.ImageUrl)
+                                                      .Except(xmlAvatarLayers)
+                                                      .Any();
 
                 if (mustDeleteAvatar)
                 {
-                    var layerIdsToDelete = seniorPlayer.AvatarLayers.Select(x => x.Id).ToList();
+                    var layerIdsToDelete = player.AvatarLayers.Select(x => x.Id).ToList();
 
-                    await this.seniorPlayerAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
+                    await this.playerAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
 
-                    seniorPlayer.Avatar = Array.Empty<byte>();
+                    player.Avatar = Array.Empty<byte>();
 
                     await this.databaseContext.SaveAsync();
                 }
 
-                if (seniorPlayer.AvatarLayers.Count == 0)
+                if (player.AvatarLayers.Count == 0)
                 {
-                    ProcessSeniorPlayerAvatar(curPlayer.Avatar, seniorPlayer);
+                    ProcessPlayerAvatar(curPlayer.Avatar, player);
 
-                    seniorPlayer.Avatar = await BuildAvatarFromLayers(seniorPlayer.AvatarLayers);
+                    player.Avatar = await BuildAvatarFromLayers(player.AvatarLayers);
                 }
             }
 

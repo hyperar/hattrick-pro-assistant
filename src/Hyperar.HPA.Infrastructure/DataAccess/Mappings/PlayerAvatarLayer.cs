@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class SeniorPlayerAvatarLayer : EntityBase<Domain.SeniorPlayerAvatarLayer>, IEntityTypeConfiguration<Domain.SeniorPlayerAvatarLayer>, IEntityMapping<Domain.SeniorPlayerAvatarLayer>
+    internal class PlayerAvatarLayer : EntityBase<Domain.PlayerAvatarLayer>, IEntityTypeConfiguration<Domain.PlayerAvatarLayer>, IEntityMapping<Domain.PlayerAvatarLayer>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.SeniorPlayerAvatarLayer> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.PlayerAvatarLayer> builder)
         {
             builder.Property(p => p.Index)
                 .HasColumnName(Constants.ColumnName.Index)
@@ -38,16 +38,16 @@
                 .IsRequired();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.SeniorPlayerAvatarLayer> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.PlayerAvatarLayer> builder)
         {
-            builder.HasOne(x => x.SeniorPlayer)
+            builder.HasOne(x => x.Player)
                 .WithMany(x => x.AvatarLayers)
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.SeniorPlayerAvatarLayer> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.PlayerAvatarLayer> builder)
         {
-            builder.ToTable(Constants.TableName.SeniorPlayerAvatarLayer);
+            builder.ToTable(Constants.TableName.PlayerAvatarLayer);
         }
     }
 }

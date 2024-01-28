@@ -53,6 +53,20 @@
                 .IsRequired()
                 .IsUnicode();
 
+            builder.Property(p => p.Season)
+                .HasColumnName(Constants.ColumnName.Season)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(p => p.Week)
+                .HasColumnName(Constants.ColumnName.Week)
+                .HasColumnOrder(
+                    this.GetCurrentColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
             builder.Property(p => p.SeasonOffset)
                 .HasColumnName(Constants.ColumnName.SeasonOffset)
                 .HasColumnOrder(
@@ -76,8 +90,8 @@
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(p => p.SeniorNationalTeamId)
-                .HasColumnName(Constants.ColumnName.SeniorNationalTeamId)
+            builder.Property(p => p.NationalTeamId)
+                .HasColumnName(Constants.ColumnName.NationalTeamId)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)

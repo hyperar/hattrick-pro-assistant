@@ -1,6 +1,6 @@
-﻿namespace Hyperar.HPA.Application.Models.Main
+﻿namespace Hyperar.HPA.Application.Models.TeamSelection
 {
-    public class SeniorTeam
+    public class Series
     {
         public uint HattrickId { get; set; }
 

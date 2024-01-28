@@ -53,7 +53,7 @@
             return GetBytesFromImage(avatarImage);
         }
 
-        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<Domain.SeniorPlayerAvatarLayer> layers)
+        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<Domain.PlayerAvatarLayer> layers)
         {
             ArgumentNullException.ThrowIfNull(layers, nameof(layers));
 

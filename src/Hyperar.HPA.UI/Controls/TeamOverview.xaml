@@ -32,7 +32,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Senior Team -->
+        <!-- Team -->
         <StackPanel Grid.Column="0"
                     Grid.Row="0"
                     Orientation="Vertical"
@@ -43,7 +43,7 @@
                        Text="{x:Static globalization:Strings.Team}" />
 
             <Image Stretch="None"
-                   Source="{Binding TeamOverview.SeniorTeam.Logo,
+                   Source="{Binding TeamOverview.Team.Logo,
                                     FallbackValue={StaticResource no-logo},
                                     TargetNullValue={StaticResource no-logo},
                                     Converter={StaticResource byteToImageConverter}}" />
@@ -68,7 +68,7 @@
 
                 <TextBlock Grid.Column="1"
                            Grid.Row="0"
-                           Text="{Binding TeamOverview.SeniorTeam}" />
+                           Text="{Binding TeamOverview.Team}" />
 
                 <TextBlock Grid.Column="0"
                            Grid.Row="1"
@@ -77,7 +77,7 @@
 
                 <TextBlock Grid.Column="1"
                            Grid.Row="1"
-                           Text="{Binding TeamOverview.SeniorTeam.Country}" />
+                           Text="{Binding TeamOverview.Team.Country}" />
 
                 <TextBlock Grid.Column="0"
                            Grid.Row="2"
@@ -86,7 +86,7 @@
 
                 <TextBlock Grid.Column="1"
                            Grid.Row="2"
-                           Text="{Binding TeamOverview.SeniorTeam.Region}" />
+                           Text="{Binding TeamOverview.Team.Region}" />
 
                 <TextBlock Grid.Column="0"
                            Grid.Row="3"
@@ -95,7 +95,7 @@
 
                 <TextBlock Grid.Column="1"
                            Grid.Row="3"
-                           Text="{Binding TeamOverview.SeniorTeam.SeniorSeries}" />
+                           Text="{Binding TeamOverview.Team.Series}" />
             </Grid>
         </StackPanel>
 
@@ -171,7 +171,7 @@
                        Text="{x:Static globalization:Strings.RecentMatches}" />
 
             <DataGrid Style="{StaticResource OverviewDataGrid}"
-                      ItemsSource="{Binding TeamOverview.SeniorTeam.PlayedMatches,
+                      ItemsSource="{Binding TeamOverview.Team.PlayedMatches,
                                             Mode=OneWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="SizeToCells"
@@ -237,7 +237,7 @@
                        Text="{x:Static globalization:Strings.UpcomingMatches}" />
 
             <DataGrid Style="{StaticResource OverviewDataGrid}"
-                      ItemsSource="{Binding TeamOverview.SeniorTeam.UpcomingMatches,
+                      ItemsSource="{Binding TeamOverview.Team.UpcomingMatches,
                                             Mode=OneWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="SizeToCells"
@@ -289,7 +289,7 @@
 
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <DataGrid Style="{StaticResource OverviewDataGrid}"
-                          ItemsSource="{Binding TeamOverview.SeniorTeam.SeniorPlayers,
+                          ItemsSource="{Binding TeamOverview.Team.Players,
                                                 Mode=OneWay}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding FullName}" Width="SizeToCells" />

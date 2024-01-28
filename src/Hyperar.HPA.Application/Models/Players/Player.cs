@@ -2,14 +2,13 @@
 {
     using Common.Enums;
 
-    public class SeniorPlayer
+    public class Player
     {
         public decimal AgeAux
         {
             get
             {
-                return decimal.Parse(
-                    $"{this.AgeYears}{Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator}{this.AgeDays:000}");
+                return decimal.Parse($"{this.AgeYears}{Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator}{this.AgeDays:000}");
             }
         }
 

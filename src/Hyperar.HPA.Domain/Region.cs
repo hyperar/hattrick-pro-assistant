@@ -10,6 +10,6 @@
 
         public string Name { get; set; } = string.Empty;
 
-        public virtual ICollection<SeniorTeam> SeniorTeams { get; set; } = new HashSet<SeniorTeam>();
+        public virtual ICollection<Team> Teams { get; set; } = new HashSet<Team>();
     }
 }

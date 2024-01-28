@@ -2,13 +2,13 @@
 {
     using Domain.Interfaces;
 
-    public class SeniorPlayerAvatarLayer : EntityBase, IEntity
+    public class PlayerAvatarLayer : EntityBase, IEntity
     {
         public string ImageUrl { get; set; } = string.Empty;
 
         public uint Index { get; set; }
 
-        public virtual SeniorPlayer SeniorPlayer { get; set; } = new SeniorPlayer();
+        public virtual Player Player { get; set; } = new Player();
 
         public uint XCoordinate { get; set; }
 

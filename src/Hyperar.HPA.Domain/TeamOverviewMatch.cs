@@ -4,7 +4,7 @@
     using Common.Enums;
     using Domain.Interfaces;
 
-    public class SeniorTeamOverviewMatch : HattrickEntityBase, IHattrickEntity
+    public class TeamOverviewMatch : HattrickEntityBase, IHattrickEntity
     {
         public uint? AwayGoals { get; set; }
 
@@ -24,11 +24,11 @@
 
         public string HomeTeamShortName { get; set; } = string.Empty;
 
-        public virtual SeniorTeam SeniorTeam { get; set; } = new SeniorTeam();
-
         public DateTime StartsOn { get; set; }
 
         public MatchStatus Status { get; set; }
+
+        public virtual Team Team { get; set; } = new Team();
 
         public MatchType Type { get; set; }
     }

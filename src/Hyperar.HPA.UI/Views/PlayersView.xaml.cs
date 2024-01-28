@@ -35,9 +35,9 @@
 
         private readonly double[] radarChartMaxValues = new double[] { 20, 20, 20, 20, 20, 20, 20 };
 
-        private SeniorPlayer? selectedComparisonSeniorPlayer;
+        private Player? selectedComparisonPlayer;
 
-        private SeniorPlayer? selectedSeniorPlayer;
+        private Player? selectedPlayer;
 
         public PlayersView()
         {
@@ -52,9 +52,9 @@
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is ComboBox combobox && combobox.SelectedItem is SeniorPlayer seniorPlayer)
+            if (sender is ComboBox combobox && combobox.SelectedItem is Player player)
             {
-                this.selectedComparisonSeniorPlayer = seniorPlayer;
+                this.selectedComparisonPlayer = player;
 
                 this.RenderRadarChart();
             }
@@ -62,9 +62,9 @@
 
         private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if (sender is DataGrid dataGrid && dataGrid.SelectedItem is SeniorPlayer seniorPlayer)
+            if (sender is DataGrid dataGrid && dataGrid.SelectedItem is Player player)
             {
-                this.selectedSeniorPlayer = seniorPlayer;
+                this.selectedPlayer = player;
 
                 this.RenderRadarChart();
             }
@@ -72,53 +72,53 @@
 
         private void RenderRadarChart()
         {
-            this.SeniorPlayerSkillRadarChart.Plot.Clear();
+            this.PlayerSkillSetRadarChart.Plot.Clear();
 
-            ArgumentNullException.ThrowIfNull(this.selectedSeniorPlayer, nameof(this.selectedSeniorPlayer));
+            ArgumentNullException.ThrowIfNull(this.selectedPlayer, nameof(this.selectedPlayer));
 
             var plt = new Plot();
 
             double[,] values;
             string[] groupNames;
 
-            if (this.selectedComparisonSeniorPlayer == null)
+            if (this.selectedComparisonPlayer == null)
             {
-                groupNames = [this.selectedSeniorPlayer.FullName];
+                groupNames = [this.selectedPlayer.FullName];
                 values = new double[,]
                 {
                     {
-                        (int)this.selectedSeniorPlayer.Keeper,
-                        (int)this.selectedSeniorPlayer.Playmaking,
-                        (int)this.selectedSeniorPlayer.Passing,
-                        (int)this.selectedSeniorPlayer.Scoring,
-                        (int)this.selectedSeniorPlayer.SetPieces,
-                        (int)this.selectedSeniorPlayer.Winger,
-                        (int)this.selectedSeniorPlayer.Defending
+                        (int)this.selectedPlayer.Keeper,
+                        (int)this.selectedPlayer.Playmaking,
+                        (int)this.selectedPlayer.Passing,
+                        (int)this.selectedPlayer.Scoring,
+                        (int)this.selectedPlayer.SetPieces,
+                        (int)this.selectedPlayer.Winger,
+                        (int)this.selectedPlayer.Defending
                     }
                 };
             }
             else
             {
-                groupNames = [this.selectedSeniorPlayer.FullName, this.selectedComparisonSeniorPlayer.FullName];
+                groupNames = [this.selectedPlayer.FullName, this.selectedComparisonPlayer.FullName];
                 values = new double[,]
                 {
                     {
-                        (int)this.selectedSeniorPlayer.Keeper,
-                        (int)this.selectedSeniorPlayer.Playmaking,
-                        (int)this.selectedSeniorPlayer.Passing,
-                        (int)this.selectedSeniorPlayer.Scoring,
-                        (int)this.selectedSeniorPlayer.SetPieces,
-                        (int)this.selectedSeniorPlayer.Winger,
-                        (int)this.selectedSeniorPlayer.Defending
+                        (int)this.selectedPlayer.Keeper,
+                        (int)this.selectedPlayer.Playmaking,
+                        (int)this.selectedPlayer.Passing,
+                        (int)this.selectedPlayer.Scoring,
+                        (int)this.selectedPlayer.SetPieces,
+                        (int)this.selectedPlayer.Winger,
+                        (int)this.selectedPlayer.Defending
                     },
                     {
-                        (int)selectedComparisonSeniorPlayer.Keeper,
-                        (int)selectedComparisonSeniorPlayer.Playmaking,
-                        (int)selectedComparisonSeniorPlayer.Passing,
-                        (int)selectedComparisonSeniorPlayer.Scoring,
-                        (int)selectedComparisonSeniorPlayer.SetPieces,
-                        (int)selectedComparisonSeniorPlayer.Winger,
-                        (int)selectedComparisonSeniorPlayer.Defending
+                        (int)selectedComparisonPlayer.Keeper,
+                        (int)selectedComparisonPlayer.Playmaking,
+                        (int)selectedComparisonPlayer.Passing,
+                        (int)selectedComparisonPlayer.Scoring,
+                        (int)selectedComparisonPlayer.SetPieces,
+                        (int)selectedComparisonPlayer.Winger,
+                        (int)selectedComparisonPlayer.Defending
                     }
                 };
             }
@@ -140,18 +140,18 @@
             radarPlot.ShowCategoryLabels = true;
             radarPlot.OutlineWidth = 2;
 
-            this.SeniorPlayerSkillRadarChart.AllowDrop =
-            this.SeniorPlayerSkillRadarChart.Configuration.Pan =
-            this.SeniorPlayerSkillRadarChart.Configuration.Zoom =
-            this.SeniorPlayerSkillRadarChart.Configuration.ScrollWheelZoom =
-            this.SeniorPlayerSkillRadarChart.Configuration.MiddleClickDragZoom = false;
+            this.PlayerSkillSetRadarChart.AllowDrop =
+            this.PlayerSkillSetRadarChart.Configuration.Pan =
+            this.PlayerSkillSetRadarChart.Configuration.Zoom =
+            this.PlayerSkillSetRadarChart.Configuration.ScrollWheelZoom =
+            this.PlayerSkillSetRadarChart.Configuration.MiddleClickDragZoom = false;
 
-            this.SeniorPlayerSkillRadarChart.Plot.XAxis.SetBoundary(-1.3, 1.3);
-            this.SeniorPlayerSkillRadarChart.Plot.YAxis.SetBoundary(-1.3, 1.4);
-            this.SeniorPlayerSkillRadarChart.Plot.Frameless(true);
+            this.PlayerSkillSetRadarChart.Plot.XAxis.SetBoundary(-1.3, 1.3);
+            this.PlayerSkillSetRadarChart.Plot.YAxis.SetBoundary(-1.3, 1.4);
+            this.PlayerSkillSetRadarChart.Plot.Frameless(true);
 
-            this.SeniorPlayerSkillRadarChart.Plot.Add(radarPlot);
-            this.SeniorPlayerSkillRadarChart.Refresh();
+            this.PlayerSkillSetRadarChart.Plot.Add(radarPlot);
+            this.PlayerSkillSetRadarChart.Refresh();
         }
     }
 }

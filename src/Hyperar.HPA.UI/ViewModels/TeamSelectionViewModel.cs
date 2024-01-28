@@ -28,13 +28,13 @@
 
         public uint SelectedTeamId { get; private set; }
 
-        public ObservableCollection<SeniorTeam> SeniorTeams { get; set; } = new ObservableCollection<SeniorTeam>();
+        public ObservableCollection<Team> Teams { get; set; } = new ObservableCollection<Team>();
 
         public override async Task InitializeAsync()
         {
-            this.SeniorTeams = new ObservableCollection<SeniorTeam>(await this.teamSelectionViewService.GetSeniorTeams());
+            this.Teams = new ObservableCollection<Team>(await this.teamSelectionViewService.GetTeams());
 
-            this.OnPropertyChanged(nameof(this.SeniorTeams));
+            this.OnPropertyChanged(nameof(this.Teams));
         }
     }
 }

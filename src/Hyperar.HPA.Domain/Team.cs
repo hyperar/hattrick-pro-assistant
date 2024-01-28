@@ -3,7 +3,7 @@
     using System;
     using Domain.Interfaces;
 
-    public class SeniorTeam : HattrickEntityBase, IHattrickEntity
+    public class Team : HattrickEntityBase, IHattrickEntity
     {
         public byte[] AlternativeMatchKit { get; set; } = Array.Empty<byte>();
 
@@ -35,7 +35,9 @@
 
         public string Name { get; set; } = string.Empty;
 
-        public virtual ICollection<SeniorTeamOverviewMatch> OverviewMatches { get; set; } = new HashSet<SeniorTeamOverviewMatch>();
+        public virtual ICollection<TeamOverviewMatch> OverviewMatches { get; set; } = new HashSet<TeamOverviewMatch>();
+
+        public virtual ICollection<Player> Players { get; set; } = new HashSet<Player>();
 
         public uint PowerRanking { get; set; }
 
@@ -45,17 +47,15 @@
 
         public uint RegionRanking { get; set; }
 
-        public virtual ICollection<SeniorPlayer> SeniorPlayers { get; set; } = new HashSet<SeniorPlayer>();
+        public uint SeriesDivision { get; set; }
 
-        public uint SeniorSeriesDivision { get; set; }
+        public uint SeriesHattrickId { get; set; }
 
-        public uint SeniorSeriesHattrickId { get; set; }
-
-        public string SeniorSeriesName { get; set; } = string.Empty;
-
-        public virtual SeniorTeamArena? SeniorTeamArena { get; set; }
+        public string SeriesName { get; set; } = string.Empty;
 
         public string ShortName { get; set; } = string.Empty;
+
+        public virtual TeamArena? TeamArena { get; set; }
 
         public uint TeamRank { get; set; }
 

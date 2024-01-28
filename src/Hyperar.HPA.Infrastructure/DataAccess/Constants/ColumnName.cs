@@ -204,15 +204,15 @@
 
         internal const string SecretValue = "SecretValue";
 
-        internal const string SeniorNationalTeamCaps = "SeniorNationalTeamCaps";
+        internal const string NationalTeamCaps = "NationalTeamCaps";
 
-        internal const string SeniorNationalTeamId = "SeniorNationalTeamId";
+        internal const string NationalTeamId = "NationalTeamId";
 
-        internal const string SeniorSeriesDivision = "SeniorSeriesDivision";
+        internal const string SeriesDivision = "SeriesDivision";
 
-        internal const string SeniorSeriesHattrickId = "SeniorSeriesHattrickId";
+        internal const string SeriesHattrickId = "SeriesHattrickId";
 
-        internal const string SeniorSeriesName = "SeniorSeriesName";
+        internal const string SeriesName = "SeriesName";
 
         internal const string SetPieces = "SetPieces";
 

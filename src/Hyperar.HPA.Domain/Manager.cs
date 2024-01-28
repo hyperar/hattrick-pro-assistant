@@ -15,7 +15,7 @@
 
         public decimal CurrencyRate { get; set; }
 
-        public virtual ICollection<SeniorTeam> SeniorTeams { get; set; } = new HashSet<SeniorTeam>();
+        public virtual ICollection<Team> Teams { get; set; } = new HashSet<Team>();
 
         public SupporterTier SupporterTier { get; set; }
 

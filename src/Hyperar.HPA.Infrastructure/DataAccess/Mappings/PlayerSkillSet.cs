@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class SeniorPlayerSkill : EntityBase<Domain.SeniorPlayerSkill>, IEntityTypeConfiguration<Domain.SeniorPlayerSkill>, IEntityMapping<Domain.SeniorPlayerSkill>
+    internal class PlayerSkillSet : EntityBase<Domain.PlayerSkillSet>, IEntityTypeConfiguration<Domain.PlayerSkillSet>, IEntityMapping<Domain.PlayerSkillSet>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.SeniorPlayerSkill> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.PlayerSkillSet> builder)
         {
             builder.Property(x => x.Season)
                 .HasColumnName(Constants.ColumnName.Season)
@@ -99,16 +99,16 @@
                 .IsRequired();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.SeniorPlayerSkill> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.PlayerSkillSet> builder)
         {
-            builder.HasOne(x => x.SeniorPlayer)
-                .WithMany(x => x.SeniorPlayerSkills)
+            builder.HasOne(x => x.Player)
+                .WithMany(x => x.PlayerSkillSets)
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.SeniorPlayerSkill> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.PlayerSkillSet> builder)
         {
-            builder.ToTable(Constants.TableName.SeniorPlayerSkill);
+            builder.ToTable(Constants.TableName.PlayerSkillSet);
         }
     }
 }

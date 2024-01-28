@@ -15,9 +15,9 @@
 
         private readonly uint selectedTeamId;
 
-        private SeniorPlayer? selectedComparisonSeniorPlayer;
+        private Player? selectedComparisonPlayer;
 
-        private SeniorPlayer? selectedSeniorPlayer;
+        private Player? selectedPlayer;
 
         private int? selectedTabIndex;
 
@@ -31,29 +31,29 @@
 
         public Currency Currency { get; private set; } = new Currency();
 
-        public SeniorPlayer? SelectedComparisonSeniorPlayer
+        public Player? SelectedComparisonPlayer
         {
             get
             {
-                return this.selectedComparisonSeniorPlayer;
+                return this.selectedComparisonPlayer;
             }
             set
             {
-                this.selectedComparisonSeniorPlayer = value;
-                OnPropertyChanged(nameof(this.SelectedComparisonSeniorPlayer));
+                this.selectedComparisonPlayer = value;
+                OnPropertyChanged(nameof(this.SelectedComparisonPlayer));
             }
         }
 
-        public SeniorPlayer? SelectedSeniorPlayer
+        public Player? SelectedPlayer
         {
             get
             {
-                return this.selectedSeniorPlayer;
+                return this.selectedPlayer;
             }
             set
             {
-                this.selectedSeniorPlayer = value;
-                OnPropertyChanged(nameof(this.SelectedSeniorPlayer));
+                this.selectedPlayer = value;
+                OnPropertyChanged(nameof(this.SelectedPlayer));
             }
         }
 
@@ -66,22 +66,22 @@
             set
             {
                 this.selectedTabIndex = value;
-                this.OnPropertyChanged(nameof(this.SeniorPlayers));
+                this.OnPropertyChanged(nameof(this.Players));
                 this.OnPropertyChanged(nameof(this.SelectedTabIndex));
             }
         }
 
-        public ObservableCollection<SeniorPlayer> SeniorPlayers { get; private set; } = new ObservableCollection<SeniorPlayer>();
+        public ObservableCollection<Player> Players { get; private set; } = new ObservableCollection<Player>();
 
         public override async Task InitializeAsync()
         {
             this.Currency = await this.playersViewService.GetManagerCurrencyAsync();
 
-            var result = await this.playersViewService.GetSeniorPlayerAsync(this.selectedTeamId);
+            var result = await this.playersViewService.GetPlayerAsync(this.selectedTeamId);
 
-            this.SeniorPlayers = new ObservableCollection<SeniorPlayer>(result ?? Array.Empty<SeniorPlayer>());
+            this.Players = new ObservableCollection<Player>(result ?? Array.Empty<Player>());
 
-            this.OnPropertyChanged(nameof(this.SeniorPlayers));
+            this.OnPropertyChanged(nameof(this.Players));
         }
     }
 }

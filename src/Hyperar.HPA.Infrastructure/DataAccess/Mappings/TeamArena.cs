@@ -4,9 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class SeniorTeamArena : HattrickEntityBase<Domain.SeniorTeamArena>, IEntityTypeConfiguration<Domain.SeniorTeamArena>, IEntityMapping<Domain.SeniorTeamArena>
+    internal class TeamArena : HattrickEntityBase<Domain.TeamArena>, IEntityTypeConfiguration<Domain.TeamArena>, IEntityMapping<Domain.TeamArena>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.SeniorTeamArena> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.TeamArena> builder)
         {
             builder.Property(x => x.Name)
                 .HasColumnName(Constants.ColumnName.Name)
@@ -60,9 +60,9 @@
                 .IsRequired();
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.SeniorTeamArena> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.TeamArena> builder)
         {
-            builder.ToTable(Constants.TableName.SeniorTeamArena);
+            builder.ToTable(Constants.TableName.TeamArena);
         }
     }
 }

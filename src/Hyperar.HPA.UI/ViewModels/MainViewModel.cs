@@ -75,13 +75,13 @@
             }
             else if (!this.Authorizer.User.LastDownloadDate.HasValue ||
                 this.Authorizer.User.Manager == null ||
-                this.Authorizer.User.Manager.SeniorTeams.Count == 0)
+                this.Authorizer.User.Manager.Teams.Count == 0)
             {
                 this.UpdateCurrentViewModelCommand.Execute(ViewType.Download);
             }
             else
             {
-                this.navigator.SelectedTeamId = this.Authorizer.User.Manager.SeniorTeams.Single(x => x.IsPrimary).HattrickId;
+                this.navigator.SelectedTeamId = this.Authorizer.User.Manager.Teams.Single(x => x.IsPrimary).HattrickId;
 
                 this.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
             }

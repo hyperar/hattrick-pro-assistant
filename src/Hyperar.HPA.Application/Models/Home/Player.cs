@@ -2,7 +2,7 @@
 {
     using Common.Enums;
 
-    public class SeniorPlayer
+    public class Player
     {
         public BookingStatus BookingStatus { get; set; }
 

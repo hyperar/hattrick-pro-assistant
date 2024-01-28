@@ -8,39 +8,39 @@
 
     public class TeamSelectionViewService : ITeamSelectionViewService
     {
-        private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
+        private readonly IHattrickRepository<Domain.Team> teamRepository;
 
-        public TeamSelectionViewService(IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository)
+        public TeamSelectionViewService(IHattrickRepository<Domain.Team> teamRepository)
         {
-            this.seniorTeamRepository = seniorTeamRepository;
+            this.teamRepository = teamRepository;
         }
 
-        public async Task<SeniorTeam[]> GetSeniorTeams()
+        public async Task<Team[]> GetTeams()
         {
-            return await this.seniorTeamRepository.Query()
-                                                  .OrderByDescending(x => x.IsPrimary)
-                                                  .OrderBy(x => x.Name)
-                                                  .Select(x => new SeniorTeam
-                                                  {
-                                                      HattrickId = x.HattrickId,
-                                                      Name = x.Name,
-                                                      Country = new Country
-                                                      {
-                                                          HattrickId = x.Region.Country.HattrickId,
-                                                          Name = x.Region.Country.Name
-                                                      },
-                                                      Logo = x.Logo,
-                                                      Region = new Region
-                                                      {
-                                                          HattrickId = x.Region.HattrickId,
-                                                          Name = x.Region.Name
-                                                      },
-                                                      SeniorSeries = new SeniorSeries
-                                                      {
-                                                          HattrickId = x.SeniorSeriesHattrickId,
-                                                          Name = x.SeniorSeriesName
-                                                      }
-                                                  }).ToArrayAsync();
+            return await this.teamRepository.Query()
+                                            .OrderByDescending(x => x.IsPrimary)
+                                            .OrderBy(x => x.Name)
+                                            .Select(x => new Team
+                                            {
+                                                HattrickId = x.HattrickId,
+                                                Name = x.Name,
+                                                Country = new Country
+                                                {
+                                                    HattrickId = x.Region.Country.HattrickId,
+                                                    Name = x.Region.Country.Name
+                                                },
+                                                Logo = x.Logo,
+                                                Region = new Region
+                                                {
+                                                    HattrickId = x.Region.HattrickId,
+                                                    Name = x.Region.Name
+                                                },
+                                                Series = new Series
+                                                {
+                                                    HattrickId = x.SeriesHattrickId,
+                                                    Name = x.SeriesName
+                                                }
+                                            }).ToArrayAsync();
         }
     }
 }

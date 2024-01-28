@@ -8,15 +8,15 @@
 
     public class PlayersViewService : IPlayersViewService
     {
-        private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
+        private readonly IHattrickRepository<Domain.Team> teamRepository;
 
         private readonly IRepository<Domain.User> userRepository;
 
         public PlayersViewService(
-            IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository,
+            IHattrickRepository<Domain.Team> teamRepository,
             IRepository<Domain.User> userRepository)
         {
-            this.seniorTeamRepository = seniorTeamRepository;
+            this.teamRepository = teamRepository;
             this.userRepository = userRepository;
         }
 
@@ -34,51 +34,51 @@
             };
         }
 
-        public async Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId)
+        public async Task<Player[]> GetPlayerAsync(uint teamId)
         {
-            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(seniorTeamId);
+            var team = await this.teamRepository.GetByHattrickIdAsync(teamId);
 
-            ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
+            ArgumentNullException.ThrowIfNull(team, nameof(team));
 
-            return seniorTeam.SeniorPlayers.Where(x => x.HattrickId != x.SeniorTeam.CoachPlayerId)
-                                           .OrderByDescending(x => x.ShirtNumber.HasValue)
-                                           .ThenBy(x => x.ShirtNumber)
-                                           .Select(Convert)
-                                           .ToArray();
+            return team.Players.Where(x => x.HattrickId != x.Team.CoachPlayerId)
+                               .OrderByDescending(x => x.ShirtNumber.HasValue)
+                               .ThenBy(x => x.ShirtNumber)
+                               .Select(Convert)
+                               .ToArray();
         }
 
-        private static SeniorPlayer Convert(Domain.SeniorPlayer seniorPlayer)
+        private static Player Convert(Domain.Player player)
         {
-            ArgumentNullException.ThrowIfNull(seniorPlayer.SeniorPlayerSkills, nameof(seniorPlayer.SeniorPlayerSkills));
+            ArgumentNullException.ThrowIfNull(player.PlayerSkillSets, nameof(player.PlayerSkillSets));
 
-            var currentSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
-                                                               .ThenByDescending(x => x.Week)
-                                                               .First();
+            var currentSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
+                                                      .ThenByDescending(x => x.Week)
+                                                      .First();
 
-            var previousSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
-                                                                .ThenByDescending(x => x.Week)
-                                                                .Skip(1)
-                                                                .FirstOrDefault();
+            var previousSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
+                                                       .ThenByDescending(x => x.Week)
+                                                       .Skip(1)
+                                                       .FirstOrDefault();
 
-            return new SeniorPlayer
+            return new Player
             {
-                Id = seniorPlayer.HattrickId,
-                FirstName = seniorPlayer.FirstName,
-                NickName = seniorPlayer.NickName,
-                LastName = seniorPlayer.LastName,
-                ShirtNumber = seniorPlayer.ShirtNumber,
-                AgeYears = seniorPlayer.AgeYears,
-                AgeDays = seniorPlayer.AgeDays,
-                TotalSkillIndex = seniorPlayer.TotalSkillIndex,
-                HasMotherClubBonus = seniorPlayer.HasMotherClubBonus,
-                Salary = seniorPlayer.Salary,
-                Specialty = seniorPlayer.Specialty,
-                Agreeability = seniorPlayer.Agreeability,
-                Aggressiveness = seniorPlayer.Aggressiveness,
-                Honesty = seniorPlayer.Honesty,
-                Leadership = seniorPlayer.Leadership,
-                BookingStatus = seniorPlayer.BookingStatus,
-                Health = seniorPlayer.Health,
+                Id = player.HattrickId,
+                FirstName = player.FirstName,
+                NickName = player.NickName,
+                LastName = player.LastName,
+                ShirtNumber = player.ShirtNumber,
+                AgeYears = player.AgeYears,
+                AgeDays = player.AgeDays,
+                TotalSkillIndex = player.TotalSkillIndex,
+                HasMotherClubBonus = player.HasMotherClubBonus,
+                Salary = player.Salary,
+                Specialty = player.Specialty,
+                Agreeability = player.Agreeability,
+                Aggressiveness = player.Aggressiveness,
+                Honesty = player.Honesty,
+                Leadership = player.Leadership,
+                BookingStatus = player.BookingStatus,
+                Health = player.Health,
                 Form = currentSkills.Form,
                 FormDelta = previousSkills == null ? null : currentSkills.Form - previousSkills.Form,
                 Stamina = currentSkills.Stamina,
@@ -101,16 +101,16 @@
                 LoyaltyDelta = previousSkills == null ? null : currentSkills.Loyalty - previousSkills.Loyalty,
                 Experience = currentSkills.Experience,
                 ExperienceDelta = previousSkills == null ? null : currentSkills.Experience - previousSkills.Experience,
-                SeasonLeagueGoals = seniorPlayer.CurrentSeasonLeagueGoals,
-                SeasonCupGoals = seniorPlayer.CurrentSeasonCupGoals,
-                SeasonFriendlyGoals = seniorPlayer.CurrentSeasonFriendlyGoals,
-                CareerLeagueGoals = seniorPlayer.CareerGoals,
-                CareerHattricks = seniorPlayer.CareerHattricks,
-                TeamGoals = seniorPlayer.GoalsOnTeam,
-                TeamMatches = seniorPlayer.MatchesOnTeam,
-                Avatar = seniorPlayer.Avatar,
-                LeagueFlag = seniorPlayer.Country.League.Flag,
-                CountryName = seniorPlayer.Country.Name
+                SeasonLeagueGoals = player.CurrentSeasonLeagueGoals,
+                SeasonCupGoals = player.CurrentSeasonCupGoals,
+                SeasonFriendlyGoals = player.CurrentSeasonFriendlyGoals,
+                CareerLeagueGoals = player.CareerGoals,
+                CareerHattricks = player.CareerHattricks,
+                TeamGoals = player.GoalsOnTeam,
+                TeamMatches = player.MatchesOnTeam,
+                Avatar = player.Avatar,
+                LeagueFlag = player.Country.League.Flag,
+                CountryName = player.Country.Name
             };
         }
     }
