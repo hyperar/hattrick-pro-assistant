@@ -207,6 +207,9 @@
   <data name="CareerHattricks" xml:space="preserve">
     <value>Career Hattricks</value>
   </data>
+  <data name="Compare" xml:space="preserve">
+    <value>Compare</value>
+  </data>
   <data name="CopyAndPasteVerificationCodeMessage" xml:space="preserve">
     <value>Once you have logged in into your Hattrick account, you will be provided with a Verification Code. Copy the code and paste it below, making sure there's no blank spaces at the beggining or the end of the code.</value>
   </data>

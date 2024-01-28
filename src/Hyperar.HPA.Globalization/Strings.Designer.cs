@@ -331,6 +331,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compare.
+        /// </summary>
+        public static string Compare {
+            get {
+                return ResourceManager.GetString("Compare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Once you have logged in into your Hattrick account, you will be provided with a Verification Code. Copy the code and paste it below, making sure there&apos;s no blank spaces at the beggining or the end of the code..
         /// </summary>
         public static string CopyAndPasteVerificationCodeMessage {
