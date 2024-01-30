@@ -60,23 +60,23 @@
 
         public uint MatchesOnTeam { get; set; }
 
+        public uint NationalTeamCaps { get; set; }
+
         public string? NickName { get; set; }
 
         public string? Notes { get; set; }
 
-        public uint Salary { get; set; }
-
-        public uint NationalTeamCaps { get; set; }
-
         public virtual ICollection<PlayerSkillSet> PlayerSkillSets { get; set; } = new HashSet<PlayerSkillSet>();
 
-        public virtual Team Team { get; set; } = new Team();
+        public uint Salary { get; set; }
 
         public uint? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 
         public string? Statement { get; set; }
+
+        public virtual Team Team { get; set; } = new Team();
 
         public uint TotalSkillIndex { get; set; }
 

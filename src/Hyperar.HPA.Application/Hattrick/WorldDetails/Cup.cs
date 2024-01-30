@@ -12,7 +12,7 @@
 
         public string CupName { get; set; } = string.Empty;
 
-        public uint MatchRound { get; set; }
+        public int MatchRound { get; set; }
 
         public uint MatchRoundsLeft { get; set; }
     }

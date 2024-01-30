@@ -6,6 +6,8 @@
 
         internal const string ActiveUsers = "ActiveUsers";
 
+        internal const string Age = "Age";
+
         internal const string AgeDays = "AgeDays";
 
         internal const string AgeYears = "AgeYears";
@@ -74,6 +76,8 @@
 
         internal const string Experience = "Experience";
 
+        internal const string ExpertType = "ExpertType";
+
         internal const string ExpiresOn = "ExpiresOn";
 
         internal const string FifthWeeklyUpdate = "FifthWeeklyUpdate";
@@ -94,11 +98,15 @@
 
         internal const string GoalsOnTeam = "GoalsOnTeam";
 
+        internal const string HallOfFamePlayerId = "HallOfFamePlayerId";
+
         internal const string HasMotherClubBonus = "HasMotherClubBonus";
 
         internal const string HattrickId = "HattrickId";
 
         internal const string Health = "Health";
+
+        internal const string HiredOn = "HiredOn";
 
         internal const string HomeGoals = "HomeGoals";
 
@@ -117,6 +125,8 @@
         internal const string ImageUrl = "ImageUrl";
 
         internal const string Index = "Index";
+
+        internal const string IntroducedToHallOfFameOn = "IntroducedToHallOfFameOn";
 
         internal const string IsCoach = "IsCoach";
 
@@ -166,6 +176,12 @@
 
         internal const string Name = "Name";
 
+        internal const string NationalTeamCaps = "NationalTeamCaps";
+
+        internal const string NationalTeamId = "NationalTeamId";
+
+        internal const string NextBirthday = "NextBirthday";
+
         internal const string NextCupMatchDate = "NextCupMatchDate";
 
         internal const string NextEconomyUpdate = "NextEconomyUpdate";
@@ -203,10 +219,6 @@
         internal const string SecondWeeklyUpdate = "SecondWeeklyUpdate";
 
         internal const string SecretValue = "SecretValue";
-
-        internal const string NationalTeamCaps = "NationalTeamCaps";
-
-        internal const string NationalTeamId = "NationalTeamId";
 
         internal const string SeriesDivision = "SeriesDivision";
 

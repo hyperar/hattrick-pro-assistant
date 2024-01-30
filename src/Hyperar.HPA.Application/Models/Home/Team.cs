@@ -12,9 +12,9 @@
 
         public PlayedMatch[] PlayedMatches { get; set; } = Array.Empty<PlayedMatch>();
 
-        public Region Region { get; set; } = new Region();
-
         public Player[] Players { get; set; } = Array.Empty<Player>();
+
+        public Region Region { get; set; } = new Region();
 
         public Series Series { get; set; } = new Series();
 

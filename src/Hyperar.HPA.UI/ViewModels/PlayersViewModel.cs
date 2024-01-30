@@ -2,12 +2,9 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Threading.Tasks;
-    using System.Windows.Input;
     using Application.Models.Players;
     using Application.Services;
-    using Hyperar.HPA.UI.Commands;
 
     public class PlayersViewModel : ViewModelBase
     {
@@ -30,6 +27,8 @@
         }
 
         public Currency Currency { get; private set; } = new Currency();
+
+        public ObservableCollection<Player> Players { get; private set; } = new ObservableCollection<Player>();
 
         public Player? SelectedComparisonPlayer
         {
@@ -70,8 +69,6 @@
                 this.OnPropertyChanged(nameof(this.SelectedTabIndex));
             }
         }
-
-        public ObservableCollection<Player> Players { get; private set; } = new ObservableCollection<Player>();
 
         public override async Task InitializeAsync()
         {

@@ -553,6 +553,9 @@ Has {3} experience and {4} leadership. Has {5} loyalty.</value>
   <data name="XmlFileType_Avatars" xml:space="preserve">
     <value>Player Avatars</value>
   </data>
+  <data name="XmlFileType_HallOfFamePlayers" xml:space="preserve">
+    <value>Hall Of Fame Players</value>
+  </data>
   <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
     <value>Manager Compendium</value>
   </data>
@@ -561,6 +564,12 @@ Has {3} experience and {4} leadership. Has {5} loyalty.</value>
   </data>
   <data name="XmlFileType_Players" xml:space="preserve">
     <value>Players</value>
+  </data>
+  <data name="XmlFileType_StaffAvatars" xml:space="preserve">
+    <value>Staff Avatars</value>
+  </data>
+  <data name="XmlFileType_StaffList" xml:space="preserve">
+    <value>Staff List</value>
   </data>
   <data name="XmlFileType_TeamDetails" xml:space="preserve">
     <value>Team Details</value>

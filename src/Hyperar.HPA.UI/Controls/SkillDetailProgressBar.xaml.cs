@@ -14,7 +14,7 @@
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     /// <summary>
     /// Interaction logic for SkillDetailProgressBar.xaml

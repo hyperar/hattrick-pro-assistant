@@ -42,7 +42,7 @@
                 .HasColumnName(Constants.ColumnName.CurrentRound)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.RoundsLeft)

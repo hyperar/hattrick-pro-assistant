@@ -3,7 +3,7 @@
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     /// <summary>
     /// Interaction logic for SkillDeltaColumnTemplate.xaml

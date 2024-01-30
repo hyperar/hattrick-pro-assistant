@@ -1,0 +1,11 @@
+﻿namespace Hyperar.HPA.Application.Hattrick.StaffAvatars
+{
+    using System.Collections.Generic;
+
+    public class Avatar
+    {
+        public string BackgroundImage { get; set; } = string.Empty;
+
+        public List<Layer> Layers { get; set; } = new List<Layer>();
+    }
+}

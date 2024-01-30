@@ -26,18 +26,25 @@
         {
             var result = (HattrickData)entity;
 
-            if (reader.Name == leagueListNodeName)
+            try
             {
-                // Reads opening element.
-                await reader.ReadAsync();
-
-                while (reader.Name == leagueNodeName)
+                if (reader.Name == leagueListNodeName)
                 {
-                    result.LeagueList.Add(await ParseLeagueNodeAsync(reader));
-                }
+                    // Reads opening element.
+                    await reader.ReadAsync();
 
-                // Reads closing element.
-                await reader.ReadAsync();
+                    while (reader.Name == leagueNodeName)
+                    {
+                        result.LeagueList.Add(await ParseLeagueNodeAsync(reader));
+                    }
+
+                    // Reads closing element.
+                    await reader.ReadAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
 
             return result;
@@ -96,7 +103,7 @@
                 CupLeagueLevel = await reader.ReadXmlValueAsUintAsync(),
                 CupLevel = await reader.ReadXmlValueAsUintAsync(),
                 CupLevelIndex = await reader.ReadXmlValueAsUintAsync(),
-                MatchRound = await reader.ReadXmlValueAsUintAsync(),
+                MatchRound = await reader.ReadXmlValueAsIntAsync(),
                 MatchRoundsLeft = await reader.ReadXmlValueAsUintAsync()
             };
 

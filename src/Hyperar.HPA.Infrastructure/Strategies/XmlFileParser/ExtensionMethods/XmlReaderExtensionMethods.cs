@@ -40,6 +40,11 @@
                 : decimal.Parse(value);
         }
 
+        public static async Task<HallOfFameExpertType> ReadXmlValueAsHallOfFameExpertTypeAsync(this XmlReader reader)
+        {
+            return (HallOfFameExpertType)await reader.ReadXmlValueAsUintAsync();
+        }
+
         public static async Task<int> ReadXmlValueAsIntAsync(this XmlReader reader)
         {
             return int.Parse(await reader.ReadElementContentAsStringAsync());
@@ -62,6 +67,21 @@
         public static async Task<SkillLevel> ReadXmlValueAsSkillLevelAsync(this XmlReader reader)
         {
             return (SkillLevel)await reader.ReadXmlValueAsIntAsync();
+        }
+
+        public static async Task<StaffType> ReadXmlValueAsStaffTypeAsync(this XmlReader reader)
+        {
+            return (StaffType)await reader.ReadXmlValueAsUintAsync();
+        }
+
+        public static async Task<TrainerStatus> ReadXmlValueAsTrainerStatusAsync(this XmlReader reader)
+        {
+            return (TrainerStatus)await reader.ReadXmlValueAsUintAsync();
+        }
+
+        public static async Task<TrainerType> ReadXmlValueAsTrainerTypeAsync(this XmlReader reader)
+        {
+            return (TrainerType)await reader.ReadXmlValueAsIntAsync();
         }
 
         public static async Task<uint> ReadXmlValueAsUintAsync(this XmlReader reader)

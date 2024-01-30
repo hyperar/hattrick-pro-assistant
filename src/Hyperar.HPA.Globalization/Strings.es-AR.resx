@@ -571,6 +571,9 @@ Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   <data name="XmlFileType_Avatars" xml:space="preserve">
     <value>Avatares de Jugadores</value>
   </data>
+  <data name="XmlFileType_HallOfFamePlayers" xml:space="preserve">
+    <value>Hall Of Fame Players</value>
+  </data>
   <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
     <value>Compendio de Manager</value>
   </data>
@@ -579,6 +582,12 @@ Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   </data>
   <data name="XmlFileType_Players" xml:space="preserve">
     <value>Jugadores</value>
+  </data>
+  <data name="XmlFileType_StaffAvatars" xml:space="preserve">
+    <value>Avatares del Cuerpo Técnico</value>
+  </data>
+  <data name="XmlFileType_StaffList" xml:space="preserve">
+    <value>Cuerpo Técnico</value>
   </data>
   <data name="XmlFileType_TeamDetails" xml:space="preserve">
     <value>Detalles del Equipo</value>

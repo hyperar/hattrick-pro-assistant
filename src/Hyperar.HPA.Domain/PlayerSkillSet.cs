@@ -17,13 +17,13 @@
 
         public SkillLevel Passing { get; set; }
 
+        public virtual Player Player { get; set; } = new Player();
+
         public SkillLevel Playmaking { get; set; }
 
         public SkillLevel Scoring { get; set; }
 
         public uint Season { get; set; }
-
-        public virtual Player Player { get; set; } = new Player();
 
         public SkillLevel SetPieces { get; set; }
 

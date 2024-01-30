@@ -15,6 +15,8 @@
 
         private readonly IDatabaseContext databaseContext;
 
+        private readonly IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository;
+
         private readonly IHattrickRepository<Domain.Player> playerRepository;
 
         private readonly IRepository<Domain.PlayerSkillSet> playerSkillSetRepository;
@@ -25,12 +27,14 @@
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
             IHattrickRepository<Domain.Player> playerRepository,
+            IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository,
             IRepository<Domain.PlayerSkillSet> playerSkillSetRepository,
             IHattrickRepository<Domain.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.playerRepository = playerRepository;
+            this.playerAvatarLayerRepository = playerAvatarLayerRepository;
             this.playerSkillSetRepository = playerSkillSetRepository;
             this.teamRepository = teamRepository;
         }
@@ -158,14 +162,22 @@
 
             List<uint> xmlPlayerIds = xmlEntity.Team.PlayerList.Select(x => x.PlayerId).ToList();
 
-            var playersToDelete = await this.playerRepository.Query(x => x.Team.HattrickId == team.HattrickId
-                                                                      && !xmlPlayerIds.Contains(x.HattrickId))
-                                                             .ToListAsync();
+            var playersIdsToDelete = await this.playerRepository.Query(x => x.Team.HattrickId == team.HattrickId)
+                                                                .Select(x => x.HattrickId)
+                                                                .Except(xmlPlayerIds)
+                                                                .ToListAsync();
 
-            foreach (var curPlayer in playersToDelete)
-            {
-                await this.playerRepository.DeleteAsync(curPlayer.HattrickId);
-            }
+            var playerAvatarLayersIdsToDelete = this.playerRepository.Query(x => playersIdsToDelete.Contains(x.HattrickId))
+                                                                     .SelectMany(x => x.AvatarLayers.Select(y => y.Id))
+                                                                     .ToList();
+
+            var playerSkillSetsIdsToDelete = this.playerRepository.Query(x => playersIdsToDelete.Contains(x.HattrickId))
+                                                                  .SelectMany(x => x.PlayerSkillSets.Select(y => y.Id))
+                                                                  .ToList();
+
+            await this.playerAvatarLayerRepository.DeleteRangeAsync(playerAvatarLayersIdsToDelete);
+            await this.playerSkillSetRepository.DeleteRangeAsync(playerSkillSetsIdsToDelete);
+            await this.playerRepository.DeleteRangeAsync(playersIdsToDelete);
 
             foreach (var curXmlPlayer in xmlEntity.Team.PlayerList)
             {

@@ -53,6 +53,30 @@
                             {
                                 { teamIdParamKey, curTeam.TeamId.ToString() }
                             }));
+
+                    downloadTasks.Add(
+                        new DownloadTask(
+                            XmlFileType.HallOfFamePlayers,
+                            new Dictionary<string, string>
+                            {
+                                { teamIdParamKey, curTeam.TeamId.ToString() },
+                            }));
+
+                    downloadTasks.Add(
+                        new DownloadTask(
+                            XmlFileType.StaffList,
+                            new Dictionary<string, string>
+                            {
+                                { teamIdParamKey, curTeam.TeamId.ToString() },
+                            }));
+
+                    downloadTasks.Add(
+                        new DownloadTask(
+                            XmlFileType.StaffAvatars,
+                            new Dictionary<string, string>
+                            {
+                                { teamIdParamKey, curTeam.TeamId.ToString() },
+                            }));
                 }
 
                 return downloadTasks;

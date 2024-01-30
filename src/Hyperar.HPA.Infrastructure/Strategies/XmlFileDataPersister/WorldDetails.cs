@@ -3,7 +3,6 @@
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
     using Domain.Interfaces;
-    using Microsoft.EntityFrameworkCore;
     using Hattrick = Application.Hattrick.WorldDetails;
 
     public class WorldDetails : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy

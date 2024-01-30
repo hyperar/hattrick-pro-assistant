@@ -11,9 +11,12 @@
             {
                 Constants.XmlFileName.ArenaDetails => XmlFileType.ArenaDetails,
                 Constants.XmlFileName.Avatars => XmlFileType.Avatars,
+                Constants.XmlFileName.HallOfFamePlayers => XmlFileType.HallOfFamePlayers,
                 Constants.XmlFileName.ManagerCompendium => XmlFileType.ManagerCompendium,
                 Constants.XmlFileName.Matches => XmlFileType.Matches,
                 Constants.XmlFileName.Players => XmlFileType.Players,
+                Constants.XmlFileName.StaffAvatars => XmlFileType.StaffAvatars,
+                Constants.XmlFileName.StaffList => XmlFileType.StaffList,
                 Constants.XmlFileName.TeamDetails => XmlFileType.TeamDetails,
                 Constants.XmlFileName.WorldDetails => XmlFileType.WorldDetails,
                 _ => throw new ArgumentOutOfRangeException(nameof(value))

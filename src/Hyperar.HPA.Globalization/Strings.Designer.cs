@@ -1367,6 +1367,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hall Of Fame Players.
+        /// </summary>
+        public static string XmlFileType_HallOfFamePlayers {
+            get {
+                return ResourceManager.GetString("XmlFileType_HallOfFamePlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager Compendium.
         /// </summary>
         public static string XmlFileType_ManagerCompendium {
@@ -1390,6 +1399,24 @@ namespace Hyperar.HPA.Globalization {
         public static string XmlFileType_Players {
             get {
                 return ResourceManager.GetString("XmlFileType_Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Staff Avatars.
+        /// </summary>
+        public static string XmlFileType_StaffAvatars {
+            get {
+                return ResourceManager.GetString("XmlFileType_StaffAvatars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Staff List.
+        /// </summary>
+        public static string XmlFileType_StaffList {
+            get {
+                return ResourceManager.GetString("XmlFileType_StaffList", resourceCulture);
             }
         }
         

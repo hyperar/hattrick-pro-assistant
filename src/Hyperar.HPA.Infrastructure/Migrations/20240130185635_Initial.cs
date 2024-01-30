@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -8,6 +7,61 @@ namespace Hyperar.HPA.Infrastructure.Migrations
     /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "LeagueCup");
+
+            migrationBuilder.DropTable(
+                name: "ManagerAvatarLayer");
+
+            migrationBuilder.DropTable(
+                name: "PlayerAvatarLayer");
+
+            migrationBuilder.DropTable(
+                name: "PlayerSkillSet");
+
+            migrationBuilder.DropTable(
+                name: "StaffMemberAvatarLayer");
+
+            migrationBuilder.DropTable(
+                name: "TeamArena");
+
+            migrationBuilder.DropTable(
+                name: "TeamOverviewMatch");
+
+            migrationBuilder.DropTable(
+                name: "Token");
+
+            migrationBuilder.DropTable(
+                name: "Player");
+
+            migrationBuilder.DropTable(
+                name: "StaffMember");
+
+            migrationBuilder.DropTable(
+                name: "Team");
+
+            migrationBuilder.DropTable(
+                name: "HallOfFamePlayer");
+
+            migrationBuilder.DropTable(
+                name: "Manager");
+
+            migrationBuilder.DropTable(
+                name: "Region");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Country");
+
+            migrationBuilder.DropTable(
+                name: "League");
+        }
+
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -94,7 +148,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     LeagueLevel = table.Column<long>(type: "bigint", nullable: false),
                     Level = table.Column<long>(type: "bigint", nullable: false),
                     LevelIndex = table.Column<long>(type: "bigint", nullable: false),
-                    CurrentRound = table.Column<long>(type: "bigint", nullable: false),
+                    CurrentRound = table.Column<int>(type: "int", nullable: false),
                     RoundsLeft = table.Column<long>(type: "bigint", nullable: false),
                     LeagueHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
@@ -129,6 +183,32 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HallOfFamePlayer",
+                columns: table => new
+                {
+                    HattrickId = table.Column<long>(type: "bigint", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    NickName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Age = table.Column<long>(type: "bigint", nullable: false),
+                    JoinedTeamOn = table.Column<DateTime>(type: "datetime", nullable: false),
+                    NextBirthday = table.Column<DateTime>(type: "datetime", nullable: false),
+                    IntroducedToHallOfFameOn = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ExpertType = table.Column<long>(type: "bigint", nullable: false),
+                    CountryHattrickId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HallOfFamePlayer", x => x.HattrickId);
+                    table.ForeignKey(
+                        name: "FK_HallOfFamePlayer_Country_CountryHattrickId",
+                        column: x => x.CountryHattrickId,
+                        principalTable: "Country",
+                        principalColumn: "HattrickId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -178,6 +258,29 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         principalTable: "Country",
                         principalColumn: "HattrickId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StaffMember",
+                columns: table => new
+                {
+                    HattrickId = table.Column<long>(type: "bigint", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    HiredOn = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Type = table.Column<long>(type: "bigint", nullable: false),
+                    Level = table.Column<long>(type: "bigint", nullable: false),
+                    Salary = table.Column<long>(type: "bigint", nullable: false),
+                    Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    HallOfFamePlayerId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StaffMember", x => x.HattrickId);
+                    table.ForeignKey(
+                        name: "FK_StaffMember_HallOfFamePlayer_HallOfFamePlayerId",
+                        column: x => x.HallOfFamePlayerId,
+                        principalTable: "HallOfFamePlayer",
+                        principalColumn: "HattrickId");
                 });
 
             migrationBuilder.CreateTable(
@@ -252,6 +355,28 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         name: "FK_Team_Region_RegionHattrickId",
                         column: x => x.RegionHattrickId,
                         principalTable: "Region",
+                        principalColumn: "HattrickId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StaffMemberAvatarLayer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Index = table.Column<long>(type: "bigint", nullable: false),
+                    XCoordinate = table.Column<long>(type: "bigint", nullable: false),
+                    YCoordinate = table.Column<long>(type: "bigint", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    StaffHattrickId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StaffMemberAvatarLayer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StaffMemberAvatarLayer_StaffMember_StaffHattrickId",
+                        column: x => x.StaffHattrickId,
+                        principalTable: "StaffMember",
                         principalColumn: "HattrickId");
                 });
 
@@ -427,6 +552,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_HallOfFamePlayer_CountryHattrickId",
+                table: "HallOfFamePlayer",
+                column: "CountryHattrickId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LeagueCup_LeagueHattrickId",
                 table: "LeagueCup",
                 column: "LeagueHattrickId");
@@ -473,6 +603,18 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 column: "CountryHattrickId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_StaffMember_HallOfFamePlayerId",
+                table: "StaffMember",
+                column: "HallOfFamePlayerId",
+                unique: true,
+                filter: "[HallOfFamePlayerId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StaffMemberAvatarLayer_StaffHattrickId",
+                table: "StaffMemberAvatarLayer",
+                column: "StaffHattrickId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Team_LeagueHattrickId",
                 table: "Team",
                 column: "LeagueHattrickId");
@@ -503,52 +645,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 table: "Token",
                 column: "UserId",
                 unique: true);
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "LeagueCup");
-
-            migrationBuilder.DropTable(
-                name: "ManagerAvatarLayer");
-
-            migrationBuilder.DropTable(
-                name: "PlayerAvatarLayer");
-
-            migrationBuilder.DropTable(
-                name: "PlayerSkillSet");
-
-            migrationBuilder.DropTable(
-                name: "TeamArena");
-
-            migrationBuilder.DropTable(
-                name: "TeamOverviewMatch");
-
-            migrationBuilder.DropTable(
-                name: "Token");
-
-            migrationBuilder.DropTable(
-                name: "Player");
-
-            migrationBuilder.DropTable(
-                name: "Team");
-
-            migrationBuilder.DropTable(
-                name: "Manager");
-
-            migrationBuilder.DropTable(
-                name: "Region");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
-                name: "League");
         }
     }
 }

@@ -13,6 +13,8 @@
 
         public string DateFormat { get; set; } = string.Empty;
 
+        public virtual ICollection<HallOfFamePlayer> HallOfFamePlayers { get; set; } = new HashSet<HallOfFamePlayer>();
+
         public virtual League League { get; set; } = new League();
 
         public uint LeagueHattrickId { get; set; }
@@ -21,9 +23,9 @@
 
         public string Name { get; set; } = string.Empty;
 
-        public virtual ICollection<Region> Regions { get; set; } = new HashSet<Region>();
-
         public virtual ICollection<Player>? Players { get; set; } = new HashSet<Player>();
+
+        public virtual ICollection<Region> Regions { get; set; } = new HashSet<Region>();
 
         public string TimeFormat { get; set; } = string.Empty;
     }

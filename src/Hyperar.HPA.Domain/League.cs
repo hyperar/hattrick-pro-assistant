@@ -33,6 +33,8 @@
 
         public string Name { get; set; } = string.Empty;
 
+        public uint NationalTeamId { get; set; }
+
         public DateTime NextCupMatchDate { get; set; }
 
         public DateTime NextEconomyUpdate { get; set; }
@@ -49,11 +51,9 @@
 
         public DateTime SecondWeeklyUpdate { get; set; }
 
-        public uint NationalTeamId { get; set; }
+        public string ShortName { get; set; } = string.Empty;
 
         public virtual ICollection<Team> Teams { get; set; } = new HashSet<Team>();
-
-        public string ShortName { get; set; } = string.Empty;
 
         public DateTime ThirdWeeklyUpdate { get; set; }
 

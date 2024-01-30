@@ -15,9 +15,9 @@
 
         public decimal CurrencyRate { get; set; }
 
-        public virtual ICollection<Team> Teams { get; set; } = new HashSet<Team>();
-
         public SupporterTier SupporterTier { get; set; }
+
+        public virtual ICollection<Team> Teams { get; set; } = new HashSet<Team>();
 
         public virtual User User { get; set; } = new User();
 

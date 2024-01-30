@@ -15,9 +15,12 @@
                 services.AddScoped<IXmlFileDataPersisterFactory, XmlFileDataPersisterFactory>();
                 services.AddScoped<ArenaDetails>();
                 services.AddScoped<Avatars>();
+                services.AddScoped<HallOfFamePlayers>();
                 services.AddScoped<ManagerCompendium>();
                 services.AddScoped<Matches>();
                 services.AddScoped<Players>();
+                services.AddScoped<StaffAvatars>();
+                services.AddScoped<StaffList>();
                 services.AddScoped<TeamDetails>();
                 services.AddScoped<WorldDetails>();
             });

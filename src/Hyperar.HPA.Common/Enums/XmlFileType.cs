@@ -6,14 +6,20 @@
 
         Avatars = 1,
 
-        ManagerCompendium = 2,
+        HallOfFamePlayers = 2,
 
-        Matches = 3,
+        ManagerCompendium = 3,
 
-        Players = 4,
+        Matches = 4,
 
-        TeamDetails = 5,
+        Players = 5,
 
-        WorldDetails = 6
+        StaffAvatars = 6,
+
+        StaffList = 7,
+
+        TeamDetails = 8,
+
+        WorldDetails = 9
     }
 }

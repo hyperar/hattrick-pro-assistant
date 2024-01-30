@@ -4,7 +4,7 @@
 
     public class LeagueCup : HattrickEntityBase, IHattrickEntity
     {
-        public uint CurrentRound { get; set; }
+        public int CurrentRound { get; set; }
 
         public virtual League? League { get; set; }
 
