@@ -151,7 +151,7 @@
 
         protected static string NormalizeUrl(string rawUrl)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(rawUrl, nameof(rawUrl));
+            ArgumentException.ThrowIfNullOrEmpty(rawUrl, nameof(rawUrl));
 
             rawUrl = rawUrl.Trim().ToLower();
 
@@ -185,7 +185,7 @@
 
         private static string GetFilePathFromUrl(string url)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
+            ArgumentException.ThrowIfNullOrEmpty(url, nameof(url));
 
             string relativePath = new Uri(url).LocalPath.Replace("/", "\\");
 

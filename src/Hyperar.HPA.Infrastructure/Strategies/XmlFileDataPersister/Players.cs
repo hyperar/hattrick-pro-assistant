@@ -162,9 +162,9 @@
 
             List<uint> xmlPlayerIds = xmlEntity.Team.PlayerList.Select(x => x.PlayerId).ToList();
 
-            var playersIdsToDelete = await this.playerRepository.Query(x => x.Team.HattrickId == team.HattrickId)
+            var playersIdsToDelete = await this.playerRepository.Query(x => x.Team.HattrickId == team.HattrickId
+                                                                         && xmlPlayerIds.Contains(x.HattrickId))
                                                                 .Select(x => x.HattrickId)
-                                                                .Except(xmlPlayerIds)
                                                                 .ToListAsync();
 
             var playerAvatarLayersIdsToDelete = this.playerRepository.Query(x => playersIdsToDelete.Contains(x.HattrickId))

@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PlatformName>windows</PlatformName>
-        <TargetFramework>net8.0-windows</TargetFramework>
+        <TargetFramework>net7.0-windows</TargetFramework>
     </PropertyGroup>
 
 </Project>

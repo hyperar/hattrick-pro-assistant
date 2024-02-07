@@ -13,6 +13,6 @@
 
         public string SourceSystem { get; set; } = string.Empty;
 
-        public string UserSupporterTier { get; set; }
+        public string UserSupporterTier { get; set; } = string.Empty;
     }
 }

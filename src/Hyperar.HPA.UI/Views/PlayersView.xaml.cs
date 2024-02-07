@@ -71,7 +71,8 @@
 
             if (this.selectedComparisonPlayer == null)
             {
-                groupNames = [this.selectedPlayer.FullName];
+                groupNames = new string[] { this.selectedPlayer.FullName };
+
                 values = new double[,]
                 {
                     {
@@ -87,7 +88,8 @@
             }
             else
             {
-                groupNames = [this.selectedPlayer.FullName, this.selectedComparisonPlayer.FullName];
+                groupNames = new string[] { this.selectedPlayer.FullName, this.selectedComparisonPlayer.FullName };
+
                 values = new double[,]
                 {
                     {

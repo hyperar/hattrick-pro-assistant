@@ -47,7 +47,7 @@
 
             string? checkTokenUrl = this.configuration[CheckTokenKeyName];
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(checkTokenUrl, nameof(checkTokenUrl));
+            ArgumentException.ThrowIfNullOrEmpty(checkTokenUrl, nameof(checkTokenUrl));
 
             var responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
 
@@ -101,7 +101,7 @@
         {
             string url = this.protectedResourceUrlBuilder.BuildUrl(request.FileType, request.Parameters);
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
+            ArgumentException.ThrowIfNullOrEmpty(url, nameof(url));
 
             OAuthSession session = this.CreateSignedOAuthSession(request.AccessToken.Token, request.AccessToken.TokenSecret);
 
@@ -118,7 +118,7 @@
 
             string? invalidateTokenUrl = this.configuration[InvalidateTokenKeyName];
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(invalidateTokenUrl, nameof(invalidateTokenUrl));
+            ArgumentException.ThrowIfNullOrEmpty(invalidateTokenUrl, nameof(invalidateTokenUrl));
 
             OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
 
@@ -129,7 +129,7 @@
 
         private static async Task<Stream> GetResponseStreamForUrlAsync(string url, OAuthSession session)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
+            ArgumentException.ThrowIfNullOrEmpty(url, nameof(url));
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
