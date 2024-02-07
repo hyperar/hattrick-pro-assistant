@@ -13,6 +13,7 @@
                 Constants.XmlFileName.Avatars => XmlFileType.Avatars,
                 Constants.XmlFileName.HallOfFamePlayers => XmlFileType.HallOfFamePlayers,
                 Constants.XmlFileName.ManagerCompendium => XmlFileType.ManagerCompendium,
+                Constants.XmlFileName.MatchDetails => XmlFileType.MatchDetails,
                 Constants.XmlFileName.Matches => XmlFileType.Matches,
                 Constants.XmlFileName.Players => XmlFileType.Players,
                 Constants.XmlFileName.StaffAvatars => XmlFileType.StaffAvatars,

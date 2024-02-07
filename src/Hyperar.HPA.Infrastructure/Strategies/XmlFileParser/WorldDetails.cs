@@ -42,7 +42,7 @@
                     await reader.ReadAsync();
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }

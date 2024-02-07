@@ -15,6 +15,8 @@
 
         private readonly ManagerCompendium managerCompendiumPersister;
 
+        private readonly MatchDetails matchDetailsPersister;
+
         private readonly Matches matchesPersister;
 
         private readonly Players playersPersister;
@@ -32,6 +34,7 @@
             Avatars avatarsPersister,
             HallOfFamePlayers hallOfFamePlayersPersister,
             ManagerCompendium managerCompendiumPersister,
+            MatchDetails matchDetailsPersister,
             Matches matchesPersister,
             Players playersPersister,
             StaffAvatars staffAvatarsPersister,
@@ -43,6 +46,7 @@
             this.avatarsPersister = avatarsPersister;
             this.hallOfFamePlayersPersister = hallOfFamePlayersPersister;
             this.managerCompendiumPersister = managerCompendiumPersister;
+            this.matchDetailsPersister = matchDetailsPersister;
             this.matchesPersister = matchesPersister;
             this.playersPersister = playersPersister;
             this.staffAvatarsPersister = staffAvatarsPersister;
@@ -59,6 +63,7 @@
                 XmlFileType.Avatars => this.avatarsPersister,
                 XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersPersister,
                 XmlFileType.ManagerCompendium => this.managerCompendiumPersister,
+                XmlFileType.MatchDetails => this.matchDetailsPersister,
                 XmlFileType.Matches => this.matchesPersister,
                 XmlFileType.Players => this.playersPersister,
                 XmlFileType.StaffAvatars => this.staffAvatarsPersister,

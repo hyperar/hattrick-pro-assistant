@@ -11,13 +11,13 @@
              d:DesignWidth="1600"
              mc:Ignorable="d">
     <StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource ViewTitle}"
+        <StackPanel Orientation="Vertical">
+            <TextBlock Style="{StaticResource ViewTitle}"
                        Text="{x:Static globalization:Strings.Home}" />
 
-                <Separator />
+            <Separator />
 
-                <controls:TeamOverview />
-            </StackPanel>
+            <controls:TeamOverview />
+        </StackPanel>
     </StackPanel>
 </UserControl>

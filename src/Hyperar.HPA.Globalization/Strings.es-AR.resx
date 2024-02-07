@@ -577,6 +577,9 @@ Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
     <value>Compendio de Manager</value>
   </data>
+  <data name="XmlFileType_MatchDetails" xml:space="preserve">
+    <value>Detalles del Partido</value>
+  </data>
   <data name="XmlFileType_Matches" xml:space="preserve">
     <value>Partidos</value>
   </data>

@@ -17,6 +17,7 @@
                 services.AddSingleton<Avatars>();
                 services.AddSingleton<HallOfFamePlayers>();
                 services.AddSingleton<ManagerCompendium>();
+                services.AddSingleton<MatchDetails>();
                 services.AddSingleton<Matches>();
                 services.AddSingleton<Players>();
                 services.AddSingleton<StaffAvatars>();

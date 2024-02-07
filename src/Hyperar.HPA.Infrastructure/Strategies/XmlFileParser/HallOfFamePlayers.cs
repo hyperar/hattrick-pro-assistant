@@ -8,8 +8,6 @@
 
     public class HallOfFamePlayers : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string playerListNodeName = "PlayerList";
-
         private const string playerNodeName = "Player";
 
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)

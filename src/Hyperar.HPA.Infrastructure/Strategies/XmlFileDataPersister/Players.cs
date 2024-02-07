@@ -189,51 +189,58 @@
 
         private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.Player player, uint season, uint week)
         {
-            var currentWeekSkill = await this.playerSkillSetRepository.Query(x => x.Player.HattrickId == xmlPlayer.PlayerId
-                                                                               && x.Season == season
-                                                                               && x.Week == week)
-                                                                      .SingleOrDefaultAsync();
+            var currentWeekSkillSet = await this.playerSkillSetRepository.Query(x => x.Player.HattrickId == player.HattrickId)
+                                                                         .OrderByDescending(x => x.Season)
+                                                                         .ThenByDescending(x => x.Week)
+                                                                         .FirstOrDefaultAsync();
 
-            if (currentWeekSkill == null)
+            if (currentWeekSkillSet == null || currentWeekSkillSet.Season != season || currentWeekSkillSet.Week != week)
             {
-                currentWeekSkill = new Domain.PlayerSkillSet
-                {
-                    Form = xmlPlayer.PlayerForm,
-                    Stamina = xmlPlayer.StaminaSkill,
-                    Keeper = xmlPlayer.KeeperSkill,
-                    Defending = xmlPlayer.DefenderSkill,
-                    Playmaking = xmlPlayer.PlaymakerSkill,
-                    Winger = xmlPlayer.WingerSkill,
-                    Passing = xmlPlayer.PassingSkill,
-                    Scoring = xmlPlayer.ScorerSkill,
-                    SetPieces = xmlPlayer.SetPiecesSkill,
-                    Loyalty = xmlPlayer.Loyalty,
-                    Experience = xmlPlayer.Experience,
-                    Season = season,
-                    Week = week,
-                    Player = player
-                };
-
-                await this.playerSkillSetRepository.InsertAsync(currentWeekSkill);
+                await this.playerSkillSetRepository.InsertAsync(
+                    new Domain.PlayerSkillSet
+                    {
+                        Season = season,
+                        Week = week,
+                        Form = xmlPlayer.PlayerForm,
+                        Stamina = xmlPlayer.StaminaSkill,
+                        Keeper = xmlPlayer.KeeperSkill,
+                        Defending = xmlPlayer.DefenderSkill,
+                        Playmaking = xmlPlayer.PlaymakerSkill,
+                        Winger = xmlPlayer.WingerSkill,
+                        Passing = xmlPlayer.PassingSkill,
+                        Scoring = xmlPlayer.ScorerSkill,
+                        SetPieces = xmlPlayer.SetPiecesSkill,
+                        Experience = xmlPlayer.Experience,
+                        Loyalty = xmlPlayer.Loyalty,
+                        Player = player
+                    });
             }
-            else
+            else if (currentWeekSkillSet.Form != xmlPlayer.PlayerForm ||
+                     currentWeekSkillSet.Stamina != xmlPlayer.StaminaSkill ||
+                     currentWeekSkillSet.Keeper != xmlPlayer.KeeperSkill ||
+                     currentWeekSkillSet.Defending != xmlPlayer.DefenderSkill ||
+                     currentWeekSkillSet.Playmaking != xmlPlayer.PlaymakerSkill ||
+                     currentWeekSkillSet.Winger != xmlPlayer.WingerSkill ||
+                     currentWeekSkillSet.Passing != xmlPlayer.PassingSkill ||
+                     currentWeekSkillSet.Scoring != xmlPlayer.ScorerSkill ||
+                     currentWeekSkillSet.SetPieces != xmlPlayer.SetPiecesSkill ||
+                     currentWeekSkillSet.Experience != xmlPlayer.Experience ||
+                     currentWeekSkillSet.Loyalty != xmlPlayer.Loyalty)
             {
-                currentWeekSkill.Form = xmlPlayer.PlayerForm;
-                currentWeekSkill.Stamina = xmlPlayer.StaminaSkill;
-                currentWeekSkill.Keeper = xmlPlayer.KeeperSkill;
-                currentWeekSkill.Defending = xmlPlayer.DefenderSkill;
-                currentWeekSkill.Playmaking = xmlPlayer.PlaymakerSkill;
-                currentWeekSkill.Winger = xmlPlayer.WingerSkill;
-                currentWeekSkill.Passing = xmlPlayer.PassingSkill;
-                currentWeekSkill.Scoring = xmlPlayer.ScorerSkill;
-                currentWeekSkill.SetPieces = xmlPlayer.SetPiecesSkill;
-                currentWeekSkill.Experience = xmlPlayer.Experience;
-                currentWeekSkill.Loyalty = xmlPlayer.Loyalty;
+                currentWeekSkillSet.Form = xmlPlayer.PlayerForm;
+                currentWeekSkillSet.Stamina = xmlPlayer.StaminaSkill;
+                currentWeekSkillSet.Keeper = xmlPlayer.KeeperSkill;
+                currentWeekSkillSet.Defending = xmlPlayer.DefenderSkill;
+                currentWeekSkillSet.Playmaking = xmlPlayer.PlaymakerSkill;
+                currentWeekSkillSet.Winger = xmlPlayer.WingerSkill;
+                currentWeekSkillSet.Passing = xmlPlayer.PassingSkill;
+                currentWeekSkillSet.Scoring = xmlPlayer.ScorerSkill;
+                currentWeekSkillSet.SetPieces = xmlPlayer.SetPiecesSkill;
+                currentWeekSkillSet.Experience = xmlPlayer.Experience;
+                currentWeekSkillSet.Loyalty = xmlPlayer.Loyalty;
 
-                this.playerSkillSetRepository.Update(currentWeekSkill);
+                this.playerSkillSetRepository.Update(currentWeekSkillSet);
             }
-
-            await this.databaseContext.SaveAsync();
         }
     }
 }

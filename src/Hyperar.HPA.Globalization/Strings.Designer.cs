@@ -1385,6 +1385,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Match Details.
+        /// </summary>
+        public static string XmlFileType_MatchDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_MatchDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Matches.
         /// </summary>
         public static string XmlFileType_Matches {

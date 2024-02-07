@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Application.Models.Players;
     using Application.Services;
+    using Hyperar.HPA.UI.ViewModels.Interfaces;
 
     public class PlayersViewModel : ViewModelBase
     {
@@ -79,6 +80,8 @@
             this.Players = new ObservableCollection<Player>(result ?? Array.Empty<Player>());
 
             this.OnPropertyChanged(nameof(this.Players));
+
+            await base.InitializeAsync();
         }
     }
 }

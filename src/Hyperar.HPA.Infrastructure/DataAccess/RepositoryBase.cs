@@ -16,7 +16,7 @@
             this.EntityCollection = this.context.CreateSet<TEntity>();
         }
 
-        protected DbSet<TEntity> EntityCollection { get; private set; }
+        protected DbSet<TEntity> EntityCollection { get; }
 
         public async Task InsertAsync(TEntity entity)
         {

@@ -10,16 +10,18 @@
 
         ManagerCompendium = 3,
 
-        Matches = 4,
+        MatchDetails = 4,
 
-        Players = 5,
+        Matches = 5,
 
-        StaffAvatars = 6,
+        Players = 6,
 
-        StaffList = 7,
+        StaffAvatars = 7,
 
-        TeamDetails = 8,
+        StaffList = 8,
 
-        WorldDetails = 9
+        TeamDetails = 9,
+
+        WorldDetails = 10
     }
 }

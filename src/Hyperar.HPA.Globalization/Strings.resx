@@ -559,6 +559,9 @@ Has {3} experience and {4} leadership. Has {5} loyalty.</value>
   <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
     <value>Manager Compendium</value>
   </data>
+  <data name="XmlFileType_MatchDetails" xml:space="preserve">
+    <value>Match Details</value>
+  </data>
   <data name="XmlFileType_Matches" xml:space="preserve">
     <value>Matches</value>
   </data>

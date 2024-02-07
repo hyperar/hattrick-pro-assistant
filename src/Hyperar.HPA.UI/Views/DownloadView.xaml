@@ -12,14 +12,14 @@
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
     </UserControl.Resources>
 
-        <StackPanel Name="ViewContainer" Orientation="Vertical">
+    <StackPanel Name="ViewContainer" Orientation="Vertical">
 
-            <TextBlock Style="{StaticResource ViewTitle}"
+        <TextBlock Style="{StaticResource ViewTitle}"
                        Text="{x:Static globalization:Strings.Download}" />
 
-            <Separator />
+        <Separator />
 
-            <DataGrid BorderThickness="1"
+        <DataGrid BorderThickness="1"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"
                       CanUserReorderColumns="False"
@@ -30,43 +30,45 @@
                       ItemsSource="{Binding DownloadTasks,
                                             Mode=OneWay}"
                       MinHeight="250"
+                      MaxHeight="500"
+                      VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource OverviewDataGrid}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="{x:Static globalization:Strings.File}"
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static globalization:Strings.File}"
                                         MinWidth="250"
                                         Binding="{Binding FileType,
                                                           Mode=OneWay,
                                                           Converter={StaticResource enumToTranslatedStringConverter}}" Width="SizeToCells" />
 
-                    <DataGridTextColumn Header="{x:Static globalization:Strings.Parameters}"
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Parameters}"
                                         Binding="{Binding ParametersString,
                                                           Mode=OneWay}"
                                         MinWidth="250"
                                         Width="SizeToCells" />
 
-                    <DataGridTextColumn Header="{x:Static globalization:Strings.Status}"
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Status}"
                                         Binding="{Binding Status,
                                                           Mode=OneWay,
                                                           Converter={StaticResource enumToTranslatedStringConverter}}"
                                         Width="150">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                <ProgressBar Grid.Column="0"
+            <ProgressBar Grid.Column="0"
                              Grid.Row="0"
                              Height="24"
                              Margin="0 5"
@@ -76,17 +78,17 @@
                              Value="{Binding CompletedDownloadTaskStepsCount,
                                              Mode=OneWay}" />
 
-                <TextBlock Grid.Column="0"
+            <TextBlock Grid.Column="0"
                            Grid.Row="0"
                            Margin="0 5"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Text="{Binding ProgressPercentage,
                                           StringFormat={}{0:0}%}" />
-            </Grid>
+        </Grid>
 
-            <Button Command="{Binding DownloadFilesCommand}"
+        <Button Command="{Binding DownloadFilesCommand}"
                     Content="{x:Static globalization:Strings.Download}"
                     Margin="15" />
-        </StackPanel>
+    </StackPanel>
 </UserControl>

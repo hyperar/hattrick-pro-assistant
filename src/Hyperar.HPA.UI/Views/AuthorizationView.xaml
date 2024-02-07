@@ -10,101 +10,101 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisible" />
     </UserControl.Resources>
-        <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
-            <StackPanel.Resources>
-                <Style x:Key="StepTitle" TargetType="{x:Type TextBlock}">
-                    <Setter Property="FontSize" Value="24" />
-                    <Setter Property="Foreground" Value="Black" />
-                    <Setter Property="Margin" Value="0 5" />
-                </Style>
+    <StackPanel Name="ViewContainer" Orientation="Vertical" Width="600">
+        <StackPanel.Resources>
+            <Style x:Key="StepTitle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Margin" Value="0 5" />
+            </Style>
 
-                <Style x:Key="StepDescription" TargetType="{x:Type TextBlock}">
-                    <Setter Property="Foreground" Value="Black" />
-                    <Setter Property="Margin" Value="0 5" />
-                    <Setter Property="TextWrapping" Value="Wrap" />
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="Width" Value="{Binding ActualWidth, ElementName=ViewContainer}" />
-                </Style>
+            <Style x:Key="StepDescription" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Margin" Value="0 5" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Width" Value="{Binding ActualWidth, ElementName=ViewContainer}" />
+            </Style>
 
-                <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="5" />
-                    <Setter Property="Padding" Value="3" />
-                    <Setter Property="TextAlignment" Value="Center" />
-                    <Setter Property="Width" Value="300" />
-                </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="3" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="Width" Value="300" />
+            </Style>
 
-                <Style x:Key="AuthorizedStatus" TargetType="{x:Type TextBlock}">
-                    <Setter Property="Foreground" Value="Green" />
-                    <Setter Property="FontSize" Value="24" />
-                    <Setter Property="Margin" Value="0" />
-                    <Setter Property="TextAlignment" Value="Center" />
-                </Style>
+            <Style x:Key="AuthorizedStatus" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="Green" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
 
-                <Style x:Key="UnauthorizedStatus" TargetType="{x:Type TextBlock}">
-                    <Setter Property="Foreground" Value="Red" />
-                    <Setter Property="FontSize" Value="24" />
-                    <Setter Property="Margin" Value="0" />
-                    <Setter Property="TextAlignment" Value="Center" />
-                </Style>
-            </StackPanel.Resources>
+            <Style x:Key="UnauthorizedStatus" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="Red" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
+        </StackPanel.Resources>
 
-            <TextBlock Style="{StaticResource ViewTitle}"
+        <TextBlock Style="{StaticResource ViewTitle}"
                        Text="{x:Static globalization:Strings.Authorization}" />
 
-            <Separator />
+        <Separator />
 
-            <TextBlock Style="{StaticResource StepTitle}"
+        <TextBlock Style="{StaticResource StepTitle}"
                        Text="{x:Static globalization:Strings.StepOne}" />
 
-            <TextBlock Style="{StaticResource StepDescription}"
+        <TextBlock Style="{StaticResource StepDescription}"
                        Text="{x:Static globalization:Strings.OpenAuthorizationWebPageMessage}" />
 
-            <Button Command="{Binding GetRequestTokenCommand}"
+        <Button Command="{Binding GetRequestTokenCommand}"
                     Content="{x:Static globalization:Strings.OpenAuthorizationWebPage}" />
 
-            <TextBlock Style="{StaticResource StepTitle}"
+        <TextBlock Style="{StaticResource StepTitle}"
                        Text="{x:Static globalization:Strings.StepTwo}" />
 
-            <TextBlock Style="{StaticResource StepDescription}"
+        <TextBlock Style="{StaticResource StepDescription}"
                        Text="{x:Static globalization:Strings.CopyAndPasteVerificationCodeMessage}" />
 
-            <TextBox IsEnabled="{Binding CanEnterVerificationCode}"
+        <TextBox IsEnabled="{Binding CanEnterVerificationCode}"
                      Text="{Binding VerificationCode}" />
 
-            <TextBlock Style="{StaticResource StepTitle}"
+        <TextBlock Style="{StaticResource StepTitle}"
                        Text="{x:Static globalization:Strings.StepThree}" />
 
-            <TextBlock Style="{StaticResource StepDescription}"
+        <TextBlock Style="{StaticResource StepDescription}"
                        Text="{x:Static globalization:Strings.AuthorizeMessage}" />
 
-            <Button Command="{Binding GetAccessTokenCommand}"
+        <Button Command="{Binding GetAccessTokenCommand}"
                     CommandParameter="{Binding GetAccessTokenRequest}"
                     IsEnabled="{Binding CanGrantAccess}"
                     Content="{x:Static globalization:Strings.Authorize}" />
 
-            <TextBlock Style="{StaticResource StepDescription}"
+        <TextBlock Style="{StaticResource StepDescription}"
                        Visibility="{Binding IsAuthorized,
                                             Converter={StaticResource BoolToVisible},
                                             FallbackValue=Hidden}"
                        Text="{x:Static globalization:Strings.DeAuthorizeMessage}" />
 
-            <Button Command="{Binding RevokeAccessTokenCommand}"
+        <Button Command="{Binding RevokeAccessTokenCommand}"
                     Visibility="{Binding IsAuthorized,
                                          Converter={StaticResource BoolToVisible},
                                          FallbackValue=Hidden}"
                     Content="{x:Static globalization:Strings.Deauthorize}" />
 
-            <Separator />
+        <Separator />
 
-            <TextBlock Style="{StaticResource AuthorizedStatus}"
+        <TextBlock Style="{StaticResource AuthorizedStatus}"
                        Visibility="{Binding IsAuthorized,
                                             Converter={StaticResource BoolToVisible},
                                             FallbackValue=Hidden}"
                        Text="{x:Static globalization:Strings.Authorized}" />
 
-            <TextBlock Style="{StaticResource UnauthorizedStatus}"
+        <TextBlock Style="{StaticResource UnauthorizedStatus}"
                        Visibility="{Binding IsNotAuthorized,
                                             Converter={StaticResource BoolToVisible}}"
                        Text="{x:Static globalization:Strings.NotAuthorized}" />
-        </StackPanel>
+    </StackPanel>
 </UserControl>

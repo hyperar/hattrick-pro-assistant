@@ -17,6 +17,7 @@
                 services.AddScoped<Avatars>();
                 services.AddScoped<HallOfFamePlayers>();
                 services.AddScoped<ManagerCompendium>();
+                services.AddScoped<MatchDetails>();
                 services.AddScoped<Matches>();
                 services.AddScoped<Players>();
                 services.AddScoped<StaffAvatars>();

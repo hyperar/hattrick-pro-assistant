@@ -10,15 +10,19 @@
 
         private readonly ManagerCompendium managerCompendiumExtractor;
 
+        private readonly Matches matchesExtractor;
+
         private readonly TeamDetails teamDetailsExtractor;
 
         public XmlDownloadTaskExtractorFactory(
             Default defaultExtractor,
             ManagerCompendium managerCompendiumExtractor,
+            Matches matchesExtractor,
             TeamDetails teamDetailsExtractor)
         {
             this.defaultExtractor = defaultExtractor;
             this.managerCompendiumExtractor = managerCompendiumExtractor;
+            this.matchesExtractor = matchesExtractor;
             this.teamDetailsExtractor = teamDetailsExtractor;
         }
 
@@ -27,6 +31,7 @@
             return fileType switch
             {
                 XmlFileType.ManagerCompendium => this.managerCompendiumExtractor,
+                XmlFileType.Matches => this.matchesExtractor,
                 XmlFileType.TeamDetails => this.teamDetailsExtractor,
                 _ => this.defaultExtractor,
             };

@@ -15,6 +15,7 @@
                 services.AddSingleton<IXmlDownloadTaskExtractorFactory, XmlDownloadTaskExtractorFactory>();
                 services.AddSingleton<Default>();
                 services.AddSingleton<ManagerCompendium>();
+                services.AddSingleton<Matches>();
                 services.AddSingleton<TeamDetails>();
             });
 
