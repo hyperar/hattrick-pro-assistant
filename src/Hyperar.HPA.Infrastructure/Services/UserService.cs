@@ -33,6 +33,22 @@
             await context.SaveAsync();
         }
 
+        public Domain.User GetUser()
+        {
+            var user = this.userRepository.Query().SingleOrDefault();
+
+            if (user == null)
+            {
+                user = new Domain.User();
+
+                this.userRepository.Insert(user);
+
+                this.context.Save();
+            }
+
+            return user;
+        }
+
         public async Task<Domain.User> GetUserAsync()
         {
             var user = await this.userRepository.Query().SingleOrDefaultAsync();

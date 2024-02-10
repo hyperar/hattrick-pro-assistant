@@ -18,6 +18,11 @@
 
         protected DbSet<TEntity> EntityCollection { get; }
 
+        public void Insert(TEntity entity)
+        {
+            this.EntityCollection.Add(entity);
+        }
+
         public async Task InsertAsync(TEntity entity)
         {
             await this.EntityCollection.AddAsync(entity);

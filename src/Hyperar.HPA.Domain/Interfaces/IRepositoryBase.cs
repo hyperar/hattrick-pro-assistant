@@ -6,6 +6,8 @@
 
     public interface IRepositoryBase<TEntity> where TEntity : class
     {
+        void Insert(TEntity entity);
+
         Task InsertAsync(TEntity entity);
 
         IQueryable<TEntity> Query(Expression<Func<TEntity, bool>>? predicate = null);
