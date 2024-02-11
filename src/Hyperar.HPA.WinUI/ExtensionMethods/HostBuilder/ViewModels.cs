@@ -46,8 +46,12 @@
 
         private static async Task<AuthorizationViewModel> CreateAuthorizationViewModel(IServiceProvider services)
         {
+            var scope = services.CreateScope();
+
             var viewModel = new AuthorizationViewModel(
-                services.GetRequiredService<INavigator>());
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IHattrickService>(),
+                scope.ServiceProvider.GetRequiredService<IUserService>());
 
             await viewModel.InitializeAsync();
 
@@ -109,7 +113,7 @@
                     viewType = ViewType.Home;
                 }
 
-                return new MainWindowViewModel(navigator, teamSelector, viewModelFactory, viewType);
+                return new MainWindowViewModel(navigator, viewModelFactory, viewType);
             }
         }
 

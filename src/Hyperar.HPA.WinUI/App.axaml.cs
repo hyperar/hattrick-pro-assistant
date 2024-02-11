@@ -2,20 +2,15 @@ namespace Hyperar.HPA.WinUI
 {
     using System;
     using Avalonia;
-    using Avalonia.Animation;
     using Avalonia.Controls.ApplicationLifetimes;
-    using Avalonia.Data.Core;
     using Avalonia.Data.Core.Plugins;
     using Avalonia.Markup.Xaml;
-    using WinUI.ViewModels;
-    using WinUI.Views;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using ExtensionMethods.HostBuilder;
     using Hyperar.HPA.Domain.Interfaces;
-    using System.Threading.Tasks;
     using Hyperar.HPA.WinUI.ViewModels.Interface;
-    using Hyperar.HPA.WinUI.Enums;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using WinUI.Views;
 
     public partial class App : Application
     {

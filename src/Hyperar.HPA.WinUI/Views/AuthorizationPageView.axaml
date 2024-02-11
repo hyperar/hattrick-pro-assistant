@@ -2,11 +2,150 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Hyperar.HPA.WinUI.ViewModels"
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             x:DataType="vm:AuthorizationViewModel"
              x:Class="Hyperar.HPA.WinUI.AuthorizationPageView"
              mc:Ignorable="d"
-             d:DesignWidth="800"
-             d:DesignHeight="450">
-    <Border CornerRadius="{DynamicResource OverlayCornerRadius}">
-        <TextBlock Text="AuthorizationPageView" />
-    </Border>
+             d:DesignWidth="1600"
+             d:DesignHeight="900">
+    <StackPanel Spacing="30">
+
+        <Panel>
+            <StackPanel Spacing="20">
+                <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
+                           FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                           Text="{x:Static globalization:Strings.StepOne}" />
+
+                <TextBlock Text="{x:Static globalization:Strings.OpenAuthorizationWebPageMessage}"
+                           TextWrapping="Wrap" />
+
+                <Button Command="{Binding GetRequestTokenCommand}"
+                        HorizontalAlignment="Center"
+                        IsEnabled="{Binding CanGetRequestToken}">
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <PathIcon Data="{DynamicResource OpenLinkIcon}" Height="12" />
+                        <TextBlock Text="{x:Static globalization:Strings.OpenAuthorizationWebPage}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Panel>
+
+        <Separator />
+
+        <Panel>
+            <StackPanel Spacing="20">
+                <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
+                           FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                           Text="{x:Static globalization:Strings.StepTwo}" />
+
+                <TextBlock Text="{x:Static globalization:Strings.CopyAndPasteVerificationCodeMessage}"
+                           TextWrapping="Wrap" />
+
+                <TextBox IsEnabled="{Binding CanEnterVerificationCode}"
+                         Text="{Binding VerificationCode}"
+                         Watermark="{x:Static globalization:Strings.VerificationCode}"
+                         Width="200" />
+            </StackPanel>
+        </Panel>
+
+        <Separator />
+
+        <Panel>
+            <StackPanel Spacing="20">
+                <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
+                           FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                           Text="{x:Static globalization:Strings.StepThree}" />
+
+                <TextBlock Text="{x:Static globalization:Strings.AuthorizeMessage}"
+                           TextWrapping="Wrap" />
+
+                <TextBlock Text="{x:Static globalization:Strings.DeAuthorizeMessage}"
+                           TextWrapping="Wrap" />
+
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5"
+                            HorizontalAlignment="Center">
+                    <Button Command="{Binding GetAccessTokenCommand}"
+                            IsEnabled="{Binding CanGetAccessToken}">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <PathIcon Data="{DynamicResource OkIcon}" Height="12" />
+                            <TextBlock Text="{x:Static globalization:Strings.Authorize}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding RevokeAccessTokenCommand}"
+                            HorizontalAlignment="Center"
+                            IsEnabled="{Binding CanRevokeAccessToken}">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <PathIcon Data="{DynamicResource CancelIcon}" Height="12" />
+                            <TextBlock Text="{x:Static globalization:Strings.Deauthorize}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Panel>
+
+        <Separator />
+
+        <Panel IsVisible="{Binding CanRevokeAccessToken}">
+            <Grid ColumnDefinitions="Auto,Auto"
+                  RowDefinitions="*,*,*,*,*"
+                  HorizontalAlignment="Center">
+                <Grid.Styles>
+                    <Style Selector="TextBlock">
+                        <Setter Property="Margin" Value="5 0" />
+                    </Style>
+                </Grid.Styles>
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           FontSize="{DynamicResource TabItemHeaderFontSize}"
+                           FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                           Text="{x:Static globalization:Strings.Authorized}"
+                           TextAlignment="Center"
+                           IsVisible="{Binding CanRevokeAccessToken}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           Text="{x:Static globalization:Strings.AccessToken}" />
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{Binding AccessToken}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="2"
+                           Text="{x:Static globalization:Strings.AccessTokenSecret}" />
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           Text="{Binding AccessTokenSecret}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="3"
+                           Text="{x:Static globalization:Strings.CreatedOn}" />
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="3"
+                           Text="{Binding AccessTokenCreatedOn}" />
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="4"
+                           Text="{x:Static globalization:Strings.ExpiresOn}" />
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="4"
+                           Text="{Binding AccessTokenExpiresOn}" />
+            </Grid>
+        </Panel>
+
+        <Panel IsVisible="{Binding !CanRevokeAccessToken}">
+            <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
+                       FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                       Text="{x:Static globalization:Strings.NotAuthorized}"
+                       IsVisible="{Binding !CanRevokeAccessToken}"
+                       TextAlignment="Center" />
+        </Panel>
+    </StackPanel>
 </UserControl>

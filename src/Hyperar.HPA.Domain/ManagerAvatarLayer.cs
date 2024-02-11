@@ -1,6 +1,5 @@
 ﻿namespace Hyperar.HPA.Domain
 {
-    using System;
     using Domain.Interfaces;
 
     public class ManagerAvatarLayer : EntityBase, IEntity

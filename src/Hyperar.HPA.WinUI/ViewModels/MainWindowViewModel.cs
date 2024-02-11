@@ -3,7 +3,6 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Windows.Input;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
@@ -14,10 +13,8 @@
     using WinUI.Models;
     using WinUI.ViewModels.Interface;
 
-    public partial class MainWindowViewModel : ViewModelBase
+    public partial class MainWindowViewModel : ViewModelBase, IDisposable
     {
-        private readonly ITeamSelector teamSelector;
-
         [ObservableProperty]
         private ViewModelBase? currentPage;
 
@@ -25,15 +22,18 @@
         private bool isMenuOpen;
 
         [ObservableProperty]
-        private MenuItemTemplate selectedItem;
+        private MenuItemTemplate? selectedItem;
+
+        public MainWindowViewModel() : base(new Navigator())
+        {
+        }
 
         public MainWindowViewModel(
             INavigator navigator,
-            ITeamSelector teamSelector,
             IViewModelFactory viewModelFactory,
             ViewType viewType) : base(navigator)
         {
-            this.teamSelector = teamSelector;
+            this.Navigator.StateChanged += this.Navigator_StateChanged;
 
             this.MenuItems = new ObservableCollection<MenuItemTemplate>
             {
@@ -50,10 +50,6 @@
             this.UpdateCurrentPageCommand = new UpdateCurrentPageCommand(navigator, this, viewModelFactory);
 
             this.SelectedItem = this.MenuItems.Single(x => x.ViewType == viewType);
-
-            this.Navigator.StateChanged += this.Navigator_StateChanged;
-
-            this.Navigator.ResumeNavigation();
         }
 
         public bool CanNavigate
@@ -64,23 +60,30 @@
             }
         }
 
-        public ObservableCollection<MenuItemTemplate> MenuItems { get; }
+        public ObservableCollection<MenuItemTemplate> MenuItems { get; } = new ObservableCollection<MenuItemTemplate>();
 
-        public ICommand UpdateCurrentPageCommand { get; set; }
+        public ICommand? UpdateCurrentPageCommand { get; set; }
+
+        public void Dispose()
+        {
+            this.Navigator.StateChanged -= this.Navigator_StateChanged;
+
+            GC.SuppressFinalize(this);
+        }
 
         private void Navigator_StateChanged()
         {
             this.OnPropertyChanged(nameof(this.CanNavigate));
         }
 
-        partial void OnSelectedItemChanged(MenuItemTemplate value)
+        partial void OnSelectedItemChanged(MenuItemTemplate? value)
         {
             if (value is null)
             {
                 return;
             }
 
-            this.UpdateCurrentPageCommand.Execute(value.ViewType);
+            this.UpdateCurrentPageCommand?.Execute(value.ViewType);
         }
 
         [RelayCommand]

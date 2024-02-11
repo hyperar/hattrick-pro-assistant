@@ -70,6 +70,24 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access Token:.
+        /// </summary>
+        public static string AccessToken {
+            get {
+                return ResourceManager.GetString("AccessToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access Token Secret:.
+        /// </summary>
+        public static string AccessTokenSecret {
+            get {
+                return ResourceManager.GetString("AccessTokenSecret", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Age.
         /// </summary>
         public static string Age {
@@ -232,6 +250,17 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authorization was revoked.
+        ///
+        ///Please re-authorize in order to keep using it..
+        /// </summary>
+        public static string AuthorizationRevokedElsewhereReauthorizeInOrderToKeepUsing {
+            get {
+                return ResourceManager.GetString("AuthorizationRevokedElsewhereReauthorizeInOrderToKeepUsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authorize.
         /// </summary>
         public static string Authorize {
@@ -367,6 +396,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created on:.
+        /// </summary>
+        public static string CreatedOn {
+            get {
+                return ResourceManager.GetString("CreatedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cup Goals.
         /// </summary>
         public static string CupGoals {
@@ -484,6 +522,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string Exit {
@@ -498,6 +545,15 @@ namespace Hyperar.HPA.Globalization {
         public static string Experience {
             get {
                 return ResourceManager.GetString("Experience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expires on:.
+        /// </summary>
+        public static string ExpiresOn {
+            get {
+                return ResourceManager.GetString("ExpiresOn", resourceCulture);
             }
         }
         
@@ -633,6 +689,15 @@ namespace Hyperar.HPA.Globalization {
         public static string ID {
             get {
                 return ResourceManager.GetString("ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
             }
         }
         
@@ -1327,6 +1392,15 @@ namespace Hyperar.HPA.Globalization {
         public static string UserLabel {
             get {
                 return ResourceManager.GetString("UserLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verification Code.
+        /// </summary>
+        public static string VerificationCode {
+            get {
+                return ResourceManager.GetString("VerificationCode", resourceCulture);
             }
         }
         

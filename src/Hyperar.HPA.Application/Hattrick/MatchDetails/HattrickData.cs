@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.MatchDetails
 {
     using Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Common.Enums;
 
     public class HattrickData : XmlFileBase, IXmlFile
     {

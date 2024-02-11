@@ -1,6 +1,5 @@
 namespace Hyperar.HPA.WinUI.Views
 {
-    using Avalonia.Controls;
     using FluentAvalonia.UI.Windowing;
 
     public partial class MainWindow : AppWindow

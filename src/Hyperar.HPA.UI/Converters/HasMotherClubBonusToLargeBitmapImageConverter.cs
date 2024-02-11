@@ -3,7 +3,6 @@
     using System;
     using System.Globalization;
     using System.Windows.Data;
-    using Common.Enums;
 
     internal class HasMotherClubBonusToLargeBitmapImageConverter : ResourceImageValueConverter, IValueConverter
     {

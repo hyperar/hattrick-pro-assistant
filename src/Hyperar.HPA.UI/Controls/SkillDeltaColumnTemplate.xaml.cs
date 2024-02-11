@@ -1,6 +1,5 @@
 ﻿namespace Hyperar.HPA.UI.Controls
 {
-    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using Common.Enums;

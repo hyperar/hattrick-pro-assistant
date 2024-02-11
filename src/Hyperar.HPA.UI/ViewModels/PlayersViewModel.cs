@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using Application.Models.Players;
     using Application.Services;
-    using Hyperar.HPA.UI.ViewModels.Interfaces;
 
     public class PlayersViewModel : ViewModelBase
     {

@@ -1,10 +1,9 @@
 ﻿namespace Hyperar.HPA.UI
 {
-    using System;
     using System.ComponentModel;
     using System.Windows;
-    using UI.ViewModels;
     using Microsoft.Extensions.Configuration;
+    using UI.ViewModels;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml

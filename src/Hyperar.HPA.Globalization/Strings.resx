@@ -120,6 +120,12 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="AccessToken" xml:space="preserve">
+    <value>Access Token:</value>
+  </data>
+  <data name="AccessTokenSecret" xml:space="preserve">
+    <value>Access Token Secret:</value>
+  </data>
   <data name="Age" xml:space="preserve">
     <value>Age</value>
   </data>
@@ -174,6 +180,11 @@
   <data name="Authorization" xml:space="preserve">
     <value>Authorization</value>
   </data>
+  <data name="AuthorizationRevokedElsewhereReauthorizeInOrderToKeepUsing" xml:space="preserve">
+    <value>Authorization was revoked.
+
+Please re-authorize in order to keep using it.</value>
+  </data>
   <data name="Authorize" xml:space="preserve">
     <value>Authorize</value>
   </data>
@@ -219,6 +230,9 @@
   <data name="CountryLabel" xml:space="preserve">
     <value>Country:</value>
   </data>
+  <data name="CreatedOn" xml:space="preserve">
+    <value>Created on:</value>
+  </data>
   <data name="CupGoals" xml:space="preserve">
     <value>Cup Goals</value>
   </data>
@@ -258,11 +272,17 @@
   <data name="DownloadTaskStatus_Saving" xml:space="preserve">
     <value>Saving</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="Experience" xml:space="preserve">
     <value>Experience</value>
+  </data>
+  <data name="ExpiresOn" xml:space="preserve">
+    <value>Expires on:</value>
   </data>
   <data name="File" xml:space="preserve">
     <value>File</value>
@@ -308,6 +328,9 @@
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
   </data>
   <data name="InjuredWeeks" xml:space="preserve">
     <value>Injured: {0} week(s)</value>
@@ -540,6 +563,9 @@ Has {3} experience and {4} leadership. Has {5} loyalty.</value>
   </data>
   <data name="UserLabel" xml:space="preserve">
     <value>User:</value>
+  </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>Verification Code</value>
   </data>
   <data name="WeeklySalary" xml:space="preserve">
     <value>{0} {1}/week</value>
