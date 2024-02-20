@@ -87,65 +87,65 @@
 
         <Separator />
 
-        <Panel IsVisible="{Binding CanRevokeAccessToken}">
-            <Grid ColumnDefinitions="Auto,Auto"
-                  RowDefinitions="*,*,*,*,*"
-                  HorizontalAlignment="Center">
-                <Grid.Styles>
-                    <Style Selector="TextBlock">
-                        <Setter Property="Margin" Value="5 0" />
-                    </Style>
-                </Grid.Styles>
+        <Grid ColumnDefinitions="*,*,*,*"
+              RowDefinitions="*,*,*"
+              HorizontalAlignment="Center"
+              IsVisible="{Binding CanRevokeAccessToken}">
+            <Grid.Styles>
+                <Style Selector="Grid">
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+                <Style Selector="TextBlock">
+                    <Setter Property="Margin" Value="3" />
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+            </Grid.Styles>
 
-                <TextBlock Grid.Column="0"
-                           Grid.Row="0"
-                           Grid.ColumnSpan="2"
-                           FontSize="{DynamicResource TabItemHeaderFontSize}"
-                           FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
-                           Text="{x:Static globalization:Strings.Authorized}"
-                           TextAlignment="Center"
-                           IsVisible="{Binding CanRevokeAccessToken}" />
-
-                <TextBlock Grid.Column="0"
-                           Grid.Row="1"
-                           Text="{x:Static globalization:Strings.AccessToken}" />
-
-                <TextBlock Grid.Column="1"
-                           Grid.Row="1"
-                           Text="{Binding AccessToken}" />
-
-                <TextBlock Grid.Column="0"
-                           Grid.Row="2"
-                           Text="{x:Static globalization:Strings.AccessTokenSecret}" />
-
-                <TextBlock Grid.Column="1"
-                           Grid.Row="2"
-                           Text="{Binding AccessTokenSecret}" />
-
-                <TextBlock Grid.Column="0"
-                           Grid.Row="3"
-                           Text="{x:Static globalization:Strings.CreatedOn}" />
-
-                <TextBlock Grid.Column="1"
-                           Grid.Row="3"
-                           Text="{Binding AccessTokenCreatedOn}" />
-
-                <TextBlock Grid.Column="0"
-                           Grid.Row="4"
-                           Text="{x:Static globalization:Strings.ExpiresOn}" />
-
-                <TextBlock Grid.Column="1"
-                           Grid.Row="4"
-                           Text="{Binding AccessTokenExpiresOn}" />
-            </Grid>
-        </Panel>
-
-        <Panel IsVisible="{Binding !CanRevokeAccessToken}">
-            <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="4"
+                       FontSize="{DynamicResource TabItemHeaderFontSize}"
                        FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
-                       Text="{x:Static globalization:Strings.NotAuthorized}"
-                       IsVisible="{Binding !CanRevokeAccessToken}"
-                       TextAlignment="Center" />
-        </Panel>
+                       Text="{x:Static globalization:Strings.Authorized}"
+                       TextAlignment="Center"
+                       IsVisible="{Binding CanRevokeAccessToken}" />
+            <TextBlock Grid.Column="0"
+                       Grid.Row="1"
+                       Text="{x:Static globalization:Strings.AccessToken}" />
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="2"
+                       Text="{Binding AccessToken, FallbackValue=%TOKEN%}}" />
+
+            <TextBlock Grid.Column="1"
+                       Grid.Row="1"
+                       Text="{x:Static globalization:Strings.AccessTokenSecret}" />
+
+            <TextBlock Grid.Column="1"
+                       Grid.Row="2"
+                       Text="{Binding AccessTokenSecret, FallbackValue=%TOKEN_SECRET%}" />
+
+            <TextBlock Grid.Column="2"
+                       Grid.Row="1"
+                       Text="{x:Static globalization:Strings.CreatedOn}" />
+
+            <TextBlock Grid.Column="2"
+                       Grid.Row="2"
+                       Text="{Binding AccessTokenCreatedOn, FallbackValue=%CREATED_ON%}}" />
+
+            <TextBlock Grid.Column="3"
+                       Grid.Row="1"
+                       Text="{x:Static globalization:Strings.ExpiresOn}" />
+
+            <TextBlock Grid.Column="3"
+                       Grid.Row="2"
+                       Text="{Binding AccessTokenExpiresOn, FallbackValue=%EXPIRES_ON%}}" />
+        </Grid>
+
+        <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
+                   FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                   Text="{x:Static globalization:Strings.NotAuthorized}"
+                   IsVisible="{Binding !CanRevokeAccessToken}"
+                   TextAlignment="Center" />
     </StackPanel>
 </UserControl>

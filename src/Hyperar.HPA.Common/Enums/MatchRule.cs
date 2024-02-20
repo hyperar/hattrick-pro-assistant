@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum MatchRule : uint
+    public enum MatchRule : byte
     {
         NoRules = 0,
 

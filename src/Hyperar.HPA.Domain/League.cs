@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Domain.Interfaces;
+    using Domain.Senior;
 
     public class League : HattrickEntityBase, IHattrickEntity
     {
@@ -21,7 +22,7 @@
 
         public DateTime FirstWeeklyUpdate { get; set; }
 
-        public byte[] Flag { get; set; } = Array.Empty<byte>();
+        public byte[] FlagBytes { get; set; } = Array.Empty<byte>();
 
         public DateTime FourthWeeklyUpdate { get; set; }
 

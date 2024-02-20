@@ -6,25 +6,25 @@
     using Domain.Interfaces;
     using Hattrick = Application.Hattrick.StaffList;
 
-    public class StaffList : IXmlFileDataPersisterStrategy
+    public class StaffList : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IHattrickRepository<Domain.HallOfFamePlayer> hallOfFamePlayerRepository;
+        private readonly IHattrickRepository<Domain.Senior.HallOfFamePlayer> hallOfFamePlayerRepository;
 
-        private readonly IHattrickRepository<Domain.StaffMember> staffMemberRepository;
+        private readonly IHattrickRepository<Domain.Senior.StaffMember> staffMemberRepository;
 
         public StaffList(
             IDatabaseContext databaseContext,
-            IHattrickRepository<Domain.HallOfFamePlayer> hallOfFamePlayerRepository,
-            IHattrickRepository<Domain.StaffMember> staffRepository)
+            IHattrickRepository<Domain.Senior.HallOfFamePlayer> hallOfFamePlayerRepository,
+            IHattrickRepository<Domain.Senior.StaffMember> staffRepository)
         {
             this.databaseContext = databaseContext;
             this.hallOfFamePlayerRepository = hallOfFamePlayerRepository;
             this.staffMemberRepository = staffRepository;
         }
 
-        public async Task PersistDataAsync(IXmlFile file)
+        public override async Task PersistDataAsync(IXmlFile file)
         {
             try
             {
@@ -61,7 +61,7 @@
 
             if (staffMember == null)
             {
-                staffMember = new Domain.StaffMember()
+                staffMember = new Domain.Senior.StaffMember
                 {
                     HattrickId = xmlStaff.StaffId,
                     Name = xmlStaff.Name,

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum MatchTeamAttitude : int
+    public enum MatchTeamAttitude : short
     {
         PlayItCool = -1,
 

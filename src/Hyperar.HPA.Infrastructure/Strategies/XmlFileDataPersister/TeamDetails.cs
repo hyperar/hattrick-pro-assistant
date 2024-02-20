@@ -16,14 +16,14 @@
 
         private readonly IHattrickRepository<Domain.Region> regionRepository;
 
-        private readonly IHattrickRepository<Domain.Team> teamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         public TeamDetails(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.League> leagueRepository,
             IHattrickRepository<Domain.Manager> managerRepository,
             IHattrickRepository<Domain.Region> regionRepository,
-            IHattrickRepository<Domain.Team> teamRepository)
+            IHattrickRepository<Domain.Senior.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
             this.leagueRepository = leagueRepository;
@@ -67,7 +67,7 @@
 
             if (team == null)
             {
-                team = new Domain.Team
+                team = new Domain.Senior.Team
                 {
                     HattrickId = xmlTeam.TeamId,
                     Name = xmlTeam.TeamName,
@@ -89,14 +89,14 @@
                     LogoUrl = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) ? NormalizeUrl(xmlTeam.LogoUrl) : null,
                     MatchKitUrl = NormalizeUrl(xmlTeam.DressUri),
                     AlternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri),
-                    Logo = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl)
+                    LogoBytes = !string.IsNullOrWhiteSpace(xmlTeam.LogoUrl)
                          ? await DownloadWebResourceAsync(
                              NormalizeUrl(
                                  xmlTeam.LogoUrl))
                          : null,
-                    MatchKit = await DownloadWebResourceAsync(
+                    MatchKitBytes = await DownloadWebResourceAsync(
                         NormalizeUrl(xmlTeam.DressUri)),
-                    AlternativeMatchKit = await DownloadWebResourceAsync(
+                    AlternativeMatchKitBytes = await DownloadWebResourceAsync(
                         NormalizeUrl(xmlTeam.DressAlternateUri)),
                     League = league,
                     Manager = manager,
@@ -127,13 +127,13 @@
 
                 if (string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && !string.IsNullOrWhiteSpace(team.LogoUrl))
                 {
-                    team.Logo = null;
+                    team.LogoBytes = null;
                     team.LogoUrl = null;
                 }
                 else if (!string.IsNullOrWhiteSpace(xmlTeam.LogoUrl) && NormalizeUrl(xmlTeam.LogoUrl) != team.LogoUrl)
                 {
                     team.LogoUrl = NormalizeUrl(xmlTeam.LogoUrl);
-                    team.Logo = await DownloadWebResourceAsync(xmlTeam.LogoUrl);
+                    team.LogoBytes = await DownloadWebResourceAsync(xmlTeam.LogoUrl);
                 }
 
                 string matchKitUrl = NormalizeUrl(xmlTeam.DressUri);
@@ -141,7 +141,7 @@
                 if (matchKitUrl != team.MatchKitUrl)
                 {
                     team.MatchKitUrl = matchKitUrl;
-                    team.MatchKit = await DownloadWebResourceAsync(matchKitUrl);
+                    team.MatchKitBytes = await DownloadWebResourceAsync(matchKitUrl);
                 }
 
                 string alternativeMatchKitUrl = NormalizeUrl(xmlTeam.DressAlternateUri);
@@ -149,7 +149,7 @@
                 if (alternativeMatchKitUrl != team.AlternativeMatchKitUrl)
                 {
                     team.AlternativeMatchKitUrl = alternativeMatchKitUrl;
-                    team.AlternativeMatchKit = await DownloadWebResourceAsync(alternativeMatchKitUrl);
+                    team.AlternativeMatchKitBytes = await DownloadWebResourceAsync(alternativeMatchKitUrl);
                 }
 
                 team.Region = region;

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.MatchDetails
 {
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class Goal
     {

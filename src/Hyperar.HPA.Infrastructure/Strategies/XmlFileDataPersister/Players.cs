@@ -9,27 +9,27 @@
     using Microsoft.EntityFrameworkCore;
     using Hattrick = Application.Hattrick.Players;
 
-    public class Players : IXmlFileDataPersisterStrategy
+    public class Players : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
         private readonly IHattrickRepository<Domain.Country> countryRepository;
 
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository;
+        private readonly IRepository<Domain.Senior.PlayerAvatarLayer> playerAvatarLayerRepository;
 
-        private readonly IHattrickRepository<Domain.Player> playerRepository;
+        private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
 
-        private readonly IRepository<Domain.PlayerSkillSet> playerSkillSetRepository;
+        private readonly IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository;
 
-        private readonly IHattrickRepository<Domain.Team> teamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         public Players(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
-            IHattrickRepository<Domain.Player> playerRepository,
-            IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository,
-            IRepository<Domain.PlayerSkillSet> playerSkillSetRepository,
-            IHattrickRepository<Domain.Team> teamRepository)
+            IHattrickRepository<Domain.Senior.Player> playerRepository,
+            IRepository<Domain.Senior.PlayerAvatarLayer> playerAvatarLayerRepository,
+            IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository,
+            IHattrickRepository<Domain.Senior.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
@@ -39,7 +39,7 @@
             this.teamRepository = teamRepository;
         }
 
-        public async Task PersistDataAsync(IXmlFile file)
+        public override async Task PersistDataAsync(IXmlFile file)
         {
             try
             {
@@ -60,7 +60,7 @@
             }
         }
 
-        private async Task ProcessPlayerAsync(Hattrick.Player xmlPlayer, Domain.Team team)
+        private async Task ProcessPlayerAsync(Hattrick.Player xmlPlayer, Domain.Senior.Team team)
         {
             var player = await this.playerRepository.GetByHattrickIdAsync(xmlPlayer.PlayerId);
 
@@ -70,7 +70,7 @@
 
                 ArgumentNullException.ThrowIfNull(country, nameof(country));
 
-                player = new Domain.Player
+                player = new Domain.Senior.Player
                 {
                     HattrickId = xmlPlayer.PlayerId,
                     FirstName = xmlPlayer.FirstName,
@@ -187,7 +187,7 @@
             await this.databaseContext.SaveAsync();
         }
 
-        private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.Player player, uint season, uint week)
+        private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.Senior.Player player, uint season, uint week)
         {
             var currentWeekSkillSet = await this.playerSkillSetRepository.Query(x => x.Player.HattrickId == player.HattrickId)
                                                                          .OrderByDescending(x => x.Season)
@@ -197,7 +197,7 @@
             if (currentWeekSkillSet == null || currentWeekSkillSet.Season != season || currentWeekSkillSet.Week != week)
             {
                 await this.playerSkillSetRepository.InsertAsync(
-                    new Domain.PlayerSkillSet
+                    new Domain.Senior.PlayerSkillSet
                     {
                         Season = season,
                         Week = week,

@@ -16,7 +16,7 @@
 
         private const string userIdParamKey = "userId";
 
-        public List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile)
+        public DownloadTask[] ExtractXmlDownloadTasks(IXmlFile xmlFile)
         {
             if (xmlFile is HattrickData file)
             {
@@ -42,7 +42,7 @@
                             { userIdParamKey, file.Manager.UserId.ToString() }
                         }));
 
-                return downloadTasks;
+                return downloadTasks.ToArray();
             }
             else
             {

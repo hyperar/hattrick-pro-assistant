@@ -8,14 +8,6 @@
 
     public class StaffAvatars : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string layerNodeName = "Layer";
-
-        private const string staffNodeName = "Staff";
-
-        private const string xAttributeName = "x";
-
-        private const string yAttributeName = "y";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -36,7 +28,7 @@
                 BackgroundImage = await reader.ReadElementContentAsStringAsync()
             };
 
-            while (reader.Name == layerNodeName)
+            while (reader.CheckNode(Constants.NodeName.Layer))
             {
                 result.Layers.Add(
                     await ParseLayerNodeAsync(reader));
@@ -52,8 +44,8 @@
         {
             var result = new Layer
             {
-                X = uint.Parse(reader.GetAttribute(xAttributeName) ?? "0"),
-                Y = uint.Parse(reader.GetAttribute(yAttributeName) ?? "0"),
+                X = uint.Parse(reader.GetAttribute(Constants.NodeName.X) ?? "0"),
+                Y = uint.Parse(reader.GetAttribute(Constants.NodeName.Y) ?? "0"),
             };
 
             // Reads opening node.
@@ -74,7 +66,7 @@
 
             var result = new List<Staff>();
 
-            while (reader.Name == staffNodeName)
+            while (reader.CheckNode(Constants.NodeName.Staff))
             {
                 result.Add(await ParseStaffNodeAsync(reader));
             }

@@ -1,9 +1,7 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum SkillLevel : int
+    public enum SkillLevel : byte
     {
-        Unavailable = -1,
-
         NonExistent = 0,
 
         Disastrous = 1,

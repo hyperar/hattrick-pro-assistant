@@ -4,28 +4,27 @@
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
     using Domain.Interfaces;
-
     using Hattrick = Application.Hattrick.ArenaDetails;
 
-    public class ArenaDetails : IXmlFileDataPersisterStrategy
+    public class ArenaDetails : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IHattrickRepository<Domain.TeamArena> teamArenaRepository;
+        private readonly IHattrickRepository<Domain.Senior.TeamArena> teamArenaRepository;
 
-        private readonly IHattrickRepository<Domain.Team> teamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         public ArenaDetails(
             IDatabaseContext databaseContext,
-            IHattrickRepository<Domain.Team> teamRepository,
-            IHattrickRepository<Domain.TeamArena> teamArenaRepository)
+            IHattrickRepository<Domain.Senior.Team> teamRepository,
+            IHattrickRepository<Domain.Senior.TeamArena> teamArenaRepository)
         {
             this.databaseContext = databaseContext;
             this.teamRepository = teamRepository;
             this.teamArenaRepository = teamArenaRepository;
         }
 
-        public async Task PersistDataAsync(IXmlFile file)
+        public override async Task PersistDataAsync(IXmlFile file)
         {
             try
             {
@@ -62,7 +61,7 @@
 
                 ArgumentNullException.ThrowIfNull(team, nameof(team));
 
-                arena = new Domain.TeamArena
+                arena = new Domain.Senior.TeamArena
                 {
                     HattrickId = xmlEntity.Arena.ArenaId,
                     Name = xmlEntity.Arena.ArenaName,

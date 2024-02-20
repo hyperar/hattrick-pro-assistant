@@ -6,11 +6,11 @@
     using System.Net;
     using System.Threading.Tasks;
     using System.Windows.Forms;
+    using Application.Models;
+    using Application.Services;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.WinUI.State.Interface;
+    using WinUI.State.Interface;
 
     public partial class AuthorizationViewModel : AsyncViewModelBase
     {

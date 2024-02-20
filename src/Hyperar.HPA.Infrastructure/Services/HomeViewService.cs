@@ -10,9 +10,9 @@
 
     public class HomeViewService : IHomeViewService
     {
-        private readonly IHattrickRepository<Domain.Team> teamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
-        public HomeViewService(IHattrickRepository<Domain.Team> teamRepository)
+        public HomeViewService(IHattrickRepository<Domain.Senior.Team> teamRepository)
         {
             this.teamRepository = teamRepository;
         }
@@ -30,7 +30,7 @@
                     HattrickId = team.Manager.HattrickId,
                     UserName = team.Manager.UserName,
                     SupporterTier = team.Manager.SupporterTier,
-                    Avatar = team.Manager.Avatar,
+                    Avatar = team.Manager.AvatarBytes,
                     Country = new Country
                     {
                         HattrickId = team.Manager.Country.HattrickId,
@@ -41,7 +41,7 @@
                 {
                     HattrickId = team.HattrickId,
                     Name = team.Name,
-                    Logo = team.Logo,
+                    Logo = team.LogoBytes,
                     Country = new Country
                     {
                         HattrickId = team.Region.Country.HattrickId,

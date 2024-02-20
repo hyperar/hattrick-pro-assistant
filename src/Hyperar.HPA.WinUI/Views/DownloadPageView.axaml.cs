@@ -1,11 +1,21 @@
-using Avalonia.Controls;
-
-namespace Hyperar.HPA.WinUI;
-
-public partial class DownloadPageView : UserControl
+namespace Hyperar.HPA.WinUI
 {
-    public DownloadPageView()
+    using System.Linq;
+    using Avalonia.Controls;
+
+    public partial class DownloadPageView : UserControl
     {
-        this.InitializeComponent();
+        public DownloadPageView()
+        {
+            this.InitializeComponent();
+        }
+
+        private void DataGrid_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            if (sender is DataGrid dataGrid && dataGrid.SelectedItem != null)
+            {
+                dataGrid.ScrollIntoView(dataGrid.SelectedItem, dataGrid.Columns.First());
+            }
+        }
     }
 }

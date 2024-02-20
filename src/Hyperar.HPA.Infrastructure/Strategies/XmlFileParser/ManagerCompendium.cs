@@ -9,28 +9,6 @@
 
     public class ManagerCompendium : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string avatarNodeName = "Avatar";
-
-        private const string lastLoginsNodeName = "LastLogins";
-
-        private const string layerNodeName = "Layer";
-
-        private const string loginTimeNodeName = "LoginTime";
-
-        private const string nationalTeamAssistantNodeName = "NationalTeamAssistant";
-
-        private const string nationalTeamCoachNodeName = "NationalTeamCoach";
-
-        private const string nationalTeamNodeName = "NationalTeam";
-
-        private const string teamNodeName = "Team";
-
-        private const string teamsNodeName = "Teams";
-
-        private const string xAttributeName = "x";
-
-        private const string yAttributeName = "y";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -67,7 +45,7 @@
                 BackgroundImage = await reader.ReadElementContentAsStringAsync()
             };
 
-            while (reader.Name == layerNodeName)
+            while (reader.CheckNode(Constants.NodeName.Layer))
             {
                 result.Layers.Add(await ParseLayerNodeAsync(reader));
             }
@@ -133,8 +111,8 @@
         {
             var result = new Layer
             {
-                X = uint.Parse(reader.GetAttribute(xAttributeName) ?? "0"),
-                Y = uint.Parse(reader.GetAttribute(yAttributeName) ?? "0"),
+                X = uint.Parse(reader.GetAttribute(Constants.NodeName.X) ?? "0"),
+                Y = uint.Parse(reader.GetAttribute(Constants.NodeName.Y) ?? "0"),
             };
 
             // Reads opening node.
@@ -195,12 +173,12 @@
                 SupporterTier = (await reader.ReadElementContentAsStringAsync()).ToSupporterTier()
             };
 
-            if (reader.Name == lastLoginsNodeName)
+            if (reader.CheckNode(Constants.NodeName.LastLogins))
             {
                 // Reads opening element.
                 await reader.ReadAsync();
 
-                while (reader.Name == loginTimeNodeName)
+                while (reader.CheckNode(Constants.NodeName.LoginTime))
                 {
                     result.LastLogins.Add(await reader.ReadElementContentAsStringAsync());
                 }
@@ -213,12 +191,12 @@
             result.Country = await ParseCountryNodeAsync(reader);
             result.Currency = await ParseCurrencyNodeAsync(reader);
 
-            if (reader.Name == teamsNodeName)
+            if (reader.CheckNode(Constants.NodeName.Teams))
             {
                 // Reads opening element.
                 await reader.ReadAsync();
 
-                while (reader.Name == teamNodeName)
+                while (reader.CheckNode(Constants.NodeName.Team))
                 {
                     result.Teams.Add(await ParseTeamNodeAsync(reader));
                 }
@@ -227,14 +205,14 @@
                 await reader.ReadAsync();
             }
 
-            if (reader.Name == nationalTeamCoachNodeName)
+            if (reader.CheckNode(Constants.NodeName.NationalTeamCoach))
             {
                 if (!reader.IsEmptyElement)
                 {
                     // Reads opening element.
                     await reader.ReadAsync();
 
-                    while (reader.Name == nationalTeamNodeName)
+                    while (reader.CheckNode(Constants.NodeName.NationalTeam))
                     {
                         result.NationalTeamCoach.Add(await ParseNationalTeamNodeAsync(reader));
                     }
@@ -247,14 +225,14 @@
                 await reader.ReadAsync();
             }
 
-            if (reader.Name == nationalTeamAssistantNodeName)
+            if (reader.CheckNode(Constants.NodeName.NationalTeamAssistant))
             {
                 if (!reader.IsEmptyElement)
                 {
                     // Reads opening element.
                     await reader.ReadAsync();
 
-                    while (reader.Name == nationalTeamNodeName)
+                    while (reader.CheckNode(Constants.NodeName.NationalTeam))
                     {
                         result.NationalTeamCoach.Add(await ParseNationalTeamNodeAsync(reader));
                     }
@@ -267,7 +245,7 @@
                 await reader.ReadAsync();
             }
 
-            if (reader.Name == avatarNodeName && !reader.IsEmptyElement)
+            if (reader.CheckNode(Constants.NodeName.Avatar) && !reader.IsEmptyElement)
             {
                 result.Avatar = await ParseAvatarNodeAsync(reader);
             }

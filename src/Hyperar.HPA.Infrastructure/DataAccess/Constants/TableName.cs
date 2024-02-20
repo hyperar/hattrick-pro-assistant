@@ -14,6 +14,30 @@
 
         internal const string ManagerAvatarLayer = "ManagerAvatarLayer";
 
+        internal const string Match = "Match";
+
+        internal const string MatchArena = "MatchArena";
+
+        internal const string MatchEvent = "MatchEvent";
+
+        internal const string MatchOfficial = "MatchOfficial";
+
+        internal const string MatchTeam = "MatchTeam";
+
+        internal const string MatchTeamBooking = "MatchTeamBooking";
+
+        internal const string MatchTeamGoal = "MatchTeamGoal";
+
+        internal const string MatchTeamInjury = "MatchTeamInjury";
+
+        internal const string MatchTeamLineUp = "MatchTeamLineUp";
+
+        internal const string MatchTeamLineUpPlayer = "MatchTeamLineUpPlayer";
+
+        internal const string MatchTeamLineUpStartingPlayer = "MatchTeamLineUpStartingPlayer";
+
+        internal const string MatchTeamLineUpSubstitution = "MatchTeamLineUpSubstitution";
+
         internal const string Player = "Player";
 
         internal const string PlayerAvatarLayer = "PlayerAvatarLayer";

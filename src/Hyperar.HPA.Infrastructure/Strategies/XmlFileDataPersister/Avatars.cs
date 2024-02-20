@@ -9,14 +9,14 @@
     {
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository;
+        private readonly IRepository<Domain.Senior.PlayerAvatarLayer> playerAvatarLayerRepository;
 
-        private readonly IHattrickRepository<Domain.Player> playerRepository;
+        private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
 
         public Avatars(
             IDatabaseContext databaseContext,
-            IHattrickRepository<Domain.Player> playerRepository,
-            IRepository<Domain.PlayerAvatarLayer> playerAvatarLayerRepository)
+            IHattrickRepository<Domain.Senior.Player> playerRepository,
+            IRepository<Domain.Senior.PlayerAvatarLayer> playerAvatarLayerRepository)
         {
             this.databaseContext = databaseContext;
             this.playerRepository = playerRepository;
@@ -44,11 +44,11 @@
             }
         }
 
-        private static void ProcessPlayerAvatar(Hattrick.Avatar avatar, Domain.Player player)
+        private static void ProcessPlayerAvatar(Hattrick.Avatar avatar, Domain.Senior.Player player)
         {
             uint layerIndex = 1;
 
-            player.AvatarLayers.Add(new Domain.PlayerAvatarLayer
+            player.AvatarLayers.Add(new Domain.Senior.PlayerAvatarLayer
             {
                 Index = layerIndex,
                 XCoordinate = 0,
@@ -60,7 +60,7 @@
             {
                 layerIndex++;
 
-                player.AvatarLayers.Add(new Domain.PlayerAvatarLayer
+                player.AvatarLayers.Add(new Domain.Senior.PlayerAvatarLayer
                 {
                     Index = layerIndex,
                     XCoordinate = curLayer.X,
@@ -95,7 +95,7 @@
 
                     await this.playerAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
 
-                    player.Avatar = Array.Empty<byte>();
+                    player.AvatarBytes = Array.Empty<byte>();
 
                     await this.databaseContext.SaveAsync();
                 }
@@ -104,7 +104,7 @@
                 {
                     ProcessPlayerAvatar(curPlayer.Avatar, player);
 
-                    player.Avatar = await BuildAvatarFromLayers(player.AvatarLayers);
+                    player.AvatarBytes = await BuildAvatarFromLayers(player.AvatarLayers);
                 }
             }
 

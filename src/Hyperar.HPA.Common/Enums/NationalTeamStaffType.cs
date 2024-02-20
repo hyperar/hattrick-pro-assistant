@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum NationalTeamStaffType : uint
+    public enum NationalTeamStaffType : byte
     {
         NationalTeamCoach = 0,
 

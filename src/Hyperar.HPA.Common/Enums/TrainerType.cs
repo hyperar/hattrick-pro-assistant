@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum TrainerType : uint
+    public enum TrainerType : byte
     {
         Defensive = 0,
 

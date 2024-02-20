@@ -6,25 +6,25 @@
     using Domain.Interfaces;
     using Hattrick = Application.Hattrick.HallOfFamePlayers;
 
-    public class HallOfFamePlayers : IXmlFileDataPersisterStrategy
+    public class HallOfFamePlayers : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
         private readonly IHattrickRepository<Domain.Country> countryRepository;
 
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IHattrickRepository<Domain.HallOfFamePlayer> hallOfFamePlayersRepository;
+        private readonly IHattrickRepository<Domain.Senior.HallOfFamePlayer> hallOfFamePlayersRepository;
 
         public HallOfFamePlayers(
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
-            IHattrickRepository<Domain.HallOfFamePlayer> hallOfFamePlayersRepository)
+            IHattrickRepository<Domain.Senior.HallOfFamePlayer> hallOfFamePlayersRepository)
         {
             this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.hallOfFamePlayersRepository = hallOfFamePlayersRepository;
         }
 
-        public async Task PersistDataAsync(IXmlFile file)
+        public override async Task PersistDataAsync(IXmlFile file)
         {
             try
             {
@@ -57,7 +57,7 @@
 
                     ArgumentNullException.ThrowIfNull(country, nameof(country));
 
-                    hallOfFamePlayer = new Domain.HallOfFamePlayer
+                    hallOfFamePlayer = new Domain.Senior.HallOfFamePlayer
                     {
                         HattrickId = curPlayer.PlayerId,
                         FirstName = curPlayer.FirstName,

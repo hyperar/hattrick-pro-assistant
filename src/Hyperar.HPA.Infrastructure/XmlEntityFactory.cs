@@ -17,6 +17,7 @@
                 XmlFileName.ManagerCompendium => new Application.Hattrick.ManagerCompendium.HattrickData(fileName),
                 XmlFileName.MatchDetails => new Application.Hattrick.MatchDetails.HattrickData(fileName),
                 XmlFileName.Matches => new Application.Hattrick.Matches.HattrickData(fileName),
+                XmlFileName.MatchLineUp => new Application.Hattrick.MatchLineUp.HattrickData(fileName),
                 XmlFileName.Players => new Application.Hattrick.Players.HattrickData(fileName),
                 XmlFileName.StaffAvatars => new Application.Hattrick.StaffAvatars.HattrickData(fileName),
                 XmlFileName.StaffList => new Application.Hattrick.StaffList.HattrickData(fileName),

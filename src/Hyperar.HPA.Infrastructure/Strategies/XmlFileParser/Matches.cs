@@ -10,16 +10,6 @@
 
     public class Matches : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string awayGoalsNodeName = "AwayGoals";
-
-        private const string homeGoalsNodeName = "HomeGoals";
-
-        private const string matchListNodeName = "MatchList";
-
-        private const string matchNodeName = "Match";
-
-        private const string ordersGivenNodeName = "OrdersGiven";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -117,9 +107,9 @@
                 MatchContextId = await reader.ReadXmlValueAsUintAsync(),
                 CupLevel = await reader.ReadXmlValueAsUintAsync(),
                 CupLevelIndex = await reader.ReadXmlValueAsUintAsync(),
-                HomeGoals = reader.Name.Equals(homeGoalsNodeName, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsUintAsync() : null,
-                AwayGoals = reader.Name.Equals(awayGoalsNodeName, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsUintAsync() : null,
-                OrdersGiven = reader.Name.Equals(ordersGivenNodeName, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsBoolAsync() : null,
+                HomeGoals = reader.Name.Equals(Constants.NodeName.HomeGoals, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsUintAsync() : null,
+                AwayGoals = reader.Name.Equals(Constants.NodeName.AwayGoals, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsUintAsync() : null,
+                OrdersGiven = reader.Name.Equals(Constants.NodeName.OrdersGiven, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsBoolAsync() : null,
                 Status = (await reader.ReadElementContentAsStringAsync()).ToMatchStatus()
             };
 
@@ -143,12 +133,12 @@
                 LeagueLevelUnit = await ParseLeagueLevelUnitNodeAsync(reader)
             };
 
-            if (reader.Name == matchListNodeName)
+            if (reader.CheckNode(Constants.NodeName.MatchList))
             {
                 // Reads opening element.
                 await reader.ReadAsync();
 
-                while (reader.Name == matchNodeName)
+                while (reader.CheckNode(Constants.NodeName.Match))
                 {
                     result.MatchList.Add(await ParseMatchNodeAsync(reader));
                 }

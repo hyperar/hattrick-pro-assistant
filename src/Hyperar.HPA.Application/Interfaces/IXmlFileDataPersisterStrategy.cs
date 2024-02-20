@@ -5,5 +5,7 @@
     public interface IXmlFileDataPersisterStrategy
     {
         Task PersistDataAsync(IXmlFile file);
+
+        Task PersistDataWithContextAsync(IXmlFile file, uint contextId);
     }
 }

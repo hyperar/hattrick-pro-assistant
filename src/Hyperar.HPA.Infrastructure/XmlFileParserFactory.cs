@@ -19,6 +19,8 @@
 
         private readonly Matches matchesParser;
 
+        private readonly MatchLineUp matchLineUpParser;
+
         private readonly Players playersParser;
 
         private readonly StaffAvatars staffAvatarsParser;
@@ -36,6 +38,7 @@
             ManagerCompendium managerCompendiumParser,
             MatchDetails matchDetailsParser,
             Matches matchesParser,
+            MatchLineUp matchLineUpParser,
             Players playersParser,
             StaffAvatars staffAvatarsParser,
             StaffList staffListParser,
@@ -49,6 +52,7 @@
             this.managerCompendiumParser = managerCompendiumParser;
             this.matchDetailsParser = matchDetailsParser;
             this.matchesParser = matchesParser;
+            this.matchLineUpParser = matchLineUpParser;
             this.playersParser = playersParser;
             this.staffAvatarsParser = staffAvatarsParser;
             this.staffListParser = staffListParser;
@@ -66,6 +70,7 @@
                 XmlFileType.ManagerCompendium => this.managerCompendiumParser,
                 XmlFileType.MatchDetails => this.matchDetailsParser,
                 XmlFileType.Matches => this.matchesParser,
+                XmlFileType.MatchLineUp => this.matchLineUpParser,
                 XmlFileType.Players => this.playersParser,
                 XmlFileType.StaffAvatars => this.staffAvatarsParser,
                 XmlFileType.StaffList => this.staffListParser,

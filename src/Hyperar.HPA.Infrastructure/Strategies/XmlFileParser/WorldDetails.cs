@@ -8,32 +8,18 @@
 
     public class WorldDetails : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string availableAttributeName = "Available";
-
-        private const string cupNodeName = "Cup";
-
-        private const string cupsNodeName = "Cups";
-
-        private const string leagueListNodeName = "LeagueList";
-
-        private const string leagueNodeName = "League";
-
-        private const string regionListNodeName = "RegionList";
-
-        private const string regionNodeName = "Region";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
 
             try
             {
-                if (reader.Name == leagueListNodeName)
+                if (reader.CheckNode(Constants.NodeName.LeagueList))
                 {
                     // Reads opening element.
                     await reader.ReadAsync();
 
-                    while (reader.Name == leagueNodeName)
+                    while (reader.CheckNode(Constants.NodeName.League))
                     {
                         result.LeagueList.Add(await ParseLeagueNodeAsync(reader));
                     }
@@ -54,7 +40,7 @@
         {
             var result = new Country
             {
-                Available = reader.GetAttribute(availableAttributeName) == bool.TrueString
+                Available = reader.GetAttribute(Constants.NodeName.Available) == bool.TrueString
             };
 
             // Reads opening element. This could be both opening and closing element if Available attribute is false.
@@ -70,12 +56,12 @@
                 result.DateFormat = result.Available ? await reader.ReadElementContentAsStringAsync() : null;
                 result.TimeFormat = result.Available ? await reader.ReadElementContentAsStringAsync() : null;
 
-                if (reader.Name == regionListNodeName)
+                if (reader.CheckNode(Constants.NodeName.RegionList))
                 {
                     // Reads opening element.
                     await reader.ReadAsync();
 
-                    while (reader.Name == regionNodeName)
+                    while (reader.CheckNode(Constants.NodeName.Region))
                     {
                         result.RegionList.Add(await ParseRegionNodeAsync(reader));
                     }
@@ -134,12 +120,12 @@
                 Country = await ParseCountryNodeAsync(reader),
             };
 
-            if (reader.Name == cupsNodeName)
+            if (reader.CheckNode(Constants.NodeName.Cups))
             {
                 // Reads opening element.
                 await reader.ReadAsync();
 
-                while (reader.Name == cupNodeName)
+                while (reader.CheckNode(Constants.NodeName.Cup))
                 {
                     result.Cups.Add(await ParseCupNodeAsync(reader));
                 }

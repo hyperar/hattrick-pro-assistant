@@ -70,7 +70,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Access Token:.
+        ///   Looks up a localized string similar to Access Token.
         /// </summary>
         public static string AccessToken {
             get {
@@ -79,7 +79,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Access Token Secret:.
+        ///   Looks up a localized string similar to Access Token Secret.
         /// </summary>
         public static string AccessTokenSecret {
             get {
@@ -396,7 +396,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created on:.
+        ///   Looks up a localized string similar to Created on.
         /// </summary>
         public static string CreatedOn {
             get {
@@ -495,20 +495,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extracting.
+        /// </summary>
+        public static string DownloadTaskStatus_Extracting {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Extracting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parsing.
+        /// </summary>
+        public static string DownloadTaskStatus_Parsing {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Parsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pending.
         /// </summary>
         public static string DownloadTaskStatus_Pending {
             get {
                 return ResourceManager.GetString("DownloadTaskStatus_Pending", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Processing.
-        /// </summary>
-        public static string DownloadTaskStatus_Processing {
-            get {
-                return ResourceManager.GetString("DownloadTaskStatus_Processing", resourceCulture);
             }
         }
         
@@ -549,7 +558,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expires on:.
+        ///   Looks up a localized string similar to Expires on.
         /// </summary>
         public static string ExpiresOn {
             get {
@@ -1473,6 +1482,15 @@ namespace Hyperar.HPA.Globalization {
         public static string XmlFileType_Matches {
             get {
                 return ResourceManager.GetString("XmlFileType_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match LineUp.
+        /// </summary>
+        public static string XmlFileType_MatchLineUp {
+            get {
+                return ResourceManager.GetString("XmlFileType_MatchLineUp", resourceCulture);
             }
         }
         

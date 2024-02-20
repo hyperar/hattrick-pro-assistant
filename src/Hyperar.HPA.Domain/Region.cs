@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.Domain
 {
     using Domain.Interfaces;
+    using Domain.Senior;
 
     public class Region : HattrickEntityBase, IHattrickEntity
     {

@@ -1,8 +1,11 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum MatchRole : uint
+    /// <summary>
+    /// The CHPP documentation is incomplete, so I stopped using this enum until the specification is brought up to date.
+    /// </summary>
+    public enum MatchRole : ushort
     {
-        SetPieces = 17,
+        SetPiecesTaker = 17,
 
         Captain = 18,
 
@@ -34,69 +37,69 @@
 
         PenaltyTaker11 = 32,
 
-        RedCardedPlayer1 = 33,
+        SuspendedPlayer1 = 33,
 
-        RedCardedPlayer2 = 34,
+        SuspendedPlayer2 = 34,
 
-        RedCardedPlayer3 = 35,
+        SuspendedPlayer3 = 35,
 
         Keeper = 100,
 
-        RightBack = 101,
+        RightWingDefender = 101,
 
-        RightCentralDefender = 102,
+        RightInnerDefender = 102,
 
-        MiddleCentralDefender = 103,
+        MiddleInnerDefender = 103,
 
-        LeftCentralDefender = 104,
+        LeftInnerDefender = 104,
 
-        LeftBack = 105,
+        LeftWingDefender = 105,
 
-        RightWinger = 106,
+        RightWingMidfielder = 106,
 
-        RightInnerMidfield = 107,
+        RightInnerMidfielder = 107,
 
-        MiddleInnerMidfield = 108,
+        MiddleInnerMidfielder = 108,
 
-        LeftInnerMidfield = 109,
+        LeftInnerMidfielder = 109,
 
-        LeftWinger = 110,
+        LeftWingMidfielder = 110,
 
         RightForward = 111,
 
-        MiddleForward = 112,
+        CentralForward = 112,
 
         LeftForward = 113,
 
-        SubstitutionKeeper1 = 114,
+        SubstituteKeeper1 = 114,
 
-        SubstitutionDefender = 115,
+        SubstituteDefender1 = 115,
 
-        SubstitutionInnerMidfield = 116,
+        SubstituteInnerMidfielder1 = 116,
 
-        SubstitutionWinger1 = 117,
+        SubstituteWingerMidfielder1 = 117,
 
-        SubstitutionForward1 = 118,
+        SubstituteForward1 = 118,
 
-        SubstitutionKeeper2 = 200,
+        SubstituteKeeper2 = 200,
 
-        SubstitutionCentralDefender = 201,
+        SubstituteCentralDefender2 = 201,
 
-        SubstitutionWingBack = 202,
+        SubstituteWingWingDefender2 = 202,
 
-        SubstitutionInnerMidfielder = 203,
+        SubstituteInnerMidfielder2 = 203,
 
-        SubstitutionForward2 = 204,
+        SubstituteForward2 = 204,
 
-        SubstitutionWinger2 = 205,
+        SubstituteWinger2 = 205,
 
-        SubstitutionExtra = 206,
+        SubstituteExtra = 206,
 
         BackupKeeper = 207,
 
         BackupCentralDefender = 208,
 
-        BackupWingBack = 209,
+        BackupWingDefender = 209,
 
         BackupInnerMidfielder = 210,
 

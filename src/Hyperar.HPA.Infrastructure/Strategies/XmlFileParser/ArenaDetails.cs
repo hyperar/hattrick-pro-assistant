@@ -8,8 +8,6 @@
 
     public class ArenaDetails : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string availableAttributeName = "Available";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -50,7 +48,7 @@
 
             var result = new CurrentCapacity
             {
-                Available = reader.GetAttribute(availableAttributeName) == bool.TrueString
+                Available = reader.GetAttribute(Constants.NodeName.Available) == bool.TrueString
             };
 
             if (result.Available)
@@ -78,7 +76,7 @@
         {
             var result = new ExpandedCapacity
             {
-                Available = reader.GetAttribute(availableAttributeName) == bool.TrueString
+                Available = reader.GetAttribute(Constants.NodeName.Available) == bool.TrueString
             };
 
             // Reads opening element. This could be both opening and closing element if Available attribute is false.

@@ -1,0 +1,23 @@
+﻿namespace Hyperar.HPA.Common.Enums
+{
+    public enum MatchRoleBehavior : short
+    {
+        NoChange = -1,
+
+        Normal = 0,
+
+        Offensive = 1,
+
+        Defensive = 2,
+
+        TowardsMiddle = 3,
+
+        TowardsWing = 4,
+
+        ExtraForward = 5,
+
+        ExtraInnerMidfield = 6,
+
+        ExtraDefender = 7
+    }
+}

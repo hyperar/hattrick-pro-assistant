@@ -3,10 +3,64 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="Hyperar.HPA.WinUI.DownloadPageView"
+             xmlns:converters="clr-namespace:Hyperar.HPA.WinUI.Converters"
+             xmlns:vm="clr-namespace:Hyperar.HPA.WinUI.ViewModels"
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             x:DataType="vm:DownloadViewModel"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d"
-             d:DesignWidth="800"
-             d:DesignHeight="450">
-    <Border CornerRadius="{DynamicResource OverlayCornerRadius}">
-        <TextBlock Text="DownloadPageView" />
-    </Border>
+             d:DesignWidth="1600"
+             d:DesignHeight="900">
+    <UserControl.Resources>
+        <converters:DownloadTaskParameterArrayToStringConverter x:Key="downloadTaskParameterArrayToStringConverter" />
+        <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
+    </UserControl.Resources>
+    <StackPanel Spacing="20">
+        <DataGrid ItemsSource="{Binding DownloadTasks}"
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedItem}"
+                  SelectionChanged="DataGrid_SelectionChanged"
+                  BorderBrush="{DynamicResource CircleElevationBorderBrush}"
+                  BorderThickness="1"
+                  VerticalScrollBarVisibility="Auto"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  CanUserSortColumns="False"
+                  IsReadOnly="True"
+                  Height="700"
+                  Width="900">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static globalization:Strings.File}"
+                                    Binding="{Binding FileType,
+                                              Mode=OneWay,
+                                              Converter={StaticResource enumToTranslatedStringConverter}}" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Parameters}"
+                                    Binding="{Binding Parameters,
+                                              Mode=OneWay,
+                                              Converter={StaticResource downloadTaskParameterArrayToStringConverter}}"
+                                    Width="*" />
+                <DataGridTextColumn Header="{x:Static globalization:Strings.Status}"
+                                    Binding="{Binding Status,
+                                              Mode=OneWay,
+                                              Converter={StaticResource enumToTranslatedStringConverter}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <ProgressBar Maximum="{Binding TaskCount}"
+                     IsVisible="{Binding IsDownloading}"
+                     Value="{Binding CompletedTaskCount}" />
+
+        <TextBlock HorizontalAlignment="Center"
+                   IsVisible="{Binding IsDownloading}"
+                   Text="{Binding ProgressPercentage, StringFormat={}{0}%}" />
+
+        <Button Command="{Binding DownloadFilesCommand}"
+                HorizontalAlignment="Center"
+                IsEnabled="{Binding CanDownload}">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <PathIcon Data="{DynamicResource DownloadIcon}" Height="12" />
+                <TextBlock Text="{x:Static globalization:Strings.Download}" />
+            </StackPanel>
+        </Button>
+    </StackPanel>
 </UserControl>

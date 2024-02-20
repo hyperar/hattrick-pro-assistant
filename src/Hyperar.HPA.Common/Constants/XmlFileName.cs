@@ -14,6 +14,8 @@
 
         public const string Matches = "matches.xml";
 
+        public const string MatchLineUp = "matchlineup.xml";
+
         public const string Players = "players.xml";
 
         public const string StaffAvatars = "staffavatars.xml";

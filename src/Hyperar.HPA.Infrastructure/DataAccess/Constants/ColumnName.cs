@@ -6,6 +6,10 @@
 
         internal const string ActiveUsers = "ActiveUsers";
 
+        internal const string AddedMinutes = "AddedMinutes";
+
+        internal const string AdditionalPlayerHattrickId = "AdditionalPlayerHattrickId";
+
         internal const string Age = "Age";
 
         internal const string AgeDays = "AgeDays";
@@ -16,11 +20,17 @@
 
         internal const string Agreeability = "Agreeability";
 
-        internal const string AlternativeMatchKit = "AlternativeMatchKit";
+        internal const string AlternativeMatchKitBytes = "AlternativeMatchKitBytes";
 
         internal const string AlternativeMatchKitUrl = "AlternativeMatchKitUrl";
 
-        internal const string Avatar = "Avatar";
+        internal const string AttackIndirectSetPiecesRating = "AttackIndirectSetPiecesRating";
+
+        internal const string Attendance = "Attendance";
+
+        internal const string Attitude = "Attitude";
+
+        internal const string AvatarBytes = "AvatarBytes";
 
         internal const string AwayGoals = "AwayGoals";
 
@@ -28,9 +38,15 @@
 
         internal const string AwayTeamName = "AwayTeamName";
 
+        internal const string AwayTeamScore = "AwayTeamScore";
+
         internal const string AwayTeamShortName = "AwayTeamShortName";
 
         internal const string BasicSeatCapacity = "BasicSeatCapacity";
+
+        internal const string BasicSeatsSold = "BasicSeatsSold";
+
+        internal const string Behavior = "Behavior";
 
         internal const string BookingStatus = "BookingStatus";
 
@@ -41,6 +57,16 @@
         internal const string CareerHattricks = "CareerHattricks";
 
         internal const string Category = "Category";
+
+        internal const string CentralAttackRating = "CentralAttackRating";
+
+        internal const string CentralDefenseRating = "CentralDefenseRating";
+
+        internal const string ChancesOnCenter = "ChancesOnCenter";
+
+        internal const string ChancesOnLeft = "ChancesOnLeft";
+
+        internal const string ChancesOnRight = "ChancesOnRight";
 
         internal const string CoachPlayerId = "CoachPlayerId";
 
@@ -70,6 +96,10 @@
 
         internal const string Defending = "Defending";
 
+        internal const string DefenseIndirectSetPiecesRating = "DefenseIndirectSetPiecesRating";
+
+        internal const string EndRating = "EndRating";
+
         internal const string EnglishName = "EnglishName";
 
         internal const string EnrolledOnNationalTeam = "EnrolledOnNationalTeam";
@@ -82,19 +112,27 @@
 
         internal const string FifthWeeklyUpdate = "FifthWeeklyUpdate";
 
+        internal const string FinishDate = "FinishDate";
+
+        internal const string FirstHalfPosession = "FirstHalfPosession";
+
         internal const string FirstName = "FirstName";
 
         internal const string FirstWeeklyUpdate = "FirstWeeklyUpdate";
 
-        internal const string Flag = "Flag";
+        internal const string FlagBytes = "FlagBytes";
 
         internal const string Form = "Form";
+
+        internal const string Formation = "Formation";
 
         internal const string FoundedOn = "FoundedOn";
 
         internal const string FourthWeeklyUpdate = "FourthWeeklyUpdate";
 
         internal const string GlobalRanking = "GlobalRanking";
+
+        internal const string Goals = "Goals";
 
         internal const string GoalsOnTeam = "GoalsOnTeam";
 
@@ -113,6 +151,8 @@
         internal const string HomeTeamHattrickId = "HomeTeamHattrickId";
 
         internal const string HomeTeamName = "HomeTeamName";
+
+        internal const string HomeTeamScore = "HomeTeamScore";
 
         internal const string HomeTeamShortName = "HomeTeamShortName";
 
@@ -158,11 +198,17 @@
 
         internal const string LeagueRanking = "LeagueRanking";
 
+        internal const string LeftAttackRating = "LeftAttackRating";
+
+        internal const string LeftDefenseRating = "LeftDefenseRating";
+
         internal const string Level = "Level";
 
         internal const string LevelIndex = "LevelIndex";
 
-        internal const string Logo = "Logo";
+        internal const string Location = "Location";
+
+        internal const string LogoBytes = "LogoBytes";
 
         internal const string LogoUrl = "LogoUrl";
 
@@ -170,15 +216,25 @@
 
         internal const string MatchesOnTeam = "MatchesOnTeam";
 
-        internal const string MatchKit = "MatchKit";
+        internal const string MatchKitBytes = "MatchKitBytes";
 
         internal const string MatchKitUrl = "MatchKitUrl";
+
+        internal const string MatchPart = "MatchPart";
+
+        internal const string MidfieldRating = "MidfieldRating";
+
+        internal const string Minute = "Minute";
 
         internal const string Name = "Name";
 
         internal const string NationalTeamCaps = "NationalTeamCaps";
 
         internal const string NationalTeamId = "NationalTeamId";
+
+        internal const string NewRole = "NewRole";
+
+        internal const string NewRoleBehavior = "NewRoleBehavior";
 
         internal const string NextBirthday = "NextBirthday";
 
@@ -196,25 +252,49 @@
 
         internal const string NumberOfLevels = "NumberOfLevels";
 
+        internal const string OrderType = "OrderType";
+
+        internal const string OtherChances = "OtherChances";
+
         internal const string Passing = "Passing";
+
+        internal const string PlayerHattrickId = "PlayerHattrickId";
+
+        internal const string PlayerName = "PlayerName";
 
         internal const string Playmaking = "Playmaking";
 
         internal const string PowerRanking = "PowerRanking";
 
+        internal const string Rating = "Rating";
+
         internal const string RegionRanking = "RegionRanking";
+
+        internal const string RightAttackRating = "RightAttackRating";
+
+        internal const string RightDefenseRating = "RightDefenseRating";
+
+        internal const string Role = "Role";
 
         internal const string RoofSeatCapacity = "RoofSeatCapacity";
 
+        internal const string RoofSeatsSold = "RoofSeatsSold";
+
         internal const string RoundsLeft = "RoundsLeft";
 
+        internal const string Rules = "Rules";
+
         internal const string Salary = "Salary";
+
+        internal const string Score = "Score";
 
         internal const string Scoring = "Scoring";
 
         internal const string Season = "Season";
 
         internal const string SeasonOffset = "SeasonOffset";
+
+        internal const string SecondHalfPosession = "SecondHalfPosession";
 
         internal const string SecondWeeklyUpdate = "SecondWeeklyUpdate";
 
@@ -232,9 +312,15 @@
 
         internal const string ShortName = "ShortName";
 
+        internal const string SourceSystem = "SourceSystem";
+
+        internal const string SpecialEventChances = "SpecialEventChances";
+
         internal const string Specialty = "Specialty";
 
         internal const string Stamina = "Stamina";
+
+        internal const string StartDate = "StartDate";
 
         internal const string StartsOn = "StartsOn";
 
@@ -242,11 +328,23 @@
 
         internal const string Status = "Status";
 
+        internal const string Style = "Style";
+
         internal const string SupporterTier = "SupporterTier";
+
+        internal const string TacticLevel = "TacticLevel";
+
+        internal const string TacticType = "TacticType";
+
+        internal const string TeamHattrickId = "TeamHattrickId";
 
         internal const string TeamRank = "TeamRank";
 
         internal const string TerracesCapacity = "TerracesCapacity";
+
+        internal const string TerracesSold = "TerracesSold";
+
+        internal const string Text = "Text";
 
         internal const string ThirdWeeklyUpdate = "ThirdWeeklyUpdate";
 
@@ -266,9 +364,15 @@
 
         internal const string Value = "Value";
 
+        internal const string Variation = "Variation";
+
         internal const string VipLoungeCapacity = "VipLoungeCapacity";
 
+        internal const string VipSeatsSold = "VipSeatsSold";
+
         internal const string WaitingUsers = "WaitingUsers";
+
+        internal const string Weather = "Weather";
 
         internal const string Week = "Week";
 

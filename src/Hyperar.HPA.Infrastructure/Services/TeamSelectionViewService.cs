@@ -8,9 +8,9 @@
 
     public class TeamSelectionViewService : ITeamSelectionViewService
     {
-        private readonly IHattrickRepository<Domain.Team> teamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
-        public TeamSelectionViewService(IHattrickRepository<Domain.Team> teamRepository)
+        public TeamSelectionViewService(IHattrickRepository<Domain.Senior.Team> teamRepository)
         {
             this.teamRepository = teamRepository;
         }
@@ -29,7 +29,7 @@
                                                     HattrickId = x.Region.Country.HattrickId,
                                                     Name = x.Region.Country.Name
                                                 },
-                                                Logo = x.Logo,
+                                                Logo = x.LogoBytes,
                                                 Region = new Region
                                                 {
                                                     HattrickId = x.Region.HattrickId,

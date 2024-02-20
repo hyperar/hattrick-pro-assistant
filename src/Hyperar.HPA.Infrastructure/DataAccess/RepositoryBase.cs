@@ -23,9 +23,9 @@
             this.EntityCollection.Add(entity);
         }
 
-        public async Task InsertAsync(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity)
         {
-            await this.EntityCollection.AddAsync(entity);
+            return (await this.EntityCollection.AddAsync(entity)).Entity;
         }
 
         public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>>? predicate = null)

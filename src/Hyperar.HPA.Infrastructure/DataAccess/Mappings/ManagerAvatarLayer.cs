@@ -40,14 +40,13 @@
 
         public override void MapRelationships(EntityTypeBuilder<Domain.ManagerAvatarLayer> builder)
         {
-            builder.HasOne(x => x.Manager)
-                .WithMany(x => x.AvatarLayers)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(m => m.Manager)
+                .WithMany(m => m.AvatarLayers);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.ManagerAvatarLayer> builder)
         {
-            builder.ToTable(Constants.TableName.ManagerAvatarLayer);
+            builder.ToTable(Constants.TableName.ManagerAvatarLayer, Constants.Schema.Global);
         }
     }
 }

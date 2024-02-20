@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using Hyperar.HPA.Application.Hattrick.Interfaces;
-    using Hyperar.HPA.Application.Hattrick.Matches;
-    using Hyperar.HPA.Application.Interfaces;
-    using Hyperar.HPA.Application.Models;
-    using Hyperar.HPA.Common.Enums;
+    using Application.Hattrick.Interfaces;
+    using Application.Hattrick.Matches;
+    using Application.Interfaces;
+    using Application.Models;
+    using Common.Enums;
 
     public class Matches : IXmlDownloadTaskExtractorStrategy
     {
@@ -16,26 +16,50 @@
 
         private const string sourceSystemParamKey = "sourceSystem";
 
-        public List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile)
+        private const string teamIdParamKey = "teamId";
+
+        public DownloadTask[] ExtractXmlDownloadTasks(IXmlFile xmlFile)
+
         {
             if (xmlFile is HattrickData file)
             {
                 var downloadTasks = new List<DownloadTask>();
 
-                foreach (var curMatch in file.Team.MatchList)
+                foreach (var curMatch in file.Team.MatchList.Where(x => x.Status == MatchStatus.Finished))
                 {
                     downloadTasks.Add(
                         new DownloadTask(
                             XmlFileType.MatchDetails,
+                            file.Team.TeamId,
                             new Dictionary<string, string>
                             {
-                                { matchIdParamKey, curMatch.MatchId.ToString()},
+                                { matchIdParamKey, curMatch.MatchId.ToString() },
                                 { matchEventsParamKey, bool.TrueString},
                                 { sourceSystemParamKey, curMatch.SourceSystem.ToString() }
                             }));
+
+                    downloadTasks.Add(
+                        new DownloadTask(
+                            XmlFileType.MatchLineUp,
+                            new Dictionary<string, string>
+                            {
+                                    { matchIdParamKey, curMatch.MatchId.ToString() },
+                                    { teamIdParamKey, curMatch.HomeTeam.HomeTeamId.ToString() },
+                                    { sourceSystemParamKey, curMatch.SourceSystem }
+                            }));
+
+                    downloadTasks.Add(
+                        new DownloadTask(
+                            XmlFileType.MatchLineUp,
+                            new Dictionary<string, string>
+                            {
+                                    { matchIdParamKey, curMatch.MatchId.ToString() },
+                                    { teamIdParamKey, curMatch.AwayTeam.AwayTeamId.ToString() },
+                                    { sourceSystemParamKey, curMatch.SourceSystem }
+                            }));
                 }
 
-                return downloadTasks;
+                return downloadTasks.ToArray();
             }
             else
             {

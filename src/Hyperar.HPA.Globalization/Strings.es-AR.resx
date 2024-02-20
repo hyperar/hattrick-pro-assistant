@@ -255,7 +255,7 @@ Por favor, vuelva a autorizar para continuar usándolo.</value>
     <value>Cancelado</value>
   </data>
   <data name="DownloadTaskStatus_Done" xml:space="preserve">
-    <value>Hecho</value>
+    <value>Listo</value>
   </data>
   <data name="DownloadTaskStatus_Downloading" xml:space="preserve">
     <value>Descargando</value>
@@ -263,11 +263,14 @@ Por favor, vuelva a autorizar para continuar usándolo.</value>
   <data name="DownloadTaskStatus_Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="DownloadTaskStatus_Extracting" xml:space="preserve">
+    <value>Extrayendo</value>
+  </data>
+  <data name="DownloadTaskStatus_Parsing" xml:space="preserve">
+    <value>Parseando</value>
+  </data>
   <data name="DownloadTaskStatus_Pending" xml:space="preserve">
     <value>Pendiente</value>
-  </data>
-  <data name="DownloadTaskStatus_Processing" xml:space="preserve">
-    <value>Procesando</value>
   </data>
   <data name="DownloadTaskStatus_Saving" xml:space="preserve">
     <value>Guardando</value>
@@ -608,6 +611,9 @@ Tiene experiencia {3}, y liderazgo {4}. Tiene lealtad {5}.</value>
   </data>
   <data name="XmlFileType_Matches" xml:space="preserve">
     <value>Partidos</value>
+  </data>
+  <data name="XmlFileType_MatchLineUp" xml:space="preserve">
+    <value>Alineación de Partido</value>
   </data>
   <data name="XmlFileType_Players" xml:space="preserve">
     <value>Jugadores</value>

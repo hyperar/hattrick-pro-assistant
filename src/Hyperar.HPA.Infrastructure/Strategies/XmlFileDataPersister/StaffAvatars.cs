@@ -10,14 +10,14 @@
     {
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IRepository<Domain.StaffMemberAvatarLayer> staffMemberAvatarLayerRepository;
+        private readonly IRepository<Domain.Senior.StaffMemberAvatarLayer> staffMemberAvatarLayerRepository;
 
-        private readonly IHattrickRepository<Domain.StaffMember> staffMemberRepository;
+        private readonly IHattrickRepository<Domain.Senior.StaffMember> staffMemberRepository;
 
         public StaffAvatars(
             IDatabaseContext databaseContext,
-            IHattrickRepository<Domain.StaffMember> staffMemberRepository,
-            IRepository<Domain.StaffMemberAvatarLayer> staffMemberAvatarLayerRepository)
+            IHattrickRepository<Domain.Senior.StaffMember> staffMemberRepository,
+            IRepository<Domain.Senior.StaffMemberAvatarLayer> staffMemberAvatarLayerRepository)
         {
             this.databaseContext = databaseContext;
             this.staffMemberRepository = staffMemberRepository;
@@ -45,11 +45,11 @@
             }
         }
 
-        private static void ProcessStaffMemberAvatar(Hattrick.Avatar avatar, Domain.StaffMember staffMember)
+        private static void ProcessStaffMemberAvatar(Hattrick.Avatar avatar, Domain.Senior.StaffMember staffMember)
         {
             uint layerIndex = 1;
 
-            staffMember.AvatarLayers.Add(new Domain.StaffMemberAvatarLayer
+            staffMember.AvatarLayers.Add(new Domain.Senior.StaffMemberAvatarLayer
             {
                 Index = layerIndex,
                 XCoordinate = 0,
@@ -61,7 +61,7 @@
             {
                 layerIndex++;
 
-                staffMember.AvatarLayers.Add(new Domain.StaffMemberAvatarLayer
+                staffMember.AvatarLayers.Add(new Domain.Senior.StaffMemberAvatarLayer
                 {
                     Index = layerIndex,
                     XCoordinate = curLayer.X,
@@ -96,7 +96,7 @@
 
                     await this.staffMemberAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
 
-                    staffmember.Avatar = Array.Empty<byte>();
+                    staffmember.AvatarBytes = Array.Empty<byte>();
 
                     await this.databaseContext.SaveAsync();
                 }
@@ -105,7 +105,7 @@
                 {
                     ProcessStaffMemberAvatar(curStaffMember.Avatar, staffmember);
 
-                    staffmember.Avatar = await BuildAvatarFromLayers(staffmember.AvatarLayers);
+                    staffmember.AvatarBytes = await BuildAvatarFromLayers(staffmember.AvatarLayers);
                 }
             }
 

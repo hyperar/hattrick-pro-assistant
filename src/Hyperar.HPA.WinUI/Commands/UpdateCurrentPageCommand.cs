@@ -2,8 +2,8 @@
 {
     using System.Threading.Tasks;
     using System.Windows.Input;
-    using Hyperar.HPA.WinUI.State.Interface;
     using WinUI.Enums;
+    using WinUI.State.Interface;
     using WinUI.ViewModels;
     using WinUI.ViewModels.Interface;
 

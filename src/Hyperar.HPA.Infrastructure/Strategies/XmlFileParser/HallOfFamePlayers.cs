@@ -4,12 +4,11 @@
     using Application.Hattrick.HallOfFamePlayers;
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
+    using Common.Enums;
     using Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
 
     public class HallOfFamePlayers : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string playerNodeName = "Player";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -26,7 +25,7 @@
 
             var result = new List<Player>();
 
-            while (reader.Name == playerNodeName)
+            while (reader.CheckNode(Constants.NodeName.Player))
             {
                 result.Add(
                     await ParsePlayerNodeAsync(
@@ -54,7 +53,7 @@
                 NextBirthday = await reader.ReadXmlValueAsDateTimeAsync(),
                 CountryId = await reader.ReadXmlValueAsUintAsync(),
                 ArrivalDate = await reader.ReadXmlValueAsDateTimeAsync(),
-                ExpertType = await reader.ReadXmlValueAsHallOfFameExpertTypeAsync(),
+                ExpertType = (HallOfFameExpertType)await reader.ReadXmlValueAsByteAsync(),
                 HofDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 HofAge = await reader.ReadXmlValueAsUintAsync(),
             };

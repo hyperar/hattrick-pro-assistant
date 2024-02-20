@@ -11,56 +11,6 @@
 
     public class TeamDetails : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string awayFlagsNodeName = "AwayFlags";
-
-        private const string bodyNodeName = "Body";
-
-        private const string flagNodeName = "Flag";
-
-        private const string flagsNodeName = "Flags";
-
-        private const string guestbookNodeName = "Guestbook";
-
-        private const string homeFlagsNodeName = "HomeFlags";
-
-        private const string imageUrlNodeName = "ImageUrl";
-
-        private const string indexAttributeName = "Index";
-
-        private const string maxItemsAttributeName = "MaxItems";
-
-        private const string mySupportesNodeName = "MySupporters";
-
-        private const string nationalTeamNodeName = "NationalTeam";
-
-        private const string pressAnnouncementBodyNodeName = "PressAnnouncementBody";
-
-        private const string pressAnnouncementNodeName = "PressAnnouncement";
-
-        private const string pressAnnouncementSendDateNodeName = "PressAnnouncementSendDate";
-
-        private const string pressAnnouncementSubjectNodeName = "PressAnnouncementSubject";
-
-        private const string sendDateNodeName = "SendDate";
-
-        private const string subjectNodeName = "Subject";
-
-        private const string supportedTeamNodeName = "SupportedTeam";
-
-        private const string supportedTeamsNodeName = "SupportedTeams";
-
-        private const string supporterTeamNodeName = "SupporterTeam";
-
-        private const string teamColorsNodeName = "TeamColors";
-
-        private const string teamNodeName = "Team";
-
-        private const string totalItemsAttributeName = "TotalItems";
-
-        private const string trophyListNodeName = "TrophyList";
-
-        private const string trophyNodeName = "Trophy";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -178,7 +128,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            while (reader.Name == flagNodeName)
+            while (reader.CheckNode(Constants.NodeName.Flag))
             {
                 result.Add(await ParseFlagNodeAsync(reader));
             }
@@ -214,12 +164,12 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            if (reader.Name == awayFlagsNodeName)
+            if (reader.CheckNode(Constants.NodeName.AwayFlags))
             {
                 result.AwayFlags = await ParseFlagListNodeAsync(reader);
             }
 
-            if (reader.Name == homeFlagsNodeName)
+            if (reader.CheckNode(Constants.NodeName.HomeFlags))
             {
                 result.HomeFlags = await ParseFlagListNodeAsync(reader);
             }
@@ -325,14 +275,14 @@
         {
             var result = new MySupporters
             {
-                TotalItems = uint.Parse(reader.GetAttribute(totalItemsAttributeName) ?? "0"),
-                MaxItems = uint.Parse(reader.GetAttribute(maxItemsAttributeName) ?? "0")
+                TotalItems = uint.Parse(reader.GetAttribute(Constants.NodeName.TotalItems) ?? "0"),
+                MaxItems = uint.Parse(reader.GetAttribute(Constants.NodeName.MaxItems) ?? "0")
             };
 
             // Reads opening element.
             await reader.ReadAsync();
 
-            while (reader.Name == supporterTeamNodeName)
+            while (reader.CheckNode(Constants.NodeName.SupporterTeam))
             {
                 result.SupporterTeamList.Add(await ParseSupporterTeamNodeAsync(reader));
             }
@@ -349,7 +299,7 @@
 
             if (!reader.IsEmptyElement)
             {
-                result.Index = uint.Parse(reader.GetAttribute(indexAttributeName) ?? "0");
+                result.Index = uint.Parse(reader.GetAttribute(Constants.NodeName.Index) ?? "0");
 
                 // Reads opening element.
                 await reader.ReadAsync();
@@ -376,7 +326,7 @@
                 // Reads opening element.
                 await reader.ReadAsync();
 
-                while (reader.Name == nationalTeamNodeName)
+                while (reader.CheckNode(Constants.NodeName.NationalTeam))
                 {
                     result.Add(await ParseNationalTeamNodeAsync(reader));
                 }
@@ -436,22 +386,22 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            while (reader.Name != pressAnnouncementNodeName && reader.NodeType != XmlNodeType.EndElement)
+            while (reader.Name != Constants.NodeName.PressAnnouncement && reader.NodeType != XmlNodeType.EndElement)
             {
                 switch (reader.Name)
                 {
-                    case sendDateNodeName:
-                    case pressAnnouncementSendDateNodeName:
+                    case Constants.NodeName.SendDate:
+                    case Constants.NodeName.PressAnnouncementSendDate:
                         result.SendDate = await reader.ReadXmlValueAsDateTimeAsync();
                         break;
 
-                    case bodyNodeName:
-                    case pressAnnouncementBodyNodeName:
+                    case Constants.NodeName.Body:
+                    case Constants.NodeName.PressAnnouncementBody:
                         result.Body = await reader.ReadElementContentAsStringAsync();
                         break;
 
-                    case subjectNodeName:
-                    case pressAnnouncementSubjectNodeName:
+                    case Constants.NodeName.Subject:
+                    case Constants.NodeName.PressAnnouncementSubject:
                         result.Subject = await reader.ReadElementContentAsStringAsync();
                         break;
 
@@ -503,7 +453,7 @@
                 NextMatch = await ParseNextMatchNodeAsync(reader),
             };
 
-            if (reader.Name == pressAnnouncementNodeName)
+            if (reader.CheckNode(Constants.NodeName.PressAnnouncement))
             {
                 result.PressAnnouncement = await ParsePressAnnouncementNodeAsync(reader);
             }
@@ -518,14 +468,14 @@
         {
             var result = new SupportedTeams
             {
-                TotalItems = uint.Parse(reader.GetAttribute(totalItemsAttributeName) ?? "0"),
-                MaxItems = uint.Parse(reader.GetAttribute(maxItemsAttributeName) ?? "0")
+                TotalItems = uint.Parse(reader.GetAttribute(Constants.NodeName.TotalItems) ?? "0"),
+                MaxItems = uint.Parse(reader.GetAttribute(Constants.NodeName.MaxItems) ?? "0")
             };
 
             // Reads opening element.
             await reader.ReadAsync();
 
-            while (reader.Name == supportedTeamNodeName)
+            while (reader.CheckNode(Constants.NodeName.SupportedTeam))
             {
                 result.SupportedTeamList.Add(await ParseSupportedTeamNodeAsync(reader));
             }
@@ -623,17 +573,17 @@
             result.Fanclub = await ParseFanclubNodeAsync(reader);
             result.LogoUrl = await reader.ReadElementContentAsStringAsync();
 
-            if (reader.Name == guestbookNodeName)
+            if (reader.CheckNode(Constants.NodeName.Guestbook))
             {
                 result.Guestbook = await ParseGuestbookNodeAsync(reader);
             }
 
-            if (reader.Name == pressAnnouncementNodeName)
+            if (reader.CheckNode(Constants.NodeName.PressAnnouncement))
             {
                 result.PressAnnouncement = await ParsePressAnnouncementNodeAsync(reader);
             }
 
-            if (reader.Name == teamColorsNodeName)
+            if (reader.CheckNode(Constants.NodeName.TeamColors))
             {
                 result.TeamColors = await ParseTeamColorsNodeAsync(reader);
             }
@@ -642,22 +592,22 @@
             result.YouthTeamName = await reader.ReadElementContentAsStringAsync();
             result.NumberOfVisits = await reader.ReadXmlValueAsUintAsync();
 
-            if (reader.Name == flagsNodeName)
+            if (reader.CheckNode(Constants.NodeName.Flags))
             {
                 result.Flags = await ParseFlagsNodeAsync(reader);
             }
 
-            if (reader.Name == trophyListNodeName)
+            if (reader.CheckNode(Constants.NodeName.TrophyList))
             {
                 result.TrophyList = await ParseTrophyListNodeAsync(reader);
             }
 
-            if (reader.Name == supportedTeamsNodeName)
+            if (reader.CheckNode(Constants.NodeName.SupportedTeams))
             {
                 result.SupportedTeams = await ParseSupportedTeamsNodeAsync(reader);
             }
 
-            if (reader.Name == mySupportesNodeName)
+            if (reader.CheckNode(Constants.NodeName.MySupportes))
             {
                 result.MySupporters = await ParseMySupportersNodeAsync(reader);
             }
@@ -678,7 +628,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            while (reader.Name == teamNodeName)
+            while (reader.CheckNode(Constants.NodeName.Team))
             {
                 result.Add(await ParseTeamNodeAsync(reader));
             }
@@ -716,7 +666,7 @@
 
                 result = new List<Trophy>();
 
-                while (reader.Name == trophyNodeName)
+                while (reader.CheckNode(Constants.NodeName.Trophy))
                 {
                     result.Add(await ParseTrophyNodeAsync(reader));
                 }
@@ -743,7 +693,7 @@
                 GainedDate = await reader.ReadXmlValueAsDateTimeAsync(),
             };
 
-            if (reader.Name == imageUrlNodeName)
+            if (reader.CheckNode(Constants.NodeName.ImageUrl))
             {
                 result.ImageUrl = await reader.ReadElementContentAsStringAsync();
             }

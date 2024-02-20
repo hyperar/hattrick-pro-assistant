@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum MatchStatus : uint
+    public enum MatchStatus : byte
     {
         Upcoming = 1,
 

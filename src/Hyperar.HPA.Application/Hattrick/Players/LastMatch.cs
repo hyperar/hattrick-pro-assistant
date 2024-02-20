@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Hattrick.Players
 {
     using System;
-    using Common.Enums;
 
     public class LastMatch
     {
@@ -11,7 +10,7 @@
 
         public uint PlayedMinutes { get; set; }
 
-        public MatchRole PositionCode { get; set; }
+        public ushort PositionCode { get; set; }
 
         public decimal Rating { get; set; }
 

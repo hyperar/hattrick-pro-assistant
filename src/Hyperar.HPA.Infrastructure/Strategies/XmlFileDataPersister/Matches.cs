@@ -10,25 +10,25 @@
     using Microsoft.EntityFrameworkCore;
     using Hattrick = Application.Hattrick.Matches;
 
-    public class Matches : IXmlFileDataPersisterStrategy
+    public class Matches : XmlFileDataPersisterBase, IXmlFileDataPersisterStrategy
     {
         private readonly IDatabaseContext databaseContext;
 
-        private readonly IHattrickRepository<Domain.TeamOverviewMatch> teamOverviewMatchRepository;
+        private readonly IHattrickRepository<Domain.Senior.TeamOverviewMatch> teamOverviewMatchRepository;
 
-        private readonly IHattrickRepository<Domain.Team> teamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         public Matches(
             IDatabaseContext databaseContext,
-            IHattrickRepository<Domain.Team> teamRepository,
-            IHattrickRepository<Domain.TeamOverviewMatch> teamOverviewMatchRepository)
+            IHattrickRepository<Domain.Senior.Team> teamRepository,
+            IHattrickRepository<Domain.Senior.TeamOverviewMatch> teamOverviewMatchRepository)
         {
             this.databaseContext = databaseContext;
             this.teamRepository = teamRepository;
             this.teamOverviewMatchRepository = teamOverviewMatchRepository;
         }
 
-        public async Task PersistDataAsync(IXmlFile file)
+        public override async Task PersistDataAsync(IXmlFile file)
         {
             try
             {
@@ -49,13 +49,13 @@
             }
         }
 
-        private async Task ProcessMatchAsync(Hattrick.Match xmlMatch, Domain.Team team)
+        private async Task ProcessMatchAsync(Hattrick.Match xmlMatch, Domain.Senior.Team team)
         {
             var storedMatch = await this.teamOverviewMatchRepository.GetByHattrickIdAsync(xmlMatch.MatchId);
 
             if (storedMatch == null)
             {
-                storedMatch = new Domain.TeamOverviewMatch
+                storedMatch = new Domain.Senior.TeamOverviewMatch
                 {
                     HattrickId = xmlMatch.MatchId,
                     HomeTeamHattrickId = xmlMatch.HomeTeam.HomeTeamId,

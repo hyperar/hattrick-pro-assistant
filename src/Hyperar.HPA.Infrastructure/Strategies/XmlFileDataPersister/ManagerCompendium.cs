@@ -108,7 +108,7 @@
                 {
                     ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
 
-                    manager.Avatar = await BuildAvatarFromLayers(manager.AvatarLayers);
+                    manager.AvatarBytes = await BuildAvatarFromLayers(manager.AvatarLayers);
                 }
 
                 await this.managerRepository.InsertAsync(manager);
@@ -139,7 +139,7 @@
 
                     await this.managerAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
 
-                    manager.Avatar = null;
+                    manager.AvatarBytes = null;
 
                     await this.databaseContext.SaveAsync();
                 }
@@ -148,7 +148,7 @@
                 {
                     ProcessManagerAvatar(xmlEntity.Manager.Avatar, manager);
 
-                    manager.Avatar = await BuildAvatarFromLayers(manager.AvatarLayers);
+                    manager.AvatarBytes = await BuildAvatarFromLayers(manager.AvatarLayers);
                 }
 
                 manager.SupporterTier = xmlEntity.Manager.SupporterTier;

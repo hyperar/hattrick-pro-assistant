@@ -7,14 +7,18 @@
     {
         Task BeginPersistSession();
 
+        Task CancelPersistSession();
+
         Task EndPersistSession();
 
-        List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile);
+        DownloadTask[] ExtractXmlDownloadTasks(IXmlFile xmlFile);
 
         Task<IXmlFile> ParseFileAsync(Stream fileStream);
 
         Task<IXmlFile> ParseFileAsync(string fileContent);
 
         Task PersistFileAsync(IXmlFile xmlFile);
+
+        Task PersistFileAsync(IXmlFile xmlFile, uint contextId);
     }
 }

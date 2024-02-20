@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.WinUI.ViewModels
 {
-    using Hyperar.HPA.WinUI.State.Interface;
+    using WinUI.State.Interface;
 
     public class SettingsViewModel : AsyncViewModelBase
     {

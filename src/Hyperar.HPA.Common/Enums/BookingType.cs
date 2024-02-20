@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum BookingType : uint
+    public enum BookingType : byte
     {
         YellowCard = 1,
 

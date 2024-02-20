@@ -15,6 +15,7 @@
                 Constants.XmlFileName.ManagerCompendium => XmlFileType.ManagerCompendium,
                 Constants.XmlFileName.MatchDetails => XmlFileType.MatchDetails,
                 Constants.XmlFileName.Matches => XmlFileType.Matches,
+                Constants.XmlFileName.MatchLineUp => XmlFileType.MatchLineUp,
                 Constants.XmlFileName.Players => XmlFileType.Players,
                 Constants.XmlFileName.StaffAvatars => XmlFileType.StaffAvatars,
                 Constants.XmlFileName.StaffList => XmlFileType.StaffList,

@@ -55,14 +55,14 @@
 
         public override void MapRelationships(EntityTypeBuilder<Domain.LeagueCup> builder)
         {
-            builder.HasOne(x => x.League)
-                .WithMany(x => x.Cups)
-                .HasForeignKey(x => x.LeagueHattrickId);
+            builder.HasOne(m => m.League)
+                .WithMany(m => m.Cups)
+                .HasForeignKey(m => m.LeagueHattrickId);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.LeagueCup> builder)
         {
-            builder.ToTable(Constants.TableName.LeagueCup);
+            builder.ToTable(Constants.TableName.LeagueCup, Constants.Schema.Global);
         }
     }
 }

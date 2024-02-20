@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.WinUI.ViewModels
 {
     using CommunityToolkit.Mvvm.ComponentModel;
-    using Hyperar.HPA.WinUI.State.Interface;
+    using WinUI.State.Interface;
 
     public partial class ViewModelBase : ObservableObject
     {

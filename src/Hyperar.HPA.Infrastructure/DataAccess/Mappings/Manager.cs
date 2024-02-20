@@ -41,8 +41,8 @@
                 .HasPrecision(10, 5)
                 .IsRequired();
 
-            builder.Property(p => p.Avatar)
-                .HasColumnName(Constants.ColumnName.Avatar)
+            builder.Property(p => p.AvatarBytes)
+                .HasColumnName(Constants.ColumnName.AvatarBytes)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.VarBinary);
@@ -50,14 +50,13 @@
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Manager> builder)
         {
-            builder.HasOne(x => x.Country)
-                .WithMany(x => x.Managers)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(m => m.Country)
+                .WithMany(m => m.Managers);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Manager> builder)
         {
-            builder.ToTable(Constants.TableName.Manager);
+            builder.ToTable(Constants.TableName.Manager, Constants.Schema.Global);
         }
     }
 }

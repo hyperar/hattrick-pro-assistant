@@ -1,6 +1,5 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
-    using System.Collections.Generic;
     using System.IO;
     using System.Text;
     using System.Xml;
@@ -42,12 +41,17 @@
             await this.databaseContext.BeginTransactionAsync();
         }
 
+        public async Task CancelPersistSession()
+        {
+            await Task.Run(() => this.databaseContext.Cancel());
+        }
+
         public async Task EndPersistSession()
         {
             await this.databaseContext.EndTransactionAsync();
         }
 
-        public List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile)
+        public DownloadTask[] ExtractXmlDownloadTasks(IXmlFile xmlFile)
         {
             IXmlDownloadTaskExtractorStrategy childTaskBuilder = this.downloadTaskExtractorFactory.CreateDownloadTaskExtractor(xmlFile.FileName.ToXmlFileType());
 
@@ -93,6 +97,13 @@
             var persister = this.fileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
 
             await persister.PersistDataAsync(xmlFile);
+        }
+
+        public async Task PersistFileAsync(IXmlFile xmlFile, uint contextId)
+        {
+            var persister = this.fileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
+
+            await persister.PersistDataWithContextAsync(xmlFile, contextId);
         }
     }
 }

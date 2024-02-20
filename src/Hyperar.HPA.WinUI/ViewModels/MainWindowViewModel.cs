@@ -6,11 +6,11 @@
     using System.Windows.Input;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using Hyperar.HPA.WinUI.State;
-    using Hyperar.HPA.WinUI.State.Interface;
     using WinUI.Commands;
     using WinUI.Enums;
     using WinUI.Models;
+    using WinUI.State;
+    using WinUI.State.Interface;
     using WinUI.ViewModels.Interface;
 
     public partial class MainWindowViewModel : ViewModelBase, IDisposable

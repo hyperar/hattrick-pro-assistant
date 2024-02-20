@@ -165,7 +165,7 @@
 
         private async Task<List<DownloadTask>?> ProcessDownloadTaskResultAsync(DownloadTask task)
         {
-            this.ChangeTaskStatus(task, DownloadTaskStatus.Processing);
+            this.ChangeTaskStatus(task, DownloadTaskStatus.Extracting);
 
             if (string.IsNullOrWhiteSpace(task.Response))
             {

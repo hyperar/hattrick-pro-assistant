@@ -74,7 +74,7 @@
 
         public override void MapTable(EntityTypeBuilder<Domain.Country> builder)
         {
-            builder.ToTable(Constants.TableName.Country);
+            builder.ToTable(Constants.TableName.Country, Constants.Schema.Global);
         }
     }
 }

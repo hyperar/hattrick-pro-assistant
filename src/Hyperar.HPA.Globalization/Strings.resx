@@ -121,10 +121,10 @@
     <value>About</value>
   </data>
   <data name="AccessToken" xml:space="preserve">
-    <value>Access Token:</value>
+    <value>Access Token</value>
   </data>
   <data name="AccessTokenSecret" xml:space="preserve">
-    <value>Access Token Secret:</value>
+    <value>Access Token Secret</value>
   </data>
   <data name="Age" xml:space="preserve">
     <value>Age</value>
@@ -231,7 +231,7 @@ Please re-authorize in order to keep using it.</value>
     <value>Country:</value>
   </data>
   <data name="CreatedOn" xml:space="preserve">
-    <value>Created on:</value>
+    <value>Created on</value>
   </data>
   <data name="CupGoals" xml:space="preserve">
     <value>Cup Goals</value>
@@ -263,11 +263,14 @@ Please re-authorize in order to keep using it.</value>
   <data name="DownloadTaskStatus_Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="DownloadTaskStatus_Extracting" xml:space="preserve">
+    <value>Extracting</value>
+  </data>
+  <data name="DownloadTaskStatus_Parsing" xml:space="preserve">
+    <value>Parsing</value>
+  </data>
   <data name="DownloadTaskStatus_Pending" xml:space="preserve">
     <value>Pending</value>
-  </data>
-  <data name="DownloadTaskStatus_Processing" xml:space="preserve">
-    <value>Processing</value>
   </data>
   <data name="DownloadTaskStatus_Saving" xml:space="preserve">
     <value>Saving</value>
@@ -282,7 +285,7 @@ Please re-authorize in order to keep using it.</value>
     <value>Experience</value>
   </data>
   <data name="ExpiresOn" xml:space="preserve">
-    <value>Expires on:</value>
+    <value>Expires on</value>
   </data>
   <data name="File" xml:space="preserve">
     <value>File</value>
@@ -590,6 +593,9 @@ Has {3} experience and {4} leadership. Has {5} loyalty.</value>
   </data>
   <data name="XmlFileType_Matches" xml:space="preserve">
     <value>Matches</value>
+  </data>
+  <data name="XmlFileType_MatchLineUp" xml:space="preserve">
+    <value>Match LineUp</value>
   </data>
   <data name="XmlFileType_Players" xml:space="preserve">
     <value>Players</value>

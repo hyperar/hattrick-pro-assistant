@@ -10,14 +10,6 @@
 
     public class Players : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string lastMatchNodeName = "LastMatch";
-
-        private const string playerListNodeName = "PlayerList";
-
-        private const string playerNodeName = "Player";
-
-        private const string trainerDataNodeName = "TrainerData";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -40,7 +32,7 @@
             {
                 Date = await reader.ReadXmlValueAsDateTimeAsync(),
                 MatchId = await reader.ReadXmlValueAsUintAsync(),
-                PositionCode = (MatchRole)await reader.ReadXmlValueAsUintAsync(),
+                PositionCode = await reader.ReadXmlValueAsUshortAsync(),
                 PlayedMinutes = await reader.ReadXmlValueAsUintAsync(),
                 Rating = await reader.ReadXmlValueAsDecimalAsync(),
                 RatingEndOfMatch = await reader.ReadXmlValueAsDecimalAsync()
@@ -69,12 +61,12 @@
                 ArrivalDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 OwnerNotes = await reader.ReadXmlValueAsNullableStringAsync(),
                 Tsi = await reader.ReadXmlValueAsUintAsync(),
-                PlayerForm = await reader.ReadXmlValueAsSkillLevelAsync(),
+                PlayerForm = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
                 Statement = await reader.ReadXmlValueAsNullableStringAsync(),
-                Experience = await reader.ReadXmlValueAsSkillLevelAsync(),
-                Loyalty = await reader.ReadXmlValueAsSkillLevelAsync(),
+                Experience = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                Loyalty = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
                 MotherClubBonus = await reader.ReadXmlValueAsBoolAsync(),
-                Leadership = await reader.ReadXmlValueAsSkillLevelAsync(),
+                Leadership = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
                 Salary = await reader.ReadXmlValueAsUintAsync(),
                 IsAbroad = await reader.ReadXmlValueAsBoolAsync(),
                 Agreeability = (AgreeabilityLevel)await reader.ReadXmlValueAsUintAsync(),
@@ -95,23 +87,23 @@
                 CapsU20 = await reader.ReadXmlValueAsUintAsync(),
                 Cards = await reader.ReadXmlValueAsUintAsync(),
                 InjuryLevel = await reader.ReadXmlValueAsIntAsync(),
-                StaminaSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
-                KeeperSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
-                PlaymakerSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
-                ScorerSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
-                PassingSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
-                WingerSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
-                DefenderSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
-                SetPiecesSkill = await reader.ReadXmlValueAsSkillLevelAsync(),
+                StaminaSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                KeeperSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                PlaymakerSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                ScorerSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                PassingSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                WingerSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                DefenderSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
+                SetPiecesSkill = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
                 PlayerCategoryId = (PlayerCategory)await reader.ReadXmlValueAsUintAsync()
             };
 
-            if (reader.Name == trainerDataNodeName)
+            if (reader.CheckNode(Constants.NodeName.TrainerData))
             {
                 result.TrainerData = await ParseTrainerDataNodeAsync(reader);
             }
 
-            if (reader.Name == lastMatchNodeName)
+            if (reader.CheckNode(Constants.NodeName.LastMatch))
             {
                 result.LastMatch = await ParseLastMatchNodeAsync(reader);
             }
@@ -133,12 +125,12 @@
                 TeamName = await reader.ReadElementContentAsStringAsync(),
             };
 
-            if (reader.Name == playerListNodeName)
+            if (reader.CheckNode(Constants.NodeName.PlayerList))
             {
                 // Reads opening element.
                 await reader.ReadAsync();
 
-                while (reader.Name == playerNodeName)
+                while (reader.CheckNode(Constants.NodeName.Player))
                 {
                     result.PlayerList.Add(
                         await ParsePlayerNodeAsync(
@@ -163,7 +155,7 @@
             var result = new TrainerData
             {
                 TrainerType = (TrainerType)await reader.ReadXmlValueAsUintAsync(),
-                SkillLevel = await reader.ReadXmlValueAsSkillLevelAsync(),
+                SkillLevel = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
             };
 
             // Reads closing element.

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum StaffType : uint
+    public enum StaffType : byte
     {
         AssistantTrainer = 1,
 

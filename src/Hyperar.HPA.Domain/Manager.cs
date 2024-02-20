@@ -2,10 +2,11 @@
 {
     using Common.Enums;
     using Domain.Interfaces;
+    using Domain.Senior;
 
     public class Manager : HattrickEntityBase, IHattrickEntity
     {
-        public byte[]? Avatar { get; set; }
+        public byte[]? AvatarBytes { get; set; }
 
         public virtual ICollection<ManagerAvatarLayer> AvatarLayers { get; set; } = new HashSet<ManagerAvatarLayer>();
 

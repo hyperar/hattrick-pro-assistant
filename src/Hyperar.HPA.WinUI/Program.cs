@@ -3,7 +3,7 @@
     using System;
     using Avalonia;
 
-    class Program
+    internal class Program
     {
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()

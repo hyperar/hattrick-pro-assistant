@@ -3,7 +3,6 @@
     using System;
     using System.Globalization;
     using System.Xml;
-    using Common.Enums;
 
     public static class XmlReaderExtensionMethods
     {
@@ -11,9 +10,9 @@
 
         private const string period = ".";
 
-        public static async Task<BookingType> ReadXmlValueAsBookingTypeAsync(this XmlReader reader)
+        public static bool CheckNode(this XmlReader reader, params string[] expectedNames)
         {
-            return (BookingType)await reader.ReadXmlValueAsIntAsync();
+            return expectedNames.Any(x => x.Equals(reader.Name, StringComparison.OrdinalIgnoreCase));
         }
 
         public static async Task<bool> ReadXmlValueAsBoolAsync(this XmlReader reader)
@@ -23,6 +22,11 @@
             return value.Length == 1
                  ? value == "1"
                  : value.Equals(bool.TrueString, StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        public static async Task<byte> ReadXmlValueAsByteAsync(this XmlReader reader)
+        {
+            return byte.Parse(await reader.ReadElementContentAsStringAsync());
         }
 
         public static async Task<DateTime> ReadXmlValueAsDateTimeAsync(this XmlReader reader)
@@ -45,49 +49,9 @@
                 : decimal.Parse(value);
         }
 
-        public static async Task<HallOfFameExpertType> ReadXmlValueAsHallOfFameExpertTypeAsync(this XmlReader reader)
-        {
-            return (HallOfFameExpertType)await reader.ReadXmlValueAsUintAsync();
-        }
-
-        public static async Task<InjuryType> ReadXmlValueAsInjuryTypeAsync(this XmlReader reader)
-        {
-            return (InjuryType)await reader.ReadXmlValueAsIntAsync();
-        }
-
         public static async Task<int> ReadXmlValueAsIntAsync(this XmlReader reader)
         {
             return int.Parse(await reader.ReadElementContentAsStringAsync());
-        }
-
-        public static async Task<MatchPart> ReadXmlValueAsMatchPartAsync(this XmlReader reader)
-        {
-            return (MatchPart)await reader.ReadXmlValueAsIntAsync();
-        }
-
-        public static async Task<MatchRule> ReadXmlValueAsMatchRuleAsync(this XmlReader reader)
-        {
-            return (MatchRule)await reader.ReadXmlValueAsIntAsync();
-        }
-
-        public static async Task<MatchSectorRating> ReadXmlValueAsMatchSectorRatingAsync(this XmlReader reader)
-        {
-            return (MatchSectorRating)await reader.ReadXmlValueAsIntAsync();
-        }
-
-        public static async Task<MatchTacticType> ReadXmlValueAsMatchTacticTypeAsync(this XmlReader reader)
-        {
-            return (MatchTacticType)await reader.ReadXmlValueAsIntAsync();
-        }
-
-        public static async Task<MatchTeamAttitude> ReadXmlValueAsMatchTeamAttitudeAsync(this XmlReader reader)
-        {
-            return (MatchTeamAttitude)await reader.ReadXmlValueAsIntAsync();
-        }
-
-        public static async Task<MatchType> ReadXmlValueAsMatchTypeAsync(this XmlReader reader)
-        {
-            return (MatchType)await reader.ReadXmlValueAsIntAsync();
         }
 
         public static async Task<string?> ReadXmlValueAsNullableStringAsync(this XmlReader reader)
@@ -104,24 +68,9 @@
             return value == nullValue?.ToString() ? null : uint.Parse(value);
         }
 
-        public static async Task<SkillLevel> ReadXmlValueAsSkillLevelAsync(this XmlReader reader)
+        public static async Task<short> ReadXmlValueAsShortAsync(this XmlReader reader)
         {
-            return (SkillLevel)await reader.ReadXmlValueAsIntAsync();
-        }
-
-        public static async Task<StaffType> ReadXmlValueAsStaffTypeAsync(this XmlReader reader)
-        {
-            return (StaffType)await reader.ReadXmlValueAsUintAsync();
-        }
-
-        public static async Task<TrainerStatus> ReadXmlValueAsTrainerStatusAsync(this XmlReader reader)
-        {
-            return (TrainerStatus)await reader.ReadXmlValueAsUintAsync();
-        }
-
-        public static async Task<TrainerType> ReadXmlValueAsTrainerTypeAsync(this XmlReader reader)
-        {
-            return (TrainerType)await reader.ReadXmlValueAsIntAsync();
+            return short.Parse(await reader.ReadElementContentAsStringAsync());
         }
 
         public static async Task<uint> ReadXmlValueAsUintAsync(this XmlReader reader)
@@ -129,9 +78,9 @@
             return uint.Parse(await reader.ReadElementContentAsStringAsync());
         }
 
-        public static async Task<Weather> ReadXmlValueAsWeatherAsync(this XmlReader reader)
+        public static async Task<ushort> ReadXmlValueAsUshortAsync(this XmlReader reader)
         {
-            return (Weather)await reader.ReadXmlValueAsIntAsync();
+            return ushort.Parse(await reader.ReadElementContentAsStringAsync());
         }
     }
 }

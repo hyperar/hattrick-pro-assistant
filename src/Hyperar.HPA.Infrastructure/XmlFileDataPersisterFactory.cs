@@ -19,6 +19,8 @@
 
         private readonly Matches matchesPersister;
 
+        private readonly MatchLineUp matchLineUpPersister;
+
         private readonly Players playersPersister;
 
         private readonly StaffAvatars staffAvatarsPersister;
@@ -36,6 +38,7 @@
             ManagerCompendium managerCompendiumPersister,
             MatchDetails matchDetailsPersister,
             Matches matchesPersister,
+            MatchLineUp matchLineUpPersister,
             Players playersPersister,
             StaffAvatars staffAvatarsPersister,
             StaffList staffListPersister,
@@ -48,6 +51,7 @@
             this.managerCompendiumPersister = managerCompendiumPersister;
             this.matchDetailsPersister = matchDetailsPersister;
             this.matchesPersister = matchesPersister;
+            this.matchLineUpPersister = matchLineUpPersister;
             this.playersPersister = playersPersister;
             this.staffAvatarsPersister = staffAvatarsPersister;
             this.staffListPersister = staffListPersister;
@@ -65,6 +69,7 @@
                 XmlFileType.ManagerCompendium => this.managerCompendiumPersister,
                 XmlFileType.MatchDetails => this.matchDetailsPersister,
                 XmlFileType.Matches => this.matchesPersister,
+                XmlFileType.MatchLineUp => this.matchLineUpPersister,
                 XmlFileType.Players => this.playersPersister,
                 XmlFileType.StaffAvatars => this.staffAvatarsPersister,
                 XmlFileType.StaffList => this.staffListPersister,

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum MatchTacticType : uint
+    public enum MatchTacticType : byte
     {
         Normal = 0,
 

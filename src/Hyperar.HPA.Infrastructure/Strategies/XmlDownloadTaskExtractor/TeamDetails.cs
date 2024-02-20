@@ -14,7 +14,7 @@
 
         private const string teamIdParamKey = "teamId";
 
-        public List<DownloadTask>? ExtractXmlDownloadTasks(IXmlFile xmlFile)
+        public DownloadTask[] ExtractXmlDownloadTasks(IXmlFile xmlFile)
         {
             if (xmlFile is HattrickData file)
             {
@@ -79,7 +79,7 @@
                             }));
                 }
 
-                return downloadTasks;
+                return downloadTasks.ToArray();
             }
             else
             {

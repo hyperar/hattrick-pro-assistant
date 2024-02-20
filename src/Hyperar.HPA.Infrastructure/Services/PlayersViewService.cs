@@ -8,12 +8,12 @@
 
     public class PlayersViewService : IPlayersViewService
     {
-        private readonly IHattrickRepository<Domain.Team> teamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         private readonly IRepository<Domain.User> userRepository;
 
         public PlayersViewService(
-            IHattrickRepository<Domain.Team> teamRepository,
+            IHattrickRepository<Domain.Senior.Team> teamRepository,
             IRepository<Domain.User> userRepository)
         {
             this.teamRepository = teamRepository;
@@ -47,7 +47,7 @@
                                .ToArray();
         }
 
-        private static Player Convert(Domain.Player player)
+        private static Player Convert(Domain.Senior.Player player)
         {
             ArgumentNullException.ThrowIfNull(player.PlayerSkillSets, nameof(player.PlayerSkillSets));
 
@@ -108,8 +108,8 @@
                 CareerHattricks = player.CareerHattricks,
                 TeamGoals = player.GoalsOnTeam,
                 TeamMatches = player.MatchesOnTeam,
-                Avatar = player.Avatar,
-                LeagueFlag = player.Country.League.Flag,
+                Avatar = player.AvatarBytes,
+                LeagueFlag = player.Country.League.FlagBytes,
                 CountryName = player.Country.Name
             };
         }

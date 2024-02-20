@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum XmlFileType : uint
+    public enum XmlFileType : byte
     {
         ArenaDetails = 0,
 
@@ -14,14 +14,16 @@
 
         Matches = 5,
 
-        Players = 6,
+        MatchLineUp = 6,
 
-        StaffAvatars = 7,
+        Players = 7,
 
-        StaffList = 8,
+        StaffAvatars = 8,
 
-        TeamDetails = 9,
+        StaffList = 9,
 
-        WorldDetails = 10
+        TeamDetails = 10,
+
+        WorldDetails = 11
     }
 }

@@ -19,6 +19,7 @@
                 services.AddScoped<ManagerCompendium>();
                 services.AddScoped<MatchDetails>();
                 services.AddScoped<Matches>();
+                services.AddScoped<MatchLineUp>();
                 services.AddScoped<Players>();
                 services.AddScoped<StaffAvatars>();
                 services.AddScoped<StaffList>();

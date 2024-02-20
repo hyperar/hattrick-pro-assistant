@@ -4,12 +4,11 @@
     using Application.Hattrick.Interfaces;
     using Application.Hattrick.StaffList;
     using Application.Interfaces;
+    using Common.Enums;
     using Infrastructure.Strategies.XmlFileParser.ExtensionMethods;
 
     public class StaffList : XmlFileParserBase, IXmlFileParserStrategy
     {
-        private const string staffNodeName = "Staff";
-
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
             var result = (HattrickData)entity;
@@ -45,7 +44,7 @@
 
             var result = new List<Staff>();
 
-            while (reader.Name == staffNodeName)
+            while (reader.CheckNode(Constants.NodeName.Staff))
             {
                 result.Add(
                     await ParseStaffNodeAsync(reader));
@@ -66,7 +65,7 @@
             {
                 Name = await reader.ReadElementContentAsStringAsync(),
                 StaffId = await reader.ReadXmlValueAsUintAsync(),
-                StaffType = await reader.ReadXmlValueAsStaffTypeAsync(),
+                StaffType = (StaffType)await reader.ReadXmlValueAsByteAsync(),
                 StaffLevel = await reader.ReadXmlValueAsUintAsync(),
                 HiredDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 Cost = await reader.ReadXmlValueAsUintAsync(),
@@ -93,10 +92,10 @@
                 ContractDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 Cost = await reader.ReadXmlValueAsUintAsync(),
                 CountryId = await reader.ReadXmlValueAsUintAsync(),
-                TrainerType = await reader.ReadXmlValueAsTrainerTypeAsync(),
-                Leadership = await reader.ReadXmlValueAsSkillLevelAsync(),
+                TrainerType = (TrainerType)await reader.ReadXmlValueAsByteAsync(),
+                Leadership = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),
                 TrainerSkillLevel = await reader.ReadXmlValueAsUintAsync(),
-                TrainerStatus = await reader.ReadXmlValueAsTrainerStatusAsync(),
+                TrainerStatus = (TrainerStatus)await reader.ReadXmlValueAsByteAsync(),
             };
 
             // Reads closing element.

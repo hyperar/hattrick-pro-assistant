@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum AgreeabilityLevel : uint
+    public enum AgreeabilityLevel : byte
     {
         NastyFellow = 0,
 

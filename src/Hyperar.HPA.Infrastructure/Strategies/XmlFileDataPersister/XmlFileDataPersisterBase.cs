@@ -3,9 +3,11 @@
     using System;
     using System.Drawing;
     using System.Drawing.Imaging;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Application.Hattrick.Interfaces;
     using Application.Interfaces;
+    using Domain.Senior;
 
     public abstract class XmlFileDataPersisterBase : IXmlFileDataPersisterStrategy
     {
@@ -15,7 +17,16 @@
 
         public abstract Task PersistDataAsync(IXmlFile file);
 
-        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<Domain.StaffMemberAvatarLayer> layers)
+        public virtual async Task PersistDataWithContextAsync(IXmlFile file, uint contextId)
+        {
+            await this.PersistDataAsync(file);
+        }
+
+        protected static string RemoveTags(string value)
+        {
+            return Regex.Replace(value, "<.*?>", string.Empty);
+        }
+        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<StaffMemberAvatarLayer> layers)
         {
             ArgumentNullException.ThrowIfNull(layers, nameof(layers));
 
@@ -91,7 +102,7 @@
             return GetBytesFromImage(avatarImage);
         }
 
-        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<Domain.PlayerAvatarLayer> layers)
+        protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<PlayerAvatarLayer> layers)
         {
             ArgumentNullException.ThrowIfNull(layers, nameof(layers));
 

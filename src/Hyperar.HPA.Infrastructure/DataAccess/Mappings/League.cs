@@ -195,8 +195,8 @@
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
-            builder.Property(p => p.Flag)
-                .HasColumnName(Constants.ColumnName.Flag)
+            builder.Property(p => p.FlagBytes)
+                .HasColumnName(Constants.ColumnName.FlagBytes)
                 .HasColumnOrder(
                     this.GetCurrentColumnOrder())
                 .HasColumnType(Constants.ColumnType.VarBinary);
@@ -204,7 +204,7 @@
 
         public override void MapTable(EntityTypeBuilder<Domain.League> builder)
         {
-            builder.ToTable(Constants.TableName.League);
+            builder.ToTable(Constants.TableName.League, Constants.Schema.Global);
         }
     }
 }

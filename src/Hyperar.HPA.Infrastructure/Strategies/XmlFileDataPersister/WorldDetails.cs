@@ -145,7 +145,7 @@
                     ThirdWeeklyUpdate = xmlLeague.Sequence3,
                     FourthWeeklyUpdate = xmlLeague.Sequence5,
                     FifthWeeklyUpdate = xmlLeague.Sequence7,
-                    Flag = await DownloadWebResourceAsync(
+                    FlagBytes = await DownloadWebResourceAsync(
                         string.Format(
                             flagUrlMask,
                             xmlLeague.LeagueId))

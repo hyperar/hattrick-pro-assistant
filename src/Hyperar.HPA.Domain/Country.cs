@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Domain.Interfaces;
+    using Domain.Senior;
 
     public class Country : HattrickEntityBase, IHattrickEntity
     {

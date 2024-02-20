@@ -19,6 +19,7 @@
                 services.AddSingleton<ManagerCompendium>();
                 services.AddSingleton<MatchDetails>();
                 services.AddSingleton<Matches>();
+                services.AddSingleton<MatchLineUp>();
                 services.AddSingleton<Players>();
                 services.AddSingleton<StaffAvatars>();
                 services.AddSingleton<StaffList>();

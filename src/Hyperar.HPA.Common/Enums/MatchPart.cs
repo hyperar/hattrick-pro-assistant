@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Common.Enums
 {
-    public enum MatchPart : uint
+    public enum MatchPart : byte
     {
         BeforeTheMatchStarted = 0,
 

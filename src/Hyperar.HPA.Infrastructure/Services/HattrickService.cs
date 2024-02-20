@@ -107,6 +107,8 @@
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
+            if (request.FileType == Common.Enums.XmlFileType.MatchDetails)
+            { }
             var responseStream = await GetResponseStreamForUrlAsync(url, session);
 
             return await ReadResponseStreamAsync(responseStream);

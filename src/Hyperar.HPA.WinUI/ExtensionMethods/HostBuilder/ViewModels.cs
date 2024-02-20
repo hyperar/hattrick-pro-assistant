@@ -2,13 +2,12 @@
 {
     using System;
     using System.Linq;
-
     using System.Threading.Tasks;
-    using Hyperar.HPA.Application.Services;
-    using Hyperar.HPA.WinUI.Enums;
-    using Hyperar.HPA.WinUI.State.Interface;
+    using Application.Services;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using WinUI.Enums;
+    using WinUI.State.Interface;
     using WinUI.ViewModels;
     using WinUI.ViewModels.Interface;
 
@@ -60,8 +59,14 @@
 
         private static async Task<DownloadViewModel> CreateDownloadViewModel(IServiceProvider services)
         {
+            var scope = services.CreateScope();
+
             var viewModel = new DownloadViewModel(
-                services.GetRequiredService<INavigator>());
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IHattrickService>(),
+                services.GetRequiredService<ITeamSelector>(),
+                scope.ServiceProvider.GetRequiredService<IUserService>(),
+                scope.ServiceProvider.GetRequiredService<IXmlFileService>());
 
             await viewModel.InitializeAsync();
 

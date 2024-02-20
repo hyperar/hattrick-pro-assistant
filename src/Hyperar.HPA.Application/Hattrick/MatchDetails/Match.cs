@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Hyperar.HPA.Common.Enums;
+    using Common.Enums;
 
     public class Match
     {

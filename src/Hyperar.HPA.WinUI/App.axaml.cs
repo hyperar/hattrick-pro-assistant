@@ -5,11 +5,11 @@ namespace Hyperar.HPA.WinUI
     using Avalonia.Controls.ApplicationLifetimes;
     using Avalonia.Data.Core.Plugins;
     using Avalonia.Markup.Xaml;
+    using Domain.Interfaces;
     using ExtensionMethods.HostBuilder;
-    using Hyperar.HPA.Domain.Interfaces;
-    using Hyperar.HPA.WinUI.ViewModels.Interface;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using WinUI.ViewModels.Interface;
     using WinUI.Views;
 
     public partial class App : Application
