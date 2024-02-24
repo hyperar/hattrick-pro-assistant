@@ -9,7 +9,7 @@
     using Application.Interfaces;
     using Domain.Senior;
 
-    public abstract class XmlFileDataPersisterBase : IXmlFileDataPersisterStrategy
+    public abstract partial class XmlFileDataPersisterBase : IXmlFileDataPersisterStrategy
     {
         private const string host = "www.hattrick.org";
 
@@ -24,7 +24,7 @@
 
         protected static string RemoveTags(string value)
         {
-            return Regex.Replace(value, "<.*?>", string.Empty);
+            return StripTagsRegEx().Replace(value, string.Empty);
         }
         protected static async Task<byte[]> BuildAvatarFromLayers(ICollection<StaffMemberAvatarLayer> layers)
         {
@@ -239,5 +239,8 @@
 
             await File.WriteAllBytesAsync(filePath, fileContent);
         }
+
+        [GeneratedRegex("<.*?>")]
+        private static partial Regex StripTagsRegEx();
     }
 }
