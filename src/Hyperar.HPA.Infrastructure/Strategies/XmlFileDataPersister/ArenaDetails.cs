@@ -47,7 +47,7 @@
 
         private async Task ProcessArenaDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            var arena = await this.teamArenaRepository.GetByHattrickIdAsync(xmlEntity.Arena.ArenaId);
+            Domain.Senior.TeamArena? arena = await this.teamArenaRepository.GetByHattrickIdAsync(xmlEntity.Arena.ArenaId);
 
             DateTime value = xmlEntity.Arena.CurrentCapacity.RebuiltDate != null
                            ? xmlEntity.Arena.CurrentCapacity.RebuiltDate.Value
@@ -57,7 +57,7 @@
 
             if (arena == null)
             {
-                var team = await this.teamRepository.GetByHattrickIdAsync(xmlEntity.Arena.Team.TeamId);
+                Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(xmlEntity.Arena.Team.TeamId);
 
                 ArgumentNullException.ThrowIfNull(team, nameof(team));
 

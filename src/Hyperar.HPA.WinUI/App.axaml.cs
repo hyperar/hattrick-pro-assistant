@@ -5,7 +5,6 @@ namespace Hyperar.HPA.WinUI
     using Avalonia.Controls.ApplicationLifetimes;
     using Avalonia.Data.Core.Plugins;
     using Avalonia.Markup.Xaml;
-    using Domain.Interfaces;
     using ExtensionMethods.HostBuilder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -19,9 +18,9 @@ namespace Hyperar.HPA.WinUI
             AvaloniaXamlLoader.Load(this);
         }
 
-        public override void OnFrameworkInitializationCompleted()
+        public override async void OnFrameworkInitializationCompleted()
         {
-            var host = Host.CreateDefaultBuilder()
+            IHost host = Host.CreateDefaultBuilder()
                 .RegisterConfiguration()
                 .RegisterDatabaseObjects()
                 .RegisterServices()
@@ -34,24 +33,31 @@ namespace Hyperar.HPA.WinUI
 
             host.Start();
 
-            using (var scope = host.Services.CreateScope())
-            {
-                scope.ServiceProvider.GetRequiredService<IDatabaseContext>().Migrate();
-            }
-
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 // Line below is needed to remove Avalonia data validation.
                 // Without this line you will get duplicate validations from both Avalonia and CT
                 BindingPlugins.DataValidators.RemoveAt(0);
 
-                var mainWindow = new MainWindow();
+                SplashScreenWindow splashScreenWindow = new SplashScreenWindow(host.Services.CreateScope().ServiceProvider);
 
-                var viewModelFactory = host.Services.GetRequiredService<IViewModelFactory>();
+                splashScreenWindow.Show();
 
-                mainWindow.DataContext = viewModelFactory.CreateMainViewModel();
+                await splashScreenWindow.InitializeAsync();
+
+                desktop.MainWindow = splashScreenWindow;
+
+                MainWindow mainWindow = new MainWindow();
+
+                IViewModelFactory viewModelFactory = host.Services.GetRequiredService<IViewModelFactory>();
+
+                mainWindow.DataContext = await viewModelFactory.CreateMainViewModelAsync();
 
                 desktop.MainWindow = mainWindow;
+
+                mainWindow.Show();
+
+                splashScreenWindow.Close();
             }
         }
 

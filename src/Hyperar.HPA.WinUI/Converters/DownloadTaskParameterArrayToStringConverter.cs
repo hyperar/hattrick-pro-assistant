@@ -13,7 +13,7 @@
             {
                 List<string> parameters = new List<string>();
 
-                foreach (var item in dictionary)
+                foreach (KeyValuePair<string, string> item in dictionary)
                 {
                     parameters.Add($"{item.Key}: \"{item.Value}\"");
                 }

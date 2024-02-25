@@ -6,8 +6,6 @@
     {
         Task DeleteUserTokenAsync(int userId);
 
-        Domain.User GetUser();
-
         Task<Domain.User> GetUserAsync();
 
         Task InsertUserTokenAsync(string token, string tokenSecret);

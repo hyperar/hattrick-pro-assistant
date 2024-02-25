@@ -56,7 +56,7 @@
                 ImageUrl = NormalizeUrl(avatar.BackgroundImage),
             });
 
-            foreach (var curLayer in avatar.Layers)
+            foreach (Hattrick.Layer curLayer in avatar.Layers)
             {
                 layerIndex++;
 
@@ -72,15 +72,15 @@
 
         private async Task ProcessAvatarsAsync(Hattrick.HattrickData xmlEntity)
         {
-            foreach (var curPlayer in xmlEntity.Team.Players)
+            foreach (Hattrick.Player curPlayer in xmlEntity.Team.Players)
             {
-                var player = await this.playerRepository.GetByHattrickIdAsync(curPlayer.PlayerId);
+                Domain.Senior.Player? player = await this.playerRepository.GetByHattrickIdAsync(curPlayer.PlayerId);
 
                 ArgumentNullException.ThrowIfNull(player, nameof(player));
 
                 bool mustDeleteAvatar = false;
 
-                var xmlAvatarLayers = new List<string>(curPlayer.Avatar.Layers.Select(x => NormalizeUrl(x.Image)).ToArray())
+                List<string> xmlAvatarLayers = new List<string>(curPlayer.Avatar.Layers.Select(x => NormalizeUrl(x.Image)).ToArray())
                 {
                     NormalizeUrl(curPlayer.Avatar.BackgroundImage),
                 };
@@ -91,7 +91,7 @@
 
                 if (mustDeleteAvatar)
                 {
-                    var layerIdsToDelete = player.AvatarLayers.Select(x => x.Id).ToList();
+                    List<int> layerIdsToDelete = player.AvatarLayers.Select(x => x.Id).ToList();
 
                     await this.playerAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
 

@@ -5,8 +5,8 @@
 
     public interface IViewModelFactory
     {
-        ViewModelBase CreateMainViewModel();
+        Task<MainViewModel> CreateMainViewModelAsync();
 
-        Task<ViewModelBase> CreateViewModel(ViewType viewType);
+        Task<ViewModelBase> CreateViewModelAsync(ViewType viewType);
     }
 }

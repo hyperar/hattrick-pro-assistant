@@ -30,14 +30,14 @@
         {
             ArgumentNullException.ThrowIfNull(layers, nameof(layers));
 
-            var firstLayer = layers.Single(x => x.Index == 1);
+            StaffMemberAvatarLayer firstLayer = layers.Single(x => x.Index == 1);
 
-            var firstLayerImage = GetImageFromBytes(
+            Bitmap firstLayerImage = GetImageFromBytes(
                 await DownloadWebResourceAsync(layers.Single(x => x.Index == 1).ImageUrl));
 
-            var avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
+            Bitmap avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
 
-            var graphics = Graphics.FromImage(avatarImage);
+            Graphics graphics = Graphics.FromImage(avatarImage);
 
             graphics.DrawImage(
                 firstLayerImage,
@@ -48,9 +48,9 @@
 
             for (int i = 2; i < layers.Count + 1; i++)
             {
-                var curLayer = layers.Single(x => x.Index == i);
+                StaffMemberAvatarLayer curLayer = layers.Single(x => x.Index == i);
 
-                var layerImage = GetImageFromBytes(
+                Bitmap layerImage = GetImageFromBytes(
                     await DownloadWebResourceAsync(curLayer.ImageUrl));
 
                 graphics.DrawImage(
@@ -68,14 +68,14 @@
         {
             ArgumentNullException.ThrowIfNull(layers, nameof(layers));
 
-            var firstLayer = layers.Single(x => x.Index == 1);
+            Domain.ManagerAvatarLayer firstLayer = layers.Single(x => x.Index == 1);
 
-            var firstLayerImage = GetImageFromBytes(
+            Bitmap firstLayerImage = GetImageFromBytes(
                 await DownloadWebResourceAsync(layers.Single(x => x.Index == 1).ImageUrl));
 
-            var avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
+            Bitmap avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
 
-            var graphics = Graphics.FromImage(avatarImage);
+            Graphics graphics = Graphics.FromImage(avatarImage);
 
             graphics.DrawImage(
                 firstLayerImage,
@@ -86,9 +86,9 @@
 
             for (int i = 2; i < layers.Count + 1; i++)
             {
-                var curLayer = layers.Single(x => x.Index == i);
+                Domain.ManagerAvatarLayer curLayer = layers.Single(x => x.Index == i);
 
-                var layerImage = GetImageFromBytes(
+                Bitmap layerImage = GetImageFromBytes(
                     await DownloadWebResourceAsync(curLayer.ImageUrl));
 
                 graphics.DrawImage(
@@ -106,14 +106,14 @@
         {
             ArgumentNullException.ThrowIfNull(layers, nameof(layers));
 
-            var firstLayer = layers.Single(x => x.Index == 1);
+            PlayerAvatarLayer firstLayer = layers.Single(x => x.Index == 1);
 
-            var firstLayerImage = GetImageFromBytes(
+            Bitmap firstLayerImage = GetImageFromBytes(
                 await DownloadWebResourceAsync(layers.Single(x => x.Index == 1).ImageUrl));
 
-            var avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
+            Bitmap avatarImage = new Bitmap(firstLayerImage.Width, firstLayerImage.Height, PixelFormat.Format32bppArgb);
 
-            var graphics = Graphics.FromImage(avatarImage);
+            Graphics graphics = Graphics.FromImage(avatarImage);
 
             graphics.DrawImage(
                 firstLayerImage,
@@ -124,9 +124,9 @@
 
             for (int i = 2; i < layers.Count + 1; i++)
             {
-                var curLayer = layers.Single(x => x.Index == i);
+                PlayerAvatarLayer curLayer = layers.Single(x => x.Index == i);
 
-                var layerImage = GetImageFromBytes(
+                Bitmap layerImage = GetImageFromBytes(
                     await DownloadWebResourceAsync(curLayer.ImageUrl));
 
                 graphics.DrawImage(
@@ -142,14 +142,14 @@
 
         protected static async Task<byte[]> DownloadWebResourceAsync(string url)
         {
-            var fileContent = await TryGetFileBytesFromCacheAsync(url);
+            byte[]? fileContent = await TryGetFileBytesFromCacheAsync(url);
 
             if (fileContent != null)
             {
                 return fileContent;
             }
 
-            using (var httpClient = new HttpClient())
+            using (HttpClient httpClient = new HttpClient())
             {
                 fileContent = await httpClient.GetByteArrayAsync(
                     NormalizeUrl(url));
@@ -186,7 +186,7 @@
 
         private static byte[] GetBytesFromImage(Image image)
         {
-            using (var memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream())
             {
                 image.Save(memoryStream, ImageFormat.Png);
 
@@ -209,9 +209,9 @@
 
         private static Bitmap GetImageFromBytes(byte[] imageBytes)
         {
-            using (var memoryStream = new MemoryStream(imageBytes))
+            using (MemoryStream memoryStream = new MemoryStream(imageBytes))
             {
-                var bitmap = new Bitmap(Image.FromStream(memoryStream));
+                Bitmap bitmap = new Bitmap(Image.FromStream(memoryStream));
 
                 bitmap.SetResolution(120, 120);
 

@@ -10,7 +10,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             result.Arena = await ParseArenaNodeAsync(reader);
 
@@ -22,7 +22,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Arena
+            Arena result = new Arena
             {
                 ArenaId = await reader.ReadXmlValueAsUintAsync(),
                 ArenaName = await reader.ReadElementContentAsStringAsync(),
@@ -46,7 +46,7 @@
             // Reads opening element. This could be both opening and closing element if Available attribute is false.
             await reader.ReadAsync();
 
-            var result = new CurrentCapacity
+            CurrentCapacity result = new CurrentCapacity
             {
                 Available = reader.GetAttribute(Constants.NodeName.Available) == bool.TrueString
             };
@@ -74,7 +74,7 @@
 
         private static async Task<ExpandedCapacity> ParseExpandedCapacityNodeAsync(XmlReader reader)
         {
-            var result = new ExpandedCapacity
+            ExpandedCapacity result = new ExpandedCapacity
             {
                 Available = reader.GetAttribute(Constants.NodeName.Available) == bool.TrueString
             };
@@ -103,7 +103,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new League
+            League result = new League
             {
                 LeagueId = await reader.ReadXmlValueAsUintAsync(),
                 LeagueName = await reader.ReadElementContentAsStringAsync()
@@ -120,7 +120,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Region
+            Region result = new Region
             {
                 RegionId = await reader.ReadXmlValueAsUintAsync(),
                 RegionName = await reader.ReadElementContentAsStringAsync()
@@ -137,7 +137,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Team
+            Team result = new Team
             {
                 TeamId = await reader.ReadXmlValueAsUintAsync(),
                 TeamName = await reader.ReadElementContentAsStringAsync()

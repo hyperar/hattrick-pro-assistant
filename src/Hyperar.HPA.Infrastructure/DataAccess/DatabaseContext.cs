@@ -50,23 +50,11 @@
             }
         }
 
-        public void Migrate()
-        {
-            EnsureDatabaseInstanceIsReady();
-
-            this.Database.Migrate();
-        }
-
         public async Task MigrateAsync()
         {
             await EnsureDatabaseInstanceIsReadyAsync();
 
             await this.Database.MigrateAsync();
-        }
-
-        public void Save()
-        {
-            this.SaveChanges();
         }
 
         public async Task SaveAsync()
@@ -81,29 +69,9 @@
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
         }
 
-        private static void EnsureDatabaseInstanceIsReady()
-        {
-            var process = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    Arguments = sqlCommandParameters, // Creates and starts the instance.
-                    CreateNoWindow = true,
-                    FileName = sqlCommandName,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                }
-            };
-
-            process.Start();
-
-            process.WaitForExit();
-        }
-
         private static async Task EnsureDatabaseInstanceIsReadyAsync()
         {
-            var process = new Process
+            Process process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {

@@ -6,7 +6,7 @@
 
     internal abstract class EntityBase<TEntity> : EntityTypeConfigurationBase<TEntity>, IEntityTypeConfiguration<TEntity>, IEntityMapping<TEntity> where TEntity : Domain.EntityBase, Domain.Interfaces.IEntity
     {
-        protected override sealed void MapBaseProperties(EntityTypeBuilder<TEntity> builder)
+        protected sealed override void MapBaseProperties(EntityTypeBuilder<TEntity> builder)
         {
             builder.HasKey(p => p.Id);
 

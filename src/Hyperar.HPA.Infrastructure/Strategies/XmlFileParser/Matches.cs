@@ -12,7 +12,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             result.IsYouth = await reader.ReadXmlValueAsBoolAsync();
             result.Team = await ParseTeamNodeAsync(reader);
@@ -25,7 +25,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new AwayTeam
+            AwayTeam result = new AwayTeam
             {
                 AwayTeamId = await reader.ReadXmlValueAsUintAsync(),
                 AwayTeamName = await reader.ReadElementContentAsStringAsync(),
@@ -43,7 +43,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new HomeTeam
+            HomeTeam result = new HomeTeam
             {
                 HomeTeamId = await reader.ReadXmlValueAsUintAsync(),
                 HomeTeamName = await reader.ReadElementContentAsStringAsync(),
@@ -61,7 +61,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new LeagueLevelUnit
+            LeagueLevelUnit result = new LeagueLevelUnit
             {
                 LeagueLevelUnitId = await reader.ReadXmlValueAsUintAsync(),
                 LeagueLevelUnitName = await reader.ReadElementContentAsStringAsync(),
@@ -79,7 +79,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new League
+            League result = new League
             {
                 LeagueId = await reader.ReadXmlValueAsUintAsync(),
                 LeagueName = await reader.ReadElementContentAsStringAsync()
@@ -96,7 +96,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Match
+            Match result = new Match
             {
                 MatchId = await reader.ReadXmlValueAsUintAsync(),
                 HomeTeam = await ParseHomeTeamNodeAsync(reader),
@@ -124,7 +124,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Team
+            Team result = new Team
             {
                 TeamId = await reader.ReadXmlValueAsUintAsync(),
                 TeamName = await reader.ReadElementContentAsStringAsync(),

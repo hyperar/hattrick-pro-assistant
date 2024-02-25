@@ -22,7 +22,7 @@
 
         public async Task<Currency> GetManagerCurrencyAsync()
         {
-            var user = await this.userRepository.Query().SingleOrDefaultAsync();
+            Domain.User? user = await this.userRepository.Query().SingleOrDefaultAsync();
 
             ArgumentNullException.ThrowIfNull(user, nameof(user));
             ArgumentNullException.ThrowIfNull(user.Manager, nameof(user.Manager));
@@ -36,7 +36,7 @@
 
         public async Task<Player[]> GetPlayerAsync(uint teamId)
         {
-            var team = await this.teamRepository.GetByHattrickIdAsync(teamId);
+            Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(teamId);
 
             ArgumentNullException.ThrowIfNull(team, nameof(team));
 
@@ -51,11 +51,11 @@
         {
             ArgumentNullException.ThrowIfNull(player.PlayerSkillSets, nameof(player.PlayerSkillSets));
 
-            var currentSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
+            Domain.Senior.PlayerSkillSet currentSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
                                                       .ThenByDescending(x => x.Week)
                                                       .First();
 
-            var previousSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
+            Domain.Senior.PlayerSkillSet? previousSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
                                                        .ThenByDescending(x => x.Week)
                                                        .Skip(1)
                                                        .FirstOrDefault();

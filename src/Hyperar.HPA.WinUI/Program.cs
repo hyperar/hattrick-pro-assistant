@@ -20,7 +20,7 @@
         [STAThread]
         public static void Main(string[] args)
         {
-            var appBuilder = BuildAvaloniaApp();
+            AppBuilder appBuilder = BuildAvaloniaApp();
 
             appBuilder.StartWithClassicDesktopLifetime(args);
         }

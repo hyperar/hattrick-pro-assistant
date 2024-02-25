@@ -47,7 +47,7 @@
 
         private async Task ProcessStaffList(Hattrick.HattrickData xmlFile)
         {
-            foreach (var curStaffMember in xmlFile.StaffList.StaffMembers)
+            foreach (Hattrick.Staff curStaffMember in xmlFile.StaffList.StaffMembers)
             {
                 await this.ProcessStaffMemberAsync(curStaffMember);
             }
@@ -57,7 +57,7 @@
 
         private async Task ProcessStaffMemberAsync(Hattrick.Staff xmlStaff)
         {
-            var staffMember = await this.staffMemberRepository.GetByHattrickIdAsync(xmlStaff.StaffId);
+            Domain.Senior.StaffMember? staffMember = await this.staffMemberRepository.GetByHattrickIdAsync(xmlStaff.StaffId);
 
             if (staffMember == null)
             {
@@ -73,7 +73,7 @@
 
                 if (xmlStaff.HofPlayerId != 0)
                 {
-                    var hallOfFamePlayer = await this.hallOfFamePlayerRepository.GetByHattrickIdAsync(xmlStaff.HofPlayerId);
+                    Domain.Senior.HallOfFamePlayer? hallOfFamePlayer = await this.hallOfFamePlayerRepository.GetByHattrickIdAsync(xmlStaff.HofPlayerId);
 
                     ArgumentNullException.ThrowIfNull(hallOfFamePlayer, nameof(hallOfFamePlayer));
 
@@ -95,7 +95,7 @@
                 {
                     if (xmlStaff.HofPlayerId != 0)
                     {
-                        var hallOfFamePlayer = await this.hallOfFamePlayerRepository.GetByHattrickIdAsync(xmlStaff.HofPlayerId);
+                        Domain.Senior.HallOfFamePlayer? hallOfFamePlayer = await this.hallOfFamePlayerRepository.GetByHattrickIdAsync(xmlStaff.HofPlayerId);
 
                         ArgumentNullException.ThrowIfNull(hallOfFamePlayer, nameof(hallOfFamePlayer));
 

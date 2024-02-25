@@ -15,6 +15,11 @@
         <converters:DownloadTaskParameterArrayToStringConverter x:Key="downloadTaskParameterArrayToStringConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
     </UserControl.Resources>
+
+    <Design.DataContext>
+        <vm:DownloadViewModel />
+    </Design.DataContext>
+    
     <StackPanel Spacing="20">
         <DataGrid ItemsSource="{Binding DownloadTasks}"
                   AutoGenerateColumns="False"

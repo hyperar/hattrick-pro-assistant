@@ -6,14 +6,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
         x:Class="Hyperar.HPA.WinUI.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="vm:MainViewModel"
         Title="Hattrick Pro Assistant"
         MinHeight="900"
         MinWidth="1600"
-        RequestedThemeVariant="Default">
+        RequestedThemeVariant="Default"
+        WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel />
+        <vm:MainViewModel />
     </Design.DataContext>
 
     <Grid RowDefinitions="Auto, *">

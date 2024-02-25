@@ -6,7 +6,7 @@
 
     internal abstract class HattrickEntityBase<TEntity> : EntityTypeConfigurationBase<TEntity>, IEntityTypeConfiguration<TEntity>, IEntityMapping<TEntity> where TEntity : Domain.HattrickEntityBase, Domain.Interfaces.IHattrickEntity
     {
-        protected override sealed void MapBaseProperties(EntityTypeBuilder<TEntity> builder)
+        protected sealed override void MapBaseProperties(EntityTypeBuilder<TEntity> builder)
         {
             builder.HasKey(p => p.HattrickId);
 

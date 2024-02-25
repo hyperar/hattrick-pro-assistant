@@ -9,7 +9,7 @@
 
     internal class UpdateCurrentPageCommand : AsyncCommandBase, ICommand
     {
-        private readonly MainWindowViewModel mainWindowViewModel;
+        private readonly MainViewModel MainViewModel;
 
         private readonly INavigator navigator;
 
@@ -17,11 +17,11 @@
 
         public UpdateCurrentPageCommand(
             INavigator navigator,
-            MainWindowViewModel mainWindowViewModel,
+            MainViewModel MainViewModel,
             IViewModelFactory viewModelFactory)
         {
             this.navigator = navigator;
-            this.mainWindowViewModel = mainWindowViewModel;
+            this.MainViewModel = MainViewModel;
             this.viewModelFactory = viewModelFactory;
         }
 
@@ -31,7 +31,7 @@
 
             if (parameter is ViewType viewType)
             {
-                this.mainWindowViewModel.CurrentPage = await this.viewModelFactory.CreateViewModel(viewType);
+                this.MainViewModel.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(viewType);
             }
 
             this.navigator.ResumeNavigation();

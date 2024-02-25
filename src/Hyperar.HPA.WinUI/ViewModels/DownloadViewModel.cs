@@ -104,7 +104,7 @@
 
         private void AddChildTasks(DownloadTask[] childDownloadTasks)
         {
-            foreach (var newTask in childDownloadTasks)
+            foreach (DownloadTask newTask in childDownloadTasks)
             {
                 this.DownloadTasks.Add(newTask);
             }

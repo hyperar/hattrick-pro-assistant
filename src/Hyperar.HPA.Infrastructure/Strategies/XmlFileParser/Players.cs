@@ -12,7 +12,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             result.UserSupporterTier = (await reader.ReadElementContentAsStringAsync()).ToSupporterTier();
             result.IsYouth = await reader.ReadXmlValueAsBoolAsync();
@@ -28,7 +28,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new LastMatch
+            LastMatch result = new LastMatch
             {
                 Date = await reader.ReadXmlValueAsDateTimeAsync(),
                 MatchId = await reader.ReadXmlValueAsUintAsync(),
@@ -49,7 +49,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Player
+            Player result = new Player
             {
                 PlayerId = await reader.ReadXmlValueAsUintAsync(),
                 FirstName = await reader.ReadElementContentAsStringAsync(),
@@ -119,7 +119,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Team
+            Team result = new Team
             {
                 TeamId = await reader.ReadXmlValueAsUintAsync(),
                 TeamName = await reader.ReadElementContentAsStringAsync(),
@@ -152,7 +152,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new TrainerData
+            TrainerData result = new TrainerData
             {
                 TrainerType = (TrainerType)await reader.ReadXmlValueAsUintAsync(),
                 SkillLevel = (SkillLevel)await reader.ReadXmlValueAsByteAsync(),

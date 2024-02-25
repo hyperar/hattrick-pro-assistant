@@ -11,7 +11,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             result.Manager = await ParseManagerNodeAsync(reader);
 
@@ -23,7 +23,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Arena
+            Arena result = new Arena
             {
                 ArenaId = await reader.ReadXmlValueAsUintAsync(),
                 ArenaName = await reader.ReadElementContentAsStringAsync()
@@ -40,7 +40,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Avatar
+            Avatar result = new Avatar
             {
                 BackgroundImage = await reader.ReadElementContentAsStringAsync()
             };
@@ -61,7 +61,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Country
+            Country result = new Country
             {
                 CountryId = await reader.ReadXmlValueAsUintAsync(),
                 CountryName = await reader.ReadElementContentAsStringAsync()
@@ -78,7 +78,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Currency
+            Currency result = new Currency
             {
                 CurrencyName = await reader.ReadElementContentAsStringAsync(),
                 CurrencyRate = await reader.ReadXmlValueAsDecimalAsync()
@@ -95,7 +95,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Language
+            Language result = new Language
             {
                 LanguageId = await reader.ReadXmlValueAsUintAsync(),
                 LanguageName = await reader.ReadElementContentAsStringAsync()
@@ -109,7 +109,7 @@
 
         private static async Task<Layer> ParseLayerNodeAsync(XmlReader reader)
         {
-            var result = new Layer
+            Layer result = new Layer
             {
                 X = uint.Parse(reader.GetAttribute(Constants.NodeName.X) ?? "0"),
                 Y = uint.Parse(reader.GetAttribute(Constants.NodeName.Y) ?? "0"),
@@ -131,7 +131,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new LeagueLevelUnit
+            LeagueLevelUnit result = new LeagueLevelUnit
             {
                 LeagueLevelUnitId = await reader.ReadXmlValueAsUintAsync(),
                 LeagueLevelUnitName = await reader.ReadElementContentAsStringAsync()
@@ -148,7 +148,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new League
+            League result = new League
             {
                 LeagueId = await reader.ReadXmlValueAsUintAsync(),
                 LeagueName = await reader.ReadElementContentAsStringAsync(),
@@ -166,7 +166,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Manager
+            Manager result = new Manager
             {
                 UserId = await reader.ReadXmlValueAsUintAsync(),
                 LoginName = await reader.ReadElementContentAsStringAsync(),
@@ -261,7 +261,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new NationalTeam
+            NationalTeam result = new NationalTeam
             {
                 NationalTeamId = await reader.ReadXmlValueAsUintAsync(),
                 NationalTeamName = await reader.ReadElementContentAsStringAsync()
@@ -278,7 +278,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Region
+            Region result = new Region
             {
                 RegionId = await reader.ReadXmlValueAsUintAsync(),
                 RegionName = await reader.ReadElementContentAsStringAsync()
@@ -295,7 +295,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Team
+            Team result = new Team
             {
                 TeamId = await reader.ReadXmlValueAsUintAsync(),
                 TeamName = await reader.ReadElementContentAsStringAsync(),

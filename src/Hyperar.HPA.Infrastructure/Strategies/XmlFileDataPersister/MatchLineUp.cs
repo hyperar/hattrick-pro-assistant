@@ -42,7 +42,7 @@
         {
             if (file is Hattrick.HattrickData xmlEntity)
             {
-                var matchTeam = await this.matchTeamRepository.Query(x => x.Match.HattrickId == xmlEntity.MatchId
+                Domain.Senior.MatchTeam? matchTeam = await this.matchTeamRepository.Query(x => x.Match.HattrickId == xmlEntity.MatchId
                                                                        && x.HattrickId == xmlEntity.Team.TeamId)
                                                               .SingleOrDefaultAsync();
 
@@ -60,7 +60,7 @@
 
         private async Task PersistMatchLineUp(Hattrick.Team xmlTeam, Domain.Senior.MatchTeam matchTeam)
         {
-            var lineUp = await this.lineUpRepository.Query(x => x.Team.HattrickId == xmlTeam.TeamId
+            Domain.Senior.MatchTeamLineUp? lineUp = await this.lineUpRepository.Query(x => x.Team.HattrickId == xmlTeam.TeamId
                                                              && x.Team.Match.HattrickId == matchTeam.Match.HattrickId)
                                                     .SingleOrDefaultAsync();
 
@@ -74,17 +74,17 @@
 
             await this.databaseContext.SaveAsync();
 
-            foreach (var xmlStartingPlayer in xmlTeam.StartingLineUp)
+            foreach (Hattrick.StartingPlayer xmlStartingPlayer in xmlTeam.StartingLineUp)
             {
                 await this.PersistStartingPlayerAsync(xmlStartingPlayer, lineUp);
             }
 
-            foreach (var xmlPlayer in xmlTeam.LineUp)
+            foreach (Hattrick.Player xmlPlayer in xmlTeam.LineUp)
             {
                 await this.PersistPlayerAsync(xmlPlayer, lineUp);
             }
 
-            foreach (var xmlSubstitution in xmlTeam.Substitutions)
+            foreach (Hattrick.Substitution xmlSubstitution in xmlTeam.Substitutions)
             {
                 await this.PersistSubstitutionAsync(xmlSubstitution, lineUp);
             }
@@ -92,7 +92,7 @@
 
         private async Task PersistPlayerAsync(Hattrick.Player xmlPlayer, Domain.Senior.MatchTeamLineUp lineUp)
         {
-            var player = await this.lineUpPlayerRepository.Query(x => x.HattrickId == xmlPlayer.PlayerId
+            Domain.Senior.MatchTeamLineUpPlayer? player = await this.lineUpPlayerRepository.Query(x => x.HattrickId == xmlPlayer.PlayerId
                                                                    && x.Role == xmlPlayer.RoleId
                                                                    && x.LineUp.Id == lineUp.Id)
                                                           .SingleOrDefaultAsync();
@@ -114,7 +114,7 @@
 
         private async Task PersistStartingPlayerAsync(Hattrick.StartingPlayer xmlStartingPlayer, Domain.Senior.MatchTeamLineUp lineUp)
         {
-            var startingPlayer = await this.lineUpStartingPlayerRepository.Query(x => x.HattrickId == xmlStartingPlayer.PlayerId
+            Domain.Senior.MatchTeamLineUpStartingPlayer? startingPlayer = await this.lineUpStartingPlayerRepository.Query(x => x.HattrickId == xmlStartingPlayer.PlayerId
                                                                                    && x.Role == xmlStartingPlayer.RoleId
                                                                                    && x.LineUp.Id == lineUp.Id)
                                                                           .SingleOrDefaultAsync();
@@ -134,7 +134,7 @@
 
         private async Task PersistSubstitutionAsync(Hattrick.Substitution xmlSubstitution, Domain.Senior.MatchTeamLineUp lineUp)
         {
-            var substitution = await this.lineUpSubstitutionRepository.Query(x => x.LineUp.Id == lineUp.Id)
+            Domain.Senior.MatchTeamLineUpSubstitution? substitution = await this.lineUpSubstitutionRepository.Query(x => x.LineUp.Id == lineUp.Id)
                                                                       .SingleOrDefaultAsync();
 
             substitution ??= await this.lineUpSubstitutionRepository.InsertAsync(

@@ -55,13 +55,13 @@
 
         private async Task ProcessTeamAsync(Hattrick.Team xmlTeam, Domain.Manager manager)
         {
-            var team = await this.teamRepository.GetByHattrickIdAsync(xmlTeam.TeamId);
+            Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(xmlTeam.TeamId);
 
-            var league = await this.leagueRepository.GetByHattrickIdAsync(xmlTeam.League.LeagueId);
+            Domain.League? league = await this.leagueRepository.GetByHattrickIdAsync(xmlTeam.League.LeagueId);
 
             ArgumentNullException.ThrowIfNull(league, nameof(league));
 
-            var region = await this.regionRepository.GetByHattrickIdAsync(xmlTeam.Region.RegionId);
+            Domain.Region? region = await this.regionRepository.GetByHattrickIdAsync(xmlTeam.Region.RegionId);
 
             ArgumentNullException.ThrowIfNull(region, nameof(region));
 
@@ -160,11 +160,11 @@
 
         private async Task ProcessTeamDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            var manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.User.UserId);
+            Domain.Manager? manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.User.UserId);
 
             ArgumentNullException.ThrowIfNull(manager, nameof(manager));
 
-            foreach (var curXmlTeam in xmlEntity.Teams)
+            foreach (Hattrick.Team curXmlTeam in xmlEntity.Teams)
             {
                 await this.ProcessTeamAsync(curXmlTeam, manager);
             }

@@ -68,7 +68,7 @@
                 return;
             }
 
-            var country = await this.countryRepository.GetByHattrickIdAsync(xmlCountry.CountryId.Value);
+            Domain.Country? country = await this.countryRepository.GetByHattrickIdAsync(xmlCountry.CountryId.Value);
 
             if (country == null)
             {
@@ -102,7 +102,7 @@
 
             if (xmlCountry.RegionList != null && xmlCountry.RegionList.Count > 0)
             {
-                foreach (var curXmlRegion in xmlCountry.RegionList)
+                foreach (Hattrick.Region curXmlRegion in xmlCountry.RegionList)
                 {
                     await this.ProcessRegionAsync(curXmlRegion, country);
                 }
@@ -113,7 +113,7 @@
 
         private async Task ProcessLeagueAsync(Hattrick.League xmlLeague)
         {
-            var league = await this.leagueRepository.GetByHattrickIdAsync(xmlLeague.LeagueId);
+            Domain.League? league = await this.leagueRepository.GetByHattrickIdAsync(xmlLeague.LeagueId);
 
             if (league == null)
             {
@@ -181,7 +181,7 @@
 
             if (xmlLeague.Cups != null && xmlLeague.Cups.Count > 0)
             {
-                foreach (var curXmlCup in xmlLeague.Cups)
+                foreach (Hattrick.Cup curXmlCup in xmlLeague.Cups)
                 {
                     await this.ProcessLeagueCupAsync(curXmlCup, xmlLeague.LeagueId);
                 }
@@ -192,7 +192,7 @@
 
         private async Task ProcessLeagueCupAsync(Hattrick.Cup xmlCup, uint leagueId)
         {
-            var cup = await this.leagueCupRepository.GetByHattrickIdAsync(xmlCup.CupId);
+            Domain.LeagueCup? cup = await this.leagueCupRepository.GetByHattrickIdAsync(xmlCup.CupId);
 
             if (cup == null)
             {
@@ -225,7 +225,7 @@
 
         private async Task ProcessRegionAsync(Hattrick.Region xmlRegion, Domain.Country country)
         {
-            var region = await this.regionRepository.GetByHattrickIdAsync(xmlRegion.RegionId);
+            Domain.Region? region = await this.regionRepository.GetByHattrickIdAsync(xmlRegion.RegionId);
 
             if (region == null)
             {
@@ -236,7 +236,7 @@
                     Name = xmlRegion.RegionName
                 };
 
-                await regionRepository.InsertAsync(region);
+                await this.regionRepository.InsertAsync(region);
             }
             else
             {
@@ -250,7 +250,7 @@
 
         private async Task ProcessWorldDetailsAsync(Hattrick.HattrickData xmlEntity)
         {
-            foreach (var curXmlLeague in xmlEntity.LeagueList)
+            foreach (Hattrick.League curXmlLeague in xmlEntity.LeagueList)
             {
                 await this.ProcessLeagueAsync(curXmlLeague);
             }

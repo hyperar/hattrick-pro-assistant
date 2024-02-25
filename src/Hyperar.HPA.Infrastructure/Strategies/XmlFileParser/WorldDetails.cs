@@ -10,7 +10,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             try
             {
@@ -38,7 +38,7 @@
 
         private static async Task<Country> ParseCountryNodeAsync(XmlReader reader)
         {
-            var result = new Country
+            Country result = new Country
             {
                 Available = reader.GetAttribute(Constants.NodeName.Available) == bool.TrueString
             };
@@ -82,7 +82,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Cup
+            Cup result = new Cup
             {
                 CupId = await reader.ReadXmlValueAsUintAsync(),
                 CupName = await reader.ReadElementContentAsStringAsync(),
@@ -104,7 +104,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new League
+            League result = new League
             {
                 LeagueId = await reader.ReadXmlValueAsUintAsync(),
                 LeagueName = await reader.ReadElementContentAsStringAsync(),
@@ -161,7 +161,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Region
+            Region result = new Region
             {
                 RegionId = await reader.ReadXmlValueAsUintAsync(),
                 RegionName = await reader.ReadElementContentAsStringAsync()

@@ -65,7 +65,7 @@
                 ImageUrl = NormalizeUrl(avatar.BackgroundImage),
             });
 
-            foreach (var curLayer in avatar.Layers)
+            foreach (Hattrick.Layer curLayer in avatar.Layers)
             {
                 layerIndex++;
 
@@ -81,15 +81,15 @@
 
         private async Task ProcessManagerCompendiumAsync(Hattrick.HattrickData xmlEntity)
         {
-            var country = await this.countryRepository.GetByHattrickIdAsync(xmlEntity.Manager.Country.CountryId);
+            Domain.Country? country = await this.countryRepository.GetByHattrickIdAsync(xmlEntity.Manager.Country.CountryId);
 
             ArgumentNullException.ThrowIfNull(country, nameof(country));
 
-            var manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.Manager.UserId);
+            Domain.Manager? manager = await this.managerRepository.GetByHattrickIdAsync(xmlEntity.Manager.UserId);
 
             if (manager == null)
             {
-                var user = await this.userRepository.Query().SingleAsync();
+                Domain.User user = await this.userRepository.Query().SingleAsync();
 
                 ArgumentNullException.ThrowIfNull(user, nameof(user));
 
@@ -123,7 +123,7 @@
                 }
                 else
                 {
-                    var xmlAvatarLayers = new List<string>(xmlEntity.Manager.Avatar.Layers.Select(x => NormalizeUrl(x.Image)).ToArray())
+                    List<string> xmlAvatarLayers = new List<string>(xmlEntity.Manager.Avatar.Layers.Select(x => NormalizeUrl(x.Image)).ToArray())
                     {
                         NormalizeUrl(xmlEntity.Manager.Avatar.BackgroundImage),
                     };
@@ -135,7 +135,7 @@
 
                 if (mustDeleteAvatar)
                 {
-                    var layerIdsToDelete = manager.AvatarLayers.Select(x => x.Id).ToList();
+                    List<int> layerIdsToDelete = manager.AvatarLayers.Select(x => x.Id).ToList();
 
                     await this.managerAvatarLayerRepository.DeleteRangeAsync(layerIdsToDelete);
 

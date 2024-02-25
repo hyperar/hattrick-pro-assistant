@@ -10,7 +10,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             result.Trainer = await ParseTrainerNodeAsync(reader);
             result.StaffMembers = await ParseStaffMembersNodeAsync(reader);
@@ -23,7 +23,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Avatar
+            Avatar result = new Avatar
             {
                 BackgroundImage = await reader.ReadElementContentAsStringAsync()
             };
@@ -42,7 +42,7 @@
 
         private static async Task<Layer> ParseLayerNodeAsync(XmlReader reader)
         {
-            var result = new Layer
+            Layer result = new Layer
             {
                 X = uint.Parse(reader.GetAttribute(Constants.NodeName.X) ?? "0"),
                 Y = uint.Parse(reader.GetAttribute(Constants.NodeName.Y) ?? "0"),
@@ -64,7 +64,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new List<Staff>();
+            List<Staff> result = new List<Staff>();
 
             while (reader.CheckNode(Constants.NodeName.Staff))
             {
@@ -82,7 +82,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Staff
+            Staff result = new Staff
             {
                 StaffId = await reader.ReadXmlValueAsUintAsync(),
                 Avatar = await ParseAvatarNodeAsync(reader),
@@ -99,7 +99,7 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            var result = new Trainer
+            Trainer result = new Trainer
             {
                 TrainerId = await reader.ReadXmlValueAsUintAsync(),
                 Avatar = await ParseAvatarNodeAsync(reader),

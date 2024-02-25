@@ -5,69 +5,69 @@
     using WinUI.Enums;
     using WinUI.ViewModels.Interface;
 
-    internal delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
+    //internal delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
 
     internal delegate Task<TViewModel> CreateViewModelAsync<TViewModel>() where TViewModel : ViewModelBase;
 
     internal class ViewModelFactory : IViewModelFactory
     {
-        private readonly CreateViewModelAsync<AboutViewModel> createAboutViewModel;
+        private readonly CreateViewModelAsync<AboutViewModel> createAboutViewModelAsync;
 
-        private readonly CreateViewModelAsync<AuthorizationViewModel> createAuthorizationViewModel;
+        private readonly CreateViewModelAsync<AuthorizationViewModel> createAuthorizationViewModelAsync;
 
-        private readonly CreateViewModelAsync<DownloadViewModel> createDownloadViewModel;
+        private readonly CreateViewModelAsync<DownloadViewModel> createDownloadViewModelAsync;
 
-        private readonly CreateViewModelAsync<HomeViewModel> createHomeViewModel;
+        private readonly CreateViewModelAsync<HomeViewModel> createHomeViewModelAsync;
 
-        private readonly CreateViewModel<MainWindowViewModel> createMainViewModel;
+        private readonly CreateViewModelAsync<MainViewModel> createMainViewModelAsync;
 
-        private readonly CreateViewModelAsync<MatchesViewModel> createMatchesViewModel;
+        private readonly CreateViewModelAsync<MatchesViewModel> createMatchesViewModelAsync;
 
-        private readonly CreateViewModelAsync<PlayersViewModel> createPlayersViewModel;
+        private readonly CreateViewModelAsync<PlayersViewModel> createPlayersViewModelAsync;
 
-        private readonly CreateViewModelAsync<SettingsViewModel> createSettingsViewModel;
+        private readonly CreateViewModelAsync<SettingsViewModel> createSettingsViewModelAsync;
 
-        private readonly CreateViewModelAsync<TeamSelectionViewModel> createTeamSelectionViewModel;
+        private readonly CreateViewModelAsync<TeamSelectionViewModel> createTeamSelectionViewModelAsync;
 
         public ViewModelFactory(
-            CreateViewModelAsync<AboutViewModel> createAboutViewModel,
-            CreateViewModelAsync<AuthorizationViewModel> createAuthorizationViewModel,
-            CreateViewModelAsync<DownloadViewModel> createDownloadViewModel,
-            CreateViewModelAsync<HomeViewModel> createHomeViewModel,
-            CreateViewModel<MainWindowViewModel> createMainViewModel,
-            CreateViewModelAsync<MatchesViewModel> createMatchesViewModel,
-            CreateViewModelAsync<PlayersViewModel> createPlayersViewModel,
-            CreateViewModelAsync<SettingsViewModel> createSettingsViewModel,
-            CreateViewModelAsync<TeamSelectionViewModel> createTeamSelectionViewModel)
+            CreateViewModelAsync<AboutViewModel> createAboutViewModelAsync,
+            CreateViewModelAsync<AuthorizationViewModel> createAuthorizationViewModelAsync,
+            CreateViewModelAsync<DownloadViewModel> createDownloadViewModelAsync,
+            CreateViewModelAsync<HomeViewModel> createHomeViewModelAsync,
+            CreateViewModelAsync<MainViewModel> createMainViewModelAsync,
+            CreateViewModelAsync<MatchesViewModel> createMatchesViewModelAsync,
+            CreateViewModelAsync<PlayersViewModel> createPlayersViewModelAsync,
+            CreateViewModelAsync<SettingsViewModel> createSettingsViewModelAsync,
+            CreateViewModelAsync<TeamSelectionViewModel> createTeamSelectionViewModelAsync)
         {
-            this.createAboutViewModel = createAboutViewModel;
-            this.createAuthorizationViewModel = createAuthorizationViewModel;
-            this.createDownloadViewModel = createDownloadViewModel;
-            this.createHomeViewModel = createHomeViewModel;
-            this.createMainViewModel = createMainViewModel;
-            this.createMatchesViewModel = createMatchesViewModel;
-            this.createPlayersViewModel = createPlayersViewModel;
-            this.createSettingsViewModel = createSettingsViewModel;
-            this.createTeamSelectionViewModel = createTeamSelectionViewModel;
+            this.createAboutViewModelAsync = createAboutViewModelAsync;
+            this.createAuthorizationViewModelAsync = createAuthorizationViewModelAsync;
+            this.createDownloadViewModelAsync = createDownloadViewModelAsync;
+            this.createHomeViewModelAsync = createHomeViewModelAsync;
+            this.createMainViewModelAsync = createMainViewModelAsync;
+            this.createMatchesViewModelAsync = createMatchesViewModelAsync;
+            this.createPlayersViewModelAsync = createPlayersViewModelAsync;
+            this.createSettingsViewModelAsync = createSettingsViewModelAsync;
+            this.createTeamSelectionViewModelAsync = createTeamSelectionViewModelAsync;
         }
 
-        public ViewModelBase CreateMainViewModel()
+        public Task<MainViewModel> CreateMainViewModelAsync()
         {
-            return this.createMainViewModel();
+            return this.createMainViewModelAsync();
         }
 
-        public async Task<ViewModelBase> CreateViewModel(ViewType viewType)
+        public async Task<ViewModelBase> CreateViewModelAsync(ViewType viewType)
         {
             return viewType switch
             {
-                ViewType.About => await this.createAboutViewModel(),
-                ViewType.Authorization => await this.createAuthorizationViewModel(),
-                ViewType.Download => await this.createDownloadViewModel(),
-                ViewType.Home => await this.createHomeViewModel(),
-                ViewType.Matches => await this.createMatchesViewModel(),
-                ViewType.Players => await this.createPlayersViewModel(),
-                ViewType.Settings => await this.createSettingsViewModel(),
-                ViewType.TeamSelection => await this.createTeamSelectionViewModel(),
+                ViewType.About => await this.createAboutViewModelAsync(),
+                ViewType.Authorization => await this.createAuthorizationViewModelAsync(),
+                ViewType.Download => await this.createDownloadViewModelAsync(),
+                ViewType.Home => await this.createHomeViewModelAsync(),
+                ViewType.Matches => await this.createMatchesViewModelAsync(),
+                ViewType.Players => await this.createPlayersViewModelAsync(),
+                ViewType.Settings => await this.createSettingsViewModelAsync(),
+                ViewType.TeamSelection => await this.createTeamSelectionViewModelAsync(),
                 _ => throw new ArgumentOutOfRangeException(nameof(viewType))
             };
         }

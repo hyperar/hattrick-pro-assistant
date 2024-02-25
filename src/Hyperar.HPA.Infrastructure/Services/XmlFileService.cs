@@ -94,14 +94,14 @@
 
         public async Task PersistFileAsync(IXmlFile xmlFile)
         {
-            var persister = this.fileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
+            IXmlFileDataPersisterStrategy persister = this.fileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
 
             await persister.PersistDataAsync(xmlFile);
         }
 
         public async Task PersistFileAsync(IXmlFile xmlFile, uint contextId)
         {
-            var persister = this.fileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
+            IXmlFileDataPersisterStrategy persister = this.fileDataPersisterFactory.GetPersister(xmlFile.FileName.ToXmlFileType());
 
             await persister.PersistDataWithContextAsync(xmlFile, contextId);
         }

@@ -17,25 +17,25 @@
         {
             host.ConfigureServices(services =>
             {
-                services.AddTransient<CreateViewModelAsync<AboutViewModel>>(services => () => CreateAboutViewModel(services));
-                services.AddTransient<CreateViewModelAsync<AuthorizationViewModel>>(services => () => CreateAuthorizationViewModel(services));
-                services.AddTransient<CreateViewModelAsync<DownloadViewModel>>(services => () => CreateDownloadViewModel(services));
-                services.AddTransient<CreateViewModelAsync<HomeViewModel>>(services => () => CreateHomeViewModel(services));
-                services.AddTransient<CreateViewModelAsync<MatchesViewModel>>(services => () => CreateMatchesViewModel(services));
-                services.AddTransient<CreateViewModelAsync<PlayersViewModel>>(services => () => CreatePlayersViewModel(services));
-                services.AddTransient<CreateViewModelAsync<SettingsViewModel>>(services => () => CreateSettingsViewModel(services));
-                services.AddTransient<CreateViewModelAsync<TeamSelectionViewModel>>(services => () => CreateTeamSelectionViewModel(services));
+                services.AddTransient<CreateViewModelAsync<AboutViewModel>>(services => () => CreateAboutViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<AuthorizationViewModel>>(services => () => CreateAuthorizationViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<DownloadViewModel>>(services => () => CreateDownloadViewModelASync(services));
+                services.AddTransient<CreateViewModelAsync<HomeViewModel>>(services => () => CreateHomeViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<MatchesViewModel>>(services => () => CreateMatchesViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<PlayersViewModel>>(services => () => CreatePlayersViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<SettingsViewModel>>(services => () => CreateSettingsViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<TeamSelectionViewModel>>(services => () => CreateTeamSelectionViewModelAsync(services));
 
-                services.AddSingleton<CreateViewModel<MainWindowViewModel>>(services => () => CreateMainViewModel(services));
+                services.AddSingleton<CreateViewModelAsync<MainViewModel>>(services => () => CreateMainViewModelAsync(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
 
             return host;
         }
 
-        private static async Task<AboutViewModel> CreateAboutViewModel(IServiceProvider services)
+        private static async Task<AboutViewModel> CreateAboutViewModelAsync(IServiceProvider services)
         {
-            var viewModel = new AboutViewModel(
+            AboutViewModel viewModel = new AboutViewModel(
                 services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
@@ -43,11 +43,11 @@
             return viewModel;
         }
 
-        private static async Task<AuthorizationViewModel> CreateAuthorizationViewModel(IServiceProvider services)
+        private static async Task<AuthorizationViewModel> CreateAuthorizationViewModelAsync(IServiceProvider services)
         {
-            var scope = services.CreateScope();
+            IServiceScope scope = services.CreateScope();
 
-            var viewModel = new AuthorizationViewModel(
+            AuthorizationViewModel viewModel = new AuthorizationViewModel(
                 services.GetRequiredService<INavigator>(),
                 services.GetRequiredService<IHattrickService>(),
                 scope.ServiceProvider.GetRequiredService<IUserService>());
@@ -57,11 +57,11 @@
             return viewModel;
         }
 
-        private static async Task<DownloadViewModel> CreateDownloadViewModel(IServiceProvider services)
+        private static async Task<DownloadViewModel> CreateDownloadViewModelASync(IServiceProvider services)
         {
-            var scope = services.CreateScope();
+            IServiceScope scope = services.CreateScope();
 
-            var viewModel = new DownloadViewModel(
+            DownloadViewModel viewModel = new DownloadViewModel(
                 services.GetRequiredService<INavigator>(),
                 services.GetRequiredService<IHattrickService>(),
                 services.GetRequiredService<ITeamSelector>(),
@@ -73,9 +73,9 @@
             return viewModel;
         }
 
-        private static async Task<HomeViewModel> CreateHomeViewModel(IServiceProvider services)
+        private static async Task<HomeViewModel> CreateHomeViewModelAsync(IServiceProvider services)
         {
-            var viewModel = new HomeViewModel(
+            HomeViewModel viewModel = new HomeViewModel(
                 services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
@@ -83,19 +83,19 @@
             return viewModel;
         }
 
-        private static MainWindowViewModel CreateMainViewModel(IServiceProvider services)
+        private static async Task<MainViewModel> CreateMainViewModelAsync(IServiceProvider services)
         {
-            using (var scope = services.CreateScope())
+            using (IServiceScope scope = services.CreateScope())
             {
                 // Scoped.
-                var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
+                IUserService userService = scope.ServiceProvider.GetRequiredService<IUserService>();
 
                 // Singleton
-                var viewModelFactory = services.GetRequiredService<IViewModelFactory>();
-                var navigator = services.GetRequiredService<INavigator>();
-                var teamSelector = services.GetRequiredService<ITeamSelector>();
+                IViewModelFactory viewModelFactory = services.GetRequiredService<IViewModelFactory>();
+                INavigator navigator = services.GetRequiredService<INavigator>();
+                ITeamSelector teamSelector = services.GetRequiredService<ITeamSelector>();
 
-                var user = userService.GetUser();
+                Domain.User user = await userService.GetUserAsync();
 
                 ArgumentNullException.ThrowIfNull(user, nameof(user));
 
@@ -118,13 +118,13 @@
                     viewType = ViewType.Home;
                 }
 
-                return new MainWindowViewModel(navigator, viewModelFactory, viewType);
+                return new MainViewModel(navigator, viewModelFactory, viewType);
             }
         }
 
-        private static async Task<MatchesViewModel> CreateMatchesViewModel(IServiceProvider services)
+        private static async Task<MatchesViewModel> CreateMatchesViewModelAsync(IServiceProvider services)
         {
-            var viewModel = new MatchesViewModel(
+            MatchesViewModel viewModel = new MatchesViewModel(
                 services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
@@ -132,9 +132,9 @@
             return viewModel;
         }
 
-        private static async Task<PlayersViewModel> CreatePlayersViewModel(IServiceProvider services)
+        private static async Task<PlayersViewModel> CreatePlayersViewModelAsync(IServiceProvider services)
         {
-            var viewModel = new PlayersViewModel(
+            PlayersViewModel viewModel = new PlayersViewModel(
                 services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
@@ -142,11 +142,11 @@
             return viewModel;
         }
 
-        private static async Task<SettingsViewModel> CreateSettingsViewModel(IServiceProvider services)
+        private static async Task<SettingsViewModel> CreateSettingsViewModelAsync(IServiceProvider services)
         {
-            var navigator = services.GetRequiredService<INavigator>();
+            INavigator navigator = services.GetRequiredService<INavigator>();
 
-            var viewModel = new SettingsViewModel(
+            SettingsViewModel viewModel = new SettingsViewModel(
                 services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
@@ -154,9 +154,9 @@
             return viewModel;
         }
 
-        private static async Task<TeamSelectionViewModel> CreateTeamSelectionViewModel(IServiceProvider services)
+        private static async Task<TeamSelectionViewModel> CreateTeamSelectionViewModelAsync(IServiceProvider services)
         {
-            var viewModel = new TeamSelectionViewModel(
+            TeamSelectionViewModel viewModel = new TeamSelectionViewModel(
                 services.GetRequiredService<INavigator>(),
                 services.GetRequiredService<ITeamSelector>());
 

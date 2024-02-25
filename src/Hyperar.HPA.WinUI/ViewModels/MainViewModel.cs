@@ -13,7 +13,7 @@
     using WinUI.State.Interface;
     using WinUI.ViewModels.Interface;
 
-    public partial class MainWindowViewModel : ViewModelBase, IDisposable
+    public partial class MainViewModel : ViewModelBase, IDisposable
     {
         [ObservableProperty]
         private ViewModelBase? currentPage;
@@ -24,11 +24,11 @@
         [ObservableProperty]
         private MenuItemTemplate? selectedItem;
 
-        public MainWindowViewModel() : base(new Navigator())
+        public MainViewModel() : base(new Navigator())
         {
         }
 
-        public MainWindowViewModel(
+        public MainViewModel(
             INavigator navigator,
             IViewModelFactory viewModelFactory,
             ViewType viewType) : base(navigator)

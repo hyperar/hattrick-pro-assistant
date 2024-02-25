@@ -19,13 +19,12 @@
         private const string teamIdParamKey = "teamId";
 
         public DownloadTask[] ExtractXmlDownloadTasks(IXmlFile xmlFile)
-
         {
             if (xmlFile is HattrickData file)
             {
-                var downloadTasks = new List<DownloadTask>();
+                List<DownloadTask> downloadTasks = new List<DownloadTask>();
 
-                foreach (var curMatch in file.Team.MatchList.Where(x => x.Status == MatchStatus.Finished))
+                foreach (Match? curMatch in file.Team.MatchList.Where(x => x.Status == MatchStatus.Finished))
                 {
                     downloadTasks.Add(
                         new DownloadTask(

@@ -12,11 +12,7 @@
 
         Task EndTransactionAsync();
 
-        void Migrate();
-
         Task MigrateAsync();
-
-        void Save();
 
         Task SaveAsync();
     }

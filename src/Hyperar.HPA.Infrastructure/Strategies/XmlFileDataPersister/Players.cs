@@ -62,11 +62,11 @@
 
         private async Task ProcessPlayerAsync(Hattrick.Player xmlPlayer, Domain.Senior.Team team)
         {
-            var player = await this.playerRepository.GetByHattrickIdAsync(xmlPlayer.PlayerId);
+            Domain.Senior.Player? player = await this.playerRepository.GetByHattrickIdAsync(xmlPlayer.PlayerId);
 
             if (player == null)
             {
-                var country = await this.countryRepository.GetByHattrickIdAsync(xmlPlayer.CountryId);
+                Domain.Country? country = await this.countryRepository.GetByHattrickIdAsync(xmlPlayer.CountryId);
 
                 ArgumentNullException.ThrowIfNull(country, nameof(country));
 
@@ -156,22 +156,22 @@
                 return;
             }
 
-            var team = await this.teamRepository.GetByHattrickIdAsync(xmlEntity.Team.TeamId);
+            Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(xmlEntity.Team.TeamId);
 
             ArgumentNullException.ThrowIfNull(team, nameof(team));
 
             List<uint> xmlPlayerIds = xmlEntity.Team.PlayerList.Select(x => x.PlayerId).ToList();
 
-            var playersIdsToDelete = await this.playerRepository.Query(x => x.Team.HattrickId == team.HattrickId
+            List<uint> playersIdsToDelete = await this.playerRepository.Query(x => x.Team.HattrickId == team.HattrickId
                                                                          && xmlPlayerIds.Contains(x.HattrickId))
                                                                 .Select(x => x.HattrickId)
                                                                 .ToListAsync();
 
-            var playerAvatarLayersIdsToDelete = this.playerRepository.Query(x => playersIdsToDelete.Contains(x.HattrickId))
+            List<int> playerAvatarLayersIdsToDelete = this.playerRepository.Query(x => playersIdsToDelete.Contains(x.HattrickId))
                                                                      .SelectMany(x => x.AvatarLayers.Select(y => y.Id))
                                                                      .ToList();
 
-            var playerSkillSetsIdsToDelete = this.playerRepository.Query(x => playersIdsToDelete.Contains(x.HattrickId))
+            List<int> playerSkillSetsIdsToDelete = this.playerRepository.Query(x => playersIdsToDelete.Contains(x.HattrickId))
                                                                   .SelectMany(x => x.PlayerSkillSets.Select(y => y.Id))
                                                                   .ToList();
 
@@ -179,7 +179,7 @@
             await this.playerSkillSetRepository.DeleteRangeAsync(playerSkillSetsIdsToDelete);
             await this.playerRepository.DeleteRangeAsync(playersIdsToDelete);
 
-            foreach (var curXmlPlayer in xmlEntity.Team.PlayerList)
+            foreach (Hattrick.Player curXmlPlayer in xmlEntity.Team.PlayerList)
             {
                 await this.ProcessPlayerAsync(curXmlPlayer, team);
             }
@@ -189,10 +189,10 @@
 
         private async Task ProcessPlayerSkillAsync(Hattrick.Player xmlPlayer, Domain.Senior.Player player, uint season, uint week)
         {
-            var currentWeekSkillSet = await this.playerSkillSetRepository.Query(x => x.Player.HattrickId == player.HattrickId)
-                                                                         .OrderByDescending(x => x.Season)
-                                                                         .ThenByDescending(x => x.Week)
-                                                                         .FirstOrDefaultAsync();
+            Domain.Senior.PlayerSkillSet? currentWeekSkillSet = await this.playerSkillSetRepository.Query(x => x.Player.HattrickId == player.HattrickId)
+                                                                          .OrderByDescending(x => x.Season)
+                                                                          .ThenByDescending(x => x.Week)
+                                                                          .FirstOrDefaultAsync();
 
             if (currentWeekSkillSet == null || currentWeekSkillSet.Season != season || currentWeekSkillSet.Week != week)
             {

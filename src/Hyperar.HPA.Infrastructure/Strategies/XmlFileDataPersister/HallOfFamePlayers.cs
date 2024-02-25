@@ -47,13 +47,13 @@
 
         private async Task ProcessHallOfFamePlayersAsync(Hattrick.HattrickData xmlPlayers)
         {
-            foreach (var curPlayer in xmlPlayers.PlayerList)
+            foreach (Hattrick.Player curPlayer in xmlPlayers.PlayerList)
             {
-                var hallOfFamePlayer = await this.hallOfFamePlayersRepository.GetByHattrickIdAsync(curPlayer.PlayerId);
+                Domain.Senior.HallOfFamePlayer? hallOfFamePlayer = await this.hallOfFamePlayersRepository.GetByHattrickIdAsync(curPlayer.PlayerId);
 
                 if (hallOfFamePlayer == null)
                 {
-                    var country = await this.countryRepository.GetByHattrickIdAsync(curPlayer.CountryId);
+                    Domain.Country? country = await this.countryRepository.GetByHattrickIdAsync(curPlayer.CountryId);
 
                     ArgumentNullException.ThrowIfNull(country, nameof(country));
 

@@ -44,7 +44,7 @@
         {
             string fileTypeString = fileType.ToString();
 
-            var stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
 
             stringBuilder.Append(this.configuration[string.Format(FileAndVersionKey, fileTypeString)]);
 
@@ -75,7 +75,7 @@
 
             if (unrecognizedParameters.Length != 0)
             {
-                var stringBuilder = new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
 
                 stringBuilder.AppendLine($"The following parameters are not allowed for File Type '{fileType.ToString()}':");
 

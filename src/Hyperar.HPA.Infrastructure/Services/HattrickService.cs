@@ -49,7 +49,7 @@
 
             ArgumentException.ThrowIfNullOrEmpty(checkTokenUrl, nameof(checkTokenUrl));
 
-            var responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
+            Stream responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
 
             return await ReadResponseStreamAsync(responseStream);
         }
@@ -62,7 +62,7 @@
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            var requestToken = new TokenBase
+            TokenBase requestToken = new TokenBase
             {
                 Token = request.RequestToken.Token,
                 TokenSecret = request.RequestToken.TokenSecret
@@ -107,9 +107,7 @@
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            if (request.FileType == Common.Enums.XmlFileType.MatchDetails)
-            { }
-            var responseStream = await GetResponseStreamForUrlAsync(url, session);
+            Stream responseStream = await GetResponseStreamForUrlAsync(url, session);
 
             return await ReadResponseStreamAsync(responseStream);
         }
@@ -124,7 +122,7 @@
 
             OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
 
-            var responseStream = await GetResponseStreamForUrlAsync(invalidateTokenUrl, session);
+            Stream responseStream = await GetResponseStreamForUrlAsync(invalidateTokenUrl, session);
 
             return await ReadResponseStreamAsync(responseStream);
         }
@@ -135,12 +133,12 @@
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            var webRequest = session.Request()
+            System.Net.HttpWebRequest webRequest = session.Request()
                 .ForUrl(url)
                 .ForMethod(HttpMethod.Get.ToString())
                 .ToWebRequest();
 
-            var response = await webRequest.GetResponseAsync();
+            System.Net.WebResponse response = await webRequest.GetResponseAsync();
 
             return response.GetResponseStream();
         }

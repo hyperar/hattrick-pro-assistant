@@ -69,7 +69,7 @@
             ArgumentException.ThrowIfNullOrWhiteSpace(this.requestToken, nameof(this.requestToken));
             ArgumentException.ThrowIfNullOrWhiteSpace(this.requestTokenSecret, nameof(this.requestTokenSecret));
 
-            var response = await this.hattrickService.GetAccessTokenAsync(
+            GetAccessTokenResponse response = await this.hattrickService.GetAccessTokenAsync(
                 new GetAccessTokenRequest(
                     this.VerificationCode,
                     this.requestToken,
@@ -123,7 +123,7 @@
         {
             this.Navigator.SuspendNavigation();
 
-            var user = await this.userService.GetUserAsync();
+            Domain.User user = await this.userService.GetUserAsync();
 
             ArgumentNullException.ThrowIfNull(user, nameof(user));
 

@@ -29,7 +29,7 @@ namespace Hyperar.HPA.WinUI
                 return null;
             }
 
-            this.locator.TryGetValue(data.GetType(), out var factory);
+            this.locator.TryGetValue(data.GetType(), out Func<Control?>? factory);
 
             return factory?.Invoke() ?? new TextBlock { Text = $"VM Not Registered: {data.GetType()}" };
         }

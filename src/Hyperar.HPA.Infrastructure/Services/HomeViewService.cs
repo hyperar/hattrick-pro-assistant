@@ -19,7 +19,7 @@
 
         public async Task<TeamOverview> GetTeamsOverview(uint teamId)
         {
-            var team = await this.teamRepository.GetByHattrickIdAsync(teamId);
+            Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(teamId);
 
             ArgumentNullException.ThrowIfNull(team, nameof(team));
 

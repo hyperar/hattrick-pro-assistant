@@ -66,7 +66,7 @@
         {
             if (file is Hattrick.HattrickData xmlEntity)
             {
-                var team = await this.teamRepository.GetByHattrickIdAsync(contextId);
+                Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(contextId);
 
                 ArgumentNullException.ThrowIfNull(team, nameof(team));
 
@@ -85,7 +85,7 @@
                 return;
             }
 
-            var arena = await this.matchArenaRepository.Query(x => x.MatchHattrickId == match.HattrickId)
+            Domain.Senior.MatchArena? arena = await this.matchArenaRepository.Query(x => x.MatchHattrickId == match.HattrickId)
                                                        .SingleOrDefaultAsync();
 
             if (arena == null)
@@ -107,7 +107,7 @@
 
         private async Task ProcessEventAsync(Hattrick.Event xmlEvent, Domain.Senior.Match match)
         {
-            var dbEvent = await this.matchEventRepository.Query(x => x.Index == xmlEvent.Index
+            Domain.Senior.MatchEvent? dbEvent = await this.matchEventRepository.Query(x => x.Index == xmlEvent.Index
                                                                   && x.Match.HattrickId == match.HattrickId)
                                                          .SingleOrDefaultAsync();
 
@@ -132,7 +132,7 @@
 
         private async Task ProcessMatchAsync(Hattrick.Match xmlMatch, string sourceSystem, Domain.Senior.Team team)
         {
-            var match = await this.matchRepository.GetByHattrickIdAsync(xmlMatch.MatchId);
+            Domain.Senior.Match? match = await this.matchRepository.GetByHattrickIdAsync(xmlMatch.MatchId);
 
             match ??= await this.matchRepository.InsertAsync(new Domain.Senior.Match
             {
@@ -165,7 +165,7 @@
 
             if (xmlMatch.EventList != null)
             {
-                foreach (var xmlEvent in xmlMatch.EventList)
+                foreach (Hattrick.Event xmlEvent in xmlMatch.EventList)
                 {
                     await this.ProcessEventAsync(xmlEvent, match);
                 }
@@ -176,13 +176,13 @@
 
         private async Task ProcessMatchOfficialAsync(Hattrick.Referee xmlReferee, Domain.Senior.Match match)
         {
-            var referee = await this.matchOfficialRepository.Query(x => x.HattrickId == xmlReferee.RefereeId
+            Domain.Senior.MatchOfficial? referee = await this.matchOfficialRepository.Query(x => x.HattrickId == xmlReferee.RefereeId
                                                                      && x.Match.HattrickId == match.HattrickId)
                                                             .SingleOrDefaultAsync();
 
             if (referee == null)
             {
-                var league = await this.leagueRepository.GetByHattrickIdAsync(xmlReferee.RefereeCountryId);
+                Domain.League? league = await this.leagueRepository.GetByHattrickIdAsync(xmlReferee.RefereeCountryId);
 
                 ArgumentNullException.ThrowIfNull(league, nameof(league));
                 ArgumentNullException.ThrowIfNull(league.Country, nameof(league.Country));
@@ -204,7 +204,7 @@
             Domain.Senior.Match match,
             bool isHomeTeam)
         {
-            var team = await this.matchTeamRepository.Query(x => x.HattrickId == xmlTeam.TeamId
+            Domain.Senior.MatchTeam? team = await this.matchTeamRepository.Query(x => x.HattrickId == xmlTeam.TeamId
                                                               && x.Match.HattrickId == match.HattrickId)
                                                      .SingleOrDefaultAsync();
 
@@ -245,7 +245,7 @@
 
                 if (xmlMatch.Scorers != null)
                 {
-                    foreach (var xmlGoal in xmlMatch.Scorers.Where(x => x.ScorerTeamId == xmlTeam.TeamId))
+                    foreach (Hattrick.Goal? xmlGoal in xmlMatch.Scorers.Where(x => x.ScorerTeamId == xmlTeam.TeamId))
                     {
                         await this.ProcessMatchTeamGoalsAsync(xmlGoal, team);
                     }
@@ -253,7 +253,7 @@
 
                 if (xmlMatch.Bookings != null)
                 {
-                    foreach (var xmlBooking in xmlMatch.Bookings.Where(x => x.BookingTeamId == xmlTeam.TeamId))
+                    foreach (Hattrick.Booking? xmlBooking in xmlMatch.Bookings.Where(x => x.BookingTeamId == xmlTeam.TeamId))
                     {
                         await this.ProcessMatchTeamBookingAsync(xmlBooking, team);
                     }
@@ -261,7 +261,7 @@
 
                 if (xmlMatch.Injuries != null)
                 {
-                    foreach (var xmlInjury in xmlMatch.Injuries.Where(x => x.InjuryTeamId == xmlTeam.TeamId))
+                    foreach (Hattrick.Injury? xmlInjury in xmlMatch.Injuries.Where(x => x.InjuryTeamId == xmlTeam.TeamId))
                     {
                         await this.ProcessMatchTeamInjuryAsync(xmlInjury, team);
                     }
@@ -271,7 +271,7 @@
 
         private async Task ProcessMatchTeamBookingAsync(Hattrick.Booking xmlBooking, Domain.Senior.MatchTeam team)
         {
-            var booking = await this.matchTeamBookingRepository.Query(x => x.Index == xmlBooking.Index
+            Domain.Senior.MatchTeamBooking? booking = await this.matchTeamBookingRepository.Query(x => x.Index == xmlBooking.Index
                                                                         && x.Team.Id == team.Id)
                                                                .SingleOrDefaultAsync();
 
@@ -290,7 +290,7 @@
 
         private async Task ProcessMatchTeamGoalsAsync(Hattrick.Goal xmlGoal, Domain.Senior.MatchTeam team)
         {
-            var goal = await this.matchTeamGoalRepository.Query(x => x.Index == xmlGoal.Index
+            Domain.Senior.MatchTeamGoal? goal = await this.matchTeamGoalRepository.Query(x => x.Index == xmlGoal.Index
                                                                   && x.Team.HattrickId == team.Match.HattrickId)
                                                          .SingleOrDefaultAsync();
 
@@ -310,7 +310,7 @@
 
         private async Task ProcessMatchTeamInjuryAsync(Hattrick.Injury xmlInjury, Domain.Senior.MatchTeam team)
         {
-            var injury = await this.matchTeamInjuryRepository.Query(x => x.Index == xmlInjury.Index
+            Domain.Senior.MatchTeamInjury? injury = await this.matchTeamInjuryRepository.Query(x => x.Index == xmlInjury.Index
                                                                       && x.Team.Id == team.Id)
                                                              .SingleOrDefaultAsync();
 

@@ -18,7 +18,7 @@
         {
             if (xmlFile is HattrickData file)
             {
-                var downloadTasks = new List<DownloadTask>();
+                List<DownloadTask> downloadTasks = new List<DownloadTask>();
 
                 foreach (Team curTeam in file.Teams)
                 {

@@ -11,7 +11,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             result.MatchId = await reader.ReadXmlValueAsUintAsync();
             result.SourceSystem = await reader.ReadElementContentAsStringAsync();
@@ -31,7 +31,7 @@
             // Reads opening node
             await reader.ReadAsync();
 
-            var result = new Arena
+            Arena result = new Arena
             {
                 ArenaId = await reader.ReadXmlValueAsUintAsync(),
                 ArenaName = await reader.ReadElementContentAsStringAsync()
@@ -48,7 +48,7 @@
             // Reads opening node
             await reader.ReadAsync();
 
-            var result = new AwayTeam
+            AwayTeam result = new AwayTeam
             {
                 AwayTeamId = await reader.ReadXmlValueAsUintAsync(),
                 AwayTeamName = await reader.ReadElementContentAsStringAsync()
@@ -65,7 +65,7 @@
             // Reads opening node
             await reader.ReadAsync();
 
-            var result = new HomeTeam
+            HomeTeam result = new HomeTeam
             {
                 HomeTeamId = await reader.ReadXmlValueAsUintAsync(),
                 HomeTeamName = await reader.ReadElementContentAsStringAsync()
@@ -82,15 +82,15 @@
             // Reads opening node
             await reader.ReadAsync();
 
-            var result = new Player
+            Player result = new Player
             {
                 PlayerId = await reader.ReadXmlValueAsUintAsync(),
                 RoleId = await reader.ReadXmlValueAsByteAsync(),
                 FirstName = await reader.ReadElementContentAsStringAsync(),
                 LastName = await reader.ReadElementContentAsStringAsync(),
                 NickName = await reader.ReadElementContentAsStringAsync(),
-                RatingStars = reader.CheckNode(Constants.NodeName.RatingStars) ? await reader.ReadXmlValueAsDecimalAsync() : (decimal?)null,
-                RatingStarsEndOfMatch = reader.CheckNode(Constants.NodeName.RatingStarsEndOfMatch) ? await reader.ReadXmlValueAsDecimalAsync() : (decimal?)null,
+                RatingStars = reader.CheckNode(Constants.NodeName.RatingStars) ? await reader.ReadXmlValueAsDecimalAsync() : null,
+                RatingStarsEndOfMatch = reader.CheckNode(Constants.NodeName.RatingStarsEndOfMatch) ? await reader.ReadXmlValueAsDecimalAsync() : null,
                 Behaviour = reader.CheckNode(Constants.NodeName.Behaviour) ? (MatchRoleBehavior)await reader.ReadXmlValueAsByteAsync() : null
             };
 
@@ -105,7 +105,7 @@
             // Reads opening node
             await reader.ReadAsync();
 
-            var result = new StartingPlayer
+            StartingPlayer result = new StartingPlayer
             {
                 PlayerId = await reader.ReadXmlValueAsUintAsync(),
                 RoleId = await reader.ReadXmlValueAsByteAsync(),
@@ -126,7 +126,7 @@
             // Reads opening node
             await reader.ReadAsync();
 
-            var result = new Substitution
+            Substitution result = new Substitution
             {
                 TeamId = await reader.ReadXmlValueAsUintAsync(),
                 SubjectPlayerId = await reader.ReadXmlValueAsUintAsync(),
@@ -147,7 +147,7 @@
             // Reads opening node
             await reader.ReadAsync();
 
-            var result = new Team
+            Team result = new Team
             {
                 TeamId = await reader.ReadXmlValueAsUintAsync(),
                 TeamName = await reader.ReadElementContentAsStringAsync(),

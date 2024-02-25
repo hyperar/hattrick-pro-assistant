@@ -11,7 +11,7 @@
     {
         public override async Task<IXmlFile> ParseFileTypeSpecificContentAsync(XmlReader reader, IXmlFile entity)
         {
-            var result = (HattrickData)entity;
+            HattrickData result = (HattrickData)entity;
 
             result.StaffList = await ParseStaffListNodeAsync(reader);
 
@@ -23,7 +23,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Application.Hattrick.StaffList.StaffList
+            Application.Hattrick.StaffList.StaffList result = new Application.Hattrick.StaffList.StaffList
             {
                 Trainer = await ParseTrainerNodeAsync(reader),
                 StaffMembers = await ParseStaffMembersNodeAsync(reader),
@@ -42,7 +42,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new List<Staff>();
+            List<Staff> result = new List<Staff>();
 
             while (reader.CheckNode(Constants.NodeName.Staff))
             {
@@ -61,7 +61,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Staff
+            Staff result = new Staff
             {
                 Name = await reader.ReadElementContentAsStringAsync(),
                 StaffId = await reader.ReadXmlValueAsUintAsync(),
@@ -83,7 +83,7 @@
             // Reads opening element.
             await reader.ReadAsync();
 
-            var result = new Trainer
+            Trainer result = new Trainer
             {
                 TrainerId = await reader.ReadXmlValueAsUintAsync(),
                 Name = await reader.ReadElementContentAsStringAsync(),

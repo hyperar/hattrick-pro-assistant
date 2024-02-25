@@ -26,32 +26,16 @@
 
         public async Task DeleteUserTokenAsync(int userId)
         {
-            var token = await this.tokenRepository.Query(x => x.UserId == userId).SingleAsync();
+            Domain.Token token = await this.tokenRepository.Query(x => x.UserId == userId).SingleAsync();
 
             await this.tokenRepository.DeleteAsync(token.Id);
 
-            await context.SaveAsync();
-        }
-
-        public Domain.User GetUser()
-        {
-            var user = this.userRepository.Query().SingleOrDefault();
-
-            if (user == null)
-            {
-                user = new Domain.User();
-
-                this.userRepository.Insert(user);
-
-                this.context.Save();
-            }
-
-            return user;
+            await this.context.SaveAsync();
         }
 
         public async Task<Domain.User> GetUserAsync()
         {
-            var user = await this.userRepository.Query().SingleOrDefaultAsync();
+            Domain.User? user = await this.userRepository.Query().SingleOrDefaultAsync();
 
             if (user == null)
             {
@@ -67,9 +51,9 @@
 
         public async Task InsertUserTokenAsync(string token, string tokenSecret)
         {
-            var storedUser = await this.userRepository.Query().SingleAsync();
+            Domain.User storedUser = await this.userRepository.Query().SingleAsync();
 
-            var newToken = new Domain.Token
+            Domain.Token newToken = new Domain.Token
             {
                 User = storedUser,
                 CreatedOn = DateTime.Now,
@@ -85,7 +69,7 @@
 
         public async Task UpdateUserLastDownloadDate()
         {
-            var storedUser = await this.userRepository.Query().SingleAsync();
+            Domain.User storedUser = await this.userRepository.Query().SingleAsync();
 
             storedUser.LastDownloadDate = DateTime.Now;
 
