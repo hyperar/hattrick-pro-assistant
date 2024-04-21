@@ -9,166 +9,118 @@
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.MatchTeam> builder)
         {
             builder.Property(p => p.HattrickId)
-                .HasColumnName(Constants.ColumnName.HattrickId)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.Name)
-                .HasColumnName(Constants.ColumnName.Name)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(2)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired();
 
-            builder.Property(x => x.MatchKitUrl)
-                .HasColumnName(Constants.ColumnName.MatchKitUrl)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.MatchKitUrl)
+                .HasColumnOrder(4)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(1024)
                 .IsUnicode();
 
             builder.Property(p => p.MatchKitBytes)
-                .HasColumnName(Constants.ColumnName.MatchKitBytes)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(5)
                 .HasColumnType(Constants.ColumnType.VarBinary);
 
             builder.Property(p => p.Formation)
-                .HasColumnName(Constants.ColumnName.Formation)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(6)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(20);
 
             builder.Property(p => p.Score)
-                .HasColumnName(Constants.ColumnName.Score)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(7)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.TacticType)
-                .HasColumnName(Constants.ColumnName.TacticType)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(8)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.TacticLevel)
-                .HasColumnName(Constants.ColumnName.TacticLevel)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(9)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.MidfieldRating)
-                .HasColumnName(Constants.ColumnName.MidfieldRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(10)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.RightDefenseRating)
-                .HasColumnName(Constants.ColumnName.RightDefenseRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(11)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.CentralDefenseRating)
-                .HasColumnName(Constants.ColumnName.CentralDefenseRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(12)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.LeftDefenseRating)
-                .HasColumnName(Constants.ColumnName.LeftDefenseRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(13)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.RightAttackRating)
-                .HasColumnName(Constants.ColumnName.RightAttackRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(14)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.CentralAttackRating)
-                .HasColumnName(Constants.ColumnName.CentralAttackRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(15)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.LeftAttackRating)
-                .HasColumnName(Constants.ColumnName.LeftAttackRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(16)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.DefenseIndirectSetPiecesRating)
-                .HasColumnName(Constants.ColumnName.DefenseIndirectSetPiecesRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(17)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.AttackIndirectSetPiecesRating)
-                .HasColumnName(Constants.ColumnName.AttackIndirectSetPiecesRating)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(18)
                 .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.Attitude)
-                .HasColumnName(Constants.ColumnName.Attitude)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(19)
                 .HasColumnType(Constants.ColumnType.SmallInt);
 
             builder.Property(p => p.ChancesOnRight)
-                .HasColumnName(Constants.ColumnName.ChancesOnRight)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(20)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.ChancesOnCenter)
-                .HasColumnName(Constants.ColumnName.ChancesOnCenter)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(21)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.ChancesOnLeft)
-                .HasColumnName(Constants.ColumnName.ChancesOnLeft)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(22)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.SpecialEventChances)
-                .HasColumnName(Constants.ColumnName.SpecialEventChances)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(23)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.OtherChances)
-                .HasColumnName(Constants.ColumnName.OtherChances)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(24)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.FirstHalfPosession)
-                .HasColumnName(Constants.ColumnName.FirstHalfPosession)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(25)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.SecondHalfPosession)
-                .HasColumnName(Constants.ColumnName.SecondHalfPosession)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(26)
+                .HasColumnType(Constants.ColumnType.TinyInt);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.MatchTeam> builder)
         {
             builder.HasOne(m => m.Match)
                 .WithMany(m => m.Teams)
+                .HasForeignKey(m => m.MatchHattrickId)
+                .HasConstraintName("FK_Senior_MatchTeam_Match")
                 .OnDelete(DeleteBehavior.NoAction);
         }
 

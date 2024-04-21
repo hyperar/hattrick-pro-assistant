@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Models.Home
 {
-    using Common.Enums;
+    using Shared.Enums;
 
     public abstract class Match
     {

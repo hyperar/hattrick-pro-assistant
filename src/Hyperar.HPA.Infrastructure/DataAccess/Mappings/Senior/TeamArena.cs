@@ -8,56 +8,55 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.TeamArena> builder)
         {
-            builder.Property(x => x.Name)
-                .HasColumnName(Constants.ColumnName.Name)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Name)
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.BuiltOn)
-                .HasColumnName(Constants.ColumnName.BuiltOn)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.BuiltOn)
+                .HasColumnOrder(2)
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
             builder.Property(p => p.TerracesCapacity)
-                .HasColumnName(Constants.ColumnName.TerracesCapacity)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(3)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.BasicSeatCapacity)
-                .HasColumnName(Constants.ColumnName.BasicSeatCapacity)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(4)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.RoofSeatCapacity)
-                .HasColumnName(Constants.ColumnName.RoofSeatCapacity)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(5)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.VipLoungeCapacity)
-                .HasColumnName(Constants.ColumnName.VipLoungeCapacity)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(6)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.TotalCapacity)
-                .HasColumnName(Constants.ColumnName.TotalCapacity)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(7)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
+
+            builder.Property(p => p.ImageBytes)
+                .HasColumnOrder(8)
+                .HasColumnType(Constants.ColumnType.VarBinary);
+        }
+
+        public override void MapRelationships(EntityTypeBuilder<Domain.Senior.TeamArena> builder)
+        {
+            builder.HasOne(m => m.Team)
+                .WithOne(m => m.TeamArena)
+                .HasForeignKey<Domain.Senior.TeamArena>(m => m.TeamHattrickId)
+                .HasConstraintName("FK_Senior_TeamArena_Team")
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.TeamArena> builder)

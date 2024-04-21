@@ -4,7 +4,7 @@
     {
         public Country Country { get; set; } = new Country();
 
-        public uint HattrickId { get; set; }
+        public long HattrickId { get; set; }
 
         public byte[]? Logo { get; set; }
 

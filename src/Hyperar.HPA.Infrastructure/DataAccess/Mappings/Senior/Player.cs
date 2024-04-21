@@ -8,256 +8,194 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.Player> builder)
         {
-            builder.Property(x => x.FirstName)
-                .HasColumnName(Constants.ColumnName.FirstName)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.FirstName)
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.NickName)
-                .HasColumnName(Constants.ColumnName.NickName)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.NickName)
+                .HasColumnOrder(2)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsUnicode();
 
-            builder.Property(x => x.LastName)
-                .HasColumnName(Constants.ColumnName.LastName)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.LastName)
+                .HasColumnOrder(3)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
             builder.Property(p => p.ShirtNumber)
-                .HasColumnName(Constants.ColumnName.ShirtNumber)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(4)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
-            builder.Property(x => x.IsCoach)
-                .HasColumnName(Constants.ColumnName.IsCoach)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.IsCoach)
+                .HasColumnOrder(5)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
             builder.Property(p => p.AgeYears)
-                .HasColumnName(Constants.ColumnName.AgeYears)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(6)
+                .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.AgeDays)
-                .HasColumnName(Constants.ColumnName.AgeDays)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(7)
+                .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
-            builder.Property(x => x.JoinedTeamOn)
-                .HasColumnName(Constants.ColumnName.JoinedTeamOn)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.JoinedTeamOn)
+                .HasColumnOrder(8)
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
-            builder.Property(x => x.Notes)
-                .HasColumnName(Constants.ColumnName.Notes)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Notes)
+                .HasColumnOrder(9)
                 .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(1024)
                 .IsUnicode();
 
-            builder.Property(x => x.Statement)
-                .HasColumnName(Constants.ColumnName.Statement)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Statement)
+                .HasColumnOrder(10)
                 .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(1024)
                 .IsUnicode();
 
             builder.Property(p => p.TotalSkillIndex)
-                .HasColumnName(Constants.ColumnName.TotalSkillIndex)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(11)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(x => x.HasMotherClubBonus)
-                .HasColumnName(Constants.ColumnName.HasMotherClubBonus)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.HasMotherClubBonus)
+                .HasColumnOrder(12)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
             builder.Property(p => p.Salary)
-                .HasColumnName(Constants.ColumnName.Salary)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(13)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(x => x.IsForeign)
-                .HasColumnName(Constants.ColumnName.IsForeign)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.IsForeign)
+                .HasColumnOrder(14)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
             builder.Property(p => p.Agreeability)
-                .HasColumnName(Constants.ColumnName.Agreeability)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(15)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Aggressiveness)
-                .HasColumnName(Constants.ColumnName.Aggressiveness)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(16)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Honesty)
-                .HasColumnName(Constants.ColumnName.Honesty)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(17)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Leadership)
-                .HasColumnName(Constants.ColumnName.Leadership)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(18)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Specialty)
-                .HasColumnName(Constants.ColumnName.Specialty)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(19)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
-            builder.Property(x => x.IsTransferListed)
-                .HasColumnName(Constants.ColumnName.IsTransferListed)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.IsTransferListed)
+                .HasColumnOrder(20)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
-            builder.Property(x => x.EnrolledOnNationalTeam)
-                .HasColumnName(Constants.ColumnName.EnrolledOnNationalTeam)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.EnrolledOnNationalTeam)
+                .HasColumnOrder(21)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
             builder.Property(p => p.CurrentSeasonLeagueGoals)
-                .HasColumnName(Constants.ColumnName.CurrentSeasonLeagueGoals)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(22)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.CurrentSeasonCupGoals)
-                .HasColumnName(Constants.ColumnName.CurrentSeasonCupGoals)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(23)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.CurrentSeasonFriendlyGoals)
-                .HasColumnName(Constants.ColumnName.CurrentSeasonFriendlyGoals)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(24)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.CareerGoals)
-                .HasColumnName(Constants.ColumnName.CareerGoals)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(25)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.CareerHattricks)
-                .HasColumnName(Constants.ColumnName.CareerHattricks)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(26)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.GoalsOnTeam)
-                .HasColumnName(Constants.ColumnName.GoalsOnTeam)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(27)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.MatchesOnTeam)
-                .HasColumnName(Constants.ColumnName.MatchesOnTeam)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(28)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
-            builder.Property(p => p.NationalTeamCaps)
-                .HasColumnName(Constants.ColumnName.NationalTeamCaps)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+            builder.Property(p => p.SeniorNationalTeamCaps)
+                .HasColumnOrder(29)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
-            builder.Property(p => p.YouthNationalTeamCaps)
-                .HasColumnName(Constants.ColumnName.YouthNationalTeamCaps)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+            builder.Property(p => p.JuniorNationalTeamCaps)
+                .HasColumnOrder(30)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.BookingStatus)
-                .HasColumnName(Constants.ColumnName.BookingStatus)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(31)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Health)
-                .HasColumnName(Constants.ColumnName.Health)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Int)
+                .HasColumnOrder(32)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.Category)
-                .HasColumnName(Constants.ColumnName.Category)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(33)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.AvatarBytes)
-                .HasColumnName(Constants.ColumnName.AvatarBytes)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(34)
                 .HasColumnType(Constants.ColumnType.VarBinary);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.Player> builder)
         {
-            builder.HasOne(x => x.Country)
-                .WithMany(x => x.Players)
+            builder.HasOne(m => m.Country)
+                .WithMany(m => m.Players)
+                .HasForeignKey(m => m.CountryHattrickId)
+                .HasConstraintName("FK_Senior_Player_Country")
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(x => x.Team)
-                .WithMany(x => x.Players)
+            builder.HasOne(m => m.Team)
+                .WithMany(m => m.Players)
+                .HasForeignKey(m => m.TeamHattrickId)
+                .HasConstraintName("FK_Senior_Player_Team")
                 .OnDelete(DeleteBehavior.NoAction);
         }
 

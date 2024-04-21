@@ -8,55 +8,52 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.StaffMember> builder)
         {
-            builder.Property(x => x.Name)
-                .HasColumnName(Constants.ColumnName.Name)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Name)
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.HiredOn)
-                .HasColumnName(Constants.ColumnName.HiredOn)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.HiredOn)
+                .HasColumnOrder(2)
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
-            builder.Property(x => x.Type)
-                .HasColumnName(Constants.ColumnName.Type)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Type)
+                .HasColumnOrder(3)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
-            builder.Property(x => x.Level)
-                .HasColumnName(Constants.ColumnName.Level)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+            builder.Property(p => p.Level)
+                .HasColumnOrder(4)
+                .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsUnicode();
 
             builder.Property(p => p.Salary)
-                .HasColumnName(Constants.ColumnName.Salary)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(5)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.AvatarBytes)
-                .HasColumnName(Constants.ColumnName.AvatarBytes)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.VarBinary);
+                .HasColumnOrder(6)
+                .HasColumnType(Constants.ColumnType.VarBinary)
+                .IsRequired();
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.StaffMember> builder)
         {
-            builder.HasOne(x => x.HallOfFamePlayer)
-                .WithOne(x => x.Staff)
-                .HasForeignKey<Domain.Senior.StaffMember>(x => x.HallOfFamePlayerId);
+            builder.HasOne(m => m.HallOfFamePlayer)
+                .WithOne(m => m.Staff)
+                .HasForeignKey<Domain.Senior.StaffMember>(x => x.HallOfFamePlayerHattrickId)
+                .HasConstraintName("FK_StaffMember_HallOfFamePlayer")
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(m => m.Team)
+                .WithMany(m => m.StaffMembers)
+                .HasForeignKey(m => m.TeamId)
+                .HasConstraintName("FK_StaffMember_Team")
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.StaffMember> builder)

@@ -20,7 +20,7 @@
             this.EntityCollection.Remove(entity);
         }
 
-        public async Task DeleteRangeAsync(ICollection<uint> hattrickIds)
+        public async Task DeleteRangeAsync(ICollection<long> hattrickIds)
         {
             ICollection<TEntity> entities = await this.EntityCollection.Where(x => hattrickIds.Contains(x.HattrickId)).ToListAsync();
 

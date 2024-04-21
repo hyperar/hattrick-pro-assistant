@@ -2,7 +2,7 @@
 {
     public class Region
     {
-        public uint HattrickId { get; set; }
+        public long HattrickId { get; set; }
 
         public string Name { get; set; } = string.Empty;
 

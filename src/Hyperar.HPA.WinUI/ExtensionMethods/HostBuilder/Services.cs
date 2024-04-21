@@ -13,19 +13,19 @@
         {
             host.ConfigureServices(services =>
             {
-                // Singleton services.
-                services.AddSingleton<IHattrickService, HattrickService>();
-                services.AddSingleton<IProtectedResourceUrlBuilder, ProtectedResourceUrlBuilder>();
+                services.AddScoped<IHattrickService, HattrickService>();
+                services.AddScoped<IProtectedResourceUrlBuilder, ProtectedResourceUrlBuilder>();
                 services.AddSingleton<IXmlEntityFactory, XmlEntityFactory>();
 
                 // View services.
+                services.AddScoped<IDownloadViewService, DownloadViewService>();
                 services.AddScoped<IHomeViewService, HomeViewService>();
                 services.AddScoped<IPlayersViewService, PlayersViewService>();
                 services.AddScoped<ITeamSelectionViewService, TeamSelectionViewService>();
 
                 // Scoped services.
+                //services.AddScoped<IDownloadService, DownloadService>();
                 services.AddScoped<IUserService, UserService>();
-                services.AddScoped<IXmlFileService, XmlFileService>();
             });
 
             return host;

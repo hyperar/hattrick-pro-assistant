@@ -6,13 +6,6 @@
 
     internal abstract class EntityTypeConfigurationBase<TEntity> : IEntityTypeConfiguration<TEntity>, IEntityMapping<TEntity> where TEntity : class
     {
-        private int columnOrder;
-
-        public EntityTypeConfigurationBase()
-        {
-            this.columnOrder = 0;
-        }
-
         public void Configure(EntityTypeBuilder<TEntity> builder)
         {
             this.MapTable(builder);
@@ -27,11 +20,6 @@
         { }
 
         public abstract void MapTable(EntityTypeBuilder<TEntity> builder);
-
-        protected int GetCurrentColumnOrder()
-        {
-            return this.columnOrder++;
-        }
 
         protected abstract void MapBaseProperties(EntityTypeBuilder<TEntity> builder);
     }

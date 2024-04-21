@@ -1,25 +1,67 @@
 ﻿namespace Hyperar.HPA.Domain.Senior
 {
     using Domain.Interfaces;
+    using Models = Shared.Models.Hattrick.MatchDetails;
 
     public class MatchArena : EntityBase, IEntity
     {
-        public uint? Attendance { get; set; }
+        public MatchArena()
+        {
+            this.Match = new Match();
 
-        public uint? BasicSeatsSold { get; set; }
+            this.Name = string.Empty;
+        }
 
-        public uint HattrickId { get; set; }
+        public int? Attendance { get; set; }
 
-        public virtual Match Match { get; set; } = new Match();
+        public int? BasicSeatsSold { get; set; }
 
-        public uint MatchHattrickId { get; set; }
+        public long HattrickId { get; set; }
 
-        public string Name { get; set; } = string.Empty;
+        public virtual Match Match { get; set; }
 
-        public uint? RoofSeatsSold { get; set; }
+        public long MatchHattrickId { get; set; }
 
-        public uint? TerracesSold { get; set; }
+        public string Name { get; set; }
 
-        public uint? VipSeatsSold { get; set; }
+        public int? RoofSeatsSold { get; set; }
+
+        public int? TerracesSold { get; set; }
+
+        public int? VipSeatsSold { get; set; }
+
+        public static MatchArena Create(Models.Arena xmlArena, Match match)
+        {
+            return new MatchArena
+            {
+                Attendance = xmlArena.SoldTotal,
+                BasicSeatsSold = xmlArena.SoldBasic,
+                Match = match,
+                Name = xmlArena.ArenaName,
+                RoofSeatsSold = xmlArena.SoldRoof,
+                TerracesSold = xmlArena.SoldTerraces,
+                VipSeatsSold = xmlArena.SoldVip
+            };
+        }
+
+        public bool HasChanged(Models.Arena xmlArena)
+        {
+            return this.Attendance != xmlArena.SoldTotal
+                || this.BasicSeatsSold != xmlArena.SoldBasic
+                || this.Name != xmlArena.ArenaName
+                || this.RoofSeatsSold != xmlArena.SoldRoof
+                || this.TerracesSold != xmlArena.SoldTerraces
+                || this.VipSeatsSold != xmlArena.SoldVip;
+        }
+
+        public void Update(Models.Arena xmlArena)
+        {
+            this.Attendance = xmlArena.SoldTotal;
+            this.BasicSeatsSold = xmlArena.SoldBasic;
+            this.Name = xmlArena.ArenaName;
+            this.RoofSeatsSold = xmlArena.SoldRoof;
+            this.TerracesSold = xmlArena.SoldTerraces;
+            this.VipSeatsSold = xmlArena.SoldVip;
+        }
     }
 }

@@ -1,15 +1,39 @@
 ﻿namespace Hyperar.HPA.Domain.Senior
 {
     using Domain.Interfaces;
+    using Models = Shared.Models.Hattrick.MatchDetails;
 
     public class MatchOfficial : EntityBase, IEntity
     {
-        public virtual Country Country { get; set; } = new Country();
+        public MatchOfficial()
+        {
+            this.Country = new Country();
+            this.Match = new Match();
 
-        public uint HattrickId { get; set; }
+            this.Name = string.Empty;
+        }
 
-        public virtual Match Match { get; set; } = new Match();
+        public virtual Country Country { get; set; }
 
-        public string Name { get; set; } = string.Empty;
+        public long CountryHattrickId { get; set; }
+
+        public long HattrickId { get; set; }
+
+        public virtual Match Match { get; set; }
+
+        public long MatchHattrickId { get; set; }
+
+        public string Name { get; set; }
+
+        public static MatchOfficial Create(Models.Referee xmlReferee, Match match, Country country)
+        {
+            return new MatchOfficial
+            {
+                Country = country,
+                HattrickId = xmlReferee.RefereeId,
+                Match = match,
+                Name = xmlReferee.RefereeName
+            };
+        }
     }
 }

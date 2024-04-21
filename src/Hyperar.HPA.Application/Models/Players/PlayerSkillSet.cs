@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Models.Players
 {
-    using Common.Enums;
+    using Shared.Enums;
 
     public class PlayerSkillSet
     {

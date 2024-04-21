@@ -49,7 +49,7 @@
 
             AuthorizationViewModel viewModel = new AuthorizationViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<IHattrickService>(),
+                scope.ServiceProvider.GetRequiredService<IHattrickService>(),
                 scope.ServiceProvider.GetRequiredService<IUserService>());
 
             await viewModel.InitializeAsync();
@@ -63,10 +63,7 @@
 
             DownloadViewModel viewModel = new DownloadViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<IHattrickService>(),
-                services.GetRequiredService<ITeamSelector>(),
-                scope.ServiceProvider.GetRequiredService<IUserService>(),
-                scope.ServiceProvider.GetRequiredService<IXmlFileService>());
+                scope.ServiceProvider.GetRequiredService<IDownloadViewService>());
 
             await viewModel.InitializeAsync();
 

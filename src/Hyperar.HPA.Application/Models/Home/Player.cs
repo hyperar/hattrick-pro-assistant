@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Models.Home
 {
-    using Common.Enums;
+    using Shared.Enums;
 
     public class Player
     {
@@ -20,7 +20,7 @@
 
         public bool HasMotherClubBonus { get; set; }
 
-        public uint HattrickId { get; set; }
+        public long HattrickId { get; set; }
 
         public int HealthStatus { get; set; }
 

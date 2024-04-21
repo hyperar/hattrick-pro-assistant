@@ -134,9 +134,8 @@
                 try
                 {
                     await this.hattrickService.CheckTokenAsync(
-                        new OAuthToken(
-                            user.Token.Value,
-                            user.Token.SecretValue));
+                        user.Token.Value,
+                        user.Token.SecretValue);
 
                     this.AccessToken = user.Token.Value;
                     this.AccessTokenSecret = user.Token.SecretValue;
@@ -150,8 +149,8 @@
                         await this.userService.DeleteUserTokenAsync(user.Id);
 
                         MessageBox.Show(
-                            Globalization.Strings.AuthorizationRevokedElsewhereReauthorizeInOrderToKeepUsing,
-                            Globalization.Strings.Information,
+                            Globalization.Translations.TokenInvalidReauthorize,
+                            Globalization.Translations.Information,
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     }
@@ -164,7 +163,7 @@
                 {
                     MessageBox.Show(
                         ex.Message,
-                        Globalization.Strings.Error,
+                        Globalization.Translations.Error,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }

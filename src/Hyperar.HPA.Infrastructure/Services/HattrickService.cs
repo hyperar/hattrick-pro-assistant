@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System;
+    using System.Net;
     using System.Threading.Tasks;
     using Application.Interfaces;
     using Application.Models;
@@ -39,11 +40,28 @@
             this.protectedResourceUrlBuilder = protectedResourceUrlBuilder;
         }
 
-        public async Task<string> CheckTokenAsync(OAuthToken token)
+        public async Task<string> CheckTokenAsync(string token, string tokenSecret, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(token, nameof(token));
+            ArgumentException.ThrowIfNullOrWhiteSpace(token, nameof(token));
+            ArgumentException.ThrowIfNullOrWhiteSpace(tokenSecret, nameof(tokenSecret));
 
-            OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
+            OAuthSession session = this.CreateSignedOAuthSession(token, tokenSecret);
+
+            string? checkTokenUrl = this.configuration[CheckTokenKeyName];
+
+            ArgumentException.ThrowIfNullOrEmpty(checkTokenUrl, nameof(checkTokenUrl));
+
+            Stream responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
+
+            return await ReadResponseStreamAsync(responseStream, cancellationToken);
+        }
+
+        public async Task<string> CheckTokenAsync(string token, string tokenSecret)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(token, nameof(token));
+            ArgumentException.ThrowIfNullOrWhiteSpace(tokenSecret, nameof(tokenSecret));
+
+            OAuthSession session = this.CreateSignedOAuthSession(token, tokenSecret);
 
             string? checkTokenUrl = this.configuration[CheckTokenKeyName];
 
@@ -97,7 +115,7 @@
             return new GetAuthorizationUrlResponse(url, requestToken.Token, requestToken.TokenSecret);
         }
 
-        public async Task<string> GetProtectedResourceAsync(GetProtectedResourceRequest request)
+        public async Task<string> GetProtectedResourceAsync(GetProtectedResourceRequest request, CancellationToken cancellationToken)
         {
             string url = this.protectedResourceUrlBuilder.BuildUrl(request.FileType, request.Parameters);
 
@@ -109,7 +127,7 @@
 
             Stream responseStream = await GetResponseStreamForUrlAsync(url, session);
 
-            return await ReadResponseStreamAsync(responseStream);
+            return await ReadResponseStreamAsync(responseStream, cancellationToken);
         }
 
         public async Task<string> RevokeTokenAsync(OAuthToken token)
@@ -133,14 +151,28 @@
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            System.Net.HttpWebRequest webRequest = session.Request()
+            HttpWebRequest webRequest = session.Request()
                 .ForUrl(url)
                 .ForMethod(HttpMethod.Get.ToString())
                 .ToWebRequest();
 
-            System.Net.WebResponse response = await webRequest.GetResponseAsync();
+            WebResponse response = await webRequest.GetResponseAsync();
 
             return response.GetResponseStream();
+        }
+
+        private static async Task<string> ReadResponseStreamAsync(Stream responseStream, CancellationToken cancellationToken)
+        {
+            ArgumentNullException.ThrowIfNull(responseStream, nameof(responseStream));
+
+            string result;
+
+            using (StreamReader reader = new StreamReader(responseStream))
+            {
+                result = await reader.ReadToEndAsync(cancellationToken);
+            }
+
+            return result;
         }
 
         private static async Task<string> ReadResponseStreamAsync(Stream responseStream)

@@ -11,11 +11,11 @@
 
         private const string sqlCommandParameters = "c HPA -s";
 
-        private bool cancelled;
+        private bool canceled;
 
         public DatabaseContext(DbContextOptions options) : base(options)
         {
-            this.cancelled = false;
+            this.canceled = false;
         }
 
         public async Task BeginTransactionAsync()
@@ -30,7 +30,7 @@
 
         public void Cancel()
         {
-            this.cancelled = true;
+            this.canceled = true;
         }
 
         public virtual DbSet<TEntity> CreateSet<TEntity>() where TEntity : class
@@ -40,7 +40,7 @@
 
         public async Task EndTransactionAsync()
         {
-            if (this.cancelled)
+            if (this.canceled)
             {
                 await this.RollbackAsync();
             }
@@ -101,6 +101,8 @@
 
         private async Task RollbackAsync()
         {
+            this.ChangeTracker.DetectChanges();
+
             this.ChangeTracker.Clear();
 
             if (this.Database.CurrentTransaction != null)
@@ -108,7 +110,7 @@
                 await this.Database.CurrentTransaction.RollbackAsync();
             }
 
-            this.cancelled = false;
+            this.canceled = false;
         }
     }
 }

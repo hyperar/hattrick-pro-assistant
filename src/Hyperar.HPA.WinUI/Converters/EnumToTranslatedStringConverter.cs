@@ -10,7 +10,7 @@
         {
             return value == null
                 ? null
-                : Globalization.Strings.ResourceManager.GetString($"{value.GetType().Name}_{value}") ?? string.Empty;
+                : Globalization.Translations.ResourceManager.GetString($"{value.GetType().Name}_{value}") ?? string.Empty;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

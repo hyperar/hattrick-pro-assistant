@@ -5,6 +5,7 @@ namespace Hyperar.HPA.WinUI
     using Avalonia.Controls.ApplicationLifetimes;
     using Avalonia.Data.Core.Plugins;
     using Avalonia.Markup.Xaml;
+    using Domain.Interfaces;
     using ExtensionMethods.HostBuilder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -26,9 +27,7 @@ namespace Hyperar.HPA.WinUI
                 .RegisterServices()
                 .RegisterStates()
                 .RegisterViewModels()
-                .RegisterXmlDownloadTaskExtractors()
-                .RegisterXmlFileDataPersisters()
-                .RegisterXmlFileParsers()
+                .RegisterFileDownloadStepProcesses()
                 .Build();
 
             host.Start();
@@ -39,11 +38,15 @@ namespace Hyperar.HPA.WinUI
                 // Without this line you will get duplicate validations from both Avalonia and CT
                 BindingPlugins.DataValidators.RemoveAt(0);
 
-                SplashScreenWindow splashScreenWindow = new SplashScreenWindow(host.Services.CreateScope().ServiceProvider);
+                SplashScreenWindow splashScreenWindow = new SplashScreenWindow();
 
                 splashScreenWindow.Show();
 
-                await splashScreenWindow.InitializeAsync();
+                using (IServiceScope scope = host.Services.CreateScope())
+                {
+                    await scope.ServiceProvider.GetRequiredService<IDatabaseContext>()
+                        .MigrateAsync();
+                }
 
                 desktop.MainWindow = splashScreenWindow;
 

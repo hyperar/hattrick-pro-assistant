@@ -8,101 +8,78 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.PlayerSkillSet> builder)
         {
-            builder.Property(x => x.Season)
-                .HasColumnName(Constants.ColumnName.Season)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+            builder.Property(p => p.Season)
+                .HasColumnOrder(1)
+                .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
-            builder.Property(x => x.Week)
-                .HasColumnName(Constants.ColumnName.Week)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+            builder.Property(p => p.Week)
+                .HasColumnOrder(2)
+                .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Form)
-                .HasColumnName(Constants.ColumnName.Form)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(3)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Stamina)
-                .HasColumnName(Constants.ColumnName.Stamina)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(4)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
             builder.Property(p => p.Keeper)
-                .HasColumnName(Constants.ColumnName.Keeper)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(5)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Defending)
-                .HasColumnName(Constants.ColumnName.Defending)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(6)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Playmaking)
-                .HasColumnName(Constants.ColumnName.Playmaking)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(7)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Winger)
-                .HasColumnName(Constants.ColumnName.Winger)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(8)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Passing)
-                .HasColumnName(Constants.ColumnName.Passing)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(9)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Scoring)
-                .HasColumnName(Constants.ColumnName.Scoring)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(10)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.SetPieces)
-                .HasColumnName(Constants.ColumnName.SetPieces)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(11)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Loyalty)
-                .HasColumnName(Constants.ColumnName.Loyalty)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(12)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.Experience)
-                .HasColumnName(Constants.ColumnName.Experience)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(13)
                 .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.PlayerSkillSet> builder)
         {
-            builder.HasOne(x => x.Player)
-                .WithMany(x => x.PlayerSkillSets);
+            builder.HasOne(m => m.Player)
+                .WithMany(m => m.PlayerSkillSets)
+                .HasForeignKey(m => m.PlayerHattrickId)
+                .HasConstraintName("FK_PlayerSkillSet_Player")
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.PlayerSkillSet> builder)

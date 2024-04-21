@@ -7,65 +7,126 @@
              xmlns:vm="clr-namespace:Hyperar.HPA.WinUI.ViewModels"
              xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
              x:DataType="vm:DownloadViewModel"
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             mc:Ignorable="d"
-             d:DesignWidth="1600"
-             d:DesignHeight="900">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <converters:DownloadTaskParameterArrayToStringConverter x:Key="downloadTaskParameterArrayToStringConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
     </UserControl.Resources>
 
-    <Design.DataContext>
-        <vm:DownloadViewModel />
-    </Design.DataContext>
-    
-    <StackPanel Spacing="20">
-        <DataGrid ItemsSource="{Binding DownloadTasks}"
-                  AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedItem}"
-                  SelectionChanged="DataGrid_SelectionChanged"
-                  BorderBrush="{DynamicResource CircleElevationBorderBrush}"
-                  BorderThickness="1"
-                  VerticalScrollBarVisibility="Auto"
-                  CanUserReorderColumns="False"
-                  CanUserResizeColumns="False"
-                  CanUserSortColumns="False"
-                  IsReadOnly="True"
-                  Height="700"
-                  Width="900">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static globalization:Strings.File}"
-                                    Binding="{Binding FileType,
-                                              Mode=OneWay,
-                                              Converter={StaticResource enumToTranslatedStringConverter}}" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Parameters}"
-                                    Binding="{Binding Parameters,
-                                              Mode=OneWay,
-                                              Converter={StaticResource downloadTaskParameterArrayToStringConverter}}"
-                                    Width="*" />
-                <DataGridTextColumn Header="{x:Static globalization:Strings.Status}"
-                                    Binding="{Binding Status,
-                                              Mode=OneWay,
-                                              Converter={StaticResource enumToTranslatedStringConverter}}" />
-            </DataGrid.Columns>
-        </DataGrid>
+    <StackPanel Spacing="10">
 
-        <ProgressBar Maximum="{Binding TaskCount}"
-                     IsVisible="{Binding IsDownloading}"
-                     Value="{Binding CompletedTaskCount}" />
+        <StackPanel Width="500">
 
-        <TextBlock HorizontalAlignment="Center"
-                   IsVisible="{Binding IsDownloading}"
-                   Text="{Binding ProgressPercentage, StringFormat={}{0}%}" />
+            <!-- Options -->
+            <Border Background="{DynamicResource ControlFillColorDefault}"
+                    CornerRadius="{DynamicResource OverlayCornerRadius}">
 
-        <Button Command="{Binding DownloadFilesCommand}"
-                HorizontalAlignment="Center"
-                IsEnabled="{Binding CanDownload}">
-            <StackPanel Orientation="Horizontal" Spacing="5">
-                <PathIcon Data="{DynamicResource DownloadIcon}" Height="12" />
-                <TextBlock Text="{x:Static globalization:Strings.Download}" />
-            </StackPanel>
-        </Button>
+                <StackPanel Spacing="5"
+                            Margin="10">
+
+                    <ToggleSwitch OnContent="{x:Static globalization:Translations.RedownloadMatchesOnContent}"
+                                  OffContent="{x:Static globalization:Translations.RedownloadMatchesOffContent}"
+                                  ToolTip.Tip="{x:Static globalization:Translations.RedownloadMatchesTooltip}"
+                                  IsEnabled="{Binding DownloadProgressReport.CanDownload}"
+                                  IsChecked="{Binding RedownloadMatches}" />
+
+                    <ToggleSwitch OnContent="{x:Static globalization:Translations.DownloadHattrickArenaMatchesOnContent}"
+                                  OffContent="{x:Static globalization:Translations.DownloadHattrickArenaMatchesOffContent}"
+                                  ToolTip.Tip="{x:Static globalization:Translations.LongRunningTaskSettingTooltip}"
+                                  IsEnabled="{Binding DownloadProgressReport.CanDownload}"
+                                  IsChecked="{Binding DownloadHattrickArenaMatches}" />
+
+                    <ToggleSwitch OnContent="{x:Static globalization:Translations.DownloadMatchArchiveOnContent}"
+                                  OffContent="{x:Static globalization:Translations.DownloadMatchArchiveOffContent}"
+                                  ToolTip.Tip="{x:Static globalization:Translations.LongRunningTaskSettingTooltip}"
+                                  IsEnabled="{Binding DownloadProgressReport.CanDownload}"
+                                  IsChecked="{Binding DownloadFullMatchArchive}" />
+
+                </StackPanel>
+
+            </Border>
+
+        </StackPanel>
+
+        <StackPanel Width="750">
+
+            <Border Background="{DynamicResource ControlFillColorDefault}"
+                    CornerRadius="{DynamicResource OverlayCornerRadius}">
+
+                <StackPanel Spacing="10"
+                            Margin="10">
+
+                    <!-- Tasks -->
+                    <DataGrid AutoGenerateColumns="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="True"
+                              CanUserSortColumns="False"
+                              Height="400"
+                              IsReadOnly="True"
+                              IsScrollInertiaEnabled="True"
+                              ItemsSource="{Binding DownloadProgressReport.Rows, Mode=OneWay}"
+                              SelectedItem="{Binding DownloadProgressReport.CurrentTask, Mode=OneWay}"
+                              SelectionChanged="DataGrid_SelectionChanged"
+                              SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Title, Mode=OneWay}"
+                                                Header="Title"
+                                                Width="2*"/>
+                            <DataGridTextColumn Binding="{Binding Type, Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}"
+                                                Header="Type"
+                                                Width="*"/>
+                            <DataGridTextColumn Binding="{Binding Status, Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}"
+                                                Header="Status"
+                                                Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <ProgressBar Maximum="{Binding DownloadProgressReport.TaskCount, FallbackValue=100}"
+                                 Value="{Binding DownloadProgressReport.CompletedTaskCount, FallbackValue=0}" />
+
+                </StackPanel>
+
+            </Border>
+
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+
+            <Button Command="{Binding ExecuteDownloadCommand}"
+                    IsEnabled="{Binding DownloadProgressReport.CanDownload, FallbackValue=true}"
+                    HorizontalAlignment="Center">
+
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+
+                    <PathIcon Data="{DynamicResource DownloadIcon}" Height="12" />
+                    <TextBlock Text="{x:Static globalization:Translations.Download}" />
+
+                </StackPanel>
+
+            </Button>
+
+            <Button Command="{Binding CancelDownloadCommand}"
+                    IsEnabled="{Binding DownloadProgressReport.IsDownloading, FallbackValue=false}"
+                    HorizontalAlignment="Center">
+
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+
+                    <PathIcon Data="{DynamicResource CancelIcon}" Height="12" />
+                    <TextBlock Text="{x:Static globalization:Translations.Cancel}" />
+
+                </StackPanel>
+
+            </Button>
+
+        </StackPanel>
+
     </StackPanel>
+
 </UserControl>

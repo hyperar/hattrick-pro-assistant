@@ -4,9 +4,9 @@
 
     public class TeamSelector : ITeamSelector
     {
-        public uint SelectedTeamId { get; private set; }
+        public long SelectedTeamId { get; private set; }
 
-        public void SetSelectedTeam(uint selectedTeamId)
+        public void SetSelectedTeam(long selectedTeamId)
         {
             this.SelectedTeamId = selectedTeamId;
         }

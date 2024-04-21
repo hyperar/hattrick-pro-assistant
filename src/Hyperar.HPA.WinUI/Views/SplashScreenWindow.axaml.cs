@@ -1,28 +1,14 @@
-namespace Hyperar.HPA.WinUI;
-using System;
-using System.Threading.Tasks;
-using Avalonia.Markup.Xaml;
-using FluentAvalonia.UI.Windowing;
-using Hyperar.HPA.Domain.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
-
-public partial class SplashScreenWindow : AppWindow
+namespace Hyperar.HPA.WinUI
 {
-    private readonly IServiceProvider serviceProvider;
+    using FluentAvalonia.UI.Windowing;
 
-    public SplashScreenWindow(IServiceProvider serviceProvider)
+    public partial class SplashScreenWindow : AppWindow
     {
-        this.InitializeComponent();
-        this.TitleBar.ExtendsContentIntoTitleBar = true;
-        this.TitleBar.TitleBarHitTestType = TitleBarHitTestType.Complex;
-        this.serviceProvider = serviceProvider;
-    }
-
-    public async Task InitializeAsync()
-    {
-        using (IServiceScope scope = this.serviceProvider.CreateScope())
+        public SplashScreenWindow()
         {
-            await scope.ServiceProvider.GetRequiredService<IDatabaseContext>().MigrateAsync();
+            this.InitializeComponent();
+            this.TitleBar.ExtendsContentIntoTitleBar = true;
+            this.TitleBar.TitleBarHitTestType = TitleBarHitTestType.Complex;
         }
     }
 }

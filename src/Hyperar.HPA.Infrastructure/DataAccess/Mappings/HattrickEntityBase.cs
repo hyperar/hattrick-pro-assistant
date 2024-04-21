@@ -6,14 +6,12 @@
 
     internal abstract class HattrickEntityBase<TEntity> : EntityTypeConfigurationBase<TEntity>, IEntityTypeConfiguration<TEntity>, IEntityMapping<TEntity> where TEntity : Domain.HattrickEntityBase, Domain.Interfaces.IHattrickEntity
     {
-        protected sealed override void MapBaseProperties(EntityTypeBuilder<TEntity> builder)
+        protected override sealed void MapBaseProperties(EntityTypeBuilder<TEntity> builder)
         {
             builder.HasKey(p => p.HattrickId);
 
             builder.Property(p => p.HattrickId)
-                .HasColumnName(Constants.ColumnName.HattrickId)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(0)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .ValueGeneratedNever()
                 .IsRequired();

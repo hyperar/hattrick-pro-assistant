@@ -2,15 +2,44 @@
 {
     using Domain.Interfaces;
     using Domain.Senior;
+    using Hattrick = Shared.Models.Hattrick;
 
     public class Region : HattrickEntityBase, IHattrickEntity
     {
-        public virtual Country Country { get; set; } = new Country();
+        public Region()
+        {
+            this.Country = new Country();
+            this.Teams = new HashSet<Team>();
 
-        public uint CountryHattrickId { get; set; }
+            this.Name = string.Empty;
+        }
 
-        public string Name { get; set; } = string.Empty;
+        public virtual Country Country { get; set; }
 
-        public virtual ICollection<Team> Teams { get; set; } = new HashSet<Team>();
+        public long CountryHattrickId { get; set; }
+
+        public string Name { get; set; }
+
+        public virtual ICollection<Team> Teams { get; set; }
+
+        public static Region Create(Hattrick.IdName xmlRegion, Country country)
+        {
+            return new Region
+            {
+                Country = country,
+                HattrickId = xmlRegion.Id,
+                Name = xmlRegion.Name
+            };
+        }
+
+        public bool HasChanged(Hattrick.IdName xmlRegion)
+        {
+            return this.Name != xmlRegion.Name;
+        }
+
+        public void Update(Hattrick.IdName xmlRegion)
+        {
+            this.Name = xmlRegion.Name;
+        }
     }
 }

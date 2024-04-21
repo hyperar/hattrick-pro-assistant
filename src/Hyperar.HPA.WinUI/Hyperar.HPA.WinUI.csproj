@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AvaloniaResource Remove="Assets\Styles\Common.axaml" />
+      <AvaloniaResource Remove="Assets\Styles\Shared.axaml" />
       <AvaloniaResource Remove="Assets\Styles\Images.axaml" />
     </ItemGroup>
 
@@ -79,6 +79,7 @@
         <ProjectReference Include="..\Hyperar.HPA.Application\Hyperar.HPA.Application.csproj" />
         <ProjectReference Include="..\Hyperar.HPA.Globalization\Hyperar.HPA.Globalization.csproj" />
         <ProjectReference Include="..\Hyperar.HPA.Infrastructure\Hyperar.HPA.Infrastructure.csproj" />
+        <ProjectReference Include="..\Hyperar.HPA.Shared\Hyperar.HPA.Shared.csproj" />
     </ItemGroup>
 
 
@@ -90,7 +91,7 @@
 
 
     <ItemGroup>
-      <AvaloniaXaml Update="Assets\Styles\Common.axaml">
+      <AvaloniaXaml Update="Assets\Styles\Shared.axaml">
         <SubType>Designer</SubType>
       </AvaloniaXaml>
     </ItemGroup>

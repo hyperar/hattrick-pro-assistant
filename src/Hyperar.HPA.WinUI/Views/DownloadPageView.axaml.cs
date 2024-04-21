@@ -2,6 +2,7 @@ namespace Hyperar.HPA.WinUI
 {
     using System.Linq;
     using Avalonia.Controls;
+    using Shared.Models.UI.Download;
 
     public partial class DownloadPageView : UserControl
     {
@@ -12,9 +13,9 @@ namespace Hyperar.HPA.WinUI
 
         private void DataGrid_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
-            if (sender is DataGrid dataGrid && dataGrid.SelectedItem != null)
+            if (sender is DataGrid dataGrid && dataGrid.SelectedItem is TaskRow currentTask)
             {
-                dataGrid.ScrollIntoView(dataGrid.SelectedItem, dataGrid.Columns.First());
+                dataGrid.ScrollIntoView(currentTask, dataGrid.Columns.First());
             }
         }
     }

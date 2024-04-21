@@ -1,288 +1,72 @@
 ﻿namespace Hyperar.HPA.WinUI.ViewModels
 {
     using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
-    using System.Windows.Forms;
-    using Application.Hattrick.Interfaces;
-    using Application.Models;
     using Application.Services;
-    using Common.Enums;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
+    using Shared.Models.UI.Download;
     using WinUI.State.Interface;
 
     public partial class DownloadViewModel : AsyncViewModelBase
     {
-        private readonly IHattrickService hattrickService;
+        private readonly IDownloadViewService downloadViewService;
 
-        private readonly ITeamSelector teamSelector;
-
-        private readonly IUserService userService;
-
-        private readonly IXmlFileService xmlFileService;
+        private CancellationTokenSource? cancellationTokenSource;
 
         [ObservableProperty]
-        private bool canDownload;
+        private bool downloadFullMatchArchive;
 
         [ObservableProperty]
-        private ObservableCollection<DownloadTask> downloadTasks;
+        private bool downloadHattrickArenaMatches;
 
         [ObservableProperty]
-        private bool isDownloading;
+        private ProcessReport? downloadProgressReport;
 
         [ObservableProperty]
-        private DownloadTask? selectedItem;
-
-        private Domain.User? user;
+        private bool redownloadMatches;
 
         public DownloadViewModel(
             INavigator navigator,
-            IHattrickService hattrickService,
-            ITeamSelector teamSelector,
-            IUserService userService,
-            IXmlFileService xmlFileService) : base(navigator)
+            IDownloadViewService downloadViewService) : base(navigator)
         {
-            this.DownloadTasks = new ObservableCollection<DownloadTask>();
-
-            this.hattrickService = hattrickService;
-            this.teamSelector = teamSelector;
-            this.userService = userService;
-            this.xmlFileService = xmlFileService;
-        }
-
-        public int CompletedTaskCount
-        {
-            get
-            {
-                return this.DownloadTasks.Where(x => x.Status == DownloadTaskStatus.Done).Count();
-            }
-        }
-
-        public int ProgressPercentage
-        {
-            get
-            {
-                return this.TaskCount == 0 ? 0 : (int)((decimal)this.CompletedTaskCount / this.TaskCount * 100m);
-            }
-        }
-
-        public int TaskCount
-        {
-            get
-            {
-                return this.DownloadTasks.Count;
-            }
-        }
-
-        public override async Task InitializeAsync()
-        {
-            this.user = await this.userService.GetUserAsync();
-
-            if (this.user.Token != null)
-            {
-                try
-                {
-                    await this.hattrickService.CheckTokenAsync(
-                        new OAuthToken(
-                            this.user.Token.Value,
-                            this.user.Token.SecretValue));
-
-                    this.CanDownload = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        ex.Message,
-                        Globalization.Strings.Error,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }
-            }
-        }
-
-        private void AddChildTasks(DownloadTask[] childDownloadTasks)
-        {
-            foreach (DownloadTask newTask in childDownloadTasks)
-            {
-                this.DownloadTasks.Add(newTask);
-            }
-
-            this.OnPropertyChanged(nameof(this.CompletedTaskCount));
-            this.OnPropertyChanged(nameof(this.TaskCount));
-            this.OnPropertyChanged(nameof(this.ProgressPercentage));
-        }
-
-        private async Task BeginDownloadProcess()
-        {
-            await this.xmlFileService.BeginPersistSession();
-
-            this.DownloadTasks = new ObservableCollection<DownloadTask>
-            {
-                new DownloadTask(XmlFileType.WorldDetails),
-                new DownloadTask(XmlFileType.ManagerCompendium)
-            };
-        }
-
-        private async Task CancelDownloadProcess()
-        {
-            await this.xmlFileService.CancelPersistSession();
-
-            int index = this.DownloadTasks.IndexOf(
-                this.DownloadTasks.First(x => x.Status != DownloadTaskStatus.Done));
-
-            this.ChangeTaskStatus(
-                this.DownloadTasks[index],
-                DownloadTaskStatus.Error);
-
-            for (int i = index + 1; i < this.DownloadTasks.Count; i++)
-            {
-                this.ChangeTaskStatus(
-                    this.DownloadTasks[i],
-                    DownloadTaskStatus.Canceled);
-            }
-        }
-
-        private void ChangeTaskStatus(DownloadTask task, DownloadTaskStatus newStatus)
-        {
-            int index = this.DownloadTasks.IndexOf(task);
-
-            this.DownloadTasks[index].Status = newStatus;
-
-            this.OnPropertyChanged(nameof(this.CompletedTaskCount));
-            this.OnPropertyChanged(nameof(this.TaskCount));
-            this.OnPropertyChanged(nameof(this.ProgressPercentage));
+            this.downloadViewService = downloadViewService;
         }
 
         [RelayCommand]
-        private async Task DownloadFilesAsync()
+        private async Task CancelDownloadAsync()
+        {
+            ArgumentNullException.ThrowIfNull(this.cancellationTokenSource, nameof(this.cancellationTokenSource));
+
+            await this.cancellationTokenSource.CancelAsync();
+        }
+
+        [RelayCommand]
+        private async Task ExecuteDownloadAsync()
         {
             this.Navigator.SuspendNavigation();
 
-            this.CanDownload = false;
+            this.cancellationTokenSource = new CancellationTokenSource();
 
-            this.IsDownloading = true;
-
-            try
+            Progress<ProcessReport> progress = new Progress<ProcessReport>(report =>
             {
-                await this.BeginDownloadProcess();
+                this.DownloadProgressReport = report;
+            });
 
-                for (int i = 0; i < this.DownloadTasks.Count; ++i)
+            await this.downloadViewService.UpdateFromHattrickAsync(
+                new Application.Models.DownloadSettings
                 {
-                    this.SelectedItem = this.DownloadTasks[i];
+                    DownloadFullMatchArchive = this.DownloadFullMatchArchive,
+                    DownloadHattrickArenaMatches = this.DownloadHattrickArenaMatches,
+                    ReDownloadMatchEvents = this.RedownloadMatches
+                },
+                progress,
+                this.cancellationTokenSource.Token);
 
-                    await this.ExecuteDownloadTaskAsync(this.SelectedItem);
-                }
-
-                this.SelectedItem = null;
-            }
-            catch
-            {
-                await this.CancelDownloadProcess();
-            }
-            finally
-            {
-                await this.EndDownloadProcessAsync();
-            }
-
-            if (this.teamSelector.SelectedTeamId == 0)
-            {
-                ArgumentNullException.ThrowIfNull(this.user, nameof(this.user));
-                ArgumentNullException.ThrowIfNull(this.user.Manager, nameof(this.user.Manager));
-
-                this.teamSelector.SetSelectedTeam(
-                    this.user.Manager.Teams.Where(x => x.IsPrimary)
-                                           .Select(x => x.HattrickId)
-                                           .Single());
-            }
-
-            this.CanDownload = true;
-
-            this.IsDownloading = false;
+            this.cancellationTokenSource = null;
 
             this.Navigator.ResumeNavigation();
-        }
-
-        private async Task EndDownloadProcessAsync()
-        {
-            await this.userService.UpdateUserLastDownloadDate();
-
-            await this.xmlFileService.EndPersistSession();
-        }
-
-        private async Task ExecuteDownloadTaskAsync(DownloadTask task)
-        {
-            string xmlFileContent = await this.StartDownloadTaskAsync(task);
-
-            IXmlFile xmlFile = await this.ParseXmlFileContent(task, xmlFileContent);
-
-            // TODO: Add XmlErrorFile check.
-
-            this.AddChildTasks(
-                this.ExtractXmlDownloadTasks(
-                    task,
-                    xmlFile));
-
-            await this.StoreDownloadTaskAsync(
-                task,
-                xmlFile);
-
-            this.ChangeTaskStatus(task, DownloadTaskStatus.Done);
-        }
-
-        private DownloadTask[] ExtractXmlDownloadTasks(DownloadTask task, IXmlFile xmlFile)
-        {
-            ArgumentNullException.ThrowIfNull(xmlFile, nameof(xmlFile));
-
-            this.ChangeTaskStatus(task, DownloadTaskStatus.Extracting);
-
-            return this.xmlFileService.ExtractXmlDownloadTasks(xmlFile);
-        }
-
-        private async Task<IXmlFile> ParseXmlFileContent(DownloadTask task, string xmlFileContent)
-        {
-            ArgumentException.ThrowIfNullOrWhiteSpace(xmlFileContent, nameof(xmlFileContent));
-
-            this.ChangeTaskStatus(task, DownloadTaskStatus.Parsing);
-
-            return await this.xmlFileService.ParseFileAsync(xmlFileContent);
-        }
-
-        private async Task<string> StartDownloadTaskAsync(DownloadTask task)
-        {
-            this.ChangeTaskStatus(task, DownloadTaskStatus.Downloading);
-
-            ArgumentNullException.ThrowIfNull(this.user, nameof(this.user));
-            ArgumentNullException.ThrowIfNull(this.user.Token, nameof(this.user.Token));
-
-            GetProtectedResourceRequest request = new GetProtectedResourceRequest(
-                this.user.Token.Value,
-                this.user.Token.SecretValue,
-                task.FileType,
-                task.Parameters);
-
-            return await this.hattrickService.GetProtectedResourceAsync(request);
-        }
-
-        private async Task StoreDownloadTaskAsync(DownloadTask task, IXmlFile xmlFile)
-        {
-            ArgumentNullException.ThrowIfNull(xmlFile, nameof(xmlFile));
-
-            this.ChangeTaskStatus(task, DownloadTaskStatus.Saving);
-
-            switch (task.FileType)
-            {
-                case XmlFileType.MatchDetails:
-                    ArgumentNullException.ThrowIfNull(task.ContextId, nameof(task.ContextId));
-
-                    await this.xmlFileService.PersistFileAsync(xmlFile, task.ContextId.Value);
-                    break;
-
-                default:
-                    await this.xmlFileService.PersistFileAsync(xmlFile);
-                    break;
-            }
         }
     }
 }

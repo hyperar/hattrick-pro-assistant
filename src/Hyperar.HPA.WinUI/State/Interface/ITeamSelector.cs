@@ -2,8 +2,8 @@
 {
     public interface ITeamSelector
     {
-        uint SelectedTeamId { get; }
+        long SelectedTeamId { get; }
 
-        public void SetSelectedTeam(uint selectedTeam);
+        public void SetSelectedTeam(long selectedTeam);
     }
 }

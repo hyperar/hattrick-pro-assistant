@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Hyperar.HPA.Common\Hyperar.HPA.Common.csproj" />
+      <ProjectReference Include="..\Hyperar.HPA.Shared\Hyperar.HPA.Shared.csproj" />
     </ItemGroup>
 
 </Project>

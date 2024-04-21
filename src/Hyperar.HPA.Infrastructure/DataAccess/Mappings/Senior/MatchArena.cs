@@ -9,56 +9,44 @@
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.MatchArena> builder)
         {
             builder.Property(p => p.HattrickId)
-                .HasColumnName(Constants.ColumnName.HattrickId)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.Name)
-                .HasColumnName(Constants.ColumnName.Name)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(2)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired();
 
             builder.Property(p => p.Attendance)
-                .HasColumnName(Constants.ColumnName.Attendance)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(3)
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.TerracesSold)
-                .HasColumnName(Constants.ColumnName.TerracesSold)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(4)
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.BasicSeatsSold)
-                .HasColumnName(Constants.ColumnName.BasicSeatsSold)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(5)
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.RoofSeatsSold)
-                .HasColumnName(Constants.ColumnName.RoofSeatsSold)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(7)
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.VipSeatsSold)
-                .HasColumnName(Constants.ColumnName.VipSeatsSold)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt);
+                .HasColumnOrder(8)
+                .HasColumnType(Constants.ColumnType.Int);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.MatchArena> builder)
         {
             builder.HasOne(m => m.Match)
                 .WithOne(m => m.Arena)
-                .HasForeignKey<Domain.Senior.MatchArena>(m => m.MatchHattrickId);
+                .HasForeignKey<Domain.Senior.MatchArena>(m => m.MatchHattrickId)
+                .HasConstraintName("FK_Senior_MatchArena_Match")
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.MatchArena> builder)

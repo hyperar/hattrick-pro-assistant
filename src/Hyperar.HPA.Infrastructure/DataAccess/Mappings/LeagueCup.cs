@@ -6,63 +6,51 @@
 
     internal class LeagueCup : HattrickEntityBase<Domain.LeagueCup>, IEntityTypeConfiguration<Domain.LeagueCup>, IEntityMapping<Domain.LeagueCup>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.LeagueCup> builder)
+        public override sealed void MapProperties(EntityTypeBuilder<Domain.LeagueCup> builder)
         {
-            builder.Property(x => x.Name)
-                .HasColumnName(Constants.ColumnName.Name)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Name)
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(p => p.LeagueLevel)
-                .HasColumnName(Constants.ColumnName.LeagueLevel)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+            builder.Property(p => p.Type)
+                .HasColumnOrder(2)
+                .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
-            builder.Property(p => p.Level)
-                .HasColumnName(Constants.ColumnName.Level)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
-                .IsRequired();
+            builder.Property(p => p.SubType)
+                .HasColumnOrder(3)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
-            builder.Property(p => p.LevelIndex)
-                .HasColumnName(Constants.ColumnName.LevelIndex)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
-                .IsRequired();
+            builder.Property(p => p.SeriesLevel)
+                .HasColumnOrder(4)
+                .HasColumnType(Constants.ColumnType.TinyInt);
 
             builder.Property(p => p.CurrentRound)
-                .HasColumnName(Constants.ColumnName.CurrentRound)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.Int)
+                .HasColumnOrder(5)
+                .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
 
             builder.Property(p => p.RoundsLeft)
-                .HasColumnName(Constants.ColumnName.RoundsLeft)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
-                .HasColumnType(Constants.ColumnType.BigInt)
+                .HasColumnOrder(6)
+                .HasColumnType(Constants.ColumnType.TinyInt)
                 .IsRequired();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.LeagueCup> builder)
+        public override sealed void MapRelationships(EntityTypeBuilder<Domain.LeagueCup> builder)
         {
             builder.HasOne(m => m.League)
                 .WithMany(m => m.Cups)
-                .HasForeignKey(m => m.LeagueHattrickId);
+                .HasForeignKey(m => m.LeagueHattrickId)
+                .HasConstraintName("FK_LeagueCup_League")
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.LeagueCup> builder)
+        public override sealed void MapTable(EntityTypeBuilder<Domain.LeagueCup> builder)
         {
-            builder.ToTable(Constants.TableName.LeagueCup, Constants.Schema.Global);
+            builder.ToTable(Constants.TableName.LeagueCup);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Models.Home
 {
-    using Common.Enums;
+    using Shared.Enums;
 
     public class Manager
     {
@@ -8,7 +8,7 @@
 
         public Country Country { get; set; } = new Country();
 
-        public uint HattrickId { get; set; }
+        public long HattrickId { get; set; }
 
         public SupporterTier SupporterTier { get; set; }
 

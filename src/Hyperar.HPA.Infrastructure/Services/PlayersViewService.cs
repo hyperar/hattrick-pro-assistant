@@ -108,7 +108,7 @@
                 CareerHattricks = player.CareerHattricks,
                 TeamGoals = player.GoalsOnTeam,
                 TeamMatches = player.MatchesOnTeam,
-                Avatar = player.AvatarBytes,
+                Avatar = player.AvatarBytes ?? Array.Empty<byte>(),
                 LeagueFlag = player.Country.League.FlagBytes,
                 CountryName = player.Country.Name
             };

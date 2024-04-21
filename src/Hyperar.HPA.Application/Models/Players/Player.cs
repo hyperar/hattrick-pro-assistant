@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Application.Models.Players
 {
-    using Common.Enums;
+    using Shared.Enums;
 
     public class Player
     {
@@ -12,9 +12,9 @@
             }
         }
 
-        public uint AgeDays { get; set; }
+        public byte AgeDays { get; set; }
 
-        public uint AgeYears { get; set; }
+        public byte AgeYears { get; set; }
 
         public AggressivenessLevel Aggressiveness { get; set; }
 
@@ -24,9 +24,9 @@
 
         public BookingStatus BookingStatus { get; set; }
 
-        public uint CareerHattricks { get; set; }
+        public int CareerHattricks { get; set; }
 
-        public uint CareerLeagueGoals { get; set; }
+        public int CareerLeagueGoals { get; set; }
 
         public string CountryName { get; set; } = string.Empty;
 
@@ -60,7 +60,7 @@
 
         public HonestyLevel Honesty { get; set; }
 
-        public uint Id { get; set; }
+        public long Id { get; set; }
 
         public SkillLevel Keeper { get; set; }
 
@@ -94,23 +94,23 @@
 
         public int? PlaymakingDelta { get; set; }
 
-        public uint Salary { get; set; }
+        public long Salary { get; set; }
 
         public SkillLevel Scoring { get; set; }
 
         public int? ScoringDelta { get; set; }
 
-        public uint SeasonCupGoals { get; set; }
+        public int SeasonCupGoals { get; set; }
 
-        public uint SeasonFriendlyGoals { get; set; }
+        public int SeasonFriendlyGoals { get; set; }
 
-        public uint SeasonLeagueGoals { get; set; }
+        public int SeasonLeagueGoals { get; set; }
 
         public SkillLevel SetPieces { get; set; }
 
         public int? SetPiecesDelta { get; set; }
 
-        public uint? ShirtNumber { get; set; }
+        public byte? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 
@@ -118,9 +118,9 @@
 
         public int? StaminaDelta { get; set; }
 
-        public uint TeamGoals { get; set; }
+        public int TeamGoals { get; set; }
 
-        public uint TeamMatches { get; set; }
+        public int TeamMatches { get; set; }
 
         public string Title
         {
@@ -132,7 +132,7 @@
             }
         }
 
-        public uint TotalSkillIndex { get; set; }
+        public int TotalSkillIndex { get; set; }
 
         public SkillLevel Winger { get; set; }
 

@@ -9,56 +9,46 @@
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.MatchTeamLineUpStartingPlayer> builder)
         {
             builder.Property(p => p.HattrickId)
-                .HasColumnName(Constants.ColumnName.HattrickId)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
-            builder.Property(x => x.FirstName)
-                .HasColumnName(Constants.ColumnName.FirstName)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.FirstName)
+                .HasColumnOrder(2)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.NickName)
-                .HasColumnName(Constants.ColumnName.NickName)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.NickName)
+                .HasColumnOrder(3)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsUnicode();
 
-            builder.Property(x => x.LastName)
-                .HasColumnName(Constants.ColumnName.LastName)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.LastName)
+                .HasColumnOrder(4)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
             builder.Property(p => p.Role)
-                .HasColumnName(Constants.ColumnName.Role)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(5)
                 .HasColumnType(Constants.ColumnType.SmallInt)
                 .IsRequired();
 
             builder.Property(p => p.Behavior)
-                .HasColumnName(Constants.ColumnName.Behavior)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(6)
                 .HasColumnType(Constants.ColumnType.SmallInt);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.MatchTeamLineUpStartingPlayer> builder)
         {
-            builder.HasOne(x => x.LineUp)
-                .WithMany(x => x.StartingPlayers)
+            builder.HasOne(m => m.MatchTeamLineUp)
+                .WithMany(m => m.StartingPlayers)
+                .HasForeignKey(m => m.MatchTeamLineUpId)
+                .HasConstraintName("FK_Senior_MatchTeamLineUpStartingPlayer_MatchTeamLineUp")
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
