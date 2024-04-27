@@ -13,7 +13,7 @@
 
     using Shared.Models.UI.Download;
 
-    public class ManagerCompendium : IFileDownloadTaskStepProcessStrategy
+    public class ManagerCompendium : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
         private const string includeRegionsParamKey = "includeRegions";
 
@@ -62,15 +62,21 @@
 
                         if (file.Manager.Avatar != null)
                         {
-                            fileDownloadTasks.Add(
-                                new ImageFileDownloadTask(
-                                    file.Manager.Avatar.BackgroundImage));
-
-                            foreach (Layer layer in file.Manager.Avatar.Layers)
+                            if (!ImageFileExists(file.Manager.Avatar.BackgroundImage))
                             {
                                 fileDownloadTasks.Add(
                                     new ImageFileDownloadTask(
-                                        layer.Image));
+                                        file.Manager.Avatar.BackgroundImage));
+                            }
+
+                            foreach (Layer layer in file.Manager.Avatar.Layers)
+                            {
+                                if (!ImageFileExists(layer.Image))
+                                {
+                                    fileDownloadTasks.Add(
+                                        new ImageFileDownloadTask(
+                                            layer.Image));
+                                }
                             }
                         }
                     }

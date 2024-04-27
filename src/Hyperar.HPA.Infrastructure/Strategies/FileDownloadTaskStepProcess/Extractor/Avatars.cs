@@ -11,7 +11,7 @@
     using Shared.Models.Hattrick.Avatars;
     using Shared.Models.UI.Download;
 
-    public class Avatars : IFileDownloadTaskStepProcessStrategy
+    public class Avatars : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
@@ -32,15 +32,21 @@
                     {
                         foreach (Player player in file.Team.Players)
                         {
-                            fileDownloadTasks.Add(
-                                new ImageFileDownloadTask(
-                                    player.Avatar.BackgroundImage));
-
-                            foreach (Layer layer in player.Avatar.Layers)
+                            if (!ImageFileExists(player.Avatar.BackgroundImage))
                             {
                                 fileDownloadTasks.Add(
                                     new ImageFileDownloadTask(
-                                        layer.Image));
+                                        player.Avatar.BackgroundImage));
+                            }
+
+                            foreach (Layer layer in player.Avatar.Layers)
+                            {
+                                if (!ImageFileExists(layer.Image))
+                                {
+                                    fileDownloadTasks.Add(
+                                        new ImageFileDownloadTask(
+                                            layer.Image));
+                                }
                             }
                         }
                     }

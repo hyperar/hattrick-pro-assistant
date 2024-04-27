@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="450">
-    <Border CornerRadius="{DynamicResource OverlayCornerRadius}">
-        <TextBlock Text="MatchesPageView" />
-    </Border>
+
+    <TextBlock Text="MatchesPageView" />
+
 </UserControl>

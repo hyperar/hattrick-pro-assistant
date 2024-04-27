@@ -11,7 +11,7 @@
     using Shared.Models.Hattrick.TeamDetails;
     using Shared.Models.UI.Download;
 
-    public class TeamDetails : IFileDownloadTaskStepProcessStrategy
+    public class TeamDetails : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
         private const string arenaIdParamKey = "arenaId";
 
@@ -47,18 +47,27 @@
 
                             if (!string.IsNullOrWhiteSpace(curTeam.LogoUrl))
                             {
-                                fileDownloadTasks.Add(
-                                    new ImageFileDownloadTask(
-                                        curTeam.LogoUrl));
+                                if (!ImageFileExists(curTeam.LogoUrl))
+                                {
+                                    fileDownloadTasks.Add(
+                                        new ImageFileDownloadTask(
+                                            curTeam.LogoUrl));
+                                }
                             }
 
-                            fileDownloadTasks.Add(
-                                new ImageFileDownloadTask(
-                                    curTeam.DressUri));
+                            if (!ImageFileExists(curTeam.DressUri))
+                            {
+                                fileDownloadTasks.Add(
+                                    new ImageFileDownloadTask(
+                                        curTeam.DressUri));
+                            }
 
-                            fileDownloadTasks.Add(
-                                new ImageFileDownloadTask(
-                                    curTeam.DressAlternateUri));
+                            if (!ImageFileExists(curTeam.DressAlternateUri))
+                            {
+                                fileDownloadTasks.Add(
+                                    new ImageFileDownloadTask(
+                                        curTeam.DressAlternateUri));
+                            }
 
                             if (downloadSettings.DownloadFullMatchArchive)
                             {

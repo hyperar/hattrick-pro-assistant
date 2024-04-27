@@ -11,9 +11,11 @@
         Width="400"
         RequestedThemeVariant="Default"
         WindowStartupLocation="CenterScreen">
-    <StackPanel Spacing="20"
+    
+    <StackPanel Spacing="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
+
         <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/Logo.png"
                Stretch="None" />
         
@@ -22,5 +24,7 @@
         <TextBlock Text="{x:Static globalization:Translations.Initializing}"
                    HorizontalAlignment="Stretch"
                    TextAlignment="Center" />
+        
     </StackPanel>
+    
 </Window>

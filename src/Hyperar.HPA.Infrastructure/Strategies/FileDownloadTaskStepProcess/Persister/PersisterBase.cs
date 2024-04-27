@@ -11,12 +11,8 @@
     using Shared.Models.UI.Download;
     using Models = Shared.Models.Hattrick;
 
-    public abstract class PersisterBase : IFileDownloadTaskStepProcessStrategy
+    public abstract class PersisterBase : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
-        private const string host = "www.hattrick.org";
-
-        private const string scheme = "https";
-
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
             ICollection<IFileDownloadTask> fileDownloadTasks,
@@ -82,49 +78,6 @@
             return GetBytesFromImage(avatarImage);
         }
 
-        protected static async Task<byte[]> GetImageBytesFromCacheAsync(string url, CancellationToken cancellationToken)
-        {
-            string filePath = GetFilePathFromUrl(url);
-
-            return File.Exists(filePath)
-                ? await File.ReadAllBytesAsync(filePath, cancellationToken)
-                : throw new FileNotFoundException(
-                    Globalization.Translations.CacheImageFileNotFound,
-                    filePath);
-        }
-
-        protected static async Task<byte[]> GetImageBytesFromCacheAsync(string url)
-        {
-            string filePath = GetFilePathFromUrl(url);
-
-            return File.Exists(filePath)
-                ? await File.ReadAllBytesAsync(filePath)
-                : throw new FileNotFoundException(
-                    Globalization.Translations.CacheImageFileNotFound,
-                    filePath);
-        }
-
-        protected static async Task<byte[]> GetImageBytesFromCacheAsync(string url, string fallBackUrl)
-        {
-            string filePath = GetFilePathFromUrl(url);
-            string fallBackFilePath = GetFilePathFromUrl(fallBackUrl);
-
-            return File.Exists(filePath)
-                ? await File.ReadAllBytesAsync(filePath)
-                : File.Exists(fallBackFilePath)
-                ? await File.ReadAllBytesAsync(fallBackFilePath)
-                : throw new FileNotFoundException(
-                    Globalization.Translations.CacheImageFileNotFound,
-                    filePath);
-        }
-
-        private static async Task<Bitmap> CreateAvatarImageAsync(string url)
-        {
-            return GetImageFromBytes(
-                await GetImageBytesFromCacheAsync(
-                    url));
-        }
-
         private static byte[] GetBytesFromImage(Image image)
         {
             using (MemoryStream memoryStream = new MemoryStream())
@@ -133,21 +86,6 @@
 
                 return memoryStream.ToArray();
             }
-        }
-
-        private static string GetFilePathFromUrl(string url)
-        {
-            ArgumentException.ThrowIfNullOrEmpty(url, nameof(url));
-
-            string normalizedUrl = NormalizeUrl(url);
-
-            string relativePath = new Uri(normalizedUrl).LocalPath.Replace("/", "\\");
-
-            return Path.Combine(
-                Environment.GetFolderPath(
-                    Environment.SpecialFolder.ApplicationData),
-                "Hyperar",
-                "HPA") + relativePath;
         }
 
         private static Bitmap GetImageFromBytes(byte[] imageBytes)
@@ -162,28 +100,11 @@
             }
         }
 
-        private static string NormalizeUrl(string rawUrl)
+        private static async Task<Bitmap> CreateAvatarImageAsync(string url)
         {
-            ArgumentException.ThrowIfNullOrEmpty(rawUrl, nameof(rawUrl));
-
-            rawUrl = rawUrl.Trim().ToLower();
-
-            if (rawUrl.StartsWith("//"))
-            {
-                rawUrl = $"{scheme}:{rawUrl}";
-            }
-            else if (rawUrl.StartsWith("/img/"))
-            {
-                rawUrl = $"{scheme}://{host}{rawUrl}";
-            }
-            else if (!rawUrl.StartsWith("http://") && !rawUrl.StartsWith("https://"))
-            {
-                rawUrl = $"{scheme}://{rawUrl}";
-            }
-
-            return Uri.TryCreate(rawUrl, new UriCreationOptions { DangerousDisablePathAndQueryCanonicalization = true }, out Uri? rawUri)
-                ? rawUri.ToString()
-                : throw new ArgumentException(rawUrl, nameof(rawUrl));
+            return GetImageFromBytes(
+                await GetImageBytesFromCacheAsync(
+                    url));
         }
     }
 }

@@ -9,10 +9,14 @@
              mc:Ignorable="d"
              d:DesignWidth="1600"
              d:DesignHeight="900">
-    <StackPanel Spacing="30">
+    <StackPanel Spacing="10">
 
-        <Panel>
-            <StackPanel Spacing="20">
+        <Border Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
+
+            <StackPanel Spacing="10">
+
                 <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
                            FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
                            Text="{x:Static globalization:Translations.StepOne}" />
@@ -23,18 +27,26 @@
                 <Button Command="{Binding GetRequestTokenCommand}"
                         HorizontalAlignment="Center"
                         IsEnabled="{Binding CanGetRequestToken}">
+
                     <StackPanel Orientation="Horizontal" Spacing="5">
+
                         <PathIcon Data="{DynamicResource OpenLinkIcon}" Height="12" />
                         <TextBlock Text="{x:Static globalization:Translations.OpenAuthorizationWebPage}" />
+
                     </StackPanel>
+
                 </Button>
+
             </StackPanel>
-        </Panel>
 
-        <Separator />
+        </Border>
 
-        <Panel>
-            <StackPanel Spacing="20">
+        <Border Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
+
+            <StackPanel Spacing="10">
+
                 <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
                            FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
                            Text="{x:Static globalization:Translations.StepTwo}" />
@@ -44,15 +56,20 @@
 
                 <TextBox IsEnabled="{Binding CanEnterVerificationCode}"
                          Text="{Binding VerificationCode}"
+                         TextAlignment="Center"
                          Watermark="{x:Static globalization:Translations.VerificationCode}"
                          Width="200" />
+
             </StackPanel>
-        </Panel>
 
-        <Separator />
+        </Border>
 
-        <Panel>
-            <StackPanel Spacing="20">
+        <Border Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
+
+            <StackPanel Spacing="10">
+
                 <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
                            FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
                            Text="{x:Static globalization:Translations.StepThree}" />
@@ -66,86 +83,118 @@
                 <StackPanel Orientation="Horizontal"
                             Spacing="5"
                             HorizontalAlignment="Center">
+
                     <Button Command="{Binding GetAccessTokenCommand}"
                             IsEnabled="{Binding CanGetAccessToken}">
+
                         <StackPanel Orientation="Horizontal" Spacing="5">
+
                             <PathIcon Data="{DynamicResource OkIcon}" Height="12" />
                             <TextBlock Text="{x:Static globalization:Translations.Authorize}" />
+
                         </StackPanel>
+
                     </Button>
+
                     <Button Command="{Binding RevokeAccessTokenCommand}"
                             HorizontalAlignment="Center"
                             IsEnabled="{Binding CanRevokeAccessToken}">
+
                         <StackPanel Orientation="Horizontal" Spacing="5">
+
                             <PathIcon Data="{DynamicResource CancelIcon}" Height="12" />
                             <TextBlock Text="{x:Static globalization:Translations.Deauthorize}" />
+
                         </StackPanel>
+
                     </Button>
+
                 </StackPanel>
+
             </StackPanel>
-        </Panel>
 
-        <Separator />
+        </Border>
 
-        <Grid ColumnDefinitions="*,*,*,*"
-              RowDefinitions="*,*,*"
-              HorizontalAlignment="Center"
-              IsVisible="{Binding CanRevokeAccessToken}">
-            <Grid.Styles>
-                <Style Selector="Grid">
-                    <Setter Property="Margin" Value="5" />
-                </Style>
-                <Style Selector="TextBlock">
-                    <Setter Property="Margin" Value="3" />
-                    <Setter Property="TextAlignment" Value="Center" />
-                </Style>
-            </Grid.Styles>
+        <Border Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
 
-            <TextBlock Grid.Column="0"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="4"
-                       FontSize="{DynamicResource TabItemHeaderFontSize}"
-                       FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
-                       Text="{x:Static globalization:Translations.Authorized}"
-                       TextAlignment="Center"
-                       IsVisible="{Binding CanRevokeAccessToken}" />
-            <TextBlock Grid.Column="0"
-                       Grid.Row="1"
-                       Text="{x:Static globalization:Translations.AccessToken}" />
+            <StackPanel Spacing="10">
 
-            <TextBlock Grid.Column="0"
-                       Grid.Row="2"
-                       Text="{Binding AccessToken, FallbackValue=%TOKEN%}}" />
+                <Grid ColumnDefinitions="*,*,*,*"
+                      RowDefinitions="*,*,*"
+                      HorizontalAlignment="Center"
+                      IsVisible="{Binding CanRevokeAccessToken}">
 
-            <TextBlock Grid.Column="1"
-                       Grid.Row="1"
-                       Text="{x:Static globalization:Translations.AccessTokenSecret}" />
+                    <Grid.Styles>
 
-            <TextBlock Grid.Column="1"
-                       Grid.Row="2"
-                       Text="{Binding AccessTokenSecret, FallbackValue=%TOKEN_SECRET%}" />
+                        <Style Selector="Grid">
 
-            <TextBlock Grid.Column="2"
-                       Grid.Row="1"
-                       Text="{x:Static globalization:Translations.CreatedOn}" />
+                            <Setter Property="Margin" Value="5" />
 
-            <TextBlock Grid.Column="2"
-                       Grid.Row="2"
-                       Text="{Binding AccessTokenCreatedOn, FallbackValue=%CREATED_ON%}}" />
+                        </Style>
 
-            <TextBlock Grid.Column="3"
-                       Grid.Row="1"
-                       Text="{x:Static globalization:Translations.ExpiresOn}" />
+                        <Style Selector="TextBlock">
 
-            <TextBlock Grid.Column="3"
-                       Grid.Row="2"
-                       Text="{Binding AccessTokenExpiresOn, FallbackValue=%EXPIRES_ON%}}" />
-        </Grid>
+                            <Setter Property="Margin" Value="3" />
+                            <Setter Property="TextAlignment" Value="Center" />
 
-        <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
-                   FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
-                   Text="{x:Static globalization:Translations.NotAuthorized}"
-                   IsVisible="{Binding !CanRevokeAccessToken}"
-                   TextAlignment="Center" />
+                        </Style>
+
+                    </Grid.Styles>
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.ColumnSpan="4"
+                               FontSize="{DynamicResource TabItemHeaderFontSize}"
+                               FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                               Text="{x:Static globalization:Translations.Authorized}"
+                               TextAlignment="Center"
+                               IsVisible="{Binding CanRevokeAccessToken}" />
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="1"
+                               Text="{x:Static globalization:Translations.AccessToken}" />
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="2"
+                               Text="{Binding AccessToken, FallbackValue=%TOKEN%}}" />
+
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="1"
+                               Text="{x:Static globalization:Translations.AccessTokenSecret}" />
+
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="2"
+                               Text="{Binding AccessTokenSecret, FallbackValue=%TOKEN_SECRET%}" />
+
+                    <TextBlock Grid.Column="2"
+                               Grid.Row="1"
+                               Text="{x:Static globalization:Translations.CreatedOn}" />
+
+                    <TextBlock Grid.Column="2"
+                               Grid.Row="2"
+                               Text="{Binding AccessTokenCreatedOn, FallbackValue=%CREATED_ON%}}" />
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="1"
+                               Text="{x:Static globalization:Translations.ExpiresOn}" />
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="2"
+                               Text="{Binding AccessTokenExpiresOn, FallbackValue=%EXPIRES_ON%}}" />
+                </Grid>
+
+                <TextBlock FontSize="{DynamicResource TabItemHeaderFontSize}"
+                           FontWeight="{DynamicResource TabItemHeaderThemeFontWeight}"
+                           Text="{x:Static globalization:Translations.NotAuthorized}"
+                           TextAlignment="Center"
+                           IsVisible="{Binding !CanRevokeAccessToken}" />
+
+            </StackPanel>
+
+        </Border>
+
     </StackPanel>
+
 </UserControl>

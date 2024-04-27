@@ -10,7 +10,7 @@
     using Shared.Models.Hattrick.WorldDetails;
     using Shared.Models.UI.Download;
 
-    public class WorldDetails : IFileDownloadTaskStepProcessStrategy
+    public class WorldDetails : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
         private const string LeagueFlagImageUrlMask = "/Img/flags/{0}.png";
 
@@ -33,11 +33,16 @@
                     {
                         foreach (League league in file.LeagueList)
                         {
-                            fileDownloadTasks.Add(
-                                new ImageFileDownloadTask(
-                                    string.Format(
-                                        LeagueFlagImageUrlMask,
-                                        league.LeagueId)));
+                            string imageUrl = string.Format(
+                                LeagueFlagImageUrlMask,
+                                league.LeagueId);
+
+                            if (!ImageFileExists(imageUrl))
+                            {
+                                fileDownloadTasks.Add(
+                                    new ImageFileDownloadTask(
+                                        imageUrl));
+                            }
                         }
                     }
                     else

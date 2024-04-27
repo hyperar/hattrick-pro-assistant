@@ -8,21 +8,24 @@
              xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
              x:DataType="vm:DownloadViewModel"
              mc:Ignorable="d">
+
     <UserControl.Resources>
+
         <converters:DownloadTaskParameterArrayToStringConverter x:Key="downloadTaskParameterArrayToStringConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
+
     </UserControl.Resources>
 
     <StackPanel Spacing="10">
 
-        <StackPanel Width="500">
+        <StackPanel Width="750">
 
             <!-- Options -->
             <Border Background="{DynamicResource ControlFillColorDefault}"
-                    CornerRadius="{DynamicResource OverlayCornerRadius}">
+                    CornerRadius="{DynamicResource OverlayCornerRadius}"
+                    Padding="10">
 
-                <StackPanel Spacing="5"
-                            Margin="10">
+                <StackPanel Spacing="5">
 
                     <ToggleSwitch OnContent="{x:Static globalization:Translations.RedownloadMatchesOnContent}"
                                   OffContent="{x:Static globalization:Translations.RedownloadMatchesOffContent}"
@@ -51,10 +54,10 @@
         <StackPanel Width="750">
 
             <Border Background="{DynamicResource ControlFillColorDefault}"
-                    CornerRadius="{DynamicResource OverlayCornerRadius}">
+                    CornerRadius="{DynamicResource OverlayCornerRadius}"
+                    Padding="10">
 
-                <StackPanel Spacing="10"
-                            Margin="10">
+                <StackPanel Spacing="10">
 
                     <!-- Tasks -->
                     <DataGrid AutoGenerateColumns="False"
@@ -68,23 +71,42 @@
                               SelectedItem="{Binding DownloadProgressReport.CurrentTask, Mode=OneWay}"
                               SelectionChanged="DataGrid_SelectionChanged"
                               SelectionMode="Single">
+
                         <DataGrid.Columns>
+
                             <DataGridTextColumn Binding="{Binding Title, Mode=OneWay}"
                                                 Header="Title"
                                                 Width="2*"/>
+
                             <DataGridTextColumn Binding="{Binding Type, Mode=OneWay,
                                                           Converter={StaticResource enumToTranslatedStringConverter}}"
                                                 Header="Type"
                                                 Width="*"/>
+
                             <DataGridTextColumn Binding="{Binding Status, Mode=OneWay,
                                                           Converter={StaticResource enumToTranslatedStringConverter}}"
                                                 Header="Status"
                                                 Width="*"/>
+
                         </DataGrid.Columns>
+
                     </DataGrid>
 
-                    <ProgressBar Maximum="{Binding DownloadProgressReport.TaskCount, FallbackValue=100}"
-                                 Value="{Binding DownloadProgressReport.CompletedTaskCount, FallbackValue=0}" />
+                    <Grid ColumnDefinitions="40,*,40">
+
+                        <TextBlock Grid.Column="0"
+                                   Text="{Binding DownloadProgressReport.CompletedTaskCount, FallbackValue=0}"
+                                   TextAlignment="Center" />
+
+                        <ProgressBar Grid.Column="1"
+                                     Maximum="{Binding DownloadProgressReport.TaskCount, FallbackValue=100}"
+                                     Value="{Binding DownloadProgressReport.CompletedTaskCount, FallbackValue=0}" />
+
+                        <TextBlock Grid.Column="2"
+                                   Text="{Binding DownloadProgressReport.TaskCount, FallbackValue=0}"
+                                   TextAlignment="Center" />
+
+                    </Grid>
 
                 </StackPanel>
 

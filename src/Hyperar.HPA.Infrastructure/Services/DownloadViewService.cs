@@ -46,92 +46,80 @@
 
             try
             {
-                try
+                for (int i = 0; i < downloadTasks.Count; i++)
                 {
-                    for (int i = 0; i < downloadTasks.Count; i++)
+                    var currentTask = downloadTasks[i];
+
+                    // Remarks:
+                    // We advance XmlFile tasks up to Processed in order to download all required images to execute the Persister.
+                    while ((currentTask.Type == DownloadTaskType.ImageFile &&
+                            currentTask.Status != DownloadTaskStatus.Finished) ||
+                           (currentTask.Type == DownloadTaskType.XmlFile &&
+                            currentTask.Status != DownloadTaskStatus.Processed))
                     {
-                        var currentTask = downloadTasks[i];
+                        var step = this.fileDownloadTaskStepProcessFactory.GetDownloadTaskStepProcess(currentTask);
 
-                        // Remarks:
-                        // We advance XmlFile tasks up to Processed in order to download all required images to execute the Persister.
-                        while ((currentTask.Type == DownloadTaskType.ImageFile &&
-                                currentTask.Status != DownloadTaskStatus.Finished) ||
-                               (currentTask.Type == DownloadTaskType.XmlFile &&
-                                currentTask.Status != DownloadTaskStatus.Processed))
-                        {
-                            var step = this.fileDownloadTaskStepProcessFactory.GetDownloadTaskStepProcess(currentTask);
+                        await step.ExecuteAsync(
+                            currentTask,
+                            downloadTasks,
+                            settings,
+                            progress,
+                            cancellationToken);
 
-                            await step.ExecuteAsync(
-                                currentTask,
-                                downloadTasks,
-                                settings,
-                                progress,
-                                cancellationToken);
+                        ReportProgress(downloadTasks, currentTask, isDownloading, progress);
 
-                            ReportProgress(downloadTasks, currentTask, isDownloading, progress);
-
-                            this.fileDownloadTaskStepAdvancerFactory.GetAdvancer(currentTask)
-                                .AdvanceTaskStatus(currentTask);
-                        }
-                    }
-
-                    // Persist tasks.
-                    for (int i = 0; i < downloadTasks.Count; i++)
-                    {
-                        var currentTask = downloadTasks[i];
-
-                        while (currentTask.Status != DownloadTaskStatus.Finished)
-                        {
-                            var step = this.fileDownloadTaskStepProcessFactory.GetDownloadTaskStepProcess(currentTask);
-
-                            await step.ExecuteAsync(
-                                currentTask,
-                                downloadTasks,
-                                settings,
-                                progress,
-                                cancellationToken);
-
-                            ReportProgress(downloadTasks, currentTask, isDownloading, progress);
-
-                            this.fileDownloadTaskStepAdvancerFactory.GetAdvancer(currentTask)
-                                .AdvanceTaskStatus(currentTask);
-                        }
+                        this.fileDownloadTaskStepAdvancerFactory.GetAdvancer(currentTask)
+                            .AdvanceTaskStatus(currentTask);
                     }
                 }
-                catch (OperationCanceledException)
+
+                // Persist tasks.
+                for (int i = 0; i < downloadTasks.Count; i++)
                 {
-                    isCanceled = true;
+                    var currentTask = downloadTasks[i];
 
-                    var unused = downloadTasks.Where(x => x.Status != DownloadTaskStatus.Finished)
-                        .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
-                        .ToList();
+                    while (currentTask.Status != DownloadTaskStatus.Finished)
+                    {
+                        var step = this.fileDownloadTaskStepProcessFactory.GetDownloadTaskStepProcess(currentTask);
 
-                    throw;
-                }
-                catch
-                {
-                    hasErrors = true;
+                        await step.ExecuteAsync(
+                            currentTask,
+                            downloadTasks,
+                            settings,
+                            progress,
+                            cancellationToken);
 
-                    var unused1 = downloadTasks.Where(x => x.Status != DownloadTaskStatus.NotStarted && x.Status != DownloadTaskStatus.Finished)
-                        .Select(x => { x.Status = DownloadTaskStatus.Error; return x; })
-                        .ToList();
+                        ReportProgress(downloadTasks, currentTask, isDownloading, progress);
 
-                    var unused2 = downloadTasks.Where(x => x.Status == DownloadTaskStatus.NotStarted)
-                        .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
-                        .ToList();
-
-                    throw;
+                        this.fileDownloadTaskStepAdvancerFactory.GetAdvancer(currentTask)
+                            .AdvanceTaskStatus(currentTask);
+                    }
                 }
             }
+            catch (OperationCanceledException)
+            {
+                isCanceled = true;
+
+                _ = downloadTasks.Where(x => x.Status != DownloadTaskStatus.Finished)
+                    .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
+                    .ToList();
+            }
             catch
+            {
+                hasErrors = true;
+
+                _ = downloadTasks.Where(x => x.Status != DownloadTaskStatus.Error
+                                          && x.Status != DownloadTaskStatus.Finished)
+                    .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
+                    .ToList();
+            }
+            finally
             {
                 if (hasErrors || isCanceled)
                 {
                     this.databaseContext.Cancel();
                 }
-            }
-            finally
-            {
+
                 isDownloading = false;
 
                 await this.databaseContext.EndTransactionAsync();
@@ -142,9 +130,11 @@
 
         private static void ReportProgress(List<IFileDownloadTask> tasks, IFileDownloadTask currentTask, bool isDownloading, IProgress<ProcessReport> progress)
         {
-            int taskCount = tasks.Count;
-            int completedTaskCount = tasks.Where(x => x.Status == DownloadTaskStatus.Finished)
-                .Count();
+            int taskCount = tasks.Sum(x => x.Type == DownloadTaskType.ImageFile ? 1 : 4);
+
+            int completedTaskCount = tasks.Sum(x => x.Type == DownloadTaskType.ImageFile
+                                                            ? x.Status == DownloadTaskStatus.Finished ? 1 : 0
+                                                            : x.Status == DownloadTaskStatus.Error || x.Status == DownloadTaskStatus.Canceled ? 0 : (int)x.Status);
 
             var rows = tasks.Select(x => new TaskRow(
                 x.Title,

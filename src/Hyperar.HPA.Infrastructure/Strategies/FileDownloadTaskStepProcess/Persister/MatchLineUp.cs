@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Application.Interfaces;
     using Hyperar.HPA.Domain.Interfaces;
+    using Hyperar.HPA.Shared.Enums;
     using Microsoft.EntityFrameworkCore;
     using Models = Shared.Models.Hattrick;
 
@@ -99,7 +100,8 @@
         private async Task ProcessMatchTeamLineUpPlayer(Models.MatchLineUp.Player xmlPlayer, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
         {
             var matchLineUpPlayer = await this.matchTeamLineUpPlayerRepository.Query(x => x.MatchTeamLineUpId == matchTeamLineUp.Id
-                                                                                       && x.HattrickId == xmlPlayer.PlayerId)
+                                                                                       && x.HattrickId == xmlPlayer.PlayerId
+                                                                                       && x.Role == (MatchRole)xmlPlayer.RoleId)
                                                                               .SingleOrDefaultAsync();
 
             if (matchLineUpPlayer == null)
@@ -114,7 +116,8 @@
         private async Task ProcessMatchTeamLineUpStartingPlayer(Models.MatchLineUp.StartingPlayer xmlStartingPlayer, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
         {
             var matchLineUpstartingPlayer = await this.matchTeamLineUpStartingPlayerRepository.Query(x => x.MatchTeamLineUpId == matchTeamLineUp.Id
-                                                                                                       && x.HattrickId == xmlStartingPlayer.PlayerId)
+                                                                                                       && x.HattrickId == xmlStartingPlayer.PlayerId
+                                                                                                       && x.Role == (MatchRole)xmlStartingPlayer.RoleId)
                                                                                               .SingleOrDefaultAsync();
 
             if (matchLineUpstartingPlayer == null)

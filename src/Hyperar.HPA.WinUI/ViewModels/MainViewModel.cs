@@ -37,14 +37,14 @@
 
             this.MenuItems = new ObservableCollection<MenuItemTemplate>
             {
-                new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, "HomeIcon"),
-                new MenuItemTemplate(Globalization.Translations.Players, ViewType.Players),
-                new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches),
+                //new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, "HomeIcon"),
+                //new MenuItemTemplate(Globalization.Translations.Players, ViewType.Players),
+                //new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches),
                 new MenuItemTemplate(Globalization.Translations.TeamSelection, ViewType.TeamSelection, "TeamSelectionIcon"),
                 new MenuItemTemplate(Globalization.Translations.Download, ViewType.Download, "DownloadIcon"),
-                new MenuItemTemplate(Globalization.Translations.Settings, ViewType.Settings, "SettingsIcon"),
+                //new MenuItemTemplate(Globalization.Translations.Settings, ViewType.Settings, "SettingsIcon"),
                 new MenuItemTemplate(Globalization.Translations.Authorization, ViewType.Authorization, "AuthorizationIcon"),
-                new MenuItemTemplate(Globalization.Translations.About, ViewType.About, "AboutIcon")
+                //new MenuItemTemplate(Globalization.Translations.About, ViewType.About, "AboutIcon")
             };
 
             this.UpdateCurrentPageCommand = new UpdateCurrentPageCommand(navigator, this, viewModelFactory);

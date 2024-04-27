@@ -9,7 +9,7 @@
     using Shared.Models.Hattrick.ArenaDetails;
     using Shared.Models.UI.Download;
 
-    public class ArenaDetails : IFileDownloadTaskStepProcessStrategy
+    public class ArenaDetails : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
@@ -28,9 +28,16 @@
 
                     if (xmlFileDownloadTask.XmlFile is HattrickData file)
                     {
-                        fileDownloadTasks.Add(
-                            new ImageFileDownloadTask(
-                                string.IsNullOrWhiteSpace(file.Arena.ArenaImage) ? file.Arena.ArenaFallbackImage : file.Arena.ArenaImage));
+                        string imageUrl = string.IsNullOrWhiteSpace(file.Arena.ArenaImage)
+                                        ? file.Arena.ArenaFallbackImage
+                                        : file.Arena.ArenaImage;
+
+                        if (!ImageFileExists(imageUrl))
+                        {
+                            fileDownloadTasks.Add(
+                                new ImageFileDownloadTask(
+                                    imageUrl));
+                        }
                     }
                     else
                     {
