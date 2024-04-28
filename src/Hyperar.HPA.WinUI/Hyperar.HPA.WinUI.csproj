@@ -28,6 +28,7 @@
       <None Remove="appSettings.json" />
       <None Remove="appSettings.Production.json" />
       <None Remove="Assets\avalonia-logo.ico" />
+      <None Remove="Assets\Images\NoTeamLogo.png" />
     </ItemGroup>
 
     <ItemGroup>

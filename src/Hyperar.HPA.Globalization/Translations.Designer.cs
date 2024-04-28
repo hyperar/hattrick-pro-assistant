@@ -835,6 +835,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Series:.
+        /// </summary>
+        public static string SeriesLabel {
+            get {
+                return ResourceManager.GetString("SeriesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set Pieces.
         /// </summary>
         public static string SetPieces {

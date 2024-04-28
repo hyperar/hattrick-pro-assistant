@@ -32,21 +32,16 @@
         {
             try
             {
-                if (fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask)
-                {
-                    return xmlFileDownloadTask.Status switch
-                    {
-                        DownloadTaskStatus.NotStarted => this.xmlFileDownloader,
-                        DownloadTaskStatus.Downloaded => this.parseStepProcessFactory.GetParser(xmlFileDownloadTask),
-                        DownloadTaskStatus.Parsed => this.extractStepProcessFactory.GetExtractor(xmlFileDownloadTask),
-                        DownloadTaskStatus.Processed => this.persistStepProcessFactory.GetPersister(xmlFileDownloadTask),
-                        _ => throw new ArgumentOutOfRangeException(nameof(fileDownloadTask), fileDownloadTask.Status.ToString(), nameof(fileDownloadTask.Status))
-                    };
-                }
-                else
-                {
-                    throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-                }
+                return fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask
+                     ? xmlFileDownloadTask.Status switch
+                     {
+                         DownloadTaskStatus.NotStarted => this.xmlFileDownloader,
+                         DownloadTaskStatus.Downloaded => this.parseStepProcessFactory.GetParser(xmlFileDownloadTask),
+                         DownloadTaskStatus.Parsed => this.extractStepProcessFactory.GetExtractor(xmlFileDownloadTask),
+                         DownloadTaskStatus.Processed => this.persistStepProcessFactory.GetPersister(xmlFileDownloadTask),
+                         _ => throw new ArgumentOutOfRangeException(nameof(fileDownloadTask), fileDownloadTask.Status.ToString(), nameof(fileDownloadTask.Status))
+                     }
+                     : throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
             }
             catch
             {

@@ -64,30 +64,25 @@
 
         public IFileDownloadTaskStepProcessStrategy GetParser(IFileDownloadTask fileDownloadTask)
         {
-            if (fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask)
-            {
-                return xmlFileDownloadTask.XmlFileType switch
-                {
-                    XmlFileType.ArenaDetails => this.arenaDetailsParser,
-                    XmlFileType.Avatars => this.avatarsParser,
-                    XmlFileType.CheckToken => this.checkTokenParser,
-                    XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersParser,
-                    XmlFileType.ManagerCompendium => this.managerCompendiumParser,
-                    XmlFileType.MatchDetails => this.matchDetailsParser,
-                    XmlFileType.Matches => this.matchesParser,
-                    XmlFileType.MatchLineUp => this.matchLineUpParser,
-                    XmlFileType.Players => this.playersParser,
-                    XmlFileType.StaffAvatars => this.staffAvatarsParser,
-                    XmlFileType.StaffList => this.staffListParser,
-                    XmlFileType.TeamDetails => this.teamDetailsParser,
-                    XmlFileType.WorldDetails => this.worldDetailsParser,
-                    _ => throw new ArgumentOutOfRangeException(nameof(fileDownloadTask), xmlFileDownloadTask.XmlFileType.ToString(), nameof(xmlFileDownloadTask.XmlFileType))
-                };
-            }
-            else
-            {
-                throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-            }
+            return fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask
+                 ? (IFileDownloadTaskStepProcessStrategy)(xmlFileDownloadTask.XmlFileType switch
+                 {
+                     XmlFileType.ArenaDetails => this.arenaDetailsParser,
+                     XmlFileType.Avatars => this.avatarsParser,
+                     XmlFileType.CheckToken => this.checkTokenParser,
+                     XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersParser,
+                     XmlFileType.ManagerCompendium => this.managerCompendiumParser,
+                     XmlFileType.MatchDetails => this.matchDetailsParser,
+                     XmlFileType.Matches => this.matchesParser,
+                     XmlFileType.MatchLineUp => this.matchLineUpParser,
+                     XmlFileType.Players => this.playersParser,
+                     XmlFileType.StaffAvatars => this.staffAvatarsParser,
+                     XmlFileType.StaffList => this.staffListParser,
+                     XmlFileType.TeamDetails => this.teamDetailsParser,
+                     XmlFileType.WorldDetails => this.worldDetailsParser,
+                     _ => throw new ArgumentOutOfRangeException(nameof(fileDownloadTask), xmlFileDownloadTask.XmlFileType.ToString(), nameof(xmlFileDownloadTask.XmlFileType))
+                 })
+                 : throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
         }
     }
 }

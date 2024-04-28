@@ -49,25 +49,20 @@
 
         public IFileDownloadTaskStepProcessStrategy GetExtractor(IFileDownloadTask fileDownloadTask)
         {
-            if (fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask)
-            {
-                return xmlFileDownloadTask.XmlFileType switch
-                {
-                    XmlFileType.ArenaDetails => this.arenaDetailsExtractor,
-                    XmlFileType.Avatars => this.avatarsExtractor,
-                    XmlFileType.CheckToken => this.checkTokenExtractor,
-                    XmlFileType.ManagerCompendium => this.managerCompendiumExtractor,
-                    XmlFileType.Matches => this.matchesExtractor,
-                    XmlFileType.StaffAvatars => this.staffAvatarsExtractor,
-                    XmlFileType.TeamDetails => this.teamDetailsExtractor,
-                    XmlFileType.WorldDetails => this.worldDetailsExtractor,
-                    _ => this.defaultExtractor
-                };
-            }
-            else
-            {
-                throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-            }
+            return fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask
+                 ? (IFileDownloadTaskStepProcessStrategy)(xmlFileDownloadTask.XmlFileType switch
+                 {
+                     XmlFileType.ArenaDetails => this.arenaDetailsExtractor,
+                     XmlFileType.Avatars => this.avatarsExtractor,
+                     XmlFileType.CheckToken => this.checkTokenExtractor,
+                     XmlFileType.ManagerCompendium => this.managerCompendiumExtractor,
+                     XmlFileType.Matches => this.matchesExtractor,
+                     XmlFileType.StaffAvatars => this.staffAvatarsExtractor,
+                     XmlFileType.TeamDetails => this.teamDetailsExtractor,
+                     XmlFileType.WorldDetails => this.worldDetailsExtractor,
+                     _ => this.defaultExtractor
+                 })
+                 : throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
         }
     }
 }

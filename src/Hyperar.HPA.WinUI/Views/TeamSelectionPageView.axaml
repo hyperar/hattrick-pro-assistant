@@ -3,10 +3,146 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="Hyperar.HPA.WinUI.TeamSelectionPageView"
+             xmlns:converters="clr-namespace:Hyperar.HPA.WinUI.Converters"
+             xmlns:vm="clr-namespace:Hyperar.HPA.WinUI.ViewModels"
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             x:DataType="vm:TeamSelectionViewModel"
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="450">
 
-    <TextBlock Text="TeamSelectionPageView" />
+    <UserControl.Resources>
+
+        <converters:ByteArrayToBitmapConverter x:Key="byteArrayToBitmapConverter" />
+        <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/NoTeamLogo.png" x:Key="noTeamLogo" />
+
+    </UserControl.Resources>
+
+    <ItemsControl ItemsSource="{Binding Teams}">
+
+        <ItemsControl.ItemsPanel>
+
+            <ItemsPanelTemplate>
+
+                <StackPanel Orientation="Vertical"
+                            Spacing="10" />
+
+            </ItemsPanelTemplate>
+
+        </ItemsControl.ItemsPanel>
+
+        <ItemsControl.ItemTemplate>
+
+            <DataTemplate>
+
+                <Button IsEnabled="{Binding !IsSelected}">
+
+                    <Grid ColumnDefinitions="105,100,*,44,44"
+                          RowDefinitions="15,20,20,20,20,20,15"
+                          Width="600">
+
+                        <Image Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="7"
+                               Height="130"
+                               Stretch="UniformToFill"
+                               Source="{Binding LogoBytes,
+                                        Converter={StaticResource byteArrayToBitmapConverter},
+                                                   ConverterParameter={StaticResource noTeamLogo}}"
+                               Width="105" />
+
+                        <Image Grid.Column="3"
+                               Grid.Row="0"
+                               Grid.RowSpan="7"
+                               Height="74"
+                               Stretch="None"
+                               Source="{Binding HomeMatchKitBytes,
+                                        Converter={StaticResource byteArrayToBitmapConverter}}"
+                               Width="44" />
+
+                        <Image Grid.Column="4"
+                               Grid.Row="0"
+                               Grid.RowSpan="7"
+                               Height="74"
+                               Stretch="None"
+                               Source="{Binding AwayMatchKitBytes,
+                                        Converter={StaticResource byteArrayToBitmapConverter}}"
+                               Width="44" />
+                        
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="1"
+                                   FontWeight="Medium"
+                                   Text="{x:Static globalization:Translations.TeamLabel}"/>
+
+                        <TextBlock Grid.Column="2"
+                                   Grid.Row="1"
+                                   Text="{Binding}" />
+
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="2"
+                                   FontWeight="Medium"
+                                   Text="{x:Static globalization:Translations.LeagueLabel}" />
+
+                        <StackPanel Grid.Column="2"
+                                    Grid.Row="2"
+                                    Orientation="Horizontal"
+                                    Spacing="5">
+
+                            <Image Height="12"
+                                   Stretch="None"
+                                   Source="{Binding League.FlagBytes,
+                                            Converter={StaticResource byteArrayToBitmapConverter}}"
+                                   Width="20" />
+
+                            <TextBlock Text="{Binding League}" />
+
+                        </StackPanel>
+
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="3"
+                                   FontWeight="Medium"
+                                   Text="{x:Static globalization:Translations.CountryLabel}" />
+
+                        <StackPanel Grid.Column="2"
+                                    Grid.Row="3"
+                                    Orientation="Horizontal"
+                                    Spacing="5">
+
+                            <Image Height="12"
+                                   Stretch="None"
+                                   Source="{Binding Country.FlagBytes,
+                                            Converter={StaticResource byteArrayToBitmapConverter}}"
+                                   Width="20" />
+
+                            <TextBlock Text="{Binding Country}" />
+
+                        </StackPanel>
+
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="4"
+                                   FontWeight="Medium"
+                                   Text="{x:Static globalization:Translations.RegionLabel}" />
+
+                        <TextBlock Grid.Column="2"
+                                   Grid.Row="4"
+                                   Text="{Binding Region}" />
+
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="5"
+                                   FontWeight="Medium"
+                                   Text="{x:Static globalization:Translations.SeriesLabel}" />
+
+                        <TextBlock Grid.Column="2"
+                                   Grid.Row="5"
+                                   Text="{Binding Series}" />
+                    </Grid>
+
+                </Button>
+
+            </DataTemplate>
+
+        </ItemsControl.ItemTemplate>
+
+    </ItemsControl>
 
 </UserControl>

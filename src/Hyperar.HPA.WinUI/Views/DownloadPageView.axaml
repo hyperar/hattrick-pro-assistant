@@ -11,7 +11,6 @@
 
     <UserControl.Resources>
 
-        <converters:DownloadTaskParameterArrayToStringConverter x:Key="downloadTaskParameterArrayToStringConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
 
     </UserControl.Resources>

@@ -18,18 +18,13 @@
         {
             try
             {
-                if (fileDownloadTask is IImageFileDownloadTask imageFileDownloadTask)
-                {
-                    return imageFileDownloadTask.Status switch
-                    {
-                        DownloadTaskStatus.NotStarted => this.imageFileDownloader,
-                        _ => throw new ArgumentOutOfRangeException(nameof(fileDownloadTask), fileDownloadTask.Status.ToString(), nameof(fileDownloadTask.Status))
-                    };
-                }
-                else
-                {
-                    throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-                }
+                return fileDownloadTask is IImageFileDownloadTask imageFileDownloadTask
+                     ? (IFileDownloadTaskStepProcessStrategy)(imageFileDownloadTask.Status switch
+                     {
+                         DownloadTaskStatus.NotStarted => this.imageFileDownloader,
+                         _ => throw new ArgumentOutOfRangeException(nameof(fileDownloadTask), fileDownloadTask.Status.ToString(), nameof(fileDownloadTask.Status))
+                     })
+                     : throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
             }
             catch
             {

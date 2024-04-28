@@ -128,7 +128,11 @@
             }
         }
 
-        private static void ReportProgress(List<IFileDownloadTask> tasks, IFileDownloadTask currentTask, bool isDownloading, IProgress<ProcessReport> progress)
+        private static void ReportProgress(
+            List<IFileDownloadTask> tasks,
+            IFileDownloadTask currentTask,
+            bool isDownloading,
+            IProgress<ProcessReport> progress)
         {
             int taskCount = tasks.Sum(x => x.Type == DownloadTaskType.ImageFile ? 1 : 4);
 

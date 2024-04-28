@@ -375,6 +375,9 @@
   <data name="SelectTeam" xml:space="preserve">
     <value>Select Team</value>
   </data>
+  <data name="SeriesLabel" xml:space="preserve">
+    <value>Series:</value>
+  </data>
   <data name="SetPieces" xml:space="preserve">
     <value>Set Pieces</value>
   </data>

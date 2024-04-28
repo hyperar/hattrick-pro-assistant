@@ -155,7 +155,8 @@
         {
             TeamSelectionViewModel viewModel = new TeamSelectionViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<ITeamSelector>());
+                services.GetRequiredService<ITeamSelector>(),
+                services.CreateScope().ServiceProvider.GetRequiredService<ITeamSelectionViewService>());
 
             await viewModel.InitializeAsync();
 

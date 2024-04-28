@@ -53,26 +53,21 @@
 
         public IFileDownloadTaskStepProcessStrategy GetPersister(IFileDownloadTask fileDownloadTask)
         {
-            if (fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask)
-            {
-                return xmlFileDownloadTask.XmlFileType switch
-                {
-                    XmlFileType.ArenaDetails => this.arenaDetailsPersister,
-                    XmlFileType.Avatars => this.avatarsPersister,
-                    XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersPersister,
-                    XmlFileType.ManagerCompendium => this.managerCompendiumPersister,
-                    XmlFileType.MatchDetails => this.matchDetailsPersister,
-                    XmlFileType.MatchLineUp => this.matchLineUpPersister,
-                    XmlFileType.Players => this.playersPersister,
-                    XmlFileType.TeamDetails => this.teamDetailsPersister,
-                    XmlFileType.WorldDetails => this.worldDetailsPersister,
-                    _ => this.defaultPersister
-                };
-            }
-            else
-            {
-                throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-            }
+            return fileDownloadTask is IXmlFileDownloadTask xmlFileDownloadTask
+                 ? (IFileDownloadTaskStepProcessStrategy)(xmlFileDownloadTask.XmlFileType switch
+                 {
+                     XmlFileType.ArenaDetails => this.arenaDetailsPersister,
+                     XmlFileType.Avatars => this.avatarsPersister,
+                     XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersPersister,
+                     XmlFileType.ManagerCompendium => this.managerCompendiumPersister,
+                     XmlFileType.MatchDetails => this.matchDetailsPersister,
+                     XmlFileType.MatchLineUp => this.matchLineUpPersister,
+                     XmlFileType.Players => this.playersPersister,
+                     XmlFileType.TeamDetails => this.teamDetailsPersister,
+                     XmlFileType.WorldDetails => this.worldDetailsPersister,
+                     _ => this.defaultPersister
+                 })
+                 : throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
         }
     }
 }

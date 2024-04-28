@@ -48,7 +48,7 @@
 
                 var matchTeam = await this.matchTeamRepository.Query(x => x.MatchHattrickId == file.MatchId
                                                                        && x.HattrickId == file.Team.TeamId)
-                                                              .SingleOrDefaultAsync();
+                                                              .SingleOrDefaultAsync(cancellationToken);
 
                 ArgumentNullException.ThrowIfNull(matchTeam, nameof(matchTeam));
 
