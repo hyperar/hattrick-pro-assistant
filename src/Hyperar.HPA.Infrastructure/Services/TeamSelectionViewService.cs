@@ -67,5 +67,18 @@
                                                 }
                                             }).ToArrayAsync();
         }
+
+        public async Task SetSelectedTeamAsync(long teamHattrickId)
+        {
+            var user = await this.userRepository.Query().SingleOrDefaultAsync();
+
+            ArgumentNullException.ThrowIfNull(user, nameof(user));
+
+            user.LastSelectedTeamHattrickId = teamHattrickId;
+
+            this.userRepository.Update(user);
+
+            await this.databaseContext.SaveAsync();
+        }
     }
 }

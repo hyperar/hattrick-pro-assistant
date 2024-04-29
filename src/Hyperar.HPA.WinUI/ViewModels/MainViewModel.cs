@@ -37,7 +37,7 @@
 
             this.MenuItems = new ObservableCollection<MenuItemTemplate>
             {
-                //new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, "HomeIcon"),
+                new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, "HomeIcon"),
                 //new MenuItemTemplate(Globalization.Translations.Players, ViewType.Players),
                 //new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches),
                 new MenuItemTemplate(Globalization.Translations.TeamSelection, ViewType.TeamSelection, "TeamSelectionIcon"),
@@ -76,7 +76,7 @@
             this.OnPropertyChanged(nameof(this.CanNavigate));
         }
 
-        partial void OnSelectedItemChanged(MenuItemTemplate? value)
+        private partial void OnSelectedItemChanged(MenuItemTemplate? value)
         {
             if (value is null)
             {

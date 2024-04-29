@@ -6,5 +6,7 @@
     public interface ITeamSelectionViewService
     {
         Task<Team[]> GetTeamsAsync();
+
+        Task SetSelectedTeamAsync(long teamHattrickId);
     }
 }

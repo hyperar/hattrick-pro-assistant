@@ -1,7 +1,6 @@
 ﻿namespace Hyperar.HPA.WinUI.ExtensionMethods.HostBuilder
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Application.Services;
     using Microsoft.Extensions.DependencyInjection;
@@ -106,11 +105,15 @@
                 {
                     viewType = ViewType.Download;
                 }
+                else if (user.LastSelectedTeamHattrickId == null)
+                {
+                    viewType = ViewType.TeamSelection;
+                }
                 else
                 {
-                    ArgumentNullException.ThrowIfNull(user.Manager, nameof(user.Manager));
+                    ArgumentNullException.ThrowIfNull(user.LastSelectedTeamHattrickId, nameof(user.LastSelectedTeamHattrickId));
 
-                    teamSelector.SetSelectedTeam(user.Manager.Teams.Single(x => x.IsPrimary).HattrickId);
+                    teamSelector.SetSelectedTeam(user.LastSelectedTeamHattrickId.Value);
 
                     viewType = ViewType.Home;
                 }

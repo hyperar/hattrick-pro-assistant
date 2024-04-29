@@ -7,6 +7,7 @@
     using Application.Models;
     using Application.Services;
     using Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
     using Shared.Enums;
     using Shared.Models.UI.Download;
 
@@ -18,14 +19,18 @@
 
         private readonly IFileDownloadTaskStepProcessAbstractFactory fileDownloadTaskStepProcessFactory;
 
+        private readonly IRepository<Domain.User> userRepository;
+
         public DownloadViewService(
             IDatabaseContext databaseContext,
             IFileDownloadTaskStepAdvancerFactory fileDownloadTaskStepAdvancerFactory,
-            IFileDownloadTaskStepProcessAbstractFactory fileDownloadTaskStepProcessFactory)
+            IFileDownloadTaskStepProcessAbstractFactory fileDownloadTaskStepProcessFactory,
+            IRepository<Domain.User> userRepository)
         {
             this.databaseContext = databaseContext;
             this.fileDownloadTaskStepAdvancerFactory = fileDownloadTaskStepAdvancerFactory;
             this.fileDownloadTaskStepProcessFactory = fileDownloadTaskStepProcessFactory;
+            this.userRepository = userRepository;
         }
 
         public async Task UpdateFromHattrickAsync(
@@ -95,6 +100,14 @@
                             .AdvanceTaskStatus(currentTask);
                     }
                 }
+
+                var user = await this.userRepository.Query().SingleOrDefaultAsync(cancellationToken);
+
+                ArgumentNullException.ThrowIfNull(user, nameof(user));
+
+                user.LastDownloadDate = DateTime.Now;
+
+                this.userRepository.Update(user);
             }
             catch (OperationCanceledException)
             {
