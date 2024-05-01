@@ -10,6 +10,8 @@
     using Application.Services;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
+    using Hyperar.HPA.WinUI.Enums;
+    using Hyperar.HPA.WinUI.ViewModels.Interface;
     using WinUI.State.Interface;
 
     public partial class AuthorizationViewModel : AsyncViewModelBase
@@ -50,15 +52,19 @@
 
         private int userId;
 
+        private readonly IViewModelFactory viewModelFactory;
+
         [ObservableProperty]
         private string? verificationCode;
 
         public AuthorizationViewModel(
             INavigator navigator,
+            IViewModelFactory viewModelFactory,
             IHattrickService hattrickService,
             IUserService userService) : base(navigator)
         {
             this.hattrickService = hattrickService;
+            this.viewModelFactory = viewModelFactory;
             this.userService = userService;
         }
 
@@ -96,8 +102,21 @@
             this.CanEnterVerificationCode = false;
             this.CanRevokeAccessToken = true;
 
-            // Allow navigation once it's authorized.
-            this.Navigator.ResumeNavigation();
+            var user = await this.userService.GetUserAsync();
+
+            if (user.LastDownloadDate == null)
+            {
+                this.Navigator.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(ViewType.Download);
+            }
+            else if (user.LastSelectedTeamHattrickId == null)
+            {
+                this.Navigator.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(ViewType.TeamSelection);
+            }
+            else
+            {
+                // If the user has downloaded and selected a team at least once, resume navigation.
+                this.Navigator.ResumeNavigation();
+            }
         }
 
         [RelayCommand]

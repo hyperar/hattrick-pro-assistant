@@ -2,11 +2,14 @@
 {
     using System;
     using CommunityToolkit.Mvvm.ComponentModel;
+    using Hyperar.HPA.WinUI.ViewModels;
     using WinUI.State.Interface;
 
     public class Navigator : ObservableObject, INavigator
     {
         private bool canNavigate;
+
+        private ViewModelBase? currentPage;
 
         public event Action? StateChanged;
 
@@ -19,6 +22,21 @@
             private set
             {
                 this.canNavigate = value;
+
+                this.StateChanged?.Invoke();
+            }
+        }
+
+        public ViewModelBase? CurrentPage
+        {
+            get
+            {
+                return this.currentPage;
+            }
+
+            set
+            {
+                this.currentPage = value;
 
                 this.StateChanged?.Invoke();
             }

@@ -6,12 +6,18 @@
     using Application.Services;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
+    using Hyperar.HPA.WinUI.Enums;
+    using Hyperar.HPA.WinUI.ViewModels.Interface;
     using Shared.Models.UI.Download;
     using WinUI.State.Interface;
 
     public partial class DownloadViewModel : AsyncViewModelBase
     {
         private readonly IDownloadViewService downloadViewService;
+
+        private readonly IUserService userService;
+
+        private readonly IViewModelFactory viewModelFactory;
 
         private CancellationTokenSource? cancellationTokenSource;
 
@@ -29,9 +35,13 @@
 
         public DownloadViewModel(
             INavigator navigator,
-            IDownloadViewService downloadViewService) : base(navigator)
+            IViewModelFactory viewModelFactory,
+            IDownloadViewService downloadViewService,
+            IUserService userService) : base(navigator)
         {
+            this.viewModelFactory = viewModelFactory;
             this.downloadViewService = downloadViewService;
+            this.userService = userService;
         }
 
         [RelayCommand]
@@ -66,7 +76,21 @@
 
             this.cancellationTokenSource = null;
 
-            this.Navigator.ResumeNavigation();
+            var user = await this.userService.GetUserAsync();
+
+            if (user.LastDownloadDate == null)
+            {
+                return;
+            }
+
+            if (user.LastSelectedTeamHattrickId == null)
+            {
+                this.Navigator.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(ViewType.TeamSelection);
+            }
+            else
+            {
+                this.Navigator.ResumeNavigation();
+            }
         }
     }
 }

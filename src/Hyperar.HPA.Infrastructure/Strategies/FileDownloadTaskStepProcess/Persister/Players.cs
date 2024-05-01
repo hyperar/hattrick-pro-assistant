@@ -48,14 +48,14 @@
                 var playerIdsToDelete = await this.playerRepository.Query(x => !xmlPlayerIds.Contains(x.HattrickId)
                                                                             && x.TeamHattrickId == file.Team.TeamId)
                                                                    .Select(x => x.HattrickId)
-                                                                   .ToListAsync();
+                                                                   .ToListAsync(cancellationToken);
 
                 // Delete former players.
                 if (playerIdsToDelete.Count > 0)
                 {
                     var playerSkillSetIdsToDelete = await this.playerSkillSetRepository.Query(x => playerIdsToDelete.Contains(x.PlayerHattrickId))
-                                                                               .Select(x => x.Id)
-                                                                               .ToListAsync();
+                                                                                       .Select(x => x.Id)
+                                                                                       .ToListAsync(cancellationToken);
 
                     await this.playerSkillSetRepository.DeleteRangeAsync(playerSkillSetIdsToDelete);
                     await this.playerRepository.DeleteRangeAsync(playerIdsToDelete);

@@ -16,9 +16,6 @@
     public partial class MainViewModel : ViewModelBase, IDisposable
     {
         [ObservableProperty]
-        private ViewModelBase? currentPage;
-
-        [ObservableProperty]
         private bool isMenuOpen;
 
         [ObservableProperty]
@@ -47,7 +44,7 @@
                 //new MenuItemTemplate(Globalization.Translations.About, ViewType.About, "AboutIcon")
             };
 
-            this.UpdateCurrentPageCommand = new UpdateCurrentPageCommand(navigator, this, viewModelFactory);
+            this.UpdateCurrentPageCommand = new UpdateCurrentPageCommand(navigator, viewModelFactory);
 
             this.SelectedItem = this.MenuItems.Single(x => x.ViewType == viewType);
         }
@@ -57,6 +54,14 @@
             get
             {
                 return this.Navigator.CanNavigate;
+            }
+        }
+
+        public ViewModelBase? CurrentPage
+        {
+            get
+            {
+                return this.Navigator.CurrentPage;
             }
         }
 
@@ -74,9 +79,10 @@
         private void Navigator_StateChanged()
         {
             this.OnPropertyChanged(nameof(this.CanNavigate));
+            this.OnPropertyChanged(nameof(this.CurrentPage));
         }
 
-        private partial void OnSelectedItemChanged(MenuItemTemplate? value)
+        partial void OnSelectedItemChanged(MenuItemTemplate? value)
         {
             if (value is null)
             {
