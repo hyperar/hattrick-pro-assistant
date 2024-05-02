@@ -32,12 +32,12 @@
         {
             this.Teams = new List<Team>(await this.teamSelectionViewService.GetTeamsAsync());
 
-            await base.InitializeAsync();
-
-            if (this.teamSelector.SelectedTeamId == 0)
+            if (this.teamSelector.SelectedTeamId != 0)
             {
-                this.Navigator.SuspendNavigation();
+                this.Navigator.ResumeNavigation();
             }
+
+            await base.InitializeAsync();
         }
 
         [RelayCommand]

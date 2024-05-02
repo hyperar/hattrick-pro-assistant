@@ -1283,7 +1283,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasColumnOrder(5);
 
-                    b.Property<long>("TeamId")
+                    b.Property<long>("TeamHattrickId")
                         .HasColumnType("bigint");
 
                     b.Property<byte>("Type")
@@ -1296,7 +1296,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .IsUnique()
                         .HasFilter("[HallOfFamePlayerHattrickId] IS NOT NULL");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("TeamHattrickId");
 
                     b.ToTable("StaffMember", "senior");
                 });
@@ -1809,7 +1809,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
                         .WithMany("StaffMembers")
-                        .HasForeignKey("TeamId")
+                        .HasForeignKey("TeamHattrickId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_StaffMember_Team");

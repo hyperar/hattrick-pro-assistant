@@ -51,7 +51,7 @@
 
             builder.HasOne(m => m.Team)
                 .WithMany(m => m.StaffMembers)
-                .HasForeignKey(m => m.TeamId)
+                .HasForeignKey(m => m.TeamHattrickId)
                 .HasConstraintName("FK_StaffMember_Team")
                 .OnDelete(DeleteBehavior.NoAction);
         }

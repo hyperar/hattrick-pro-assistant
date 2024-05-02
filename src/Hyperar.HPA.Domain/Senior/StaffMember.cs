@@ -31,7 +31,7 @@
 
         public virtual Team Team { get; set; }
 
-        public long TeamId { get; set; }
+        public long TeamHattrickId { get; set; }
 
         public StaffType Type { get; set; }
 

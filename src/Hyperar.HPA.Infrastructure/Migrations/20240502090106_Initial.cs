@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,103 +8,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
     /// <inheritdoc />
     public partial class Initial : Migration
     {
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "LeagueCup");
-
-            migrationBuilder.DropTable(
-                name: "MatchArena",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchEvent",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchOfficial",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamBooking",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamGoal",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamInjury",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpPlayer",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpStartingPlayer",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpSubstitution",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "PlayerSkillSet",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "StaffMember",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "TeamArena",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Token");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUp",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Player",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "HallOfFamePlayer",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeam",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Match",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Team",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Manager");
-
-            migrationBuilder.DropTable(
-                name: "Region");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
-                name: "League");
-        }
-
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -479,7 +383,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     Salary = table.Column<long>(type: "bigint", nullable: false),
                     AvatarBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     HallOfFamePlayerHattrickId = table.Column<long>(type: "bigint", nullable: true),
-                    TeamId = table.Column<long>(type: "bigint", nullable: false)
+                    TeamHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -492,7 +396,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         principalColumn: "HattrickId");
                     table.ForeignKey(
                         name: "FK_StaffMember_Team",
-                        column: x => x.TeamId,
+                        column: x => x.TeamHattrickId,
                         principalSchema: "senior",
                         principalTable: "Team",
                         principalColumn: "HattrickId");
@@ -988,10 +892,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 filter: "[HallOfFamePlayerHattrickId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StaffMember_TeamId",
+                name: "IX_StaffMember_TeamHattrickId",
                 schema: "senior",
                 table: "StaffMember",
-                column: "TeamId");
+                column: "TeamHattrickId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Team_LeagueHattrickId",
@@ -1023,6 +927,103 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 table: "Token",
                 column: "UserId",
                 unique: true);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "LeagueCup");
+
+            migrationBuilder.DropTable(
+                name: "MatchArena",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchEvent",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchOfficial",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamBooking",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamGoal",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamInjury",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpPlayer",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpStartingPlayer",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpSubstitution",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "PlayerSkillSet",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "StaffMember",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "TeamArena",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Token");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUp",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Player",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "HallOfFamePlayer",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeam",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Match",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Team",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Manager");
+
+            migrationBuilder.DropTable(
+                name: "Region");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Country");
+
+            migrationBuilder.DropTable(
+                name: "League");
         }
     }
 }
