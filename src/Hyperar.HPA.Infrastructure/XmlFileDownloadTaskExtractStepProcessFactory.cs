@@ -17,6 +17,8 @@
 
         private readonly ManagerCompendium managerCompendiumExtractor;
 
+        private readonly MatchArchive matchArchiveExtractor;
+
         private readonly Matches matchesExtractor;
 
         private readonly StaffAvatars staffAvatarsExtractor;
@@ -31,6 +33,7 @@
             CheckToken checkTokenExtractor,
             Default defaultExtractor,
             ManagerCompendium managerCompendiumExtractor,
+            MatchArchive matchArchiveExtractor,
             Matches matchesExtractor,
             StaffAvatars staffAvatarsExtractor,
             TeamDetails teamDetailsExtractor,
@@ -41,6 +44,7 @@
             this.checkTokenExtractor = checkTokenExtractor;
             this.defaultExtractor = defaultExtractor;
             this.managerCompendiumExtractor = managerCompendiumExtractor;
+            this.matchArchiveExtractor = matchArchiveExtractor;
             this.matchesExtractor = matchesExtractor;
             this.staffAvatarsExtractor = staffAvatarsExtractor;
             this.teamDetailsExtractor = teamDetailsExtractor;
@@ -56,6 +60,7 @@
                      XmlFileType.Avatars => this.avatarsExtractor,
                      XmlFileType.CheckToken => this.checkTokenExtractor,
                      XmlFileType.ManagerCompendium => this.managerCompendiumExtractor,
+                     XmlFileType.MatchArchive => this.matchArchiveExtractor,
                      XmlFileType.Matches => this.matchesExtractor,
                      XmlFileType.StaffAvatars => this.staffAvatarsExtractor,
                      XmlFileType.TeamDetails => this.teamDetailsExtractor,

@@ -9,15 +9,23 @@
 
     internal class EnumToImageConverter : IValueConverter
     {
-        private const string MissingIconKey = "MissingIcon";
         private const string CardIconKey = "CardIcon";
-        private const string TechnicalIconKey = "TechnicalIcon";
-        private const string QuickIconKey = "QuickIcon";
-        private const string PowerfulIconKey = "PowerfulIcon";
-        private const string UnpredictableIconKey = "UnpredictableIcon";
+
         private const string HeadSpecialistIconKey = "HeadSpecialistIcon";
+
+        private const string MissingIconKey = "MissingIcon";
+
+        private const string PowerfulIconKey = "PowerfulIcon";
+
+        private const string QuickIconKey = "QuickIcon";
+
         private const string ResilientIconKey = "ResilientIcon";
+
         private const string SupportIconKey = "SupportIcon";
+
+        private const string TechnicalIconKey = "TechnicalIcon";
+
+        private const string UnpredictableIconKey = "UnpredictableIcon";
 
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
@@ -37,7 +45,6 @@
                         _ => Application.Current?.FindResource(CardIconKey) ?? Application.Current?.FindResource(MissingIconKey)
                     };
                 }
-
             }
             else if (value is Specialty specialty)
             {

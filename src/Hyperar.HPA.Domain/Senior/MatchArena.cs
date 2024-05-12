@@ -36,6 +36,7 @@
             {
                 Attendance = xmlArena.SoldTotal,
                 BasicSeatsSold = xmlArena.SoldBasic,
+                HattrickId = xmlArena.ArenaId,
                 Match = match,
                 Name = xmlArena.ArenaName,
                 RoofSeatsSold = xmlArena.SoldRoof,

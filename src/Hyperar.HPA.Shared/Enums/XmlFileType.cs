@@ -18,16 +18,18 @@
 
         Matches = 8,
 
-        MatchLineUp = 9,
+        MatchArchive = 9,
 
-        Players = 10,
+        MatchLineUp = 10,
 
-        StaffAvatars = 11,
+        Players = 11,
 
-        StaffList = 12,
+        StaffAvatars = 12,
 
-        TeamDetails = 13,
+        StaffList = 13,
 
-        WorldDetails = 14
+        TeamDetails = 14,
+
+        WorldDetails = 15
     }
 }

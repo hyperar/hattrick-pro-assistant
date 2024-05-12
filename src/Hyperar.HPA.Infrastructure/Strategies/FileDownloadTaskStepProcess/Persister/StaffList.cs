@@ -13,7 +13,9 @@
         private readonly IDatabaseContext databaseContext;
 
         private readonly IHattrickRepository<Domain.Senior.HallOfFamePlayer> hallOfFameRepository;
+
         private readonly IHattrickRepository<Domain.Senior.StaffMember> staffMemberRepository;
+
         private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         public StaffList(

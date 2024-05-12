@@ -17,9 +17,9 @@
 
         public long HattrickId { get; set; }
 
-        public string UserName { get; set; }
-
         public SupporterTier SupporterTier { get; set; }
+
+        public string UserName { get; set; }
 
         public override string ToString()
         {

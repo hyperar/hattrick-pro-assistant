@@ -239,9 +239,24 @@
                                                       Converter={StaticResource enumToTranslatedStringConverter}}"
                                             Header="{x:Static globalization:Translations.Type}"/>
                         <DataGridTextColumn Binding="{Binding HomeTeam.Name}"
-                                            Header="{x:Static globalization:Translations.HomeTeam}"/>
+                                            Header="{x:Static globalization:Translations.HomeTeam}" />
+                        <DataGridTemplateColumn>
+
+                            <DataTemplate>
+
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+
+                                    <TextBlock Text="-" />
+
+                                </StackPanel>
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Binding="{Binding AwayTeam.Name}"
-                                            Header="{x:Static globalization:Translations.AwayTeam}"/>
+                                            Header="{x:Static globalization:Translations.AwayTeam}" />
 
                     </DataGrid.Columns>
 
@@ -316,7 +331,6 @@
                           CanUserReorderColumns="False"
                           CanUserResizeColumns="True"
                           CanUserSortColumns="False"
-                          HeadersVisibility="None"
                           IsReadOnly="True"
                           IsScrollInertiaEnabled="True"
                           ItemsSource="{Binding Team.Players, Mode=OneWay}"
@@ -326,10 +340,10 @@
                     <DataGrid.Columns>
 
                         <DataGridTextColumn Binding="{Binding ShirtNumber}"
-                                            Width="auto" />
+                                            Header="#" />
                         <DataGridTextColumn Binding="{Binding}"
-                                            Width="auto"/>
-                        <DataGridTemplateColumn Width="auto">
+                                            Header="{x:Static globalization:Translations.Name}" />
+                        <DataGridTemplateColumn>
 
                             <DataTemplate>
 
@@ -343,7 +357,7 @@
 
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn>
 
                             <DataTemplate>
 
@@ -358,7 +372,7 @@
 
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn>
 
                             <DataTemplate>
 
@@ -387,7 +401,7 @@
 
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn>
 
                             <DataTemplate>
 
@@ -401,7 +415,7 @@
 
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn>
 
                             <DataTemplate>
 

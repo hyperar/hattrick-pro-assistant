@@ -8,9 +8,11 @@
 
     internal class HealthStatusToImageConverter : IValueConverter
     {
-        private const string MissingIconKey = "MissingIcon";
         private const string BruisedIconKey = "BruisedIcon";
+
         private const string InjuredIconKey = "InjuredIcon";
+
+        private const string MissingIconKey = "MissingIcon";
 
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

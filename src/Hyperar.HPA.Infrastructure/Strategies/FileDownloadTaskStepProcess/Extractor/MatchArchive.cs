@@ -10,22 +10,22 @@
     using Domain.Interfaces;
     using Shared.Enums;
     using Shared.ExtensionMethods;
-    using Shared.Models.Hattrick.Matches;
+    using Shared.Models.Hattrick.MatchArchive;
     using Shared.Models.UI.Download;
 
-    public class Matches : IFileDownloadTaskStepProcessStrategy
+    public class MatchArchive : IFileDownloadTaskStepProcessStrategy
     {
-        private const string matchEventsParamKey = "matchEvents";
+        private const string MatchEventsParamKey = "matchEvents";
 
-        private const string matchIdParamKey = "matchId";
+        private const string MatchIdParamKey = "matchId";
 
-        private const string sourceSystemParamKey = "sourceSystem";
+        private const string SourceSystemParamKey = "sourceSystem";
 
-        private const string teamIdParamKey = "teamId";
+        private const string TeamIdParamKey = "teamId";
 
         private readonly IHattrickRepository<Domain.Senior.Match> matchRepository;
 
-        public Matches(IHattrickRepository<Domain.Senior.Match> matchRepository)
+        public MatchArchive(IHattrickRepository<Domain.Senior.Match> matchRepository)
         {
             this.matchRepository = matchRepository;
         }
@@ -74,13 +74,13 @@
                                         file.Team.TeamId,
                                         new NameValueCollection
                                         {
-                                            { matchIdParamKey, curMatch.MatchId.ToString() },
-                                            { matchEventsParamKey, bool.TrueString},
-                                            { sourceSystemParamKey, curMatch.SourceSystem.ToString() }
+                                            { MatchIdParamKey, curMatch.MatchId.ToString() },
+                                            { MatchEventsParamKey, bool.TrueString},
+                                            { SourceSystemParamKey, curMatch.SourceSystem.ToString() }
                                         }));
                             }
 
-                            if (curMatch.Status.ToMatchStatus() == MatchStatus.Finished && match == null)
+                            if (match == null)
                             {
                                 fileDownloadTasks.Add(
                                     new XmlFileDownloadTask(
@@ -88,9 +88,9 @@
                                         curMatch.MatchContextId,
                                         new NameValueCollection
                                         {
-                                            { matchIdParamKey, curMatch.MatchId.ToString() },
-                                            { teamIdParamKey, curMatch.HomeTeam.HomeTeamId.ToString() },
-                                            { sourceSystemParamKey, curMatch.SourceSystem }
+                                            { MatchIdParamKey, curMatch.MatchId.ToString() },
+                                            { TeamIdParamKey, curMatch.HomeTeam.HomeTeamId.ToString() },
+                                            { SourceSystemParamKey, curMatch.SourceSystem }
                                         }));
 
                                 fileDownloadTasks.Add(
@@ -99,9 +99,9 @@
                                         xmlFileDownloadTask.ContextId,
                                         new NameValueCollection
                                         {
-                                            { matchIdParamKey, curMatch.MatchId.ToString() },
-                                            { teamIdParamKey, curMatch.AwayTeam.AwayTeamId.ToString() },
-                                            { sourceSystemParamKey, curMatch.SourceSystem }
+                                            { MatchIdParamKey, curMatch.MatchId.ToString() },
+                                            { TeamIdParamKey, curMatch.AwayTeam.AwayTeamId.ToString() },
+                                            { SourceSystemParamKey, curMatch.SourceSystem }
                                         }));
                             }
                         }

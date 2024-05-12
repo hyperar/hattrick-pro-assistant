@@ -17,6 +17,7 @@
                 XmlFileName.CheckToken => new Shared.Models.Hattrick.CheckToken.HattrickData(fileName),
                 XmlFileName.HallOfFamePlayers => new Shared.Models.Hattrick.HallOfFamePlayers.HattrickData(fileName),
                 XmlFileName.ManagerCompendium => new Shared.Models.Hattrick.ManagerCompendium.HattrickData(fileName),
+                XmlFileName.MatchArchive => new Shared.Models.Hattrick.MatchArchive.HattrickData(fileName),
                 XmlFileName.MatchDetails => new Shared.Models.Hattrick.MatchDetails.HattrickData(fileName),
                 XmlFileName.Matches => new Shared.Models.Hattrick.Matches.HattrickData(fileName),
                 XmlFileName.MatchLineUp => new Shared.Models.Hattrick.MatchLineUp.HattrickData(fileName),

@@ -78,6 +78,13 @@
             return GetBytesFromImage(avatarImage);
         }
 
+        private static async Task<Bitmap> CreateAvatarImageAsync(string url)
+        {
+            return GetImageFromBytes(
+                await GetImageBytesFromCacheAsync(
+                    url));
+        }
+
         private static byte[] GetBytesFromImage(Image image)
         {
             using (MemoryStream memoryStream = new MemoryStream())
@@ -98,13 +105,6 @@
 
                 return bitmap;
             }
-        }
-
-        private static async Task<Bitmap> CreateAvatarImageAsync(string url)
-        {
-            return GetImageFromBytes(
-                await GetImageBytesFromCacheAsync(
-                    url));
         }
     }
 }

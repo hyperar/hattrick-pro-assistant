@@ -12,6 +12,8 @@
 
         public const string ManagerCompendium = "managercompendium.xml";
 
+        public const string MatchArchive = "matchesArchive.xml";
+
         public const string MatchDetails = "matchdetails.xml";
 
         public const string Matches = "matches.xml";

@@ -35,6 +35,7 @@
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.CheckToken>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.Default>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.ManagerCompendium>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.MatchArchive>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.Matches>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.StaffAvatars>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.TeamDetails>();
@@ -46,6 +47,7 @@
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.CheckToken>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.HallOfFamePlayers>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.ManagerCompendium>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.MatchArchive>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.MatchDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.Matches>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.MatchLineUp>();

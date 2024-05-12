@@ -16,6 +16,8 @@
 
         private readonly ManagerCompendium managerCompendiumParser;
 
+        private readonly MatchArchive matchArchiveParser;
+
         private readonly MatchDetails matchDetailsParser;
 
         private readonly Matches matchesParser;
@@ -38,6 +40,7 @@
             CheckToken checkTokenParser,
             HallOfFamePlayers hallOfFamePlayersParser,
             ManagerCompendium managerCompendiumParser,
+            MatchArchive matchArchiveParser,
             MatchDetails matchDetailsParser,
             Matches matchesParser,
             MatchLineUp matchLineUpParser,
@@ -52,6 +55,7 @@
             this.checkTokenParser = checkTokenParser;
             this.hallOfFamePlayersParser = hallOfFamePlayersParser;
             this.managerCompendiumParser = managerCompendiumParser;
+            this.matchArchiveParser = matchArchiveParser;
             this.matchDetailsParser = matchDetailsParser;
             this.matchesParser = matchesParser;
             this.matchLineUpParser = matchLineUpParser;
@@ -72,6 +76,7 @@
                      XmlFileType.CheckToken => this.checkTokenParser,
                      XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersParser,
                      XmlFileType.ManagerCompendium => this.managerCompendiumParser,
+                     XmlFileType.MatchArchive => this.matchArchiveParser,
                      XmlFileType.MatchDetails => this.matchDetailsParser,
                      XmlFileType.Matches => this.matchesParser,
                      XmlFileType.MatchLineUp => this.matchLineUpParser,

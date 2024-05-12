@@ -15,6 +15,16 @@
 
     public partial class MainViewModel : ViewModelBase, IDisposable
     {
+        private const string AuthorizationIconKey = "AuthorizationIcon";
+
+        private const string DownloadIconKey = "DownloadIcon";
+
+        private const string HomeIconKey = "HomeIcon";
+
+        private const string PlayersIconKey = "PlayersIcon";
+
+        private const string TeamSelection = "TeamSelectionIcon";
+
         [ObservableProperty]
         private bool isMenuOpen;
 
@@ -34,13 +44,13 @@
 
             this.MenuItems = new ObservableCollection<MenuItemTemplate>
             {
-                new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, "HomeIcon"),
-                //new MenuItemTemplate(Globalization.Translations.Players, ViewType.Players),
+                new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, HomeIconKey),
+                new MenuItemTemplate(Globalization.Translations.Players, ViewType.Players,PlayersIconKey),
                 //new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches),
-                new MenuItemTemplate(Globalization.Translations.TeamSelection, ViewType.TeamSelection, "TeamSelectionIcon"),
-                new MenuItemTemplate(Globalization.Translations.Download, ViewType.Download, "DownloadIcon"),
+                new MenuItemTemplate(Globalization.Translations.TeamSelection, ViewType.TeamSelection, TeamSelection),
+                new MenuItemTemplate(Globalization.Translations.Download, ViewType.Download, DownloadIconKey),
                 //new MenuItemTemplate(Globalization.Translations.Settings, ViewType.Settings, "SettingsIcon"),
-                new MenuItemTemplate(Globalization.Translations.Authorization, ViewType.Authorization, "AuthorizationIcon"),
+                new MenuItemTemplate(Globalization.Translations.Authorization, ViewType.Authorization, AuthorizationIconKey),
                 //new MenuItemTemplate(Globalization.Translations.About, ViewType.About, "AboutIcon")
             };
 

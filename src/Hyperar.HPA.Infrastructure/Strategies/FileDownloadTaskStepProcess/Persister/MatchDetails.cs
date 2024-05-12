@@ -80,9 +80,21 @@
 
                 if (file.Match.MatchOfficials != null)
                 {
-                    await this.ProcessMatchOfficialAsync(file.Match.MatchOfficials.Referee, match);
-                    await this.ProcessMatchOfficialAsync(file.Match.MatchOfficials.RefereeAssistant1, match);
-                    await this.ProcessMatchOfficialAsync(file.Match.MatchOfficials.RefereeAssistant2, match);
+                    // Some matches are broken and don't have all match officials.
+                    if (file.Match.MatchOfficials.Referee.RefereeId > 0)
+                    {
+                        await this.ProcessMatchOfficialAsync(file.Match.MatchOfficials.Referee, match);
+                    }
+
+                    if (file.Match.MatchOfficials.RefereeAssistant1.RefereeId > 0)
+                    {
+                        await this.ProcessMatchOfficialAsync(file.Match.MatchOfficials.RefereeAssistant1, match);
+                    }
+
+                    if (file.Match.MatchOfficials.RefereeAssistant2.RefereeId > 0)
+                    {
+                        await this.ProcessMatchOfficialAsync(file.Match.MatchOfficials.RefereeAssistant2, match);
+                    }
                 }
 
                 var homeTeam = await this.ProcessMatchTeamAsync(

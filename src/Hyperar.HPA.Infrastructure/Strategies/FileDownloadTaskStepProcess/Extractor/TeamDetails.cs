@@ -13,9 +13,17 @@
 
     public class TeamDetails : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
-        private const string arenaIdParamKey = "arenaId";
+        private const string ArenaIdParamKey = "arenaId";
 
-        private const string teamIdParamKey = "teamId";
+        private const string TeamIdParamKey = "teamId";
+
+        private const string IsYouthParamKey = "isYouth";
+
+        private const string FirstMatchDateParamKey = "firstMatchDate";
+
+        private const string LastMatchDateParamKey = "lastMatchDate";
+
+        private const string IncludeHTOParamKey = "includeHTO";
 
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
@@ -42,7 +50,7 @@
                                     curTeam.TeamId,
                                     new NameValueCollection
                                     {
-                                        { arenaIdParamKey, curTeam.Arena.Id.ToString() }
+                                        { ArenaIdParamKey, curTeam.Arena.Id.ToString() }
                                     }));
 
                             if (!string.IsNullOrWhiteSpace(curTeam.LogoUrl))
@@ -71,19 +79,37 @@
 
                             if (downloadSettings.DownloadFullMatchArchive)
                             {
-                                throw new NotImplementedException(nameof(downloadSettings.DownloadFullMatchArchive));
+                                DateTime startDate = curTeam.FoundedDate;
+                                DateTime endDate = startDate.AddDays(7);
+
+                                while (startDate <= DateTime.Today)
+                                {
+                                    fileDownloadTasks.Add(
+                                        new XmlFileDownloadTask(
+                                            XmlFileType.MatchArchive,
+                                            curTeam.TeamId,
+                                            new NameValueCollection
+                                            {
+                                                { TeamIdParamKey, curTeam.TeamId.ToString() },
+                                                { IsYouthParamKey, bool.FalseString },
+                                                { FirstMatchDateParamKey, startDate.ToString("yyyy-MM-dd") },
+                                                { LastMatchDateParamKey, endDate.ToString("yyyy-MM-dd") },
+                                                { IncludeHTOParamKey, downloadSettings.DownloadHattrickArenaMatches.ToString() }
+                                            }));
+
+                                    startDate = endDate;
+                                    endDate = endDate.AddDays(7);
+                                }
                             }
-                            else
-                            {
-                                fileDownloadTasks.Add(
-                                    new XmlFileDownloadTask(
-                                        XmlFileType.Matches,
-                                        curTeam.TeamId,
-                                        new NameValueCollection
-                                        {
-                                            { teamIdParamKey, curTeam.TeamId.ToString() }
-                                        }));
-                            }
+
+                            fileDownloadTasks.Add(
+                                new XmlFileDownloadTask(
+                                    XmlFileType.Matches,
+                                    curTeam.TeamId,
+                                    new NameValueCollection
+                                    {
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
+                                    }));
 
                             fileDownloadTasks.Add(
                                 new XmlFileDownloadTask(
@@ -91,7 +117,7 @@
                                     curTeam.TeamId,
                                     new NameValueCollection
                                     {
-                                        { teamIdParamKey, curTeam.TeamId.ToString() }
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
                                     }));
 
                             fileDownloadTasks.Add(
@@ -100,7 +126,7 @@
                                     curTeam.TeamId,
                                     new NameValueCollection
                                     {
-                                        { teamIdParamKey, curTeam.TeamId.ToString() }
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
                                     }));
 
                             fileDownloadTasks.Add(
@@ -109,7 +135,7 @@
                                     curTeam.TeamId,
                                     new NameValueCollection
                                     {
-                                        { teamIdParamKey, curTeam.TeamId.ToString() },
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() },
                                     }));
 
                             fileDownloadTasks.Add(
@@ -118,7 +144,7 @@
                                     curTeam.TeamId,
                                     new NameValueCollection
                                     {
-                                        { teamIdParamKey, curTeam.TeamId.ToString() },
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() },
                                     }));
 
                             fileDownloadTasks.Add(
@@ -127,7 +153,7 @@
                                     curTeam.TeamId,
                                     new NameValueCollection
                                     {
-                                        { teamIdParamKey, curTeam.TeamId.ToString() },
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() },
                                     }));
                         }
                     }

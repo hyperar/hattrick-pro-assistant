@@ -14,8 +14,6 @@
             this.Series = new Series();
         }
 
-        public bool IsSelected { get; set; }
-
         public byte[] AwayMatchKitBytes { get; set; }
 
         public Country Country { get; set; }
@@ -23,6 +21,8 @@
         public long HattrickId { get; set; }
 
         public byte[] HomeMatchKitBytes { get; set; }
+
+        public bool IsSelected { get; set; }
 
         public League League { get; set; }
 

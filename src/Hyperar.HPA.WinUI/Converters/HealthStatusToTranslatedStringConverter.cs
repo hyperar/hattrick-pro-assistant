@@ -12,7 +12,7 @@
             {
                 return healthStatus switch
                 {
-                    -1 => string.Empty,
+                    -1 => null,
                     0 => Globalization.Translations.BruisedTooltip,
                     _ => string.Format(Globalization.Translations.InjuredTooltip, healthStatus)
                 };

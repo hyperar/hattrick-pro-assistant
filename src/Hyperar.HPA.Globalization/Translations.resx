@@ -235,7 +235,7 @@
     <value>Download</value>
   </data>
   <data name="DownloadHattrickArenaMatchesOffContent" xml:space="preserve">
-    <value>Skip Hattrick Arena matches</value>
+    <value>Skip Hattrick Arena matches.</value>
   </data>
   <data name="DownloadHattrickArenaMatchesOnContent" xml:space="preserve">
     <value>Download all matches.</value>
@@ -244,7 +244,7 @@
     <value>Download current matches.</value>
   </data>
   <data name="DownloadMatchArchiveOnContent" xml:space="preserve">
-    <value>Download full teams' full match history.</value>
+    <value>Download full match history.</value>
   </data>
   <data name="DownloadTaskStatus_Canceled" xml:space="preserve">
     <value>Canceled</value>
@@ -644,6 +644,9 @@ Found: '{1}'.</value>
   </data>
   <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
     <value>Manager Compendium</value>
+  </data>
+  <data name="XmlFileType_MatchArchive" xml:space="preserve">
+    <value>Match Archive</value>
   </data>
   <data name="XmlFileType_MatchDetails" xml:space="preserve">
     <value>Match Details</value>

@@ -412,7 +412,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Skip Hattrick Arena matches.
+        ///   Looks up a localized string similar to Skip Hattrick Arena matches..
         /// </summary>
         public static string DownloadHattrickArenaMatchesOffContent {
             get {
@@ -439,7 +439,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download full teams&apos; full match history..
+        ///   Looks up a localized string similar to Download full match history..
         /// </summary>
         public static string DownloadMatchArchiveOnContent {
             get {
@@ -1635,6 +1635,15 @@ namespace Hyperar.HPA.Globalization {
         public static string XmlFileType_ManagerCompendium {
             get {
                 return ResourceManager.GetString("XmlFileType_ManagerCompendium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match Archive.
+        /// </summary>
+        public static string XmlFileType_MatchArchive {
+            get {
+                return ResourceManager.GetString("XmlFileType_MatchArchive", resourceCulture);
             }
         }
         

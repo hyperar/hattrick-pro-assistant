@@ -10,8 +10,6 @@
             this.LastName = string.Empty;
         }
 
-        public byte? ShirtNumber { get; set; }
-
         public BookingStatus BookingStatus { get; set; }
 
         public string FirstName { get; set; }
@@ -27,6 +25,8 @@
         public string LastName { get; set; }
 
         public string? NickName { get; set; }
+
+        public byte? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 

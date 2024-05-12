@@ -20,6 +20,8 @@
 
         private readonly IUserService userService;
 
+        private readonly IViewModelFactory viewModelFactory;
+
         [ObservableProperty]
         private string? accessToken;
 
@@ -51,8 +53,6 @@
         private string? requestTokenSecret;
 
         private int userId;
-
-        private readonly IViewModelFactory viewModelFactory;
 
         [ObservableProperty]
         private string? verificationCode;
