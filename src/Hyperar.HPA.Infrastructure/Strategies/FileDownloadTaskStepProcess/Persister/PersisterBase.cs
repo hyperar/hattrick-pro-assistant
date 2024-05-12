@@ -59,7 +59,7 @@
                 backgroundImage.Width,
                 backgroundImage.Height);
 
-            for (int i = 1; i < avatar.Layers.Count; i++)
+            for (int i = 0; i < avatar.Layers.Count; i++)
             {
                 var layer = avatar.Layers[i];
 

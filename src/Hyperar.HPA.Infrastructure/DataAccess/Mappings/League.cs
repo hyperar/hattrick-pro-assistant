@@ -112,8 +112,7 @@
 
             builder.Property(p => p.NextCupMatchDate)
                 .HasColumnOrder(19)
-                .HasColumnType(Constants.ColumnType.DateTime)
-                .IsRequired();
+                .HasColumnType(Constants.ColumnType.DateTime);
 
             builder.Property(p => p.NextSeriesMatchDate)
                 .HasColumnOrder(20)

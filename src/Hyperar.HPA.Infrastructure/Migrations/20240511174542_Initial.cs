@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -37,7 +36,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     NumberOfLevels = table.Column<byte>(type: "tinyint", nullable: false),
                     NextTrainingUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
                     NextEconomyUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    NextCupMatchDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    NextCupMatchDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     NextSeriesMatchDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     FlagBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
@@ -495,6 +494,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HattrickId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Location = table.Column<byte>(type: "tinyint", nullable: false),
                     MatchKitUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     MatchKitBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Formation = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),

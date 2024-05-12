@@ -15,6 +15,7 @@
 
         <converters:ByteArrayToBitmapConverter x:Key="byteArrayToBitmapConverter" />
         <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/NoTeamLogo.png" x:Key="noTeamLogo" />
+
     </UserControl.Resources>
 
     <ItemsControl ItemsSource="{Binding Teams}">
@@ -23,9 +24,11 @@
 
             <ItemsPanelTemplate>
 
-                <StackPanel Orientation="Vertical"
+                <StackPanel Orientation="Horizontal"
                             Spacing="10" />
+
             </ItemsPanelTemplate>
+
         </ItemsControl.ItemsPanel>
 
         <ItemsControl.ItemTemplate>
@@ -34,106 +37,105 @@
 
                 <Button Command="{Binding $parent[ItemsControl].((vm:TeamSelectionViewModel)DataContext).SelectTeamCommand}"
                         CommandParameter="{Binding HattrickId}"
-                        IsEnabled="{Binding !IsSelected}">
+                        IsEnabled="{Binding !IsSelected}"
+                        Width="350">
 
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Spacing="10"
-                                VerticalAlignment="Center">
+                    <Grid ColumnDefinitions="Auto,*"
+                          RowDefinitions="130,20,20,20,20,20"
+                          HorizontalAlignment="Center">
 
-                        <Image Height="130"
+                        <Grid.Styles>
+
+                            <Style Selector="TextBlock.label">
+
+                                <Setter Property="Padding" Value="5 0" />
+                                <Setter Property="FontWeight" Value="Medium" />
+
+                            </Style>
+
+                        </Grid.Styles>
+
+                        <Image Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="0"
+                               Height="130"
                                Stretch="UniformToFill"
                                Source="{Binding LogoBytes,
-                                        Converter={StaticResource byteArrayToBitmapConverter},
-                                                   ConverterParameter={StaticResource noTeamLogo}}"
+                                            Converter={StaticResource byteArrayToBitmapConverter},
+                                            ConverterParameter={StaticResource noTeamLogo}}"
                                Width="105" />
 
-                        <Grid ColumnDefinitions="100,*"
-                              RowDefinitions="15,20,20,20,20,20,15"
-                              Width="350">
+                        <TextBlock Classes="label"
+                                   Grid.Column="0"
+                                   Grid.Row="1"
+                                   Text="{x:Static globalization:Translations.TeamLabel}" />
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="1"
-                                       FontWeight="Medium"
-                                       Text="{x:Static globalization:Translations.TeamLabel}" />
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding}" />
 
-                            <TextBlock Grid.Column="1"
-                                       Grid.Row="1"
-                                       Text="{Binding}" />
+                        <TextBlock Classes="label"
+                                   Grid.Column="0"
+                                   Grid.Row="2"
+                                   Text="{x:Static globalization:Translations.LeagueLabel}" />
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="2"
-                                       FontWeight="Medium"
-                                       Text="{x:Static globalization:Translations.LeagueLabel}" />
+                        <StackPanel Grid.Column="1"
+                                    Grid.Row="2"
+                                    HorizontalAlignment="Stretch"
+                                    Orientation="Horizontal"
+                                    Spacing="5">
 
-                            <StackPanel Grid.Column="1"
-                                        Grid.Row="2"
-                                        Orientation="Horizontal"
-                                        Spacing="5">
-
-                                <Image Height="12"
-                                       Stretch="None"
-                                       Source="{Binding League.FlagBytes,
+                            <Image Height="12"
+                                   Stretch="None"
+                                   Source="{Binding League.FlagBytes,
                                             Converter={StaticResource byteArrayToBitmapConverter}}"
-                                       Width="20" />
+                                   Width="20" />
 
-                                <TextBlock Text="{Binding League}" />
+                            <TextBlock Text="{Binding League}"
+                                       HorizontalAlignment="Stretch" />
 
-                            </StackPanel>
+                        </StackPanel>
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="3"
-                                       FontWeight="Medium"
-                                       Text="{x:Static globalization:Translations.CountryLabel}" />
+                        <TextBlock Classes="label"
+                                   Grid.Column="0"
+                                   Grid.Row="3"
+                                   Text="{x:Static globalization:Translations.CountryLabel}" />
 
-                            <StackPanel Grid.Column="1"
-                                        Grid.Row="3"
-                                        Orientation="Horizontal"
-                                        Spacing="5">
+                        <StackPanel Grid.Column="1"
+                                    Grid.Row="3"
+                                    Orientation="Horizontal"
+                                    Spacing="5">
 
-                                <Image Height="12"
-                                       Stretch="None"
-                                       Source="{Binding Country.FlagBytes,
+                            <Image Height="12"
+                                   Stretch="None"
+                                   Source="{Binding Country.FlagBytes,
                                             Converter={StaticResource byteArrayToBitmapConverter}}"
-                                       Width="20" />
+                                   Width="20" />
 
-                                <TextBlock Text="{Binding Country}" />
+                            <TextBlock Text="{Binding Country}"
+                                       HorizontalAlignment="Stretch" />
 
-                            </StackPanel>
+                        </StackPanel>
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="4"
-                                       FontWeight="Medium"
-                                       Text="{x:Static globalization:Translations.RegionLabel}" />
+                        <TextBlock Classes="label"
+                                   Grid.Column="0"
+                                   Grid.Row="4"
+                                   Text="{x:Static globalization:Translations.RegionLabel}" />
 
-                            <TextBlock Grid.Column="1"
-                                       Grid.Row="4"
-                                       Text="{Binding Region}" />
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="4"
+                                   Text="{Binding Region}" />
 
-                            <TextBlock Grid.Column="0"
-                                       Grid.Row="5"
-                                       FontWeight="Medium"
-                                       Text="{x:Static globalization:Translations.SeriesLabel}" />
+                        <TextBlock Classes="label"
+                                   Grid.Column="0"
+                                   Grid.Row="5"
+                                   Text="{x:Static globalization:Translations.SeriesLabel}" />
 
-                            <TextBlock Grid.Column="1"
-                                       Grid.Row="5"
-                                       Text="{Binding Series}" />
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="5"
+                                   Text="{Binding Series}" />
 
-                        </Grid>
-
-                        <Image Height="74"
-                               Stretch="None"
-                               Source="{Binding HomeMatchKitBytes,
-                                        Converter={StaticResource byteArrayToBitmapConverter}}"
-                               Width="44" />
-
-                        <Image Height="74"
-                               Stretch="None"
-                               Source="{Binding AwayMatchKitBytes,
-                                        Converter={StaticResource byteArrayToBitmapConverter}}"
-                               Width="44" />
-                        
-                    </StackPanel>
+                    </Grid>
 
                 </Button>
 

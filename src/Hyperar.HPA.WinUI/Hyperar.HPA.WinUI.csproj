@@ -28,6 +28,8 @@
       <None Remove="appSettings.json" />
       <None Remove="appSettings.Production.json" />
       <None Remove="Assets\avalonia-logo.ico" />
+      <None Remove="Assets\Images\BotTeamLogo.png" />
+      <None Remove="Assets\Images\NoManagerAvatar.png" />
       <None Remove="Assets\Images\NoTeamLogo.png" />
     </ItemGroup>
 
@@ -50,26 +52,26 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.9" />
-        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.9" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.9" />
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.9" />
+        <PackageReference Include="Avalonia" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.9" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="FluentAvaloniaUI" Version="2.0.5" />
-        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.8.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.8.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.9.2" />
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.4" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

@@ -18,25 +18,18 @@
         {
             HattrickData result = (HattrickData)entity;
 
-            try
+            if (reader.CheckNode(NodeName.LeagueList))
             {
-                if (reader.CheckNode(NodeName.LeagueList))
+                // Reads opening element.
+                await reader.ReadAsync();
+
+                while (reader.CheckNode(NodeName.League))
                 {
-                    // Reads opening element.
-                    await reader.ReadAsync();
-
-                    while (reader.CheckNode(NodeName.League))
-                    {
-                        result.LeagueList.Add(await ParseLeagueNodeAsync(reader));
-                    }
-
-                    // Reads closing element.
-                    await reader.ReadAsync();
+                    result.LeagueList.Add(await ParseLeagueNodeAsync(reader));
                 }
-            }
-            catch
-            {
-                throw;
+
+                // Reads closing element.
+                await reader.ReadAsync();
             }
 
             return result;
@@ -128,12 +121,15 @@
 
             if (reader.CheckNode(NodeName.Cups))
             {
-                // Reads opening element.
-                await reader.ReadAsync();
-
-                while (reader.CheckNode(NodeName.Cup))
+                if (!reader.IsEmptyElement)
                 {
-                    result.Cups.Add(await ParseCupNodeAsync(reader));
+                    // Reads opening element.
+                    await reader.ReadAsync();
+
+                    while (reader.CheckNode(NodeName.Cup))
+                    {
+                        result.Cups.Add(await ParseCupNodeAsync(reader));
+                    }
                 }
 
                 // Reads closing element.
@@ -147,7 +143,7 @@
             result.WaitingUsers = await reader.ReadXmlValueAsIntAsync();
             result.TrainingDate = await reader.ReadXmlValueAsDateTimeAsync();
             result.EconomyDate = await reader.ReadXmlValueAsDateTimeAsync();
-            result.CupMatchDate = await reader.ReadXmlValueAsDateTimeAsync();
+            result.CupMatchDate = await reader.ReadXmlValueAsNullableDateTimeAsync();
             result.SeriesMatchDate = await reader.ReadXmlValueAsDateTimeAsync();
             result.Sequence1 = await reader.ReadXmlValueAsDateTimeAsync();
             result.Sequence2 = await reader.ReadXmlValueAsDateTimeAsync();

@@ -43,7 +43,7 @@
 
         public string Name { get; set; }
 
-        public DateTime NextCupMatchDate { get; set; }
+        public DateTime? NextCupMatchDate { get; set; }
 
         public DateTime NextEconomyUpdate { get; set; }
 

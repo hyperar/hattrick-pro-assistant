@@ -40,26 +40,33 @@
 
             if (fileDownloadTask.XmlFile is Models.WorldDetails.HattrickData file)
             {
-                foreach (var xmlLeague in file.LeagueList)
+                try
                 {
-                    var league = await this.ProcessLeagueAsync(xmlLeague);
-
-                    foreach (var xmlCup in xmlLeague.Cups)
+                    foreach (var xmlLeague in file.LeagueList)
                     {
-                        await this.ProcessLeagueCupAsync(xmlCup, league);
-                    }
+                        var league = await this.ProcessLeagueAsync(xmlLeague);
 
-                    var country = await this.ProcessCountryAsync(xmlLeague.Country, league);
-
-                    if (xmlLeague.Country.RegionList.Count > 0)
-                    {
-                        ArgumentNullException.ThrowIfNull(country, nameof(country));
-
-                        foreach (var xmlRegion in xmlLeague.Country.RegionList)
+                        foreach (var xmlCup in xmlLeague.Cups)
                         {
-                            await this.ProcessRegionAsync(xmlRegion, country);
+                            await this.ProcessLeagueCupAsync(xmlCup, league);
+                        }
+
+                        var country = await this.ProcessCountryAsync(xmlLeague.Country, league);
+
+                        if (xmlLeague.Country.RegionList.Count > 0)
+                        {
+                            ArgumentNullException.ThrowIfNull(country, nameof(country));
+
+                            foreach (var xmlRegion in xmlLeague.Country.RegionList)
+                            {
+                                await this.ProcessRegionAsync(xmlRegion, country);
+                            }
                         }
                     }
+                }
+                catch
+                {
+                    throw;
                 }
             }
             else

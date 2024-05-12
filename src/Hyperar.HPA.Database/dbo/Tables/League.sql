@@ -5,8 +5,8 @@
     [EnglishName]          NVARCHAR (256)  NOT NULL,
     [Continent]            NVARCHAR (256)  NOT NULL,
     [Zone]                 NVARCHAR (256)  NOT NULL,
-    [Season]               TINYINT          NOT NULL,
-    [Week]                 TINYINT          NOT NULL,
+    [Season]               TINYINT         NOT NULL,
+    [Week]                 TINYINT         NOT NULL,
     [SeasonOffset]         SMALLINT        NOT NULL,
     [LanguageId]           BIGINT          NOT NULL,
     [LanguageName]         NVARCHAR (256)  NOT NULL,
@@ -18,9 +18,11 @@
     [NumberOfLevels]       TINYINT         NOT NULL,
     [NextTrainingUpdate]   DATETIME        NOT NULL,
     [NextEconomyUpdate]    DATETIME        NOT NULL,
-    [NextCupMatchDate]     DATETIME        NOT NULL,
+    [NextCupMatchDate]     DATETIME        NULL,
     [NextSeriesMatchDate]  DATETIME        NOT NULL,
     [FlagBytes]            VARBINARY (MAX) NOT NULL,
     CONSTRAINT [PK_League] PRIMARY KEY CLUSTERED ([HattrickId] ASC)
 );
+
+
 

@@ -56,20 +56,20 @@
 
                 foreach (var xmlPlayer in file.Team.StartingLineUp)
                 {
-                    await this.ProcessMatchTeamLineUpStartingPlayer(xmlPlayer, matchTeamLineUp);
+                    await this.ProcessMatchTeamLineUpStartingPlayerAsync(xmlPlayer, matchTeamLineUp);
                 }
 
                 if (file.Team.Substitutions != null)
                 {
                     foreach (var xmlPlayer in file.Team.Substitutions)
                     {
-                        await this.ProcessMatchTeamLineUpSubstitution(xmlPlayer, matchTeamLineUp);
+                        await this.ProcessMatchTeamLineUpSubstitutionAsync(xmlPlayer, matchTeamLineUp);
                     }
                 }
 
                 foreach (var xmlPlayer in file.Team.LineUp)
                 {
-                    await this.ProcessMatchTeamLineUpPlayer(xmlPlayer, matchTeamLineUp);
+                    await this.ProcessMatchTeamLineUpPlayerAsync(xmlPlayer, matchTeamLineUp);
                 }
             }
             else
@@ -97,7 +97,7 @@
             return lineUp;
         }
 
-        private async Task ProcessMatchTeamLineUpPlayer(Models.MatchLineUp.Player xmlPlayer, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
+        private async Task ProcessMatchTeamLineUpPlayerAsync(Models.MatchLineUp.Player xmlPlayer, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
         {
             var matchLineUpPlayer = await this.matchTeamLineUpPlayerRepository.Query(x => x.MatchTeamLineUpId == matchTeamLineUp.Id
                                                                                        && x.HattrickId == xmlPlayer.PlayerId
@@ -113,7 +113,7 @@
             }
         }
 
-        private async Task ProcessMatchTeamLineUpStartingPlayer(Models.MatchLineUp.StartingPlayer xmlStartingPlayer, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
+        private async Task ProcessMatchTeamLineUpStartingPlayerAsync(Models.MatchLineUp.StartingPlayer xmlStartingPlayer, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
         {
             var matchLineUpstartingPlayer = await this.matchTeamLineUpStartingPlayerRepository.Query(x => x.MatchTeamLineUpId == matchTeamLineUp.Id
                                                                                                        && x.HattrickId == xmlStartingPlayer.PlayerId
@@ -129,7 +129,7 @@
             }
         }
 
-        private async Task ProcessMatchTeamLineUpSubstitution(Models.MatchLineUp.Substitution xmlSubstitution, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
+        private async Task ProcessMatchTeamLineUpSubstitutionAsync(Models.MatchLineUp.Substitution xmlSubstitution, Domain.Senior.MatchTeamLineUp matchTeamLineUp)
         {
             var matchLineUpSubstitution = await this.matchTeamLineUpSubstitutionRepository.Query(x => x.MatchTeamLineUpId == matchTeamLineUp.Id
                                                                                                    && x.InPlayerHattrickId == xmlSubstitution.ObjectPlayerId

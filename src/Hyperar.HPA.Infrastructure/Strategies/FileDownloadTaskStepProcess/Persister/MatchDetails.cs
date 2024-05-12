@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Application.Interfaces;
     using Hyperar.HPA.Domain.Interfaces;
+    using Hyperar.HPA.Shared.Enums;
     using Microsoft.EntityFrameworkCore;
     using Models = Shared.Models.Hattrick;
 
@@ -86,12 +87,14 @@
 
                 var homeTeam = await this.ProcessMatchTeamAsync(
                     file.Match.HomeTeam,
+                    MatchTeamLocation.Home,
                     file.Match.PossessionFirstHalfHome,
                     file.Match.PossessionSecondHalfHome,
                     match);
 
                 var awayTeam = await this.ProcessMatchTeamAsync(
                     file.Match.AwayTeam,
+                    MatchTeamLocation.Away,
                     file.Match.PossessionFirstHalfAway,
                     file.Match.PossessionSecondHalfAway,
                     match);
@@ -241,6 +244,7 @@
 
         private async Task<Domain.Senior.MatchTeam> ProcessMatchTeamAsync(
             Models.MatchDetails.Team xmlTeam,
+            MatchTeamLocation location,
             byte? firstHalfPosession,
             byte? secondHalfPosession,
             Domain.Senior.Match match)
@@ -254,6 +258,7 @@
                 matchTeam = await this.matchTeamRepository.InsertAsync(
                     Domain.Senior.MatchTeam.Create(
                         xmlTeam,
+                        location,
                         firstHalfPosession,
                         secondHalfPosession,
                         match));

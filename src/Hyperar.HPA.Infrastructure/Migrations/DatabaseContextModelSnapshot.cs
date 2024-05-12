@@ -17,7 +17,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -137,7 +137,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnType("nvarchar")
                         .HasColumnOrder(1);
 
-                    b.Property<DateTime>("NextCupMatchDate")
+                    b.Property<DateTime?>("NextCupMatchDate")
                         .HasColumnType("datetime")
                         .HasColumnOrder(19);
 
@@ -620,6 +620,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<byte?>("LeftDefenseRating")
                         .HasColumnType("tinyint")
                         .HasColumnOrder(13);
+
+                    b.Property<byte>("Location")
+                        .HasColumnType("tinyint")
+                        .HasColumnOrder(3);
 
                     b.Property<long>("MatchHattrickId")
                         .HasColumnType("bigint");

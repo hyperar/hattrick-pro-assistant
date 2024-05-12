@@ -19,6 +19,11 @@
                 .HasMaxLength(256)
                 .IsRequired();
 
+            builder.Property(p => p.Location)
+                .HasColumnOrder(3)
+                .HasColumnType(Constants.ColumnType.TinyInt)
+                .IsRequired();
+
             builder.Property(p => p.MatchKitUrl)
                 .HasColumnOrder(4)
                 .HasColumnType(Constants.ColumnType.NVarChar)

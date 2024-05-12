@@ -250,6 +250,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Away Team.
+        /// </summary>
+        public static string AwayTeam {
+            get {
+                return ResourceManager.GetString("AwayTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookings.
         /// </summary>
         public static string Bookings {
@@ -345,6 +354,15 @@ namespace Hyperar.HPA.Globalization {
         public static string CreatedOn {
             get {
                 return ResourceManager.GetString("CreatedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         
@@ -565,6 +583,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home Team.
+        /// </summary>
+        public static string HomeTeam {
+            get {
+                return ResourceManager.GetString("HomeTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Honesty.
         /// </summary>
         public static string Honesty {
@@ -700,6 +727,204 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duel.
+        /// </summary>
+        public static string MatchType_Duel {
+            get {
+                return ResourceManager.GetString("MatchType_Duel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friendly (Cup).
+        /// </summary>
+        public static string MatchType_FriendlyWithCupRules {
+            get {
+                return ResourceManager.GetString("MatchType_FriendlyWithCupRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friendly (Normal).
+        /// </summary>
+        public static string MatchType_FriendlyWithNormalRules {
+            get {
+                return ResourceManager.GetString("MatchType_FriendlyWithNormalRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hattrick Masters.
+        /// </summary>
+        public static string MatchType_HattrickMasters {
+            get {
+                return ResourceManager.GetString("MatchType_HattrickMasters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to International Friendly (Normal).
+        /// </summary>
+        public static string MatchType_InternationalFriendlyWithNormalRules {
+            get {
+                return ResourceManager.GetString("MatchType_InternationalFriendlyWithNormalRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to International Friendly (Cup).
+        /// </summary>
+        public static string MatchType_InternationFriendlyCupRules {
+            get {
+                return ResourceManager.GetString("MatchType_InternationFriendlyCupRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ladder.
+        /// </summary>
+        public static string MatchType_Ladder {
+            get {
+                return ResourceManager.GetString("MatchType_Ladder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to League.
+        /// </summary>
+        public static string MatchType_League {
+            get {
+                return ResourceManager.GetString("MatchType_League", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cup.
+        /// </summary>
+        public static string MatchType_LeagueCup {
+            get {
+                return ResourceManager.GetString("MatchType_LeagueCup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to National Team Competition (Cup).
+        /// </summary>
+        public static string MatchType_NationalTeamsCompetitionCupRules {
+            get {
+                return ResourceManager.GetString("MatchType_NationalTeamsCompetitionCupRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to National Team Competition (Normal).
+        /// </summary>
+        public static string MatchType_NationalTeamsCompetitionWithNormalRules {
+            get {
+                return ResourceManager.GetString("MatchType_NationalTeamsCompetitionWithNormalRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to National Team Friendly.
+        /// </summary>
+        public static string MatchType_NationalTeamsFriendly {
+            get {
+                return ResourceManager.GetString("MatchType_NationalTeamsFriendly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparation.
+        /// </summary>
+        public static string MatchType_Preparation {
+            get {
+                return ResourceManager.GetString("MatchType_Preparation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Qualification.
+        /// </summary>
+        public static string MatchType_Qualification {
+            get {
+                return ResourceManager.GetString("MatchType_Qualification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tournament League.
+        /// </summary>
+        public static string MatchType_TournamentLeague {
+            get {
+                return ResourceManager.GetString("MatchType_TournamentLeague", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tournament Playoff.
+        /// </summary>
+        public static string MatchType_TournamentPlayoff {
+            get {
+                return ResourceManager.GetString("MatchType_TournamentPlayoff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth Friendly (Cup).
+        /// </summary>
+        public static string MatchType_YouthFriendlyWithCupRules {
+            get {
+                return ResourceManager.GetString("MatchType_YouthFriendlyWithCupRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth Friendly (Normal).
+        /// </summary>
+        public static string MatchType_YouthFriendlyWithNormalRules {
+            get {
+                return ResourceManager.GetString("MatchType_YouthFriendlyWithNormalRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to International Youth Friendly (Cup).
+        /// </summary>
+        public static string MatchType_YouthInternationalFriendlyWithCupRules {
+            get {
+                return ResourceManager.GetString("MatchType_YouthInternationalFriendlyWithCupRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to International Youth Friendly (Normal).
+        /// </summary>
+        public static string MatchType_YouthInternationalFriendlyWithNormalRules {
+            get {
+                return ResourceManager.GetString("MatchType_YouthInternationalFriendlyWithNormalRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth League.
+        /// </summary>
+        public static string MatchType_YouthLeague {
+            get {
+                return ResourceManager.GetString("MatchType_YouthLeague", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Authorized.
         /// </summary>
         public static string NotAuthorized {
@@ -813,6 +1038,15 @@ namespace Hyperar.HPA.Globalization {
         public static string Salary {
             get {
                 return ResourceManager.GetString("Salary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score.
+        /// </summary>
+        public static string Score {
+            get {
+                return ResourceManager.GetString("Score", resourceCulture);
             }
         }
         
@@ -1264,6 +1498,15 @@ namespace Hyperar.HPA.Globalization {
         public static string TotalSkillIndex {
             get {
                 return ResourceManager.GetString("TotalSkillIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
         

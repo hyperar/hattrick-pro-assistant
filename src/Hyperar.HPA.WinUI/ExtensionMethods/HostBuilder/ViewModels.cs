@@ -18,7 +18,7 @@
             {
                 services.AddTransient<CreateViewModelAsync<AboutViewModel>>(services => () => CreateAboutViewModelAsync(services));
                 services.AddTransient<CreateViewModelAsync<AuthorizationViewModel>>(services => () => CreateAuthorizationViewModelAsync(services));
-                services.AddTransient<CreateViewModelAsync<DownloadViewModel>>(services => () => CreateDownloadViewModelASync(services));
+                services.AddTransient<CreateViewModelAsync<DownloadViewModel>>(services => () => CreateDownloadViewModelAsync(services));
                 services.AddTransient<CreateViewModelAsync<HomeViewModel>>(services => () => CreateHomeViewModelAsync(services));
                 services.AddTransient<CreateViewModelAsync<MatchesViewModel>>(services => () => CreateMatchesViewModelAsync(services));
                 services.AddTransient<CreateViewModelAsync<PlayersViewModel>>(services => () => CreatePlayersViewModelAsync(services));
@@ -57,7 +57,7 @@
             return viewModel;
         }
 
-        private static async Task<DownloadViewModel> CreateDownloadViewModelASync(IServiceProvider services)
+        private static async Task<DownloadViewModel> CreateDownloadViewModelAsync(IServiceProvider services)
         {
             IServiceScope scope = services.CreateScope();
 
@@ -75,7 +75,9 @@
         private static async Task<HomeViewModel> CreateHomeViewModelAsync(IServiceProvider services)
         {
             HomeViewModel viewModel = new HomeViewModel(
-                services.GetRequiredService<INavigator>());
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<ITeamSelector>(),
+                services.CreateScope().ServiceProvider.GetRequiredService<IHomeViewService>());
 
             await viewModel.InitializeAsync();
 

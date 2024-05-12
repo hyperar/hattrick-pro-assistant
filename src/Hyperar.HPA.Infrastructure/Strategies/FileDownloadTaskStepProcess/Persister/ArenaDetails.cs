@@ -35,7 +35,7 @@
 
                 ArgumentNullException.ThrowIfNull(team, nameof(team));
 
-                await this.ProcessArena(file.Arena, team);
+                await this.ProcessArenaAsync(file.Arena, team);
             }
             else
             {
@@ -49,7 +49,7 @@
             await this.databaseContext.SaveAsync();
         }
 
-        private async Task ProcessArena(Models.ArenaDetails.Arena xmlArena, Domain.Senior.Team team)
+        private async Task ProcessArenaAsync(Models.ArenaDetails.Arena xmlArena, Domain.Senior.Team team)
         {
             var arena = await this.teamArenaRepository.GetByHattrickIdAsync(xmlArena.ArenaId);
 

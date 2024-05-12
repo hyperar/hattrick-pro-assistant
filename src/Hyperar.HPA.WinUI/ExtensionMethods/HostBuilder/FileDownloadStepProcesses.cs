@@ -64,6 +64,8 @@
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.MatchDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.MatchLineUp>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.Players>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.StaffAvatars>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.StaffList>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.TeamDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.WorldDetails>();
             });

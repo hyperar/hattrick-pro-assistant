@@ -180,6 +180,9 @@
   <data name="AuthorizeMessage" xml:space="preserve">
     <value>Once you have pasted the Verification Code, click on 'Authorize'.</value>
   </data>
+  <data name="AwayTeam" xml:space="preserve">
+    <value>Away Team</value>
+  </data>
   <data name="Bookings" xml:space="preserve">
     <value>Bookings</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="CreatedOn" xml:space="preserve">
     <value>Created on</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="Deauthorize" xml:space="preserve">
     <value>De-authorize</value>
@@ -285,6 +291,9 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="HomeTeam" xml:space="preserve">
+    <value>Home Team</value>
+  </data>
   <data name="Honesty" xml:space="preserve">
     <value>Honesty</value>
   </data>
@@ -330,6 +339,72 @@
   <data name="Matches" xml:space="preserve">
     <value>Matches</value>
   </data>
+  <data name="MatchType_Duel" xml:space="preserve">
+    <value>Duel</value>
+  </data>
+  <data name="MatchType_FriendlyWithCupRules" xml:space="preserve">
+    <value>Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_FriendlyWithNormalRules" xml:space="preserve">
+    <value>Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_HattrickMasters" xml:space="preserve">
+    <value>Hattrick Masters</value>
+  </data>
+  <data name="MatchType_InternationalFriendlyWithNormalRules" xml:space="preserve">
+    <value>International Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_InternationFriendlyCupRules" xml:space="preserve">
+    <value>International Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_Ladder" xml:space="preserve">
+    <value>Ladder</value>
+  </data>
+  <data name="MatchType_League" xml:space="preserve">
+    <value>League</value>
+  </data>
+  <data name="MatchType_LeagueCup" xml:space="preserve">
+    <value>Cup</value>
+  </data>
+  <data name="MatchType_NationalTeamsCompetitionCupRules" xml:space="preserve">
+    <value>National Team Competition (Cup)</value>
+  </data>
+  <data name="MatchType_NationalTeamsCompetitionWithNormalRules" xml:space="preserve">
+    <value>National Team Competition (Normal)</value>
+  </data>
+  <data name="MatchType_NationalTeamsFriendly" xml:space="preserve">
+    <value>National Team Friendly</value>
+  </data>
+  <data name="MatchType_Preparation" xml:space="preserve">
+    <value>Preparation</value>
+  </data>
+  <data name="MatchType_Qualification" xml:space="preserve">
+    <value>Qualification</value>
+  </data>
+  <data name="MatchType_TournamentLeague" xml:space="preserve">
+    <value>Tournament League</value>
+  </data>
+  <data name="MatchType_TournamentPlayoff" xml:space="preserve">
+    <value>Tournament Playoff</value>
+  </data>
+  <data name="MatchType_YouthFriendlyWithCupRules" xml:space="preserve">
+    <value>Youth Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_YouthFriendlyWithNormalRules" xml:space="preserve">
+    <value>Youth Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_YouthInternationalFriendlyWithCupRules" xml:space="preserve">
+    <value>International Youth Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_YouthInternationalFriendlyWithNormalRules" xml:space="preserve">
+    <value>International Youth Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_YouthLeague" xml:space="preserve">
+    <value>Youth League</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="NotAuthorized" xml:space="preserve">
     <value>Not Authorized</value>
   </data>
@@ -368,6 +443,9 @@
   </data>
   <data name="Salary" xml:space="preserve">
     <value>Salary</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
   </data>
   <data name="Scoring" xml:space="preserve">
     <value>Scoring</value>
@@ -519,6 +597,9 @@ Please re-authorize it.</value>
   </data>
   <data name="TotalSkillIndex" xml:space="preserve">
     <value>TSI</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="UnexpectedFileDownloadTaskType" xml:space="preserve">
     <value>Unexpected File Download Task type found.</value>

@@ -26,7 +26,7 @@
 
         public Country Country { get; set; }
 
-        public DateTime CupMatchDate { get; set; }
+        public DateTime? CupMatchDate { get; set; }
 
         public List<Cup> Cups { get; set; }
 

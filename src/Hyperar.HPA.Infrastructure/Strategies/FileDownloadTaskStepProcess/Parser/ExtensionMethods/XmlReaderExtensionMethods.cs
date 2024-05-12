@@ -36,6 +36,15 @@
             return DateTime.Parse(value);
         }
 
+        public static async Task<DateTime?> ReadXmlValueAsNullableDateTimeAsync(this XmlReader reader)
+        {
+            string value = await reader.ReadElementContentAsStringAsync();
+
+            return string.IsNullOrWhiteSpace(value)
+                 ? null
+                 : DateTime.Parse(value);
+        }
+
         public static async Task<decimal> ReadXmlValueAsDecimalAsync(this XmlReader reader)
         {
             string value = await reader.ReadElementContentAsStringAsync();

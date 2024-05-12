@@ -44,6 +44,18 @@
             this.userService = userService;
         }
 
+        public override async Task InitializeAsync()
+        {
+            var user = await this.userService.GetUserAsync();
+
+            if (user.LastDownloadDate != null)
+            {
+                this.Navigator.ResumeNavigation();
+            }
+
+            await base.InitializeAsync();
+        }
+
         [RelayCommand]
         private async Task CancelDownloadAsync()
         {

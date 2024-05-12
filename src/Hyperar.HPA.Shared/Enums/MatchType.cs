@@ -42,6 +42,6 @@
 
         YouthInternationalFriendlyWithNormalRules = 105,
 
-        YouthInternationalFriendlyWithCupRules = 106,
+        YouthInternationalFriendlyWithCupRules = 106
     }
 }

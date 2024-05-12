@@ -1,19 +1,40 @@
 ﻿namespace Hyperar.HPA.WinUI.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using Hyperar.HPA.Application.Services;
+    using Shared.Models.UI.Home;
     using WinUI.State.Interface;
 
-    public class HomeViewModel : AsyncViewModelBase
+    public partial class HomeViewModel : AsyncViewModelBase
     {
-        public HomeViewModel(INavigator navigator) : base(navigator)
+        private readonly IHomeViewService homeViewService;
+
+        private readonly ITeamSelector teamSelector;
+
+        [ObservableProperty]
+        private Team? team;
+
+        public HomeViewModel(
+            INavigator navigator,
+            ITeamSelector teamSelector,
+            IHomeViewService homeViewService) : base(navigator)
         {
+            this.homeViewService = homeViewService;
+            this.teamSelector = teamSelector;
         }
 
-        public override Task InitializeAsync()
+        public override async Task InitializeAsync()
         {
+            ArgumentNullException.ThrowIfNull(this.teamSelector.SelectedTeamId, nameof(this.teamSelector.SelectedTeamId));
+
+            this.Team = await this.homeViewService.GetTeamsOverviewAsync(
+                this.teamSelector.SelectedTeamId);
+
             this.Navigator.ResumeNavigation();
 
-            return base.InitializeAsync();
+            await base.InitializeAsync();
         }
     }
 }

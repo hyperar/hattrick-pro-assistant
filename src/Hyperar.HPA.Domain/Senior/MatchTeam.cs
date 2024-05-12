@@ -50,6 +50,8 @@
 
         public virtual MatchTeamLineUp? LineUp { get; set; }
 
+        public MatchTeamLocation Location { get; set; }
+
         public virtual Match Match { get; set; }
 
         public long MatchHattrickId { get; set; }
@@ -78,7 +80,12 @@
 
         public MatchTacticType? TacticType { get; set; }
 
-        public static MatchTeam Create(Models.Team xmlTeam, byte? firstHalfPosession, byte? secondHalfPosession, Match match)
+        public static MatchTeam Create(
+            Models.Team xmlTeam,
+            MatchTeamLocation location,
+            byte? firstHalfPosession,
+            byte? secondHalfPosession,
+            Match match)
         {
             return new MatchTeam
             {
@@ -95,6 +102,7 @@
                 HattrickId = xmlTeam.TeamId,
                 LeftAttackRating = xmlTeam.RatingLeftAtt != null ? (MatchSectorRating)xmlTeam.RatingLeftAtt : null,
                 LeftDefenseRating = xmlTeam.RatingLeftDef != null ? (MatchSectorRating)xmlTeam.RatingLeftDef : null,
+                Location = location,
                 Match = match,
                 MidfieldRating = xmlTeam.RatingMidfield != null ? (MatchSectorRating)xmlTeam.RatingMidfield : null,
                 Name = xmlTeam.TeamName,
