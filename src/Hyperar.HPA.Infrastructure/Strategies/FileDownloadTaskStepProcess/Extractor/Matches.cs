@@ -80,7 +80,7 @@
                                         }));
                             }
 
-                            if (curMatch.Status.ToMatchStatus() == MatchStatus.Finished)
+                            if (curMatch.Status.ToMatchStatus() == MatchStatus.Finished && match == null)
                             {
                                 fileDownloadTasks.Add(
                                     new XmlFileDownloadTask(

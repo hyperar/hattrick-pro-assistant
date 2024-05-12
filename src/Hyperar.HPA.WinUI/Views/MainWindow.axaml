@@ -11,7 +11,8 @@
         MinHeight="900"
         MinWidth="1600"
         RequestedThemeVariant="Default"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
 
     <Design.DataContext>
 

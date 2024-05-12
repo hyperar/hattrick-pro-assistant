@@ -4,13 +4,21 @@
     using System.Globalization;
     using Avalonia.Data.Converters;
 
-    internal class EnumToTranslatedStringConverter : IValueConverter
+    internal class HealthStatusToValueStringConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return value == null
-                 ? null
-                 : Globalization.Translations.ResourceManager.GetString($"{value.GetType().Name}_{value}") ?? string.Empty;
+            if (value is short healthStatus)
+            {
+                return healthStatus switch
+                {
+                    -1 => string.Empty,
+                    0 => string.Empty,
+                    _ => healthStatus.ToString()
+                };
+            }
+
+            return null;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

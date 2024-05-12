@@ -187,16 +187,19 @@
     <value>Bookings</value>
   </data>
   <data name="BookingStatus_NoBookings" xml:space="preserve">
-    <value>No bookings</value>
+    <value>No cards accumulated</value>
   </data>
   <data name="BookingStatus_OneYellowCard" xml:space="preserve">
-    <value>One booking</value>
+    <value>1 card accumulated</value>
   </data>
   <data name="BookingStatus_Suspended" xml:space="preserve">
-    <value>Suspended</value>
+    <value>Suspended for the next match</value>
   </data>
   <data name="BookingStatus_TwoYellowCards" xml:space="preserve">
-    <value>Two bookings</value>
+    <value>2 cards accumulated</value>
+  </data>
+  <data name="BruisedTooltip" xml:space="preserve">
+    <value>Bruised</value>
   </data>
   <data name="CacheImageFileNotFound" xml:space="preserve">
     <value>Image file not found in cache.</value>
@@ -321,6 +324,9 @@
   <data name="Initializing" xml:space="preserve">
     <value>Initializing...</value>
   </data>
+  <data name="InjuredTooltip" xml:space="preserve">
+    <value>Estimated injury time: {0} week(s)</value>
+  </data>
   <data name="Keeper" xml:space="preserve">
     <value>Keeper</value>
   </data>
@@ -401,6 +407,9 @@
   </data>
   <data name="MatchType_YouthLeague" xml:space="preserve">
     <value>Youth League</value>
+  </data>
+  <data name="MotherClubBonusTooltip" xml:space="preserve">
+    <value>Mother club bonus</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -597,6 +606,9 @@ Please re-authorize it.</value>
   </data>
   <data name="TotalSkillIndex" xml:space="preserve">
     <value>TSI</value>
+  </data>
+  <data name="TransferListedTooltip" xml:space="preserve">
+    <value>Transfer-listed</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>

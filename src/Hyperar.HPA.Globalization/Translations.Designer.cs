@@ -268,7 +268,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No bookings.
+        ///   Looks up a localized string similar to No cards accumulated.
         /// </summary>
         public static string BookingStatus_NoBookings {
             get {
@@ -277,7 +277,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One booking.
+        ///   Looks up a localized string similar to 1 card accumulated.
         /// </summary>
         public static string BookingStatus_OneYellowCard {
             get {
@@ -286,7 +286,7 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Suspended.
+        ///   Looks up a localized string similar to Suspended for the next match.
         /// </summary>
         public static string BookingStatus_Suspended {
             get {
@@ -295,11 +295,20 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Two bookings.
+        ///   Looks up a localized string similar to 2 cards accumulated.
         /// </summary>
         public static string BookingStatus_TwoYellowCards {
             get {
                 return ResourceManager.GetString("BookingStatus_TwoYellowCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bruised.
+        /// </summary>
+        public static string BruisedTooltip {
+            get {
+                return ResourceManager.GetString("BruisedTooltip", resourceCulture);
             }
         }
         
@@ -673,6 +682,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estimated injury time: {0} week(s).
+        /// </summary>
+        public static string InjuredTooltip {
+            get {
+                return ResourceManager.GetString("InjuredTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keeper.
         /// </summary>
         public static string Keeper {
@@ -912,6 +930,15 @@ namespace Hyperar.HPA.Globalization {
         public static string MatchType_YouthLeague {
             get {
                 return ResourceManager.GetString("MatchType_YouthLeague", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mother club bonus.
+        /// </summary>
+        public static string MotherClubBonusTooltip {
+            get {
+                return ResourceManager.GetString("MotherClubBonusTooltip", resourceCulture);
             }
         }
         
@@ -1498,6 +1525,15 @@ namespace Hyperar.HPA.Globalization {
         public static string TotalSkillIndex {
             get {
                 return ResourceManager.GetString("TotalSkillIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer-listed.
+        /// </summary>
+        public static string TransferListedTooltip {
+            get {
+                return ResourceManager.GetString("TransferListedTooltip", resourceCulture);
             }
         }
         

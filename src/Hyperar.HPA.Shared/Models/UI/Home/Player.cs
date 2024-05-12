@@ -30,46 +30,6 @@
 
         public Specialty Specialty { get; set; }
 
-        public bool IsBruised
-        {
-            get
-            {
-                return this.HealthStatus == 0;
-            }
-        }
-
-        public bool IsInjured
-        {
-            get
-            {
-                return this.HealthStatus > 0;
-            }
-        }
-
-        public bool IsBooked
-        {
-            get
-            {
-                return this.BookingStatus == BookingStatus.OneYellowCard || this.BookingStatus == BookingStatus.TwoYellowCards;
-            }
-        }
-
-        public bool IsDoubleBooked
-        {
-            get
-            {
-                return this.BookingStatus == BookingStatus.TwoYellowCards;
-            }
-        }
-
-        public bool IsSuspended
-        {
-            get
-            {
-                return this.BookingStatus == BookingStatus.Suspended;
-            }
-        }
-
         public override string ToString()
         {
             return $"{this.FirstName} {(string.IsNullOrWhiteSpace(this.NickName) ? string.Empty : $"\"{this.NickName}\"")} {this.LastName}";

@@ -4,13 +4,18 @@
     using System.Globalization;
     using Avalonia.Data.Converters;
 
-    internal class EnumToTranslatedStringConverter : IValueConverter
+    internal class EqualToBooleanConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return value == null
-                 ? null
-                 : Globalization.Translations.ResourceManager.GetString($"{value.GetType().Name}_{value}") ?? string.Empty;
+            if (value != null && parameter != null)
+            {
+                return object.Equals(value, parameter);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
