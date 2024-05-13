@@ -390,6 +390,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnType("datetime")
                         .HasColumnOrder(6);
 
+                    b.Property<byte?>("Result")
+                        .HasColumnType("tinyint")
+                        .HasColumnOrder(9);
+
                     b.Property<byte>("Rules")
                         .HasColumnType("tinyint")
                         .HasColumnOrder(4);

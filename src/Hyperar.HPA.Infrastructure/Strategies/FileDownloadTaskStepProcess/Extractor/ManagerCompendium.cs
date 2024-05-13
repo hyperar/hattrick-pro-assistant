@@ -15,11 +15,11 @@
 
     public class ManagerCompendium : FileDownloadTaskStepProcessStrategyBase, IFileDownloadTaskStepProcessStrategy
     {
-        private const string includeRegionsParamKey = "includeRegions";
+        private const string IncludeRegionsParamKey = "includeRegions";
 
-        private const string leagueIdParamKey = "leagueId";
+        private const string LeagueIdParamKey = "leagueId";
 
-        private const string userIdParamKey = "userId";
+        private const string UserIdParamKey = "userId";
 
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
@@ -46,8 +46,8 @@
                                     curTeam.TeamId,
                                     new NameValueCollection
                                     {
-                                        { leagueIdParamKey, curTeam.League.LeagueId.ToString() },
-                                        { includeRegionsParamKey, bool.TrueString }
+                                        { LeagueIdParamKey, curTeam.League.LeagueId.ToString() },
+                                        { IncludeRegionsParamKey, bool.TrueString }
                                     }));
                         }
 
@@ -57,7 +57,7 @@
                                 file.Manager.UserId,
                                 new NameValueCollection
                                 {
-                                    { userIdParamKey, file.Manager.UserId.ToString() }
+                                    { UserIdParamKey, file.Manager.UserId.ToString() }
                                 }));
 
                         if (file.Manager.Avatar != null)

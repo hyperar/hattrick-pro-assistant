@@ -15,15 +15,15 @@
     {
         private const string ArenaIdParamKey = "arenaId";
 
-        private const string TeamIdParamKey = "teamId";
+        private const string FirstMatchDateParamKey = "firstMatchDate";
+
+        private const string IncludeHTOParamKey = "includeHTO";
 
         private const string IsYouthParamKey = "isYouth";
 
-        private const string FirstMatchDateParamKey = "firstMatchDate";
-
         private const string LastMatchDateParamKey = "lastMatchDate";
 
-        private const string IncludeHTOParamKey = "includeHTO";
+        private const string TeamIdParamKey = "teamId";
 
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,

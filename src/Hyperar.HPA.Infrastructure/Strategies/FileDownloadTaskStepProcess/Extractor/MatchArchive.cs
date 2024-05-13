@@ -9,7 +9,6 @@
     using Application.Models;
     using Domain.Interfaces;
     using Shared.Enums;
-    using Shared.ExtensionMethods;
     using Shared.Models.Hattrick.MatchArchive;
     using Shared.Models.UI.Download;
 

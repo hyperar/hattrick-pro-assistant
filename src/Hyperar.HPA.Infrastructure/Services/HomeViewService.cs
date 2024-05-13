@@ -60,7 +60,10 @@
                     HattrickId = team.Region.HattrickId,
                     Name = team.Region.Name
                 },
-                Players = team.Players.Where(x => !x.IsCoach)
+                Players = team.Players.Where(x => !x.IsCoach
+                                               && (x.IsTransferListed ||
+                                                   x.Health > -1 ||
+                                                   x.BookingStatus != BookingStatus.NoBookings))
                                       .OrderBy(x => x.ShirtNumber)
                                       .ThenBy(x => x.LastName)
                                       .ThenBy(x => x.FirstName)
@@ -108,6 +111,7 @@
                                                 },
                                                 HomeTeamScore = x.Teams.Where(x => x.Location == MatchTeamLocation.Home)
                                                                        .Single().Score ?? 0,
+                                                Result = x.Result ?? MatchResult.Drawn,
                                                 Type = x.Type
                                             }).ToArray(),
                 UpcomingMatches = team.Matches.Where(x => !x.FinishDate.HasValue)

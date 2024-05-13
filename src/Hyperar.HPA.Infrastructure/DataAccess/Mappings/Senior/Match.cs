@@ -43,6 +43,10 @@
             builder.Property(p => p.Weather)
                 .HasColumnOrder(8)
                 .HasColumnType(Constants.ColumnType.TinyInt);
+
+            builder.Property(p => p.Result)
+                .HasColumnOrder(9)
+                .HasColumnType(Constants.ColumnType.TinyInt);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.Match> builder)

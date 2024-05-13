@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hyperar.HPA.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240511174542_Initial")]
+    [Migration("20240512191242_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -392,6 +392,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<DateTime?>("FinishDate")
                         .HasColumnType("datetime")
                         .HasColumnOrder(6);
+
+                    b.Property<byte?>("Result")
+                        .HasColumnType("tinyint")
+                        .HasColumnOrder(9);
 
                     b.Property<byte>("Rules")
                         .HasColumnType("tinyint")

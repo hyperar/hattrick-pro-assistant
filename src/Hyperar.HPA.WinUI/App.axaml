@@ -4,13 +4,17 @@
              xmlns:local="using:Hyperar.HPA.WinUI"
              xmlns:sty="using:FluentAvalonia.Styling"
              RequestedThemeVariant="Default">
+
     <Application.DataTemplates>
+
         <local:ViewLocator />
+
     </Application.DataTemplates>
 
     <Application.Styles>
         <StyleInclude Source="/Assets/Styles/Common.axaml" />
         <StyleInclude Source="/Assets/Styles/Images.axaml" />
         <sty:FluentAvaloniaTheme />
+
     </Application.Styles>
 </Application>

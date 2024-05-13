@@ -15,15 +15,21 @@
 
     public partial class MainViewModel : ViewModelBase, IDisposable
     {
+        private const string AboutIconKey = "AboutIcon";
+
         private const string AuthorizationIconKey = "AuthorizationIcon";
 
         private const string DownloadIconKey = "DownloadIcon";
 
         private const string HomeIconKey = "HomeIcon";
 
+        private const string MatchesIconKey = "MatchesIcon";
+
         private const string PlayersIconKey = "PlayersIcon";
 
-        private const string TeamSelection = "TeamSelectionIcon";
+        private const string SettingsIconKey = "SettingsIcon";
+
+        private const string TeamSelectionIconKey = "TeamSelectionIcon";
 
         [ObservableProperty]
         private bool isMenuOpen;
@@ -46,8 +52,8 @@
             {
                 new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, HomeIconKey),
                 new MenuItemTemplate(Globalization.Translations.Players, ViewType.Players,PlayersIconKey),
-                //new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches),
-                new MenuItemTemplate(Globalization.Translations.TeamSelection, ViewType.TeamSelection, TeamSelection),
+                //new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches, MatchesIconKey),
+                new MenuItemTemplate(Globalization.Translations.TeamSelection, ViewType.TeamSelection, TeamSelectionIconKey),
                 new MenuItemTemplate(Globalization.Translations.Download, ViewType.Download, DownloadIconKey),
                 //new MenuItemTemplate(Globalization.Translations.Settings, ViewType.Settings, "SettingsIcon"),
                 new MenuItemTemplate(Globalization.Translations.Authorization, ViewType.Authorization, AuthorizationIconKey),

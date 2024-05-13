@@ -29,6 +29,8 @@
 
         public virtual ICollection<MatchOfficial> Officials { get; set; }
 
+        public MatchResult? Result { get; set; }
+
         public MatchRule Rules { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -45,15 +47,16 @@
 
         public Weather? Weather { get; set; }
 
-        public static Match Create(Models.Match xmlMatch, string system, Team team)
+        public static Match Create(Models.Match xmlMatch, string system, MatchResult? result, Team team)
         {
             return new Match
             {
                 AddedMinutes = xmlMatch.AddedMinutes,
                 CompetitionId = xmlMatch.MatchContextId != 0 ? xmlMatch.MatchContextId : null,
                 FinishDate = xmlMatch.FinishedDate,
-                Rules = (MatchRule)xmlMatch.MatchRuleId,
                 HattrickId = xmlMatch.MatchId,
+                Result = result,
+                Rules = (MatchRule)xmlMatch.MatchRuleId,
                 StartDate = xmlMatch.MatchDate,
                 System = system.ToMatchSystem(),
                 Team = team,
@@ -62,17 +65,19 @@
             };
         }
 
-        public bool HasChanged(Models.Match xmlMatch)
+        public bool HasChanged(Models.Match xmlMatch, MatchResult? result)
         {
             return this.AddedMinutes != xmlMatch.AddedMinutes
                 || this.FinishDate != xmlMatch.FinishedDate
+                || this.Result != result
                 || this.Weather != (xmlMatch.Arena.WeatherId != null ? (Weather)xmlMatch.Arena.WeatherId : null);
         }
 
-        public void Update(Models.Match xmlMatch)
+        public void Update(Models.Match xmlMatch, MatchResult? result)
         {
             this.AddedMinutes = xmlMatch.AddedMinutes;
             this.FinishDate = xmlMatch.FinishedDate;
+            this.Result = result;
             this.Weather = xmlMatch.Arena.WeatherId != null ? (Weather)xmlMatch.Arena.WeatherId : null;
         }
     }

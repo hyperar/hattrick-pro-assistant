@@ -28,439 +28,446 @@
 
     </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal"
-                Spacing="10">
+    <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="*,*">
 
-        <StackPanel Orientation="Vertical" Spacing="10">
+        <Grid.Styles>
 
-            <!-- Manager -->
-            <Border Background="{DynamicResource ControlFillColorDefault}"
-                    CornerRadius="{DynamicResource OverlayCornerRadius}"
-                    Padding="10">
+            <Style Selector="Border.container">
 
-                <Grid ColumnDefinitions="Auto,*"
-                      RowDefinitions="155,20,20,20"
-                      HorizontalAlignment="Center">
+                <Setter Property="Margin" Value="5" />
 
-                    <Grid.Styles>
+            </Style>
 
-                        <Style Selector="TextBlock.label">
+        </Grid.Styles>
 
-                            <Setter Property="Padding" Value="5 0" />
+        <!-- Team -->
+        <Border Classes="container"
+                Grid.Column="0"
+                Grid.Row="0"
+                Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
 
-                        </Style>
+            <Grid ColumnDefinitions="Auto,*"
+                  RowDefinitions="130,20,20,20,20,20"
+                  HorizontalAlignment="Center">
 
-                    </Grid.Styles>
+                <Grid.Styles>
 
-                    <Image Grid.Column="0"
-                           Grid.ColumnSpan="2"
-                           Grid.Row="0"
-                           Height="155"
-                           Source="{Binding Team.Manager.AvatarBytes,
-                                    Converter={StaticResource byteArrayToBitmapConverter},
-                                    ConverterParameter={StaticResource noManagerAvatar}}"
-                           Stretch="None"
-                           Width="110" />
+                    <Style Selector="TextBlock.label">
 
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="1"
-                               FontWeight="Medium"
-                               Text="{x:Static globalization:Translations.UserLabel}" />
+                        <Setter Property="Padding" Value="5 0" />
+                        <Setter Property="FontWeight" Value="Medium" />
 
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="1"
-                               Text="{Binding Team.Manager.UserName}" />
+                    </Style>
 
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="2"
-                               FontWeight="Medium"
-                               Text="{x:Static globalization:Translations.CountryLabel}" />
+                </Grid.Styles>
 
-                    <StackPanel Grid.Column="1"
-                                Grid.Row="2"
-                                Orientation="Horizontal"
-                                Spacing="5">
-
-                        <Image Height="12"
-                               Stretch="None"
-                               Source="{Binding Team.Manager.Country.FlagBytes,
-                                        Converter={StaticResource byteArrayToBitmapConverter}}"
-                               Width="20" />
-
-                        <TextBlock Text="{Binding Team.Manager.Country}" />
-
-                    </StackPanel>
-
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="3"
-                               FontWeight="Medium"
-                               Text="{x:Static globalization:Translations.SupporterLabel}" />
-
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="3"
-                               Text="{Binding Team.Manager.SupporterTier,
-                                  Converter={StaticResource enumToTranslatedStringConverter}}" />
-
-                </Grid>
-
-            </Border>
-
-            <!-- Team -->
-            <Border Background="{DynamicResource ControlFillColorDefault}"
-                    CornerRadius="{DynamicResource OverlayCornerRadius}"
-                    Padding="10">
-
-                <Grid ColumnDefinitions="Auto,*"
-                      RowDefinitions="130,20,20,20,20,20"
-                      HorizontalAlignment="Center">
-
-                    <Grid.Styles>
-
-                        <Style Selector="TextBlock.label">
-
-                            <Setter Property="Padding" Value="5 0" />
-                            <Setter Property="FontWeight" Value="Medium" />
-
-                        </Style>
-
-                    </Grid.Styles>
-
-                    <Image Grid.Column="0"
-                           Grid.ColumnSpan="2"
-                           Grid.Row="0"
-                           Height="130"
-                           Stretch="UniformToFill"
-                           Source="{Binding Team.LogoBytes,
+                <Image Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="0"
+                       Height="130"
+                       Stretch="UniformToFill"
+                       Source="{Binding Team.LogoBytes,
                                     Converter={StaticResource byteArrayToBitmapConverter},
                                     ConverterParameter={StaticResource noTeamLogo}}"
-                           Width="105" />
+                       Width="105" />
 
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="1"
-                               Text="{x:Static globalization:Translations.TeamLabel}" />
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           Text="{x:Static globalization:Translations.TeamLabel}" />
 
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="1"
-                               Text="{Binding Team}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{Binding Team}" />
 
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="2"
-                               Text="{x:Static globalization:Translations.LeagueLabel}" />
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           Text="{x:Static globalization:Translations.LeagueLabel}" />
 
-                    <StackPanel Grid.Column="1"
-                                Grid.Row="2"
-                                HorizontalAlignment="Stretch"
-                                Orientation="Horizontal"
-                                Spacing="5">
+                <StackPanel Grid.Column="1"
+                            Grid.Row="2"
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal"
+                            Spacing="5">
 
-                        <Image Height="12"
-                               Stretch="None"
-                               Source="{Binding Team.League.FlagBytes,
+                    <Image Height="12"
+                           Stretch="None"
+                           Source="{Binding Team.League.FlagBytes,
                                         Converter={StaticResource byteArrayToBitmapConverter}}"
-                               Width="20" />
+                           Width="20" />
 
-                        <TextBlock Text="{Binding Team.League}"
-                                   HorizontalAlignment="Stretch" />
+                    <TextBlock Text="{Binding Team.League}"
+                               HorizontalAlignment="Stretch" />
 
-                    </StackPanel>
+                </StackPanel>
 
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="3"
-                               Text="{x:Static globalization:Translations.CountryLabel}" />
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="3"
+                           Text="{x:Static globalization:Translations.CountryLabel}" />
 
-                    <StackPanel Grid.Column="1"
-                                Grid.Row="3"
-                                Orientation="Horizontal"
-                                Spacing="5">
+                <StackPanel Grid.Column="1"
+                            Grid.Row="3"
+                            Orientation="Horizontal"
+                            Spacing="5">
 
-                        <Image Height="12"
-                               Stretch="None"
-                               Source="{Binding Team.Country.FlagBytes,
+                    <Image Height="12"
+                           Stretch="None"
+                           Source="{Binding Team.Country.FlagBytes,
                                         Converter={StaticResource byteArrayToBitmapConverter}}"
-                               Width="20" />
+                           Width="20" />
 
-                        <TextBlock Text="{Binding Team.Country}"
-                                   HorizontalAlignment="Stretch" />
+                    <TextBlock Text="{Binding Team.Country}"
+                               HorizontalAlignment="Stretch" />
 
-                    </StackPanel>
+                </StackPanel>
 
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="4"
-                               Text="{x:Static globalization:Translations.RegionLabel}" />
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="4"
+                           Text="{x:Static globalization:Translations.RegionLabel}" />
 
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="4"
-                               Text="{Binding Team.Region}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="4"
+                           Text="{Binding Team.Region}" />
 
-                    <TextBlock Classes="label"
-                               Grid.Column="0"
-                               Grid.Row="5"
-                               Text="{x:Static globalization:Translations.SeriesLabel}" />
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="5"
+                           Text="{x:Static globalization:Translations.SeriesLabel}" />
 
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="5"
-                               Text="{Binding Team.Series}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="5"
+                           Text="{Binding Team.Series}" />
 
-                </Grid>
+            </Grid>
 
-            </Border>
+        </Border>
 
-        </StackPanel>
+        <!-- Manager -->
+        <Border Classes="container"
+                Grid.Column="0"
+                Grid.Row="1"
+                Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
 
-        <StackPanel Orientation="Vertical"
-                    Spacing="10">
+            <Grid ColumnDefinitions="Auto,*"
+                  RowDefinitions="155,20,20,20"
+                  HorizontalAlignment="Center">
 
-            <!-- Upcoming Matches -->
-            <Border Background="{DynamicResource ControlFillColorDefault}"
-                    CornerRadius="{DynamicResource OverlayCornerRadius}"
-                    Padding="10">
+                <Grid.Styles>
 
-                <DataGrid AutoGenerateColumns="False"
-                          CanUserReorderColumns="False"
-                          CanUserResizeColumns="True"
-                          CanUserSortColumns="False"
-                          IsReadOnly="True"
-                          IsScrollInertiaEnabled="True"
-                          ItemsSource="{Binding Team.UpcomingMatches, Mode=OneWay}"
-                          SelectionMode="Single">
+                    <Style Selector="TextBlock.label">
 
-                    <DataGrid.Columns>
+                        <Setter Property="Padding" Value="5 0" />
 
-                        <DataGridTextColumn Binding="{Binding Date, StringFormat=G}"
-                                            Header="{x:Static globalization:Translations.Date}"/>
-                        <DataGridTextColumn Binding="{Binding Type, Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}"
-                                            Header="{x:Static globalization:Translations.Type}"/>
-                        <DataGridTextColumn Binding="{Binding HomeTeam.Name}"
-                                            Header="{x:Static globalization:Translations.HomeTeam}" />
-                        <DataGridTemplateColumn>
+                    </Style>
 
-                            <DataTemplate>
+                </Grid.Styles>
 
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
+                <Image Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="0"
+                       Height="155"
+                       Source="{Binding Team.Manager.AvatarBytes,
+                                    Converter={StaticResource byteArrayToBitmapConverter},
+                                    ConverterParameter={StaticResource noManagerAvatar}}"
+                       Stretch="None"
+                       Width="110" />
 
-                                    <TextBlock Text="-" />
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           FontWeight="Medium"
+                           Text="{x:Static globalization:Translations.UserLabel}" />
 
-                                </StackPanel>
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{Binding Team.Manager.UserName}" />
 
-                            </DataTemplate>
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           FontWeight="Medium"
+                           Text="{x:Static globalization:Translations.CountryLabel}" />
 
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding AwayTeam.Name}"
-                                            Header="{x:Static globalization:Translations.AwayTeam}" />
+                <StackPanel Grid.Column="1"
+                            Grid.Row="2"
+                            Orientation="Horizontal"
+                            Spacing="5">
 
-                    </DataGrid.Columns>
+                    <Image Height="12"
+                           Stretch="None"
+                           Source="{Binding Team.Manager.Country.FlagBytes,
+                                        Converter={StaticResource byteArrayToBitmapConverter}}"
+                           Width="20" />
 
-                </DataGrid>
+                    <TextBlock Text="{Binding Team.Manager.Country}" />
 
-            </Border>
+                </StackPanel>
 
-            <!-- Recent Matches -->
-            <Border Background="{DynamicResource ControlFillColorDefault}"
-                    CornerRadius="{DynamicResource OverlayCornerRadius}"
-                    Padding="10">
+                <TextBlock Classes="label"
+                           Grid.Column="0"
+                           Grid.Row="3"
+                           FontWeight="Medium"
+                           Text="{x:Static globalization:Translations.SupporterLabel}" />
 
-                <DataGrid AutoGenerateColumns="False"
-                          CanUserReorderColumns="False"
-                          CanUserResizeColumns="True"
-                          CanUserSortColumns="False"
-                          IsReadOnly="True"
-                          IsScrollInertiaEnabled="True"
-                          ItemsSource="{Binding Team.RecentMatches, Mode=OneWay}"
-                          SelectionMode="Single">
+                <TextBlock Grid.Column="1"
+                           Grid.Row="3"
+                           Text="{Binding Team.Manager.SupporterTier,
+                                  Converter={StaticResource enumToTranslatedStringConverter}}" />
 
-                    <DataGrid.Columns>
+            </Grid>
 
-                        <DataGridTextColumn Binding="{Binding Date, StringFormat=G}"
-                                            Header="{x:Static globalization:Translations.Date}"/>
-                        <DataGridTextColumn Binding="{Binding Type, Mode=OneWay,
-                                                      Converter={StaticResource enumToTranslatedStringConverter}}"
-                                            Header="{x:Static globalization:Translations.Type}"/>
-                        <DataGridTextColumn Binding="{Binding HomeTeam.Name}"
-                                            Header="{x:Static globalization:Translations.HomeTeam}"/>
-                        <DataGridTemplateColumn Header="{x:Static globalization:Translations.Score}">
+        </Border>
 
-                            <DataTemplate>
+        <!-- Upcoming Matches -->
+        <Border Classes="container"
+                Grid.Column="1"
+                Grid.Row="0"
+                Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
 
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="5"
-                                            Spacing="5"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center">
+            <DataGrid AutoGenerateColumns="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="True"
+                      CanUserSortColumns="False"
+                      IsReadOnly="True"
+                      IsScrollInertiaEnabled="True"
+                      ItemsSource="{Binding Team.UpcomingMatches, Mode=OneWay}"
+                      SelectionMode="Single">
 
-                                    <TextBlock Text="{Binding HomeTeamScore}" />
-                                    <TextBlock HorizontalAlignment="Center"
-                                               Text="-"
-                                               VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding AwayTeamScore}" />
+                <DataGrid.Columns>
 
-                                </StackPanel>
+                    <DataGridTextColumn Binding="{Binding Date, StringFormat=g}"
+                                        Header="{x:Static globalization:Translations.Date}" />
+                    <DataGridTextColumn Binding="{Binding HomeTeam.Name}"
+                                        Header="{x:Static globalization:Translations.HomeTeam}" />
+                    <DataGridTemplateColumn>
 
-                            </DataTemplate>
+                        <DataTemplate>
 
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding AwayTeam.Name}"
-                                            Header="{x:Static globalization:Translations.AwayTeam}"/>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
 
-                    </DataGrid.Columns>
+                                <TextBlock Text="-" />
 
-                </DataGrid>
+                            </StackPanel>
 
-            </Border>
+                        </DataTemplate>
 
-        </StackPanel>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding AwayTeam.Name}"
+                                        Header="{x:Static globalization:Translations.AwayTeam}" />
 
-        <StackPanel Orientation="Vertical"
-            Spacing="10">
+                </DataGrid.Columns>
 
-            <!-- Players -->
-            <Border Background="{DynamicResource ControlFillColorDefault}"
-                    CornerRadius="{DynamicResource OverlayCornerRadius}"
-                    Padding="10">
+            </DataGrid>
 
-                <DataGrid AutoGenerateColumns="False"
-                          CanUserReorderColumns="False"
-                          CanUserResizeColumns="True"
-                          CanUserSortColumns="False"
-                          IsReadOnly="True"
-                          IsScrollInertiaEnabled="True"
-                          ItemsSource="{Binding Team.Players, Mode=OneWay}"
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                          SelectionMode="Single">
+        </Border>
 
-                    <DataGrid.Columns>
+        <!-- Recent Matches -->
+        <Border Classes="container"
+                Grid.Column="1"
+                Grid.Row="1"
+                Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
 
-                        <DataGridTextColumn Binding="{Binding ShirtNumber}"
-                                            Header="#" />
-                        <DataGridTextColumn Binding="{Binding}"
-                                            Header="{x:Static globalization:Translations.Name}" />
-                        <DataGridTemplateColumn>
+            <DataGrid AutoGenerateColumns="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="True"
+                      CanUserSortColumns="False"
+                      IsReadOnly="True"
+                      IsScrollInertiaEnabled="True"
+                      ItemsSource="{Binding Team.RecentMatches, Mode=OneWay}"
+                      SelectionMode="Single">
 
-                            <DataTemplate>
+                <DataGrid.Columns>
 
-                                <PathIcon Data="{StaticResource TransferListedIcon}"
-                                          IsVisible="{Binding IsTransferListed}"
-                                          Height="16"
-                                          ToolTip.Tip="{x:Static globalization:Translations.TransferListedTooltip}"
-                                          Width="16" />
+                    <DataGridTextColumn Binding="{Binding Date, StringFormat=g}"
+                                        Header="{x:Static globalization:Translations.Date}" />
+                    <DataGridTextColumn Binding="{Binding HomeTeam.Name}"
+                                        Header="{x:Static globalization:Translations.HomeTeam}"/>
+                    <DataGridTemplateColumn Header="{x:Static globalization:Translations.Score}">
 
-                            </DataTemplate>
+                        <DataTemplate>
 
-                        </DataGridTemplateColumn>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="5"
+                                        Spacing="5"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
 
-                        <DataGridTemplateColumn>
+                                <TextBlock Text="{Binding HomeTeamScore}"
+                                           VerticalAlignment="Center" />
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="-"
+                                           VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding AwayTeamScore}"
+                                           VerticalAlignment="Center" />
 
-                            <DataTemplate>
+                            </StackPanel>
 
-                                <PathIcon Data="{Binding Specialty,
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding AwayTeam.Name}"
+                                        Header="{x:Static globalization:Translations.AwayTeam}"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </Border>
+
+        <!-- Players -->
+        <Border Classes="container"
+                Grid.Column="2"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Padding="10">
+
+            <DataGrid AutoGenerateColumns="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="True"
+                      CanUserSortColumns="False"
+                      IsReadOnly="True"
+                      IsScrollInertiaEnabled="True"
+                      ItemsSource="{Binding Team.Players, Mode=OneWay}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      SelectionMode="Single">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Binding="{Binding ShirtNumber}"
+                                        Header="#" />
+                    <DataGridTextColumn Binding="{Binding}"
+                                        Header="{x:Static globalization:Translations.Name}" />
+                    <DataGridTemplateColumn>
+
+                        <DataTemplate>
+
+                            <PathIcon Data="{StaticResource TransferListedIcon}"
+                                      IsVisible="{Binding IsTransferListed}"
+                                      Height="16"
+                                      ToolTip.Tip="{x:Static globalization:Translations.TransferListedTooltip}"
+                                      Width="16" />
+
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+
+                        <DataTemplate>
+
+                            <PathIcon Data="{Binding Specialty,
                                                  Converter={StaticResource enumToImageConverter}}"
-                                          ToolTip.Tip="{Binding Specialty,
+                                      ToolTip.Tip="{Binding Specialty,
                                                         Converter={StaticResource enumToTranslatedStringConverter}}"
+                                      Height="16"
+                                      Width="16" />
+
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+
+                        <DataTemplate>
+
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        Margin="5"
+                                        ToolTip.Tip="{Binding HealthStatus,
+                                                          Converter={StaticResource healthStatusToTranslatedStringConverter}}"
+                                        VerticalAlignment="Center"
+                                        Spacing="5">
+
+                                <PathIcon Data="{Binding HealthStatus,
+                                                     Converter={StaticResource healthStatusToImageConverter}}"
                                           Height="16"
                                           Width="16" />
 
-                            </DataTemplate>
-
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn>
-
-                            <DataTemplate>
-
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Center"
-                                            Margin="5"
-                                            ToolTip.Tip="{Binding HealthStatus,
-                                                          Converter={StaticResource healthStatusToTranslatedStringConverter}}"
-                                            VerticalAlignment="Center"
-                                            Spacing="5">
-
-                                    <PathIcon Data="{Binding HealthStatus,
-                                                     Converter={StaticResource healthStatusToImageConverter}}"
-                                              Height="16"
-                                              Width="16" />
-
-                                    <TextBlock Text="{Binding HealthStatus,
+                                <TextBlock Text="{Binding HealthStatus,
                                                       Converter={StaticResource healthStatusToValueStringConverter}}"
-                                               IsVisible="{Binding HealthStatus,
+                                           IsVisible="{Binding HealthStatus,
                                                            Converter={StaticResource notEqualToBooleanConverter},
                                                            ConverterParameter=0}" />
 
-                                </StackPanel>
+                            </StackPanel>
 
-                            </DataTemplate>
+                        </DataTemplate>
 
-                        </DataGridTemplateColumn>
+                    </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
 
-                            <DataTemplate>
+                        <DataTemplate>
 
-                                <PathIcon Data="{StaticResource MotherClubBonusIcon}"
-                                          IsVisible="{Binding HasMotherClubBonus}"
+                            <PathIcon Data="{StaticResource MotherClubBonusIcon}"
+                                      IsVisible="{Binding HasMotherClubBonus}"
+                                      Height="16"
+                                      ToolTip.Tip="{x:Static globalization:Translations.MotherClubBonusTooltip}"
+                                      Width="16" />
+
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+
+                        <DataTemplate>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="5"
+                                        HorizontalAlignment="Center"
+                                        ToolTip.Tip="{Binding BookingStatus,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}"
+                                        VerticalAlignment="Center">
+
+                                <PathIcon Data="{Binding BookingStatus,
+                                                     Converter={StaticResource enumToImageConverter}}"
+                                          Foreground="{Binding BookingStatus,
+                                                       Converter={StaticResource enumToColorConverter}}"
+                                          IsVisible="{Binding BookingStatus,
+                                                      Converter={StaticResource notEqualToBooleanConverter},
+                                                      ConverterParameter={x:Static enums:BookingStatus.NoBookings}}"
                                           Height="16"
-                                          ToolTip.Tip="{x:Static globalization:Translations.MotherClubBonusTooltip}"
                                           Width="16" />
 
-                            </DataTemplate>
-
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn>
-
-                            <DataTemplate>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="5"
-                                            HorizontalAlignment="Center"
-                                            ToolTip.Tip="{Binding BookingStatus,
-                                                          Converter={StaticResource enumToTranslatedStringConverter}}"
-                                            VerticalAlignment="Center">
-
-                                    <PathIcon Data="{Binding BookingStatus,
-                                                     Converter={StaticResource enumToImageConverter}}"
-                                              Foreground="{Binding BookingStatus,
-                                                           Converter={StaticResource enumToColorConverter}}"
-                                              IsVisible="{Binding BookingStatus,
-                                                          Converter={StaticResource notEqualToBooleanConverter},
-                                                          ConverterParameter={x:Static enums:BookingStatus.NoBookings}}"
-                                              Height="16"
-                                              Width="16" />
-
-                                    <PathIcon Data="{Binding BookingStatus,
+                                <PathIcon Data="{Binding BookingStatus,
                                                      Converter={StaticResource enumToImageConverter},
                                                      ConverterParameter={x:Static enums:BookingStatus.TwoYellowCards}}"
-                                              Foreground="{Binding BookingStatus,
-                                                           Converter={StaticResource enumToColorConverter}}"
-                                              IsVisible="{Binding BookingStatus,
-                                                          Converter={StaticResource equalToBooleanConverter},
-                                                          ConverterParameter={x:Static enums:BookingStatus.TwoYellowCards}}"
-                                              Height="16"
-                                              Width="16" />
+                                          Foreground="{Binding BookingStatus,
+                                                       Converter={StaticResource enumToColorConverter}}"
+                                          IsVisible="{Binding BookingStatus,
+                                                      Converter={StaticResource equalToBooleanConverter},
+                                                      ConverterParameter={x:Static enums:BookingStatus.TwoYellowCards}}"
+                                          Height="16"
+                                          Width="16" />
 
-                                </StackPanel>
+                            </StackPanel>
 
-                            </DataTemplate>
+                        </DataTemplate>
 
-                        </DataGridTemplateColumn>
+                    </DataGridTemplateColumn>
 
-                    </DataGrid.Columns>
+                </DataGrid.Columns>
 
-                </DataGrid>
+            </DataGrid>
 
-            </Border>
+        </Border>
 
-        </StackPanel>
-
-    </StackPanel>
+    </Grid>
 
 </UserControl>

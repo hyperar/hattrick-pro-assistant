@@ -163,8 +163,7 @@
             Models.MatchDetails.Arena xmlArena,
             Domain.Senior.Match match)
         {
-            var matchArena = await this.matchArenaRepository.Query(x => x.HattrickId == xmlArena.ArenaId
-                                                                     && x.MatchHattrickId == match.HattrickId)
+            var matchArena = await this.matchArenaRepository.Query(x => x.MatchHattrickId == match.HattrickId)
                                                             .SingleOrDefaultAsync();
 
             if (matchArena == null)
@@ -189,6 +188,28 @@
         {
             var match = await this.matchRepository.GetByHattrickIdAsync(xmlMatch.MatchId);
 
+            MatchResult? matchResult = null;
+
+            if (xmlMatch.FinishedDate.HasValue)
+            {
+                if (xmlMatch.HomeTeam.Goals == xmlMatch.AwayTeam.Goals)
+                {
+                    matchResult = MatchResult.Drawn;
+                }
+                else if (xmlMatch.HomeTeam.TeamId == teamId)
+                {
+                    matchResult = xmlMatch.HomeTeam.Goals > xmlMatch.AwayTeam.Goals
+                                ? MatchResult.Won
+                                : MatchResult.Lost;
+                }
+                else
+                {
+                    matchResult = xmlMatch.HomeTeam.Goals < xmlMatch.AwayTeam.Goals
+                                ? MatchResult.Won
+                                : MatchResult.Lost;
+                }
+            }
+
             if (match == null)
             {
                 var team = await this.teamRepository.GetByHattrickIdAsync(teamId);
@@ -199,11 +220,12 @@
                     Domain.Senior.Match.Create(
                         xmlMatch,
                         sourceSytem,
+                        matchResult,
                         team));
             }
-            else if (match.HasChanged(xmlMatch))
+            else if (match.HasChanged(xmlMatch, matchResult))
             {
-                match.Update(xmlMatch);
+                match.Update(xmlMatch, matchResult);
 
                 this.matchRepository.Update(match);
             }

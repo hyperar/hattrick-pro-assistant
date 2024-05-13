@@ -74,17 +74,17 @@
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Binding="{Binding Title, Mode=OneWay}"
-                                                Header="Title"
+                                                Header="{x:Static globalization:Translations.Title}"
                                                 Width="2*"/>
 
                             <DataGridTextColumn Binding="{Binding Type, Mode=OneWay,
                                                           Converter={StaticResource enumToTranslatedStringConverter}}"
-                                                Header="Type"
+                                                Header="{x:Static globalization:Translations.Type}"
                                                 Width="*"/>
 
                             <DataGridTextColumn Binding="{Binding Status, Mode=OneWay,
                                                           Converter={StaticResource enumToTranslatedStringConverter}}"
-                                                Header="Status"
+                                                Header="{x:Static globalization:Translations.Status}"
                                                 Width="*"/>
 
                         </DataGrid.Columns>

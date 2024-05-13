@@ -49,6 +49,7 @@
         {
             return this.Attendance != xmlArena.SoldTotal
                 || this.BasicSeatsSold != xmlArena.SoldBasic
+                || this.HattrickId != xmlArena.ArenaId
                 || this.Name != xmlArena.ArenaName
                 || this.RoofSeatsSold != xmlArena.SoldRoof
                 || this.TerracesSold != xmlArena.SoldTerraces
@@ -59,6 +60,7 @@
         {
             this.Attendance = xmlArena.SoldTotal;
             this.BasicSeatsSold = xmlArena.SoldBasic;
+            this.HattrickId = xmlArena.ArenaId;
             this.Name = xmlArena.ArenaName;
             this.RoofSeatsSold = xmlArena.SoldRoof;
             this.TerracesSold = xmlArena.SoldTerraces;

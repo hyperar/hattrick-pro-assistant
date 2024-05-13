@@ -22,6 +22,8 @@
 
         public byte HomeTeamScore { get; set; }
 
+        public MatchResult Result { get; set; }
+
         public MatchType Type { get; set; }
     }
 }

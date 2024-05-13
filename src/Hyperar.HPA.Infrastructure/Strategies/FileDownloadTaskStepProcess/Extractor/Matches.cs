@@ -15,13 +15,13 @@
 
     public class Matches : IFileDownloadTaskStepProcessStrategy
     {
-        private const string matchEventsParamKey = "matchEvents";
+        private const string MatchEventsParamKey = "matchEvents";
 
-        private const string matchIdParamKey = "matchId";
+        private const string MatchIdParamKey = "matchId";
 
-        private const string sourceSystemParamKey = "sourceSystem";
+        private const string SourceSystemParamKey = "sourceSystem";
 
-        private const string teamIdParamKey = "teamId";
+        private const string TeamIdParamKey = "teamId";
 
         private readonly IHattrickRepository<Domain.Senior.Match> matchRepository;
 
@@ -74,9 +74,9 @@
                                         file.Team.TeamId,
                                         new NameValueCollection
                                         {
-                                            { matchIdParamKey, curMatch.MatchId.ToString() },
-                                            { matchEventsParamKey, bool.TrueString},
-                                            { sourceSystemParamKey, curMatch.SourceSystem.ToString() }
+                                            { MatchIdParamKey, curMatch.MatchId.ToString() },
+                                            { MatchEventsParamKey, bool.TrueString},
+                                            { SourceSystemParamKey, curMatch.SourceSystem.ToString() }
                                         }));
                             }
 
@@ -88,9 +88,9 @@
                                         curMatch.MatchContextId,
                                         new NameValueCollection
                                         {
-                                            { matchIdParamKey, curMatch.MatchId.ToString() },
-                                            { teamIdParamKey, curMatch.HomeTeam.HomeTeamId.ToString() },
-                                            { sourceSystemParamKey, curMatch.SourceSystem }
+                                            { MatchIdParamKey, curMatch.MatchId.ToString() },
+                                            { TeamIdParamKey, curMatch.HomeTeam.HomeTeamId.ToString() },
+                                            { SourceSystemParamKey, curMatch.SourceSystem }
                                         }));
 
                                 fileDownloadTasks.Add(
@@ -99,9 +99,9 @@
                                         xmlFileDownloadTask.ContextId,
                                         new NameValueCollection
                                         {
-                                            { matchIdParamKey, curMatch.MatchId.ToString() },
-                                            { teamIdParamKey, curMatch.AwayTeam.AwayTeamId.ToString() },
-                                            { sourceSystemParamKey, curMatch.SourceSystem }
+                                            { MatchIdParamKey, curMatch.MatchId.ToString() },
+                                            { TeamIdParamKey, curMatch.AwayTeam.AwayTeamId.ToString() },
+                                            { SourceSystemParamKey, curMatch.SourceSystem }
                                         }));
                             }
                         }

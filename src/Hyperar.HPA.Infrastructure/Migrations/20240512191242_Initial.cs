@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -270,6 +271,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     FinishDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     AddedMinutes = table.Column<byte>(type: "tinyint", nullable: true),
                     Weather = table.Column<byte>(type: "tinyint", nullable: true),
+                    Result = table.Column<byte>(type: "tinyint", nullable: true),
                     TeamHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
