@@ -139,8 +139,12 @@
 
         private static async Task<PlayersViewModel> CreatePlayersViewModelAsync(IServiceProvider services)
         {
+            IServiceScope scope = services.CreateScope();
+
             PlayersViewModel viewModel = new PlayersViewModel(
-                services.GetRequiredService<INavigator>());
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<ITeamSelector>(),
+                scope.ServiceProvider.GetRequiredService<IPlayersViewService>());
 
             await viewModel.InitializeAsync();
 

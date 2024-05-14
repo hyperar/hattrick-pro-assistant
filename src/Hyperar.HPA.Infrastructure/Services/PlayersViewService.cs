@@ -1,10 +1,11 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System.Linq;
-    using Application.Models.Players;
+    using Shared.Models.UI.Players;
     using Application.Services;
     using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using Hyperar.HPA.Shared.Enums;
 
     public class PlayersViewService : IPlayersViewService
     {
@@ -34,7 +35,7 @@
             };
         }
 
-        public async Task<Player[]> GetPlayerAsync(uint teamId)
+        public async Task<Player[]> GetPlayersAsync(long teamId)
         {
             Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(teamId);
 
@@ -62,7 +63,7 @@
 
             return new Player
             {
-                Id = player.HattrickId,
+                HattrickId = player.HattrickId,
                 FirstName = player.FirstName,
                 NickName = player.NickName,
                 LastName = player.LastName,
@@ -70,48 +71,61 @@
                 AgeYears = player.AgeYears,
                 AgeDays = player.AgeDays,
                 TotalSkillIndex = player.TotalSkillIndex,
+                Country = new Country()
+                {
+                    FlagBytes = player.Country.League.FlagBytes,
+                    HattrickId = player.Country.HattrickId,
+                    Name = player.Country.Name
+                },
                 HasMotherClubBonus = player.HasMotherClubBonus,
+                IsTransferListed = player.IsTransferListed,
                 Salary = player.Salary,
                 Specialty = player.Specialty,
-                Agreeability = player.Agreeability,
-                Aggressiveness = player.Aggressiveness,
-                Honesty = player.Honesty,
-                Leadership = player.Leadership,
+                AgreeabilityLevel = player.Agreeability,
+                AggressivenessLevel = player.Aggressiveness,
+                HonestyLevel = player.Honesty,
+                LeadershipLevel = player.Leadership,
                 BookingStatus = player.BookingStatus,
-                Health = player.Health,
-                Form = currentSkills.Form,
-                FormDelta = previousSkills == null ? null : currentSkills.Form - previousSkills.Form,
-                Stamina = currentSkills.Stamina,
-                StaminaDelta = previousSkills == null ? null : currentSkills.Stamina - previousSkills.Stamina,
-                Keeper = currentSkills.Keeper,
-                KeeperDelta = previousSkills == null ? null : currentSkills.Keeper - previousSkills.Keeper,
-                Defending = currentSkills.Defending,
-                DefendingDelta = previousSkills == null ? null : currentSkills.Defending - previousSkills.Defending,
-                Playmaking = currentSkills.Playmaking,
-                PlaymakingDelta = previousSkills == null ? null : currentSkills.Playmaking - previousSkills.Playmaking,
-                Winger = currentSkills.Winger,
-                WingerDelta = previousSkills == null ? null : currentSkills.Winger - previousSkills.Winger,
-                Passing = currentSkills.Passing,
-                PassingDelta = previousSkills == null ? null : currentSkills.Passing - previousSkills.Passing,
-                Scoring = currentSkills.Scoring,
-                ScoringDelta = previousSkills == null ? null : currentSkills.Scoring - previousSkills.Scoring,
-                SetPieces = currentSkills.SetPieces,
-                SetPiecesDelta = previousSkills == null ? null : currentSkills.SetPieces - previousSkills.SetPieces,
-                Loyalty = currentSkills.Loyalty,
-                LoyaltyDelta = previousSkills == null ? null : currentSkills.Loyalty - previousSkills.Loyalty,
-                Experience = currentSkills.Experience,
-                ExperienceDelta = previousSkills == null ? null : currentSkills.Experience - previousSkills.Experience,
+                HealthStatus = player.Health,
+                FormLevel = currentSkills.Form,
+                FormLevelDelta = GetPlayerSkillDelta(currentSkills.Form, previousSkills?.Form),
+                StaminaLevel = currentSkills.Stamina,
+                StaminaLevelDelta = GetPlayerSkillDelta(currentSkills.Stamina, previousSkills?.Stamina),
+                KeeperLevel = currentSkills.Keeper,
+                KeeperLevelDelta = GetPlayerSkillDelta(currentSkills.Keeper, previousSkills?.Keeper),
+                DefendingLevel = currentSkills.Defending,
+                DefendingLevelDelta = GetPlayerSkillDelta(currentSkills.Defending, previousSkills?.Defending),
+                PlaymakingLevel = currentSkills.Playmaking,
+                PlaymakingLevelDelta = GetPlayerSkillDelta(currentSkills.Playmaking, previousSkills?.Playmaking),
+                WingerLevel = currentSkills.Winger,
+                WingerLevelDelta = GetPlayerSkillDelta(currentSkills.Winger, previousSkills?.Winger),
+                PassingLevel = currentSkills.Passing,
+                PassingLevelDelta = GetPlayerSkillDelta(currentSkills.Passing, previousSkills?.Passing),
+                ScoringLevel = currentSkills.Scoring,
+                ScoringLevelDelta = GetPlayerSkillDelta(currentSkills.Scoring, previousSkills?.Scoring),
+                SetPiecesLevel = currentSkills.SetPieces,
+                SetPiecesLevelDelta = GetPlayerSkillDelta(currentSkills.SetPieces, previousSkills?.SetPieces),
+                LoyaltyLevel = currentSkills.Loyalty,
+                LoyaltyLevelDelta = GetPlayerSkillDelta(currentSkills.Loyalty, previousSkills?.Loyalty),
+                ExperienceLevel = currentSkills.Experience,
+                ExperienceLevelDelta = GetPlayerSkillDelta(currentSkills.Experience, previousSkills?.Experience),
                 SeasonLeagueGoals = player.CurrentSeasonLeagueGoals,
                 SeasonCupGoals = player.CurrentSeasonCupGoals,
                 SeasonFriendlyGoals = player.CurrentSeasonFriendlyGoals,
                 CareerLeagueGoals = player.CareerGoals,
                 CareerHattricks = player.CareerHattricks,
-                TeamGoals = player.GoalsOnTeam,
-                TeamMatches = player.MatchesOnTeam,
-                Avatar = player.AvatarBytes ?? Array.Empty<byte>(),
-                LeagueFlag = player.Country.League.FlagBytes,
-                CountryName = player.Country.Name
+                GoalsOnTeam = player.GoalsOnTeam,
+                MatchesOnTeam = player.MatchesOnTeam,
+                AvatarBytes = player.AvatarBytes ?? Array.Empty<byte>(),
             };
+        }
+
+        private static short GetPlayerSkillDelta(SkillLevel currentSkillLevel, SkillLevel? previousSkillLevel)
+        {
+            short currentSkillLevelAux = (short)currentSkillLevel;
+            short previousSkillLevelAux = (short)(previousSkillLevel ?? currentSkillLevel);
+
+            return (short)(currentSkillLevelAux - previousSkillLevelAux);
         }
     }
 }

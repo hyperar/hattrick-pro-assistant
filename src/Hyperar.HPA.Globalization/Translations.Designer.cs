@@ -88,11 +88,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        public static string AgeHeader {
+            get {
+                return ResourceManager.GetString("AgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} years and {1} day(s).
+        /// </summary>
+        public static string AgeMask {
+            get {
+                return ResourceManager.GetString("AgeMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aggressiveness.
         /// </summary>
-        public static string Aggressiveness {
+        public static string AggressivenessHeader {
             get {
-                return ResourceManager.GetString("Aggressiveness", resourceCulture);
+                return ResourceManager.GetString("AggressivenessHeader", resourceCulture);
             }
         }
         
@@ -153,9 +171,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Agreeability.
         /// </summary>
-        public static string Agreeability {
+        public static string AgreeabilityHeader {
             get {
-                return ResourceManager.GetString("Agreeability", resourceCulture);
+                return ResourceManager.GetString("AgreeabilityHeader", resourceCulture);
             }
         }
         
@@ -259,11 +277,11 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bookings.
+        ///   Looks up a localized string similar to B.
         /// </summary>
-        public static string Bookings {
+        public static string BookingsHeader {
             get {
-                return ResourceManager.GetString("Bookings", resourceCulture);
+                return ResourceManager.GetString("BookingsHeader", resourceCulture);
             }
         }
         
@@ -304,6 +322,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bookings.
+        /// </summary>
+        public static string BookingsToolTip {
+            get {
+                return ResourceManager.GetString("BookingsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bruised.
         /// </summary>
         public static string BruisedTooltip {
@@ -331,6 +358,42 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HT (C).
+        /// </summary>
+        public static string CareerHattricksHeader {
+            get {
+                return ResourceManager.GetString("CareerHattricksHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hattricks (Career).
+        /// </summary>
+        public static string CareerHattricksToolTip {
+            get {
+                return ResourceManager.GetString("CareerHattricksToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LG (C).
+        /// </summary>
+        public static string CareerLeagueGoalsHeader {
+            get {
+                return ResourceManager.GetString("CareerLeagueGoalsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to League Goals (Career.
+        /// </summary>
+        public static string CareerLeagueGoalsToolTip {
+            get {
+                return ResourceManager.GetString("CareerLeagueGoalsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Once you have logged in into your Hattrick account, you will be provided with a Verification Code. Copy the code and paste it below, making sure there&apos;s no blank spaces at the beggining or the end of the code..
         /// </summary>
         public static string CopyAndPasteVerificationCodeMessage {
@@ -349,11 +412,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C.
+        /// </summary>
+        public static string CountryHeader {
+            get {
+                return ResourceManager.GetString("CountryHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Country:.
         /// </summary>
         public static string CountryLabel {
             get {
                 return ResourceManager.GetString("CountryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string CountryToolTip {
+            get {
+                return ResourceManager.GetString("CountryToolTip", resourceCulture);
             }
         }
         
@@ -396,9 +477,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Defending.
         /// </summary>
-        public static string Defending {
+        public static string DefendingHeader {
             get {
-                return ResourceManager.GetString("Defending", resourceCulture);
+                return ResourceManager.GetString("DefendingHeader", resourceCulture);
             }
         }
         
@@ -549,9 +630,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Experience.
         /// </summary>
-        public static string Experience {
+        public static string ExperienceHeader {
             get {
-                return ResourceManager.GetString("Experience", resourceCulture);
+                return ResourceManager.GetString("ExperienceHeader", resourceCulture);
             }
         }
         
@@ -576,9 +657,45 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Form.
         /// </summary>
-        public static string Form {
+        public static string FormHeader {
             get {
-                return ResourceManager.GetString("Form", resourceCulture);
+                return ResourceManager.GetString("FormHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GoT.
+        /// </summary>
+        public static string GoalsOnTeamHeader {
+            get {
+                return ResourceManager.GetString("GoalsOnTeamHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goals on Team.
+        /// </summary>
+        public static string GoalsOnTeamToolTip {
+            get {
+                return ResourceManager.GetString("GoalsOnTeamToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HS.
+        /// </summary>
+        public static string HealthStatusHeader {
+            get {
+                return ResourceManager.GetString("HealthStatusHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health Status.
+        /// </summary>
+        public static string HealthStatusToolTip {
+            get {
+                return ResourceManager.GetString("HealthStatusToolTip", resourceCulture);
             }
         }
         
@@ -603,9 +720,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Honesty.
         /// </summary>
-        public static string Honesty {
+        public static string HonestyHeader {
             get {
-                return ResourceManager.GetString("Honesty", resourceCulture);
+                return ResourceManager.GetString("HonestyHeader", resourceCulture);
             }
         }
         
@@ -664,6 +781,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string IDHeader {
+            get {
+                return ResourceManager.GetString("IDHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string Information {
@@ -693,9 +819,27 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Keeper.
         /// </summary>
-        public static string Keeper {
+        public static string KeeperHeader {
             get {
-                return ResourceManager.GetString("Keeper", resourceCulture);
+                return ResourceManager.GetString("KeeperHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lastname.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leadership.
+        /// </summary>
+        public static string LeadershipHeader {
+            get {
+                return ResourceManager.GetString("LeadershipHeader", resourceCulture);
             }
         }
         
@@ -720,9 +864,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Loyalty.
         /// </summary>
-        public static string Loyalty {
+        public static string LoyaltyHeader {
             get {
-                return ResourceManager.GetString("Loyalty", resourceCulture);
+                return ResourceManager.GetString("LoyaltyHeader", resourceCulture);
             }
         }
         
@@ -741,6 +885,24 @@ namespace Hyperar.HPA.Globalization {
         public static string Matches {
             get {
                 return ResourceManager.GetString("Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MoT.
+        /// </summary>
+        public static string MatchesOnTeamHeader {
+            get {
+                return ResourceManager.GetString("MatchesOnTeamHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches on Team.
+        /// </summary>
+        public static string MatchesOnTeamToolTip {
+            get {
+                return ResourceManager.GetString("MatchesOnTeamToolTip", resourceCulture);
             }
         }
         
@@ -934,20 +1096,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MC.
+        /// </summary>
+        public static string MotherClubBonusHeader {
+            get {
+                return ResourceManager.GetString("MotherClubBonusHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mother club bonus.
         /// </summary>
-        public static string MotherClubBonusTooltip {
+        public static string MotherClubBonusToolTip {
             get {
-                return ResourceManager.GetString("MotherClubBonusTooltip", resourceCulture);
+                return ResourceManager.GetString("MotherClubBonusToolTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string Name {
+        public static string NameHeader {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("NameHeader", resourceCulture);
             }
         }
         
@@ -990,9 +1161,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Passing.
         /// </summary>
-        public static string Passing {
+        public static string PassingHeader {
             get {
-                return ResourceManager.GetString("Passing", resourceCulture);
+                return ResourceManager.GetString("PassingHeader", resourceCulture);
             }
         }
         
@@ -1008,9 +1179,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Playmaking.
         /// </summary>
-        public static string Playmaking {
+        public static string PlaymakingHeader {
             get {
-                return ResourceManager.GetString("Playmaking", resourceCulture);
+                return ResourceManager.GetString("PlaymakingHeader", resourceCulture);
             }
         }
         
@@ -1062,9 +1233,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Salary.
         /// </summary>
-        public static string Salary {
+        public static string SalaryHeader {
             get {
-                return ResourceManager.GetString("Salary", resourceCulture);
+                return ResourceManager.GetString("SalaryHeader", resourceCulture);
             }
         }
         
@@ -1080,9 +1251,63 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Scoring.
         /// </summary>
-        public static string Scoring {
+        public static string ScoringHeader {
             get {
-                return ResourceManager.GetString("Scoring", resourceCulture);
+                return ResourceManager.GetString("ScoringHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CP (S).
+        /// </summary>
+        public static string SeasonCupGoalsHeader {
+            get {
+                return ResourceManager.GetString("SeasonCupGoalsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cup Goals (Season).
+        /// </summary>
+        public static string SeasonCupGoalsToolTip {
+            get {
+                return ResourceManager.GetString("SeasonCupGoalsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FG (S).
+        /// </summary>
+        public static string SeasonFriendlyGoalsHeader {
+            get {
+                return ResourceManager.GetString("SeasonFriendlyGoalsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friendly Goals (Season).
+        /// </summary>
+        public static string SeasonFriendlyGoalsToolTip {
+            get {
+                return ResourceManager.GetString("SeasonFriendlyGoalsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LG (S).
+        /// </summary>
+        public static string SeasonLeagueGoalsHeader {
+            get {
+                return ResourceManager.GetString("SeasonLeagueGoalsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to League Goals (Season).
+        /// </summary>
+        public static string SeasonLeagueGoalsToolTip {
+            get {
+                return ResourceManager.GetString("SeasonLeagueGoalsToolTip", resourceCulture);
             }
         }
         
@@ -1107,9 +1332,9 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to Set Pieces.
         /// </summary>
-        public static string SetPieces {
+        public static string SetPiecesHeader {
             get {
-                return ResourceManager.GetString("SetPieces", resourceCulture);
+                return ResourceManager.GetString("SetPiecesHeader", resourceCulture);
             }
         }
         
@@ -1312,15 +1537,6 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specialty.
-        /// </summary>
-        public static string Specialty {
-            get {
-                return ResourceManager.GetString("Specialty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Head Specialist.
         /// </summary>
         public static string Specialty_HeadSpecialist {
@@ -1384,11 +1600,29 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to S.
+        /// </summary>
+        public static string SpecialtyHeader {
+            get {
+                return ResourceManager.GetString("SpecialtyHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specialty.
+        /// </summary>
+        public static string SpecialtyToolTip {
+            get {
+                return ResourceManager.GetString("SpecialtyToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stamina.
         /// </summary>
-        public static string Stamina {
+        public static string StaminaHeader {
             get {
-                return ResourceManager.GetString("Stamina", resourceCulture);
+                return ResourceManager.GetString("StaminaHeader", resourceCulture);
             }
         }
         
@@ -1531,18 +1765,36 @@ namespace Hyperar.HPA.Globalization {
         /// <summary>
         ///   Looks up a localized string similar to TSI.
         /// </summary>
-        public static string TotalSkillIndex {
+        public static string TotalSkillIndexHeader {
             get {
-                return ResourceManager.GetString("TotalSkillIndex", resourceCulture);
+                return ResourceManager.GetString("TotalSkillIndexHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Skill Index.
+        /// </summary>
+        public static string TotalSkillIndexToolTip {
+            get {
+                return ResourceManager.GetString("TotalSkillIndexToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TL.
+        /// </summary>
+        public static string TransferListedHeader {
+            get {
+                return ResourceManager.GetString("TransferListedHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Transfer-listed.
         /// </summary>
-        public static string TransferListedTooltip {
+        public static string TransferListedToolTip {
             get {
-                return ResourceManager.GetString("TransferListedTooltip", resourceCulture);
+                return ResourceManager.GetString("TransferListedToolTip", resourceCulture);
             }
         }
         
@@ -1594,11 +1846,20 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} {1}/week.
+        /// </summary>
+        public static string WeeklySalaryMask {
+            get {
+                return ResourceManager.GetString("WeeklySalaryMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Winger.
         /// </summary>
-        public static string Winger {
+        public static string WingerHeader {
             get {
-                return ResourceManager.GetString("Winger", resourceCulture);
+                return ResourceManager.GetString("WingerHeader", resourceCulture);
             }
         }
         
