@@ -78,6 +78,8 @@
                     }
                 }
 
+                await this.databaseContext.BeginTransactionAsync();
+
                 // Persist tasks.
                 for (int i = 0; i < downloadTasks.Count; i++)
                 {
