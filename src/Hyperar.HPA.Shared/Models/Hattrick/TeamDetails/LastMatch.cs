@@ -10,7 +10,7 @@
             this.LastMatchHomeTeamName = string.Empty;
         }
 
-        public byte LastMatchAwayGoals { get; set; }
+        public int LastMatchAwayGoals { get; set; }
 
         public long LastMatchAwayTeamId { get; set; }
 
@@ -18,7 +18,7 @@
 
         public DateTime LastMatchDate { get; set; }
 
-        public byte LastMatchHomeGoals { get; set; }
+        public int LastMatchHomeGoals { get; set; }
 
         public long LastMatchHomeTeamId { get; set; }
 

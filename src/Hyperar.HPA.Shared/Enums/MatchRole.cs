@@ -3,7 +3,7 @@
     /// <summary>
     /// The CHPP documentation is incomplete, so I stopped using this enum until the specification is brought up to date.
     /// </summary>
-    public enum MatchRole : short
+    public enum MatchRole : int
     {
         SetPiecesTaker = 17,
 

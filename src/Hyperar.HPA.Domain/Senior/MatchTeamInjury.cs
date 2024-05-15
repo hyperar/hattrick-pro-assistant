@@ -13,7 +13,7 @@
             this.PlayerName = string.Empty;
         }
 
-        public byte Index { get; set; }
+        public int Index { get; set; }
 
         public MatchPart MatchPart { get; set; }
 
@@ -21,7 +21,7 @@
 
         public int MatchTeamId { get; set; }
 
-        public byte Minute { get; set; }
+        public int Minute { get; set; }
 
         public long PlayerHattrickId { get; set; }
 

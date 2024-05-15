@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum DownloadTaskStatus : byte
+    public enum DownloadTaskStatus : int
     {
         NotStarted = 0,
 

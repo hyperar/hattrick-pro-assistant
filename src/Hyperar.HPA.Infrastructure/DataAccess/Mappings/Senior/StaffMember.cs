@@ -22,12 +22,12 @@
 
             builder.Property(p => p.Type)
                 .HasColumnOrder(3)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Level)
                 .HasColumnOrder(4)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsUnicode();
 
             builder.Property(p => p.Salary)

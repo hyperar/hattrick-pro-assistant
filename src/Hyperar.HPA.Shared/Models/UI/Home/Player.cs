@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Models.UI.Home
 {
-    using Hyperar.HPA.Shared.Enums;
+    using Shared.Enums;
 
     public class Player
     {
@@ -18,7 +18,7 @@
 
         public long HattrickId { get; set; }
 
-        public short HealthStatus { get; set; }
+        public int HealthStatus { get; set; }
 
         public bool IsTransferListed { get; set; }
 
@@ -26,7 +26,7 @@
 
         public string? NickName { get; set; }
 
-        public byte? ShirtNumber { get; set; }
+        public int? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 

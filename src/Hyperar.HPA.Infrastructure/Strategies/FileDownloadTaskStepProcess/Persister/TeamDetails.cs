@@ -44,6 +44,8 @@
 
         private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
 
+        private readonly IRepository<Domain.Senior.PlayerMatch> playerMatchRepository;
+
         private readonly IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository;
 
         private readonly IHattrickRepository<Domain.Region> regionRepository;
@@ -68,6 +70,7 @@
             IRepository<Domain.Senior.MatchTeamLineUpSubstitution> matchTeamLineUpSubstitutionRepository,
             IRepository<Domain.Senior.MatchTeam> matchTeamRepository,
             IHattrickRepository<Domain.Senior.Player> playerRepository,
+            IRepository<Domain.Senior.PlayerMatch> playerMatchRepository,
             IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository,
             IHattrickRepository<Domain.Region> regionRepository,
             IHattrickRepository<Domain.Senior.Team> teamRepository)
@@ -89,6 +92,7 @@
             this.matchTeamLineUpSubstitutionRepository = matchTeamLineUpSubstitutionRepository;
             this.matchTeamRepository = matchTeamRepository;
             this.playerRepository = playerRepository;
+            this.playerMatchRepository = playerMatchRepository;
             this.playerSkillSetRepository = playerSkillSetRepository;
             this.regionRepository = regionRepository;
             this.teamRepository = teamRepository;
@@ -139,6 +143,11 @@
             await this.hallOfFamePlayerRepository.DeleteRangeAsync(
                 await this.hallOfFamePlayerRepository.Query(x => x.TeamHattrickId == teamId)
                     .Select(x => x.HattrickId)
+                    .ToListAsync(cancellationToken));
+
+            await this.playerMatchRepository.DeleteRangeAsync(
+                await this.playerMatchRepository.Query(x => x.Player.TeamHattrickId == teamId)
+                    .Select(x => x.Id)
                     .ToListAsync(cancellationToken));
 
             await this.playerSkillSetRepository.DeleteRangeAsync(

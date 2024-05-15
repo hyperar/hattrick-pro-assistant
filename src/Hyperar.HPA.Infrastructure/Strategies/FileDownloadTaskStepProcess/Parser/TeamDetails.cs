@@ -60,11 +60,11 @@
                 {
                     result.CupId = await reader.ReadXmlValueAsLongAsync();
                     result.CupName = await reader.ReadElementContentAsStringAsync();
-                    result.CupLeagueLevel = await reader.ReadXmlValueAsByteAsync();
-                    result.CupLevel = await reader.ReadXmlValueAsByteAsync();
-                    result.CupLeagueLevelIndex = await reader.ReadXmlValueAsByteAsync();
-                    result.MatchRound = await reader.ReadXmlValueAsByteAsync();
-                    result.MatchRoundsLeft = await reader.ReadXmlValueAsByteAsync();
+                    result.CupLeagueLevel = await reader.ReadXmlValueAsIntAsync();
+                    result.CupLevel = await reader.ReadXmlValueAsIntAsync();
+                    result.CupLeagueLevelIndex = await reader.ReadXmlValueAsIntAsync();
+                    result.MatchRound = await reader.ReadXmlValueAsIntAsync();
+                    result.MatchRoundsLeft = await reader.ReadXmlValueAsIntAsync();
                 }
             }
 
@@ -178,10 +178,10 @@
                 LastMatchDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 LastMatchHomeTeamId = await reader.ReadXmlValueAsLongAsync(),
                 LastMatchHomeTeamName = await reader.ReadElementContentAsStringAsync(),
-                LastMatchHomeGoals = await reader.ReadXmlValueAsByteAsync(),
+                LastMatchHomeGoals = await reader.ReadXmlValueAsIntAsync(),
                 LastMatchAwayTeamId = await reader.ReadXmlValueAsLongAsync(),
                 LastMatchAwayTeamName = await reader.ReadElementContentAsStringAsync(),
-                LastMatchAwayGoals = await reader.ReadXmlValueAsByteAsync()
+                LastMatchAwayGoals = await reader.ReadXmlValueAsIntAsync()
             };
 
             // Reads closing element.
@@ -199,7 +199,7 @@
             {
                 LeagueLevelUnitId = await reader.ReadXmlValueAsLongAsync(),
                 LeagueLevelUnitName = await reader.ReadElementContentAsStringAsync(),
-                LeagueLevel = await reader.ReadXmlValueAsByteAsync()
+                LeagueLevel = await reader.ReadXmlValueAsIntAsync()
             };
 
             // Reads closing element.
@@ -241,7 +241,7 @@
                 // Reads opening element.
                 await reader.ReadAsync();
 
-                result.NationalTeamStaffType = (NationalTeamStaffType)await reader.ReadXmlValueAsLongAsync();
+                result.NationalTeamStaffType = await reader.ReadXmlValueAsIntAsync();
                 result.NationalTeamId = await reader.ReadXmlValueAsLongAsync();
                 result.NationalTeamName = await reader.ReadElementContentAsStringAsync();
             }
@@ -510,7 +510,7 @@
 
             result.YouthTeamId = await reader.ReadXmlValueAsLongAsync();
             result.YouthTeamName = await reader.ReadElementContentAsStringAsync();
-            result.NumberOfVisits = await reader.ReadXmlValueAsShortAsync();
+            result.NumberOfVisits = await reader.ReadXmlValueAsIntAsync();
 
             if (reader.CheckNode(NodeName.Flags))
             {
@@ -606,8 +606,8 @@
             Trophy result = new Trophy
             {
                 TrophyTypeId = await reader.ReadXmlValueAsLongAsync(),
-                TrophySeason = await reader.ReadXmlValueAsByteAsync(),
-                LeagueLevel = await reader.ReadXmlValueAsByteAsync(),
+                TrophySeason = await reader.ReadXmlValueAsIntAsync(),
+                LeagueLevel = await reader.ReadXmlValueAsIntAsync(),
                 LeagueLevelUnitId = await reader.ReadXmlValueAsLongAsync(),
                 LeagueLevelUnitName = await reader.ReadElementContentAsStringAsync(),
                 GainedDate = await reader.ReadXmlValueAsDateTimeAsync(),

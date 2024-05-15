@@ -69,12 +69,12 @@
 
             builder.Property(p => p.UndefeatedStreak)
                 .HasColumnOrder(12)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.WinStreak)
                 .HasColumnOrder(13)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.SeriesHattrickId)
@@ -91,7 +91,7 @@
 
             builder.Property(p => p.SeriesDivision)
                 .HasColumnOrder(16)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.LogoBytes)

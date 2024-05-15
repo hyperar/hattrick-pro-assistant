@@ -10,59 +10,59 @@
             this.LastName = string.Empty;
         }
 
-        public byte Age { get; set; }
+        public int Age { get; set; }
 
-        public byte AgeDays { get; set; }
+        public int AgeDays { get; set; }
 
-        public byte Aggressiveness { get; set; }
+        public int Aggressiveness { get; set; }
 
-        public byte Agreeability { get; set; }
+        public int Agreeability { get; set; }
 
         public DateTime ArrivalDate { get; set; }
 
-        public short Caps { get; set; }
+        public int Caps { get; set; }
 
-        public short CapsU20 { get; set; }
+        public int CapsU20 { get; set; }
 
-        public short Cards { get; set; }
+        public int Cards { get; set; }
 
-        public short CareerGoals { get; set; }
+        public int CareerGoals { get; set; }
 
-        public short CareerHattricks { get; set; }
+        public int CareerHattricks { get; set; }
 
         public long CountryId { get; set; }
 
-        public short CupGoals { get; set; }
+        public int CupGoals { get; set; }
 
-        public byte DefenderSkill { get; set; }
+        public int DefenderSkill { get; set; }
 
-        public byte Experience { get; set; }
+        public int Experience { get; set; }
 
         public string FirstName { get; set; }
 
-        public short FriendliesGoals { get; set; }
+        public int FriendliesGoals { get; set; }
 
-        public short GoalsCurrentTeam { get; set; }
+        public int GoalsCurrentTeam { get; set; }
 
-        public byte Honesty { get; set; }
+        public int Honesty { get; set; }
 
-        public short InjuryLevel { get; set; }
+        public int InjuryLevel { get; set; }
 
         public bool IsAbroad { get; set; }
 
-        public byte KeeperSkill { get; set; }
+        public int KeeperSkill { get; set; }
 
         public LastMatch? LastMatch { get; set; }
 
         public string LastName { get; set; }
 
-        public byte Leadership { get; set; }
+        public int Leadership { get; set; }
 
-        public short LeagueGoals { get; set; }
+        public int LeagueGoals { get; set; }
 
-        public byte Loyalty { get; set; }
+        public int Loyalty { get; set; }
 
-        public short MatchesCurrentTeam { get; set; }
+        public int MatchesCurrentTeam { get; set; }
 
         public bool MotherClubBonus { get; set; }
 
@@ -72,27 +72,27 @@
 
         public string? OwnerNotes { get; set; }
 
-        public byte PassingSkill { get; set; }
+        public int PassingSkill { get; set; }
 
-        public byte PlayerCategoryId { get; set; }
+        public int PlayerCategoryId { get; set; }
 
-        public byte PlayerForm { get; set; }
+        public int PlayerForm { get; set; }
 
         public long PlayerId { get; set; }
 
-        public byte? PlayerNumber { get; set; }
+        public int? PlayerNumber { get; set; }
 
-        public byte PlaymakerSkill { get; set; }
+        public int PlaymakerSkill { get; set; }
 
         public long Salary { get; set; }
 
-        public byte ScorerSkill { get; set; }
+        public int ScorerSkill { get; set; }
 
-        public byte SetPiecesSkill { get; set; }
+        public int SetPiecesSkill { get; set; }
 
-        public byte Specialty { get; set; }
+        public int Specialty { get; set; }
 
-        public byte StaminaSkill { get; set; }
+        public int StaminaSkill { get; set; }
 
         public string? Statement { get; set; }
 
@@ -102,6 +102,6 @@
 
         public int Tsi { get; set; }
 
-        public byte WingerSkill { get; set; }
+        public int WingerSkill { get; set; }
     }
 }

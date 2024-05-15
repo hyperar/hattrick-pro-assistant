@@ -37,6 +37,7 @@
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.ManagerCompendium>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.MatchArchive>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.Matches>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.Players>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.StaffAvatars>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.TeamDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Extractor.WorldDetails>();
@@ -52,6 +53,7 @@
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.Matches>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.MatchLineUp>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.Players>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.PlayerDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.StaffAvatars>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.StaffList>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.TeamDetails>();
@@ -66,6 +68,7 @@
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.MatchDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.MatchLineUp>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.Players>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.PlayerDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.StaffAvatars>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.StaffList>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.TeamDetails>();

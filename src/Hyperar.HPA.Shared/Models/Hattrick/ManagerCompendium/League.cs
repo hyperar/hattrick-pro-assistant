@@ -11,6 +11,6 @@
 
         public string LeagueName { get; set; }
 
-        public byte Season { get; set; }
+        public int Season { get; set; }
     }
 }

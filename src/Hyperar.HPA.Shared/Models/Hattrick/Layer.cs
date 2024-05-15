@@ -9,8 +9,8 @@
 
         public string Image { get; set; }
 
-        public byte X { get; set; }
+        public int X { get; set; }
 
-        public byte Y { get; set; }
+        public int Y { get; set; }
     }
 }

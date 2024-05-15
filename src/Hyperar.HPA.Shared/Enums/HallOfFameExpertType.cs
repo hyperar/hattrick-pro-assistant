@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum HallOfFameExpertType : byte
+    public enum HallOfFameExpertType : int
     {
         Referee = 1,
 

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum HonestyLevel : byte
+    public enum HonestyLevel : int
     {
         Infamous = 0,
 

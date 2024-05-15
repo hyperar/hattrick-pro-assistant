@@ -12,7 +12,7 @@
             this.HomeTeam = new Team();
         }
 
-        public byte? AddedMinutes { get; set; }
+        public int? AddedMinutes { get; set; }
 
         public Arena Arena { get; set; }
 
@@ -20,9 +20,9 @@
 
         public List<Booking>? Bookings { get; set; }
 
-        public byte CupLevel { get; set; }
+        public int CupLevel { get; set; }
 
-        public byte CupLevelIndex { get; set; }
+        public int CupLevelIndex { get; set; }
 
         public List<Event>? EventList { get; set; }
 
@@ -40,17 +40,17 @@
 
         public MatchOfficials? MatchOfficials { get; set; }
 
-        public byte MatchRuleId { get; set; }
+        public int MatchRuleId { get; set; }
 
-        public byte MatchType { get; set; }
+        public int MatchType { get; set; }
 
-        public byte? PossessionFirstHalfAway { get; set; }
+        public int? PossessionFirstHalfAway { get; set; }
 
-        public byte? PossessionFirstHalfHome { get; set; }
+        public int? PossessionFirstHalfHome { get; set; }
 
-        public byte? PossessionSecondHalfAway { get; set; }
+        public int? PossessionSecondHalfAway { get; set; }
 
-        public byte? PossessionSecondHalfHome { get; set; }
+        public int? PossessionSecondHalfHome { get; set; }
 
         public List<Goal>? Scorers { get; set; }
     }

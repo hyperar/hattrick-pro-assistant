@@ -27,7 +27,7 @@
 
         public long MatchId { get; set; }
 
-        public byte MatchType { get; set; }
+        public int MatchType { get; set; }
 
         public string SourceSystem { get; set; }
 

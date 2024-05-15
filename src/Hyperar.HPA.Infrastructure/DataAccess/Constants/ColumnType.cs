@@ -16,10 +16,6 @@
 
         internal const string NVarChar = "nvarchar";
 
-        internal const string SmallInt = "smallint";
-
-        internal const string TinyInt = "tinyint";
-
         internal const string VarBinary = "varbinary(max)";
     }
 }

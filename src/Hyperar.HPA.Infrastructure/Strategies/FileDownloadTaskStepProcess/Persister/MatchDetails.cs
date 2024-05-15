@@ -3,8 +3,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
-    using Hyperar.HPA.Shared.Enums;
+    using Domain.Interfaces;
+    using Shared.Enums;
     using Microsoft.EntityFrameworkCore;
     using Models = Shared.Models.Hattrick;
 
@@ -279,8 +279,8 @@
         private async Task<Domain.Senior.MatchTeam> ProcessMatchTeamAsync(
             Models.MatchDetails.Team xmlTeam,
             MatchTeamLocation location,
-            byte? firstHalfPosession,
-            byte? secondHalfPosession,
+            int? firstHalfPosession,
+            int? secondHalfPosession,
             Domain.Senior.Match match)
         {
             var matchTeam = await this.matchTeamRepository.Query(x => x.HattrickId == xmlTeam.TeamId

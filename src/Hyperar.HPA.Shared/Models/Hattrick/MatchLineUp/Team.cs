@@ -13,13 +13,13 @@
             this.TeamName = string.Empty;
         }
 
-        public byte ExperienceLevel { get; set; }
+        public int ExperienceLevel { get; set; }
 
         public List<Player> LineUp { get; set; }
 
         public List<StartingPlayer> StartingLineUp { get; set; }
 
-        public short StyleOfPlay { get; set; }
+        public int StyleOfPlay { get; set; }
 
         public List<Substitution> Substitutions { get; set; }
 

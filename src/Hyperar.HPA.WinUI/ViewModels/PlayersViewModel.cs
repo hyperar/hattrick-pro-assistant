@@ -5,7 +5,7 @@
     using Shared.Models.UI.Players;
     using CommunityToolkit.Mvvm.ComponentModel;
     using System;
-    using Hyperar.HPA.Application.Services;
+    using Application.Services;
     using System.Collections.Generic;
     using System.Linq;
 

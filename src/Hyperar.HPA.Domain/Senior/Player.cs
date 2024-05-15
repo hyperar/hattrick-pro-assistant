@@ -12,14 +12,15 @@
             this.Country = new Country();
             this.PlayerSkillSets = new HashSet<PlayerSkillSet>();
             this.Team = new Team();
+            this.Matches = new HashSet<PlayerMatch>();
 
             this.FirstName = string.Empty;
             this.LastName = string.Empty;
         }
 
-        public byte AgeDays { get; set; }
+        public int AgeDays { get; set; }
 
-        public byte AgeYears { get; set; }
+        public int AgeYears { get; set; }
 
         public AggressivenessLevel Aggressiveness { get; set; }
 
@@ -29,9 +30,9 @@
 
         public BookingStatus BookingStatus { get; set; }
 
-        public short CareerGoals { get; set; }
+        public int CareerGoals { get; set; }
 
-        public short CareerHattricks { get; set; }
+        public int CareerHattricks { get; set; }
 
         public PlayerCategory Category { get; set; }
 
@@ -39,21 +40,21 @@
 
         public long CountryHattrickId { get; set; }
 
-        public short CurrentSeasonCupGoals { get; set; }
+        public int CurrentSeasonCupGoals { get; set; }
 
-        public short CurrentSeasonFriendlyGoals { get; set; }
+        public int CurrentSeasonFriendlyGoals { get; set; }
 
-        public short CurrentSeasonLeagueGoals { get; set; }
+        public int CurrentSeasonLeagueGoals { get; set; }
 
         public bool EnrolledOnNationalTeam { get; set; }
 
         public string FirstName { get; set; }
 
-        public short GoalsOnTeam { get; set; }
+        public int GoalsOnTeam { get; set; }
 
         public bool HasMotherClubBonus { get; set; }
 
-        public short Health { get; set; }
+        public int Health { get; set; }
 
         public HonestyLevel Honesty { get; set; }
 
@@ -65,13 +66,15 @@
 
         public DateTime JoinedTeamOn { get; set; }
 
-        public short JuniorNationalTeamCaps { get; set; }
+        public int JuniorNationalTeamCaps { get; set; }
 
         public string LastName { get; set; }
 
         public SkillLevel Leadership { get; set; }
 
-        public short MatchesOnTeam { get; set; }
+        public virtual ICollection<PlayerMatch> Matches { get; set; }
+
+        public int MatchesOnTeam { get; set; }
 
         public string? NickName { get; set; }
 
@@ -81,9 +84,9 @@
 
         public long Salary { get; set; }
 
-        public short SeniorNationalTeamCaps { get; set; }
+        public int SeniorNationalTeamCaps { get; set; }
 
-        public byte? ShirtNumber { get; set; }
+        public int? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum MatchSystem : byte
+    public enum MatchSystem : int
     {
         Hattrick = 1,
 

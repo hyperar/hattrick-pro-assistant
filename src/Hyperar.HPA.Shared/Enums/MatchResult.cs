@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum MatchResult : byte
+    public enum MatchResult : int
     {
         Won = 0,
 

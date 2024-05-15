@@ -21,6 +21,6 @@
 
         public int? SoldVip { get; set; }
 
-        public byte? WeatherId { get; set; }
+        public int? WeatherId { get; set; }
     }
 }

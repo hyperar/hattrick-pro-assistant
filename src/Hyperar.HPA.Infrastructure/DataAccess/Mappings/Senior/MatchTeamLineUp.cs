@@ -10,12 +10,12 @@
         {
             builder.Property(p => p.Experience)
                 .HasColumnOrder(1)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Style)
                 .HasColumnOrder(2)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
         }
 

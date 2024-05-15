@@ -10,7 +10,7 @@
     {
         public IXmlFile CreateEntity(string fileName)
         {
-            return fileName switch
+            return fileName.ToLower() switch
             {
                 XmlFileName.ArenaDetails => new Shared.Models.Hattrick.ArenaDetails.HattrickData(fileName),
                 XmlFileName.Avatars => new Shared.Models.Hattrick.Avatars.HattrickData(fileName),
@@ -22,6 +22,7 @@
                 XmlFileName.Matches => new Shared.Models.Hattrick.Matches.HattrickData(fileName),
                 XmlFileName.MatchLineUp => new Shared.Models.Hattrick.MatchLineUp.HattrickData(fileName),
                 XmlFileName.Players => new Shared.Models.Hattrick.Players.HattrickData(fileName),
+                XmlFileName.PlayerDeails => new Shared.Models.Hattrick.PlayerDetails.HattrickData(fileName),
                 XmlFileName.StaffAvatars => new Shared.Models.Hattrick.StaffAvatars.HattrickData(fileName),
                 XmlFileName.StaffList => new Shared.Models.Hattrick.StaffList.HattrickData(fileName),
                 XmlFileName.TeamDetails => new Shared.Models.Hattrick.TeamDetails.HattrickData(fileName),

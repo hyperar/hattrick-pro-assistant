@@ -13,41 +13,41 @@
 
         public string? Formation { get; set; }
 
-        public byte? Goals { get; set; }
+        public int? Goals { get; set; }
 
-        public byte? NrOfChancesCenter { get; set; }
+        public int? NrOfChancesCenter { get; set; }
 
-        public byte? NrOfChancesLeft { get; set; }
+        public int? NrOfChancesLeft { get; set; }
 
-        public byte? NrOfChancesOther { get; set; }
+        public int? NrOfChancesOther { get; set; }
 
-        public byte? NrOfChancesRight { get; set; }
+        public int? NrOfChancesRight { get; set; }
 
-        public byte? NrOfChancesSpecialEvents { get; set; }
+        public int? NrOfChancesSpecialEvents { get; set; }
 
-        public byte? RatingLeftAtt { get; set; }
+        public int? RatingLeftAtt { get; set; }
 
-        public byte? RatingLeftDef { get; set; }
+        public int? RatingLeftDef { get; set; }
 
-        public byte? RatingMidAtt { get; set; }
+        public int? RatingMidAtt { get; set; }
 
-        public byte? RatingMidDef { get; set; }
+        public int? RatingMidDef { get; set; }
 
-        public byte? RatingMidfield { get; set; }
+        public int? RatingMidfield { get; set; }
 
-        public byte? RatingRightAtt { get; set; }
+        public int? RatingRightAtt { get; set; }
 
-        public byte? RatingRightDef { get; set; }
+        public int? RatingRightDef { get; set; }
 
-        public byte? RatingSetPiecesAtt { get; set; }
+        public int? RatingSetPiecesAtt { get; set; }
 
-        public byte? RatingSetPiecesDef { get; set; }
+        public int? RatingSetPiecesDef { get; set; }
 
-        public byte? TacticSkill { get; set; }
+        public int? TacticSkill { get; set; }
 
-        public byte? TacticType { get; set; }
+        public int? TacticType { get; set; }
 
-        public byte? TeamAttitude { get; set; }
+        public int? TeamAttitude { get; set; }
 
         public long TeamId { get; set; }
 

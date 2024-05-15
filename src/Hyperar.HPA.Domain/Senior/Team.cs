@@ -66,7 +66,7 @@
 
         public int RegionRanking { get; set; }
 
-        public byte SeriesDivision { get; set; }
+        public int SeriesDivision { get; set; }
 
         public long SeriesHattrickId { get; set; }
 
@@ -80,9 +80,9 @@
 
         public int TeamRank { get; set; }
 
-        public short UndefeatedStreak { get; set; }
+        public int UndefeatedStreak { get; set; }
 
-        public short WinStreak { get; set; }
+        public int WinStreak { get; set; }
 
         public static Team Create(
             Models.Team xmlTeam,

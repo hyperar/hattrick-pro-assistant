@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum PlayerCategory : byte
+    public enum PlayerCategory : int
     {
         NoCategory = 0,
 

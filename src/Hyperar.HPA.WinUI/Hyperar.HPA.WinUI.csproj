@@ -31,6 +31,7 @@
       <None Remove="Assets\Images\BotTeamLogo.png" />
       <None Remove="Assets\Images\NoManagerAvatar.png" />
       <None Remove="Assets\Images\NoTeamLogo.png" />
+      <None Remove="Assets\Images\star_yellow_to_red.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -67,11 +68,11 @@
         <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.9.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.9.2" />
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.5">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.5" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

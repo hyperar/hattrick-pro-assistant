@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum Weather : byte
+    public enum Weather : int
     {
         Rain = 0,
 

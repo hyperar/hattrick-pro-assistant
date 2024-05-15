@@ -64,11 +64,11 @@
 
         public MySupporters MySupporters { get; set; }
 
-        public short? NumberOfUndefeated { get; set; }
+        public int? NumberOfUndefeated { get; set; }
 
-        public short? NumberOfVictories { get; set; }
+        public int? NumberOfVictories { get; set; }
 
-        public short NumberOfVisits { get; set; }
+        public int NumberOfVisits { get; set; }
 
         public bool PossibleToChallengeMidweek { get; set; }
 

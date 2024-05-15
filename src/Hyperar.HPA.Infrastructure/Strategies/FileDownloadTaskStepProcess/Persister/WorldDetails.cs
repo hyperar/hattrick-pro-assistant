@@ -120,14 +120,14 @@
 
             if (league == null)
             {
-                var flagImageBytes = await GetImageBytesFromCacheAsync(
+                var flagBytes = await GetImageBytesFromCacheAsync(
                     string.Format(
                         FlagImageUrlMask,
                         xmlLeague.LeagueId));
 
                 league = Domain.League.Create(
                     xmlLeague,
-                    flagImageBytes);
+                    flagBytes);
 
                 await this.leagueRepository.InsertAsync(league);
             }

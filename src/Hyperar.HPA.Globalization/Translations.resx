@@ -372,6 +372,12 @@
   <data name="KeeperHeader" xml:space="preserve">
     <value>Keeper</value>
   </data>
+  <data name="LastMatchRatingHeader" xml:space="preserve">
+    <value>LMR</value>
+  </data>
+  <data name="LastMatchRatingToolTip" xml:space="preserve">
+    <value>Last Match Rating</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Lastname</value>
   </data>
@@ -398,6 +404,9 @@
   </data>
   <data name="MatchesOnTeamToolTip" xml:space="preserve">
     <value>Matches on Team</value>
+  </data>
+  <data name="MatchRatingMask" xml:space="preserve">
+    <value>Average: {0}* - End of Match: {1}*</value>
   </data>
   <data name="MatchType_Duel" xml:space="preserve">
     <value>Duel</value>
@@ -746,6 +755,9 @@ Found: '{1}'.</value>
   </data>
   <data name="XmlFileType_MatchLineUp" xml:space="preserve">
     <value>Match LineUp</value>
+  </data>
+  <data name="XmlFileType_PlayerDetails" xml:space="preserve">
+    <value>Player Details</value>
   </data>
   <data name="XmlFileType_Players" xml:space="preserve">
     <value>Players</value>

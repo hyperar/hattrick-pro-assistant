@@ -7,15 +7,15 @@
             this.ScorerPlayerName = string.Empty;
         }
 
-        public byte Index { get; set; }
+        public int Index { get; set; }
 
-        public byte MatchPart { get; set; }
+        public int MatchPart { get; set; }
 
-        public byte ScorerAwayGoals { get; set; }
+        public int ScorerAwayGoals { get; set; }
 
-        public byte ScorerHomeGoals { get; set; }
+        public int ScorerHomeGoals { get; set; }
 
-        public byte ScorerMinute { get; set; }
+        public int ScorerMinute { get; set; }
 
         public long ScorerPlayerId { get; set; }
 

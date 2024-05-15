@@ -19,8 +19,8 @@
 
         public long StaffId { get; set; }
 
-        public byte StaffLevel { get; set; }
+        public int StaffLevel { get; set; }
 
-        public byte StaffType { get; set; }
+        public int StaffType { get; set; }
     }
 }

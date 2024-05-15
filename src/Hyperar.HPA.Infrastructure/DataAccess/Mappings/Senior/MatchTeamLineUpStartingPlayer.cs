@@ -35,12 +35,12 @@
 
             builder.Property(p => p.Role)
                 .HasColumnOrder(5)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Behavior)
                 .HasColumnOrder(6)
-                .HasColumnType(Constants.ColumnType.SmallInt);
+                .HasColumnType(Constants.ColumnType.Int);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.MatchTeamLineUpStartingPlayer> builder)

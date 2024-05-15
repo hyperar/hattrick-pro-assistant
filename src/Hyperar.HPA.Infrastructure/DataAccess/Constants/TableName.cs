@@ -42,6 +42,8 @@
 
         internal const string PlayerAvatarLayer = "PlayerAvatarLayer";
 
+        internal const string PlayerMatch = "PlayerMatch";
+
         internal const string PlayerSkillSet = "PlayerSkillSet";
 
         internal const string Region = "Region";

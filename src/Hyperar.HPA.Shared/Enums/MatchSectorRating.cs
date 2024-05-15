@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum MatchSectorRating : byte
+    public enum MatchSectorRating : int
     {
         DisastrousVeryLow = 1,
 

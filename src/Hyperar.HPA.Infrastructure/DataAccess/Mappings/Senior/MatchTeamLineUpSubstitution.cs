@@ -10,27 +10,27 @@
         {
             builder.Property(p => p.OrderType)
                 .HasColumnOrder(1)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.NewRole)
                 .HasColumnOrder(2)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.NewRoleBehavior)
                 .HasColumnOrder(3)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Minute)
                 .HasColumnOrder(4)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.MatchPart)
                 .HasColumnOrder(5)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.InPlayerHattrickId)

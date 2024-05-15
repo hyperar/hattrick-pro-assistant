@@ -826,6 +826,24 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LMR.
+        /// </summary>
+        public static string LastMatchRatingHeader {
+            get {
+                return ResourceManager.GetString("LastMatchRatingHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Match Rating.
+        /// </summary>
+        public static string LastMatchRatingToolTip {
+            get {
+                return ResourceManager.GetString("LastMatchRatingToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lastname.
         /// </summary>
         public static string LastName {
@@ -903,6 +921,15 @@ namespace Hyperar.HPA.Globalization {
         public static string MatchesOnTeamToolTip {
             get {
                 return ResourceManager.GetString("MatchesOnTeamToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average: {0}* - End of Match: {1}*.
+        /// </summary>
+        public static string MatchRatingMask {
+            get {
+                return ResourceManager.GetString("MatchRatingMask", resourceCulture);
             }
         }
         
@@ -1941,6 +1968,15 @@ namespace Hyperar.HPA.Globalization {
         public static string XmlFileType_MatchLineUp {
             get {
                 return ResourceManager.GetString("XmlFileType_MatchLineUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player Details.
+        /// </summary>
+        public static string XmlFileType_PlayerDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_PlayerDetails", resourceCulture);
             }
         }
         

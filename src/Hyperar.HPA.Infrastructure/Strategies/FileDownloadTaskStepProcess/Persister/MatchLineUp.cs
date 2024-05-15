@@ -3,9 +3,9 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
-    using Hyperar.HPA.Shared.Enums;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using Shared.Enums;
     using Models = Shared.Models.Hattrick;
 
     public class MatchLineUp : PersisterBase, IFileDownloadTaskStepProcessStrategy
@@ -22,13 +22,19 @@
 
         private readonly IRepository<Domain.Senior.MatchTeam> matchTeamRepository;
 
+        private readonly IRepository<Domain.Senior.PlayerMatch> playerMatchRepository;
+
+        private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
+
         public MatchLineUp(
             IDatabaseContext databaseContext,
             IRepository<Domain.Senior.MatchTeamLineUpPlayer> matchTeamLineUpPlayerRepository,
             IRepository<Domain.Senior.MatchTeamLineUp> matchTeamLineUpRepository,
             IRepository<Domain.Senior.MatchTeamLineUpStartingPlayer> matchTeamLineUpStartingPlayerRepository,
             IRepository<Domain.Senior.MatchTeamLineUpSubstitution> matchTeamLineUpSubstitutionRepository,
-            IRepository<Domain.Senior.MatchTeam> matchTeamRepository)
+            IRepository<Domain.Senior.MatchTeam> matchTeamRepository,
+            IHattrickRepository<Domain.Senior.Player> playerRepository,
+            IRepository<Domain.Senior.PlayerMatch> playerMatchRepository)
         {
             this.databaseContext = databaseContext;
             this.matchTeamLineUpPlayerRepository = matchTeamLineUpPlayerRepository;
@@ -36,6 +42,8 @@
             this.matchTeamLineUpStartingPlayerRepository = matchTeamLineUpStartingPlayerRepository;
             this.matchTeamLineUpSubstitutionRepository = matchTeamLineUpSubstitutionRepository;
             this.matchTeamRepository = matchTeamRepository;
+            this.playerRepository = playerRepository;
+            this.playerMatchRepository = playerMatchRepository;
         }
 
         public override async Task PersistFileAsync(IXmlFileDownloadTask fileDownloadTask, CancellationToken cancellationToken)
@@ -70,6 +78,14 @@
                 foreach (var xmlPlayer in file.Team.LineUp)
                 {
                     await this.ProcessMatchTeamLineUpPlayerAsync(xmlPlayer, matchTeamLineUp);
+
+                    if (matchTeam.HattrickId == file.Team.TeamId)
+                    {
+                        await this.ProcessPlayerMatchAsync(
+                            xmlPlayer,
+                            matchTeamLineUp.MatchTeam.MatchHattrickId,
+                            matchTeamLineUp.MatchTeam.Match.StartDate);
+                    }
                 }
             }
             else
@@ -142,6 +158,42 @@
                     Domain.Senior.MatchTeamLineUpSubstitution.Create(
                         xmlSubstitution,
                         matchTeamLineUp));
+            }
+        }
+
+        private async Task ProcessPlayerMatchAsync(
+            Models.MatchLineUp.Player xmlPlayer,
+            long matchId,
+            DateTime matchDate)
+        {
+            if (xmlPlayer.RatingStars == null || xmlPlayer.RatingStarsEndOfMatch == null)
+            {
+                return;
+            }
+
+            var player = await this.playerRepository.GetByHattrickIdAsync(xmlPlayer.PlayerId);
+
+            // Player no longer on team, discard.
+            if (player == null)
+            {
+                return;
+            }
+
+            var playerMatch = await this.playerMatchRepository.Query(x => x.PlayerHattrickId == xmlPlayer.PlayerId
+                                                                       && x.MatchHattrickId == matchId)
+                                                              .SingleOrDefaultAsync();
+
+            if (playerMatch == null)
+            {
+                string calculatedRating = CalculateRating(xmlPlayer.RatingStars.Value, xmlPlayer.RatingStarsEndOfMatch.Value);
+
+                await this.playerMatchRepository.InsertAsync(
+                    Domain.Senior.PlayerMatch.Create(
+                        xmlPlayer,
+                        player,
+                        matchId,
+                        matchDate,
+                        calculatedRating));
             }
         }
     }

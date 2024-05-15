@@ -26,21 +26,21 @@
 
         public SkillLevel Scoring { get; set; }
 
-        public short Season { get; set; }
+        public int Season { get; set; }
 
         public SkillLevel SetPieces { get; set; }
 
         public SkillLevel Stamina { get; set; }
 
-        public byte Week { get; set; }
+        public int Week { get; set; }
 
         public SkillLevel Winger { get; set; }
 
         public static PlayerSkillSet Create(
             Models.Player xmlPlayer,
             Player player,
-            short season,
-            byte week)
+            int season,
+            int week)
         {
             return new PlayerSkillSet
             {

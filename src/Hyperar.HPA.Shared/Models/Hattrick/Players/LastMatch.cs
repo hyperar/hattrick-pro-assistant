@@ -8,9 +8,9 @@
 
         public long MatchId { get; set; }
 
-        public byte PlayedMinutes { get; set; }
+        public int PlayedMinutes { get; set; }
 
-        public short PositionCode { get; set; }
+        public int PositionCode { get; set; }
 
         public decimal Rating { get; set; }
 

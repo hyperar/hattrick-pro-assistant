@@ -1,6 +1,5 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser
 {
-    using System;
     using System.Threading.Tasks;
     using System.Xml;
     using Application.Interfaces;
@@ -70,15 +69,15 @@
                 HomeTeam = await ParseHomeTeamNodeAsync(reader),
                 AwayTeam = await ParseAwayTeamNodeAsync(reader),
                 MatchDate = await reader.ReadXmlValueAsDateTimeAsync(),
-                MatchType = await reader.ReadXmlValueAsByteAsync(),
+                MatchType = await reader.ReadXmlValueAsIntAsync(),
                 MatchContextId = await reader.ReadXmlValueAsLongAsync(),
                 SourceSystem = await reader.ReadElementContentAsStringAsync(),
-                MatchRuleId = await reader.ReadXmlValueAsByteAsync(),
+                MatchRuleId = await reader.ReadXmlValueAsIntAsync(),
                 CupId = await reader.ReadXmlValueAsLongAsync(),
-                CupLevel = await reader.ReadXmlValueAsByteAsync(),
-                CupLevelIndex = await reader.ReadXmlValueAsByteAsync(),
-                HomeGoals = await reader.ReadXmlValueAsByteAsync(),
-                AwayGoals = await reader.ReadXmlValueAsByteAsync()
+                CupLevel = await reader.ReadXmlValueAsIntAsync(),
+                CupLevelIndex = await reader.ReadXmlValueAsIntAsync(),
+                HomeGoals = await reader.ReadXmlValueAsIntAsync(),
+                AwayGoals = await reader.ReadXmlValueAsIntAsync()
             };
 
             // Reads closing node.

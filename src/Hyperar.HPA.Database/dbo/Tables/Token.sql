@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Token] (
     [Id]          INT            IDENTITY (1, 1) NOT NULL,
-    [Scope]       TINYINT        NOT NULL,
+    [Scope]       INT            NOT NULL,
     [Value]       NVARCHAR (128) NOT NULL,
     [SecretValue] NVARCHAR (128) NOT NULL,
     [CreatedOn]   DATETIME       NOT NULL,
@@ -9,6 +9,8 @@
     CONSTRAINT [PK_Token] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Token_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id])
 );
+
+
 
 
 GO

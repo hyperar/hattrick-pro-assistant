@@ -11,15 +11,15 @@
             this.SourceSystem = string.Empty;
         }
 
-        public byte? AwayGoals { get; set; }
+        public int? AwayGoals { get; set; }
 
         public AwayTeam AwayTeam { get; set; }
 
-        public byte CupLevel { get; set; }
+        public int CupLevel { get; set; }
 
-        public byte CupLevelIndex { get; set; }
+        public int CupLevelIndex { get; set; }
 
-        public byte? HomeGoals { get; set; }
+        public int? HomeGoals { get; set; }
 
         public HomeTeam HomeTeam { get; set; }
 
@@ -29,11 +29,11 @@
 
         public long MatchId { get; set; }
 
-        public byte MatchType { get; set; }
+        public int MatchType { get; set; }
 
         public string SourceSystem { get; set; }
 
-        public byte MatchRuleId { get; set; }
+        public int MatchRuleId { get; set; }
 
         public long CupId { get; set; }
     }

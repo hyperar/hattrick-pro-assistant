@@ -11,7 +11,7 @@
             this.Name = string.Empty;
         }
 
-        public byte CurrentRound { get; set; }
+        public int CurrentRound { get; set; }
 
         public virtual League? League { get; set; }
 
@@ -19,9 +19,9 @@
 
         public string Name { get; set; }
 
-        public byte RoundsLeft { get; set; }
+        public int RoundsLeft { get; set; }
 
-        public byte? SeriesLevel { get; set; }
+        public int? SeriesLevel { get; set; }
 
         public LeagueCupSubType? SubType { get; set; }
 

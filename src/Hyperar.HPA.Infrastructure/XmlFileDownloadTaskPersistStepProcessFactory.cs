@@ -23,6 +23,8 @@
 
         private readonly Players playersPersister;
 
+        private readonly PlayerDetails playerDetailsPersister;
+
         private readonly StaffAvatars staffAvatarsPersister;
 
         private readonly StaffList staffListPersister;
@@ -40,6 +42,7 @@
             MatchDetails matchDetailsPersister,
             MatchLineUp matchLineUpPersister,
             Players playersPersister,
+            PlayerDetails playerDetailsPersister,
             StaffAvatars staffAvatarsPersister,
             StaffList staffListPersister,
             TeamDetails teamDetailsPersister,
@@ -53,6 +56,7 @@
             this.matchDetailsPersister = matchDetailsPersister;
             this.matchLineUpPersister = matchLineUpPersister;
             this.playersPersister = playersPersister;
+            this.playerDetailsPersister = playerDetailsPersister;
             this.staffAvatarsPersister = staffAvatarsPersister;
             this.staffListPersister = staffListPersister;
             this.teamDetailsPersister = teamDetailsPersister;
@@ -71,6 +75,7 @@
                      XmlFileType.MatchDetails => this.matchDetailsPersister,
                      XmlFileType.MatchLineUp => this.matchLineUpPersister,
                      XmlFileType.Players => this.playersPersister,
+                     //XmlFileType.PlayerDetails => this.playerDetailsPersister,
                      XmlFileType.StaffAvatars => this.staffAvatarsPersister,
                      XmlFileType.StaffList => this.staffListPersister,
                      XmlFileType.TeamDetails => this.teamDetailsPersister,

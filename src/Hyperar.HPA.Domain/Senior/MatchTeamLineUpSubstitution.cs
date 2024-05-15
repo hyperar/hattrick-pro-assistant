@@ -19,7 +19,7 @@
 
         public int MatchTeamLineUpId { get; set; }
 
-        public byte Minute { get; set; }
+        public int Minute { get; set; }
 
         public MatchRole NewRole { get; set; }
 

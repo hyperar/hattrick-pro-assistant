@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum MatchOrderType : byte
+    public enum MatchOrderType : int
     {
         NormalSubstitutionOrBehaviorChange = 1,
 

@@ -42,15 +42,15 @@
 
         public string LeagueName { get; set; }
 
-        public byte MatchRound { get; set; }
+        public int MatchRound { get; set; }
 
         public long NationalTeamId { get; set; }
 
-        public byte NumberOfLevels { get; set; }
+        public int NumberOfLevels { get; set; }
 
-        public byte Season { get; set; }
+        public int Season { get; set; }
 
-        public short SeasonOffset { get; set; }
+        public int SeasonOffset { get; set; }
 
         public DateTime Sequence1 { get; set; }
 

@@ -7,9 +7,9 @@
             this.InjuryPlayerName = string.Empty;
         }
 
-        public byte Index { get; set; }
+        public int Index { get; set; }
 
-        public byte InjuryMinute { get; set; }
+        public int InjuryMinute { get; set; }
 
         public long InjuryPlayerId { get; set; }
 
@@ -17,8 +17,8 @@
 
         public long InjuryTeamId { get; set; }
 
-        public byte InjuryType { get; set; }
+        public int InjuryType { get; set; }
 
-        public byte MatchPart { get; set; }
+        public int MatchPart { get; set; }
     }
 }

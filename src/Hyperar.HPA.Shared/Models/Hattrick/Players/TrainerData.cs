@@ -1,11 +1,9 @@
 ﻿namespace Hyperar.HPA.Shared.Models.Hattrick.Players
 {
-    using Shared.Enums;
-
     public class TrainerData
     {
-        public SkillLevel SkillLevel { get; set; }
+        public int SkillLevel { get; set; }
 
-        public TrainerType TrainerType { get; set; }
+        public int TrainerType { get; set; }
     }
 }

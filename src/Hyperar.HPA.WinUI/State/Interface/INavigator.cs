@@ -1,7 +1,7 @@
 ﻿namespace Hyperar.HPA.WinUI.State.Interface
 {
     using System;
-    using Hyperar.HPA.WinUI.ViewModels;
+    using WinUI.ViewModels;
 
     public interface INavigator
     {

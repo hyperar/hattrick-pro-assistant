@@ -1,15 +1,17 @@
 ﻿CREATE TABLE [dbo].[LeagueCup] (
     [HattrickId]       BIGINT         NOT NULL,
     [Name]             NVARCHAR (256) NOT NULL,
-    [Type]             TINYINT        NOT NULL,
-    [SubType]          TINYINT        NULL,
-    [SeriesLevel]      TINYINT        NULL,
-    [CurrentRound]     TINYINT        NOT NULL,
-    [RoundsLeft]       TINYINT        NOT NULL,
+    [Type]             INT            NOT NULL,
+    [SubType]          INT            NULL,
+    [SeriesLevel]      INT            NULL,
+    [CurrentRound]     INT            NOT NULL,
+    [RoundsLeft]       INT            NOT NULL,
     [LeagueHattrickId] BIGINT         NOT NULL,
     CONSTRAINT [PK_LeagueCup] PRIMARY KEY CLUSTERED ([HattrickId] ASC),
     CONSTRAINT [FK_LeagueCup_League] FOREIGN KEY ([LeagueHattrickId]) REFERENCES [dbo].[League] ([HattrickId])
 );
+
+
 
 
 GO

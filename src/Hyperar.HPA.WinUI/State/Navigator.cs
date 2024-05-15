@@ -2,7 +2,7 @@
 {
     using System;
     using CommunityToolkit.Mvvm.ComponentModel;
-    using Hyperar.HPA.WinUI.ViewModels;
+    using WinUI.ViewModels;
     using WinUI.State.Interface;
 
     public class Navigator : ObservableObject, INavigator

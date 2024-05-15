@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum InjuryType : byte
+    public enum InjuryType : int
     {
         Bruised = 1,
 

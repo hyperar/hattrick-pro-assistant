@@ -90,7 +90,7 @@
             {
                 LeagueId = await reader.ReadXmlValueAsLongAsync(),
                 LeagueName = await reader.ReadElementContentAsStringAsync(),
-                Season = await reader.ReadXmlValueAsByteAsync()
+                Season = await reader.ReadXmlValueAsIntAsync()
             };
 
             // Reads closing element.

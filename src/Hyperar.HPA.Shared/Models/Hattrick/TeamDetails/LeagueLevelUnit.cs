@@ -7,7 +7,7 @@
             this.LeagueLevelUnitName = string.Empty;
         }
 
-        public byte LeagueLevel { get; set; }
+        public int LeagueLevel { get; set; }
 
         public long LeagueLevelUnitId { get; set; }
 

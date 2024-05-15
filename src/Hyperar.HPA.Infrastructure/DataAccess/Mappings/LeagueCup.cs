@@ -17,25 +17,25 @@
 
             builder.Property(p => p.Type)
                 .HasColumnOrder(2)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.SubType)
                 .HasColumnOrder(3)
-                .HasColumnType(Constants.ColumnType.TinyInt);
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.SeriesLevel)
                 .HasColumnOrder(4)
-                .HasColumnType(Constants.ColumnType.TinyInt);
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.CurrentRound)
                 .HasColumnOrder(5)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.RoundsLeft)
                 .HasColumnOrder(6)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
         }
 

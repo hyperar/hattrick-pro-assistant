@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum XmlFileType : byte
+    public enum XmlFileType : int
     {
         ArenaDetails = 1,
 
@@ -24,12 +24,14 @@
 
         Players = 11,
 
-        StaffAvatars = 12,
+        PlayerDetails = 12,
 
-        StaffList = 13,
+        StaffAvatars = 13,
 
-        TeamDetails = 14,
+        StaffList = 14,
 
-        WorldDetails = 15
+        TeamDetails = 15,
+
+        WorldDetails = 16
     }
 }

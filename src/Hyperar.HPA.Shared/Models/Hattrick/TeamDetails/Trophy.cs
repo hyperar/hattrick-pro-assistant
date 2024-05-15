@@ -9,23 +9,23 @@
             this.LeagueLevelUnitName = string.Empty;
         }
 
-        public byte? CupLeagueLevel { get; set; }
+        public int? CupLeagueLevel { get; set; }
 
-        public byte? CupLevel { get; set; }
+        public int? CupLevel { get; set; }
 
-        public byte? CupLevelIndex { get; set; }
+        public int? CupLevelIndex { get; set; }
 
         public DateTime GainedDate { get; set; }
 
         public string? ImageUrl { get; set; }
 
-        public byte LeagueLevel { get; set; }
+        public int LeagueLevel { get; set; }
 
         public long LeagueLevelUnitId { get; set; }
 
         public string LeagueLevelUnitName { get; set; }
 
-        public byte TrophySeason { get; set; }
+        public int TrophySeason { get; set; }
 
         public long TrophyTypeId { get; set; }
     }

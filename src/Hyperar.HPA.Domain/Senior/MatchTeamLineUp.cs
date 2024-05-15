@@ -25,7 +25,7 @@
 
         public virtual ICollection<MatchTeamLineUpStartingPlayer> StartingPlayers { get; set; }
 
-        public short Style { get; set; }
+        public int Style { get; set; }
 
         public virtual ICollection<MatchTeamLineUpSubstitution> Substitutions { get; set; }
 

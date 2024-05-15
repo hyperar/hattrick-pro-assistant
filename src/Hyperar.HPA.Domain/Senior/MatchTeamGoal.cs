@@ -13,11 +13,11 @@
             this.PlayerName = string.Empty;
         }
 
-        public byte AwayTeamScore { get; set; }
+        public int AwayTeamScore { get; set; }
 
-        public byte HomeTeamScore { get; set; }
+        public int HomeTeamScore { get; set; }
 
-        public byte Index { get; set; }
+        public int Index { get; set; }
 
         public MatchPart MatchPart { get; set; }
 
@@ -25,7 +25,7 @@
 
         public int MatchTeamId { get; set; }
 
-        public byte Minute { get; set; }
+        public int Minute { get; set; }
 
         public long PlayerHattrickId { get; set; }
 

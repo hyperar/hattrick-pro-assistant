@@ -17,7 +17,7 @@
 
             builder.Property(p => p.SupporterTier)
                 .HasColumnOrder(2)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.CurrencyName)

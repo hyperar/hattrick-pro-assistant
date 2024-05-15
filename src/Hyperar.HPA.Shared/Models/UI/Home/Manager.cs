@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Models.UI.Home
 {
-    using Hyperar.HPA.Shared.Enums;
+    using Shared.Enums;
 
     public class Manager
     {

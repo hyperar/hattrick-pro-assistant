@@ -91,12 +91,12 @@
                 AwayTeam = await ParseAwayTeamNodeAsync(reader),
                 MatchDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 SourceSystem = await reader.ReadElementContentAsStringAsync(),
-                MatchType = await reader.ReadXmlValueAsByteAsync(),
+                MatchType = await reader.ReadXmlValueAsIntAsync(),
                 MatchContextId = await reader.ReadXmlValueAsLongAsync(),
-                CupLevel = await reader.ReadXmlValueAsByteAsync(),
-                CupLevelIndex = await reader.ReadXmlValueAsByteAsync(),
-                HomeGoals = reader.Name.Equals(NodeName.HomeGoals, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsByteAsync() : null,
-                AwayGoals = reader.Name.Equals(NodeName.AwayGoals, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsByteAsync() : null,
+                CupLevel = await reader.ReadXmlValueAsIntAsync(),
+                CupLevelIndex = await reader.ReadXmlValueAsIntAsync(),
+                HomeGoals = reader.Name.Equals(NodeName.HomeGoals, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsIntAsync() : null,
+                AwayGoals = reader.Name.Equals(NodeName.AwayGoals, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsIntAsync() : null,
                 OrdersGiven = reader.Name.Equals(NodeName.OrdersGiven, StringComparison.OrdinalIgnoreCase) ? await reader.ReadXmlValueAsBoolAsync() : null,
                 Status = await reader.ReadElementContentAsStringAsync()
             };

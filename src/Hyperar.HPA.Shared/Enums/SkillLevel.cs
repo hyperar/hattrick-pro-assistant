@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum SkillLevel : byte
+    public enum SkillLevel : int
     {
         NonExistent = 0,
 

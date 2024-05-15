@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum BookingStatus : byte
+    public enum BookingStatus : int
     {
         NoBookings = 0,
 

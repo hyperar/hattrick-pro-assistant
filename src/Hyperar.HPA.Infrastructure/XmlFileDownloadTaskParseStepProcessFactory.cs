@@ -26,6 +26,8 @@
 
         private readonly Players playersParser;
 
+        private readonly PlayerDetails playerDetailsParser;
+
         private readonly StaffAvatars staffAvatarsParser;
 
         private readonly StaffList staffListParser;
@@ -45,6 +47,7 @@
             Matches matchesParser,
             MatchLineUp matchLineUpParser,
             Players playersParser,
+            PlayerDetails playerDetailsParser,
             StaffAvatars staffAvatarsParser,
             StaffList staffListParser,
             TeamDetails teamDetailsParser,
@@ -60,6 +63,7 @@
             this.matchesParser = matchesParser;
             this.matchLineUpParser = matchLineUpParser;
             this.playersParser = playersParser;
+            this.playerDetailsParser = playerDetailsParser;
             this.staffAvatarsParser = staffAvatarsParser;
             this.staffListParser = staffListParser;
             this.teamDetailsParser = teamDetailsParser;
@@ -81,6 +85,7 @@
                      XmlFileType.Matches => this.matchesParser,
                      XmlFileType.MatchLineUp => this.matchLineUpParser,
                      XmlFileType.Players => this.playersParser,
+                     XmlFileType.PlayerDetails => this.playerDetailsParser,
                      XmlFileType.StaffAvatars => this.staffAvatarsParser,
                      XmlFileType.StaffList => this.staffListParser,
                      XmlFileType.TeamDetails => this.teamDetailsParser,

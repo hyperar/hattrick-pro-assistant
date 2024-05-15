@@ -35,7 +35,7 @@
             {
                 ArenaId = await reader.ReadXmlValueAsLongAsync(),
                 ArenaName = await reader.ReadElementContentAsStringAsync(),
-                WeatherId = reader.CheckNode(NodeName.WeatherId) ? await reader.ReadXmlValueAsByteAsync() : null,
+                WeatherId = reader.CheckNode(NodeName.WeatherId) ? await reader.ReadXmlValueAsIntAsync() : null,
                 SoldTotal = reader.CheckNode(NodeName.SoldTotal) ? await reader.ReadXmlValueAsIntAsync() : null,
                 SoldTerraces = reader.CheckNode(NodeName.SoldTerraces) ? await reader.ReadXmlValueAsIntAsync() : null,
                 SoldBasic = reader.CheckNode(NodeName.SoldBasic) ? await reader.ReadXmlValueAsIntAsync() : null,
@@ -84,9 +84,9 @@
             result.BookingPlayerId = await reader.ReadXmlValueAsLongAsync();
             result.BookingPlayerName = await reader.ReadElementContentAsStringAsync();
             result.BookingTeamId = await reader.ReadXmlValueAsLongAsync();
-            result.BookingType = await reader.ReadXmlValueAsByteAsync();
-            result.BookingMinute = await reader.ReadXmlValueAsByteAsync();
-            result.MatchPart = await reader.ReadXmlValueAsByteAsync();
+            result.BookingType = await reader.ReadXmlValueAsIntAsync();
+            result.BookingMinute = await reader.ReadXmlValueAsIntAsync();
+            result.MatchPart = await reader.ReadXmlValueAsIntAsync();
 
             // Reads closing node.
             await reader.ReadAsync();
@@ -123,13 +123,13 @@
             // Reads opening node.
             await reader.ReadAsync();
 
-            result.Minute = await reader.ReadXmlValueAsByteAsync();
+            result.Minute = await reader.ReadXmlValueAsIntAsync();
             result.SubjectPlayerId = await reader.ReadXmlValueAsLongAsync();
             result.SubjectTeamId = await reader.ReadXmlValueAsLongAsync();
             result.ObjectPlayerId = await reader.ReadXmlValueAsLongAsync();
-            result.MatchPart = await reader.ReadXmlValueAsByteAsync();
-            result.EventTypeId = await reader.ReadXmlValueAsShortAsync();
-            result.EventVariation = await reader.ReadXmlValueAsShortAsync();
+            result.MatchPart = await reader.ReadXmlValueAsIntAsync();
+            result.EventTypeId = await reader.ReadXmlValueAsIntAsync();
+            result.EventVariation = await reader.ReadXmlValueAsIntAsync();
             result.EventText = await reader.ReadElementContentAsStringAsync();
 
             // Reads closing node.
@@ -173,10 +173,10 @@
             result.ScorerPlayerId = await reader.ReadXmlValueAsLongAsync();
             result.ScorerPlayerName = await reader.ReadElementContentAsStringAsync();
             result.ScorerTeamId = await reader.ReadXmlValueAsLongAsync();
-            result.ScorerHomeGoals = await reader.ReadXmlValueAsByteAsync();
-            result.ScorerAwayGoals = await reader.ReadXmlValueAsByteAsync();
-            result.ScorerMinute = await reader.ReadXmlValueAsByteAsync();
-            result.MatchPart = await reader.ReadXmlValueAsByteAsync();
+            result.ScorerHomeGoals = await reader.ReadXmlValueAsIntAsync();
+            result.ScorerAwayGoals = await reader.ReadXmlValueAsIntAsync();
+            result.ScorerMinute = await reader.ReadXmlValueAsIntAsync();
+            result.MatchPart = await reader.ReadXmlValueAsIntAsync();
 
             // Reads closing node.
             await reader.ReadAsync();
@@ -219,9 +219,9 @@
             result.InjuryPlayerId = await reader.ReadXmlValueAsLongAsync();
             result.InjuryPlayerName = await reader.ReadElementContentAsStringAsync();
             result.InjuryTeamId = await reader.ReadXmlValueAsLongAsync();
-            result.InjuryType = await reader.ReadXmlValueAsByteAsync();
-            result.InjuryMinute = await reader.ReadXmlValueAsByteAsync();
-            result.MatchPart = await reader.ReadXmlValueAsByteAsync();
+            result.InjuryType = await reader.ReadXmlValueAsIntAsync();
+            result.InjuryMinute = await reader.ReadXmlValueAsIntAsync();
+            result.MatchPart = await reader.ReadXmlValueAsIntAsync();
 
             // Reads closing node.
             await reader.ReadAsync();
@@ -237,14 +237,14 @@
             Match result = new Match
             {
                 MatchId = await reader.ReadXmlValueAsLongAsync(),
-                MatchType = await reader.ReadXmlValueAsByteAsync(),
+                MatchType = await reader.ReadXmlValueAsIntAsync(),
                 MatchContextId = await reader.ReadXmlValueAsLongAsync(),
-                MatchRuleId = await reader.ReadXmlValueAsByteAsync(),
-                CupLevel = await reader.ReadXmlValueAsByteAsync(),
-                CupLevelIndex = await reader.ReadXmlValueAsByteAsync(),
+                MatchRuleId = await reader.ReadXmlValueAsIntAsync(),
+                CupLevel = await reader.ReadXmlValueAsIntAsync(),
+                CupLevelIndex = await reader.ReadXmlValueAsIntAsync(),
                 MatchDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 FinishedDate = reader.CheckNode(NodeName.FinishedDate) ? await reader.ReadXmlValueAsDateTimeAsync() : null,
-                AddedMinutes = reader.CheckNode(NodeName.AddedMinutes) ? await reader.ReadXmlValueAsByteAsync() : null,
+                AddedMinutes = reader.CheckNode(NodeName.AddedMinutes) ? await reader.ReadXmlValueAsIntAsync() : null,
                 HomeTeam = await ParseTeamNodeAsync(reader),
                 AwayTeam = await ParseTeamNodeAsync(reader),
                 Arena = await ParseArenaNodeAsync(reader),
@@ -252,10 +252,10 @@
                 Scorers = reader.CheckNode(NodeName.Scorers) ? await ParseGoalListNodeAsync(reader) : null,
                 Bookings = reader.CheckNode(NodeName.Bookings) ? await ParseBookingListNodeAsync(reader) : null,
                 Injuries = reader.CheckNode(NodeName.Injuries) ? await ParseInjuryListNodeAsync(reader) : null,
-                PossessionFirstHalfHome = reader.CheckNode(NodeName.PossessionFirstHalfHome) ? await reader.ReadXmlValueAsByteAsync() : null,
-                PossessionFirstHalfAway = reader.CheckNode(NodeName.PossessionFirstHalfAway) ? await reader.ReadXmlValueAsByteAsync() : null,
-                PossessionSecondHalfHome = reader.CheckNode(NodeName.PossessionSecondHalfHome) ? await reader.ReadXmlValueAsByteAsync() : null,
-                PossessionSecondHalfAway = reader.CheckNode(NodeName.PossessionSecondHalfAway) ? await reader.ReadXmlValueAsByteAsync() : null,
+                PossessionFirstHalfHome = reader.CheckNode(NodeName.PossessionFirstHalfHome) ? await reader.ReadXmlValueAsIntAsync() : null,
+                PossessionFirstHalfAway = reader.CheckNode(NodeName.PossessionFirstHalfAway) ? await reader.ReadXmlValueAsIntAsync() : null,
+                PossessionSecondHalfHome = reader.CheckNode(NodeName.PossessionSecondHalfHome) ? await reader.ReadXmlValueAsIntAsync() : null,
+                PossessionSecondHalfAway = reader.CheckNode(NodeName.PossessionSecondHalfAway) ? await reader.ReadXmlValueAsIntAsync() : null,
                 EventList = reader.CheckNode(NodeName.EventList) ? await ParseEventListNodeAsync(reader) : null
             };
 
@@ -315,24 +315,24 @@
                 TeamName = await reader.ReadElementContentAsStringAsync(),
                 DressUri = reader.CheckNode(NodeName.DressURI) ? await reader.ReadElementContentAsStringAsync() : null,
                 Formation = reader.CheckNode(NodeName.Formation) ? await reader.ReadElementContentAsStringAsync() : null,
-                Goals = reader.CheckNode(NodeName.AwayGoals, NodeName.HomeGoals) ? await reader.ReadXmlValueAsByteAsync() : null,
-                TacticType = reader.CheckNode(NodeName.TacticType) ? await reader.ReadXmlValueAsByteAsync() : null,
-                TacticSkill = reader.CheckNode(NodeName.TacticSkill) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingMidfield = reader.CheckNode(NodeName.RatingMidfield) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingRightDef = reader.CheckNode(NodeName.RatingRightDef) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingMidDef = reader.CheckNode(NodeName.RatingMidDef) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingLeftDef = reader.CheckNode(NodeName.RatingLeftDef) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingRightAtt = reader.CheckNode(NodeName.RatingRightAtt) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingMidAtt = reader.CheckNode(NodeName.RatingMidAtt) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingLeftAtt = reader.CheckNode(NodeName.RatingLeftAtt) ? await reader.ReadXmlValueAsByteAsync() : null,
-                TeamAttitude = reader.CheckNode(NodeName.TeamAttitude) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingSetPiecesDef = reader.CheckNode(NodeName.RatingIndirectSetPiecesDef) ? await reader.ReadXmlValueAsByteAsync() : null,
-                RatingSetPiecesAtt = reader.CheckNode(NodeName.RatingIndirectSetPiecesAtt) ? await reader.ReadXmlValueAsByteAsync() : null,
-                NrOfChancesLeft = reader.CheckNode(NodeName.NrOfChancesLeft) ? await reader.ReadXmlValueAsByteAsync() : null,
-                NrOfChancesCenter = reader.CheckNode(NodeName.NrOfChancesCenter) ? await reader.ReadXmlValueAsByteAsync() : null,
-                NrOfChancesRight = reader.CheckNode(NodeName.NrOfChancesRight) ? await reader.ReadXmlValueAsByteAsync() : null,
-                NrOfChancesSpecialEvents = reader.CheckNode(NodeName.NrOfChancesSpecialEvents) ? await reader.ReadXmlValueAsByteAsync() : null,
-                NrOfChancesOther = reader.CheckNode(NodeName.NrOfChancesOther) ? await reader.ReadXmlValueAsByteAsync() : null,
+                Goals = reader.CheckNode(NodeName.AwayGoals, NodeName.HomeGoals) ? await reader.ReadXmlValueAsIntAsync() : null,
+                TacticType = reader.CheckNode(NodeName.TacticType) ? await reader.ReadXmlValueAsIntAsync() : null,
+                TacticSkill = reader.CheckNode(NodeName.TacticSkill) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingMidfield = reader.CheckNode(NodeName.RatingMidfield) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingRightDef = reader.CheckNode(NodeName.RatingRightDef) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingMidDef = reader.CheckNode(NodeName.RatingMidDef) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingLeftDef = reader.CheckNode(NodeName.RatingLeftDef) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingRightAtt = reader.CheckNode(NodeName.RatingRightAtt) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingMidAtt = reader.CheckNode(NodeName.RatingMidAtt) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingLeftAtt = reader.CheckNode(NodeName.RatingLeftAtt) ? await reader.ReadXmlValueAsIntAsync() : null,
+                TeamAttitude = reader.CheckNode(NodeName.TeamAttitude) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingSetPiecesDef = reader.CheckNode(NodeName.RatingIndirectSetPiecesDef) ? await reader.ReadXmlValueAsIntAsync() : null,
+                RatingSetPiecesAtt = reader.CheckNode(NodeName.RatingIndirectSetPiecesAtt) ? await reader.ReadXmlValueAsIntAsync() : null,
+                NrOfChancesLeft = reader.CheckNode(NodeName.NrOfChancesLeft) ? await reader.ReadXmlValueAsIntAsync() : null,
+                NrOfChancesCenter = reader.CheckNode(NodeName.NrOfChancesCenter) ? await reader.ReadXmlValueAsIntAsync() : null,
+                NrOfChancesRight = reader.CheckNode(NodeName.NrOfChancesRight) ? await reader.ReadXmlValueAsIntAsync() : null,
+                NrOfChancesSpecialEvents = reader.CheckNode(NodeName.NrOfChancesSpecialEvents) ? await reader.ReadXmlValueAsIntAsync() : null,
+                NrOfChancesOther = reader.CheckNode(NodeName.NrOfChancesOther) ? await reader.ReadXmlValueAsIntAsync() : null,
             };
 
             // Reads closing node.

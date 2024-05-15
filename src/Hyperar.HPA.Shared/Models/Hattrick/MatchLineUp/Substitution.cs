@@ -2,17 +2,17 @@
 {
     public class Substitution
     {
-        public byte MatchMinute { get; set; }
+        public int MatchMinute { get; set; }
 
-        public byte MatchPart { get; set; }
+        public int MatchPart { get; set; }
 
-        public short NewPositionBehaviour { get; set; }
+        public int NewPositionBehaviour { get; set; }
 
-        public short NewPositionId { get; set; }
+        public int NewPositionId { get; set; }
 
         public long ObjectPlayerId { get; set; }
 
-        public byte OrderType { get; set; }
+        public int OrderType { get; set; }
 
         public long SubjectPlayerId { get; set; }
 

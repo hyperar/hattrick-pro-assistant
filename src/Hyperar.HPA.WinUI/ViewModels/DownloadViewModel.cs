@@ -6,8 +6,8 @@
     using Application.Services;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using Hyperar.HPA.WinUI.Enums;
-    using Hyperar.HPA.WinUI.ViewModels.Interface;
+    using WinUI.Enums;
+    using WinUI.ViewModels.Interface;
     using Shared.Models.UI.Download;
     using WinUI.State.Interface;
 

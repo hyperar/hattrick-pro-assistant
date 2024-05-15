@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum DownloadTaskType : byte
+    public enum DownloadTaskType : int
     {
         XmlFile = 0,
 

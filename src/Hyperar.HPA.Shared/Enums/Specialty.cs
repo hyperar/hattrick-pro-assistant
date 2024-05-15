@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum Specialty : byte
+    public enum Specialty : int
     {
         NoSpecialty = 0,
 

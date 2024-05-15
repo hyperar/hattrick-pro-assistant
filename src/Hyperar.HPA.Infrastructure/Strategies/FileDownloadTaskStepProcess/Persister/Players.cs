@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models = Shared.Models.Hattrick;
 
@@ -12,6 +12,8 @@
         private readonly IHattrickRepository<Domain.Country> countryRepository;
 
         private readonly IDatabaseContext databaseContext;
+
+        private readonly IRepository<Domain.Senior.PlayerMatch> playerMatchRepository;
 
         private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
 
@@ -23,12 +25,14 @@
             IDatabaseContext databaseContext,
             IHattrickRepository<Domain.Country> countryRepository,
             IHattrickRepository<Domain.Senior.Player> playerRepository,
+            IRepository<Domain.Senior.PlayerMatch> playerMatchRepository,
             IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository,
             IHattrickRepository<Domain.Senior.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
             this.countryRepository = countryRepository;
             this.playerRepository = playerRepository;
+            this.playerMatchRepository = playerMatchRepository;
             this.playerSkillSetRepository = playerSkillSetRepository;
             this.teamRepository = teamRepository;
         }
@@ -57,6 +61,11 @@
                                                                                        .Select(x => x.Id)
                                                                                        .ToListAsync(cancellationToken);
 
+                    var playerMatchIdsToDelete = await this.playerMatchRepository.Query(x => playerIdsToDelete.Contains(x.PlayerHattrickId))
+                                                                                 .Select(x=>x.Id)
+                                                                                 .ToListAsync(cancellationToken);
+
+                    await this.playerMatchRepository.DeleteRangeAsync(playerSkillSetIdsToDelete);
                     await this.playerSkillSetRepository.DeleteRangeAsync(playerSkillSetIdsToDelete);
                     await this.playerRepository.DeleteRangeAsync(playerIdsToDelete);
                 }
@@ -115,8 +124,8 @@
 
         private async Task ProcessPlayerSkillSetAsync(
             Models.Players.Player xmlPlayer,
-            short season,
-            byte week,
+            int season,
+            int week,
             Domain.Senior.Player player)
         {
             var playerSkillSet = await this.playerSkillSetRepository.Query(x => x.PlayerHattrickId == xmlPlayer.PlayerId

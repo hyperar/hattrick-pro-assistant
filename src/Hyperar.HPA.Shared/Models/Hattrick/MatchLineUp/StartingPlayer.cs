@@ -8,7 +8,7 @@
             this.LastName = string.Empty;
         }
 
-        public short? Behaviour { get; set; }
+        public int? Behaviour { get; set; }
 
         public string FirstName { get; set; }
 
@@ -18,6 +18,6 @@
 
         public long PlayerId { get; set; }
 
-        public short RoleId { get; set; }
+        public int RoleId { get; set; }
     }
 }

@@ -9,7 +9,10 @@
             this.AvatarBytes = Array.Empty<byte>();
             this.FirstName = string.Empty;
             this.LastName = string.Empty;
+
             this.Country = new Country();
+
+            this.MatchesRating = new List<MatchRating>();
         }
 
         public decimal AgeAux
@@ -21,9 +24,9 @@
             }
         }
 
-        public byte AgeDays { get; set; }
+        public int AgeDays { get; set; }
 
-        public byte AgeYears { get; set; }
+        public int AgeYears { get; set; }
 
         public AggressivenessLevel AggressivenessLevel { get; set; }
 
@@ -33,25 +36,25 @@
 
         public BookingStatus BookingStatus { get; set; }
 
-        public short CareerHattricks { get; set; }
+        public int CareerHattricks { get; set; }
 
-        public short CareerLeagueGoals { get; set; }
+        public int CareerLeagueGoals { get; set; }
 
         public Country Country { get; set; }
 
         public SkillLevel DefendingLevel { get; set; }
 
-        public short DefendingLevelDelta { get; set; }
+        public int DefendingLevelDelta { get; set; }
 
         public SkillLevel ExperienceLevel { get; set; }
 
-        public short ExperienceLevelDelta { get; set; }
+        public int ExperienceLevelDelta { get; set; }
 
         public string FirstName { get; set; }
 
         public SkillLevel FormLevel { get; set; }
 
-        public short FormLevelDelta { get; set; }
+        public int FormLevelDelta { get; set; }
 
         public string FullName
         {
@@ -63,13 +66,13 @@
             }
         }
 
-        public short GoalsOnTeam { get; set; }
+        public int GoalsOnTeam { get; set; }
 
         public bool HasMotherClubBonus { get; set; }
 
         public long HattrickId { get; set; }
 
-        public short HealthStatus { get; set; }
+        public int HealthStatus { get; set; }
 
         public HonestyLevel HonestyLevel { get; set; }
 
@@ -77,7 +80,17 @@
 
         public SkillLevel KeeperLevel { get; set; }
 
-        public short KeeperLevelDelta { get; set; }
+        public int KeeperLevelDelta { get; set; }
+
+        public MatchRating? LastMatchRating
+        {
+            get
+            {
+                return this.MatchesRating.FirstOrDefault();
+            }
+        }
+
+        public List<MatchRating> MatchesRating { get; set; }
 
         public string LastName { get; set; }
 
@@ -85,48 +98,48 @@
 
         public SkillLevel LoyaltyLevel { get; set; }
 
-        public short LoyaltyLevelDelta { get; set; }
+        public int LoyaltyLevelDelta { get; set; }
 
-        public short MatchesOnTeam { get; set; }
+        public int MatchesOnTeam { get; set; }
 
         public string? NickName { get; set; }
 
         public SkillLevel PassingLevel { get; set; }
 
-        public short PassingLevelDelta { get; set; }
+        public int PassingLevelDelta { get; set; }
 
         public SkillLevel PlaymakingLevel { get; set; }
 
-        public short PlaymakingLevelDelta { get; set; }
+        public int PlaymakingLevelDelta { get; set; }
 
         public long Salary { get; set; }
 
         public SkillLevel ScoringLevel { get; set; }
 
-        public short ScoringLevelDelta { get; set; }
+        public int ScoringLevelDelta { get; set; }
 
-        public short SeasonCupGoals { get; set; }
+        public int SeasonCupGoals { get; set; }
 
-        public short SeasonFriendlyGoals { get; set; }
+        public int SeasonFriendlyGoals { get; set; }
 
-        public short SeasonLeagueGoals { get; set; }
+        public int SeasonLeagueGoals { get; set; }
 
         public SkillLevel SetPiecesLevel { get; set; }
 
-        public short SetPiecesLevelDelta { get; set; }
+        public int SetPiecesLevelDelta { get; set; }
 
-        public byte? ShirtNumber { get; set; }
+        public int? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
 
         public SkillLevel StaminaLevel { get; set; }
 
-        public short StaminaLevelDelta { get; set; }
+        public int StaminaLevelDelta { get; set; }
 
         public long TotalSkillIndex { get; set; }
 
         public SkillLevel WingerLevel { get; set; }
 
-        public short WingerLevelDelta { get; set; }
+        public int WingerLevelDelta { get; set; }
     }
 }

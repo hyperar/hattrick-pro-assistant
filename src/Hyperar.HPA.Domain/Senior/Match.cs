@@ -17,7 +17,7 @@
             this.Teams = new HashSet<MatchTeam>();
         }
 
-        public byte? AddedMinutes { get; set; }
+        public int? AddedMinutes { get; set; }
 
         public virtual MatchArena? Arena { get; set; }
 

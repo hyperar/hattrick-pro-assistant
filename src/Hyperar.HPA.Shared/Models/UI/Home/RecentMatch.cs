@@ -12,7 +12,7 @@
 
         public MatchTeam AwayTeam { get; set; }
 
-        public byte AwayTeamScore { get; set; }
+        public int AwayTeamScore { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -20,7 +20,7 @@
 
         public MatchTeam HomeTeam { get; set; }
 
-        public byte HomeTeamScore { get; set; }
+        public int HomeTeamScore { get; set; }
 
         public MatchResult Result { get; set; }
 

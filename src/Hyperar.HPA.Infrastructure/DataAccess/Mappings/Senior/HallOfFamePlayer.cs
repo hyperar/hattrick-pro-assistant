@@ -30,7 +30,7 @@
 
             builder.Property(p => p.Age)
                 .HasColumnOrder(4)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.JoinedTeamOn)
@@ -50,7 +50,7 @@
 
             builder.Property(p => p.ExpertType)
                 .HasColumnOrder(8)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
         }
 

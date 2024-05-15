@@ -7,6 +7,8 @@
     using System.Threading.Tasks;
     using Application.Interfaces;
     using Application.Models;
+    using Hyperar.HPA.Shared.Constants;
+    using Microsoft.Identity.Client;
     using Shared.Enums;
     using Shared.Models.UI.Download;
     using Models = Shared.Models.Hattrick;
@@ -76,6 +78,86 @@
             }
 
             return GetBytesFromImage(avatarImage);
+        }
+
+        protected static string CalculateRating(decimal averageRating, decimal endOfMatchRating)
+        {
+            List<string> startList = new List<string>();
+
+            decimal delta = Math.Abs(averageRating - endOfMatchRating);
+            decimal baseValue = delta > 0 ? endOfMatchRating : averageRating;
+
+            int primaryBigStars = (int)baseValue / 5;
+            baseValue -= 5 * primaryBigStars;
+
+            int primaryWholeStars = (int)baseValue;
+            baseValue -= primaryWholeStars;
+
+            int primaryHalfStar = baseValue > 0 && delta == 0
+                                ? 1
+                                : 0;
+            baseValue -= primaryHalfStar * 0.5m;
+
+            int transitionStar = baseValue > 0 && delta > 0
+                               ? 1
+                               : 0;
+
+            baseValue -= transitionStar * 0.5m;
+            delta -= transitionStar * 0.5m;
+
+            int secondaryWholeStars = (int)delta / 1;
+            delta -= secondaryWholeStars;
+
+            int secondaryHalfStar = delta > 0 ? 1 : 0;
+            delta -= secondaryHalfStar * 0.5m;
+
+            if (baseValue != 0 || delta != 0)
+            {
+
+            }
+
+            while (primaryBigStars > 0)
+            {
+                startList.Add(MatchRatingStars.YellowBigStar);
+                primaryBigStars--;
+            }
+
+            while (primaryWholeStars > 0)
+            {
+                startList.Add(MatchRatingStars.YellowWholeStar);
+                primaryWholeStars--;
+            }
+
+            while (primaryHalfStar > 0)
+            {
+                startList.Add(MatchRatingStars.YellowHalfStar);
+                primaryHalfStar--;
+            }
+
+            while (transitionStar > 0)
+            {
+                startList.Add(averageRating > endOfMatchRating ? MatchRatingStars.YellowToBrownStar : MatchRatingStars.YellowToRedStar);
+                transitionStar--;
+            }
+
+            while (secondaryWholeStars > 0)
+            {
+                startList.Add(averageRating > endOfMatchRating ? MatchRatingStars.BrownWholeStar : MatchRatingStars.RedWholeStar);
+                secondaryWholeStars--;
+            }
+
+            while (secondaryHalfStar > 0)
+            {
+                startList.Add(averageRating > endOfMatchRating ? MatchRatingStars.BrownHalfStar : MatchRatingStars.RedHalfStar);
+                secondaryHalfStar--;
+            }
+
+            if (primaryBigStars > 0 || primaryWholeStars > 0 || primaryWholeStars > 0 || transitionStar > 0 || secondaryWholeStars > 0 || secondaryWholeStars > 0)
+            {
+
+            }
+
+            return string.Join(",", startList);
         }
 
         private static async Task<Bitmap> CreateAvatarImageAsync(string url)

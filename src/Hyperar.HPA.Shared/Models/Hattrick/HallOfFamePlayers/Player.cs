@@ -10,17 +10,17 @@
             this.LastName = string.Empty;
         }
 
-        public byte Age { get; set; }
+        public int Age { get; set; }
 
         public DateTime ArrivalDate { get; set; }
 
         public long CountryId { get; set; }
 
-        public byte ExpertType { get; set; }
+        public int ExpertType { get; set; }
 
         public string FirstName { get; set; }
 
-        public short HofAge { get; set; }
+        public int HofAge { get; set; }
 
         public DateTime HofDate { get; set; }
 

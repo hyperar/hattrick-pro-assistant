@@ -9,9 +9,9 @@
             this.Name = string.Empty;
         }
 
-        public byte Age { get; set; }
+        public int Age { get; set; }
 
-        public byte AgeDays { get; set; }
+        public int AgeDays { get; set; }
 
         public DateTime ContractDate { get; set; }
 
@@ -19,16 +19,16 @@
 
         public long CountryId { get; set; }
 
-        public byte Leadership { get; set; }
+        public int Leadership { get; set; }
 
         public string Name { get; set; }
 
         public long TrainerId { get; set; }
 
-        public byte TrainerSkillLevel { get; set; }
+        public int TrainerSkillLevel { get; set; }
 
-        public byte TrainerStatus { get; set; }
+        public int TrainerStatus { get; set; }
 
-        public byte TrainerType { get; set; }
+        public int TrainerType { get; set; }
     }
 }

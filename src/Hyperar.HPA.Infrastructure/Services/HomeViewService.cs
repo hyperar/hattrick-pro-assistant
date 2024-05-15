@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Application.Services;
     using Domain.Interfaces;
-    using Hyperar.HPA.Shared.Enums;
+    using Shared.Enums;
     using Shared.Models.UI.Home;
 
     public class HomeViewService : IHomeViewService

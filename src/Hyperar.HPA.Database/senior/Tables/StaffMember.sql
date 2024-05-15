@@ -1,9 +1,9 @@
-CREATE TABLE [senior].[StaffMember] (
+﻿CREATE TABLE [senior].[StaffMember] (
     [HattrickId]                 BIGINT          NOT NULL,
     [Name]                       NVARCHAR (256)  NOT NULL,
     [HiredOn]                    DATETIME        NOT NULL,
-    [Type]                       TINYINT         NOT NULL,
-    [Level]                      TINYINT         NOT NULL,
+    [Type]                       INT             NOT NULL,
+    [Level]                      INT             NOT NULL,
     [Salary]                     BIGINT          NOT NULL,
     [AvatarBytes]                VARBINARY (MAX) NOT NULL,
     [HallOfFamePlayerHattrickId] BIGINT          NULL,
@@ -12,6 +12,8 @@ CREATE TABLE [senior].[StaffMember] (
     CONSTRAINT [FK_StaffMember_HallOfFamePlayer] FOREIGN KEY ([HallOfFamePlayerHattrickId]) REFERENCES [senior].[HallOfFamePlayer] ([HattrickId]),
     CONSTRAINT [FK_StaffMember_Team] FOREIGN KEY ([TeamHattrickId]) REFERENCES [senior].[Team] ([HattrickId])
 );
+
+
 
 
 

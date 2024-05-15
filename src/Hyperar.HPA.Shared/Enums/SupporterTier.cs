@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum SupporterTier : byte
+    public enum SupporterTier : int
     {
         None = 0,
 

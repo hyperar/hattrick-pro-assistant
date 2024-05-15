@@ -3,7 +3,7 @@
     using System;
 
     [Flags]
-    public enum ChppScope : byte
+    public enum ChppScope : int
     {
         ReadOnly = 1,
 

@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum TrainerStatus : byte
+    public enum TrainerStatus : int
     {
         Player = 1,
 

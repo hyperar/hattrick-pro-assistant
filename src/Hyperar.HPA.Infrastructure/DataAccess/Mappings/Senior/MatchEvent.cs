@@ -10,7 +10,7 @@
         {
             builder.Property(p => p.Index)
                 .HasColumnOrder(1)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.PlayerHattrickId)
@@ -27,12 +27,12 @@
 
             builder.Property(p => p.Type)
                 .HasColumnOrder(5)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Variation)
                 .HasColumnOrder(6)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Text)
@@ -41,12 +41,12 @@
 
             builder.Property(p => p.Minute)
                 .HasColumnOrder(8)
-               .HasColumnType(Constants.ColumnType.TinyInt)
+               .HasColumnType(Constants.ColumnType.Int)
                .IsRequired();
 
             builder.Property(p => p.MatchPart)
                 .HasColumnOrder(9)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
         }
 

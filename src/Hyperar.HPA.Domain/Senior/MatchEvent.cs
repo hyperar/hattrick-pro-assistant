@@ -13,7 +13,7 @@
 
         public long? AdditionalPlayerHattrickId { get; set; }
 
-        public byte Index { get; set; }
+        public int Index { get; set; }
 
         public virtual Match Match { get; set; }
 
@@ -21,7 +21,7 @@
 
         public MatchPart MatchPart { get; set; }
 
-        public byte Minute { get; set; }
+        public int Minute { get; set; }
 
         public long? PlayerHattrickId { get; set; }
 
@@ -29,9 +29,9 @@
 
         public string? Text { get; set; }
 
-        public short Type { get; set; }
+        public int Type { get; set; }
 
-        public short Variation { get; set; }
+        public int Variation { get; set; }
 
         public static MatchEvent Create(Models.Event xmlEvent, Match match)
         {

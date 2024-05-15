@@ -8,7 +8,7 @@
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is short healthStatus)
+            if (value is int healthStatus)
             {
                 return healthStatus switch
                 {

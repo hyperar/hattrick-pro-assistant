@@ -9,7 +9,7 @@
             this.NickName = string.Empty;
         }
 
-        public short? Behaviour { get; set; }
+        public int? Behaviour { get; set; }
 
         public string FirstName { get; set; }
 
@@ -23,6 +23,6 @@
 
         public decimal? RatingStarsEndOfMatch { get; set; }
 
-        public short RoleId { get; set; }
+        public int RoleId { get; set; }
     }
 }

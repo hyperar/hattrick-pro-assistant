@@ -26,15 +26,15 @@
 
         public MatchSectorRating? CentralDefenseRating { get; set; }
 
-        public byte? ChancesOnCenter { get; set; }
+        public int? ChancesOnCenter { get; set; }
 
-        public byte? ChancesOnLeft { get; set; }
+        public int? ChancesOnLeft { get; set; }
 
-        public byte? ChancesOnRight { get; set; }
+        public int? ChancesOnRight { get; set; }
 
         public MatchSectorRating? DefenseIndirectSetPiecesRating { get; set; }
 
-        public byte? FirstHalfPosession { get; set; }
+        public int? FirstHalfPosession { get; set; }
 
         public string? Formation { get; set; }
 
@@ -64,17 +64,17 @@
 
         public string Name { get; set; }
 
-        public byte? OtherChances { get; set; }
+        public int? OtherChances { get; set; }
 
         public MatchSectorRating? RightAttackRating { get; set; }
 
         public MatchSectorRating? RightDefenseRating { get; set; }
 
-        public byte? Score { get; set; }
+        public int? Score { get; set; }
 
-        public byte? SecondHalfPosession { get; set; }
+        public int? SecondHalfPosession { get; set; }
 
-        public byte? SpecialEventChances { get; set; }
+        public int? SpecialEventChances { get; set; }
 
         public SkillLevel? TacticLevel { get; set; }
 
@@ -83,8 +83,8 @@
         public static MatchTeam Create(
             Models.Team xmlTeam,
             MatchTeamLocation location,
-            byte? firstHalfPosession,
-            byte? secondHalfPosession,
+            int? firstHalfPosession,
+            int? secondHalfPosession,
             Match match)
         {
             return new MatchTeam
@@ -117,7 +117,7 @@
             };
         }
 
-        public bool HasChanged(Models.Team xmlTeam, byte? firstHalfPosession, byte? secondHalfPosession)
+        public bool HasChanged(Models.Team xmlTeam, int? firstHalfPosession, int? secondHalfPosession)
         {
             return this.AttackIndirectSetPiecesRating != (xmlTeam.RatingSetPiecesAtt != null ? (MatchSectorRating)xmlTeam.RatingSetPiecesAtt : null)
                 || this.Attitude != (xmlTeam.TeamAttitude != null ? (MatchTeamAttitude)xmlTeam.TeamAttitude : null)
@@ -143,7 +143,7 @@
                 || this.TacticType != (xmlTeam.TacticType != null ? (MatchTacticType)xmlTeam.TacticType : null);
         }
 
-        public void Update(Models.Team xmlTeam, byte? firstHalfPosession, byte? secondHalfPosession)
+        public void Update(Models.Team xmlTeam, int? firstHalfPosession, int? secondHalfPosession)
         {
             this.AttackIndirectSetPiecesRating = xmlTeam.RatingSetPiecesAtt != null ? (MatchSectorRating)xmlTeam.RatingSetPiecesAtt : null;
             this.Attitude = xmlTeam.TeamAttitude != null ? (MatchTeamAttitude)xmlTeam.TeamAttitude : null;

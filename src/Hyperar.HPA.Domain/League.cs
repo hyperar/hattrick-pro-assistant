@@ -51,11 +51,11 @@
 
         public DateTime NextTrainingUpdate { get; set; }
 
-        public byte NumberOfLevels { get; set; }
+        public int NumberOfLevels { get; set; }
 
-        public byte Season { get; set; }
+        public int Season { get; set; }
 
-        public short SeasonOffset { get; set; }
+        public int SeasonOffset { get; set; }
 
         public long SeniorNationalTeamId { get; set; }
 
@@ -65,7 +65,7 @@
 
         public int WaitingUsers { get; set; }
 
-        public byte Week { get; set; }
+        public int Week { get; set; }
 
         public string Zone { get; set; }
 

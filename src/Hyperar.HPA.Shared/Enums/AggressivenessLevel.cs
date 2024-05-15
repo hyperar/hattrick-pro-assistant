@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum AggressivenessLevel : byte
+    public enum AggressivenessLevel : int
     {
         Tranquil = 0,
 

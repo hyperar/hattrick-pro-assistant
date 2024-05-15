@@ -21,6 +21,8 @@
 
         private readonly Matches matchesExtractor;
 
+        private readonly Players playersExtractor;
+
         private readonly StaffAvatars staffAvatarsExtractor;
 
         private readonly TeamDetails teamDetailsExtractor;
@@ -35,6 +37,7 @@
             ManagerCompendium managerCompendiumExtractor,
             MatchArchive matchArchiveExtractor,
             Matches matchesExtractor,
+            Players playersExtractor,
             StaffAvatars staffAvatarsExtractor,
             TeamDetails teamDetailsExtractor,
             WorldDetails worldDetailsExtractor)
@@ -46,6 +49,7 @@
             this.managerCompendiumExtractor = managerCompendiumExtractor;
             this.matchArchiveExtractor = matchArchiveExtractor;
             this.matchesExtractor = matchesExtractor;
+            this.playersExtractor = playersExtractor;
             this.staffAvatarsExtractor = staffAvatarsExtractor;
             this.teamDetailsExtractor = teamDetailsExtractor;
             this.worldDetailsExtractor = worldDetailsExtractor;
@@ -62,6 +66,7 @@
                      XmlFileType.ManagerCompendium => this.managerCompendiumExtractor,
                      XmlFileType.MatchArchive => this.matchArchiveExtractor,
                      XmlFileType.Matches => this.matchesExtractor,
+                     XmlFileType.Players => this.playersExtractor,
                      XmlFileType.StaffAvatars => this.staffAvatarsExtractor,
                      XmlFileType.TeamDetails => this.teamDetailsExtractor,
                      XmlFileType.WorldDetails => this.worldDetailsExtractor,

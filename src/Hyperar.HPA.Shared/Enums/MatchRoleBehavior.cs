@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum MatchRoleBehavior : short
+    public enum MatchRoleBehavior : int
     {
         NoChange = -1,
 

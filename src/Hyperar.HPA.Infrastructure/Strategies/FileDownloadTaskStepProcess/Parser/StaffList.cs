@@ -71,8 +71,8 @@
             {
                 Name = await reader.ReadElementContentAsStringAsync(),
                 StaffId = await reader.ReadXmlValueAsLongAsync(),
-                StaffType = await reader.ReadXmlValueAsByteAsync(),
-                StaffLevel = await reader.ReadXmlValueAsByteAsync(),
+                StaffType = await reader.ReadXmlValueAsIntAsync(),
+                StaffLevel = await reader.ReadXmlValueAsIntAsync(),
                 HiredDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 Cost = await reader.ReadXmlValueAsLongAsync(),
                 HofPlayerId = await reader.ReadXmlValueAsLongAsync()
@@ -93,15 +93,15 @@
             {
                 TrainerId = await reader.ReadXmlValueAsLongAsync(),
                 Name = await reader.ReadElementContentAsStringAsync(),
-                Age = await reader.ReadXmlValueAsByteAsync(),
-                AgeDays = await reader.ReadXmlValueAsByteAsync(),
+                Age = await reader.ReadXmlValueAsIntAsync(),
+                AgeDays = await reader.ReadXmlValueAsIntAsync(),
                 ContractDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 Cost = await reader.ReadXmlValueAsLongAsync(),
                 CountryId = await reader.ReadXmlValueAsLongAsync(),
-                TrainerType = await reader.ReadXmlValueAsByteAsync(),
-                Leadership = await reader.ReadXmlValueAsByteAsync(),
-                TrainerSkillLevel = await reader.ReadXmlValueAsByteAsync(),
-                TrainerStatus = await reader.ReadXmlValueAsByteAsync(),
+                TrainerType = await reader.ReadXmlValueAsIntAsync(),
+                Leadership = await reader.ReadXmlValueAsIntAsync(),
+                TrainerSkillLevel = await reader.ReadXmlValueAsIntAsync(),
+                TrainerStatus = await reader.ReadXmlValueAsIntAsync(),
             };
 
             // Reads closing element.

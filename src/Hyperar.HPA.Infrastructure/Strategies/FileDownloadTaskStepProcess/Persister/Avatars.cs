@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application.Interfaces;
-    using Hyperar.HPA.Domain.Interfaces;
+    using Domain.Interfaces;
     using Models = Shared.Models.Hattrick;
 
     public class Avatars : PersisterBase, IFileDownloadTaskStepProcessStrategy

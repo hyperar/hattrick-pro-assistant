@@ -10,8 +10,8 @@
     using Application.Services;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using Hyperar.HPA.WinUI.Enums;
-    using Hyperar.HPA.WinUI.ViewModels.Interface;
+    using WinUI.Enums;
+    using WinUI.ViewModels.Interface;
     using WinUI.State.Interface;
 
     public partial class AuthorizationViewModel : AsyncViewModelBase

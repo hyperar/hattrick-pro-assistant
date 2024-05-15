@@ -45,17 +45,17 @@
 
             builder.Property(p => p.Season)
                 .HasColumnOrder(6)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Week)
                 .HasColumnOrder(7)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.SeasonOffset)
                 .HasColumnOrder(8)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.LanguageId)
@@ -97,7 +97,7 @@
 
             builder.Property(p => p.NumberOfLevels)
                 .HasColumnOrder(16)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.NextTrainingUpdate)

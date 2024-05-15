@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum MatchTeamLocation : byte
+    public enum MatchTeamLocation : int
     {
         Neutral = 0,
 

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Manager] (
     [HattrickId]        BIGINT          NOT NULL,
     [UserName]          NVARCHAR (128)  NOT NULL,
-    [SupporterTier]     TINYINT          NOT NULL,
+    [SupporterTier]     INT             NOT NULL,
     [CurrencyName]      NVARCHAR (64)   NOT NULL,
     [CurrencyRate]      DECIMAL (10, 5) NOT NULL,
     [AvatarBytes]       VARBINARY (MAX) NULL,
@@ -11,6 +11,8 @@
     CONSTRAINT [FK_Manager_Country] FOREIGN KEY ([CountryHattrickId]) REFERENCES [dbo].[Country] ([HattrickId]),
     CONSTRAINT [FK_Manager_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id])
 );
+
+
 
 
 GO

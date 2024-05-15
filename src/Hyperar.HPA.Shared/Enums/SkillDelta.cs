@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum SkillDelta : short
+    public enum SkillDelta : int
     {
         Decrease = -1,
 

@@ -16,7 +16,7 @@
             this.LastName = string.Empty;
         }
 
-        public byte Age { get; set; }
+        public int Age { get; set; }
 
         public virtual Country Country { get; set; }
 

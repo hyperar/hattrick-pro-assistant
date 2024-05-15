@@ -1,11 +1,11 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System.Linq;
-    using Shared.Models.UI.Players;
     using Application.Services;
     using Domain.Interfaces;
+    using Shared.Enums;
     using Microsoft.EntityFrameworkCore;
-    using Hyperar.HPA.Shared.Enums;
+    using Shared.Models.UI.Players;
 
     public class PlayersViewService : IPlayersViewService
     {
@@ -71,7 +71,7 @@
                 AgeYears = player.AgeYears,
                 AgeDays = player.AgeDays,
                 TotalSkillIndex = player.TotalSkillIndex,
-                Country = new Country()
+                Country = new Country
                 {
                     FlagBytes = player.Country.League.FlagBytes,
                     HattrickId = player.Country.HattrickId,
@@ -117,6 +117,16 @@
                 GoalsOnTeam = player.GoalsOnTeam,
                 MatchesOnTeam = player.MatchesOnTeam,
                 AvatarBytes = player.AvatarBytes ?? Array.Empty<byte>(),
+                MatchesRating = player.Matches.OrderByDescending(x => x.Date)
+                                              .Select(x => new MatchRating()
+                                              {
+                                                  AverageRating = x.AverageRating,
+                                                  Date = x.Date,
+                                                  EndOfMatchRating = x.EndOfMatchRating,
+                                                  RatingStars = x.CalculatedRating.Split(",")
+                                                                                  .ToList(),
+                                                  Role = x.Role
+                                              }).ToList()
             };
         }
 

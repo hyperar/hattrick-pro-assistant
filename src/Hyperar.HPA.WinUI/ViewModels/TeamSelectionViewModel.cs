@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using Hyperar.HPA.Application.Services;
+    using Application.Services;
     using Shared.Models.UI.TeamSelection;
     using WinUI.State.Interface;
 

@@ -35,12 +35,12 @@
 
             builder.Property(p => p.Role)
                 .HasColumnOrder(5)
-                .HasColumnType(Constants.ColumnType.SmallInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Behavior)
                 .HasColumnOrder(6)
-                .HasColumnType(Constants.ColumnType.SmallInt);
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.Rating)
                 .HasColumnOrder(7)

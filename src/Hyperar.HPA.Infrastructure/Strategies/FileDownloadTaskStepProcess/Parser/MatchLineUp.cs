@@ -20,7 +20,7 @@
 
             result.MatchId = await reader.ReadXmlValueAsLongAsync();
             result.SourceSystem = await reader.ReadElementContentAsStringAsync();
-            result.MatchType = await reader.ReadXmlValueAsByteAsync();
+            result.MatchType = await reader.ReadXmlValueAsIntAsync();
             result.MatchContextId = await reader.ReadXmlValueAsLongAsync();
             result.MatchDate = await reader.ReadXmlValueAsDateTimeAsync();
             result.HomeTeam = await ParseIdNameNodeAsync(reader);
@@ -56,13 +56,13 @@
             Player result = new Player
             {
                 PlayerId = await reader.ReadXmlValueAsLongAsync(),
-                RoleId = await reader.ReadXmlValueAsByteAsync(),
+                RoleId = await reader.ReadXmlValueAsIntAsync(),
                 FirstName = await reader.ReadElementContentAsStringAsync(),
                 LastName = await reader.ReadElementContentAsStringAsync(),
                 NickName = await reader.ReadElementContentAsStringAsync(),
-                RatingStars = reader.CheckNode(NodeName.RatingStars) ? await reader.ReadXmlValueAsDecimalAsync() : null,
-                RatingStarsEndOfMatch = reader.CheckNode(NodeName.RatingStarsEndOfMatch) ? await reader.ReadXmlValueAsDecimalAsync() : null,
-                Behaviour = reader.CheckNode(NodeName.Behaviour) ? await reader.ReadXmlValueAsByteAsync() : null
+                RatingStars = reader.CheckNode(NodeName.RatingStars) ? await reader.ReadXmlValueAsNullableDecimalAsync(0) : null,
+                RatingStarsEndOfMatch = reader.CheckNode(NodeName.RatingStarsEndOfMatch) ? await reader.ReadXmlValueAsNullableDecimalAsync(0) : null,
+                Behaviour = reader.CheckNode(NodeName.Behaviour) ? await reader.ReadXmlValueAsIntAsync() : null
             };
 
             // Reads closing node.
@@ -79,11 +79,11 @@
             StartingPlayer result = new StartingPlayer
             {
                 PlayerId = await reader.ReadXmlValueAsLongAsync(),
-                RoleId = await reader.ReadXmlValueAsByteAsync(),
+                RoleId = await reader.ReadXmlValueAsIntAsync(),
                 FirstName = await reader.ReadElementContentAsStringAsync(),
                 LastName = await reader.ReadElementContentAsStringAsync(),
                 NickName = await reader.ReadElementContentAsStringAsync(),
-                Behaviour = reader.CheckNode(NodeName.Behaviour) ? await reader.ReadXmlValueAsByteAsync() : null
+                Behaviour = reader.CheckNode(NodeName.Behaviour) ? await reader.ReadXmlValueAsIntAsync() : null
             };
 
             // Reads closing node.
@@ -102,11 +102,11 @@
                 TeamId = await reader.ReadXmlValueAsLongAsync(),
                 SubjectPlayerId = await reader.ReadXmlValueAsLongAsync(),
                 ObjectPlayerId = await reader.ReadXmlValueAsLongAsync(),
-                OrderType = await reader.ReadXmlValueAsByteAsync(),
-                NewPositionId = await reader.ReadXmlValueAsShortAsync(),
-                NewPositionBehaviour = await reader.ReadXmlValueAsShortAsync(),
-                MatchMinute = await reader.ReadXmlValueAsByteAsync(),
-                MatchPart = await reader.ReadXmlValueAsByteAsync()
+                OrderType = await reader.ReadXmlValueAsIntAsync(),
+                NewPositionId = await reader.ReadXmlValueAsIntAsync(),
+                NewPositionBehaviour = await reader.ReadXmlValueAsIntAsync(),
+                MatchMinute = await reader.ReadXmlValueAsIntAsync(),
+                MatchPart = await reader.ReadXmlValueAsIntAsync()
             };
 
             // Reads closing node.
@@ -124,8 +124,8 @@
             {
                 TeamId = await reader.ReadXmlValueAsLongAsync(),
                 TeamName = await reader.ReadElementContentAsStringAsync(),
-                ExperienceLevel = await reader.ReadXmlValueAsByteAsync(),
-                StyleOfPlay = await reader.ReadXmlValueAsShortAsync(),
+                ExperienceLevel = await reader.ReadXmlValueAsIntAsync(),
+                StyleOfPlay = await reader.ReadXmlValueAsIntAsync(),
             };
 
             if (reader.CheckNode(NodeName.StartingLineup) && !reader.IsEmptyElement)

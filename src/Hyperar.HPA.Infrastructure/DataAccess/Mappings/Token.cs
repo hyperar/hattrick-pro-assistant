@@ -10,7 +10,7 @@
         {
             builder.Property(p => p.Scope)
                 .HasColumnOrder(1)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Value)

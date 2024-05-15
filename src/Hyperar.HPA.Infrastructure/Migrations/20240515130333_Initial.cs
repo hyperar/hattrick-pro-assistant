@@ -24,9 +24,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     EnglishName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Continent = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Zone = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Season = table.Column<byte>(type: "tinyint", nullable: false),
-                    Week = table.Column<byte>(type: "tinyint", nullable: false),
-                    SeasonOffset = table.Column<short>(type: "smallint", nullable: false),
+                    Season = table.Column<int>(type: "int", nullable: false),
+                    Week = table.Column<int>(type: "int", nullable: false),
+                    SeasonOffset = table.Column<int>(type: "int", nullable: false),
                     LanguageId = table.Column<long>(type: "bigint", nullable: false),
                     LanguageName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     SeniorNationalTeamId = table.Column<long>(type: "bigint", nullable: false),
@@ -34,7 +34,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     ActiveTeams = table.Column<int>(type: "int", nullable: false),
                     ActiveUsers = table.Column<int>(type: "int", nullable: false),
                     WaitingUsers = table.Column<int>(type: "int", nullable: false),
-                    NumberOfLevels = table.Column<byte>(type: "tinyint", nullable: false),
+                    NumberOfLevels = table.Column<int>(type: "int", nullable: false),
                     NextTrainingUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
                     NextEconomyUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
                     NextCupMatchDate = table.Column<DateTime>(type: "datetime", nullable: true),
@@ -89,11 +89,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     HattrickId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Type = table.Column<byte>(type: "tinyint", nullable: false),
-                    SubType = table.Column<byte>(type: "tinyint", nullable: true),
-                    SeriesLevel = table.Column<byte>(type: "tinyint", nullable: true),
-                    CurrentRound = table.Column<byte>(type: "tinyint", nullable: false),
-                    RoundsLeft = table.Column<byte>(type: "tinyint", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    SubType = table.Column<int>(type: "int", nullable: true),
+                    SeriesLevel = table.Column<int>(type: "int", nullable: true),
+                    CurrentRound = table.Column<int>(type: "int", nullable: false),
+                    RoundsLeft = table.Column<int>(type: "int", nullable: false),
                     LeagueHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -112,7 +112,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Scope = table.Column<byte>(type: "tinyint", nullable: false),
+                    Scope = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     SecretValue = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -135,7 +135,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     HattrickId = table.Column<long>(type: "bigint", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    SupporterTier = table.Column<byte>(type: "tinyint", nullable: false),
+                    SupporterTier = table.Column<int>(type: "int", nullable: false),
                     CurrencyName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     CurrencyRate = table.Column<decimal>(type: "decimal(10,5)", precision: 10, scale: 5, nullable: false),
                     AvatarBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
@@ -192,11 +192,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     RegionRanking = table.Column<int>(type: "int", nullable: false),
                     PowerRanking = table.Column<int>(type: "int", nullable: false),
                     TeamRank = table.Column<int>(type: "int", nullable: false),
-                    UndefeatedStreak = table.Column<short>(type: "smallint", nullable: false),
-                    WinStreak = table.Column<short>(type: "smallint", nullable: false),
+                    UndefeatedStreak = table.Column<int>(type: "int", nullable: false),
+                    WinStreak = table.Column<int>(type: "int", nullable: false),
                     SeriesHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     SeriesName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    SeriesDivision = table.Column<byte>(type: "tinyint", nullable: false),
+                    SeriesDivision = table.Column<int>(type: "int", nullable: false),
                     LogoBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     HomeMatchKitBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     AwayMatchKitBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
@@ -233,11 +233,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NickName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Age = table.Column<byte>(type: "tinyint", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     JoinedTeamOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     NextBirthday = table.Column<DateTime>(type: "datetime", nullable: false),
                     IntroducedOn = table.Column<DateTime>(type: "datetime", nullable: false),
-                    ExpertType = table.Column<byte>(type: "tinyint", nullable: false),
+                    ExpertType = table.Column<int>(type: "int", nullable: false),
                     CountryHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     TeamHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
@@ -263,15 +263,15 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 columns: table => new
                 {
                     HattrickId = table.Column<long>(type: "bigint", nullable: false),
-                    System = table.Column<byte>(type: "tinyint", nullable: false),
-                    Type = table.Column<byte>(type: "tinyint", nullable: false),
+                    System = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     CompetitionId = table.Column<long>(type: "bigint", nullable: true),
-                    Rules = table.Column<byte>(type: "tinyint", nullable: false),
+                    Rules = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     FinishDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    AddedMinutes = table.Column<byte>(type: "tinyint", nullable: true),
-                    Weather = table.Column<byte>(type: "tinyint", nullable: true),
-                    Result = table.Column<byte>(type: "tinyint", nullable: true),
+                    AddedMinutes = table.Column<int>(type: "int", nullable: true),
+                    Weather = table.Column<int>(type: "int", nullable: true),
+                    Result = table.Column<int>(type: "int", nullable: true),
                     TeamHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -294,10 +294,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NickName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    ShirtNumber = table.Column<byte>(type: "tinyint", nullable: true),
+                    ShirtNumber = table.Column<int>(type: "int", nullable: true),
                     IsCoach = table.Column<bool>(type: "bit", nullable: false),
-                    AgeYears = table.Column<byte>(type: "tinyint", nullable: false),
-                    AgeDays = table.Column<byte>(type: "tinyint", nullable: false),
+                    AgeYears = table.Column<int>(type: "int", nullable: false),
+                    AgeDays = table.Column<int>(type: "int", nullable: false),
                     JoinedTeamOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     Statement = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
@@ -305,25 +305,25 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     HasMotherClubBonus = table.Column<bool>(type: "bit", nullable: false),
                     Salary = table.Column<long>(type: "bigint", nullable: false),
                     IsForeign = table.Column<bool>(type: "bit", nullable: false),
-                    Agreeability = table.Column<byte>(type: "tinyint", nullable: false),
-                    Aggressiveness = table.Column<byte>(type: "tinyint", nullable: false),
-                    Honesty = table.Column<byte>(type: "tinyint", nullable: false),
-                    Leadership = table.Column<byte>(type: "tinyint", nullable: false),
-                    Specialty = table.Column<byte>(type: "tinyint", nullable: false),
+                    Agreeability = table.Column<int>(type: "int", nullable: false),
+                    Aggressiveness = table.Column<int>(type: "int", nullable: false),
+                    Honesty = table.Column<int>(type: "int", nullable: false),
+                    Leadership = table.Column<int>(type: "int", nullable: false),
+                    Specialty = table.Column<int>(type: "int", nullable: false),
                     IsTransferListed = table.Column<bool>(type: "bit", nullable: false),
                     EnrolledOnNationalTeam = table.Column<bool>(type: "bit", nullable: false),
-                    CurrentSeasonLeagueGoals = table.Column<short>(type: "smallint", nullable: false),
-                    CurrentSeasonCupGoals = table.Column<short>(type: "smallint", nullable: false),
-                    CurrentSeasonFriendlyGoals = table.Column<short>(type: "smallint", nullable: false),
-                    CareerGoals = table.Column<short>(type: "smallint", nullable: false),
-                    CareerHattricks = table.Column<short>(type: "smallint", nullable: false),
-                    GoalsOnTeam = table.Column<short>(type: "smallint", nullable: false),
-                    MatchesOnTeam = table.Column<short>(type: "smallint", nullable: false),
-                    SeniorNationalTeamCaps = table.Column<short>(type: "smallint", nullable: false),
-                    JuniorNationalTeamCaps = table.Column<short>(type: "smallint", nullable: false),
-                    BookingStatus = table.Column<byte>(type: "tinyint", nullable: false),
-                    Health = table.Column<short>(type: "smallint", nullable: false),
-                    Category = table.Column<byte>(type: "tinyint", nullable: false),
+                    CurrentSeasonLeagueGoals = table.Column<int>(type: "int", nullable: false),
+                    CurrentSeasonCupGoals = table.Column<int>(type: "int", nullable: false),
+                    CurrentSeasonFriendlyGoals = table.Column<int>(type: "int", nullable: false),
+                    CareerGoals = table.Column<int>(type: "int", nullable: false),
+                    CareerHattricks = table.Column<int>(type: "int", nullable: false),
+                    GoalsOnTeam = table.Column<int>(type: "int", nullable: false),
+                    MatchesOnTeam = table.Column<int>(type: "int", nullable: false),
+                    SeniorNationalTeamCaps = table.Column<int>(type: "int", nullable: false),
+                    JuniorNationalTeamCaps = table.Column<int>(type: "int", nullable: false),
+                    BookingStatus = table.Column<int>(type: "int", nullable: false),
+                    Health = table.Column<int>(type: "int", nullable: false),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     AvatarBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CountryHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     TeamHattrickId = table.Column<long>(type: "bigint", nullable: false)
@@ -379,8 +379,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     HattrickId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     HiredOn = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Type = table.Column<byte>(type: "tinyint", nullable: false),
-                    Level = table.Column<byte>(type: "tinyint", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
                     Salary = table.Column<long>(type: "bigint", nullable: false),
                     AvatarBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     HallOfFamePlayerHattrickId = table.Column<long>(type: "bigint", nullable: true),
@@ -437,15 +437,15 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Index = table.Column<byte>(type: "tinyint", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
                     PlayerHattrickId = table.Column<long>(type: "bigint", nullable: true),
                     AdditionalPlayerHattrickId = table.Column<long>(type: "bigint", nullable: true),
                     TeamHattrickId = table.Column<long>(type: "bigint", nullable: true),
-                    Type = table.Column<short>(type: "smallint", nullable: false),
-                    Variation = table.Column<short>(type: "smallint", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Variation = table.Column<int>(type: "int", nullable: false),
                     Text = table.Column<string>(type: "ntext", nullable: true),
-                    Minute = table.Column<byte>(type: "tinyint", nullable: false),
-                    MatchPart = table.Column<byte>(type: "tinyint", nullable: false),
+                    Minute = table.Column<int>(type: "int", nullable: false),
+                    MatchPart = table.Column<int>(type: "int", nullable: false),
                     MatchHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -496,30 +496,30 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HattrickId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Location = table.Column<byte>(type: "tinyint", nullable: false),
+                    Location = table.Column<int>(type: "int", nullable: false),
                     MatchKitUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     MatchKitBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Formation = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Score = table.Column<byte>(type: "tinyint", nullable: true),
-                    TacticType = table.Column<byte>(type: "tinyint", nullable: true),
-                    TacticLevel = table.Column<byte>(type: "tinyint", nullable: true),
-                    MidfieldRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    RightDefenseRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    CentralDefenseRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    LeftDefenseRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    RightAttackRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    CentralAttackRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    LeftAttackRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    DefenseIndirectSetPiecesRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    AttackIndirectSetPiecesRating = table.Column<byte>(type: "tinyint", nullable: true),
-                    Attitude = table.Column<short>(type: "smallint", nullable: true),
-                    ChancesOnRight = table.Column<byte>(type: "tinyint", nullable: true),
-                    ChancesOnCenter = table.Column<byte>(type: "tinyint", nullable: true),
-                    ChancesOnLeft = table.Column<byte>(type: "tinyint", nullable: true),
-                    SpecialEventChances = table.Column<byte>(type: "tinyint", nullable: true),
-                    OtherChances = table.Column<byte>(type: "tinyint", nullable: true),
-                    FirstHalfPosession = table.Column<byte>(type: "tinyint", nullable: true),
-                    SecondHalfPosession = table.Column<byte>(type: "tinyint", nullable: true),
+                    Score = table.Column<int>(type: "int", nullable: true),
+                    TacticType = table.Column<int>(type: "int", nullable: true),
+                    TacticLevel = table.Column<int>(type: "int", nullable: true),
+                    MidfieldRating = table.Column<int>(type: "int", nullable: true),
+                    RightDefenseRating = table.Column<int>(type: "int", nullable: true),
+                    CentralDefenseRating = table.Column<int>(type: "int", nullable: true),
+                    LeftDefenseRating = table.Column<int>(type: "int", nullable: true),
+                    RightAttackRating = table.Column<int>(type: "int", nullable: true),
+                    CentralAttackRating = table.Column<int>(type: "int", nullable: true),
+                    LeftAttackRating = table.Column<int>(type: "int", nullable: true),
+                    DefenseIndirectSetPiecesRating = table.Column<int>(type: "int", nullable: true),
+                    AttackIndirectSetPiecesRating = table.Column<int>(type: "int", nullable: true),
+                    Attitude = table.Column<int>(type: "int", nullable: true),
+                    ChancesOnRight = table.Column<int>(type: "int", nullable: true),
+                    ChancesOnCenter = table.Column<int>(type: "int", nullable: true),
+                    ChancesOnLeft = table.Column<int>(type: "int", nullable: true),
+                    SpecialEventChances = table.Column<int>(type: "int", nullable: true),
+                    OtherChances = table.Column<int>(type: "int", nullable: true),
+                    FirstHalfPosession = table.Column<int>(type: "int", nullable: true),
+                    SecondHalfPosession = table.Column<int>(type: "int", nullable: true),
                     MatchHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -534,25 +534,51 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PlayerMatch",
+                schema: "senior",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
+                    MatchHattrickId = table.Column<long>(type: "bigint", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    AverageRating = table.Column<decimal>(type: "decimal(4,1)", precision: 4, scale: 1, nullable: false),
+                    EndOfMatchRating = table.Column<decimal>(type: "decimal(4,1)", precision: 4, scale: 1, nullable: false),
+                    CalculatedRating = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PlayerHattrickId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlayerMatch", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PlayerMatch_Player",
+                        column: x => x.PlayerHattrickId,
+                        principalSchema: "senior",
+                        principalTable: "Player",
+                        principalColumn: "HattrickId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PlayerSkillSet",
                 schema: "senior",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Season = table.Column<short>(type: "smallint", nullable: false),
-                    Week = table.Column<byte>(type: "tinyint", nullable: false),
-                    Form = table.Column<byte>(type: "tinyint", nullable: false),
-                    Stamina = table.Column<byte>(type: "tinyint", nullable: false),
-                    Keeper = table.Column<byte>(type: "tinyint", nullable: false),
-                    Defending = table.Column<byte>(type: "tinyint", nullable: false),
-                    Playmaking = table.Column<byte>(type: "tinyint", nullable: false),
-                    Winger = table.Column<byte>(type: "tinyint", nullable: false),
-                    Passing = table.Column<byte>(type: "tinyint", nullable: false),
-                    Scoring = table.Column<byte>(type: "tinyint", nullable: false),
-                    SetPieces = table.Column<byte>(type: "tinyint", nullable: false),
-                    Loyalty = table.Column<byte>(type: "tinyint", nullable: false),
-                    Experience = table.Column<byte>(type: "tinyint", nullable: false),
+                    Season = table.Column<int>(type: "int", nullable: false),
+                    Week = table.Column<int>(type: "int", nullable: false),
+                    Form = table.Column<int>(type: "int", nullable: false),
+                    Stamina = table.Column<int>(type: "int", nullable: false),
+                    Keeper = table.Column<int>(type: "int", nullable: false),
+                    Defending = table.Column<int>(type: "int", nullable: false),
+                    Playmaking = table.Column<int>(type: "int", nullable: false),
+                    Winger = table.Column<int>(type: "int", nullable: false),
+                    Passing = table.Column<int>(type: "int", nullable: false),
+                    Scoring = table.Column<int>(type: "int", nullable: false),
+                    SetPieces = table.Column<int>(type: "int", nullable: false),
+                    Loyalty = table.Column<int>(type: "int", nullable: false),
+                    Experience = table.Column<int>(type: "int", nullable: false),
                     PlayerHattrickId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -573,12 +599,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Index = table.Column<byte>(type: "tinyint", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
                     PlayerHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     PlayerName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Type = table.Column<byte>(type: "tinyint", nullable: false),
-                    Minute = table.Column<byte>(type: "tinyint", nullable: false),
-                    MatchPart = table.Column<byte>(type: "tinyint", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Minute = table.Column<int>(type: "int", nullable: false),
+                    MatchPart = table.Column<int>(type: "int", nullable: false),
                     MatchTeamId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -599,13 +625,13 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Index = table.Column<byte>(type: "tinyint", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
                     PlayerHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     PlayerName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    HomeTeamScore = table.Column<byte>(type: "tinyint", nullable: false),
-                    AwayTeamScore = table.Column<byte>(type: "tinyint", nullable: false),
-                    Minute = table.Column<byte>(type: "tinyint", nullable: false),
-                    MatchPart = table.Column<byte>(type: "tinyint", nullable: false),
+                    HomeTeamScore = table.Column<int>(type: "int", nullable: false),
+                    AwayTeamScore = table.Column<int>(type: "int", nullable: false),
+                    Minute = table.Column<int>(type: "int", nullable: false),
+                    MatchPart = table.Column<int>(type: "int", nullable: false),
                     MatchTeamId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -626,12 +652,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Index = table.Column<byte>(type: "tinyint", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
                     PlayerHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     PlayerName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Type = table.Column<byte>(type: "tinyint", nullable: false),
-                    Minute = table.Column<byte>(type: "tinyint", nullable: false),
-                    MatchPart = table.Column<byte>(type: "tinyint", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Minute = table.Column<int>(type: "int", nullable: false),
+                    MatchPart = table.Column<int>(type: "int", nullable: false),
                     MatchTeamId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -652,8 +678,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Experience = table.Column<byte>(type: "tinyint", nullable: false),
-                    Style = table.Column<short>(type: "smallint", nullable: false),
+                    Experience = table.Column<int>(type: "int", nullable: false),
+                    Style = table.Column<int>(type: "int", nullable: false),
                     MatchTeamId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -678,8 +704,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NickName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Role = table.Column<short>(type: "smallint", nullable: false),
-                    Behavior = table.Column<short>(type: "smallint", nullable: true),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    Behavior = table.Column<int>(type: "int", nullable: true),
                     Rating = table.Column<decimal>(type: "decimal(3,1)", precision: 3, scale: 1, nullable: true),
                     EndRating = table.Column<decimal>(type: "decimal(3,1)", precision: 3, scale: 1, nullable: true),
                     MatchTeamLineUpId = table.Column<int>(type: "int", nullable: false)
@@ -706,8 +732,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NickName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Role = table.Column<short>(type: "smallint", nullable: false),
-                    Behavior = table.Column<short>(type: "smallint", nullable: true),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    Behavior = table.Column<int>(type: "int", nullable: true),
                     MatchTeamLineUpId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -728,11 +754,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderType = table.Column<byte>(type: "tinyint", nullable: false),
-                    NewRole = table.Column<short>(type: "smallint", nullable: false),
-                    NewRoleBehavior = table.Column<short>(type: "smallint", nullable: false),
-                    Minute = table.Column<byte>(type: "tinyint", nullable: false),
-                    MatchPart = table.Column<byte>(type: "tinyint", nullable: false),
+                    OrderType = table.Column<int>(type: "int", nullable: false),
+                    NewRole = table.Column<int>(type: "int", nullable: false),
+                    NewRoleBehavior = table.Column<int>(type: "int", nullable: false),
+                    Minute = table.Column<int>(type: "int", nullable: false),
+                    MatchPart = table.Column<int>(type: "int", nullable: false),
                     InPlayerHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     OutPlayerHattrickId = table.Column<long>(type: "bigint", nullable: false),
                     MatchTeamLineUpId = table.Column<int>(type: "int", nullable: false)
@@ -875,6 +901,12 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 column: "TeamHattrickId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PlayerMatch_PlayerHattrickId",
+                schema: "senior",
+                table: "PlayerMatch",
+                column: "PlayerHattrickId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlayerSkillSet_PlayerHattrickId",
                 schema: "senior",
                 table: "PlayerSkillSet",
@@ -971,6 +1003,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "MatchTeamLineUpSubstitution",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "PlayerMatch",
                 schema: "senior");
 
             migrationBuilder.DropTable(

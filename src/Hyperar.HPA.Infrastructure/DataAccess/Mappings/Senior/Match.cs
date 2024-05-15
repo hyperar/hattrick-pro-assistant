@@ -10,12 +10,12 @@
         {
             builder.Property(p => p.System)
                 .HasColumnOrder(1)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Type)
                 .HasColumnOrder(2)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.CompetitionId)
@@ -24,7 +24,7 @@
 
             builder.Property(p => p.Rules)
                 .HasColumnOrder(4)
-                .HasColumnType(Constants.ColumnType.TinyInt)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.StartDate)
@@ -38,15 +38,15 @@
 
             builder.Property(p => p.AddedMinutes)
                 .HasColumnOrder(7)
-                .HasColumnType(Constants.ColumnType.TinyInt);
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.Weather)
                 .HasColumnOrder(8)
-                .HasColumnType(Constants.ColumnType.TinyInt);
+                .HasColumnType(Constants.ColumnType.Int);
 
             builder.Property(p => p.Result)
                 .HasColumnOrder(9)
-                .HasColumnType(Constants.ColumnType.TinyInt);
+                .HasColumnType(Constants.ColumnType.Int);
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.Match> builder)

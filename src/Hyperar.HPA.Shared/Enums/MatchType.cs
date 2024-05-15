@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum MatchType : byte
+    public enum MatchType : int
     {
         League = 1,
 

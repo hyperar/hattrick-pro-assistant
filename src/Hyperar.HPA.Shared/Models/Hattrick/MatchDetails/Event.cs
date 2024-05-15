@@ -9,15 +9,15 @@
 
         public string EventText { get; set; }
 
-        public short EventTypeId { get; set; }
+        public int EventTypeId { get; set; }
 
-        public short EventVariation { get; set; }
+        public int EventVariation { get; set; }
 
-        public byte Index { get; set; }
+        public int Index { get; set; }
 
-        public byte MatchPart { get; set; }
+        public int MatchPart { get; set; }
 
-        public byte Minute { get; set; }
+        public int Minute { get; set; }
 
         public long ObjectPlayerId { get; set; }
 

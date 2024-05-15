@@ -1,6 +1,6 @@
 ﻿namespace Hyperar.HPA.Shared.Enums
 {
-    public enum LeagueCupSubType : byte
+    public enum LeagueCupSubType : int
     {
         Emerald = 1,
 

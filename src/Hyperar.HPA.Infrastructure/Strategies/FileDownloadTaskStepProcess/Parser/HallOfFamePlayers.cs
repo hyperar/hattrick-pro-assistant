@@ -55,13 +55,13 @@
                 FirstName = await reader.ReadElementContentAsStringAsync(),
                 NickName = await reader.ReadXmlValueAsNullableStringAsync(),
                 LastName = await reader.ReadElementContentAsStringAsync(),
-                Age = await reader.ReadXmlValueAsByteAsync(),
+                Age = await reader.ReadXmlValueAsIntAsync(),
                 NextBirthday = await reader.ReadXmlValueAsDateTimeAsync(),
                 CountryId = await reader.ReadXmlValueAsLongAsync(),
                 ArrivalDate = await reader.ReadXmlValueAsDateTimeAsync(),
-                ExpertType = await reader.ReadXmlValueAsByteAsync(),
+                ExpertType = await reader.ReadXmlValueAsIntAsync(),
                 HofDate = await reader.ReadXmlValueAsDateTimeAsync(),
-                HofAge = await reader.ReadXmlValueAsShortAsync(),
+                HofAge = await reader.ReadXmlValueAsIntAsync(),
             };
 
             // Reads closing element.

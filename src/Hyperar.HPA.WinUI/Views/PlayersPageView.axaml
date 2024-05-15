@@ -26,6 +26,7 @@
         <converters:HealthStatusToTranslatedStringConverter x:Key="healthStatusToTranslatedStringConverter" />
         <converters:HealthStatusToValueStringConverter x:Key="healthStatusToValueStringConverter" />
         <converters:NotEqualToBooleanConverter x:Key="notEqualToBooleanConverter" />
+        <converters:StringToMatchRatingConverter x:Key="stringToMatchRatingConverter" />
 
     </UserControl.Resources>
 
@@ -192,7 +193,7 @@
                         </DataTemplate>
 
                     </DataGridTemplateColumn.HeaderTemplate>
-                    
+
                     <DataGridTemplateColumn.CellTemplate>
 
                         <DataTemplate>
@@ -309,7 +310,7 @@
                         </DataTemplate>
 
                     </DataGridTemplateColumn.HeaderTemplate>
-                    
+
                     <DataGridTemplateColumn.CellTemplate>
 
                         <DataTemplate>
@@ -829,6 +830,56 @@
 
                         <TextBlock Classes="numeric"
                                    Text="{Binding MatchesOnTeam}" />
+
+                    </DataTemplate>
+
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn SortMemberPath="LastMatchRating.AverageRating">
+
+                    <DataGridTemplateColumn.HeaderTemplate>
+
+                        <DataTemplate>
+
+                            <TextBlock Classes="numeric"
+                                       Text="{x:Static globalization:Translations.LastMatchRatingHeader}"
+                                       ToolTip.Tip="{x:Static globalization:Translations.LastMatchRatingToolTip}" />
+
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn.HeaderTemplate>
+
+                    <DataTemplate>
+
+                        <ItemsControl ItemsSource="{Binding LastMatchRating.RatingStars}">
+
+                            <ItemsControl.ItemsPanel>
+
+                                <ItemsPanelTemplate>
+
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Left"
+                                                Margin="5"
+                                                Spacing="0"
+                                                VerticalAlignment="Center" />
+
+                                </ItemsPanelTemplate>
+
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+
+                                <DataTemplate>
+                                    
+                                    <Image Source="{Binding,
+                                                    Converter={StaticResource stringToMatchRatingConverter}}"
+                                           Stretch="None" />
+
+                                </DataTemplate>
+
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
 
                     </DataTemplate>
 

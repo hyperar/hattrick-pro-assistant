@@ -85,11 +85,11 @@
             {
                 CupId = await reader.ReadXmlValueAsLongAsync(),
                 CupName = await reader.ReadElementContentAsStringAsync(),
-                CupLeagueLevel = await reader.ReadXmlValueAsByteAsync(),
-                CupLevel = await reader.ReadXmlValueAsByteAsync(),
-                CupLevelIndex = await reader.ReadXmlValueAsByteAsync(),
-                MatchRound = await reader.ReadXmlValueAsByteAsync(),
-                MatchRoundsLeft = await reader.ReadXmlValueAsByteAsync()
+                CupLeagueLevel = await reader.ReadXmlValueAsIntAsync(),
+                CupLevel = await reader.ReadXmlValueAsIntAsync(),
+                CupLevelIndex = await reader.ReadXmlValueAsIntAsync(),
+                MatchRound = await reader.ReadXmlValueAsIntAsync(),
+                MatchRoundsLeft = await reader.ReadXmlValueAsIntAsync()
             };
 
             // Reads closing element.
@@ -107,9 +107,9 @@
             {
                 LeagueId = await reader.ReadXmlValueAsLongAsync(),
                 LeagueName = await reader.ReadElementContentAsStringAsync(),
-                Season = await reader.ReadXmlValueAsByteAsync(),
-                SeasonOffset = await reader.ReadXmlValueAsShortAsync(),
-                MatchRound = await reader.ReadXmlValueAsByteAsync(),
+                Season = await reader.ReadXmlValueAsIntAsync(),
+                SeasonOffset = await reader.ReadXmlValueAsIntAsync(),
+                MatchRound = await reader.ReadXmlValueAsIntAsync(),
                 ShortName = await reader.ReadElementContentAsStringAsync(),
                 Continent = await reader.ReadElementContentAsStringAsync(),
                 ZoneName = await reader.ReadElementContentAsStringAsync(),
@@ -150,7 +150,7 @@
             result.Sequence3 = await reader.ReadXmlValueAsDateTimeAsync();
             result.Sequence5 = await reader.ReadXmlValueAsDateTimeAsync();
             result.Sequence7 = await reader.ReadXmlValueAsDateTimeAsync();
-            result.NumberOfLevels = await reader.ReadXmlValueAsByteAsync();
+            result.NumberOfLevels = await reader.ReadXmlValueAsIntAsync();
 
             // Reads closing element.
             await reader.ReadAsync();

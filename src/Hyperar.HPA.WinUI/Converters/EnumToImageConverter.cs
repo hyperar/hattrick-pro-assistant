@@ -5,7 +5,7 @@
     using Avalonia;
     using Avalonia.Controls;
     using Avalonia.Data.Converters;
-    using Hyperar.HPA.Shared.Enums;
+    using Shared.Enums;
 
     internal class EnumToImageConverter : IValueConverter
     {

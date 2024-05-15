@@ -24,11 +24,6 @@
                  : value.Equals(bool.TrueString, StringComparison.CurrentCultureIgnoreCase);
         }
 
-        public static async Task<byte> ReadXmlValueAsByteAsync(this XmlReader reader)
-        {
-            return byte.Parse(await reader.ReadElementContentAsStringAsync());
-        }
-
         public static async Task<DateTime> ReadXmlValueAsDateTimeAsync(this XmlReader reader)
         {
             string value = await reader.ReadElementContentAsStringAsync();
@@ -59,13 +54,6 @@
             return long.Parse(await reader.ReadElementContentAsStringAsync());
         }
 
-        public static async Task<byte?> ReadXmlValueAsNullableByteAsync(this XmlReader reader, byte? nullValue = null)
-        {
-            string value = await reader.ReadElementContentAsStringAsync();
-
-            return value == nullValue?.ToString() ? null : byte.Parse(value);
-        }
-
         public static async Task<DateTime?> ReadXmlValueAsNullableDateTimeAsync(this XmlReader reader)
         {
             string value = await reader.ReadElementContentAsStringAsync();
@@ -73,6 +61,30 @@
             return string.IsNullOrWhiteSpace(value)
                  ? null
                  : DateTime.Parse(value);
+        }
+
+        public static async Task<int?> ReadXmlValueAsNullableIntAsync(this XmlReader reader, int? nullValue = null)
+        {
+            string value = await reader.ReadElementContentAsStringAsync();
+
+            return value == nullValue?.ToString() ? null : int.Parse(value);
+        }
+
+        public static async Task<decimal?> ReadXmlValueAsNullableDecimalAsync(this XmlReader reader, decimal? nullValue = null)
+        {
+            string value = await reader.ReadElementContentAsStringAsync();
+
+            string numberDecimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+
+            decimal decimalValue = value.Contains(period, StringComparison.CurrentCulture) && numberDecimalSeparator != period
+                                 ? decimal.Parse(value.Replace(period, numberDecimalSeparator))
+                                 : value.Contains(comma, StringComparison.CurrentCulture) && numberDecimalSeparator != comma
+                                 ? decimal.Parse(value.Replace(comma, numberDecimalSeparator))
+                                 : decimal.Parse(value);
+
+            return nullValue.HasValue && nullValue.Value == decimalValue
+                 ? null
+                 : decimalValue;
         }
 
         public static async Task<long?> ReadXmlValueAsNullableLongAsync(this XmlReader reader, long? nullValue = null)
@@ -87,11 +99,6 @@
             string? value = await reader.ReadElementContentAsStringAsync();
 
             return string.IsNullOrWhiteSpace(value) ? null : value;
-        }
-
-        public static async Task<short> ReadXmlValueAsShortAsync(this XmlReader reader)
-        {
-            return short.Parse(await reader.ReadElementContentAsStringAsync());
         }
     }
 }
