@@ -21,27 +21,31 @@
         <converters:EnumToImageConverter x:Key="enumToImageConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
         <converters:EnumToTranslatedStringAndValueConverter x:Key="enumToTranslatedStringAndValueConverter" />
+        <converters:EnumToUnderlyingValueConverter x:Key="enumToUnderlyingValueConverter" />
         <converters:EqualToBooleanConverter x:Key="equalToBooleanConverter" />
         <converters:HealthStatusToImageConverter x:Key="healthStatusToImageConverter" />
         <converters:HealthStatusToTranslatedStringConverter x:Key="healthStatusToTranslatedStringConverter" />
         <converters:HealthStatusToValueStringConverter x:Key="healthStatusToValueStringConverter" />
         <converters:NotEqualToBooleanConverter x:Key="notEqualToBooleanConverter" />
+        <converters:NotNullToBooleanConverter x:Key="notNullToBooleanConverter" />
+        <converters:SkillLevelToColorConverter x:Key="skillLevelToColorConverter" />
         <converters:StringToMatchRatingConverter x:Key="stringToMatchRatingConverter" />
 
     </UserControl.Resources>
 
-    <Border Background="{DynamicResource ControlFillColorDefault}"
-            CornerRadius="{DynamicResource OverlayCornerRadius}"
-            Padding="10">
+    <UniformGrid Columns="1"
+                 Rows="2">
 
         <DataGrid AutoGenerateColumns="False"
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="True"
                   CanUserSortColumns="True"
+                  GridLinesVisibility="All"
                   IsReadOnly="True"
                   IsScrollInertiaEnabled="True"
                   ItemsSource="{Binding Players, Mode=OneWay}"
                   MaxHeight="700"
+                  SelectedItem="{Binding SelectedPlayer}"
                   SelectionMode="Single">
 
             <DataGrid.Styles>
@@ -538,14 +542,14 @@
 
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="{x:Static globalization:Translations.KeeperHeader}"
-                                        SortMemberPath="KeeperLevel">
+                <DataGridTemplateColumn Header="{x:Static globalization:Translations.SetPiecesHeader}"
+                                        SortMemberPath="SetPiecesLevel">
 
                     <DataGridTemplateColumn.CellTemplate>
 
                         <DataTemplate>
 
-                            <TextBlock Text="{Binding KeeperLevel,
+                            <TextBlock Text="{Binding SetPiecesLevel,
                                               Mode=OneWay,
                                               Converter={StaticResource enumToTranslatedStringAndValueConverter}}" />
 
@@ -870,7 +874,7 @@
                             <ItemsControl.ItemTemplate>
 
                                 <DataTemplate>
-                                    
+
                                     <Image Source="{Binding,
                                                     Converter={StaticResource stringToMatchRatingConverter}}"
                                            Stretch="None" />
@@ -889,6 +893,436 @@
 
         </DataGrid>
 
-    </Border>
+        <Border Background="{DynamicResource ControlFillColorDefault}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                Margin="0 10 0 0"
+                Padding="10">
+
+            <StackPanel IsVisible="{Binding SelectedPlayer,
+                                    Converter={StaticResource notNullToBooleanConverter}}"
+                        Orientation="Vertical"
+                        Spacing="10">
+
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+
+                    <Image Source="{Binding SelectedPlayer.AvatarBytes,
+                                    Converter={StaticResource byteArrayToBitmapConverter}}"
+                           Stretch="None" />
+
+
+                    <Grid VerticalAlignment="Center">
+
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="*" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   FontSize="{DynamicResource TabItemHeaderFontSize}"
+                                   FontWeight="DemiBold"
+                                   VerticalAlignment="Center">
+
+                            <TextBlock.Text>
+
+                                <MultiBinding StringFormat="{x:Static globalization:Translations.PlayerTitleMask}">
+
+                                    <Binding Path="SelectedPlayer.ShirtNumber" />
+                                    <Binding Path="SelectedPlayer.FullName" />
+                                    <Binding Path="SelectedPlayer.HattrickId" />
+
+                                </MultiBinding>
+
+                            </TextBlock.Text>
+
+                        </TextBlock>
+
+                        <StackPanel Grid.Row="1"
+                                    Orientation="Horizontal"
+                                    Spacing="5"
+                                    VerticalAlignment="Center">
+
+                            <Image Source="{Binding SelectedPlayer.Country.FlagBytes,
+                                            Converter={StaticResource byteArrayToBitmapConverter}}"
+                                   Stretch="None" />
+
+                            <TextBlock>
+
+                                <TextBlock.Text>
+
+                                    <MultiBinding StringFormat="{x:Static globalization:Translations.AgeMask}">
+
+                                        <Binding Path="SelectedPlayer.AgeYears" />
+                                        <Binding Path="SelectedPlayer.AgeDays" />
+
+                                    </MultiBinding>
+
+                                </TextBlock.Text>
+
+                            </TextBlock>
+
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="2">
+
+                            <TextBlock.Text>
+
+                                <MultiBinding StringFormat="{x:Static globalization:Translations.PlayerPersonalityMask}">
+
+                                    <Binding Path="SelectedPlayer.AgreeabilityLevel"
+                                             Converter="{StaticResource enumToTranslatedStringAndValueConverter}" />
+                                    <Binding Path="SelectedPlayer.AggressivenessLevel"
+                                             Converter="{StaticResource enumToTranslatedStringAndValueConverter}" />
+                                    <Binding Path="SelectedPlayer.HonestyLevel"
+                                             Converter="{StaticResource enumToTranslatedStringAndValueConverter}" />
+
+                                </MultiBinding>
+
+                            </TextBlock.Text>
+
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="3">
+
+                            <TextBlock.Text>
+
+                                <MultiBinding StringFormat="{x:Static globalization:Translations.PlayerSeniorityMask}">
+
+                                    <Binding Path="SelectedPlayer.ExperienceLevel"
+                                             Converter="{StaticResource enumToTranslatedStringAndValueConverter}" />
+                                    <Binding Path="SelectedPlayer.LeadershipLevel"
+                                             Converter="{StaticResource enumToTranslatedStringAndValueConverter}" />
+                                    <Binding Path="SelectedPlayer.LoyaltyLevel"
+                                             Converter="{StaticResource enumToTranslatedStringAndValueConverter}" />
+
+                                </MultiBinding>
+
+                            </TextBlock.Text>
+
+                        </TextBlock>
+
+                    </Grid>
+
+                </StackPanel>
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="24" />
+
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="28" />
+
+                    </Grid.RowDefinitions>
+
+                    <Grid.Styles>
+
+                        <Style Selector="ProgressBar">
+
+                            <Setter Property="VerticalAlignment" Value="Bottom" />
+
+                        </Style>
+
+                        <Style Selector="ProgressBar.regularSkill">
+
+                            <Setter Property="Foreground" Value="#59965D" />
+                            <Setter Property="Maximum" Value="20" />
+                            <Setter Property="VerticalAlignment" Value="Bottom" />
+
+                        </Style>
+
+                        <Style Selector="TextBlock">
+
+                            <Setter Property="FontWeight" Value="DemiBold" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+
+                        </Style>
+
+                        <Style Selector="TextBlock.skillValue">
+
+                            <Setter Property="FontWeight" Value="DemiBold" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+
+                        </Style>
+
+                    </Grid.Styles>
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="0"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.TsiLabel}" />
+
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="0"
+                               Text="{Binding SelectedPlayer.TotalSkillIndex, StringFormat={}{0:N0}}}}" />
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="1"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.SalaryLabel}" />
+
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="1"
+                               VerticalAlignment="Center">
+
+                        <TextBlock.Text>
+
+                            <MultiBinding Converter="{StaticResource moneyConverter}">
+
+                                <Binding Path="SelectedPlayer.Salary" />
+                                <Binding Path="$parent.((vm:PlayersViewModel)DataContext).Currency.Rate" />
+                                <Binding Path="$parent.((vm:PlayersViewModel)DataContext).Currency.Name" />
+
+                            </MultiBinding>
+
+                        </TextBlock.Text>
+
+                    </TextBlock>
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="2"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.SpecialtyLabel}" />
+
+                    <StackPanel Grid.Column="1"
+                                Grid.Row="2"
+                                Orientation="Horizontal"
+                                Spacing="5">
+
+                        <PathIcon Data="{Binding SelectedPlayer.Specialty,
+                                         Converter={StaticResource enumToImageConverter}}"
+                                  Height="16"
+                                  ToolTip.Tip="{Binding SelectedPlayer.Specialty,
+                                                Converter={StaticResource enumToTranslatedStringConverter}}"
+                                  Width="16" />
+
+                        <TextBlock Text="{Binding SelectedPlayer.Specialty,
+                                          Converter={StaticResource enumToTranslatedStringConverter}}"/>
+
+                    </StackPanel>
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="4"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.FormLabel}" />
+
+                    <Grid Grid.Column="1"
+                          Grid.Row="4">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.FormLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Foreground="{Binding SelectedPlayer.FormLevel,
+                                                  Converter={StaticResource skillLevelToColorConverter}}"
+                                     Maximum="8"
+                                     Value="{Binding SelectedPlayer.FormLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}"
+                                     VerticalAlignment="Bottom" />
+
+                    </Grid>
+
+                    <!--<StackPanel Grid.Column="1"
+                                Grid.Row="4"
+                                HorizontalAlignment="Stretch">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.FormLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Foreground="{Binding SelectedPlayer.FormLevel,
+                                                  Converter={StaticResource skillLevelToColorConverter}}"
+                                     Maximum="8"
+                                     Value="{Binding SelectedPlayer.FormLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}"
+                                     VerticalAlignment="Bottom" />
+
+                    </StackPanel>-->
+
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="5"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.StaminaLabel}" />
+
+                    <Grid Grid.Column="1"
+                          Grid.Row="5">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.StaminaLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Foreground="{Binding SelectedPlayer.FormLevel,
+                                                  Converter={StaticResource skillLevelToColorConverter}}"
+                                     Maximum="9"
+                                     Value="{Binding SelectedPlayer.StaminaLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}"
+                                     VerticalAlignment="Bottom" />
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="0"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.KeeperLabel}" />
+
+                    <Grid Grid.Column="4"
+                          Grid.Row="0">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.KeeperLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Classes="regularSkill"
+                                     Value="{Binding SelectedPlayer.KeeperLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}"
+                                     VerticalAlignment="Bottom" />
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="1"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.DefendingLabel}" />
+
+                    <Grid Grid.Column="4"
+                          Grid.Row="1">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.DefendingLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Classes="regularSkill"
+                                     Value="{Binding SelectedPlayer.DefendingLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}"
+                                     VerticalAlignment="Bottom" />
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="2"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.PlaymakingLabel}" />
+
+                    <Grid Grid.Column="4"
+                          Grid.Row="2">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.PlaymakingLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Classes="regularSkill"
+                                     Value="{Binding SelectedPlayer.PlaymakingLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}"
+                                     VerticalAlignment="Bottom" />
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="3"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.WingerLabel}" />
+
+                    <Grid Grid.Column="4"
+                          Grid.Row="3">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.WingerLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Classes="regularSkill"
+                                     Value="{Binding SelectedPlayer.WingerLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}"
+                                     VerticalAlignment="Bottom" />
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="4"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.PassingLabel}" />
+
+                    <Grid Grid.Column="4"
+                          Grid.Row="4">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.PassingLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Classes="regularSkill"
+                                     Value="{Binding SelectedPlayer.PassingLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}" />
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="5"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.ScoringLabel}" />
+
+                    <Grid Grid.Column="4"
+                          Grid.Row="5">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.ScoringLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Classes="regularSkill"
+                                     Value="{Binding SelectedPlayer.ScoringLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}" />
+
+                    </Grid>
+
+                    <TextBlock Grid.Column="3"
+                               Grid.Row="6"
+                               FontWeight="DemiBold"
+                               Text="{x:Static globalization:Translations.SetPiecesLabel}" />
+
+                    <Grid Grid.Column="4"
+                          Grid.Row="6">
+
+                        <TextBlock Classes="skillValue"
+                                   Text="{Binding SelectedPlayer.SetPiecesLevel,
+                                          Converter={StaticResource enumToTranslatedStringAndValueConverter}}"/>
+
+                        <ProgressBar Classes="regularSkill"
+                                     Value="{Binding SelectedPlayer.SetPiecesLevel,
+                                             Converter={StaticResource enumToUnderlyingValueConverter}}" />
+
+                    </Grid>
+
+                </Grid>
+
+            </StackPanel>
+
+        </Border>
+
+    </UniformGrid>
 
 </UserControl>

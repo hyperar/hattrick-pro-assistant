@@ -12,7 +12,12 @@
     public partial class PlayersViewModel : AsyncViewModelBase
     {
         private readonly IPlayersViewService playersViewService;
+
         private readonly ITeamSelector teamSelector;
+
+        [ObservableProperty]
+        private List<Player> players;
+
         public PlayersViewModel(
             INavigator navigator,
             ITeamSelector teamSelector,
@@ -24,6 +29,11 @@
             this.teamSelector = teamSelector;
         }
 
+        public Currency Currency { get; set; }
+
+        [ObservableProperty]
+        private Player? selectedPlayer;
+
         public override async Task InitializeAsync()
         {
             this.Currency = await this.playersViewService.GetManagerCurrencyAsync();
@@ -33,10 +43,5 @@
 
             await base.InitializeAsync();
         }
-
-        public Currency Currency { get; set; }
-
-        [ObservableProperty]
-        private List<Player> players;
     }
 }

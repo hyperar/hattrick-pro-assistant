@@ -258,6 +258,9 @@
   <data name="DefendingHeader" xml:space="preserve">
     <value>Defending</value>
   </data>
+  <data name="DefendingLabel" xml:space="preserve">
+    <value>Defending:</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Download</value>
   </data>
@@ -318,6 +321,9 @@
   <data name="FormHeader" xml:space="preserve">
     <value>Form</value>
   </data>
+  <data name="FormLabel" xml:space="preserve">
+    <value>Form:</value>
+  </data>
   <data name="GoalsOnTeamHeader" xml:space="preserve">
     <value>GoT</value>
   </data>
@@ -371,6 +377,9 @@
   </data>
   <data name="KeeperHeader" xml:space="preserve">
     <value>Keeper</value>
+  </data>
+  <data name="KeeperLabel" xml:space="preserve">
+    <value>Keeper:</value>
   </data>
   <data name="LastMatchRatingHeader" xml:space="preserve">
     <value>LMR</value>
@@ -495,11 +504,26 @@
   <data name="PassingHeader" xml:space="preserve">
     <value>Passing</value>
   </data>
+  <data name="PassingLabel" xml:space="preserve">
+    <value>Passing:</value>
+  </data>
+  <data name="PlayerPersonalityMask" xml:space="preserve">
+    <value>A {0} who is {1} and {2}.</value>
+  </data>
   <data name="Players" xml:space="preserve">
     <value>Players</value>
   </data>
+  <data name="PlayerSeniorityMask" xml:space="preserve">
+    <value>Has {0} experience and {1} leadership. Has {2} loyalty.</value>
+  </data>
+  <data name="PlayerTitleMask" xml:space="preserve">
+    <value>{0}. {1} ({2})</value>
+  </data>
   <data name="PlaymakingHeader" xml:space="preserve">
     <value>Playmaking</value>
+  </data>
+  <data name="PlaymakingLabel" xml:space="preserve">
+    <value>Playmaking:</value>
   </data>
   <data name="RedownloadMatchesOffContent" xml:space="preserve">
     <value>Download missing matches.</value>
@@ -519,11 +543,17 @@
   <data name="SalaryHeader" xml:space="preserve">
     <value>Salary</value>
   </data>
+  <data name="SalaryLabel" xml:space="preserve">
+    <value>Salary:</value>
+  </data>
   <data name="Score" xml:space="preserve">
     <value>Score</value>
   </data>
   <data name="ScoringHeader" xml:space="preserve">
     <value>Scoring</value>
+  </data>
+  <data name="ScoringLabel" xml:space="preserve">
+    <value>Scoring:</value>
   </data>
   <data name="SeasonCupGoalsHeader" xml:space="preserve">
     <value>CP (S)</value>
@@ -551,6 +581,9 @@
   </data>
   <data name="SetPiecesHeader" xml:space="preserve">
     <value>Set Pieces</value>
+  </data>
+  <data name="SetPiecesLabel" xml:space="preserve">
+    <value>Set Pieces:</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -621,6 +654,9 @@
   <data name="SpecialtyHeader" xml:space="preserve">
     <value>S</value>
   </data>
+  <data name="SpecialtyLabel" xml:space="preserve">
+    <value>Specialty:</value>
+  </data>
   <data name="SpecialtyToolTip" xml:space="preserve">
     <value>Specialty</value>
   </data>
@@ -647,6 +683,9 @@
   </data>
   <data name="StaminaHeader" xml:space="preserve">
     <value>Stamina</value>
+  </data>
+  <data name="StaminaLabel" xml:space="preserve">
+    <value>Stamina:</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
@@ -706,6 +745,9 @@ Please re-authorize it.</value>
   <data name="TransferListedToolTip" xml:space="preserve">
     <value>Transfer-listed</value>
   </data>
+  <data name="TsiLabel" xml:space="preserve">
+    <value>TSI:</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -728,6 +770,9 @@ Found: '{1}'.</value>
   </data>
   <data name="WingerHeader" xml:space="preserve">
     <value>Winger</value>
+  </data>
+  <data name="WingerLabel" xml:space="preserve">
+    <value>Winger:</value>
   </data>
   <data name="XmlFileType_ArenaDetails" xml:space="preserve">
     <value>Arena Details</value>

@@ -235,8 +235,9 @@
 
             <DataGrid AutoGenerateColumns="False"
                       CanUserReorderColumns="False"
-                      CanUserResizeColumns="True"
+                      CanUserResizeColumns="False"
                       CanUserSortColumns="False"
+                      GridLinesVisibility="All"
                       IsReadOnly="True"
                       IsScrollInertiaEnabled="True"
                       ItemsSource="{Binding Team.UpcomingMatches, Mode=OneWay}"
@@ -282,8 +283,9 @@
 
             <DataGrid AutoGenerateColumns="False"
                       CanUserReorderColumns="False"
-                      CanUserResizeColumns="True"
+                      CanUserResizeColumns="False"
                       CanUserSortColumns="False"
+                      GridLinesVisibility="All"
                       IsReadOnly="True"
                       IsScrollInertiaEnabled="True"
                       ItemsSource="{Binding Team.RecentMatches, Mode=OneWay}"
@@ -338,12 +340,12 @@
 
             <DataGrid AutoGenerateColumns="False"
                       CanUserReorderColumns="False"
-                      CanUserResizeColumns="True"
+                      CanUserResizeColumns="False"
                       CanUserSortColumns="False"
+                      GridLinesVisibility="All"
                       IsReadOnly="True"
                       IsScrollInertiaEnabled="True"
                       ItemsSource="{Binding Team.Players, Mode=OneWay}"
-                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       SelectionMode="Single">
 
                 <DataGrid.Columns>

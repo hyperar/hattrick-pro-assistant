@@ -484,6 +484,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Defending:.
+        /// </summary>
+        public static string DefendingLabel {
+            get {
+                return ResourceManager.GetString("DefendingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download.
         /// </summary>
         public static string Download {
@@ -664,6 +673,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Form:.
+        /// </summary>
+        public static string FormLabel {
+            get {
+                return ResourceManager.GetString("FormLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GoT.
         /// </summary>
         public static string GoalsOnTeamHeader {
@@ -822,6 +840,15 @@ namespace Hyperar.HPA.Globalization {
         public static string KeeperHeader {
             get {
                 return ResourceManager.GetString("KeeperHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keeper:.
+        /// </summary>
+        public static string KeeperLabel {
+            get {
+                return ResourceManager.GetString("KeeperLabel", resourceCulture);
             }
         }
         
@@ -1195,6 +1222,24 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Passing:.
+        /// </summary>
+        public static string PassingLabel {
+            get {
+                return ResourceManager.GetString("PassingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} who is {1} and {2}..
+        /// </summary>
+        public static string PlayerPersonalityMask {
+            get {
+                return ResourceManager.GetString("PlayerPersonalityMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Players.
         /// </summary>
         public static string Players {
@@ -1204,11 +1249,38 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Has {0} experience and {1} leadership. Has {2} loyalty..
+        /// </summary>
+        public static string PlayerSeniorityMask {
+            get {
+                return ResourceManager.GetString("PlayerSeniorityMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}. {1} ({2}).
+        /// </summary>
+        public static string PlayerTitleMask {
+            get {
+                return ResourceManager.GetString("PlayerTitleMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Playmaking.
         /// </summary>
         public static string PlaymakingHeader {
             get {
                 return ResourceManager.GetString("PlaymakingHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playmaking:.
+        /// </summary>
+        public static string PlaymakingLabel {
+            get {
+                return ResourceManager.GetString("PlaymakingLabel", resourceCulture);
             }
         }
         
@@ -1267,6 +1339,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Salary:.
+        /// </summary>
+        public static string SalaryLabel {
+            get {
+                return ResourceManager.GetString("SalaryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Score.
         /// </summary>
         public static string Score {
@@ -1281,6 +1362,15 @@ namespace Hyperar.HPA.Globalization {
         public static string ScoringHeader {
             get {
                 return ResourceManager.GetString("ScoringHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scoring:.
+        /// </summary>
+        public static string ScoringLabel {
+            get {
+                return ResourceManager.GetString("ScoringLabel", resourceCulture);
             }
         }
         
@@ -1362,6 +1452,15 @@ namespace Hyperar.HPA.Globalization {
         public static string SetPiecesHeader {
             get {
                 return ResourceManager.GetString("SetPiecesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Pieces:.
+        /// </summary>
+        public static string SetPiecesLabel {
+            get {
+                return ResourceManager.GetString("SetPiecesLabel", resourceCulture);
             }
         }
         
@@ -1636,6 +1735,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specialty:.
+        /// </summary>
+        public static string SpecialtyLabel {
+            get {
+                return ResourceManager.GetString("SpecialtyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specialty.
         /// </summary>
         public static string SpecialtyToolTip {
@@ -1650,6 +1758,15 @@ namespace Hyperar.HPA.Globalization {
         public static string StaminaHeader {
             get {
                 return ResourceManager.GetString("StaminaHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stamina:.
+        /// </summary>
+        public static string StaminaLabel {
+            get {
+                return ResourceManager.GetString("StaminaLabel", resourceCulture);
             }
         }
         
@@ -1826,6 +1943,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TSI:.
+        /// </summary>
+        public static string TsiLabel {
+            get {
+                return ResourceManager.GetString("TsiLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string Type {
@@ -1887,6 +2013,15 @@ namespace Hyperar.HPA.Globalization {
         public static string WingerHeader {
             get {
                 return ResourceManager.GetString("WingerHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winger:.
+        /// </summary>
+        public static string WingerLabel {
+            get {
+                return ResourceManager.GetString("WingerLabel", resourceCulture);
             }
         }
         
