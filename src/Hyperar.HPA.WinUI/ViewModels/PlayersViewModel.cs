@@ -1,13 +1,12 @@
 ﻿namespace Hyperar.HPA.WinUI.ViewModels
 {
-    using System.Threading.Tasks;
-    using WinUI.State.Interface;
-    using Shared.Models.UI.Players;
-    using CommunityToolkit.Mvvm.ComponentModel;
-    using System;
-    using Application.Services;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
+    using Application.Services;
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using Shared.Models.UI.Players;
+    using WinUI.State.Interface;
 
     public partial class PlayersViewModel : AsyncViewModelBase
     {

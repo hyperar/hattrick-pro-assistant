@@ -12,6 +12,8 @@
 
         private readonly CheckToken checkTokenParser;
 
+        private readonly Club clubParser;
+
         private readonly HallOfFamePlayers hallOfFamePlayersParser;
 
         private readonly ManagerCompendium managerCompendiumParser;
@@ -24,9 +26,9 @@
 
         private readonly MatchLineUp matchLineUpParser;
 
-        private readonly Players playersParser;
-
         private readonly PlayerDetails playerDetailsParser;
+
+        private readonly Players playersParser;
 
         private readonly StaffAvatars staffAvatarsParser;
 
@@ -40,6 +42,7 @@
             ArenaDetails arenaDetailsParser,
             Avatars avatarsParser,
             CheckToken checkTokenParser,
+            Club clubParser,
             HallOfFamePlayers hallOfFamePlayersParser,
             ManagerCompendium managerCompendiumParser,
             MatchArchive matchArchiveParser,
@@ -56,6 +59,7 @@
             this.arenaDetailsParser = arenaDetailsParser;
             this.avatarsParser = avatarsParser;
             this.checkTokenParser = checkTokenParser;
+            this.clubParser = clubParser;
             this.hallOfFamePlayersParser = hallOfFamePlayersParser;
             this.managerCompendiumParser = managerCompendiumParser;
             this.matchArchiveParser = matchArchiveParser;
@@ -78,6 +82,7 @@
                      XmlFileType.ArenaDetails => this.arenaDetailsParser,
                      XmlFileType.Avatars => this.avatarsParser,
                      XmlFileType.CheckToken => this.checkTokenParser,
+                     XmlFileType.Club => this.clubParser,
                      XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersParser,
                      XmlFileType.ManagerCompendium => this.managerCompendiumParser,
                      XmlFileType.MatchArchive => this.matchArchiveParser,

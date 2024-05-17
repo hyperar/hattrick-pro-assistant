@@ -5,7 +5,6 @@
     using Application.Interfaces;
     using Constants;
     using ExtensionMethods;
-    using Shared.Enums;
     using Shared.Models.Hattrick.Interfaces;
     using Shared.Models.Hattrick.Players;
 

@@ -46,6 +46,7 @@
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.ArenaDetails>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.Avatars>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.CheckToken>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.Club>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.HallOfFamePlayers>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.ManagerCompendium>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Parser.MatchArchive>();
@@ -62,6 +63,7 @@
                 // Persisters.
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.Avatars>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.ArenaDetails>();
+                services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.Club>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.Default>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.HallOfFamePlayers>();
                 services.AddScoped<Infrastructure.Strategies.FileDownloadTaskStepProcess.Persister.ManagerCompendium>();

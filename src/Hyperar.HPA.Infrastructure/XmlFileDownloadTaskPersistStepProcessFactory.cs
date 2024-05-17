@@ -11,6 +11,8 @@
 
         private readonly Avatars avatarsPersister;
 
+        private readonly Club clubPersister;
+
         private readonly Default defaultPersister;
 
         private readonly HallOfFamePlayers hallOfFamePlayersPersister;
@@ -23,7 +25,7 @@
 
         private readonly Players playersPersister;
 
-        private readonly PlayerDetails playerDetailsPersister;
+        //private readonly PlayerDetails playerDetailsPersister;
 
         private readonly StaffAvatars staffAvatarsPersister;
 
@@ -36,13 +38,14 @@
         public XmlFileDownloadTaskPersistStepProcessFactory(
             ArenaDetails arenaDetailsPersister,
             Avatars avatarsPersister,
+            Club clubPersister,
             Default defaultPersister,
             HallOfFamePlayers hallOfFamePlayersPersister,
             ManagerCompendium managerCompendiumPersister,
             MatchDetails matchDetailsPersister,
             MatchLineUp matchLineUpPersister,
             Players playersPersister,
-            PlayerDetails playerDetailsPersister,
+            //PlayerDetails playerDetailsPersister,
             StaffAvatars staffAvatarsPersister,
             StaffList staffListPersister,
             TeamDetails teamDetailsPersister,
@@ -50,13 +53,14 @@
         {
             this.arenaDetailsPersister = arenaDetailsPersister;
             this.avatarsPersister = avatarsPersister;
+            this.clubPersister = clubPersister;
             this.defaultPersister = defaultPersister;
             this.hallOfFamePlayersPersister = hallOfFamePlayersPersister;
             this.managerCompendiumPersister = managerCompendiumPersister;
             this.matchDetailsPersister = matchDetailsPersister;
             this.matchLineUpPersister = matchLineUpPersister;
             this.playersPersister = playersPersister;
-            this.playerDetailsPersister = playerDetailsPersister;
+            //this.playerDetailsPersister = playerDetailsPersister;
             this.staffAvatarsPersister = staffAvatarsPersister;
             this.staffListPersister = staffListPersister;
             this.teamDetailsPersister = teamDetailsPersister;
@@ -70,6 +74,7 @@
                  {
                      XmlFileType.ArenaDetails => this.arenaDetailsPersister,
                      XmlFileType.Avatars => this.avatarsPersister,
+                     XmlFileType.Club => this.clubPersister,
                      XmlFileType.HallOfFamePlayers => this.hallOfFamePlayersPersister,
                      XmlFileType.ManagerCompendium => this.managerCompendiumPersister,
                      XmlFileType.MatchDetails => this.matchDetailsPersister,

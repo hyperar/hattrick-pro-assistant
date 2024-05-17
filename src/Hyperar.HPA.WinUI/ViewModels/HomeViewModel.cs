@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using CommunityToolkit.Mvvm.ComponentModel;
     using Application.Services;
+    using CommunityToolkit.Mvvm.ComponentModel;
     using Shared.Models.UI.Home;
     using WinUI.State.Interface;
 

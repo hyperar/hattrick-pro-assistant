@@ -4,8 +4,8 @@
     using System.Threading.Tasks;
     using Application.Interfaces;
     using Domain.Interfaces;
-    using Shared.Enums;
     using Microsoft.EntityFrameworkCore;
+    using Shared.Enums;
     using Models = Shared.Models.Hattrick;
 
     public class MatchDetails : PersisterBase, IFileDownloadTaskStepProcessStrategy

@@ -42,69 +42,74 @@
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
-            builder.Property(p => p.GlobalRanking)
+            builder.Property(p => p.HasPromotedJuniorPlayer)
                 .HasColumnOrder(7)
-                .HasColumnType(Constants.ColumnType.Int)
+                .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
-            builder.Property(p => p.LeagueRanking)
+            builder.Property(p => p.GlobalRanking)
                 .HasColumnOrder(8)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.RegionRanking)
+            builder.Property(p => p.LeagueRanking)
                 .HasColumnOrder(9)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.PowerRanking)
+            builder.Property(p => p.RegionRanking)
                 .HasColumnOrder(10)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.TeamRank)
+            builder.Property(p => p.PowerRanking)
                 .HasColumnOrder(11)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.UndefeatedStreak)
+            builder.Property(p => p.TeamRank)
                 .HasColumnOrder(12)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.WinStreak)
+            builder.Property(p => p.UndefeatedStreak)
                 .HasColumnOrder(13)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.SeriesHattrickId)
+            builder.Property(p => p.WinStreak)
                 .HasColumnOrder(14)
+                .HasColumnType(Constants.ColumnType.Int)
+                .IsRequired();
+
+            builder.Property(p => p.SeriesHattrickId)
+                .HasColumnOrder(15)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.SeriesName)
-                .HasColumnOrder(15)
+                .HasColumnOrder(16)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(100)
                 .IsRequired()
                 .IsUnicode();
 
             builder.Property(p => p.SeriesDivision)
-                .HasColumnOrder(16)
+                .HasColumnOrder(17)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.LogoBytes)
-                .HasColumnOrder(17)
+                .HasColumnOrder(18)
                 .HasColumnType(Constants.ColumnType.VarBinary);
 
             builder.Property(p => p.HomeMatchKitBytes)
-                .HasColumnOrder(18)
+                .HasColumnOrder(19)
                 .HasColumnType(Constants.ColumnType.VarBinary)
                 .IsRequired();
 
             builder.Property(p => p.AwayMatchKitBytes)
-                .HasColumnOrder(19)
+                .HasColumnOrder(20)
                 .HasColumnType(Constants.ColumnType.VarBinary)
                 .IsRequired();
         }

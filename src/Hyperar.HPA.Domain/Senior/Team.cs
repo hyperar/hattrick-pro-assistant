@@ -34,6 +34,8 @@
 
         public virtual ICollection<HallOfFamePlayer> HallOfFamePlayers { get; set; }
 
+        public bool HasPromotedJuniorPlayer { get; set; }
+
         public byte[] HomeMatchKitBytes { get; set; } = Array.Empty<byte>();
 
         public bool IsPlayingCup { get; set; }

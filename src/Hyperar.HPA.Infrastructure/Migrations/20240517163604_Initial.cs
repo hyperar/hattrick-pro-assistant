@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -187,6 +186,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     FoundedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     CoachPlayerId = table.Column<long>(type: "bigint", nullable: false),
                     IsPlayingCup = table.Column<bool>(type: "bit", nullable: false),
+                    HasPromotedJuniorPlayer = table.Column<bool>(type: "bit", nullable: false),
                     GlobalRanking = table.Column<int>(type: "int", nullable: false),
                     LeagueRanking = table.Column<int>(type: "int", nullable: false),
                     RegionRanking = table.Column<int>(type: "int", nullable: false),

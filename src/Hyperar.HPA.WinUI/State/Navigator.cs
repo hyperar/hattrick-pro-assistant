@@ -2,8 +2,8 @@
 {
     using System;
     using CommunityToolkit.Mvvm.ComponentModel;
-    using WinUI.ViewModels;
     using WinUI.State.Interface;
+    using WinUI.ViewModels;
 
     public class Navigator : ObservableObject, INavigator
     {

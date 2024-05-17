@@ -11,8 +11,8 @@
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
     using WinUI.Enums;
-    using WinUI.ViewModels.Interface;
     using WinUI.State.Interface;
+    using WinUI.ViewModels.Interface;
 
     public partial class AuthorizationViewModel : AsyncViewModelBase
     {

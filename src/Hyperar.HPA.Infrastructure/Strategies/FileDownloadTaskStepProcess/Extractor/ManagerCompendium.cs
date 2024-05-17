@@ -19,6 +19,7 @@
 
         private const string LeagueIdParamKey = "leagueId";
 
+        private const string TeamIdParamKey = "teamId";
         private const string UserIdParamKey = "userId";
 
         public async Task ExecuteAsync(
@@ -59,6 +60,18 @@
                                 {
                                     { UserIdParamKey, file.Manager.UserId.ToString() }
                                 }));
+
+                        foreach (Team curTeam in file.Manager.Teams)
+                        {
+                            fileDownloadTasks.Add(
+                                new XmlFileDownloadTask(
+                                    XmlFileType.Club,
+                                    curTeam.TeamId,
+                                    new NameValueCollection
+                                    {
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
+                                    }));
+                        }
 
                         if (file.Manager.Avatar != null)
                         {

@@ -3,8 +3,8 @@
     using System.Linq;
     using Application.Services;
     using Domain.Interfaces;
-    using Shared.Enums;
     using Microsoft.EntityFrameworkCore;
+    using Shared.Enums;
     using Shared.Models.UI.Players;
 
     public class PlayersViewService : IPlayersViewService

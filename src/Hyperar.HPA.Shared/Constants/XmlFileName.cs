@@ -8,6 +8,8 @@
 
         public const string CheckToken = "check_token";
 
+        public const string Club = "club.xml";
+
         public const string HallOfFamePlayers = "hofplayers.xml";
 
         public const string ManagerCompendium = "managercompendium.xml";
@@ -20,9 +22,9 @@
 
         public const string MatchLineUp = "matchlineup.xml";
 
-        public const string Players = "players.xml";
-
         public const string PlayerDeails = "playerdetails.xml";
+
+        public const string Players = "players.xml";
 
         public const string StaffAvatars = "staffavatars.xml";
 

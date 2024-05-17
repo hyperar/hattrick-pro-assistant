@@ -62,7 +62,7 @@
                                                                                        .ToListAsync(cancellationToken);
 
                     var playerMatchIdsToDelete = await this.playerMatchRepository.Query(x => playerIdsToDelete.Contains(x.PlayerHattrickId))
-                                                                                 .Select(x=>x.Id)
+                                                                                 .Select(x => x.Id)
                                                                                  .ToListAsync(cancellationToken);
 
                     await this.playerMatchRepository.DeleteRangeAsync(playerSkillSetIdsToDelete);

@@ -17,7 +17,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -1365,7 +1365,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<byte[]>("AwayMatchKitBytes")
                         .IsRequired()
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(19);
+                        .HasColumnOrder(20);
 
                     b.Property<long>("CoachPlayerId")
                         .HasColumnType("bigint")
@@ -1377,12 +1377,16 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("GlobalRanking")
                         .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<bool>("HasPromotedJuniorPlayer")
+                        .HasColumnType("bit")
                         .HasColumnOrder(7);
 
                     b.Property<byte[]>("HomeMatchKitBytes")
                         .IsRequired()
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(18);
+                        .HasColumnOrder(19);
 
                     b.Property<bool>("IsPlayingCup")
                         .HasColumnType("bit")
@@ -1397,11 +1401,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("LeagueRanking")
                         .HasColumnType("int")
-                        .HasColumnOrder(8);
+                        .HasColumnOrder(9);
 
                     b.Property<byte[]>("LogoBytes")
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(17);
+                        .HasColumnOrder(18);
 
                     b.Property<long>("ManagerHattrickId")
                         .HasColumnType("bigint");
@@ -1415,29 +1419,29 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("PowerRanking")
                         .HasColumnType("int")
-                        .HasColumnOrder(10);
+                        .HasColumnOrder(11);
 
                     b.Property<long>("RegionHattrickId")
                         .HasColumnType("bigint");
 
                     b.Property<int>("RegionRanking")
                         .HasColumnType("int")
-                        .HasColumnOrder(9);
+                        .HasColumnOrder(10);
 
                     b.Property<int>("SeriesDivision")
                         .HasColumnType("int")
-                        .HasColumnOrder(16);
+                        .HasColumnOrder(17);
 
                     b.Property<long>("SeriesHattrickId")
                         .HasColumnType("bigint")
-                        .HasColumnOrder(14);
+                        .HasColumnOrder(15);
 
                     b.Property<string>("SeriesName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(15);
+                        .HasColumnOrder(16);
 
                     b.Property<string>("ShortName")
                         .IsRequired()
@@ -1448,15 +1452,15 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("TeamRank")
                         .HasColumnType("int")
-                        .HasColumnOrder(11);
+                        .HasColumnOrder(12);
 
                     b.Property<int>("UndefeatedStreak")
                         .HasColumnType("int")
-                        .HasColumnOrder(12);
+                        .HasColumnOrder(13);
 
                     b.Property<int>("WinStreak")
                         .HasColumnType("int")
-                        .HasColumnOrder(13);
+                        .HasColumnOrder(14);
 
                     b.HasKey("HattrickId");
 

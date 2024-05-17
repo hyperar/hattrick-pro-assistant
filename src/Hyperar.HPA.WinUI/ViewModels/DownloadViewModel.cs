@@ -6,10 +6,10 @@
     using Application.Services;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using WinUI.Enums;
-    using WinUI.ViewModels.Interface;
     using Shared.Models.UI.Download;
+    using WinUI.Enums;
     using WinUI.State.Interface;
+    using WinUI.ViewModels.Interface;
 
     public partial class DownloadViewModel : AsyncViewModelBase
     {

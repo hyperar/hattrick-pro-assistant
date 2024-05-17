@@ -2053,6 +2053,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Club.
+        /// </summary>
+        public static string XmlFileType_Club {
+            get {
+                return ResourceManager.GetString("XmlFileType_Club", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hall Of Fame Players.
         /// </summary>
         public static string XmlFileType_HallOfFamePlayers {

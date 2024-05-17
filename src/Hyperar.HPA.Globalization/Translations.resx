@@ -783,6 +783,9 @@ Found: '{1}'.</value>
   <data name="XmlFileType_CheckToken" xml:space="preserve">
     <value>Authorization</value>
   </data>
+  <data name="XmlFileType_Club" xml:space="preserve">
+    <value>Club</value>
+  </data>
   <data name="XmlFileType_HallOfFamePlayers" xml:space="preserve">
     <value>Hall Of Fame Players</value>
   </data>

@@ -8,7 +8,6 @@
     using Application.Interfaces;
     using Application.Models;
     using Hyperar.HPA.Shared.Constants;
-    using Microsoft.Identity.Client;
     using Shared.Enums;
     using Shared.Models.UI.Download;
     using Models = Shared.Models.Hattrick;
