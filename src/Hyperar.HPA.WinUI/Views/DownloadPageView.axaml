@@ -72,6 +72,16 @@
                               SelectionChanged="DataGrid_SelectionChanged"
                               SelectionMode="Single">
 
+                        <DataGrid.Styles>
+
+                            <Style Selector="TextBlock">
+
+                                <Setter Property="FontSize" Value="14" />
+
+                            </Style>
+
+                        </DataGrid.Styles>
+
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Binding="{Binding Title, Mode=OneWay}"

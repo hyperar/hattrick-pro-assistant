@@ -549,6 +549,9 @@
   <data name="Score" xml:space="preserve">
     <value>Score</value>
   </data>
+  <data name="ScoreMask" xml:space="preserve">
+    <value> {0} - {1}</value>
+  </data>
   <data name="ScoringHeader" xml:space="preserve">
     <value>Scoring</value>
   </data>

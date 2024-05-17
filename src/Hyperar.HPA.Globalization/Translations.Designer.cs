@@ -1357,6 +1357,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  {0} - {1}.
+        /// </summary>
+        public static string ScoreMask {
+            get {
+                return ResourceManager.GetString("ScoreMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scoring.
         /// </summary>
         public static string ScoringHeader {

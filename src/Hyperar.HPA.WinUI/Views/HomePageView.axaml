@@ -25,10 +25,9 @@
         <converters:NotEqualToBooleanConverter x:Key="notEqualToBooleanConverter" />
         <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/NoManagerAvatar.png" x:Key="noManagerAvatar" />
         <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/NoTeamLogo.png" x:Key="noTeamLogo" />
-
     </UserControl.Resources>
 
-    <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="*,*">
+    <Grid ColumnDefinitions="Auto,*,*" RowDefinitions="*,*">
 
         <Grid.Styles>
 
@@ -122,7 +121,6 @@
 
                     <TextBlock HorizontalAlignment="Stretch"
                                Text="{Binding Team.Country}" />
-
                 </StackPanel>
 
                 <TextBlock Classes="label"
@@ -164,7 +162,6 @@
                     <Style Selector="TextBlock.label">
 
                         <Setter Property="Padding" Value="5 0" />
-
                     </Style>
 
                 </Grid.Styles>
@@ -207,7 +204,6 @@
                            Width="20" />
 
                     <TextBlock Text="{Binding Team.Manager.Country}" />
-
                 </StackPanel>
 
                 <TextBlock Classes="label"
@@ -220,7 +216,6 @@
                            Grid.Row="3"
                            Text="{Binding Team.Manager.SupporterTier,
                                   Converter={StaticResource enumToTranslatedStringConverter}}" />
-
             </Grid>
 
         </Border>
@@ -243,29 +238,88 @@
                       ItemsSource="{Binding Team.UpcomingMatches, Mode=OneWay}"
                       SelectionMode="Single">
 
+                <DataGrid.Styles>
+
+                    <Style Selector="TextBlock">
+
+                        <Setter Property="FontSize" Value="14" />
+
+                    </Style>
+
+                </DataGrid.Styles>
+
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Binding="{Binding Date, StringFormat=g}"
                                         Header="{x:Static globalization:Translations.Date}" />
-                    <DataGridTextColumn Binding="{Binding HomeTeam.Name}"
-                                        Header="{x:Static globalization:Translations.HomeTeam}" />
-                    <DataGridTemplateColumn>
 
-                        <DataTemplate>
+                    <DataGridTemplateColumn Width="*">
 
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
+                        <DataGridTemplateColumn.HeaderTemplate>
 
-                                <TextBlock Text="-" />
+                            <DataTemplate>
 
-                            </StackPanel>
+                                <TextBlock Text="{x:Static globalization:Translations.HomeTeam}" />
 
-                        </DataTemplate>
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.HeaderTemplate>
+
+                        <DataGridTemplateColumn.CellTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="{Binding HomeTeam.Name}"
+                                           VerticalAlignment="Center" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.CellTemplate>
 
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding AwayTeam.Name}"
-                                        Header="{x:Static globalization:Translations.AwayTeam}" />
+
+                    <DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn.CellTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="-"
+                                           VerticalAlignment="Center" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="*">
+
+                        <DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock Text="{x:Static globalization:Translations.AwayTeam}" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.HeaderTemplate>
+
+                        <DataGridTemplateColumn.CellTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="{Binding AwayTeam.Name}"
+                                           VerticalAlignment="Center" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
 
@@ -291,37 +345,110 @@
                       ItemsSource="{Binding Team.RecentMatches, Mode=OneWay}"
                       SelectionMode="Single">
 
+                <DataGrid.Styles>
+
+                    <Style Selector="TextBlock">
+
+                        <Setter Property="FontSize" Value="14" />
+
+                    </Style>
+
+                </DataGrid.Styles>
+
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Binding="{Binding Date, StringFormat=g}"
                                         Header="{x:Static globalization:Translations.Date}" />
-                    <DataGridTextColumn Binding="{Binding HomeTeam.Name}"
-                                        Header="{x:Static globalization:Translations.HomeTeam}"/>
-                    <DataGridTemplateColumn Header="{x:Static globalization:Translations.Score}">
 
-                        <DataTemplate>
+                    <DataGridTemplateColumn Width="*">
 
-                            <StackPanel Orientation="Horizontal"
-                                        Margin="5"
-                                        Spacing="5"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
+                        <DataGridTemplateColumn.HeaderTemplate>
 
-                                <TextBlock Text="{Binding HomeTeamScore}"
-                                           VerticalAlignment="Center" />
+                            <DataTemplate>
+
+                                <TextBlock Text="{x:Static globalization:Translations.HomeTeam}" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.HeaderTemplate>
+
+                        <DataGridTemplateColumn.CellTemplate>
+
+                            <DataTemplate>
+
                                 <TextBlock HorizontalAlignment="Center"
-                                           Text="-"
-                                           VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding AwayTeamScore}"
+                                           Text="{Binding HomeTeam.Name}"
                                            VerticalAlignment="Center" />
 
-                            </StackPanel>
+                            </DataTemplate>
 
-                        </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
 
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding AwayTeam.Name}"
-                                        Header="{x:Static globalization:Translations.AwayTeam}"/>
+
+                    <DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock Text="{x:Static globalization:Translations.Score}" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.HeaderTemplate>
+
+                        <DataGridTemplateColumn.CellTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock HorizontalAlignment="Center"
+                                           VerticalAlignment="Center">
+
+                                    <TextBlock.Text>
+
+                                        <MultiBinding StringFormat="{x:Static globalization:Translations.ScoreMask}">
+
+                                            <Binding Path="HomeTeamScore" />
+                                            <Binding Path="AwayTeamScore" />
+
+                                        </MultiBinding>
+
+                                    </TextBlock.Text>
+
+                                </TextBlock>
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="*">
+
+                        <DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock Text="{x:Static globalization:Translations.AwayTeam}" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.HeaderTemplate>
+
+                        <DataGridTemplateColumn.CellTemplate>
+
+                            <DataTemplate>
+
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="{Binding AwayTeam.Name}"
+                                           VerticalAlignment="Center" />
+
+                            </DataTemplate>
+
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
 
@@ -347,6 +474,16 @@
                       IsScrollInertiaEnabled="True"
                       ItemsSource="{Binding Team.Players, Mode=OneWay}"
                       SelectionMode="Single">
+
+                <DataGrid.Styles>
+
+                    <Style Selector="TextBlock">
+
+                        <Setter Property="FontSize" Value="14" />
+
+                    </Style>
+
+                </DataGrid.Styles>
 
                 <DataGrid.Columns>
 
