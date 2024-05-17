@@ -542,14 +542,14 @@
 
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="{x:Static globalization:Translations.SetPiecesHeader}"
-                                        SortMemberPath="SetPiecesLevel">
+                <DataGridTemplateColumn Header="{x:Static globalization:Translations.KeeperHeader}"
+                                        SortMemberPath="KeeperLevel">
 
                     <DataGridTemplateColumn.CellTemplate>
 
                         <DataTemplate>
 
-                            <TextBlock Text="{Binding SetPiecesLevel,
+                            <TextBlock Text="{Binding KeeperLevel,
                                               Mode=OneWay,
                                               Converter={StaticResource enumToTranslatedStringAndValueConverter}}" />
 
