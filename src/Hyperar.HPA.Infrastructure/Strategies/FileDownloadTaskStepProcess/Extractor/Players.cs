@@ -25,7 +25,7 @@
 
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
-            ICollection<IFileDownloadTask> fileDownloadTasks,
+            IList<IFileDownloadTask> fileDownloadTasks,
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken)
@@ -40,9 +40,14 @@
 
                     if (xmlFileDownloadTask.XmlFile is HattrickData file)
                     {
+                        int index = fileDownloadTasks.IndexOf(fileDownloadTask);
+
                         foreach (var xmlPlayer in file.Team.PlayerList.Where(x => x.TrainerData == null))
                         {
-                            fileDownloadTasks.Add(
+                            index++;
+
+                            fileDownloadTasks.Insert(
+                                index,
                                 new XmlFileDownloadTask(
                                     XmlFileType.PlayerDetails,
                                     xmlFileDownloadTask.ContextId,

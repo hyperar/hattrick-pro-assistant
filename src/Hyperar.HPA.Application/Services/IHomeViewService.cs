@@ -5,6 +5,8 @@
 
     public interface IHomeViewService
     {
+        Task<Currency> GetManagerCurrencyAsync();
+
         Task<Team> GetTeamsOverviewAsync(long teamId);
     }
 }

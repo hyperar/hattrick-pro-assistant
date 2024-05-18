@@ -82,6 +82,8 @@
 
         public int TeamRank { get; set; }
 
+        public long TrainerHattrickId { get; set; }
+
         public int UndefeatedStreak { get; set; }
 
         public int WinStreak { get; set; }
@@ -118,6 +120,7 @@
                 SeriesHattrickId = xmlTeam.LeagueLevelUnit.LeagueLevelUnitId,
                 ShortName = xmlTeam.ShortTeamName,
                 TeamRank = xmlTeam.TeamRank ?? 0,
+                TrainerHattrickId = xmlTeam.Trainer.PlayerId,
                 UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0,
                 WinStreak = xmlTeam.NumberOfVictories ?? 0
             };
@@ -145,6 +148,7 @@
                 || this.SeriesName != xmlTeam.LeagueLevelUnit.LeagueLevelUnitName
                 || this.ShortName != xmlTeam.ShortTeamName
                 || this.TeamRank != xmlTeam.TeamRank
+                || this.TrainerHattrickId != xmlTeam.Trainer.PlayerId
                 || this.UndefeatedStreak != xmlTeam.NumberOfUndefeated
                 || this.WinStreak != xmlTeam.NumberOfVictories;
         }
@@ -171,6 +175,7 @@
             this.SeriesName = xmlTeam.LeagueLevelUnit.LeagueLevelUnitName;
             this.ShortName = xmlTeam.ShortTeamName;
             this.TeamRank = xmlTeam.TeamRank ?? 0;
+            this.TrainerHattrickId = xmlTeam.Trainer.PlayerId;
             this.UndefeatedStreak = xmlTeam.NumberOfUndefeated ?? 0;
             this.WinStreak = xmlTeam.NumberOfVictories ?? 0;
         }

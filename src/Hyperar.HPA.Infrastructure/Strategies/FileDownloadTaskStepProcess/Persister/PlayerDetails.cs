@@ -9,20 +9,28 @@
 
     public class PlayerDetails : PersisterBase, IFileDownloadTaskStepProcessStrategy
     {
-        private readonly IDatabaseContext databaseContext;
+        private readonly IHattrickRepository<Domain.Country> countryRepository;
 
-        private readonly IRepository<Domain.Senior.PlayerMatch> playerMatchRepository;
+        private readonly IDatabaseContext databaseContext;
 
         private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
 
+        private readonly IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository;
+
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
+
         public PlayerDetails(
             IDatabaseContext databaseContext,
+            IHattrickRepository<Domain.Country> countryRepository,
             IHattrickRepository<Domain.Senior.Player> playerRepository,
-            IRepository<Domain.Senior.PlayerMatch> playerMatchRepository)
+            IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository,
+            IHattrickRepository<Domain.Senior.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
+            this.countryRepository = countryRepository;
             this.playerRepository = playerRepository;
-            this.playerMatchRepository = playerMatchRepository;
+            this.playerSkillSetRepository = playerSkillSetRepository;
+            this.teamRepository = teamRepository;
         }
 
         public override async Task PersistFileAsync(IXmlFileDownloadTask fileDownloadTask, CancellationToken cancellationToken)
@@ -31,14 +39,17 @@
 
             if (fileDownloadTask.XmlFile is Models.PlayerDetails.HattrickData file)
             {
-                var player = await this.playerRepository.GetByHattrickIdAsync(file.Player.PlayerId);
+                var team = await this.teamRepository.GetByHattrickIdAsync(file.Player.OwningTeam.TeamId);
 
-                ArgumentNullException.ThrowIfNull(player, nameof(player));
+                ArgumentNullException.ThrowIfNull(team, nameof(team));
 
-                if (file.Player.LastMatch != null)
-                {
-                    await this.ProcessPlayerMatchAsync(file.Player.LastMatch, player);
-                }
+                var player = await this.ProcessPlayerAsync(file.Player, team);
+
+                await this.ProcessPlayerSkillSetAsync(
+                    file.Player,
+                    team.League.Season,
+                    team.League.Week,
+                    player);
             }
             else
             {
@@ -52,21 +63,60 @@
             await this.databaseContext.SaveAsync();
         }
 
-        private async Task ProcessPlayerMatchAsync(
-            Models.PlayerDetails.LastMatch xmlMatch,
+        private async Task<Domain.Senior.Player> ProcessPlayerAsync(
+            Models.PlayerDetails.Player xmlPlayer,
+            Domain.Senior.Team team)
+        {
+            var player = await this.playerRepository.GetByHattrickIdAsync(xmlPlayer.PlayerId);
+
+            if (player == null)
+            {
+                var country = await this.countryRepository.GetByHattrickIdAsync(xmlPlayer.NativeCountryId);
+
+                ArgumentNullException.ThrowIfNull(country, nameof(country));
+
+                player = await this.playerRepository.InsertAsync(
+                    Domain.Senior.Player.Create(
+                        xmlPlayer,
+                        country,
+                        team));
+            }
+            else if (player.HasChanged(xmlPlayer))
+            {
+                player.Update(xmlPlayer);
+
+                this.playerRepository.Update(player);
+            }
+
+            return player;
+        }
+
+        private async Task ProcessPlayerSkillSetAsync(
+            Models.PlayerDetails.Player xmlPlayer,
+            int season,
+            int week,
             Domain.Senior.Player player)
         {
-            var playerMatch = await this.playerMatchRepository.Query(x => x.PlayerHattrickId == player.HattrickId
-                                                                       && x.MatchHattrickId == xmlMatch.MatchId)
-                                                              .SingleOrDefaultAsync();
+            var playerSkillSet = await this.playerSkillSetRepository.Query(x => x.PlayerHattrickId == xmlPlayer.PlayerId
+                                                                             && x.Season == season
+                                                                             && x.Week == week)
+                                                                    .SingleOrDefaultAsync();
 
-            //if (playerMatch == null)
-            //{
-            //    await this.playerMatchRepository.InsertAsync(
-            //        Domain.Senior.PlayerMatch.Create(
-            //            xmlMatch,
-            //            player));
-            //}
+            if (playerSkillSet == null)
+            {
+                await this.playerSkillSetRepository.InsertAsync(
+                    Domain.Senior.PlayerSkillSet.Create(
+                        xmlPlayer,
+                        player,
+                        season,
+                        week));
+            }
+            else if (playerSkillSet.HasChanged(xmlPlayer))
+            {
+                playerSkillSet.Update(xmlPlayer);
+
+                this.playerSkillSetRepository.Update(playerSkillSet);
+            }
         }
     }
 }

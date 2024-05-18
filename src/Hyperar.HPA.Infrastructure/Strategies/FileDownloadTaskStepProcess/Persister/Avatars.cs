@@ -12,10 +12,16 @@
 
         private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
 
-        public Avatars(IDatabaseContext databaseContext, IHattrickRepository<Domain.Senior.Player> playerRepository)
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
+
+        public Avatars(
+            IDatabaseContext databaseContext,
+            IHattrickRepository<Domain.Senior.Player> playerRepository,
+            IHattrickRepository<Domain.Senior.Team> teamRepository)
         {
             this.databaseContext = databaseContext;
             this.playerRepository = playerRepository;
+            this.teamRepository = teamRepository;
         }
 
         public override async Task PersistFileAsync(IXmlFileDownloadTask fileDownloadTask, CancellationToken cancellationToken)
@@ -24,7 +30,11 @@
 
             if (fileDownloadTask.XmlFile is Models.Avatars.HattrickData file)
             {
-                foreach (var xmlPlayer in file.Team.Players)
+                var team = await this.teamRepository.GetByHattrickIdAsync(file.Team.TeamId);
+
+                ArgumentNullException.ThrowIfNull(team, nameof(team));
+
+                foreach (var xmlPlayer in file.Team.Players.Where(x => x.PlayerId != team.TrainerHattrickId))
                 {
                     await this.ProcessPlayerAsync(xmlPlayer);
                 }

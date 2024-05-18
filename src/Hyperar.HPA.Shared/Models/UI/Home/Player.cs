@@ -10,6 +10,8 @@
             this.LastName = string.Empty;
         }
 
+        public long? AskingPrice { get; set; }
+
         public BookingStatus BookingStatus { get; set; }
 
         public string FirstName { get; set; }
@@ -29,6 +31,8 @@
         public int? ShirtNumber { get; set; }
 
         public Specialty Specialty { get; set; }
+
+        public long? WinningBid { get; set; }
 
         public override string ToString()
         {

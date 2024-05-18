@@ -100,7 +100,7 @@
 
         public bool TransferListed { get; set; }
 
-        public int Tsi { get; set; }
+        public int TSI { get; set; }
 
         public int WingerSkill { get; set; }
     }

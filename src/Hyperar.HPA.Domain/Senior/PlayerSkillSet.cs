@@ -2,7 +2,7 @@
 {
     using Domain.Interfaces;
     using Shared.Enums;
-    using Models = Shared.Models.Hattrick.Players;
+    using Models = Shared.Models.Hattrick.PlayerDetails;
 
     public class PlayerSkillSet : EntityBase, IEntity
     {
@@ -44,51 +44,51 @@
         {
             return new PlayerSkillSet
             {
-                Defending = (SkillLevel)xmlPlayer.DefenderSkill,
-                Experience = (SkillLevel)xmlPlayer.Experience,
                 Form = (SkillLevel)xmlPlayer.PlayerForm,
-                Keeper = (SkillLevel)xmlPlayer.KeeperSkill,
+                Stamina = (SkillLevel)xmlPlayer.PlayerSkills.StaminaSkill,
+                Keeper = (SkillLevel)xmlPlayer.PlayerSkills.KeeperSkill,
+                Defending = (SkillLevel)xmlPlayer.PlayerSkills.DefenderSkill,
+                Playmaking = (SkillLevel)xmlPlayer.PlayerSkills.PlaymakerSkill,
+                Winger = (SkillLevel)xmlPlayer.PlayerSkills.WingerSkill,
+                Passing = (SkillLevel)xmlPlayer.PlayerSkills.PassingSkill,
+                Scoring = (SkillLevel)xmlPlayer.PlayerSkills.ScorerSkill,
+                SetPieces = (SkillLevel)xmlPlayer.PlayerSkills.SetPiecesSkill,
+                Experience = (SkillLevel)xmlPlayer.Experience,
                 Loyalty = (SkillLevel)xmlPlayer.Loyalty,
-                Passing = (SkillLevel)xmlPlayer.PassingSkill,
-                Player = player,
-                Playmaking = (SkillLevel)xmlPlayer.PlaymakerSkill,
-                Scoring = (SkillLevel)xmlPlayer.ScorerSkill,
                 Season = season,
-                SetPieces = (SkillLevel)xmlPlayer.SetPiecesSkill,
-                Stamina = (SkillLevel)xmlPlayer.StaminaSkill,
                 Week = week,
-                Winger = (SkillLevel)xmlPlayer.WingerSkill
+                Player = player
             };
         }
 
         public bool HasChanged(Models.Player xmlPlayer)
         {
-            return this.Defending != (SkillLevel)xmlPlayer.DefenderSkill
-                || this.Experience != (SkillLevel)xmlPlayer.Experience
+            return this.Stamina != (SkillLevel)xmlPlayer.PlayerSkills.StaminaSkill
+                || this.Defending != (SkillLevel)xmlPlayer.PlayerSkills.DefenderSkill
                 || this.Form != (SkillLevel)xmlPlayer.PlayerForm
-                || this.Keeper != (SkillLevel)xmlPlayer.KeeperSkill
-                || this.Loyalty != (SkillLevel)xmlPlayer.Loyalty
-                || this.Passing != (SkillLevel)xmlPlayer.PassingSkill
-                || this.Playmaking != (SkillLevel)xmlPlayer.PlaymakerSkill
-                || this.Scoring != (SkillLevel)xmlPlayer.ScorerSkill
-                || this.SetPieces != (SkillLevel)xmlPlayer.SetPiecesSkill
-                || this.Stamina != (SkillLevel)xmlPlayer.StaminaSkill
-                || this.Winger != (SkillLevel)xmlPlayer.WingerSkill;
+                || this.Keeper != (SkillLevel)xmlPlayer.PlayerSkills.KeeperSkill
+                || this.Playmaking != (SkillLevel)xmlPlayer.PlayerSkills.PlaymakerSkill
+                || this.Winger != (SkillLevel)xmlPlayer.PlayerSkills.WingerSkill
+                || this.Passing != (SkillLevel)xmlPlayer.PlayerSkills.PassingSkill
+                || this.Scoring != (SkillLevel)xmlPlayer.PlayerSkills.ScorerSkill
+                || this.SetPieces != (SkillLevel)xmlPlayer.PlayerSkills.SetPiecesSkill
+                || this.Experience != (SkillLevel)xmlPlayer.Experience
+                || this.Loyalty != (SkillLevel)xmlPlayer.Loyalty;
         }
 
         public void Update(Models.Player xmlPlayer)
         {
-            this.Defending = (SkillLevel)xmlPlayer.DefenderSkill;
-            this.Experience = (SkillLevel)xmlPlayer.Experience;
             this.Form = (SkillLevel)xmlPlayer.PlayerForm;
-            this.Keeper = (SkillLevel)xmlPlayer.KeeperSkill;
+            this.Stamina = (SkillLevel)xmlPlayer.PlayerSkills.StaminaSkill;
+            this.Keeper = (SkillLevel)xmlPlayer.PlayerSkills.KeeperSkill;
+            this.Defending = (SkillLevel)xmlPlayer.PlayerSkills.DefenderSkill;
+            this.Playmaking = (SkillLevel)xmlPlayer.PlayerSkills.PlaymakerSkill;
+            this.Winger = (SkillLevel)xmlPlayer.PlayerSkills.WingerSkill;
+            this.Passing = (SkillLevel)xmlPlayer.PlayerSkills.PassingSkill;
+            this.Scoring = (SkillLevel)xmlPlayer.PlayerSkills.ScorerSkill;
+            this.SetPieces = (SkillLevel)xmlPlayer.PlayerSkills.SetPiecesSkill;
+            this.Experience = (SkillLevel)xmlPlayer.Experience;
             this.Loyalty = (SkillLevel)xmlPlayer.Loyalty;
-            this.Passing = (SkillLevel)xmlPlayer.PassingSkill;
-            this.Playmaking = (SkillLevel)xmlPlayer.PlaymakerSkill;
-            this.Scoring = (SkillLevel)xmlPlayer.ScorerSkill;
-            this.SetPieces = (SkillLevel)xmlPlayer.SetPiecesSkill;
-            this.Stamina = (SkillLevel)xmlPlayer.StaminaSkill;
-            this.Winger = (SkillLevel)xmlPlayer.WingerSkill;
         }
     }
 }

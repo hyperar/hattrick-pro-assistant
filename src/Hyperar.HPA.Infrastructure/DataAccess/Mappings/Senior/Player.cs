@@ -47,74 +47,74 @@
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.JoinedTeamOn)
+            builder.Property(p => p.NextBirthDay)
                 .HasColumnOrder(8)
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
-            builder.Property(p => p.Notes)
+            builder.Property(p => p.JoinedTeamOn)
                 .HasColumnOrder(9)
-                .HasColumnType(Constants.ColumnType.NVarChar)
-                .HasMaxLength(1024)
-                .IsUnicode();
+                .HasColumnType(Constants.ColumnType.DateTime)
+                .IsRequired();
 
-            builder.Property(p => p.Statement)
+            builder.Property(p => p.Notes)
                 .HasColumnOrder(10)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(1024)
                 .IsUnicode();
 
-            builder.Property(p => p.TotalSkillIndex)
+            builder.Property(p => p.Statement)
                 .HasColumnOrder(11)
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(1024)
+                .IsUnicode();
+
+            builder.Property(p => p.TotalSkillIndex)
+                .HasColumnOrder(12)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.HasMotherClubBonus)
-                .HasColumnOrder(12)
+                .HasColumnOrder(13)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
             builder.Property(p => p.Salary)
-                .HasColumnOrder(13)
+                .HasColumnOrder(14)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.IsForeign)
-                .HasColumnOrder(14)
+                .HasColumnOrder(15)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
 
             builder.Property(p => p.Agreeability)
-                .HasColumnOrder(15)
-                .HasColumnType(Constants.ColumnType.Int)
-                .IsRequired();
-
-            builder.Property(p => p.Aggressiveness)
                 .HasColumnOrder(16)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.Honesty)
+            builder.Property(p => p.Aggressiveness)
                 .HasColumnOrder(17)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.Leadership)
+            builder.Property(p => p.Honesty)
                 .HasColumnOrder(18)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.Specialty)
+            builder.Property(p => p.Leadership)
                 .HasColumnOrder(19)
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.IsTransferListed)
+            builder.Property(p => p.Specialty)
                 .HasColumnOrder(20)
-                .HasColumnType(Constants.ColumnType.Bit)
+                .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.EnrolledOnNationalTeam)
+            builder.Property(p => p.IsTransferListed)
                 .HasColumnOrder(21)
                 .HasColumnType(Constants.ColumnType.Bit)
                 .IsRequired();
@@ -179,8 +179,25 @@
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.AvatarBytes)
+            builder.Property(p => p.AskingPrice)
                 .HasColumnOrder(34)
+                .HasColumnType(Constants.ColumnType.BigInt);
+
+            builder.Property(p => p.BuyingTeamHattrickId)
+                .HasColumnOrder(35)
+                .HasColumnType(Constants.ColumnType.BigInt);
+
+            builder.Property(p => p.BuyingTeamName)
+                .HasColumnOrder(36)
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(256);
+
+            builder.Property(p => p.WinningBid)
+                .HasColumnOrder(37)
+                .HasColumnType(Constants.ColumnType.BigInt);
+
+            builder.Property(p => p.AvatarBytes)
+                .HasColumnOrder(38)
                 .HasColumnType(Constants.ColumnType.VarBinary);
         }
 

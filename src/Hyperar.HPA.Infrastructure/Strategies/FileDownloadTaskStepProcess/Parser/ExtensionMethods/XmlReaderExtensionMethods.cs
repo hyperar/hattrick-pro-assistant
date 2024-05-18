@@ -63,13 +63,6 @@
                  : DateTime.Parse(value);
         }
 
-        public static async Task<int?> ReadXmlValueAsNullableIntAsync(this XmlReader reader, int? nullValue = null)
-        {
-            string value = await reader.ReadElementContentAsStringAsync();
-
-            return value == nullValue?.ToString() ? null : int.Parse(value);
-        }
-
         public static async Task<decimal?> ReadXmlValueAsNullableDecimalAsync(this XmlReader reader, decimal? nullValue = null)
         {
             string value = await reader.ReadElementContentAsStringAsync();
@@ -85,6 +78,13 @@
             return nullValue.HasValue && nullValue.Value == decimalValue
                  ? null
                  : decimalValue;
+        }
+
+        public static async Task<int?> ReadXmlValueAsNullableIntAsync(this XmlReader reader, int? nullValue = null)
+        {
+            string value = await reader.ReadElementContentAsStringAsync();
+
+            return value == nullValue?.ToString() ? null : int.Parse(value);
         }
 
         public static async Task<long?> ReadXmlValueAsNullableLongAsync(this XmlReader reader, long? nullValue = null)

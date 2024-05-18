@@ -9,7 +9,7 @@
     {
         Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
-            ICollection<IFileDownloadTask> fileDownloadTasks,
+            IList<IFileDownloadTask> fileDownloadTasks,
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken);

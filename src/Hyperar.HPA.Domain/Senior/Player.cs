@@ -3,7 +3,7 @@
     using System;
     using Domain.Interfaces;
     using Shared.Enums;
-    using Models = Shared.Models.Hattrick.Players;
+    using Models = Shared.Models.Hattrick.PlayerDetails;
 
     public class Player : HattrickEntityBase, IHattrickEntity
     {
@@ -26,9 +26,15 @@
 
         public AgreeabilityLevel Agreeability { get; set; }
 
+        public long? AskingPrice { get; set; }
+
         public byte[]? AvatarBytes { get; set; }
 
         public BookingStatus BookingStatus { get; set; }
+
+        public long? BuyingTeamHattrickId { get; set; }
+
+        public string? BuyingTeamName { get; set; }
 
         public int CareerGoals { get; set; }
 
@@ -45,8 +51,6 @@
         public int CurrentSeasonFriendlyGoals { get; set; }
 
         public int CurrentSeasonLeagueGoals { get; set; }
-
-        public bool EnrolledOnNationalTeam { get; set; }
 
         public string FirstName { get; set; }
 
@@ -76,6 +80,8 @@
 
         public int MatchesOnTeam { get; set; }
 
+        public DateTime NextBirthDay { get; set; }
+
         public string? NickName { get; set; }
 
         public string? Notes { get; set; }
@@ -98,6 +104,8 @@
 
         public int TotalSkillIndex { get; set; }
 
+        public long? WinningBid { get; set; }
+
         public static Player Create(Models.Player xmlPlayer, Country country, Team team)
         {
             return new Player
@@ -106,7 +114,10 @@
                 AgeYears = xmlPlayer.Age,
                 Aggressiveness = (AggressivenessLevel)xmlPlayer.Aggressiveness,
                 Agreeability = (AgreeabilityLevel)xmlPlayer.Agreeability,
+                AskingPrice = xmlPlayer.TransferDetails?.AskingPrice,
                 BookingStatus = (BookingStatus)xmlPlayer.Cards,
+                BuyingTeamHattrickId = xmlPlayer.TransferDetails?.BidderTeam?.TeamId,
+                BuyingTeamName = xmlPlayer.TransferDetails?.BidderTeam?.TeamName,
                 CareerGoals = xmlPlayer.CareerGoals,
                 CareerHattricks = xmlPlayer.CareerHattricks,
                 Category = (PlayerCategory)xmlPlayer.PlayerCategoryId,
@@ -114,7 +125,6 @@
                 CurrentSeasonCupGoals = xmlPlayer.CupGoals,
                 CurrentSeasonFriendlyGoals = xmlPlayer.FriendliesGoals,
                 CurrentSeasonLeagueGoals = xmlPlayer.LeagueGoals,
-                EnrolledOnNationalTeam = xmlPlayer.NationalTeamId != null,
                 FirstName = xmlPlayer.FirstName,
                 NickName = xmlPlayer.NickName,
                 GoalsOnTeam = xmlPlayer.GoalsCurrentTeam,
@@ -130,6 +140,7 @@
                 LastName = xmlPlayer.LastName,
                 Leadership = (SkillLevel)xmlPlayer.Leadership,
                 MatchesOnTeam = xmlPlayer.MatchesCurrentTeam,
+                NextBirthDay = xmlPlayer.NextBirthDay,
                 Notes = xmlPlayer.OwnerNotes,
                 Salary = xmlPlayer.Salary,
                 SeniorNationalTeamCaps = xmlPlayer.Caps,
@@ -137,7 +148,8 @@
                 Specialty = (Specialty)xmlPlayer.Specialty,
                 Statement = xmlPlayer.Statement,
                 Team = team,
-                TotalSkillIndex = xmlPlayer.Tsi
+                TotalSkillIndex = xmlPlayer.TSI,
+                WinningBid = xmlPlayer.TransferDetails?.HighestBid
             };
         }
 
@@ -145,14 +157,16 @@
         {
             return this.AgeDays != xmlPlayer.AgeDays
                 || this.AgeYears != xmlPlayer.Age
+                || this.AskingPrice != xmlPlayer.TransferDetails?.AskingPrice
                 || this.BookingStatus != (BookingStatus)xmlPlayer.Cards
+                || this.BuyingTeamHattrickId != xmlPlayer.TransferDetails?.BidderTeam?.TeamId
+                || this.BuyingTeamName != xmlPlayer.TransferDetails?.BidderTeam?.TeamName
                 || this.CareerGoals != xmlPlayer.CareerGoals
                 || this.CareerHattricks != xmlPlayer.CareerHattricks
                 || this.Category != (PlayerCategory)xmlPlayer.PlayerCategoryId
                 || this.CurrentSeasonCupGoals != xmlPlayer.CupGoals
                 || this.CurrentSeasonFriendlyGoals != xmlPlayer.FriendliesGoals
                 || this.CurrentSeasonLeagueGoals != xmlPlayer.LeagueGoals
-                || this.EnrolledOnNationalTeam != (xmlPlayer.NationalTeamId != null)
                 || this.FirstName != xmlPlayer.FirstName
                 || this.GoalsOnTeam != xmlPlayer.GoalsCurrentTeam
                 || this.HasMotherClubBonus != xmlPlayer.MotherClubBonus
@@ -163,27 +177,31 @@
                 || this.JuniorNationalTeamCaps != xmlPlayer.CapsU20
                 || this.LastName != xmlPlayer.LastName
                 || this.MatchesOnTeam != xmlPlayer.MatchesCurrentTeam
+                || this.NextBirthDay != xmlPlayer.NextBirthDay
                 || this.NickName != xmlPlayer.NickName
                 || this.Notes != xmlPlayer.OwnerNotes
                 || this.Salary != xmlPlayer.Salary
                 || this.SeniorNationalTeamCaps != xmlPlayer.Caps
                 || this.ShirtNumber != xmlPlayer.PlayerNumber
                 || this.Statement != xmlPlayer.Statement
-                || this.TotalSkillIndex != xmlPlayer.Tsi;
+                || this.TotalSkillIndex != xmlPlayer.TSI
+                || this.WinningBid != xmlPlayer.TransferDetails?.HighestBid;
         }
 
         public void Update(Models.Player xmlPlayer)
         {
             this.AgeDays = xmlPlayer.AgeDays;
             this.AgeYears = xmlPlayer.Age;
+            this.AskingPrice = xmlPlayer.TransferDetails?.AskingPrice;
             this.BookingStatus = (BookingStatus)xmlPlayer.Cards;
+            this.BuyingTeamHattrickId = xmlPlayer.TransferDetails?.BidderTeam?.TeamId;
+            this.BuyingTeamName = xmlPlayer.TransferDetails?.BidderTeam?.TeamName;
             this.CareerGoals = xmlPlayer.CareerGoals;
             this.CareerHattricks = xmlPlayer.CareerHattricks;
             this.Category = (PlayerCategory)xmlPlayer.PlayerCategoryId;
             this.CurrentSeasonCupGoals = xmlPlayer.CupGoals;
             this.CurrentSeasonFriendlyGoals = xmlPlayer.FriendliesGoals;
             this.CurrentSeasonLeagueGoals = xmlPlayer.LeagueGoals;
-            this.EnrolledOnNationalTeam = xmlPlayer.NationalTeamId != null;
             this.FirstName = xmlPlayer.FirstName;
             this.GoalsOnTeam = xmlPlayer.GoalsCurrentTeam;
             this.HasMotherClubBonus = xmlPlayer.MotherClubBonus;
@@ -194,13 +212,15 @@
             this.JuniorNationalTeamCaps = xmlPlayer.CapsU20;
             this.LastName = xmlPlayer.LastName;
             this.MatchesOnTeam = xmlPlayer.MatchesCurrentTeam;
+            this.NextBirthDay = xmlPlayer.NextBirthDay;
             this.NickName = xmlPlayer.NickName;
             this.Notes = xmlPlayer.OwnerNotes;
             this.Salary = xmlPlayer.Salary;
             this.SeniorNationalTeamCaps = xmlPlayer.Caps;
             this.ShirtNumber = xmlPlayer.PlayerNumber;
             this.Statement = xmlPlayer.Statement;
-            this.TotalSkillIndex = xmlPlayer.Tsi;
+            this.TotalSkillIndex = xmlPlayer.TSI;
+            this.WinningBid = xmlPlayer.TransferDetails?.HighestBid;
         }
     }
 }

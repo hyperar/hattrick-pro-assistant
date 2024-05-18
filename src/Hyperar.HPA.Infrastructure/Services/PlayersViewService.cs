@@ -44,11 +44,11 @@
             return team.Players.Where(x => x.HattrickId != x.Team.CoachPlayerId)
                                .OrderByDescending(x => x.ShirtNumber.HasValue)
                                .ThenBy(x => x.ShirtNumber)
-                               .Select(Convert)
+                               .Select(x => Convert(x, team.Manager.CurrencyRate))
                                .ToArray();
         }
 
-        private static Player Convert(Domain.Senior.Player player)
+        private static Player Convert(Domain.Senior.Player player, decimal currencyRate)
         {
             ArgumentNullException.ThrowIfNull(player.PlayerSkillSets, nameof(player.PlayerSkillSets));
 
@@ -70,6 +70,8 @@
                 ShirtNumber = player.ShirtNumber,
                 AgeYears = player.AgeYears,
                 AgeDays = player.AgeDays,
+                AskingPrice = (long)((player.AskingPrice ?? 0) / currencyRate),
+                NextBirthDay = player.NextBirthDay,
                 TotalSkillIndex = player.TotalSkillIndex,
                 Country = new Country
                 {
@@ -79,7 +81,7 @@
                 },
                 HasMotherClubBonus = player.HasMotherClubBonus,
                 IsTransferListed = player.IsTransferListed,
-                Salary = player.Salary,
+                Salary = (long)(player.Salary / currencyRate),
                 Specialty = player.Specialty,
                 AgreeabilityLevel = player.Agreeability,
                 AggressivenessLevel = player.Aggressiveness,
@@ -116,6 +118,7 @@
                 CareerHattricks = player.CareerHattricks,
                 GoalsOnTeam = player.GoalsOnTeam,
                 MatchesOnTeam = player.MatchesOnTeam,
+                WinningBid = (long)((player.WinningBid ?? 0) / currencyRate),
                 AvatarBytes = player.AvatarBytes ?? Array.Empty<byte>(),
                 MatchesRating = player.Matches.OrderByDescending(x => x.Date)
                                               .Select(x => new MatchRating()
@@ -126,7 +129,7 @@
                                                   RatingStars = x.CalculatedRating.Split(",")
                                                                                   .ToList(),
                                                   Role = x.Role
-                                              }).ToList()
+                                              }).ToList(),
             };
         }
 

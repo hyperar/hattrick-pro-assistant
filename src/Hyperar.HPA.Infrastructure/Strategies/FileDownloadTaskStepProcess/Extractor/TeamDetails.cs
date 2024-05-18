@@ -27,7 +27,7 @@
 
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
-            ICollection<IFileDownloadTask> fileDownloadTasks,
+            IList<IFileDownloadTask> fileDownloadTasks,
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken)
@@ -53,14 +53,12 @@
                                         { ArenaIdParamKey, curTeam.Arena.Id.ToString() }
                                     }));
 
-                            if (!string.IsNullOrWhiteSpace(curTeam.LogoUrl))
+                            if (!string.IsNullOrWhiteSpace(curTeam.LogoUrl) &&
+                                !ImageFileExists(curTeam.LogoUrl))
                             {
-                                if (!ImageFileExists(curTeam.LogoUrl))
-                                {
-                                    fileDownloadTasks.Add(
-                                        new ImageFileDownloadTask(
-                                            curTeam.LogoUrl));
-                                }
+                                fileDownloadTasks.Add(
+                                    new ImageFileDownloadTask(
+                                        curTeam.LogoUrl));
                             }
 
                             if (!ImageFileExists(curTeam.DressUri))
@@ -76,6 +74,24 @@
                                     new ImageFileDownloadTask(
                                         curTeam.DressAlternateUri));
                             }
+
+                            fileDownloadTasks.Add(
+                                new XmlFileDownloadTask(
+                                    XmlFileType.Players,
+                                    curTeam.TeamId,
+                                    new NameValueCollection
+                                    {
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
+                                    }));
+
+                            fileDownloadTasks.Add(
+                                new XmlFileDownloadTask(
+                                    XmlFileType.Avatars,
+                                    curTeam.TeamId,
+                                    new NameValueCollection
+                                    {
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
+                                    }));
 
                             if (downloadSettings.DownloadFullMatchArchive)
                             {
@@ -101,33 +117,17 @@
                                     endDate = endDate.AddDays(7);
                                 }
                             }
-
-                            fileDownloadTasks.Add(
-                                new XmlFileDownloadTask(
-                                    XmlFileType.Matches,
-                                    curTeam.TeamId,
-                                    new NameValueCollection
-                                    {
-                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
-                                    }));
-
-                            fileDownloadTasks.Add(
-                                new XmlFileDownloadTask(
-                                    XmlFileType.Players,
-                                    curTeam.TeamId,
-                                    new NameValueCollection
-                                    {
-                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
-                                    }));
-
-                            fileDownloadTasks.Add(
-                                new XmlFileDownloadTask(
-                                    XmlFileType.Avatars,
-                                    curTeam.TeamId,
-                                    new NameValueCollection
-                                    {
-                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
-                                    }));
+                            else
+                            {
+                                fileDownloadTasks.Add(
+                                    new XmlFileDownloadTask(
+                                        XmlFileType.Matches,
+                                        curTeam.TeamId,
+                                        new NameValueCollection
+                                        {
+                                            { TeamIdParamKey, curTeam.TeamId.ToString() }
+                                        }));
+                            }
 
                             fileDownloadTasks.Add(
                                 new XmlFileDownloadTask(

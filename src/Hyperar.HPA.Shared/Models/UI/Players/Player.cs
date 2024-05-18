@@ -32,6 +32,8 @@
 
         public AgreeabilityLevel AgreeabilityLevel { get; set; }
 
+        public long? AskingPrice { get; set; }
+
         public byte[] AvatarBytes { get; set; }
 
         public BookingStatus BookingStatus { get; set; }
@@ -90,8 +92,6 @@
             }
         }
 
-        public List<MatchRating> MatchesRating { get; set; }
-
         public string LastName { get; set; }
 
         public SkillLevel LeadershipLevel { get; set; }
@@ -101,6 +101,10 @@
         public int LoyaltyLevelDelta { get; set; }
 
         public int MatchesOnTeam { get; set; }
+
+        public List<MatchRating> MatchesRating { get; set; }
+
+        public DateTime NextBirthDay { get; set; }
 
         public string? NickName { get; set; }
 
@@ -141,5 +145,7 @@
         public SkillLevel WingerLevel { get; set; }
 
         public int WingerLevelDelta { get; set; }
+
+        public long? WinningBid { get; set; }
     }
 }

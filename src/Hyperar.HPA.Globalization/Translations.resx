@@ -126,6 +126,9 @@
   <data name="AccessTokenSecret" xml:space="preserve">
     <value>Access Token Secret</value>
   </data>
+  <data name="AgeAndBirthDayMask" xml:space="preserve">
+    <value>{0} years and {1} days, next birthday: {2}.</value>
+  </data>
   <data name="AgeHeader" xml:space="preserve">
     <value>Age</value>
   </data>
@@ -517,6 +520,9 @@
     <value>Has {0} experience and {1} leadership. Has {2} loyalty.</value>
   </data>
   <data name="PlayerTitleMask" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="PlayerTitleMaskWithShirtNumber" xml:space="preserve">
     <value>{0}. {1} ({2})</value>
   </data>
   <data name="PlaymakingHeader" xml:space="preserve">
@@ -747,6 +753,11 @@ Please re-authorize it.</value>
   </data>
   <data name="TransferListedToolTip" xml:space="preserve">
     <value>Transfer-listed</value>
+  </data>
+  <data name="TransferListedValueToolTip" xml:space="preserve">
+    <value>Transfer-listed.
+Asking price: {0} {2}.
+Winning bid: {1} {2}.</value>
   </data>
   <data name="TsiLabel" xml:space="preserve">
     <value>TSI:</value>

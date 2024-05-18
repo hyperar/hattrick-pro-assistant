@@ -2,9 +2,9 @@
 {
     public class YouthSquad
     {
-        public long Investment { get; set; }
-
         public bool HasPromoted { get; set; }
+
+        public long Investment { get; set; }
 
         public int YouthLevel { get; set; }
     }

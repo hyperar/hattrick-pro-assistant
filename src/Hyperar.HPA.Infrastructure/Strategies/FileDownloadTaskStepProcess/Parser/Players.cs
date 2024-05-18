@@ -64,7 +64,7 @@
                 AgeDays = await reader.ReadXmlValueAsIntAsync(),
                 ArrivalDate = await reader.ReadXmlValueAsDateTimeAsync(),
                 OwnerNotes = await reader.ReadXmlValueAsNullableStringAsync(),
-                Tsi = await reader.ReadXmlValueAsIntAsync(),
+                TSI = await reader.ReadXmlValueAsIntAsync(),
                 PlayerForm = await reader.ReadXmlValueAsIntAsync(),
                 Statement = await reader.ReadXmlValueAsNullableStringAsync(),
                 Experience = await reader.ReadXmlValueAsIntAsync(),

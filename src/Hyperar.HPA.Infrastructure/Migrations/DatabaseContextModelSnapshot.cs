@@ -1033,19 +1033,32 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("Aggressiveness")
                         .HasColumnType("int")
-                        .HasColumnOrder(16);
+                        .HasColumnOrder(17);
 
                     b.Property<int>("Agreeability")
                         .HasColumnType("int")
-                        .HasColumnOrder(15);
+                        .HasColumnOrder(16);
+
+                    b.Property<long?>("AskingPrice")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(34);
 
                     b.Property<byte[]>("AvatarBytes")
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(34);
+                        .HasColumnOrder(38);
 
                     b.Property<int>("BookingStatus")
                         .HasColumnType("int")
                         .HasColumnOrder(31);
+
+                    b.Property<long?>("BuyingTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(35);
+
+                    b.Property<string>("BuyingTeamName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(36);
 
                     b.Property<int>("CareerGoals")
                         .HasColumnType("int")
@@ -1074,10 +1087,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(22);
 
-                    b.Property<bool>("EnrolledOnNationalTeam")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(21);
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -1091,7 +1100,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<bool>("HasMotherClubBonus")
                         .HasColumnType("bit")
-                        .HasColumnOrder(12);
+                        .HasColumnOrder(13);
 
                     b.Property<int>("Health")
                         .HasColumnType("int")
@@ -1099,7 +1108,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("Honesty")
                         .HasColumnType("int")
-                        .HasColumnOrder(17);
+                        .HasColumnOrder(18);
 
                     b.Property<bool>("IsCoach")
                         .HasColumnType("bit")
@@ -1107,15 +1116,15 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<bool>("IsForeign")
                         .HasColumnType("bit")
-                        .HasColumnOrder(14);
+                        .HasColumnOrder(15);
 
                     b.Property<bool>("IsTransferListed")
                         .HasColumnType("bit")
-                        .HasColumnOrder(20);
+                        .HasColumnOrder(21);
 
                     b.Property<DateTime>("JoinedTeamOn")
                         .HasColumnType("datetime")
-                        .HasColumnOrder(8);
+                        .HasColumnOrder(9);
 
                     b.Property<int>("JuniorNationalTeamCaps")
                         .HasColumnType("int")
@@ -1130,11 +1139,15 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("Leadership")
                         .HasColumnType("int")
-                        .HasColumnOrder(18);
+                        .HasColumnOrder(19);
 
                     b.Property<int>("MatchesOnTeam")
                         .HasColumnType("int")
                         .HasColumnOrder(28);
+
+                    b.Property<DateTime>("NextBirthDay")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
 
                     b.Property<string>("NickName")
                         .HasMaxLength(256)
@@ -1146,11 +1159,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasMaxLength(1024)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(9);
+                        .HasColumnOrder(10);
 
                     b.Property<long>("Salary")
                         .HasColumnType("bigint")
-                        .HasColumnOrder(13);
+                        .HasColumnOrder(14);
 
                     b.Property<int>("SeniorNationalTeamCaps")
                         .HasColumnType("int")
@@ -1162,20 +1175,24 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<int>("Specialty")
                         .HasColumnType("int")
-                        .HasColumnOrder(19);
+                        .HasColumnOrder(20);
 
                     b.Property<string>("Statement")
                         .HasMaxLength(1024)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(10);
+                        .HasColumnOrder(11);
 
                     b.Property<long>("TeamHattrickId")
                         .HasColumnType("bigint");
 
                     b.Property<int>("TotalSkillIndex")
                         .HasColumnType("int")
-                        .HasColumnOrder(11);
+                        .HasColumnOrder(12);
+
+                    b.Property<long?>("WinningBid")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(37);
 
                     b.HasKey("HattrickId");
 
@@ -1365,7 +1382,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<byte[]>("AwayMatchKitBytes")
                         .IsRequired()
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(20);
+                        .HasColumnOrder(21);
 
                     b.Property<long>("CoachPlayerId")
                         .HasColumnType("bigint")
@@ -1386,7 +1403,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<byte[]>("HomeMatchKitBytes")
                         .IsRequired()
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(19);
+                        .HasColumnOrder(20);
 
                     b.Property<bool>("IsPlayingCup")
                         .HasColumnType("bit")
@@ -1405,7 +1422,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<byte[]>("LogoBytes")
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(18);
+                        .HasColumnOrder(19);
 
                     b.Property<long>("ManagerHattrickId")
                         .HasColumnType("bigint");
@@ -1453,6 +1470,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<int>("TeamRank")
                         .HasColumnType("int")
                         .HasColumnOrder(12);
+
+                    b.Property<long>("TrainerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(18);
 
                     b.Property<int>("UndefeatedStreak")
                         .HasColumnType("int")

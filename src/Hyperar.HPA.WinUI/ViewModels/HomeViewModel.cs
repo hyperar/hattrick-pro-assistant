@@ -25,9 +25,13 @@
             this.teamSelector = teamSelector;
         }
 
+        public Currency Currency { get; set; }
+
         public override async Task InitializeAsync()
         {
             ArgumentNullException.ThrowIfNull(this.teamSelector.SelectedTeamId, nameof(this.teamSelector.SelectedTeamId));
+
+            this.Currency = await this.homeViewService.GetManagerCurrencyAsync();
 
             this.Team = await this.homeViewService.GetTeamsOverviewAsync(
                 this.teamSelector.SelectedTeamId);

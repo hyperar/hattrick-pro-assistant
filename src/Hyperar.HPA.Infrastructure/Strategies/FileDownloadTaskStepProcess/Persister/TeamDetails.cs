@@ -42,9 +42,9 @@
 
         private readonly IRepository<Domain.Senior.MatchTeam> matchTeamRepository;
 
-        private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
-
         private readonly IRepository<Domain.Senior.PlayerMatch> playerMatchRepository;
+
+        private readonly IHattrickRepository<Domain.Senior.Player> playerRepository;
 
         private readonly IRepository<Domain.Senior.PlayerSkillSet> playerSkillSetRepository;
 

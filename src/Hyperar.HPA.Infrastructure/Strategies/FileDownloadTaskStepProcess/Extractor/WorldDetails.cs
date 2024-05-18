@@ -16,48 +16,49 @@
 
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
-            ICollection<IFileDownloadTask> fileDownloadTasks,
+            IList<IFileDownloadTask> fileDownloadTasks,
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken)
         {
             try
             {
-                await Task.Delay(0, cancellationToken);
-
-                if (fileDownloadTask is XmlFileDownloadTask xmlFileDownloadTask)
+                await Task.Run(() =>
                 {
-                    ArgumentNullException.ThrowIfNull(xmlFileDownloadTask.XmlFile, nameof(xmlFileDownloadTask.XmlFile));
-
-                    if (xmlFileDownloadTask.XmlFile is HattrickData file)
+                    if (fileDownloadTask is XmlFileDownloadTask xmlFileDownloadTask)
                     {
-                        foreach (League league in file.LeagueList)
-                        {
-                            string imageUrl = string.Format(
-                                LeagueFlagImageUrlMask,
-                                league.LeagueId);
+                        ArgumentNullException.ThrowIfNull(xmlFileDownloadTask.XmlFile, nameof(xmlFileDownloadTask.XmlFile));
 
-                            if (!ImageFileExists(imageUrl))
+                        if (xmlFileDownloadTask.XmlFile is HattrickData file)
+                        {
+                            foreach (League league in file.LeagueList)
                             {
-                                fileDownloadTasks.Add(
-                                    new ImageFileDownloadTask(
-                                        imageUrl));
+                                string imageUrl = string.Format(
+                                    LeagueFlagImageUrlMask,
+                                    league.LeagueId);
+
+                                if (!ImageFileExists(imageUrl))
+                                {
+                                    fileDownloadTasks.Add(
+                                        new ImageFileDownloadTask(
+                                            imageUrl));
+                                }
                             }
+                        }
+                        else
+                        {
+                            throw new ArgumentException(
+                                string.Format(
+                                    Globalization.Translations.UnexpectedFileType,
+                                    typeof(HattrickData).FullName,
+                                    xmlFileDownloadTask.XmlFile.GetType().FullName));
                         }
                     }
                     else
                     {
-                        throw new ArgumentException(
-                            string.Format(
-                                Globalization.Translations.UnexpectedFileType,
-                                typeof(HattrickData).FullName,
-                                xmlFileDownloadTask.XmlFile.GetType().FullName));
+                        throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
                     }
-                }
-                else
-                {
-                    throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-                }
+                }, cancellationToken);
             }
             catch
             {

@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Application.Services;
     using Domain.Interfaces;
+    using Microsoft.EntityFrameworkCore;
     using Shared.Enums;
     using Shared.Models.UI.Home;
 
@@ -12,9 +13,28 @@
     {
         private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
-        public HomeViewService(IHattrickRepository<Domain.Senior.Team> teamRepository)
+        private readonly IRepository<Domain.User> userRepository;
+
+        public HomeViewService(
+            IHattrickRepository<Domain.Senior.Team> teamRepository,
+            IRepository<Domain.User> userRepository)
         {
             this.teamRepository = teamRepository;
+            this.userRepository = userRepository;
+        }
+
+        public async Task<Currency> GetManagerCurrencyAsync()
+        {
+            Domain.User? user = await this.userRepository.Query().SingleOrDefaultAsync();
+
+            ArgumentNullException.ThrowIfNull(user, nameof(user));
+            ArgumentNullException.ThrowIfNull(user.Manager, nameof(user.Manager));
+
+            return new Currency
+            {
+                Name = user.Manager.CurrencyName,
+                Rate = user.Manager.CurrencyRate
+            };
         }
 
         public async Task<Team> GetTeamsOverviewAsync(long teamId)
@@ -74,12 +94,14 @@
                                           FirstName = x.FirstName,
                                           NickName = x.NickName,
                                           LastName = x.LastName,
+                                          AskingPrice = (long)((x.AskingPrice ?? 0) / team.Manager.CurrencyRate),
                                           BookingStatus = x.BookingStatus,
                                           HasMotherClubBonus = x.HasMotherClubBonus,
                                           IsTransferListed = x.IsTransferListed,
                                           HealthStatus = x.Health,
                                           ShirtNumber = x.ShirtNumber,
-                                          Specialty = x.Specialty
+                                          Specialty = x.Specialty,
+                                          WinningBid = (long)((x.WinningBid ?? 0) / team.Manager.CurrencyRate),
                                       }).ToArray(),
                 Series = new Series
                 {

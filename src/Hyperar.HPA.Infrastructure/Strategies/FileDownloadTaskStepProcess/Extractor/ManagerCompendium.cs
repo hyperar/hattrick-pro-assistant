@@ -20,92 +20,94 @@
         private const string LeagueIdParamKey = "leagueId";
 
         private const string TeamIdParamKey = "teamId";
+
         private const string UserIdParamKey = "userId";
 
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
-            ICollection<IFileDownloadTask> fileDownloadTasks,
+            IList<IFileDownloadTask> fileDownloadTasks,
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken)
         {
             try
             {
-                await Task.Delay(0, cancellationToken);
-
-                if (fileDownloadTask is XmlFileDownloadTask xmlFileDownloadTask)
+                await Task.Run(() =>
                 {
-                    ArgumentNullException.ThrowIfNull(xmlFileDownloadTask.XmlFile, nameof(xmlFileDownloadTask.XmlFile));
-
-                    if (xmlFileDownloadTask.XmlFile is HattrickData file)
+                    if (fileDownloadTask is XmlFileDownloadTask xmlFileDownloadTask)
                     {
-                        foreach (Team curTeam in file.Manager.Teams)
-                        {
-                            fileDownloadTasks.Add(
-                                new XmlFileDownloadTask(
-                                    XmlFileType.WorldDetails,
-                                    curTeam.TeamId,
-                                    new NameValueCollection
-                                    {
-                                        { LeagueIdParamKey, curTeam.League.LeagueId.ToString() },
-                                        { IncludeRegionsParamKey, bool.TrueString }
-                                    }));
-                        }
+                        ArgumentNullException.ThrowIfNull(xmlFileDownloadTask.XmlFile, nameof(xmlFileDownloadTask.XmlFile));
 
-                        fileDownloadTasks.Add(
-                            new XmlFileDownloadTask(
-                                XmlFileType.TeamDetails,
-                                file.Manager.UserId,
-                                new NameValueCollection
-                                {
-                                    { UserIdParamKey, file.Manager.UserId.ToString() }
-                                }));
-
-                        foreach (Team curTeam in file.Manager.Teams)
+                        if (xmlFileDownloadTask.XmlFile is HattrickData file)
                         {
-                            fileDownloadTasks.Add(
-                                new XmlFileDownloadTask(
-                                    XmlFileType.Club,
-                                    curTeam.TeamId,
-                                    new NameValueCollection
-                                    {
-                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
-                                    }));
-                        }
-
-                        if (file.Manager.Avatar != null)
-                        {
-                            if (!ImageFileExists(file.Manager.Avatar.BackgroundImage))
+                            foreach (Team curTeam in file.Manager.Teams)
                             {
                                 fileDownloadTasks.Add(
-                                    new ImageFileDownloadTask(
-                                        file.Manager.Avatar.BackgroundImage));
+                                    new XmlFileDownloadTask(
+                                        XmlFileType.WorldDetails,
+                                        curTeam.TeamId,
+                                        new NameValueCollection
+                                        {
+                                            { LeagueIdParamKey, curTeam.League.LeagueId.ToString() },
+                                            { IncludeRegionsParamKey, bool.TrueString }
+                                        }));
                             }
 
-                            foreach (Layer layer in file.Manager.Avatar.Layers)
+                            fileDownloadTasks.Add(
+                                new XmlFileDownloadTask(
+                                    XmlFileType.TeamDetails,
+                                    file.Manager.UserId,
+                                    new NameValueCollection
+                                    {
+                                        { UserIdParamKey, file.Manager.UserId.ToString() }
+                                    }));
+
+                            foreach (Team curTeam in file.Manager.Teams)
                             {
-                                if (!ImageFileExists(layer.Image))
+                                fileDownloadTasks.Add(
+                                    new XmlFileDownloadTask(
+                                        XmlFileType.Club,
+                                        curTeam.TeamId,
+                                        new NameValueCollection
+                                        {
+                                        { TeamIdParamKey, curTeam.TeamId.ToString() }
+                                        }));
+                            }
+
+                            if (file.Manager.Avatar != null)
+                            {
+                                if (!ImageFileExists(file.Manager.Avatar.BackgroundImage))
                                 {
                                     fileDownloadTasks.Add(
                                         new ImageFileDownloadTask(
-                                            layer.Image));
+                                            file.Manager.Avatar.BackgroundImage));
+                                }
+
+                                foreach (Layer layer in file.Manager.Avatar.Layers)
+                                {
+                                    if (!ImageFileExists(layer.Image))
+                                    {
+                                        fileDownloadTasks.Add(
+                                            new ImageFileDownloadTask(
+                                                layer.Image));
+                                    }
                                 }
                             }
+                        }
+                        else
+                        {
+                            throw new ArgumentException(
+                                string.Format(
+                                    Globalization.Translations.UnexpectedFileType,
+                                    typeof(HattrickData).FullName,
+                                    xmlFileDownloadTask.XmlFile.GetType().FullName));
                         }
                     }
                     else
                     {
-                        throw new ArgumentException(
-                            string.Format(
-                                Globalization.Translations.UnexpectedFileType,
-                                typeof(HattrickData).FullName,
-                                xmlFileDownloadTask.XmlFile.GetType().FullName));
+                        throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
                     }
-                }
-                else
-                {
-                    throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-                }
+                }, cancellationToken);
             }
             catch
             {

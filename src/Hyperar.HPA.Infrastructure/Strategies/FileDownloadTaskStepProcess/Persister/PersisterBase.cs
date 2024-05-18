@@ -16,7 +16,7 @@
     {
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
-            ICollection<IFileDownloadTask> fileDownloadTasks,
+            IList<IFileDownloadTask> fileDownloadTasks,
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken)
@@ -112,7 +112,6 @@
 
             if (baseValue != 0 || delta != 0)
             {
-
             }
 
             while (primaryBigStars > 0)
@@ -153,7 +152,6 @@
 
             if (primaryBigStars > 0 || primaryWholeStars > 0 || primaryWholeStars > 0 || transitionStar > 0 || secondaryWholeStars > 0 || secondaryWholeStars > 0)
             {
-
             }
 
             return string.Join(",", startList);

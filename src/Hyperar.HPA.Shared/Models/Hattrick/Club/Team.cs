@@ -10,11 +10,11 @@
             this.YouthSquad = new YouthSquad();
         }
 
+        public Staff Staff { get; set; }
+
         public long TeamId { get; set; }
 
         public string TeamName { get; set; }
-
-        public Staff Staff { get; set; }
 
         public YouthSquad YouthSquad { get; set; }
     }

@@ -99,17 +99,22 @@
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.LogoBytes)
+            builder.Property(p => p.TrainerHattrickId)
                 .HasColumnOrder(18)
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(p => p.LogoBytes)
+                .HasColumnOrder(19)
                 .HasColumnType(Constants.ColumnType.VarBinary);
 
             builder.Property(p => p.HomeMatchKitBytes)
-                .HasColumnOrder(19)
+                .HasColumnOrder(20)
                 .HasColumnType(Constants.ColumnType.VarBinary)
                 .IsRequired();
 
             builder.Property(p => p.AwayMatchKitBytes)
-                .HasColumnOrder(20)
+                .HasColumnOrder(21)
                 .HasColumnType(Constants.ColumnType.VarBinary)
                 .IsRequired();
         }

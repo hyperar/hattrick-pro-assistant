@@ -88,6 +88,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} years and {1} days, next birthday: {2}..
+        /// </summary>
+        public static string AgeAndBirthDayMask {
+            get {
+                return ResourceManager.GetString("AgeAndBirthDayMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Age.
         /// </summary>
         public static string AgeHeader {
@@ -1258,11 +1267,20 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}. {1} ({2}).
+        ///   Looks up a localized string similar to {0} ({1}).
         /// </summary>
         public static string PlayerTitleMask {
             get {
                 return ResourceManager.GetString("PlayerTitleMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}. {1} ({2}).
+        /// </summary>
+        public static string PlayerTitleMaskWithShirtNumber {
+            get {
+                return ResourceManager.GetString("PlayerTitleMaskWithShirtNumber", resourceCulture);
             }
         }
         
@@ -1948,6 +1966,17 @@ namespace Hyperar.HPA.Globalization {
         public static string TransferListedToolTip {
             get {
                 return ResourceManager.GetString("TransferListedToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer-listed.
+        ///Asking price: {0} {2}.
+        ///Winning bid: {1} {2}..
+        /// </summary>
+        public static string TransferListedValueToolTip {
+            get {
+                return ResourceManager.GetString("TransferListedValueToolTip", resourceCulture);
             }
         }
         

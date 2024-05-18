@@ -14,42 +14,43 @@
     {
         public async Task ExecuteAsync(
             IFileDownloadTask fileDownloadTask,
-            ICollection<IFileDownloadTask> fileDownloadTasks,
+            IList<IFileDownloadTask> fileDownloadTasks,
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken)
         {
             try
             {
-                await Task.Delay(0, cancellationToken);
-
-                if (fileDownloadTask is XmlFileDownloadTask xmlFileDownloadTask)
+                await Task.Run(() =>
                 {
-                    ArgumentNullException.ThrowIfNull(xmlFileDownloadTask.XmlFile, nameof(xmlFileDownloadTask.XmlFile));
-
-                    if (xmlFileDownloadTask.XmlFile is HattrickData file)
+                    if (fileDownloadTask is XmlFileDownloadTask xmlFileDownloadTask)
                     {
-                        fileDownloadTasks.Add(
-                            new XmlFileDownloadTask(
-                                XmlFileType.WorldDetails));
+                        ArgumentNullException.ThrowIfNull(xmlFileDownloadTask.XmlFile, nameof(xmlFileDownloadTask.XmlFile));
 
-                        fileDownloadTasks.Add(
-                            new XmlFileDownloadTask(
-                                XmlFileType.ManagerCompendium));
+                        if (xmlFileDownloadTask.XmlFile is HattrickData file)
+                        {
+                            fileDownloadTasks.Add(
+                                new XmlFileDownloadTask(
+                                    XmlFileType.WorldDetails));
+
+                            fileDownloadTasks.Add(
+                                new XmlFileDownloadTask(
+                                    XmlFileType.ManagerCompendium));
+                        }
+                        else
+                        {
+                            throw new ArgumentException(
+                                string.Format(
+                                    Globalization.Translations.UnexpectedFileType,
+                                    typeof(HattrickData).FullName,
+                                    xmlFileDownloadTask.XmlFile.GetType().FullName));
+                        }
                     }
                     else
                     {
-                        throw new ArgumentException(
-                            string.Format(
-                                Globalization.Translations.UnexpectedFileType,
-                                typeof(HattrickData).FullName,
-                                xmlFileDownloadTask.XmlFile.GetType().FullName));
+                        throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
                     }
-                }
-                else
-                {
-                    throw new ArgumentException(Globalization.Translations.UnexpectedFileDownloadTaskType);
-                }
+                }, cancellationToken);
             }
             catch
             {

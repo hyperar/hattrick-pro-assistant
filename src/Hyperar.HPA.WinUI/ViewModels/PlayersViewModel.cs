@@ -17,8 +17,11 @@
         [ObservableProperty]
         private List<Player> players;
 
+        [ObservableProperty]
+        private Player? selectedPlayer;
+
         public PlayersViewModel(
-            INavigator navigator,
+                    INavigator navigator,
             ITeamSelector teamSelector,
             IPlayersViewService playersViewService) : base(navigator)
         {
@@ -29,9 +32,6 @@
         }
 
         public Currency Currency { get; set; }
-
-        [ObservableProperty]
-        private Player? selectedPlayer;
 
         public override async Task InitializeAsync()
         {
