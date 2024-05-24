@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+        x:Class="Hyperar.HPA.WinUI.SplashScreenWindow"
+        mc:Ignorable="d"
+        d:DesignWidth="400"
+        d:DesignHeight="400"
+        Height="400"
+        Width="400"
+        RequestedThemeVariant="Default"
+        WindowStartupLocation="CenterScreen">
+    
+    <StackPanel Spacing="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+        <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/Logo.png"
+               Stretch="None" />
+        
+        <ProgressBar IsIndeterminate="True" />
+        
+        <TextBlock Text="{x:Static globalization:Translations.Initializing}"
+                   HorizontalAlignment="Stretch"
+                   TextAlignment="Center" />
+        
+    </StackPanel>
+    
+</Window>

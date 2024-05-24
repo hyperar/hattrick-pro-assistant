@@ -1,28 +1,29 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System.Linq;
-    using Application.Models.Players;
     using Application.Services;
     using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using Shared.Enums;
+    using Shared.Models.UI.Players;
 
     public class PlayersViewService : IPlayersViewService
     {
-        private readonly IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository;
+        private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         private readonly IRepository<Domain.User> userRepository;
 
         public PlayersViewService(
-            IHattrickRepository<Domain.SeniorTeam> seniorTeamRepository,
+            IHattrickRepository<Domain.Senior.Team> teamRepository,
             IRepository<Domain.User> userRepository)
         {
-            this.seniorTeamRepository = seniorTeamRepository;
+            this.teamRepository = teamRepository;
             this.userRepository = userRepository;
         }
 
         public async Task<Currency> GetManagerCurrencyAsync()
         {
-            var user = await this.userRepository.Query().SingleOrDefaultAsync();
+            Domain.User? user = await this.userRepository.Query().SingleOrDefaultAsync();
 
             ArgumentNullException.ThrowIfNull(user, nameof(user));
             ArgumentNullException.ThrowIfNull(user.Manager, nameof(user.Manager));
@@ -34,84 +35,110 @@
             };
         }
 
-        public async Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId)
+        public async Task<Player[]> GetPlayersAsync(long teamId)
         {
-            var seniorTeam = await this.seniorTeamRepository.GetByHattrickIdAsync(seniorTeamId);
+            Domain.Senior.Team? team = await this.teamRepository.GetByHattrickIdAsync(teamId);
 
-            ArgumentNullException.ThrowIfNull(seniorTeam, nameof(seniorTeam));
+            ArgumentNullException.ThrowIfNull(team, nameof(team));
 
-            return seniorTeam.SeniorPlayers.Where(x => x.HattrickId != x.SeniorTeam.CoachPlayerId)
-                                           .OrderByDescending(x => x.ShirtNumber.HasValue)
-                                           .ThenBy(x => x.ShirtNumber)
-                                           .Select(Convert)
-                                           .ToArray();
+            return team.Players.Where(x => x.HattrickId != x.Team.CoachPlayerId)
+                               .OrderByDescending(x => x.ShirtNumber.HasValue)
+                               .ThenBy(x => x.ShirtNumber)
+                               .Select(x => Convert(x, team.Manager.CurrencyRate))
+                               .ToArray();
         }
 
-        private static SeniorPlayer Convert(Domain.SeniorPlayer seniorPlayer)
+        private static Player Convert(Domain.Senior.Player player, decimal currencyRate)
         {
-            ArgumentNullException.ThrowIfNull(seniorPlayer.SeniorPlayerSkills, nameof(seniorPlayer.SeniorPlayerSkills));
+            ArgumentNullException.ThrowIfNull(player.PlayerSkillSets, nameof(player.PlayerSkillSets));
 
-            var currentSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
-                                                               .ThenByDescending(x => x.Week)
-                                                               .First();
+            Domain.Senior.PlayerSkillSet currentSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
+                                                      .ThenByDescending(x => x.Week)
+                                                      .First();
 
-            var previousSkills = seniorPlayer.SeniorPlayerSkills.OrderByDescending(x => x.Season)
-                                                                .ThenByDescending(x => x.Week)
-                                                                .Skip(1)
-                                                                .FirstOrDefault();
+            Domain.Senior.PlayerSkillSet? previousSkills = player.PlayerSkillSets.OrderByDescending(x => x.Season)
+                                                       .ThenByDescending(x => x.Week)
+                                                       .Skip(1)
+                                                       .FirstOrDefault();
 
-            return new SeniorPlayer
+            return new Player
             {
-                Id = seniorPlayer.HattrickId,
-                FirstName = seniorPlayer.FirstName,
-                NickName = seniorPlayer.NickName,
-                LastName = seniorPlayer.LastName,
-                ShirtNumber = seniorPlayer.ShirtNumber,
-                AgeYears = seniorPlayer.AgeYears,
-                AgeDays = seniorPlayer.AgeDays,
-                TotalSkillIndex = seniorPlayer.TotalSkillIndex,
-                HasMotherClubBonus = seniorPlayer.HasMotherClubBonus,
-                Salary = seniorPlayer.Salary,
-                Specialty = seniorPlayer.Specialty,
-                Agreeability = seniorPlayer.Agreeability,
-                Aggressiveness = seniorPlayer.Aggressiveness,
-                Honesty = seniorPlayer.Honesty,
-                Leadership = seniorPlayer.Leadership,
-                BookingStatus = seniorPlayer.BookingStatus,
-                Health = seniorPlayer.Health,
-                Form = currentSkills.Form,
-                FormDelta = previousSkills == null ? null : currentSkills.Form - previousSkills.Form,
-                Stamina = currentSkills.Stamina,
-                StaminaDelta = previousSkills == null ? null : currentSkills.Stamina - previousSkills.Stamina,
-                Keeper = currentSkills.Keeper,
-                KeeperDelta = previousSkills == null ? null : currentSkills.Keeper - previousSkills.Keeper,
-                Defending = currentSkills.Defending,
-                DefendingDelta = previousSkills == null ? null : currentSkills.Defending - previousSkills.Defending,
-                Playmaking = currentSkills.Playmaking,
-                PlaymakingDelta = previousSkills == null ? null : currentSkills.Playmaking - previousSkills.Playmaking,
-                Winger = currentSkills.Winger,
-                WingerDelta = previousSkills == null ? null : currentSkills.Winger - previousSkills.Winger,
-                Passing = currentSkills.Passing,
-                PassingDelta = previousSkills == null ? null : currentSkills.Passing - previousSkills.Passing,
-                Scoring = currentSkills.Scoring,
-                ScoringDelta = previousSkills == null ? null : currentSkills.Scoring - previousSkills.Scoring,
-                SetPieces = currentSkills.SetPieces,
-                SetPiecesDelta = previousSkills == null ? null : currentSkills.SetPieces - previousSkills.SetPieces,
-                Loyalty = currentSkills.Loyalty,
-                LoyaltyDelta = previousSkills == null ? null : currentSkills.Loyalty - previousSkills.Loyalty,
-                Experience = currentSkills.Experience,
-                ExperienceDelta = previousSkills == null ? null : currentSkills.Experience - previousSkills.Experience,
-                SeasonLeagueGoals = seniorPlayer.CurrentSeasonLeagueGoals,
-                SeasonCupGoals = seniorPlayer.CurrentSeasonCupGoals,
-                SeasonFriendlyGoals = seniorPlayer.CurrentSeasonFriendlyGoals,
-                CareerLeagueGoals = seniorPlayer.CareerGoals,
-                CareerHattricks = seniorPlayer.CareerHattricks,
-                TeamGoals = seniorPlayer.GoalsOnTeam,
-                TeamMatches = seniorPlayer.MatchesOnTeam,
-                Avatar = seniorPlayer.Avatar,
-                LeagueFlag = seniorPlayer.Country.League.Flag,
-                CountryName = seniorPlayer.Country.Name
+                HattrickId = player.HattrickId,
+                FirstName = player.FirstName,
+                NickName = player.NickName,
+                LastName = player.LastName,
+                ShirtNumber = player.ShirtNumber,
+                AgeYears = player.AgeYears,
+                AgeDays = player.AgeDays,
+                AskingPrice = (long)((player.AskingPrice ?? 0) / currencyRate),
+                NextBirthDay = player.NextBirthDay,
+                TotalSkillIndex = player.TotalSkillIndex,
+                Country = new Country
+                {
+                    FlagBytes = player.Country.League.FlagBytes,
+                    HattrickId = player.Country.HattrickId,
+                    Name = player.Country.Name
+                },
+                HasMotherClubBonus = player.HasMotherClubBonus,
+                IsTransferListed = player.IsTransferListed,
+                Salary = (long)(player.Salary / currencyRate),
+                Specialty = player.Specialty,
+                AgreeabilityLevel = player.Agreeability,
+                AggressivenessLevel = player.Aggressiveness,
+                HonestyLevel = player.Honesty,
+                LeadershipLevel = player.Leadership,
+                BookingStatus = player.BookingStatus,
+                HealthStatus = player.Health,
+                FormLevel = currentSkills.Form,
+                FormLevelDelta = GetPlayerSkillDelta(currentSkills.Form, previousSkills?.Form),
+                StaminaLevel = currentSkills.Stamina,
+                StaminaLevelDelta = GetPlayerSkillDelta(currentSkills.Stamina, previousSkills?.Stamina),
+                KeeperLevel = currentSkills.Keeper,
+                KeeperLevelDelta = GetPlayerSkillDelta(currentSkills.Keeper, previousSkills?.Keeper),
+                DefendingLevel = currentSkills.Defending,
+                DefendingLevelDelta = GetPlayerSkillDelta(currentSkills.Defending, previousSkills?.Defending),
+                PlaymakingLevel = currentSkills.Playmaking,
+                PlaymakingLevelDelta = GetPlayerSkillDelta(currentSkills.Playmaking, previousSkills?.Playmaking),
+                WingerLevel = currentSkills.Winger,
+                WingerLevelDelta = GetPlayerSkillDelta(currentSkills.Winger, previousSkills?.Winger),
+                PassingLevel = currentSkills.Passing,
+                PassingLevelDelta = GetPlayerSkillDelta(currentSkills.Passing, previousSkills?.Passing),
+                ScoringLevel = currentSkills.Scoring,
+                ScoringLevelDelta = GetPlayerSkillDelta(currentSkills.Scoring, previousSkills?.Scoring),
+                SetPiecesLevel = currentSkills.SetPieces,
+                SetPiecesLevelDelta = GetPlayerSkillDelta(currentSkills.SetPieces, previousSkills?.SetPieces),
+                LoyaltyLevel = currentSkills.Loyalty,
+                LoyaltyLevelDelta = GetPlayerSkillDelta(currentSkills.Loyalty, previousSkills?.Loyalty),
+                ExperienceLevel = currentSkills.Experience,
+                ExperienceLevelDelta = GetPlayerSkillDelta(currentSkills.Experience, previousSkills?.Experience),
+                SeasonLeagueGoals = player.CurrentSeasonLeagueGoals,
+                SeasonCupGoals = player.CurrentSeasonCupGoals,
+                SeasonFriendlyGoals = player.CurrentSeasonFriendlyGoals,
+                CareerLeagueGoals = player.CareerGoals,
+                CareerHattricks = player.CareerHattricks,
+                GoalsOnTeam = player.GoalsOnTeam,
+                MatchesOnTeam = player.MatchesOnTeam,
+                WinningBid = (long)((player.WinningBid ?? 0) / currencyRate),
+                AvatarBytes = player.AvatarBytes ?? Array.Empty<byte>(),
+                MatchesRating = player.Matches.OrderByDescending(x => x.Date)
+                                              .Select(x => new MatchRating()
+                                              {
+                                                  AverageRating = x.AverageRating,
+                                                  Date = x.Date,
+                                                  EndOfMatchRating = x.EndOfMatchRating,
+                                                  RatingStars = x.CalculatedRating.Split(",")
+                                                                                  .ToList(),
+                                                  Role = x.Role
+                                              }).ToList(),
             };
+        }
+
+        private static short GetPlayerSkillDelta(SkillLevel currentSkillLevel, SkillLevel? previousSkillLevel)
+        {
+            short currentSkillLevelAux = (short)currentSkillLevel;
+            short previousSkillLevelAux = (short)(previousSkillLevel ?? currentSkillLevel);
+
+            return (short)(currentSkillLevelAux - previousSkillLevelAux);
         }
     }
 }

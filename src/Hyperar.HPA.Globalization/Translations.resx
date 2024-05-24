@@ -1,0 +1,839 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AccessToken" xml:space="preserve">
+    <value>Access Token</value>
+  </data>
+  <data name="AccessTokenSecret" xml:space="preserve">
+    <value>Access Token Secret</value>
+  </data>
+  <data name="AgeAndBirthDayMask" xml:space="preserve">
+    <value>{0} years and {1} days, next birthday: {2}.</value>
+  </data>
+  <data name="AgeHeader" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="AgeMask" xml:space="preserve">
+    <value>{0} years and {1} day(s)</value>
+  </data>
+  <data name="AggressivenessHeader" xml:space="preserve">
+    <value>Aggressiveness</value>
+  </data>
+  <data name="AggressivenessLevel_Balanced" xml:space="preserve">
+    <value>balanced</value>
+  </data>
+  <data name="AggressivenessLevel_Calm" xml:space="preserve">
+    <value>calm</value>
+  </data>
+  <data name="AggressivenessLevel_Fiery" xml:space="preserve">
+    <value>fiery</value>
+  </data>
+  <data name="AggressivenessLevel_Temperamental" xml:space="preserve">
+    <value>temperamental</value>
+  </data>
+  <data name="AggressivenessLevel_Tranquil" xml:space="preserve">
+    <value>tranquil</value>
+  </data>
+  <data name="AggressivenessLevel_Unstable" xml:space="preserve">
+    <value>unstable</value>
+  </data>
+  <data name="AgreeabilityHeader" xml:space="preserve">
+    <value>Agreeability</value>
+  </data>
+  <data name="AgreeabilityLevel_BelovedTeamMember" xml:space="preserve">
+    <value>beloved team member</value>
+  </data>
+  <data name="AgreeabilityLevel_ControversialPerson" xml:space="preserve">
+    <value>controversial person</value>
+  </data>
+  <data name="AgreeabilityLevel_NastyFellow" xml:space="preserve">
+    <value>nasty fellow</value>
+  </data>
+  <data name="AgreeabilityLevel_PleasantGuy" xml:space="preserve">
+    <value>pleasant guy</value>
+  </data>
+  <data name="AgreeabilityLevel_PopularGuy" xml:space="preserve">
+    <value>popular guy</value>
+  </data>
+  <data name="AgreeabilityLevel_SympatheticGuy" xml:space="preserve">
+    <value>sympathetic guy</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
+  <data name="Authorize" xml:space="preserve">
+    <value>Authorize</value>
+  </data>
+  <data name="Authorized" xml:space="preserve">
+    <value>Authorized</value>
+  </data>
+  <data name="AuthorizeMessage" xml:space="preserve">
+    <value>Once you have pasted the Verification Code, click on 'Authorize'.</value>
+  </data>
+  <data name="AwayTeam" xml:space="preserve">
+    <value>Away Team</value>
+  </data>
+  <data name="BookingsHeader" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="BookingStatus_NoBookings" xml:space="preserve">
+    <value>No cards accumulated</value>
+  </data>
+  <data name="BookingStatus_OneYellowCard" xml:space="preserve">
+    <value>1 card accumulated</value>
+  </data>
+  <data name="BookingStatus_Suspended" xml:space="preserve">
+    <value>Suspended for the next match</value>
+  </data>
+  <data name="BookingStatus_TwoYellowCards" xml:space="preserve">
+    <value>2 cards accumulated</value>
+  </data>
+  <data name="BookingsToolTip" xml:space="preserve">
+    <value>Bookings</value>
+  </data>
+  <data name="BruisedTooltip" xml:space="preserve">
+    <value>Bruised</value>
+  </data>
+  <data name="CacheImageFileNotFound" xml:space="preserve">
+    <value>Image file not found in cache.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CareerHattricksHeader" xml:space="preserve">
+    <value>HT (C)</value>
+  </data>
+  <data name="CareerHattricksToolTip" xml:space="preserve">
+    <value>Hattricks (Career)</value>
+  </data>
+  <data name="CareerLeagueGoalsHeader" xml:space="preserve">
+    <value>LG (C)</value>
+  </data>
+  <data name="CareerLeagueGoalsToolTip" xml:space="preserve">
+    <value>League Goals (Career</value>
+  </data>
+  <data name="CopyAndPasteVerificationCodeMessage" xml:space="preserve">
+    <value>Once you have logged in into your Hattrick account, you will be provided with a Verification Code. Copy the code and paste it below, making sure there's no blank spaces at the beggining or the end of the code.</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryHeader" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="CountryLabel" xml:space="preserve">
+    <value>Country:</value>
+  </data>
+  <data name="CountryToolTip" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CreatedOn" xml:space="preserve">
+    <value>Created on</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Deauthorize" xml:space="preserve">
+    <value>De-authorize</value>
+  </data>
+  <data name="DeAuthorizeMessage" xml:space="preserve">
+    <value>If at any point you want to de-authorize Hattrick Pro Assistant, you can do so by clicking on 'De-authorize'.</value>
+  </data>
+  <data name="DefendingHeader" xml:space="preserve">
+    <value>Defending</value>
+  </data>
+  <data name="DefendingLabel" xml:space="preserve">
+    <value>Defending:</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadHattrickArenaMatchesOffContent" xml:space="preserve">
+    <value>Skip Hattrick Arena matches.</value>
+  </data>
+  <data name="DownloadHattrickArenaMatchesOnContent" xml:space="preserve">
+    <value>Download all matches.</value>
+  </data>
+  <data name="DownloadMatchArchiveOffContent" xml:space="preserve">
+    <value>Download current matches.</value>
+  </data>
+  <data name="DownloadMatchArchiveOnContent" xml:space="preserve">
+    <value>Download full match history.</value>
+  </data>
+  <data name="DownloadTaskStatus_Canceled" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="DownloadTaskStatus_Downloaded" xml:space="preserve">
+    <value>Downloaded</value>
+  </data>
+  <data name="DownloadTaskStatus_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="DownloadTaskStatus_Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="DownloadTaskStatus_NotStarted" xml:space="preserve">
+    <value>Not Started</value>
+  </data>
+  <data name="DownloadTaskStatus_Parsed" xml:space="preserve">
+    <value>Parsed</value>
+  </data>
+  <data name="DownloadTaskStatus_Processed" xml:space="preserve">
+    <value>Processed</value>
+  </data>
+  <data name="DownloadTaskType_CheckToken" xml:space="preserve">
+    <value>Check Token</value>
+  </data>
+  <data name="DownloadTaskType_ImageFile" xml:space="preserve">
+    <value>Image File</value>
+  </data>
+  <data name="DownloadTaskType_XmlFile" xml:space="preserve">
+    <value>XML File</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ExperienceHeader" xml:space="preserve">
+    <value>Experience</value>
+  </data>
+  <data name="ExpiresOn" xml:space="preserve">
+    <value>Expires on</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FormHeader" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="FormLabel" xml:space="preserve">
+    <value>Form:</value>
+  </data>
+  <data name="GoalsOnTeamHeader" xml:space="preserve">
+    <value>GoT</value>
+  </data>
+  <data name="GoalsOnTeamToolTip" xml:space="preserve">
+    <value>Goals on Team</value>
+  </data>
+  <data name="HealthStatusHeader" xml:space="preserve">
+    <value>HS</value>
+  </data>
+  <data name="HealthStatusToolTip" xml:space="preserve">
+    <value>Health Status</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HomeTeam" xml:space="preserve">
+    <value>Home Team</value>
+  </data>
+  <data name="HonestyHeader" xml:space="preserve">
+    <value>Honesty</value>
+  </data>
+  <data name="HonestyLevel_Dishonest" xml:space="preserve">
+    <value>dishonest</value>
+  </data>
+  <data name="HonestyLevel_Honest" xml:space="preserve">
+    <value>honest</value>
+  </data>
+  <data name="HonestyLevel_Infamous" xml:space="preserve">
+    <value>infamous</value>
+  </data>
+  <data name="HonestyLevel_Righteous" xml:space="preserve">
+    <value>righteous</value>
+  </data>
+  <data name="HonestyLevel_Saintly" xml:space="preserve">
+    <value>saintly</value>
+  </data>
+  <data name="HonestyLevel_Upright" xml:space="preserve">
+    <value>upright</value>
+  </data>
+  <data name="IDHeader" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Initializing" xml:space="preserve">
+    <value>Initializing...</value>
+  </data>
+  <data name="InjuredTooltip" xml:space="preserve">
+    <value>Estimated injury time: {0} week(s)</value>
+  </data>
+  <data name="KeeperHeader" xml:space="preserve">
+    <value>Keeper</value>
+  </data>
+  <data name="KeeperLabel" xml:space="preserve">
+    <value>Keeper:</value>
+  </data>
+  <data name="LastMatchRatingHeader" xml:space="preserve">
+    <value>LMR</value>
+  </data>
+  <data name="LastMatchRatingToolTip" xml:space="preserve">
+    <value>Last Match Rating</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Lastname</value>
+  </data>
+  <data name="LeadershipHeader" xml:space="preserve">
+    <value>Leadership</value>
+  </data>
+  <data name="LeagueLabel" xml:space="preserve">
+    <value>League:</value>
+  </data>
+  <data name="LongRunningTaskSettingTooltip" xml:space="preserve">
+    <value>This setting could take a considerable amount of time to complete.</value>
+  </data>
+  <data name="LoyaltyHeader" xml:space="preserve">
+    <value>Loyalty</value>
+  </data>
+  <data name="Manager" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="Matches" xml:space="preserve">
+    <value>Matches</value>
+  </data>
+  <data name="MatchesOnTeamHeader" xml:space="preserve">
+    <value>MoT</value>
+  </data>
+  <data name="MatchesOnTeamToolTip" xml:space="preserve">
+    <value>Matches on Team</value>
+  </data>
+  <data name="MatchRatingMask" xml:space="preserve">
+    <value>Average: {0}* - End of Match: {1}*</value>
+  </data>
+  <data name="MatchType_Duel" xml:space="preserve">
+    <value>Duel</value>
+  </data>
+  <data name="MatchType_FriendlyWithCupRules" xml:space="preserve">
+    <value>Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_FriendlyWithNormalRules" xml:space="preserve">
+    <value>Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_HattrickMasters" xml:space="preserve">
+    <value>Hattrick Masters</value>
+  </data>
+  <data name="MatchType_InternationalFriendlyWithNormalRules" xml:space="preserve">
+    <value>International Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_InternationFriendlyCupRules" xml:space="preserve">
+    <value>International Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_Ladder" xml:space="preserve">
+    <value>Ladder</value>
+  </data>
+  <data name="MatchType_League" xml:space="preserve">
+    <value>League</value>
+  </data>
+  <data name="MatchType_LeagueCup" xml:space="preserve">
+    <value>Cup</value>
+  </data>
+  <data name="MatchType_NationalTeamsCompetitionCupRules" xml:space="preserve">
+    <value>National Team Competition (Cup)</value>
+  </data>
+  <data name="MatchType_NationalTeamsCompetitionWithNormalRules" xml:space="preserve">
+    <value>National Team Competition (Normal)</value>
+  </data>
+  <data name="MatchType_NationalTeamsFriendly" xml:space="preserve">
+    <value>National Team Friendly</value>
+  </data>
+  <data name="MatchType_Preparation" xml:space="preserve">
+    <value>Preparation</value>
+  </data>
+  <data name="MatchType_Qualification" xml:space="preserve">
+    <value>Qualification</value>
+  </data>
+  <data name="MatchType_TournamentLeague" xml:space="preserve">
+    <value>Tournament League</value>
+  </data>
+  <data name="MatchType_TournamentPlayoff" xml:space="preserve">
+    <value>Tournament Playoff</value>
+  </data>
+  <data name="MatchType_YouthFriendlyWithCupRules" xml:space="preserve">
+    <value>Youth Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_YouthFriendlyWithNormalRules" xml:space="preserve">
+    <value>Youth Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_YouthInternationalFriendlyWithCupRules" xml:space="preserve">
+    <value>International Youth Friendly (Cup)</value>
+  </data>
+  <data name="MatchType_YouthInternationalFriendlyWithNormalRules" xml:space="preserve">
+    <value>International Youth Friendly (Normal)</value>
+  </data>
+  <data name="MatchType_YouthLeague" xml:space="preserve">
+    <value>Youth League</value>
+  </data>
+  <data name="MotherClubBonusHeader" xml:space="preserve">
+    <value>MC</value>
+  </data>
+  <data name="MotherClubBonusToolTip" xml:space="preserve">
+    <value>Mother club bonus</value>
+  </data>
+  <data name="NameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NotAuthorized" xml:space="preserve">
+    <value>Not Authorized</value>
+  </data>
+  <data name="OpenAuthorizationWebPage" xml:space="preserve">
+    <value>Open Authorization Web Page</value>
+  </data>
+  <data name="OpenAuthorizationWebPageMessage" xml:space="preserve">
+    <value>In order to use Hattrick Pro Assistant, you have to authorize it first. Click on 'Open Authorization Web Page' to begin the authorization process.</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="PassingHeader" xml:space="preserve">
+    <value>Passing</value>
+  </data>
+  <data name="PassingLabel" xml:space="preserve">
+    <value>Passing:</value>
+  </data>
+  <data name="PlayerPersonalityMask" xml:space="preserve">
+    <value>A {0} who is {1} and {2}.</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="PlayerSeniorityMask" xml:space="preserve">
+    <value>Has {0} experience and {1} leadership. Has {2} loyalty.</value>
+  </data>
+  <data name="PlayerTitleMask" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="PlayerTitleMaskWithShirtNumber" xml:space="preserve">
+    <value>{0}. {1} ({2})</value>
+  </data>
+  <data name="PlaymakingHeader" xml:space="preserve">
+    <value>Playmaking</value>
+  </data>
+  <data name="PlaymakingLabel" xml:space="preserve">
+    <value>Playmaking:</value>
+  </data>
+  <data name="RedownloadMatchesOffContent" xml:space="preserve">
+    <value>Download missing matches.</value>
+  </data>
+  <data name="RedownloadMatchesOnContent" xml:space="preserve">
+    <value>Re-download match events.</value>
+  </data>
+  <data name="RedownloadMatchesTooltip" xml:space="preserve">
+    <value>This setting is useful if you changed the language in Hattrick and want to download match events in the new language.</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="RegionLabel" xml:space="preserve">
+    <value>Region:</value>
+  </data>
+  <data name="SalaryHeader" xml:space="preserve">
+    <value>Salary</value>
+  </data>
+  <data name="SalaryLabel" xml:space="preserve">
+    <value>Salary:</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="ScoreMask" xml:space="preserve">
+    <value> {0} - {1}</value>
+  </data>
+  <data name="ScoringHeader" xml:space="preserve">
+    <value>Scoring</value>
+  </data>
+  <data name="ScoringLabel" xml:space="preserve">
+    <value>Scoring:</value>
+  </data>
+  <data name="SeasonCupGoalsHeader" xml:space="preserve">
+    <value>CP (S)</value>
+  </data>
+  <data name="SeasonCupGoalsToolTip" xml:space="preserve">
+    <value>Cup Goals (Season)</value>
+  </data>
+  <data name="SeasonFriendlyGoalsHeader" xml:space="preserve">
+    <value>FG (S)</value>
+  </data>
+  <data name="SeasonFriendlyGoalsToolTip" xml:space="preserve">
+    <value>Friendly Goals (Season)</value>
+  </data>
+  <data name="SeasonLeagueGoalsHeader" xml:space="preserve">
+    <value>LG (S)</value>
+  </data>
+  <data name="SeasonLeagueGoalsToolTip" xml:space="preserve">
+    <value>League Goals (Season)</value>
+  </data>
+  <data name="SelectTeam" xml:space="preserve">
+    <value>Select Team</value>
+  </data>
+  <data name="SeriesLabel" xml:space="preserve">
+    <value>Series:</value>
+  </data>
+  <data name="SetPiecesHeader" xml:space="preserve">
+    <value>Set Pieces</value>
+  </data>
+  <data name="SetPiecesLabel" xml:space="preserve">
+    <value>Set Pieces:</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SkillLevel_Brilliant" xml:space="preserve">
+    <value>brilliant</value>
+  </data>
+  <data name="SkillLevel_Disastrous" xml:space="preserve">
+    <value>disastrous</value>
+  </data>
+  <data name="SkillLevel_Divine" xml:space="preserve">
+    <value>divine</value>
+  </data>
+  <data name="SkillLevel_Excellent" xml:space="preserve">
+    <value>excellent</value>
+  </data>
+  <data name="SkillLevel_ExtraTerrestrial" xml:space="preserve">
+    <value>extra-terrestrial</value>
+  </data>
+  <data name="SkillLevel_Formidable" xml:space="preserve">
+    <value>formidable</value>
+  </data>
+  <data name="SkillLevel_Inadequate" xml:space="preserve">
+    <value>inadequate</value>
+  </data>
+  <data name="SkillLevel_Magical" xml:space="preserve">
+    <value>magical</value>
+  </data>
+  <data name="SkillLevel_Magnificent" xml:space="preserve">
+    <value>magnificent</value>
+  </data>
+  <data name="SkillLevel_Mythical" xml:space="preserve">
+    <value>mythical</value>
+  </data>
+  <data name="SkillLevel_NonExistent" xml:space="preserve">
+    <value>non-existent</value>
+  </data>
+  <data name="SkillLevel_Outstanding" xml:space="preserve">
+    <value>outstanding</value>
+  </data>
+  <data name="SkillLevel_Passable" xml:space="preserve">
+    <value>passable</value>
+  </data>
+  <data name="SkillLevel_Poor" xml:space="preserve">
+    <value>poor</value>
+  </data>
+  <data name="SkillLevel_Solid" xml:space="preserve">
+    <value>solid</value>
+  </data>
+  <data name="SkillLevel_Supernatural" xml:space="preserve">
+    <value>supernatural</value>
+  </data>
+  <data name="SkillLevel_Titanic" xml:space="preserve">
+    <value>titanic</value>
+  </data>
+  <data name="SkillLevel_Utopian" xml:space="preserve">
+    <value>utopian</value>
+  </data>
+  <data name="SkillLevel_Weak" xml:space="preserve">
+    <value>weak</value>
+  </data>
+  <data name="SkillLevel_WorldClass" xml:space="preserve">
+    <value>world class</value>
+  </data>
+  <data name="SkillLevel_Wretched" xml:space="preserve">
+    <value>wretched</value>
+  </data>
+  <data name="SpecialtyHeader" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SpecialtyLabel" xml:space="preserve">
+    <value>Specialty:</value>
+  </data>
+  <data name="SpecialtyToolTip" xml:space="preserve">
+    <value>Specialty</value>
+  </data>
+  <data name="Specialty_HeadSpecialist" xml:space="preserve">
+    <value>Head Specialist</value>
+  </data>
+  <data name="Specialty_Powerful" xml:space="preserve">
+    <value>Powerful</value>
+  </data>
+  <data name="Specialty_Quick" xml:space="preserve">
+    <value>Quick</value>
+  </data>
+  <data name="Specialty_Resilient" xml:space="preserve">
+    <value>Resilient</value>
+  </data>
+  <data name="Specialty_Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Specialty_Technical" xml:space="preserve">
+    <value>Technical</value>
+  </data>
+  <data name="Specialty_Unpredictable" xml:space="preserve">
+    <value>Unpredictable</value>
+  </data>
+  <data name="StaminaHeader" xml:space="preserve">
+    <value>Stamina</value>
+  </data>
+  <data name="StaminaLabel" xml:space="preserve">
+    <value>Stamina:</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StepOne" xml:space="preserve">
+    <value>Step 1</value>
+  </data>
+  <data name="StepThree" xml:space="preserve">
+    <value>Step 3</value>
+  </data>
+  <data name="StepTwo" xml:space="preserve">
+    <value>Step 2</value>
+  </data>
+  <data name="SupporterLabel" xml:space="preserve">
+    <value>Supporter:</value>
+  </data>
+  <data name="SupporterTier_Diamond" xml:space="preserve">
+    <value>Diamond</value>
+  </data>
+  <data name="SupporterTier_Gold" xml:space="preserve">
+    <value>Gold</value>
+  </data>
+  <data name="SupporterTier_NoSupporter" xml:space="preserve">
+    <value>No Supporter</value>
+  </data>
+  <data name="SupporterTier_Platinum" xml:space="preserve">
+    <value>Platinum</value>
+  </data>
+  <data name="SupporterTier_Silver" xml:space="preserve">
+    <value>Silver</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="TeamLabel" xml:space="preserve">
+    <value>Team:</value>
+  </data>
+  <data name="TeamSelection" xml:space="preserve">
+    <value>Team Selection</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TokenInvalidReauthorize" xml:space="preserve">
+    <value>HPA access is no longer valid.
+Please re-authorize it.</value>
+  </data>
+  <data name="TotalSkillIndexHeader" xml:space="preserve">
+    <value>TSI</value>
+  </data>
+  <data name="TotalSkillIndexToolTip" xml:space="preserve">
+    <value>Total Skill Index</value>
+  </data>
+  <data name="TransferListedHeader" xml:space="preserve">
+    <value>TL</value>
+  </data>
+  <data name="TransferListedToolTip" xml:space="preserve">
+    <value>Transfer-listed</value>
+  </data>
+  <data name="TransferListedValueToolTip" xml:space="preserve">
+    <value>Transfer-listed.
+Asking price: {0} {2}.
+Winning bid: {1} {2}.</value>
+  </data>
+  <data name="TsiLabel" xml:space="preserve">
+    <value>TSI:</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UnexpectedFileDownloadTaskType" xml:space="preserve">
+    <value>Unexpected File Download Task type found.</value>
+  </data>
+  <data name="UnexpectedFileType" xml:space="preserve">
+    <value>Unexpected file type found.
+Expected: '{0}'.
+Found: '{1}'.</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>User:</value>
+  </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="WeeklySalaryMask" xml:space="preserve">
+    <value>{0} {1}/week</value>
+  </data>
+  <data name="WingerHeader" xml:space="preserve">
+    <value>Winger</value>
+  </data>
+  <data name="WingerLabel" xml:space="preserve">
+    <value>Winger:</value>
+  </data>
+  <data name="XmlFileType_ArenaDetails" xml:space="preserve">
+    <value>Arena Details</value>
+  </data>
+  <data name="XmlFileType_Avatars" xml:space="preserve">
+    <value>Player Avatars</value>
+  </data>
+  <data name="XmlFileType_CheckToken" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
+  <data name="XmlFileType_Club" xml:space="preserve">
+    <value>Club</value>
+  </data>
+  <data name="XmlFileType_HallOfFamePlayers" xml:space="preserve">
+    <value>Hall Of Fame Players</value>
+  </data>
+  <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
+    <value>Manager Compendium</value>
+  </data>
+  <data name="XmlFileType_MatchArchive" xml:space="preserve">
+    <value>Match Archive</value>
+  </data>
+  <data name="XmlFileType_MatchDetails" xml:space="preserve">
+    <value>Match Details</value>
+  </data>
+  <data name="XmlFileType_Matches" xml:space="preserve">
+    <value>Matches</value>
+  </data>
+  <data name="XmlFileType_MatchLineUp" xml:space="preserve">
+    <value>Match LineUp</value>
+  </data>
+  <data name="XmlFileType_PlayerDetails" xml:space="preserve">
+    <value>Player Details</value>
+  </data>
+  <data name="XmlFileType_Players" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="XmlFileType_StaffAvatars" xml:space="preserve">
+    <value>Staff Avatars</value>
+  </data>
+  <data name="XmlFileType_StaffList" xml:space="preserve">
+    <value>Staff List</value>
+  </data>
+  <data name="XmlFileType_TeamDetails" xml:space="preserve">
+    <value>Team Details</value>
+  </data>
+  <data name="XmlFileType_WorldDetails" xml:space="preserve">
+    <value>World Details</value>
+  </data>
+</root>

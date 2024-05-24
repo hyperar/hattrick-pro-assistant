@@ -4,6 +4,6 @@
 
     public abstract class HattrickEntityBase : IHattrickEntity
     {
-        public uint HattrickId { get; set; }
+        public long HattrickId { get; set; }
     }
 }

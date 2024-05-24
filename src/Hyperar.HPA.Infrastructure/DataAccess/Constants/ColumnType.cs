@@ -12,6 +12,8 @@
 
         internal const string Int = "int";
 
+        internal const string NText = "ntext";
+
         internal const string NVarChar = "nvarchar";
 
         internal const string VarBinary = "varbinary(max)";

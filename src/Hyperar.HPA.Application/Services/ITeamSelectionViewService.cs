@@ -1,14 +1,12 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
-    using Application.Models.TeamSelection;
+    using Shared.Models.UI.TeamSelection;
 
     public interface ITeamSelectionViewService
     {
-        Task<SeniorTeam[]> GetSeniorTeams();
+        Task<Team[]> GetTeamsAsync();
+
+        Task SetSelectedTeamAsync(long teamHattrickId);
     }
 }

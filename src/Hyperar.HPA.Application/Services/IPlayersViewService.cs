@@ -1,11 +1,11 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
-    using Application.Models.Players;
+    using Shared.Models.UI.Players;
 
     public interface IPlayersViewService
     {
         Task<Currency> GetManagerCurrencyAsync();
 
-        Task<SeniorPlayer[]> GetSeniorPlayerAsync(uint seniorTeamId);
+        Task<Player[]> GetPlayersAsync(long teamId);
     }
 }

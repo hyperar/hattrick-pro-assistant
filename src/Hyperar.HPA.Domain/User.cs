@@ -7,6 +7,8 @@
     {
         public DateTime? LastDownloadDate { get; set; }
 
+        public long? LastSelectedTeamHattrickId { get; set; }
+
         public virtual Manager? Manager { get; set; }
 
         public virtual Token? Token { get; set; }

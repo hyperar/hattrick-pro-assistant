@@ -11,9 +11,7 @@
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id)
-                .HasColumnName(Constants.ColumnName.Id)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(0)
                 .HasColumnType(Constants.ColumnType.Int)
                 .ValueGeneratedOnAdd()
                 .IsRequired();

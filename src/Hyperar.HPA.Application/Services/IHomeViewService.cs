@@ -1,10 +1,12 @@
 ﻿namespace Hyperar.HPA.Application.Services
 {
     using System.Threading.Tasks;
-    using Application.Models.Home;
+    using Shared.Models.UI.Home;
 
     public interface IHomeViewService
     {
-        Task<TeamOverview> GetTeamsOverview(uint seniorTeamId);
+        Task<Currency> GetManagerCurrencyAsync();
+
+        Task<Team> GetTeamsOverviewAsync(long teamId);
     }
 }

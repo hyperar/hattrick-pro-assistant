@@ -1,0 +1,20 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Hyperar.HPA.WinUI.App"
+             xmlns:local="using:Hyperar.HPA.WinUI"
+             xmlns:sty="using:FluentAvalonia.Styling"
+             RequestedThemeVariant="Default">
+
+    <Application.DataTemplates>
+
+        <local:ViewLocator />
+
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <StyleInclude Source="/Assets/Styles/Common.axaml" />
+        <StyleInclude Source="/Assets/Styles/Images.axaml" />
+        <sty:FluentAvaloniaTheme />
+
+    </Application.Styles>
+</Application>

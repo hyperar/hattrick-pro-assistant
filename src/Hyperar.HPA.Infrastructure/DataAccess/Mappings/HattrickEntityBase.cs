@@ -11,9 +11,7 @@
             builder.HasKey(p => p.HattrickId);
 
             builder.Property(p => p.HattrickId)
-                .HasColumnName(Constants.ColumnName.HattrickId)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+                .HasColumnOrder(0)
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .ValueGeneratedNever()
                 .IsRequired();

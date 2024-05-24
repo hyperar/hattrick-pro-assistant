@@ -1,13 +1,14 @@
 ﻿namespace Hyperar.HPA.Infrastructure
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
     using System.Web;
     using Application.Interfaces;
-    using Common.Enums;
     using Microsoft.Extensions.Configuration;
+
+    using Shared.Enums;
 
     public class ProtectedResourceUrlBuilder : IProtectedResourceUrlBuilder
     {
@@ -24,7 +25,7 @@
             this.configuration = configuration;
         }
 
-        public string BuildUrl(XmlFileType fileType, Dictionary<string, string>? parameters)
+        public string BuildUrl(XmlFileType fileType, NameValueCollection parameters)
         {
             this.ValidateParameters(fileType, parameters);
 
@@ -40,11 +41,11 @@
             return uriBuilder.ToString();
         }
 
-        private string BuildQueryString(XmlFileType fileType, Dictionary<string, string>? parameters)
+        private string BuildQueryString(XmlFileType fileType, NameValueCollection parameters)
         {
             string fileTypeString = fileType.ToString();
 
-            var stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
 
             stringBuilder.Append(this.configuration[string.Format(FileAndVersionKey, fileTypeString)]);
 
@@ -59,7 +60,7 @@
             return stringBuilder.ToString();
         }
 
-        private void ValidateParameters(XmlFileType fileType, Dictionary<string, string>? parameters)
+        private void ValidateParameters(XmlFileType fileType, NameValueCollection parameters)
         {
             if (parameters == null || parameters.Count == 0)
             {
@@ -69,13 +70,13 @@
             string[] allowedParametersKeys = this.configuration.GetSection(string.Format(ParametersKey, fileType.ToString()))
                 .Get<string[]>() ?? Array.Empty<string>();
 
-            string[] specifiedParametersKeys = parameters.Keys.ToArray();
+            string[] specifiedParametersKeys = parameters.Keys.Cast<string>().ToArray();
 
             string[] unrecognizedParameters = specifiedParametersKeys.Except(allowedParametersKeys).ToArray();
 
             if (unrecognizedParameters.Length != 0)
             {
-                var stringBuilder = new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
 
                 stringBuilder.AppendLine($"The following parameters are not allowed for File Type '{fileType.ToString()}':");
 

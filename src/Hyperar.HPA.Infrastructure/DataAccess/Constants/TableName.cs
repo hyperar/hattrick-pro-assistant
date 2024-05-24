@@ -4,6 +4,8 @@
     {
         internal const string Country = "Country";
 
+        internal const string HallOfFamePlayer = "HallOfFamePlayer";
+
         internal const string League = "League";
 
         internal const string LeagueCup = "LeagueCup";
@@ -12,24 +14,52 @@
 
         internal const string ManagerAvatarLayer = "ManagerAvatarLayer";
 
+        internal const string Match = "Match";
+
+        internal const string MatchArena = "MatchArena";
+
+        internal const string MatchEvent = "MatchEvent";
+
+        internal const string MatchOfficial = "MatchOfficial";
+
+        internal const string MatchTeam = "MatchTeam";
+
+        internal const string MatchTeamBooking = "MatchTeamBooking";
+
+        internal const string MatchTeamGoal = "MatchTeamGoal";
+
+        internal const string MatchTeamInjury = "MatchTeamInjury";
+
+        internal const string MatchTeamLineUp = "MatchTeamLineUp";
+
+        internal const string MatchTeamLineUpPlayer = "MatchTeamLineUpPlayer";
+
+        internal const string MatchTeamLineUpStartingPlayer = "MatchTeamLineUpStartingPlayer";
+
+        internal const string MatchTeamLineUpSubstitution = "MatchTeamLineUpSubstitution";
+
+        internal const string Player = "Player";
+
+        internal const string PlayerAvatarLayer = "PlayerAvatarLayer";
+
+        internal const string PlayerMatch = "PlayerMatch";
+
+        internal const string PlayerSkillSet = "PlayerSkillSet";
+
         internal const string Region = "Region";
 
-        internal const string SeniorPlayer = "SeniorPlayer";
+        internal const string StaffMember = "StaffMember";
 
-        internal const string SeniorPlayerAvatarLayer = "SeniorPlayerAvatarLayer";
+        internal const string StaffMemberAvatarLayer = "StaffMemberAvatarLayer";
 
-        internal const string SeniorPlayerSkill = "SeniorPlayerSkill";
+        internal const string Team = "Team";
 
-        internal const string SeniorTeam = "SeniorTeam";
+        internal const string TeamArena = "TeamArena";
 
-        internal const string SeniorTeamArena = "SeniorTeamArena";
-
-        internal const string SeniorTeamOverviewMatch = "SeniorTeamOverviewMatch";
+        internal const string TeamOverviewMatch = "TeamOverviewMatch";
 
         internal const string Token = "Token";
 
         internal const string User = "User";
-
-        internal const string World = "World";
     }
 }

@@ -1,0 +1,134 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ApplicationIcon>Assets\Icons\HPA.ico</ApplicationIcon>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <BaseOutputPath>..\bin\</BaseOutputPath>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <Nullable>enable</Nullable>
+        <OutputType>WinExe</OutputType>
+        <PlatformName>windows</PlatformName>
+        <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+        <UserSecretsId>f7b20ba9-3e09-4d26-ae60-c3bd7111a660</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**" />
+        <AvaloniaResource Include="Assets\Icons\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaResource Remove="Assets\Styles\Shared.axaml" />
+      <AvaloniaResource Remove="Assets\Styles\Images.axaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="appSettings.Development.json" />
+      <None Remove="appSettings.json" />
+      <None Remove="appSettings.Production.json" />
+      <None Remove="Assets\avalonia-logo.ico" />
+      <None Remove="Assets\Images\BotTeamLogo.png" />
+      <None Remove="Assets\Images\NoManagerAvatar.png" />
+      <None Remove="Assets\Images\NoTeamLogo.png" />
+      <None Remove="Assets\Images\star_yellow_to_red.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="appSettings.Development.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Include="appSettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Include="appSettings.Production.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="FluentAvaloniaUI" Version="2.0.5" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.9.2" />
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.5">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.5" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <ProjectReference Include="..\Hyperar.HPA.Application\Hyperar.HPA.Application.csproj" />
+        <ProjectReference Include="..\Hyperar.HPA.Globalization\Hyperar.HPA.Globalization.csproj" />
+        <ProjectReference Include="..\Hyperar.HPA.Infrastructure\Hyperar.HPA.Infrastructure.csproj" />
+        <ProjectReference Include="..\Hyperar.HPA.Shared\Hyperar.HPA.Shared.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Resource Include="Assets\Icons\HPA.ico">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <AvaloniaXaml Update="Assets\Styles\Shared.axaml">
+        <SubType>Designer</SubType>
+      </AvaloniaXaml>
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <AvaloniaXaml Update="Assets\Styles\Images.axaml">
+          <SubType>Designer</SubType>
+        </AvaloniaXaml>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Compile Update="Views\AboutPageView.axaml.cs">
+        <DependentUpon>AboutPageView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\DownloadPageView.axaml.cs">
+        <DependentUpon>DownloadPageView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\AuthorizationPageView.axaml.cs">
+        <DependentUpon>AuthorizationPageView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\SettingsPageView.axaml.cs">
+        <DependentUpon>SettingsPageView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\TeamSelectionPageView.axaml.cs">
+        <DependentUpon>TeamSelectionPageView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\MatchesPageView.axaml.cs">
+        <DependentUpon>MatchesPageView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\PlayersPageView.axaml.cs">
+        <DependentUpon>PlayersPageView.axaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+</Project>

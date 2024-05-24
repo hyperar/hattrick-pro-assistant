@@ -1,0 +1,164 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="Hyperar.HPA.WinUI.DownloadPageView"
+             xmlns:converters="clr-namespace:Hyperar.HPA.WinUI.Converters"
+             xmlns:vm="clr-namespace:Hyperar.HPA.WinUI.ViewModels"
+             xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
+             x:DataType="vm:DownloadViewModel"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
+
+    </UserControl.Resources>
+
+    <StackPanel Spacing="10">
+
+        <StackPanel Width="750">
+
+            <!-- Options -->
+            <Border Background="{DynamicResource ControlFillColorDefault}"
+                    CornerRadius="{DynamicResource OverlayCornerRadius}"
+                    Padding="10">
+
+                <StackPanel Spacing="5">
+
+                    <ToggleSwitch OnContent="{x:Static globalization:Translations.RedownloadMatchesOnContent}"
+                                  OffContent="{x:Static globalization:Translations.RedownloadMatchesOffContent}"
+                                  ToolTip.Tip="{x:Static globalization:Translations.RedownloadMatchesTooltip}"
+                                  IsEnabled="{Binding DownloadProgressReport.CanDownload}"
+                                  IsChecked="{Binding RedownloadMatches}" />
+
+                    <ToggleSwitch OnContent="{x:Static globalization:Translations.DownloadHattrickArenaMatchesOnContent}"
+                                  OffContent="{x:Static globalization:Translations.DownloadHattrickArenaMatchesOffContent}"
+                                  ToolTip.Tip="{x:Static globalization:Translations.LongRunningTaskSettingTooltip}"
+                                  IsEnabled="{Binding DownloadProgressReport.CanDownload}"
+                                  IsChecked="{Binding DownloadHattrickArenaMatches}" />
+
+                    <ToggleSwitch OnContent="{x:Static globalization:Translations.DownloadMatchArchiveOnContent}"
+                                  OffContent="{x:Static globalization:Translations.DownloadMatchArchiveOffContent}"
+                                  ToolTip.Tip="{x:Static globalization:Translations.LongRunningTaskSettingTooltip}"
+                                  IsEnabled="{Binding DownloadProgressReport.CanDownload}"
+                                  IsChecked="{Binding DownloadFullMatchArchive}" />
+
+                </StackPanel>
+
+            </Border>
+
+        </StackPanel>
+
+        <StackPanel Width="750">
+
+            <Border Background="{DynamicResource ControlFillColorDefault}"
+                    CornerRadius="{DynamicResource OverlayCornerRadius}"
+                    Padding="10">
+
+                <StackPanel Spacing="10">
+
+                    <!-- Tasks -->
+                    <DataGrid AutoGenerateColumns="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="False"
+                              CanUserSortColumns="False"
+                              GridLinesVisibility="All"
+                              Height="400"
+                              IsReadOnly="True"
+                              IsScrollInertiaEnabled="True"
+                              ItemsSource="{Binding DownloadProgressReport.Rows, Mode=OneWay}"
+                              SelectedItem="{Binding DownloadProgressReport.CurrentTask, Mode=OneWay}"
+                              SelectionChanged="DataGrid_SelectionChanged"
+                              SelectionMode="Single">
+
+                        <DataGrid.Styles>
+
+                            <Style Selector="TextBlock">
+
+                                <Setter Property="FontSize" Value="14" />
+
+                            </Style>
+
+                        </DataGrid.Styles>
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Binding="{Binding Title, Mode=OneWay}"
+                                                Header="{x:Static globalization:Translations.Title}"
+                                                Width="2*"/>
+
+                            <DataGridTextColumn Binding="{Binding Type, Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}"
+                                                Header="{x:Static globalization:Translations.Type}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Binding="{Binding Status, Mode=OneWay,
+                                                          Converter={StaticResource enumToTranslatedStringConverter}}"
+                                                Header="{x:Static globalization:Translations.Status}"
+                                                Width="*"/>
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                    <Grid ColumnDefinitions="40,*,40">
+
+                        <TextBlock Grid.Column="0"
+                                   Text="{Binding DownloadProgressReport.CompletedTaskCount, FallbackValue=0}"
+                                   TextAlignment="Center" />
+
+                        <ProgressBar Grid.Column="1"
+                                     Maximum="{Binding DownloadProgressReport.TaskCount, FallbackValue=100}"
+                                     Value="{Binding DownloadProgressReport.CompletedTaskCount, FallbackValue=0}" />
+
+                        <TextBlock Grid.Column="2"
+                                   Text="{Binding DownloadProgressReport.TaskCount, FallbackValue=0}"
+                                   TextAlignment="Center" />
+
+                    </Grid>
+
+                </StackPanel>
+
+            </Border>
+
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+
+            <Button Command="{Binding ExecuteDownloadCommand}"
+                    IsEnabled="{Binding DownloadProgressReport.CanDownload, FallbackValue=true}"
+                    HorizontalAlignment="Center">
+
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+
+                    <PathIcon Data="{DynamicResource DownloadIcon}" Height="12" />
+                    <TextBlock Text="{x:Static globalization:Translations.Download}" />
+
+                </StackPanel>
+
+            </Button>
+
+            <Button Command="{Binding CancelDownloadCommand}"
+                    IsEnabled="{Binding DownloadProgressReport.IsDownloading, FallbackValue=false}"
+                    HorizontalAlignment="Center">
+
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+
+                    <PathIcon Data="{DynamicResource CancelIcon}" Height="12" />
+                    <TextBlock Text="{x:Static globalization:Translations.Cancel}" />
+
+                </StackPanel>
+
+            </Button>
+
+        </StackPanel>
+
+    </StackPanel>
+
+</UserControl>

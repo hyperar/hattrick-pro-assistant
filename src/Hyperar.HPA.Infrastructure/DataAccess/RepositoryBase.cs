@@ -16,11 +16,11 @@
             this.EntityCollection = this.context.CreateSet<TEntity>();
         }
 
-        protected DbSet<TEntity> EntityCollection { get; private set; }
+        protected DbSet<TEntity> EntityCollection { get; }
 
-        public async Task InsertAsync(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity)
         {
-            await this.EntityCollection.AddAsync(entity);
+            return (await this.EntityCollection.AddAsync(entity)).Entity;
         }
 
         public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>>? predicate = null)

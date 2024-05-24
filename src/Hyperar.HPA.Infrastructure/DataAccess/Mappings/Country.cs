@@ -6,73 +6,60 @@
 
     internal class Country : HattrickEntityBase<Domain.Country>, IEntityTypeConfiguration<Domain.Country>, IEntityMapping<Domain.Country>
     {
-        public override void MapProperties(EntityTypeBuilder<Domain.Country> builder)
+        public override sealed void MapProperties(EntityTypeBuilder<Domain.Country> builder)
         {
-            builder.Property(x => x.Name)
-                .HasColumnName(Constants.ColumnName.Name)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Name)
+                .HasColumnOrder(1)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.CurrencyName)
-                .HasColumnName(Constants.ColumnName.CurrencyName)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.CurrencyName)
+                .HasColumnOrder(2)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(64)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.CurrencyRate)
-                .HasColumnName(Constants.ColumnName.CurrencyRate)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.CurrencyRate)
+                .HasColumnOrder(3)
                 .HasColumnType(Constants.ColumnType.Decimal)
                 .HasPrecision(10, 5)
                 .IsRequired();
 
-            builder.Property(x => x.Code)
-                .HasColumnName(Constants.ColumnName.Code)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.Code)
+                .HasColumnOrder(4)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(4)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.DateFormat)
-                .HasColumnName(Constants.ColumnName.DateFormat)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.DateFormat)
+                .HasColumnOrder(5)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(20)
                 .IsRequired()
                 .IsUnicode();
 
-            builder.Property(x => x.TimeFormat)
-                .HasColumnName(Constants.ColumnName.TimeFormat)
-                .HasColumnOrder(
-                    this.GetCurrentColumnOrder())
+            builder.Property(p => p.TimeFormat)
+                .HasColumnOrder(6)
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(20)
                 .IsRequired()
                 .IsUnicode();
         }
 
-        public override void MapRelationships(EntityTypeBuilder<Domain.Country> builder)
+        public override sealed void MapRelationships(EntityTypeBuilder<Domain.Country> builder)
         {
-            builder.HasMany(x => x.Regions)
-                .WithOne(x => x.Country);
-
-            builder.HasOne(x => x.League)
-                .WithOne(x => x.Country)
-                .HasForeignKey<Domain.Country>(x => x.LeagueHattrickId);
+            builder.HasOne(m => m.League)
+                .WithOne(m => m.Country)
+                .HasForeignKey<Domain.Country>(x => x.LeagueHattrickId)
+                .HasConstraintName("FK_Country_League")
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override void MapTable(EntityTypeBuilder<Domain.Country> builder)
+        public override sealed void MapTable(EntityTypeBuilder<Domain.Country> builder)
         {
             builder.ToTable(Constants.TableName.Country);
         }

@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.Infrastructure.Services
 {
     using System;
+    using System.Net;
     using System.Threading.Tasks;
     using Application.Interfaces;
     using Application.Models;
@@ -39,17 +40,34 @@
             this.protectedResourceUrlBuilder = protectedResourceUrlBuilder;
         }
 
-        public async Task<string> CheckTokenAsync(OAuthToken token)
+        public async Task<string> CheckTokenAsync(string token, string tokenSecret, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(token, nameof(token));
+            ArgumentException.ThrowIfNullOrWhiteSpace(token, nameof(token));
+            ArgumentException.ThrowIfNullOrWhiteSpace(tokenSecret, nameof(tokenSecret));
 
-            OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
+            OAuthSession session = this.CreateSignedOAuthSession(token, tokenSecret);
 
             string? checkTokenUrl = this.configuration[CheckTokenKeyName];
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(checkTokenUrl, nameof(checkTokenUrl));
+            ArgumentException.ThrowIfNullOrEmpty(checkTokenUrl, nameof(checkTokenUrl));
 
-            var responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
+            Stream responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
+
+            return await ReadResponseStreamAsync(responseStream, cancellationToken);
+        }
+
+        public async Task<string> CheckTokenAsync(string token, string tokenSecret)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(token, nameof(token));
+            ArgumentException.ThrowIfNullOrWhiteSpace(tokenSecret, nameof(tokenSecret));
+
+            OAuthSession session = this.CreateSignedOAuthSession(token, tokenSecret);
+
+            string? checkTokenUrl = this.configuration[CheckTokenKeyName];
+
+            ArgumentException.ThrowIfNullOrEmpty(checkTokenUrl, nameof(checkTokenUrl));
+
+            Stream responseStream = await GetResponseStreamForUrlAsync(checkTokenUrl, session);
 
             return await ReadResponseStreamAsync(responseStream);
         }
@@ -62,7 +80,7 @@
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            var requestToken = new TokenBase
+            TokenBase requestToken = new TokenBase
             {
                 Token = request.RequestToken.Token,
                 TokenSecret = request.RequestToken.TokenSecret
@@ -97,19 +115,19 @@
             return new GetAuthorizationUrlResponse(url, requestToken.Token, requestToken.TokenSecret);
         }
 
-        public async Task<string> GetProtectedResourceAsync(GetProtectedResourceRequest request)
+        public async Task<string> GetProtectedResourceAsync(GetProtectedResourceRequest request, CancellationToken cancellationToken)
         {
             string url = this.protectedResourceUrlBuilder.BuildUrl(request.FileType, request.Parameters);
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
+            ArgumentException.ThrowIfNullOrEmpty(url, nameof(url));
 
             OAuthSession session = this.CreateSignedOAuthSession(request.AccessToken.Token, request.AccessToken.TokenSecret);
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            var responseStream = await GetResponseStreamForUrlAsync(url, session);
+            Stream responseStream = await GetResponseStreamForUrlAsync(url, session);
 
-            return await ReadResponseStreamAsync(responseStream);
+            return await ReadResponseStreamAsync(responseStream, cancellationToken);
         }
 
         public async Task<string> RevokeTokenAsync(OAuthToken token)
@@ -118,29 +136,43 @@
 
             string? invalidateTokenUrl = this.configuration[InvalidateTokenKeyName];
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(invalidateTokenUrl, nameof(invalidateTokenUrl));
+            ArgumentException.ThrowIfNullOrEmpty(invalidateTokenUrl, nameof(invalidateTokenUrl));
 
             OAuthSession session = this.CreateSignedOAuthSession(token.Token, token.TokenSecret);
 
-            var responseStream = await GetResponseStreamForUrlAsync(invalidateTokenUrl, session);
+            Stream responseStream = await GetResponseStreamForUrlAsync(invalidateTokenUrl, session);
 
             return await ReadResponseStreamAsync(responseStream);
         }
 
         private static async Task<Stream> GetResponseStreamForUrlAsync(string url, OAuthSession session)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
+            ArgumentException.ThrowIfNullOrEmpty(url, nameof(url));
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            var webRequest = session.Request()
+            HttpWebRequest webRequest = session.Request()
                 .ForUrl(url)
                 .ForMethod(HttpMethod.Get.ToString())
                 .ToWebRequest();
 
-            var response = await webRequest.GetResponseAsync();
+            WebResponse response = await webRequest.GetResponseAsync();
 
             return response.GetResponseStream();
+        }
+
+        private static async Task<string> ReadResponseStreamAsync(Stream responseStream, CancellationToken cancellationToken)
+        {
+            ArgumentNullException.ThrowIfNull(responseStream, nameof(responseStream));
+
+            string result;
+
+            using (StreamReader reader = new StreamReader(responseStream))
+            {
+                result = await reader.ReadToEndAsync(cancellationToken);
+            }
+
+            return result;
         }
 
         private static async Task<string> ReadResponseStreamAsync(Stream responseStream)

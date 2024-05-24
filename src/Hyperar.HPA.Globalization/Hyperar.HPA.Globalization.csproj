@@ -7,7 +7,7 @@
         <Nullable>enable</Nullable>
         <NeutralLanguage>en-US</NeutralLanguage>
         <PlatformName>windows</PlatformName>
-        <TargetFramework>net8.0-windows</TargetFramework>
+        <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,17 +17,17 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Strings.Designer.cs">
+      <Compile Update="Translations.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>Strings.resx</DependentUpon>
+        <DependentUpon>Translations.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Strings.resx">
+      <EmbeddedResource Update="Translations.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
