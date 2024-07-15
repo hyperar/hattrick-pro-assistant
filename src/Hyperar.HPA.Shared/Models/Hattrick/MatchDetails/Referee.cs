@@ -2,23 +2,16 @@
 {
     public class Referee
     {
-        public Referee()
-        {
-            this.RefereeCountryName = string.Empty;
-            this.RefereeName = string.Empty;
-            this.RefereeTeamName = string.Empty;
-        }
-
         public long RefereeCountryId { get; set; }
 
-        public string RefereeCountryName { get; set; }
+        public string RefereeCountryName { get; set; } = string.Empty;
 
         public long RefereeId { get; set; }
 
-        public string RefereeName { get; set; }
+        public string RefereeName { get; set; } = string.Empty;
 
         public long RefereeTeamId { get; set; }
 
-        public string RefereeTeamName { get; set; }
+        public string RefereeTeamName { get; set; } = string.Empty;
     }
 }

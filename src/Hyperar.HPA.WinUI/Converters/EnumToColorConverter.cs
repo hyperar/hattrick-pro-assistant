@@ -15,8 +15,8 @@
                 var color = bookingStatus switch
                 {
                     BookingStatus.NoBookings => Color.FromArgb(0, 0, 0, 0),
-                    BookingStatus.Suspended => Color.FromArgb(255, 255, 51, 51),
-                    _ => Color.FromArgb(255, 255, 204, 0)
+                    BookingStatus.Suspended => Color.FromRgb(255, 51, 51),
+                    _ => Color.FromRgb(255, 204, 0)
                 };
 
                 return new SolidColorBrush(color);

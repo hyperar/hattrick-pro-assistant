@@ -6,10 +6,8 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.Manager = new Manager();
-        }
+        { }
 
-        public Manager Manager { get; set; }
+        public Manager Manager { get; set; } = new Manager();
     }
 }

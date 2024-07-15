@@ -6,26 +6,27 @@
 
     internal class Region : HattrickEntityBase<Domain.Region>, IEntityTypeConfiguration<Domain.Region>, IEntityMapping<Domain.Region>
     {
-        public override sealed void MapProperties(EntityTypeBuilder<Domain.Region> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.Region> builder)
         {
             builder.Property(p => p.Name)
-                .HasColumnOrder(1)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
         }
 
-        public override sealed void MapRelationships(EntityTypeBuilder<Domain.Region> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.Region> builder)
         {
             builder.HasOne(m => m.Country)
                 .WithMany(m => m.Regions)
-                .HasForeignKey(m => m.CountryHattrickId)
                 .HasConstraintName("FK_Region_Country")
+                .HasForeignKey(m => m.CountryHattrickId)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
-        public override sealed void MapTable(EntityTypeBuilder<Domain.Region> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.Region> builder)
         {
             builder.ToTable(Constants.TableName.Region);
         }

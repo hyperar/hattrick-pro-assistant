@@ -2,7 +2,7 @@
 {
     using Domain;
 
-    public interface IRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase, IEntity
+    public interface IRepository<TEntity> : IAuditableRepository<TEntity> where TEntity : EntityBase, IEntity
     {
         Task DeleteAsync(int id);
 

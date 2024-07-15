@@ -7,4 +7,16 @@
 
     </Style>
 
+    <Style Selector="PathIcon.MotherClubIcon">
+
+        <Setter Property="Foreground" Value="#DD4140" />
+
+    </Style>
+
+    <Style Selector="PathIcon.YellowCardIcon">
+
+        <Setter Property="Foreground" Value="#DD4140" />
+
+    </Style>
+
 </Styles>

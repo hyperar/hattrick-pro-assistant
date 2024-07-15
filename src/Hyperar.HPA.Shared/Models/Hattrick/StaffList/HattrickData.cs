@@ -6,10 +6,8 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.StaffList = new StaffList();
-        }
+        { }
 
-        public StaffList StaffList { get; set; }
+        public StaffList StaffList { get; set; } = new StaffList();
     }
 }

@@ -4,12 +4,6 @@
 
     public class Player
     {
-        public Player()
-        {
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
-        }
-
         public int Age { get; set; }
 
         public int AgeDays { get; set; }
@@ -38,7 +32,7 @@
 
         public int Experience { get; set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         public int FriendliesGoals { get; set; }
 
@@ -54,7 +48,7 @@
 
         public LastMatch? LastMatch { get; set; }
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         public int Leadership { get; set; }
 

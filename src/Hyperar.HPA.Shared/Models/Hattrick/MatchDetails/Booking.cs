@@ -2,16 +2,11 @@
 {
     public class Booking
     {
-        public Booking()
-        {
-            this.BookingPlayerName = string.Empty;
-        }
-
         public int BookingMinute { get; set; }
 
         public long BookingPlayerId { get; set; }
 
-        public string BookingPlayerName { get; set; }
+        public string BookingPlayerName { get; set; } = string.Empty;
 
         public long BookingTeamId { get; set; }
 

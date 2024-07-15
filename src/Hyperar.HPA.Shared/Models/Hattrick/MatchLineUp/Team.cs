@@ -4,27 +4,18 @@
 
     public class Team
     {
-        public Team()
-        {
-            this.LineUp = new List<Player>();
-            this.StartingLineUp = new List<StartingPlayer>();
-            this.Substitutions = new List<Substitution>();
-
-            this.TeamName = string.Empty;
-        }
-
         public int ExperienceLevel { get; set; }
 
-        public List<Player> LineUp { get; set; }
+        public List<Player> LineUp { get; set; } = new List<Player>();
 
-        public List<StartingPlayer> StartingLineUp { get; set; }
+        public List<StartingPlayer> StartingLineUp { get; set; } = new List<StartingPlayer>();
 
         public int StyleOfPlay { get; set; }
 
-        public List<Substitution> Substitutions { get; set; }
+        public List<Substitution> Substitutions { get; set; } = new List<Substitution>();
 
         public long TeamId { get; set; }
 
-        public string TeamName { get; set; }
+        public string TeamName { get; set; } = string.Empty;
     }
 }

@@ -5,6 +5,7 @@
     using Application.Services;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
+    using Hyperar.HPA.WinUI.Enums;
     using Shared.Models.UI.TeamSelection;
     using WinUI.State.Interface;
 
@@ -32,7 +33,7 @@
         {
             this.Teams = new List<Team>(await this.teamSelectionViewService.GetTeamsAsync());
 
-            if (this.teamSelector.SelectedTeamId != 0)
+            if (this.teamSelector.SelectedTeamHattrickId != 0)
             {
                 this.Navigator.ResumeNavigation();
             }
@@ -41,17 +42,15 @@
         }
 
         [RelayCommand]
-        private async Task SelectTeamAsync(long selectedTeamId)
+        private async Task SelectTeamAsync(long selectedTeamHattrickId)
         {
             this.Navigator.SuspendNavigation();
 
-            this.teamSelector.SetSelectedTeam(selectedTeamId);
+            this.teamSelector.SetSelectedTeam(selectedTeamHattrickId);
 
-            await this.teamSelectionViewService.SetSelectedTeamAsync(selectedTeamId);
+            await this.teamSelectionViewService.SetSelectedTeamAsync(selectedTeamHattrickId);
 
-            await this.InitializeAsync();
-
-            this.Navigator.ResumeNavigation();
+            this.Navigator.SetPageType(ViewType.Home);
         }
     }
 }

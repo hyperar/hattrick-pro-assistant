@@ -2,45 +2,25 @@
 {
     using Domain.Interfaces;
     using Shared.Enums;
-    using Models = Shared.Models.Hattrick.MatchDetails;
 
-    public class MatchTeamBooking : EntityBase, IEntity
+    public class MatchTeamBooking : AuditableEntityBase, IAuditableEntity
     {
-        public MatchTeamBooking()
-        {
-            this.MatchTeam = new MatchTeam();
-
-            this.PlayerName = string.Empty;
-        }
-
         public int Index { get; set; }
+
+        public long MatchHattrickId { get; set; }
 
         public MatchPart MatchPart { get; set; }
 
-        public virtual MatchTeam MatchTeam { get; set; }
-
-        public int MatchTeamId { get; set; }
+        public virtual MatchTeam MatchTeam { get; set; } = new MatchTeam();
 
         public int Minute { get; set; }
 
         public long PlayerHattrickId { get; set; }
 
-        public string PlayerName { get; set; }
+        public string PlayerName { get; set; } = string.Empty;
+
+        public long TeamHattrickId { get; set; }
 
         public BookingType Type { get; set; }
-
-        public static MatchTeamBooking Create(Models.Booking xmlBooking, MatchTeam matchTeam)
-        {
-            return new MatchTeamBooking
-            {
-                Index = xmlBooking.Index,
-                MatchPart = (MatchPart)xmlBooking.MatchPart,
-                MatchTeam = matchTeam,
-                Minute = xmlBooking.BookingMinute,
-                PlayerHattrickId = xmlBooking.BookingPlayerId,
-                PlayerName = xmlBooking.BookingPlayerName,
-                Type = (BookingType)xmlBooking.BookingType
-            };
-        }
     }
 }

@@ -21,6 +21,7 @@
                     o.UseSqlServer(connectionString);
                 }
 
+                services.AddScoped(typeof(IAuditableRepository<>), typeof(AuditableRepository<>));
                 services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
                 services.AddScoped(typeof(IHattrickRepository<>), typeof(HattrickRepository<>));
                 services.AddDbContext<IDatabaseContext, DatabaseContext>(configureDbContext, ServiceLifetime.Scoped);

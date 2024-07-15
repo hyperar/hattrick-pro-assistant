@@ -12,6 +12,8 @@
 
         public const string HallOfFamePlayers = "hofplayers.xml";
 
+        public const string LeagueDetails = "leaguedetails.xml";
+
         public const string ManagerCompendium = "managercompendium.xml";
 
         public const string MatchArchive = "matchesarchive.xml";
@@ -33,5 +35,15 @@
         public const string TeamDetails = "teamdetails.xml";
 
         public const string WorldDetails = "worlddetails.xml";
+
+        public const string YouthAvatars = "youthavatars.xml";
+
+        public const string YouthLeagueDetails = "youthleaguedetails.xml";
+
+        public const string YouthPlayerDetails = "youthplayerdetails.xml";
+
+        public const string YouthPlayerList = "youthplayerlist.xml";
+
+        public const string YouthTeamDetails = "youthteam.xml";
     }
 }

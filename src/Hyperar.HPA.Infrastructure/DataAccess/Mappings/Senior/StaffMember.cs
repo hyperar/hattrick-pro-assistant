@@ -9,51 +9,51 @@
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.StaffMember> builder)
         {
             builder.Property(p => p.Name)
-                .HasColumnOrder(1)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
-                .IsRequired()
-                .IsUnicode();
-
-            builder.Property(p => p.HiredOn)
-                .HasColumnOrder(2)
-                .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
             builder.Property(p => p.Type)
-                .HasColumnOrder(3)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Level)
-                .HasColumnOrder(4)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
-                .IsUnicode();
+                .IsRequired();
+
+            builder.Property(p => p.HiredOn)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.DateTime)
+                .IsRequired();
 
             builder.Property(p => p.Salary)
-                .HasColumnOrder(5)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.AvatarBytes)
-                .HasColumnOrder(6)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.VarBinary)
                 .IsRequired();
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.StaffMember> builder)
         {
-            builder.HasOne(m => m.HallOfFamePlayer)
-                .WithOne(m => m.Staff)
-                .HasForeignKey<Domain.Senior.StaffMember>(x => x.HallOfFamePlayerHattrickId)
-                .HasConstraintName("FK_StaffMember_HallOfFamePlayer")
-                .OnDelete(DeleteBehavior.NoAction);
-
             builder.HasOne(m => m.Team)
                 .WithMany(m => m.StaffMembers)
-                .HasForeignKey(m => m.TeamHattrickId)
                 .HasConstraintName("FK_StaffMember_Team")
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(m => m.TeamHattrickId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.StaffMember> builder)

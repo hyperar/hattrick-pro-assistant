@@ -22,6 +22,7 @@
         <converters:EnumToTranslatedStringAndValueConverter x:Key="enumToTranslatedStringAndValueConverter" />
         <converters:EnumToUnderlyingValueConverter x:Key="enumToUnderlyingValueConverter" />
         <converters:EqualToBooleanConverter x:Key="equalToBooleanConverter" />
+        <converters:HealthStatusToColorConverter x:Key="healthStatusToColorConverter" />
         <converters:HealthStatusToImageConverter x:Key="healthStatusToImageConverter" />
         <converters:HealthStatusToTranslatedStringConverter x:Key="healthStatusToTranslatedStringConverter" />
         <converters:HealthStatusToValueStringConverter x:Key="healthStatusToValueStringConverter" />
@@ -240,8 +241,9 @@
                         <DataTemplate>
 
                             <PathIcon Data="{StaticResource MotherClubBonusIcon}"
-                                      Height="16"
                                       IsVisible="{Binding HasMotherClubBonus}"
+                                      Foreground="#DD4140"
+                                      Height="16"
                                       ToolTip.Tip="{x:Static globalization:Translations.MotherClubBonusToolTip}"
                                       Width="16" />
 
@@ -491,20 +493,22 @@
                                     HorizontalAlignment="Center"
                                     Margin="5"
                                     ToolTip.Tip="{Binding HealthStatus,
-                                                  Converter={StaticResource healthStatusToTranslatedStringConverter}}"
+                                                      Converter={StaticResource healthStatusToTranslatedStringConverter}}"
                                     VerticalAlignment="Center"
                                     Spacing="5">
 
                             <PathIcon Data="{Binding HealthStatus,
-                                             Converter={StaticResource healthStatusToImageConverter}}"
+                                                 Converter={StaticResource healthStatusToImageConverter}}"
+                                      Foreground="{Binding HealthStatus,
+                                                       Converter={StaticResource healthStatusToColorConverter}}"
                                       Height="16"
                                       Width="16" />
 
                             <TextBlock Text="{Binding HealthStatus,
-                                              Converter={StaticResource healthStatusToValueStringConverter}}"
+                                                  Converter={StaticResource healthStatusToValueStringConverter}}"
                                        IsVisible="{Binding HealthStatus,
-                                                   Converter={StaticResource notEqualToBooleanConverter},
-                                                   ConverterParameter=0}" />
+                                                       Converter={StaticResource notEqualToBooleanConverter},
+                                                       ConverterParameter=0}" />
 
                         </StackPanel>
 

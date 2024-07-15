@@ -2,46 +2,25 @@
 {
     using Domain.Interfaces;
     using Shared.Enums;
-    using Models = Shared.Models.Hattrick.MatchLineUp;
 
-    public class MatchTeamLineUpStartingPlayer : EntityBase, IEntity
+    public class MatchTeamLineUpStartingPlayer : AuditableEntityBase, IAuditableEntity
     {
-        public MatchTeamLineUpStartingPlayer()
-        {
-            this.MatchTeamLineUp = new MatchTeamLineUp();
-
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
-        }
-
         public MatchRoleBehavior? Behavior { get; set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
-        public long HattrickId { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
-        public string LastName { get; set; }
+        public long MatchHattrickId { get; set; }
 
-        public virtual MatchTeamLineUp MatchTeamLineUp { get; set; }
-
-        public int MatchTeamLineUpId { get; set; }
+        public virtual MatchTeamLineUp MatchTeamLineUp { get; set; } = new MatchTeamLineUp();
 
         public string? NickName { get; set; }
 
+        public long PlayerHattrickId { get; set; }
+
         public MatchRole Role { get; set; }
 
-        public static MatchTeamLineUpStartingPlayer Create(Models.StartingPlayer xmlPlayer, MatchTeamLineUp matchTeamLineUp)
-        {
-            return new MatchTeamLineUpStartingPlayer
-            {
-                Behavior = xmlPlayer.Behaviour != null ? (MatchRoleBehavior)xmlPlayer.Behaviour : null,
-                FirstName = xmlPlayer.FirstName,
-                HattrickId = xmlPlayer.PlayerId,
-                LastName = xmlPlayer.LastName,
-                MatchTeamLineUp = matchTeamLineUp,
-                NickName = !string.IsNullOrWhiteSpace(xmlPlayer.NickName) ? xmlPlayer.NickName : null,
-                Role = (MatchRole)xmlPlayer.RoleId
-            };
-        }
+        public long TeamHattrickId { get; set; }
     }
 }

@@ -14,7 +14,7 @@
             host.ConfigureServices(services =>
             {
                 services.AddScoped<IHattrickService, HattrickService>();
-                services.AddScoped<IProtectedResourceUrlBuilder, ProtectedResourceUrlBuilder>();
+                services.AddScoped<IProtectedResourceUrlFactory, ProtectedResourceUrlFactory>();
                 services.AddSingleton<IXmlEntityFactory, XmlEntityFactory>();
 
                 // View services.

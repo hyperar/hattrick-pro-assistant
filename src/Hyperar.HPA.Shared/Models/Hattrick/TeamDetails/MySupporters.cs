@@ -4,14 +4,9 @@
 
     public class MySupporters
     {
-        public MySupporters()
-        {
-            this.SupporterTeamList = new List<SupporterTeam>();
-        }
-
         public int MaxItems { get; set; }
 
-        public List<SupporterTeam> SupporterTeamList { get; set; }
+        public List<SupporterTeam> SupporterTeamList { get; set; } = new List<SupporterTeam>();
 
         public int TotalItems { get; set; }
     }

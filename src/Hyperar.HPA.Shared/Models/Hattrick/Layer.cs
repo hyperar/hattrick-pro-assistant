@@ -2,12 +2,7 @@
 {
     public class Layer
     {
-        public Layer()
-        {
-            this.Image = string.Empty;
-        }
-
-        public string Image { get; set; }
+        public string Image { get; set; } = string.Empty;
 
         public int X { get; set; }
 

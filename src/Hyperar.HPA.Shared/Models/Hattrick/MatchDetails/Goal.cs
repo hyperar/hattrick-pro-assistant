@@ -2,11 +2,6 @@
 {
     public class Goal
     {
-        public Goal()
-        {
-            this.ScorerPlayerName = string.Empty;
-        }
-
         public int Index { get; set; }
 
         public int MatchPart { get; set; }
@@ -19,7 +14,7 @@
 
         public long ScorerPlayerId { get; set; }
 
-        public string ScorerPlayerName { get; set; }
+        public string ScorerPlayerName { get; set; } = string.Empty;
 
         public long ScorerTeamId { get; set; }
     }

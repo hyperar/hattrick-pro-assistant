@@ -2,18 +2,26 @@
 {
     public enum DownloadTaskStatus : int
     {
-        NotStarted = 0,
+        Pending,
 
-        Downloaded = 1,
+        Downloading,
 
-        Parsed = 2,
+        Downloaded,
 
-        Processed = 3,
+        Parsing,
 
-        Finished = 4,
+        Parsed,
 
-        Error = 5,
+        Processing,
 
-        Canceled = 6
+        Processed,
+
+        Persisting,
+
+        Finished,
+
+        Error,
+
+        Canceled
     }
 }

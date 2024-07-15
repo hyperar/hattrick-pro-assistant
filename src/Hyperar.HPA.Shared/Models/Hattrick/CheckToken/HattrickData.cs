@@ -6,19 +6,15 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.Token = string.Empty;
-
-            this.ExtendedPermissions = new List<string>();
-        }
+        { }
 
         public DateTime Created { get; set; }
 
         public DateTime Expires { get; set; }
 
-        public List<string> ExtendedPermissions { get; set; }
+        public string[] ExtendedPermissions { get; set; } = Array.Empty<string>();
 
-        public string Token { get; set; }
+        public string Token { get; set; } = string.Empty;
 
         public long User { get; set; }
     }

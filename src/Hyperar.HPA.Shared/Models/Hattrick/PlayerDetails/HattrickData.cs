@@ -6,16 +6,12 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.UserSupporterTier = string.Empty;
-
-            this.Player = new Player();
-        }
+        { }
 
         public bool IsPlayingMatch { get; set; }
 
-        public Player Player { get; set; }
+        public Player Player { get; set; } = new Player();
 
-        public string UserSupporterTier { get; set; }
+        public string UserSupporterTier { get; set; } = string.Empty;
     }
 }

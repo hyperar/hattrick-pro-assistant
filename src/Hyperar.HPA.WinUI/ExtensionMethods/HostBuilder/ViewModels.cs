@@ -48,7 +48,6 @@
 
             AuthorizationViewModel viewModel = new AuthorizationViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<IViewModelFactory>(),
                 scope.ServiceProvider.GetRequiredService<IHattrickService>(),
                 scope.ServiceProvider.GetRequiredService<IUserService>());
 
@@ -63,7 +62,6 @@
 
             DownloadViewModel viewModel = new DownloadViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<IViewModelFactory>(),
                 scope.ServiceProvider.GetRequiredService<IDownloadViewService>(),
                 scope.ServiceProvider.GetRequiredService<IUserService>());
 
@@ -110,15 +108,15 @@
                 {
                     viewType = ViewType.Download;
                 }
-                else if (user.LastSelectedTeamHattrickId == null)
+                else if (user.SelectedTeamHattrickId == null)
                 {
                     viewType = ViewType.TeamSelection;
                 }
                 else
                 {
-                    ArgumentNullException.ThrowIfNull(user.LastSelectedTeamHattrickId, nameof(user.LastSelectedTeamHattrickId));
+                    ArgumentNullException.ThrowIfNull(user.SelectedTeamHattrickId, nameof(user.SelectedTeamHattrickId));
 
-                    teamSelector.SetSelectedTeam(user.LastSelectedTeamHattrickId.Value);
+                    teamSelector.SetSelectedTeam(user.SelectedTeamHattrickId.Value);
 
                     viewType = ViewType.Home;
                 }

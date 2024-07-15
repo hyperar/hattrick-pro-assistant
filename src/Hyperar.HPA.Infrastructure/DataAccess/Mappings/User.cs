@@ -6,18 +6,20 @@
 
     internal class User : EntityBase<Domain.User>, IEntityTypeConfiguration<Domain.User>, IEntityMapping<Domain.User>
     {
-        public override sealed void MapProperties(EntityTypeBuilder<Domain.User> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.User> builder)
         {
             builder.Property(p => p.LastDownloadDate)
-                .HasColumnOrder(1)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.DateTime);
 
-            builder.Property(p => p.LastSelectedTeamHattrickId)
-                .HasColumnOrder(2)
+            builder.Property(p => p.SelectedTeamHattrickId)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt);
         }
 
-        public override sealed void MapTable(EntityTypeBuilder<Domain.User> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.User> builder)
         {
             builder.ToTable(Constants.TableName.User);
         }

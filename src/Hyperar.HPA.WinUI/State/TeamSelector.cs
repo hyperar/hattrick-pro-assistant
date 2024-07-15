@@ -4,11 +4,11 @@
 
     public class TeamSelector : ITeamSelector
     {
-        public long SelectedTeamId { get; private set; }
+        public long SelectedTeamHattrickId { get; private set; }
 
-        public void SetSelectedTeam(long selectedTeamId)
+        public void SetSelectedTeam(long selectedTeamHattrickId)
         {
-            this.SelectedTeamId = selectedTeamId;
+            this.SelectedTeamHattrickId = selectedTeamHattrickId;
         }
     }
 }

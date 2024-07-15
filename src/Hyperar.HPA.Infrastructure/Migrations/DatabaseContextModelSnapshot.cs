@@ -17,7 +17,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -29,33 +29,26 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.Property<long>("HattrickId")
                         .HasColumnType("bigint")
-                        .HasColumnOrder(0);
+                        .HasColumnOrder(-1);
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(4)
-                        .IsUnicode(true)
+                        .HasMaxLength(10)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(1);
 
-                    b.Property<string>("CurrencyName")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(5);
 
-                    b.Property<decimal>("CurrencyRate")
-                        .HasPrecision(10, 5)
-                        .HasColumnType("decimal")
-                        .HasColumnOrder(3);
+                    b.Property<int>("CurrencyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("DateFormat")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(2);
 
                     b.Property<long>("LeagueHattrickId")
                         .HasColumnType("bigint");
@@ -63,18 +56,21 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(0);
 
                     b.Property<string>("TimeFormat")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(6);
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("HattrickId");
+
+                    b.HasIndex("CurrencyId");
 
                     b.HasIndex("LeagueHattrickId")
                         .IsUnique();
@@ -82,114 +78,1209 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.ToTable("Country", (string)null);
                 });
 
-            modelBuilder.Entity("Hyperar.HPA.Domain.League", b =>
+            modelBuilder.Entity("Hyperar.HPA.Domain.Currency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(-1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<decimal>("Rate")
+                        .HasPrecision(10, 5)
+                        .HasColumnType("decimal")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Currency", (string)null);
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Match", b =>
                 {
                     b.Property<long>("HattrickId")
                         .HasColumnType("bigint")
-                        .HasColumnOrder(0);
+                        .HasColumnOrder(-1);
 
-                    b.Property<int>("ActiveTeams")
+                    b.Property<int>("AddedMinutes")
                         .HasColumnType("int")
-                        .HasColumnOrder(13);
-
-                    b.Property<int>("ActiveUsers")
-                        .HasColumnType("int")
-                        .HasColumnOrder(14);
-
-                    b.Property<string>("Continent")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
                         .HasColumnOrder(4);
 
-                    b.Property<string>("EnglishName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Rules")
+                        .HasColumnType("int")
                         .HasColumnOrder(3);
 
-                    b.Property<byte[]>("FlagBytes")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(21);
+                    b.Property<int>("System")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
-                    b.Property<long>("JuniorNationalTeamId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(12);
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("LanguageId")
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("TeamHattrickId");
+
+                    b.ToTable("Match", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchArena", b =>
+                {
+                    b.Property<long>("ArenaHattrickId")
                         .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("AttendanceBasic")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("AttendanceRoof")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("AttendanceTerraces")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("AttendanceTotal")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("AttendanceVip")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
                         .HasColumnOrder(9);
-
-                    b.Property<string>("LanguageName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(10);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
                         .HasColumnOrder(1);
 
-                    b.Property<DateTime?>("NextCupMatchDate")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(19);
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("NextEconomyUpdate")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(18);
+                    b.Property<int>("Weather")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
 
-                    b.Property<DateTime>("NextSeriesMatchDate")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(20);
+                    b.HasKey("ArenaHattrickId", "MatchHattrickId");
 
-                    b.Property<DateTime>("NextTrainingUpdate")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(17);
+                    b.HasIndex("MatchHattrickId")
+                        .IsUnique();
 
-                    b.Property<int>("NumberOfLevels")
+                    b.ToTable("MatchArena", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchEvent", b =>
+                {
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(10);
+
+                    b.Property<int>("MatchPart")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<long?>("ObjectPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(7);
+
+                    b.Property<long?>("SubjectPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(6);
+
+                    b.Property<long?>("SubjectTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("ntext")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Variation")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.HasKey("MatchHattrickId", "Index");
+
+                    b.ToTable("MatchEvent", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeam", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("AttackIndirectSetPiecesRating")
                         .HasColumnType("int")
                         .HasColumnOrder(16);
 
-                    b.Property<int>("Season")
+                    b.Property<int>("CenterAttackRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(13);
+
+                    b.Property<int>("CenterDefenseRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.Property<int>("ChancesOnCenter")
+                        .HasColumnType("int")
+                        .HasColumnOrder(18);
+
+                    b.Property<int>("ChancesOnLeft")
+                        .HasColumnType("int")
+                        .HasColumnOrder(17);
+
+                    b.Property<int>("ChancesOnRight")
+                        .HasColumnType("int")
+                        .HasColumnOrder(19);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(23);
+
+                    b.Property<int>("DefenseIndirectSetPiecesRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(15);
+
+                    b.Property<int>("FirstHalfPossession")
                         .HasColumnType("int")
                         .HasColumnOrder(6);
 
-                    b.Property<int>("SeasonOffset")
+                    b.Property<string>("Formation")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("LeftAttackRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.Property<int>("LeftDefenseRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("Location")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("MidfieldRating")
                         .HasColumnType("int")
                         .HasColumnOrder(8);
 
-                    b.Property<long>("SeniorNationalTeamId")
-                        .HasColumnType("bigint")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("OtherChances")
+                        .HasColumnType("int")
+                        .HasColumnOrder(21);
+
+                    b.Property<int>("RightAttackRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(14);
+
+                    b.Property<int>("RightDefenseRating")
+                        .HasColumnType("int")
                         .HasColumnOrder(11);
+
+                    b.Property<int>("SecondHalfPossession")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("SpecialEventChances")
+                        .HasColumnType("int")
+                        .HasColumnOrder(20);
+
+                    b.Property<int>("TacticSkill")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("TacticType")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId");
+
+                    b.HasIndex("MatchHattrickId");
+
+                    b.ToTable("MatchTeam", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamBooking", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("MatchPart")
+                        .HasMaxLength(20)
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId", "Index");
+
+                    b.ToTable("MatchTeamBooking", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamGoal", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("AwayTeamScore")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("HomeTeamScore")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int>("MatchPart")
+                        .HasMaxLength(20)
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId", "Index");
+
+                    b.ToTable("MatchTeamGoal", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamInjury", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("MatchPart")
+                        .HasMaxLength(20)
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId", "Index");
+
+                    b.ToTable("MatchTeamInjury", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUp", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("PlayStyle")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUp", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUpPlayer", b =>
+                {
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<decimal?>("AverageRating")
+                        .HasPrecision(5, 1)
+                        .HasColumnType("decimal")
+                        .HasColumnOrder(7);
+
+                    b.Property<int?>("Behavior")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(3);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("NickName")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PlayerHattrickId", "TeamHattrickId", "MatchHattrickId", "Role");
+
+                    b.HasIndex("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUpPlayer", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUpStartingPlayer", b =>
+                {
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int?>("Behavior")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(3);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("NickName")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PlayerHattrickId", "TeamHattrickId", "MatchHattrickId", "Role");
+
+                    b.HasIndex("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUpStartingPlayer", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUpSubstitution", b =>
+                {
+                    b.Property<long>("OutPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("InPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("NewRole")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("NewBehavior")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("MatchPart")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("OutPlayerHattrickId", "InPlayerHattrickId", "TeamHattrickId", "MatchHattrickId", "NewRole", "NewBehavior");
+
+                    b.HasIndex("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUpSubstitution", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Player", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("AgeDays")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("AgeYears")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<byte[]>("AvatarBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(19);
+
+                    b.Property<int>("BookingStatus")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<int>("CareerGoals")
+                        .HasColumnType("int")
+                        .HasColumnOrder(17);
+
+                    b.Property<int>("CareerHattricks")
+                        .HasColumnType("int")
+                        .HasColumnOrder(18);
+
+                    b.Property<int?>("Category")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<long>("CountryHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(21);
+
+                    b.Property<int>("DaysLeftToPromote")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("HealthStatus")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.Property<DateTime>("JoinedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime>("NextBirthDay")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(6);
+
+                    b.Property<string>("NickName")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(13);
+
+                    b.Property<int>("SeasonFriendlyGoals")
+                        .HasColumnType("int")
+                        .HasColumnOrder(16);
+
+                    b.Property<int>("SeasonLeagueGoals")
+                        .HasColumnType("int")
+                        .HasColumnOrder(15);
+
+                    b.Property<int?>("ShirtNumber")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("Specialty")
+                        .HasColumnType("int")
+                        .HasColumnOrder(14);
+
+                    b.Property<string>("Statement")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(12);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("CountryHattrickId");
+
+                    b.HasIndex("TeamHattrickId");
+
+                    b.ToTable("Player", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.PlayerMatch", b =>
+                {
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<decimal>("AverageRating")
+                        .HasPrecision(5, 1)
+                        .HasColumnType("decimal")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PlayerHattrickId", "MatchHattrickId");
+
+                    b.HasIndex("MatchHattrickId");
+
+                    b.ToTable("PlayerMatch", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.PlayerSkillSet", b =>
+                {
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(24);
+
+                    b.Property<int?>("Defending")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int?>("DefendingMax")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int?>("Goalkeeping")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int?>("GoalkeepingMax")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<bool>("IsDefendingMaxReached")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(7);
+
+                    b.Property<bool>("IsGoalkeepingMaxReached")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(4);
+
+                    b.Property<bool>("IsPassingMaxReached")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(16);
+
+                    b.Property<bool>("IsPlaymakingMaxReached")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(10);
+
+                    b.Property<bool>("IsScoringMaxReached")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(19);
+
+                    b.Property<bool>("IsSetPiecesMaxReached")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(22);
+
+                    b.Property<bool>("IsWingerMaxReached")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(13);
+
+                    b.Property<int?>("Passing")
+                        .HasColumnType("int")
+                        .HasColumnOrder(14);
+
+                    b.Property<int?>("PassingMax")
+                        .HasColumnType("int")
+                        .HasColumnOrder(15);
+
+                    b.Property<int?>("Playmaking")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<int?>("PlaymakingMax")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<int?>("Scoring")
+                        .HasColumnType("int")
+                        .HasColumnOrder(17);
+
+                    b.Property<int?>("ScoringMax")
+                        .HasColumnType("int")
+                        .HasColumnOrder(18);
+
+                    b.Property<int?>("SetPieces")
+                        .HasColumnType("int")
+                        .HasColumnOrder(20);
+
+                    b.Property<int?>("SetPiecesMax")
+                        .HasColumnType("int")
+                        .HasColumnOrder(21);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Winger")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<int?>("WingerMax")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.HasKey("PlayerHattrickId", "Season", "Week");
+
+                    b.ToTable("PlayerSkillSet", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Series", b =>
+                {
+                    b.Property<long>("SeriesHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SeriesHattrickId", "TeamHattrickId", "Season");
+
+                    b.HasIndex("TeamHattrickId");
+
+                    b.ToTable("Series", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.SeriesTeam", b =>
+                {
+                    b.Property<long>("SeriesHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Change")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(14);
+
+                    b.Property<int>("DrawnMatches")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<int>("GoalsAgainst")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("GoalsFor")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int>("LostMatches")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("WonMatches")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.HasKey("SeriesHattrickId", "TeamHattrickId", "Season", "HattrickId");
+
+                    b.ToTable("SeriesTeam", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Team", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<DateTime>("CanBookFriendlyOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("FoundedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(2);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("SeniorTeamHattrickId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ShortName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("TrainerPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("SeniorTeamHattrickId")
+                        .IsUnique();
+
+                    b.ToTable("Team", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.UpcomingMatch", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("AwayTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(6);
+
+                    b.Property<string>("AwayTeamName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(7);
+
+                    b.Property<long?>("ContextId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("HomeTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("HomeTeamName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("System")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("TeamHattrickId");
+
+                    b.ToTable("UpcomingMatch", "junior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.League", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("ActiveTeams")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.Property<int>("ActiveUsers")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<string>("Continent")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(16);
+
+                    b.Property<string>("EnglishName")
+                        .IsRequired()
+                        .HasMaxLength(256)
                         .HasColumnType("nvarchar")
                         .HasColumnOrder(2);
 
+                    b.Property<byte[]>("FlagBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(14);
+
+                    b.Property<long?>("JuniorNationalTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("LeagueLevels")
+                        .HasColumnType("int")
+                        .HasColumnOrder(13);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("SeasonOffset")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<long?>("SeniorNationalTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(8);
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("WaitingUsers")
                         .HasColumnType("int")
-                        .HasColumnOrder(15);
+                        .HasColumnOrder(12);
 
                     b.Property<int>("Week")
                         .HasColumnType("int")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(6);
 
                     b.Property<string>("Zone")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(4);
 
                     b.HasKey("HattrickId");
 
@@ -200,37 +1291,43 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.Property<long>("HattrickId")
                         .HasColumnType("bigint")
-                        .HasColumnOrder(0);
+                        .HasColumnOrder(-1);
 
-                    b.Property<int>("CurrentRound")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(7);
 
                     b.Property<long>("LeagueHattrickId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("RoundsLeft")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<int?>("SeriesLevel")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<int?>("SubType")
+                    b.Property<int?>("Level")
                         .HasColumnType("int")
                         .HasColumnOrder(3);
 
-                    b.Property<int>("Type")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<int?>("SubType")
                         .HasColumnType("int")
                         .HasColumnOrder(2);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("WeeksLeft")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
 
                     b.HasKey("HattrickId");
 
@@ -239,44 +1336,113 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.ToTable("LeagueCup", (string)null);
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.LeagueSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(-1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(10);
+
+                    b.Property<DateTime>("FifthDailyUpdate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
+
+                    b.Property<DateTime>("FirstDailyUpdate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime>("FourthDailyUpdate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(7);
+
+                    b.Property<long>("LeagueHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("NextCupMatchDate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("NextEconomyUpdate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("NextSeriesMatchDate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime>("NextTrainingUpdate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime>("SecondDailyUpdate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("ThirdDailyUpdate")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LeagueHattrickId")
+                        .IsUnique();
+
+                    b.ToTable("LeagueSchedule", (string)null);
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.Manager", b =>
                 {
                     b.Property<long>("HattrickId")
                         .HasColumnType("bigint")
-                        .HasColumnOrder(0);
+                        .HasColumnOrder(-1);
 
                     b.Property<byte[]>("AvatarBytes")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(4);
 
                     b.Property<long>("CountryHattrickId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(6);
+
                     b.Property<string>("CurrencyName")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .IsUnicode(true)
+                        .HasMaxLength(256)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
+                        .HasColumnOrder(2);
 
                     b.Property<decimal>("CurrencyRate")
-                        .HasPrecision(10, 5)
+                        .HasPrecision(5, 1)
                         .HasColumnType("decimal")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(3);
 
                     b.Property<int>("SupporterTier")
                         .HasColumnType("int")
-                        .HasColumnOrder(2);
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .IsUnicode(true)
+                        .HasMaxLength(256)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(0);
 
                     b.HasKey("HattrickId");
 
@@ -292,17 +1458,23 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.Property<long>("HattrickId")
                         .HasColumnType("bigint")
-                        .HasColumnOrder(0);
+                        .HasColumnOrder(-1);
 
                     b.Property<long>("CountryHattrickId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(2);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("HattrickId");
 
@@ -311,57 +1483,903 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.ToTable("Region", (string)null);
                 });
 
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.HallOfFamePlayer", b =>
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Arena", b =>
                 {
                     b.Property<long>("HattrickId")
                         .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("BasicCapacity")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int?>("BasicCapacityChange")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<DateTime?>("BuiltOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(1);
+
+                    b.Property<int?>("CapacityChange")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.Property<DateTime?>("ConstructionEndsOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(15);
+
+                    b.Property<int>("CurrentCapacity")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<byte[]>("ImageBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(13);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("Age")
+                    b.Property<int>("RoofCapacity")
                         .HasColumnType("int")
                         .HasColumnOrder(4);
+
+                    b.Property<int?>("RoofCapacityChange")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("TerracesCapacity")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int?>("TerracesCapacityChange")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VipCapacity")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int?>("VipCapacityChange")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("TeamHattrickId")
+                        .IsUnique();
+
+                    b.ToTable("Arena", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Match", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("AddedMinutes")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<long?>("ContextId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Rules")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("System")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("TeamHattrickId");
+
+                    b.ToTable("Match", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchArena", b =>
+                {
+                    b.Property<long>("ArenaHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("AttendanceBasic")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("AttendanceRoof")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("AttendanceTerraces")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("AttendanceTotal")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("AttendanceVip")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Weather")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.HasKey("ArenaHattrickId", "MatchHattrickId");
+
+                    b.HasIndex("MatchHattrickId")
+                        .IsUnique();
+
+                    b.ToTable("MatchArena", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchEvent", b =>
+                {
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(10);
+
+                    b.Property<int>("MatchPart")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<long?>("ObjectPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(7);
+
+                    b.Property<long?>("SubjectPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(6);
+
+                    b.Property<long?>("SubjectTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("ntext")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Variation")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.HasKey("MatchHattrickId", "Index");
+
+                    b.ToTable("MatchEvent", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchReferee", b =>
+                {
+                    b.Property<long>("RefereeHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
 
                     b.Property<long>("CountryHattrickId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("ExpertType")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RefereeHattrickId", "MatchHattrickId");
+
+                    b.HasIndex("CountryHattrickId");
+
+                    b.HasIndex("MatchHattrickId");
+
+                    b.ToTable("MatchReferee", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeam", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("AttackIndirectSetPiecesRating")
                         .HasColumnType("int")
+                        .HasColumnOrder(16);
+
+                    b.Property<int?>("Attitude")
+                        .HasColumnType("int")
+                        .HasColumnOrder(17);
+
+                    b.Property<int>("CenterAttackRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(13);
+
+                    b.Property<int>("CenterDefenseRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.Property<int>("ChancesOnCenter")
+                        .HasColumnType("int")
+                        .HasColumnOrder(19);
+
+                    b.Property<int>("ChancesOnLeft")
+                        .HasColumnType("int")
+                        .HasColumnOrder(18);
+
+                    b.Property<int>("ChancesOnRight")
+                        .HasColumnType("int")
+                        .HasColumnOrder(20);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(24);
+
+                    b.Property<int>("DefenseIndirectSetPiecesRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(15);
+
+                    b.Property<int>("FirstHalfPossession")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<string>("Formation")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("LeftAttackRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.Property<int>("LeftDefenseRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("Location")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("MidfieldRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("OtherChances")
+                        .HasColumnType("int")
+                        .HasColumnOrder(22);
+
+                    b.Property<int>("RightAttackRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(14);
+
+                    b.Property<int>("RightDefenseRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<int>("SecondHalfPossession")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("SpecialEventChances")
+                        .HasColumnType("int")
+                        .HasColumnOrder(21);
+
+                    b.Property<int>("TacticSkill")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("TacticType")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId");
+
+                    b.HasIndex("MatchHattrickId");
+
+                    b.ToTable("MatchTeam", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamBooking", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("MatchPart")
+                        .HasMaxLength(20)
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId", "Index");
+
+                    b.ToTable("MatchTeamBooking", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamGoal", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("AwayTeamScore")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("HomeTeamScore")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int>("MatchPart")
+                        .HasMaxLength(20)
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId", "Index");
+
+                    b.ToTable("MatchTeamGoal", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamInjury", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("MatchPart")
+                        .HasMaxLength(20)
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId", "Index");
+
+                    b.ToTable("MatchTeamInjury", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUp", b =>
+                {
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("PlayStyle")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUp", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUpPlayer", b =>
+                {
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<decimal?>("AverageRating")
+                        .HasPrecision(5, 1)
+                        .HasColumnType("decimal")
+                        .HasColumnOrder(7);
+
+                    b.Property<int?>("Behavior")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(10);
+
+                    b.Property<decimal?>("EndOfMatchRating")
+                        .HasPrecision(5, 1)
+                        .HasColumnType("decimal")
                         .HasColumnOrder(8);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
-
-                    b.Property<DateTime>("IntroducedOn")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(7);
-
-                    b.Property<DateTime>("JoinedTeamOn")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(3);
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .IsUnicode(true)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("NickName")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PlayerHattrickId", "TeamHattrickId", "MatchHattrickId", "Role");
+
+                    b.HasIndex("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUpPlayer", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUpStartingPlayer", b =>
+                {
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int?>("Behavior")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(8);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
                         .HasColumnType("nvarchar")
                         .HasColumnOrder(3);
 
-                    b.Property<DateTime>("NextBirthday")
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("NickName")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PlayerHattrickId", "TeamHattrickId", "MatchHattrickId", "Role");
+
+                    b.HasIndex("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUpStartingPlayer", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUpSubstitution", b =>
+                {
+                    b.Property<long>("OutPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("InPlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("MatchHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("NewRole")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("NewBehavior")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("MatchPart")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int>("Minute")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("OutPlayerHattrickId", "InPlayerHattrickId", "TeamHattrickId", "MatchHattrickId", "NewRole", "NewBehavior");
+
+                    b.HasIndex("TeamHattrickId", "MatchHattrickId");
+
+                    b.ToTable("MatchTeamLineUpSubstitution", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Player", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("AgeDays")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("AgeYears")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Aggressiveness")
+                        .HasColumnType("int")
+                        .HasColumnOrder(19);
+
+                    b.Property<int>("Agreeability")
+                        .HasColumnType("int")
+                        .HasColumnOrder(18);
+
+                    b.Property<byte[]>("AvatarBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(33);
+
+                    b.Property<int>("BookingStatus")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.Property<int>("CareerGoals")
+                        .HasColumnType("int")
+                        .HasColumnOrder(28);
+
+                    b.Property<int>("CareerHattricks")
+                        .HasColumnType("int")
+                        .HasColumnOrder(29);
+
+                    b.Property<int?>("Category")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<long>("CountryHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(35);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("GoalsOnTeam")
+                        .HasColumnType("int")
+                        .HasColumnOrder(30);
+
+                    b.Property<bool>("HasMotherClubBonus")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("HealthStatus")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<int>("Honesty")
+                        .HasColumnType("int")
+                        .HasColumnOrder(20);
+
+                    b.Property<bool>("IsForeign")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(32);
+
+                    b.Property<bool>("IsTransferListed")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(17);
+
+                    b.Property<DateTime>("JoinedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("JuniorNationalTeamCaps")
+                        .HasColumnType("int")
+                        .HasColumnOrder(24);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Leadership")
+                        .HasColumnType("int")
+                        .HasColumnOrder(21);
+
+                    b.Property<int>("MatchesOnTeam")
+                        .HasColumnType("int")
+                        .HasColumnOrder(31);
+
+                    b.Property<DateTime>("NextBirthDay")
                         .HasColumnType("datetime")
                         .HasColumnOrder(6);
 
                     b.Property<string>("NickName")
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
+                        .HasMaxLength(128)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(14);
+
+                    b.Property<long>("Salary")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(16);
+
+                    b.Property<int>("SeasonCupGoals")
+                        .HasColumnType("int")
+                        .HasColumnOrder(26);
+
+                    b.Property<int>("SeasonFriendlyGoals")
+                        .HasColumnType("int")
+                        .HasColumnOrder(27);
+
+                    b.Property<int>("SeasonLeagueGoals")
+                        .HasColumnType("int")
+                        .HasColumnOrder(25);
+
+                    b.Property<int>("SeniorNationalTeamCaps")
+                        .HasColumnType("int")
+                        .HasColumnOrder(23);
+
+                    b.Property<int?>("ShirtNumber")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("Specialty")
+                        .HasColumnType("int")
+                        .HasColumnOrder(22);
+
+                    b.Property<string>("Statement")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(13);
 
                     b.Property<long>("TeamHattrickId")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("TotalSkillIndex")
+                        .HasColumnType("int")
+                        .HasColumnOrder(15);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("HattrickId");
 
@@ -369,37 +2387,497 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.HasIndex("TeamHattrickId");
 
-                    b.ToTable("HallOfFamePlayer", "senior");
+                    b.ToTable("Player", "senior");
                 });
 
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Match", b =>
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.PlayerMatch", b =>
                 {
-                    b.Property<long>("HattrickId")
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("MatchHattrickId")
                         .HasColumnType("bigint")
                         .HasColumnOrder(0);
 
-                    b.Property<int?>("AddedMinutes")
-                        .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<long?>("CompetitionId")
-                        .HasColumnType("bigint")
+                    b.Property<decimal>("AverageRating")
+                        .HasPrecision(5, 1)
+                        .HasColumnType("decimal")
                         .HasColumnOrder(3);
 
-                    b.Property<DateTime?>("FinishDate")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime")
                         .HasColumnOrder(6);
 
-                    b.Property<int?>("Result")
-                        .HasColumnType("int")
-                        .HasColumnOrder(9);
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(1);
 
-                    b.Property<int>("Rules")
+                    b.Property<decimal>("EndOfMatchRating")
+                        .HasPrecision(5, 1)
+                        .HasColumnType("decimal")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PlayerHattrickId", "MatchHattrickId");
+
+                    b.HasIndex("MatchHattrickId");
+
+                    b.ToTable("PlayerMatch", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.PlayerSkillSet", b =>
+                {
+                    b.Property<long>("PlayerHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(14);
+
+                    b.Property<int>("Defending")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<int>("Form")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Goalkeeping")
                         .HasColumnType("int")
                         .HasColumnOrder(4);
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<int>("Loyalty")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.Property<int>("Passing")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("Playmaking")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int>("Scoring")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("SetPieces")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.Property<int>("Stamina")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Winger")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.HasKey("PlayerHattrickId", "Season", "Week");
+
+                    b.ToTable("PlayerSkillSet", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Series", b =>
+                {
+                    b.Property<long>("SeriesHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SeriesHattrickId", "TeamHattrickId", "Season");
+
+                    b.HasIndex("TeamHattrickId");
+
+                    b.ToTable("Series", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.SeriesTeam", b =>
+                {
+                    b.Property<long>("SeriesHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("Change")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(14);
+
+                    b.Property<int>("DrawnMatches")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.Property<int>("GoalsAgainst")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("GoalsFor")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<int>("LostMatches")
+                        .HasColumnType("int")
+                        .HasColumnOrder(12);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Week")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<int>("WonMatches")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.HasKey("SeriesHattrickId", "TeamHattrickId", "Season", "HattrickId");
+
+                    b.ToTable("SeriesTeam", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.StaffMember", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<byte[]>("AvatarBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime>("HiredOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("Salary")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("TeamHattrickId");
+
+                    b.ToTable("StaffMember", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Team", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<byte[]>("AwayMatchKitBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(16);
+
+                    b.Property<bool>("CanBookMidWeekFriendly")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(12);
+
+                    b.Property<bool>("CanBookWeekEndFriendly")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(13);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(18);
+
+                    b.Property<DateTime>("FoundedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("GlobalRanking")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<byte[]>("HomeMatchKitBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(15);
+
+                    b.Property<bool>("IsPlayingCup")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(4);
+
+                    b.Property<bool>("IsPrimary")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(3);
+
+                    b.Property<long>("LeagueHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("LeagueRanking")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<byte[]>("LogoBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(14);
+
+                    b.Property<long>("ManagerHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("PowerRating")
+                        .HasColumnType("int")
+                        .HasColumnOrder(9);
+
+                    b.Property<long>("RegionHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("RegionRanking")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(1);
+
+                    b.Property<int?>("TeamRanking")
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
+
+                    b.Property<int>("UndefeatedStreak")
+                        .HasColumnType("int")
+                        .HasColumnOrder(10);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WinningStreak")
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("LeagueHattrickId");
+
+                    b.HasIndex("ManagerHattrickId");
+
+                    b.HasIndex("RegionHattrickId");
+
+                    b.ToTable("Team", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Trainer", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<int>("AgeDays")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("AgeYears")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<byte[]>("AvatarBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(8);
+
+                    b.Property<long>("CountryHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(10);
+
+                    b.Property<DateTime>("HiredOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("Leadership")
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("Salary")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<long>("TeamHattrickId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HattrickId");
+
+                    b.HasIndex("CountryHattrickId");
+
+                    b.HasIndex("TeamHattrickId")
+                        .IsUnique();
+
+                    b.ToTable("Trainer", "senior");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.UpcomingMatch", b =>
+                {
+                    b.Property<long>("HattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(-1);
+
+                    b.Property<long>("AwayTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(6);
+
+                    b.Property<string>("AwayTeamName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
+                        .HasColumnOrder(7);
+
+                    b.Property<long?>("ContextId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(9);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("HomeTeamHattrickId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("HomeTeamName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar")
                         .HasColumnOrder(5);
 
                     b.Property<int>("System")
@@ -413,1138 +2891,14 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
-                    b.Property<int?>("Weather")
-                        .HasColumnType("int")
-                        .HasColumnOrder(8);
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("HattrickId");
 
                     b.HasIndex("TeamHattrickId");
 
-                    b.ToTable("Match", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchArena", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("Attendance")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
-
-                    b.Property<int?>("BasicSeatsSold")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.Property<long>("MatchHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
-
-                    b.Property<int?>("RoofSeatsSold")
-                        .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<int?>("TerracesSold")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<int?>("VipSeatsSold")
-                        .HasColumnType("int")
-                        .HasColumnOrder(8);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchHattrickId")
-                        .IsUnique();
-
-                    b.ToTable("MatchArena", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchEvent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<long?>("AdditionalPlayerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<long>("MatchHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("MatchPart")
-                        .HasColumnType("int")
-                        .HasColumnOrder(9);
-
-                    b.Property<int>("Minute")
-                        .HasColumnType("int")
-                        .HasColumnOrder(8);
-
-                    b.Property<long?>("PlayerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(2);
-
-                    b.Property<long?>("TeamHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(4);
-
-                    b.Property<string>("Text")
-                        .HasColumnType("ntext")
-                        .HasColumnOrder(7);
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<int>("Variation")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchHattrickId");
-
-                    b.ToTable("MatchEvent", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchOfficial", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<long>("CountryHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.Property<long>("MatchHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryHattrickId");
-
-                    b.HasIndex("MatchHattrickId");
-
-                    b.ToTable("MatchOfficial", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AttackIndirectSetPiecesRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(18);
-
-                    b.Property<int?>("Attitude")
-                        .HasColumnType("int")
-                        .HasColumnOrder(19);
-
-                    b.Property<int?>("CentralAttackRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(15);
-
-                    b.Property<int?>("CentralDefenseRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(12);
-
-                    b.Property<int?>("ChancesOnCenter")
-                        .HasColumnType("int")
-                        .HasColumnOrder(21);
-
-                    b.Property<int?>("ChancesOnLeft")
-                        .HasColumnType("int")
-                        .HasColumnOrder(22);
-
-                    b.Property<int?>("ChancesOnRight")
-                        .HasColumnType("int")
-                        .HasColumnOrder(20);
-
-                    b.Property<int?>("DefenseIndirectSetPiecesRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(17);
-
-                    b.Property<int?>("FirstHalfPosession")
-                        .HasColumnType("int")
-                        .HasColumnOrder(25);
-
-                    b.Property<string>("Formation")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(6);
-
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.Property<int?>("LeftAttackRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(16);
-
-                    b.Property<int?>("LeftDefenseRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(13);
-
-                    b.Property<int>("Location")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
-
-                    b.Property<long>("MatchHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<byte[]>("MatchKitBytes")
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(5);
-
-                    b.Property<string>("MatchKitUrl")
-                        .HasMaxLength(1024)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(4);
-
-                    b.Property<int?>("MidfieldRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(10);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
-
-                    b.Property<int?>("OtherChances")
-                        .HasColumnType("int")
-                        .HasColumnOrder(24);
-
-                    b.Property<int?>("RightAttackRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(14);
-
-                    b.Property<int?>("RightDefenseRating")
-                        .HasColumnType("int")
-                        .HasColumnOrder(11);
-
-                    b.Property<int?>("Score")
-                        .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<int?>("SecondHalfPosession")
-                        .HasColumnType("int")
-                        .HasColumnOrder(26);
-
-                    b.Property<int?>("SpecialEventChances")
-                        .HasColumnType("int")
-                        .HasColumnOrder(23);
-
-                    b.Property<int?>("TacticLevel")
-                        .HasColumnType("int")
-                        .HasColumnOrder(9);
-
-                    b.Property<int?>("TacticType")
-                        .HasColumnType("int")
-                        .HasColumnOrder(8);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchHattrickId");
-
-                    b.ToTable("MatchTeam", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamBooking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("MatchPart")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<int>("MatchTeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Minute")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<long>("PlayerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(2);
-
-                    b.Property<string>("PlayerName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchTeamId");
-
-                    b.ToTable("MatchTeamBooking", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamGoal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AwayTeamScore")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<int>("HomeTeamScore")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("MatchPart")
-                        .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<int>("MatchTeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Minute")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<long>("PlayerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(2);
-
-                    b.Property<string>("PlayerName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchTeamId");
-
-                    b.ToTable("MatchTeamGoal", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamInjury", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("MatchPart")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<int>("MatchTeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Minute")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<long>("PlayerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(2);
-
-                    b.Property<string>("PlayerName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchTeamId");
-
-                    b.ToTable("MatchTeamInjury", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUp", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Experience")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("MatchTeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Style")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchTeamId")
-                        .IsUnique();
-
-                    b.ToTable("MatchTeamLineUp", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUpPlayer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("Behavior")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<decimal?>("EndRating")
-                        .HasPrecision(3, 1)
-                        .HasColumnType("decimal")
-                        .HasColumnOrder(8);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
-
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(4);
-
-                    b.Property<int>("MatchTeamLineUpId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NickName")
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
-
-                    b.Property<decimal?>("Rating")
-                        .HasPrecision(3, 1)
-                        .HasColumnType("decimal")
-                        .HasColumnOrder(7);
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchTeamLineUpId");
-
-                    b.ToTable("MatchTeamLineUpPlayer", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUpStartingPlayer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("Behavior")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
-
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(4);
-
-                    b.Property<int>("MatchTeamLineUpId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NickName")
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchTeamLineUpId");
-
-                    b.ToTable("MatchTeamLineUpStartingPlayer", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchTeamLineUpSubstitution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<long>("InPlayerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(6);
-
-                    b.Property<int>("MatchPart")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<int>("MatchTeamLineUpId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Minute")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<int>("NewRole")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
-
-                    b.Property<int>("NewRoleBehavior")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("OrderType")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<long>("OutPlayerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(7);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MatchTeamLineUpId");
-
-                    b.ToTable("MatchTeamLineUpSubstitution", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Player", b =>
-                {
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("AgeDays")
-                        .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<int>("AgeYears")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<int>("Aggressiveness")
-                        .HasColumnType("int")
-                        .HasColumnOrder(17);
-
-                    b.Property<int>("Agreeability")
-                        .HasColumnType("int")
-                        .HasColumnOrder(16);
-
-                    b.Property<long?>("AskingPrice")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(34);
-
-                    b.Property<byte[]>("AvatarBytes")
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(38);
-
-                    b.Property<int>("BookingStatus")
-                        .HasColumnType("int")
-                        .HasColumnOrder(31);
-
-                    b.Property<long?>("BuyingTeamHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(35);
-
-                    b.Property<string>("BuyingTeamName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(36);
-
-                    b.Property<int>("CareerGoals")
-                        .HasColumnType("int")
-                        .HasColumnOrder(25);
-
-                    b.Property<int>("CareerHattricks")
-                        .HasColumnType("int")
-                        .HasColumnOrder(26);
-
-                    b.Property<int>("Category")
-                        .HasColumnType("int")
-                        .HasColumnOrder(33);
-
-                    b.Property<long>("CountryHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("CurrentSeasonCupGoals")
-                        .HasColumnType("int")
-                        .HasColumnOrder(23);
-
-                    b.Property<int>("CurrentSeasonFriendlyGoals")
-                        .HasColumnType("int")
-                        .HasColumnOrder(24);
-
-                    b.Property<int>("CurrentSeasonLeagueGoals")
-                        .HasColumnType("int")
-                        .HasColumnOrder(22);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("GoalsOnTeam")
-                        .HasColumnType("int")
-                        .HasColumnOrder(27);
-
-                    b.Property<bool>("HasMotherClubBonus")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(13);
-
-                    b.Property<int>("Health")
-                        .HasColumnType("int")
-                        .HasColumnOrder(32);
-
-                    b.Property<int>("Honesty")
-                        .HasColumnType("int")
-                        .HasColumnOrder(18);
-
-                    b.Property<bool>("IsCoach")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(5);
-
-                    b.Property<bool>("IsForeign")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(15);
-
-                    b.Property<bool>("IsTransferListed")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(21);
-
-                    b.Property<DateTime>("JoinedTeamOn")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(9);
-
-                    b.Property<int>("JuniorNationalTeamCaps")
-                        .HasColumnType("int")
-                        .HasColumnOrder(30);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("Leadership")
-                        .HasColumnType("int")
-                        .HasColumnOrder(19);
-
-                    b.Property<int>("MatchesOnTeam")
-                        .HasColumnType("int")
-                        .HasColumnOrder(28);
-
-                    b.Property<DateTime>("NextBirthDay")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(8);
-
-                    b.Property<string>("NickName")
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
-
-                    b.Property<string>("Notes")
-                        .HasMaxLength(1024)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(10);
-
-                    b.Property<long>("Salary")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(14);
-
-                    b.Property<int>("SeniorNationalTeamCaps")
-                        .HasColumnType("int")
-                        .HasColumnOrder(29);
-
-                    b.Property<int?>("ShirtNumber")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<int>("Specialty")
-                        .HasColumnType("int")
-                        .HasColumnOrder(20);
-
-                    b.Property<string>("Statement")
-                        .HasMaxLength(1024)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(11);
-
-                    b.Property<long>("TeamHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TotalSkillIndex")
-                        .HasColumnType("int")
-                        .HasColumnOrder(12);
-
-                    b.Property<long?>("WinningBid")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(37);
-
-                    b.HasKey("HattrickId");
-
-                    b.HasIndex("CountryHattrickId");
-
-                    b.HasIndex("TeamHattrickId");
-
-                    b.ToTable("Player", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.PlayerMatch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("AverageRating")
-                        .HasPrecision(4, 1)
-                        .HasColumnType("decimal")
-                        .HasColumnOrder(4);
-
-                    b.Property<string>("CalculatedRating")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(6);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(1);
-
-                    b.Property<decimal>("EndOfMatchRating")
-                        .HasPrecision(4, 1)
-                        .HasColumnType("decimal")
-                        .HasColumnOrder(5);
-
-                    b.Property<long>("MatchHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(2);
-
-                    b.Property<long>("PlayerHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlayerHattrickId");
-
-                    b.ToTable("PlayerMatch", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.PlayerSkillSet", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Defending")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<int>("Experience")
-                        .HasColumnType("int")
-                        .HasColumnOrder(13);
-
-                    b.Property<int>("Form")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("Keeper")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<int>("Loyalty")
-                        .HasColumnType("int")
-                        .HasColumnOrder(12);
-
-                    b.Property<int>("Passing")
-                        .HasColumnType("int")
-                        .HasColumnOrder(9);
-
-                    b.Property<long>("PlayerHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Playmaking")
-                        .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<int>("Scoring")
-                        .HasColumnType("int")
-                        .HasColumnOrder(10);
-
-                    b.Property<int>("Season")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("SetPieces")
-                        .HasColumnType("int")
-                        .HasColumnOrder(11);
-
-                    b.Property<int>("Stamina")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<int>("Week")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
-
-                    b.Property<int>("Winger")
-                        .HasColumnType("int")
-                        .HasColumnOrder(8);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlayerHattrickId");
-
-                    b.ToTable("PlayerSkillSet", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.StaffMember", b =>
-                {
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(0);
-
-                    b.Property<byte[]>("AvatarBytes")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(6);
-
-                    b.Property<long?>("HallOfFamePlayerHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("HiredOn")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(2);
-
-                    b.Property<int>("Level")
-                        .IsUnicode(true)
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
-
-                    b.Property<long>("Salary")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(5);
-
-                    b.Property<long>("TeamHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
-
-                    b.HasKey("HattrickId");
-
-                    b.HasIndex("HallOfFamePlayerHattrickId")
-                        .IsUnique()
-                        .HasFilter("[HallOfFamePlayerHattrickId] IS NOT NULL");
-
-                    b.HasIndex("TeamHattrickId");
-
-                    b.ToTable("StaffMember", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Team", b =>
-                {
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(0);
-
-                    b.Property<byte[]>("AwayMatchKitBytes")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(21);
-
-                    b.Property<long>("CoachPlayerId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(5);
-
-                    b.Property<DateTime>("FoundedOn")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(4);
-
-                    b.Property<int>("GlobalRanking")
-                        .HasColumnType("int")
-                        .HasColumnOrder(8);
-
-                    b.Property<bool>("HasPromotedJuniorPlayer")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(7);
-
-                    b.Property<byte[]>("HomeMatchKitBytes")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(20);
-
-                    b.Property<bool>("IsPlayingCup")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(6);
-
-                    b.Property<bool>("IsPrimary")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(3);
-
-                    b.Property<long>("LeagueHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("LeagueRanking")
-                        .HasColumnType("int")
-                        .HasColumnOrder(9);
-
-                    b.Property<byte[]>("LogoBytes")
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(19);
-
-                    b.Property<long>("ManagerHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("PowerRanking")
-                        .HasColumnType("int")
-                        .HasColumnOrder(11);
-
-                    b.Property<long>("RegionHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("RegionRanking")
-                        .HasColumnType("int")
-                        .HasColumnOrder(10);
-
-                    b.Property<int>("SeriesDivision")
-                        .HasColumnType("int")
-                        .HasColumnOrder(17);
-
-                    b.Property<long>("SeriesHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(15);
-
-                    b.Property<string>("SeriesName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(16);
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
-
-                    b.Property<int>("TeamRank")
-                        .HasColumnType("int")
-                        .HasColumnOrder(12);
-
-                    b.Property<long>("TrainerHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(18);
-
-                    b.Property<int>("UndefeatedStreak")
-                        .HasColumnType("int")
-                        .HasColumnOrder(13);
-
-                    b.Property<int>("WinStreak")
-                        .HasColumnType("int")
-                        .HasColumnOrder(14);
-
-                    b.HasKey("HattrickId");
-
-                    b.HasIndex("LeagueHattrickId");
-
-                    b.HasIndex("ManagerHattrickId");
-
-                    b.HasIndex("RegionHattrickId");
-
-                    b.ToTable("Team", "senior");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.TeamArena", b =>
-                {
-                    b.Property<long>("HattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("BasicSeatCapacity")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
-
-                    b.Property<DateTime>("BuiltOn")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(2);
-
-                    b.Property<byte[]>("ImageBytes")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(8);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar")
-                        .HasColumnOrder(1);
-
-                    b.Property<int>("RoofSeatCapacity")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<long>("TeamHattrickId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TerracesCapacity")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
-
-                    b.Property<int>("TotalCapacity")
-                        .HasColumnType("int")
-                        .HasColumnOrder(7);
-
-                    b.Property<int>("VipLoungeCapacity")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.HasKey("HattrickId");
-
-                    b.HasIndex("TeamHattrickId")
-                        .IsUnique();
-
-                    b.ToTable("TeamArena", "senior");
+                    b.ToTable("UpcomingMatch", "senior");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Token", b =>
@@ -1552,28 +2906,34 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnOrder(0);
+                        .HasColumnOrder(-1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(6);
 
                     b.Property<DateTime>("ExpiresOn")
                         .HasColumnType("datetime")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(4);
+
+                    b.Property<DateTime>("GeneratedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
 
                     b.Property<int>("Scope")
                         .HasColumnType("int")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(2);
 
-                    b.Property<string>("SecretValue")
+                    b.Property<string>("Secret")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(3);
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -1581,9 +2941,8 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .IsUnicode(true)
                         .HasColumnType("nvarchar")
-                        .HasColumnOrder(2);
+                        .HasColumnOrder(0);
 
                     b.HasKey("Id");
 
@@ -1598,17 +2957,24 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnOrder(0);
+                        .HasColumnOrder(-1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime")
+                        .HasColumnOrder(3);
+
                     b.Property<DateTime?>("LastDownloadDate")
                         .HasColumnType("datetime")
+                        .HasColumnOrder(0);
+
+                    b.Property<long?>("SelectedTeamHattrickId")
+                        .HasColumnType("bigint")
                         .HasColumnOrder(1);
 
-                    b.Property<long?>("LastSelectedTeamHattrickId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(2);
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -1617,14 +2983,257 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Country", b =>
                 {
+                    b.HasOne("Hyperar.HPA.Domain.Currency", "Currency")
+                        .WithMany("Countries")
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Country_Currency");
+
                     b.HasOne("Hyperar.HPA.Domain.League", "League")
                         .WithOne("Country")
                         .HasForeignKey("Hyperar.HPA.Domain.Country", "LeagueHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Country_League");
 
+                    b.Navigation("Currency");
+
                     b.Navigation("League");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Match", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Team", "Team")
+                        .WithMany("Matches")
+                        .HasForeignKey("TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Match_Team");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchArena", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Match", "Match")
+                        .WithOne("Arena")
+                        .HasForeignKey("Hyperar.HPA.Domain.Junior.MatchArena", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchArena_Match");
+
+                    b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchEvent", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Match", "Match")
+                        .WithMany("Events")
+                        .HasForeignKey("MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchEvent_Match");
+
+                    b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeam", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Match", "Match")
+                        .WithMany("Teams")
+                        .HasForeignKey("MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeam_Match");
+
+                    b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamBooking", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.MatchTeam", "MatchTeam")
+                        .WithMany("Bookings")
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeamBooking_MatchTeam");
+
+                    b.Navigation("MatchTeam");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamGoal", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.MatchTeam", "MatchTeam")
+                        .WithMany("Goals")
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeamGoal_MatchTeam");
+
+                    b.Navigation("MatchTeam");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamInjury", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.MatchTeam", "MatchTeam")
+                        .WithMany("Injuries")
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeamInjury_MatchTeam");
+
+                    b.Navigation("MatchTeam");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUp", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.MatchTeam", "MatchTeam")
+                        .WithOne("LineUp")
+                        .HasForeignKey("Hyperar.HPA.Domain.Junior.MatchTeamLineUp", "TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeamLineUp_MatchTeam");
+
+                    b.Navigation("MatchTeam");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUpPlayer", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.MatchTeamLineUp", "MatchTeamLineUp")
+                        .WithMany("Players")
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeamLineUpPlayer_MatchTeamLineUp");
+
+                    b.Navigation("MatchTeamLineUp");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUpStartingPlayer", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.MatchTeamLineUp", "MatchTeamLineUp")
+                        .WithMany("StartingPlayers")
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeamLineUpStartingPlayer_MatchTeamLineUp");
+
+                    b.Navigation("MatchTeamLineUp");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUpSubstitution", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.MatchTeamLineUp", "MatchTeamLineUp")
+                        .WithMany("Substitutions")
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_MatchTeamLineUpSubstitution_MatchTeamLineUp");
+
+                    b.Navigation("MatchTeamLineUp");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Player", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Country", "Country")
+                        .WithMany("JuniorPlayers")
+                        .HasForeignKey("CountryHattrickId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Player_Country");
+
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Team", "Team")
+                        .WithMany("Players")
+                        .HasForeignKey("TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Player_Team");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.PlayerMatch", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Match", "Match")
+                        .WithMany("PlayerMatches")
+                        .HasForeignKey("MatchHattrickId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_PlayerMatch_Match");
+
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Player", "Player")
+                        .WithMany("PlayerMatches")
+                        .HasForeignKey("PlayerHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_PlayerMatch_Player");
+
+                    b.Navigation("Match");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.PlayerSkillSet", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Player", "Player")
+                        .WithMany("PlayerSkillSets")
+                        .HasForeignKey("PlayerHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_PlayerSkillSet_Player");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Series", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Team", "Team")
+                        .WithMany("Series")
+                        .HasForeignKey("TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Series_Team");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.SeriesTeam", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Series", "Series")
+                        .WithMany("Teams")
+                        .HasForeignKey("SeriesHattrickId", "TeamHattrickId", "Season")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_SeriesTeam_Team");
+
+                    b.Navigation("Series");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Team", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Senior.Team", "SeniorTeam")
+                        .WithOne("JuniorTeam")
+                        .HasForeignKey("Hyperar.HPA.Domain.Junior.Team", "SeniorTeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Team_Team");
+
+                    b.Navigation("SeniorTeam");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.UpcomingMatch", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Junior.Team", "Team")
+                        .WithMany("UpcomingMatches")
+                        .HasForeignKey("TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_UpcomingMatch_Team");
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.LeagueCup", b =>
@@ -1635,6 +3244,18 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_LeagueCup_League");
+
+                    b.Navigation("League");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.LeagueSchedule", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.League", "League")
+                        .WithOne("Schedule")
+                        .HasForeignKey("Hyperar.HPA.Domain.LeagueSchedule", "LeagueHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_LeagueSchedule_League");
 
                     b.Navigation("League");
                 });
@@ -1651,7 +3272,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasOne("Hyperar.HPA.Domain.User", "User")
                         .WithOne("Manager")
                         .HasForeignKey("Hyperar.HPA.Domain.Manager", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Manager_User");
 
@@ -1672,23 +3293,14 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.HallOfFamePlayer", b =>
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Arena", b =>
                 {
-                    b.HasOne("Hyperar.HPA.Domain.Country", "Country")
-                        .WithMany("HallOfFamePlayers")
-                        .HasForeignKey("CountryHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_Senior_HallOfFamePlayer_Country");
-
                     b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
-                        .WithMany("HallOfFamePlayers")
-                        .HasForeignKey("TeamHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .WithOne("Arena")
+                        .HasForeignKey("Hyperar.HPA.Domain.Senior.Arena", "TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_HallOfFamePlayer_Team");
-
-                    b.Navigation("Country");
+                        .HasConstraintName("FK_Arena_Team");
 
                     b.Navigation("Team");
                 });
@@ -1698,9 +3310,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
                         .WithMany("Matches")
                         .HasForeignKey("TeamHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_Match_Team");
+                        .HasConstraintName("FK_Match_Team");
 
                     b.Navigation("Team");
                 });
@@ -1710,9 +3322,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasOne("Hyperar.HPA.Domain.Senior.Match", "Match")
                         .WithOne("Arena")
                         .HasForeignKey("Hyperar.HPA.Domain.Senior.MatchArena", "MatchHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchArena_Match");
+                        .HasConstraintName("FK_MatchArena_Match");
 
                     b.Navigation("Match");
                 });
@@ -1722,28 +3334,28 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasOne("Hyperar.HPA.Domain.Senior.Match", "Match")
                         .WithMany("Events")
                         .HasForeignKey("MatchHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchEvent_Match");
+                        .HasConstraintName("FK_MatchEvent_Match");
 
                     b.Navigation("Match");
                 });
 
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchOfficial", b =>
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.MatchReferee", b =>
                 {
                     b.HasOne("Hyperar.HPA.Domain.Country", "Country")
-                        .WithMany("MatchOfficials")
+                        .WithMany("Referees")
                         .HasForeignKey("CountryHattrickId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchOfficial_Country");
+                        .HasConstraintName("FK_MatchReferee_Country");
 
                     b.HasOne("Hyperar.HPA.Domain.Senior.Match", "Match")
-                        .WithMany("Officials")
+                        .WithMany("Referees")
                         .HasForeignKey("MatchHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchOfficial_Match");
+                        .HasConstraintName("FK_MatchReferee_Match");
 
                     b.Navigation("Country");
 
@@ -1755,9 +3367,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasOne("Hyperar.HPA.Domain.Senior.Match", "Match")
                         .WithMany("Teams")
                         .HasForeignKey("MatchHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeam_Match");
+                        .HasConstraintName("FK_MatchTeam_Match");
 
                     b.Navigation("Match");
                 });
@@ -1766,10 +3378,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.MatchTeam", "MatchTeam")
                         .WithMany("Bookings")
-                        .HasForeignKey("MatchTeamId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeamBooking_MatchTeam");
+                        .HasConstraintName("FK_MatchTeamBooking_MatchTeam");
 
                     b.Navigation("MatchTeam");
                 });
@@ -1778,10 +3390,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.MatchTeam", "MatchTeam")
                         .WithMany("Goals")
-                        .HasForeignKey("MatchTeamId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeamGoal_MatchTeam");
+                        .HasConstraintName("FK_MatchTeamGoal_MatchTeam");
 
                     b.Navigation("MatchTeam");
                 });
@@ -1790,10 +3402,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.MatchTeam", "MatchTeam")
                         .WithMany("Injuries")
-                        .HasForeignKey("MatchTeamId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeamInjury_MatchTeam");
+                        .HasConstraintName("FK_MatchTeamInjury_MatchTeam");
 
                     b.Navigation("MatchTeam");
                 });
@@ -1802,10 +3414,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.MatchTeam", "MatchTeam")
                         .WithOne("LineUp")
-                        .HasForeignKey("Hyperar.HPA.Domain.Senior.MatchTeamLineUp", "MatchTeamId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("Hyperar.HPA.Domain.Senior.MatchTeamLineUp", "TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeamLineUp_MatchTeam");
+                        .HasConstraintName("FK_MatchTeamLineUp_MatchTeam");
 
                     b.Navigation("MatchTeam");
                 });
@@ -1814,10 +3426,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.MatchTeamLineUp", "MatchTeamLineUp")
                         .WithMany("Players")
-                        .HasForeignKey("MatchTeamLineUpId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeamLineUpPlayer_MatchTeamLineUp");
+                        .HasConstraintName("FK_MatchTeamLineUpPlayer_MatchTeamLineUp");
 
                     b.Navigation("MatchTeamLineUp");
                 });
@@ -1826,10 +3438,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.MatchTeamLineUp", "MatchTeamLineUp")
                         .WithMany("StartingPlayers")
-                        .HasForeignKey("MatchTeamLineUpId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeamLineUpStartingPlayer_MatchTeamLineUp");
+                        .HasConstraintName("FK_MatchTeamLineUpStartingPlayer_MatchTeamLineUp");
 
                     b.Navigation("MatchTeamLineUp");
                 });
@@ -1838,10 +3450,10 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.MatchTeamLineUp", "MatchTeamLineUp")
                         .WithMany("Substitutions")
-                        .HasForeignKey("MatchTeamLineUpId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("TeamHattrickId", "MatchHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_MatchTeamLineUpSubstitution_MatchTeamLineUp");
+                        .HasConstraintName("FK_MatchTeamLineUpSubstitution_MatchTeamLineUp");
 
                     b.Navigation("MatchTeamLineUp");
                 });
@@ -1849,18 +3461,18 @@ namespace Hyperar.HPA.Infrastructure.Migrations
             modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Player", b =>
                 {
                     b.HasOne("Hyperar.HPA.Domain.Country", "Country")
-                        .WithMany("Players")
+                        .WithMany("SeniorPlayers")
                         .HasForeignKey("CountryHattrickId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_Player_Country");
+                        .HasConstraintName("FK_Player_Country");
 
                     b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_Player_Team");
+                        .HasConstraintName("FK_Player_Team");
 
                     b.Navigation("Country");
 
@@ -1869,12 +3481,21 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Senior.PlayerMatch", b =>
                 {
-                    b.HasOne("Hyperar.HPA.Domain.Senior.Player", "Player")
-                        .WithMany("Matches")
-                        .HasForeignKey("PlayerHattrickId")
+                    b.HasOne("Hyperar.HPA.Domain.Senior.Match", "Match")
+                        .WithMany("PlayerMatches")
+                        .HasForeignKey("MatchHattrickId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
+                        .HasConstraintName("FK_PlayerMatch_Match");
+
+                    b.HasOne("Hyperar.HPA.Domain.Senior.Player", "Player")
+                        .WithMany("PlayerMatches")
+                        .HasForeignKey("PlayerHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK_PlayerMatch_Player");
+
+                    b.Navigation("Match");
 
                     b.Navigation("Player");
                 });
@@ -1884,29 +3505,45 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasOne("Hyperar.HPA.Domain.Senior.Player", "Player")
                         .WithMany("PlayerSkillSets")
                         .HasForeignKey("PlayerHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_PlayerSkillSet_Player");
 
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Series", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
+                        .WithMany("Series")
+                        .HasForeignKey("TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Series_Team");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.SeriesTeam", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Senior.Series", "Series")
+                        .WithMany("Teams")
+                        .HasForeignKey("SeriesHattrickId", "TeamHattrickId", "Season")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_SeriesTeam_Team");
+
+                    b.Navigation("Series");
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.Senior.StaffMember", b =>
                 {
-                    b.HasOne("Hyperar.HPA.Domain.Senior.HallOfFamePlayer", "HallOfFamePlayer")
-                        .WithOne("Staff")
-                        .HasForeignKey("Hyperar.HPA.Domain.Senior.StaffMember", "HallOfFamePlayerHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .HasConstraintName("FK_StaffMember_HallOfFamePlayer");
-
                     b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
                         .WithMany("StaffMembers")
                         .HasForeignKey("TeamHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_StaffMember_Team");
-
-                    b.Navigation("HallOfFamePlayer");
 
                     b.Navigation("Team");
                 });
@@ -1914,25 +3551,25 @@ namespace Hyperar.HPA.Infrastructure.Migrations
             modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Team", b =>
                 {
                     b.HasOne("Hyperar.HPA.Domain.League", "League")
-                        .WithMany("Teams")
+                        .WithMany("SeniorTeams")
                         .HasForeignKey("LeagueHattrickId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_Team_League");
+                        .HasConstraintName("FK_Team_League");
 
                     b.HasOne("Hyperar.HPA.Domain.Manager", "Manager")
-                        .WithMany("Teams")
+                        .WithMany("SeniorTeams")
                         .HasForeignKey("ManagerHattrickId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_Team_Manager");
+                        .HasConstraintName("FK_Team_Manager");
 
                     b.HasOne("Hyperar.HPA.Domain.Region", "Region")
-                        .WithMany("Teams")
+                        .WithMany("SeniorTeams")
                         .HasForeignKey("RegionHattrickId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_Team_Region");
+                        .HasConstraintName("FK_Team_Region");
 
                     b.Navigation("League");
 
@@ -1941,14 +3578,35 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Navigation("Region");
                 });
 
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.TeamArena", b =>
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Trainer", b =>
+                {
+                    b.HasOne("Hyperar.HPA.Domain.Country", "Country")
+                        .WithMany("Trainers")
+                        .HasForeignKey("CountryHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Trainer_Country");
+
+                    b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
+                        .WithOne("Trainer")
+                        .HasForeignKey("Hyperar.HPA.Domain.Senior.Trainer", "TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Trainer_Team");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.UpcomingMatch", b =>
                 {
                     b.HasOne("Hyperar.HPA.Domain.Senior.Team", "Team")
-                        .WithOne("TeamArena")
-                        .HasForeignKey("Hyperar.HPA.Domain.Senior.TeamArena", "TeamHattrickId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .WithMany("UpcomingMatches")
+                        .HasForeignKey("TeamHattrickId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Senior_TeamArena_Team");
+                        .HasConstraintName("FK_UpcomingMatch_Team");
 
                     b.Navigation("Team");
                 });
@@ -1958,7 +3616,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.HasOne("Hyperar.HPA.Domain.User", "User")
                         .WithOne("Token")
                         .HasForeignKey("Hyperar.HPA.Domain.Token", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Token_User");
 
@@ -1967,15 +3625,76 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Country", b =>
                 {
-                    b.Navigation("HallOfFamePlayers");
+                    b.Navigation("JuniorPlayers");
 
                     b.Navigation("Managers");
 
-                    b.Navigation("MatchOfficials");
+                    b.Navigation("Referees");
+
+                    b.Navigation("Regions");
+
+                    b.Navigation("SeniorPlayers");
+
+                    b.Navigation("Trainers");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Currency", b =>
+                {
+                    b.Navigation("Countries");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Match", b =>
+                {
+                    b.Navigation("Arena");
+
+                    b.Navigation("Events");
+
+                    b.Navigation("PlayerMatches");
+
+                    b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeam", b =>
+                {
+                    b.Navigation("Bookings");
+
+                    b.Navigation("Goals");
+
+                    b.Navigation("Injuries");
+
+                    b.Navigation("LineUp");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.MatchTeamLineUp", b =>
+                {
+                    b.Navigation("Players");
+
+                    b.Navigation("StartingPlayers");
+
+                    b.Navigation("Substitutions");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Player", b =>
+                {
+                    b.Navigation("PlayerMatches");
+
+                    b.Navigation("PlayerSkillSets");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Series", b =>
+                {
+                    b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("Hyperar.HPA.Domain.Junior.Team", b =>
+                {
+                    b.Navigation("Matches");
 
                     b.Navigation("Players");
 
-                    b.Navigation("Regions");
+                    b.Navigation("Series");
+
+                    b.Navigation("UpcomingMatches");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.League", b =>
@@ -1984,22 +3703,19 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Navigation("Cups");
 
-                    b.Navigation("Teams");
+                    b.Navigation("Schedule");
+
+                    b.Navigation("SeniorTeams");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Manager", b =>
                 {
-                    b.Navigation("Teams");
+                    b.Navigation("SeniorTeams");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Region", b =>
                 {
-                    b.Navigation("Teams");
-                });
-
-            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.HallOfFamePlayer", b =>
-                {
-                    b.Navigation("Staff");
+                    b.Navigation("SeniorTeams");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Match", b =>
@@ -2008,7 +3724,9 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Navigation("Events");
 
-                    b.Navigation("Officials");
+                    b.Navigation("PlayerMatches");
+
+                    b.Navigation("Referees");
 
                     b.Navigation("Teams");
                 });
@@ -2035,22 +3753,33 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
             modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Player", b =>
                 {
-                    b.Navigation("Matches");
+                    b.Navigation("PlayerMatches");
 
                     b.Navigation("PlayerSkillSets");
                 });
 
+            modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Series", b =>
+                {
+                    b.Navigation("Teams");
+                });
+
             modelBuilder.Entity("Hyperar.HPA.Domain.Senior.Team", b =>
                 {
-                    b.Navigation("HallOfFamePlayers");
+                    b.Navigation("Arena");
+
+                    b.Navigation("JuniorTeam");
 
                     b.Navigation("Matches");
 
                     b.Navigation("Players");
 
+                    b.Navigation("Series");
+
                     b.Navigation("StaffMembers");
 
-                    b.Navigation("TeamArena");
+                    b.Navigation("Trainer");
+
+                    b.Navigation("UpcomingMatches");
                 });
 
             modelBuilder.Entity("Hyperar.HPA.Domain.User", b =>

@@ -4,12 +4,7 @@
 
     public class Player
     {
-        public Player()
-        {
-            this.Avatar = new Avatar();
-        }
-
-        public Avatar Avatar { get; set; }
+        public Avatar Avatar { get; set; } = new Avatar();
 
         public long PlayerId { get; set; }
     }

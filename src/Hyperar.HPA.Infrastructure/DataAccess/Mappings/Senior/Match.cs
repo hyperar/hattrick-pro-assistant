@@ -8,54 +8,50 @@
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.Match> builder)
         {
+            builder.Property(p => p.Date)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.DateTime)
+                .IsRequired();
+
             builder.Property(p => p.System)
-                .HasColumnOrder(1)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.Type)
-                .HasColumnOrder(2)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.CompetitionId)
-                .HasColumnOrder(3)
+            builder.Property(p => p.ContextId)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt);
 
             builder.Property(p => p.Rules)
-                .HasColumnOrder(4)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.StartDate)
-                .HasColumnOrder(5)
-                .HasColumnType(Constants.ColumnType.DateTime)
-                .IsRequired();
-
-            builder.Property(p => p.FinishDate)
-                .HasColumnOrder(6)
-                .HasColumnType(Constants.ColumnType.DateTime);
-
             builder.Property(p => p.AddedMinutes)
-                .HasColumnOrder(7)
-                .HasColumnType(Constants.ColumnType.Int);
-
-            builder.Property(p => p.Weather)
-                .HasColumnOrder(8)
-                .HasColumnType(Constants.ColumnType.Int);
-
-            builder.Property(p => p.Result)
-                .HasColumnOrder(9)
-                .HasColumnType(Constants.ColumnType.Int);
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.Int)
+                .IsRequired();
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.Match> builder)
         {
             builder.HasOne(m => m.Team)
                 .WithMany(m => m.Matches)
+                .HasConstraintName("FK_Match_Team")
                 .HasForeignKey(m => m.TeamHattrickId)
-                .HasConstraintName("FK_Senior_Match_Team")
-                .OnDelete(DeleteBehavior.NoAction);
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.Match> builder)

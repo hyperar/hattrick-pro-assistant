@@ -4,16 +4,10 @@
 
     public class Team
     {
-        public Team()
-        {
-            this.PlayerList = new List<Player>();
-            this.TeamName = string.Empty;
-        }
-
-        public List<Player> PlayerList { get; set; }
+        public List<Player> PlayerList { get; set; } = new List<Player>();
 
         public long TeamId { get; set; }
 
-        public string TeamName { get; set; }
+        public string TeamName { get; set; } = string.Empty;
     }
 }

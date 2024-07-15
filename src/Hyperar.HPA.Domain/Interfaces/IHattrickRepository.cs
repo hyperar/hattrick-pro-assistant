@@ -2,7 +2,7 @@
 {
     using Domain;
 
-    public interface IHattrickRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity
+    public interface IHattrickRepository<TEntity> : IAuditableRepository<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity
     {
         Task DeleteAsync(long hattrickId);
 

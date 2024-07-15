@@ -12,15 +12,12 @@
     using CommunityToolkit.Mvvm.Input;
     using WinUI.Enums;
     using WinUI.State.Interface;
-    using WinUI.ViewModels.Interface;
 
     public partial class AuthorizationViewModel : AsyncViewModelBase
     {
         private readonly IHattrickService hattrickService;
 
         private readonly IUserService userService;
-
-        private readonly IViewModelFactory viewModelFactory;
 
         [ObservableProperty]
         private string? accessToken;
@@ -59,12 +56,10 @@
 
         public AuthorizationViewModel(
             INavigator navigator,
-            IViewModelFactory viewModelFactory,
             IHattrickService hattrickService,
             IUserService userService) : base(navigator)
         {
             this.hattrickService = hattrickService;
-            this.viewModelFactory = viewModelFactory;
             this.userService = userService;
         }
 
@@ -106,11 +101,11 @@
 
             if (user.LastDownloadDate == null)
             {
-                this.Navigator.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(ViewType.Download);
+                this.Navigator.SetPageType(ViewType.Download);
             }
-            else if (user.LastSelectedTeamHattrickId == null)
+            else if (user.SelectedTeamHattrickId == null)
             {
-                this.Navigator.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(ViewType.TeamSelection);
+                this.Navigator.SetPageType(ViewType.TeamSelection);
             }
             else
             {
@@ -154,11 +149,11 @@
                 {
                     await this.hattrickService.CheckTokenAsync(
                         user.Token.Value,
-                        user.Token.SecretValue);
+                        user.Token.Secret);
 
                     this.AccessToken = user.Token.Value;
-                    this.AccessTokenSecret = user.Token.SecretValue;
-                    this.AccessTokenCreatedOn = user.Token.CreatedOn;
+                    this.AccessTokenSecret = user.Token.Secret;
+                    this.AccessTokenCreatedOn = user.Token.GeneratedOn;
                     this.AccessTokenExpiresOn = user.Token.ExpiresOn;
                 }
                 catch (WebException ex)

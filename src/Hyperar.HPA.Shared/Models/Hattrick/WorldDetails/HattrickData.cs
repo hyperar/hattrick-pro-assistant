@@ -7,10 +7,8 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.LeagueList = new List<League>();
-        }
+        { }
 
-        public List<League> LeagueList { get; set; }
+        public List<League> LeagueList { get; set; } = new List<League>();
     }
 }

@@ -4,18 +4,13 @@
 
     public class Staff
     {
-        public Staff()
-        {
-            this.Name = string.Empty;
-        }
-
         public long Cost { get; set; }
 
         public DateTime HiredDate { get; set; }
 
         public long HofPlayerId { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public long StaffId { get; set; }
 

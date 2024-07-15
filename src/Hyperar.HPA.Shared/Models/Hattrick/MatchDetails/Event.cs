@@ -2,12 +2,7 @@
 {
     public class Event
     {
-        public Event()
-        {
-            this.EventText = string.Empty;
-        }
-
-        public string EventText { get; set; }
+        public string EventText { get; set; } = string.Empty;
 
         public int EventTypeId { get; set; }
 

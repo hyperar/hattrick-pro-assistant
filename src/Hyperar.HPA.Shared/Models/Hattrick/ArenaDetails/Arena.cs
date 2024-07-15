@@ -2,35 +2,22 @@
 {
     public class Arena
     {
-        public Arena()
-        {
-            this.CurrentCapacity = new CurrentCapacity();
-            this.ExpandedCapacity = new ExpandedCapacity();
-            this.League = new IdName();
-            this.Region = new IdName();
-            this.Team = new IdName();
-
-            this.ArenaFallbackImage = string.Empty;
-            this.ArenaImage = string.Empty;
-            this.ArenaName = string.Empty;
-        }
-
-        public string ArenaFallbackImage { get; set; }
+        public string ArenaFallbackImage { get; set; } = string.Empty;
 
         public long ArenaId { get; set; }
 
-        public string ArenaImage { get; set; }
+        public string ArenaImage { get; set; } = string.Empty;
 
-        public string ArenaName { get; set; }
+        public string ArenaName { get; set; } = string.Empty;
 
-        public CurrentCapacity CurrentCapacity { get; set; }
+        public CurrentCapacity CurrentCapacity { get; set; } = new CurrentCapacity();
 
-        public ExpandedCapacity ExpandedCapacity { get; set; }
+        public ExpandedCapacity ExpandedCapacity { get; set; } = new ExpandedCapacity();
 
-        public IdName League { get; set; }
+        public IdName League { get; set; } = new IdName();
 
-        public IdName Region { get; set; }
+        public IdName Region { get; set; } = new IdName();
 
-        public IdName Team { get; set; }
+        public IdName Team { get; set; } = new IdName();
     }
 }

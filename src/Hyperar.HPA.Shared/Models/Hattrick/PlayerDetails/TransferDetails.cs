@@ -6,7 +6,7 @@
     {
         public long AskingPrice { get; set; }
 
-        public BidderTeam? BidderTeam { get; set; }
+        public IdName? BidderTeam { get; set; }
 
         public DateTime Deadline { get; set; }
 

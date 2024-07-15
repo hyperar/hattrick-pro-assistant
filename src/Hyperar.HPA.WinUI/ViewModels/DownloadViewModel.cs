@@ -9,15 +9,12 @@
     using Shared.Models.UI.Download;
     using WinUI.Enums;
     using WinUI.State.Interface;
-    using WinUI.ViewModels.Interface;
 
     public partial class DownloadViewModel : AsyncViewModelBase
     {
         private readonly IDownloadViewService downloadViewService;
 
         private readonly IUserService userService;
-
-        private readonly IViewModelFactory viewModelFactory;
 
         private CancellationTokenSource? cancellationTokenSource;
 
@@ -35,11 +32,9 @@
 
         public DownloadViewModel(
             INavigator navigator,
-            IViewModelFactory viewModelFactory,
             IDownloadViewService downloadViewService,
             IUserService userService) : base(navigator)
         {
-            this.viewModelFactory = viewModelFactory;
             this.downloadViewService = downloadViewService;
             this.userService = userService;
         }
@@ -77,7 +72,7 @@
             });
 
             await this.downloadViewService.UpdateFromHattrickAsync(
-                new Application.Models.DownloadSettings
+                new DownloadSettings
                 {
                     DownloadFullMatchArchive = this.DownloadFullMatchArchive,
                     DownloadHattrickArenaMatches = this.DownloadHattrickArenaMatches,
@@ -95,12 +90,14 @@
                 return;
             }
 
-            if (user.LastSelectedTeamHattrickId == null)
+            if (user.SelectedTeamHattrickId == null)
             {
-                this.Navigator.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(ViewType.TeamSelection);
+                this.Navigator.SetPageType(ViewType.TeamSelection);
             }
             else
             {
+                this.Navigator.SetPageType(ViewType.Home);
+
                 this.Navigator.ResumeNavigation();
             }
         }

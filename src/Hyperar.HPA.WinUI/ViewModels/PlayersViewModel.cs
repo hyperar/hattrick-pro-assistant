@@ -21,7 +21,7 @@
         private Player? selectedPlayer;
 
         public PlayersViewModel(
-                    INavigator navigator,
+            INavigator navigator,
             ITeamSelector teamSelector,
             IPlayersViewService playersViewService) : base(navigator)
         {
@@ -36,7 +36,7 @@
         public override async Task InitializeAsync()
         {
             this.Currency = await this.playersViewService.GetManagerCurrencyAsync();
-            this.Players = (await this.playersViewService.GetPlayersAsync(this.teamSelector.SelectedTeamId)).ToList();
+            this.Players = (await this.playersViewService.GetPlayersAsync(this.teamSelector.SelectedTeamHattrickId)).ToList();
 
             this.Navigator.ResumeNavigation();
 

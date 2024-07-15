@@ -565,6 +565,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        public static string DownloadTaskStatus_Downloading {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string DownloadTaskStatus_Error {
@@ -583,15 +592,6 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not Started.
-        /// </summary>
-        public static string DownloadTaskStatus_NotStarted {
-            get {
-                return ResourceManager.GetString("DownloadTaskStatus_NotStarted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Parsed.
         /// </summary>
         public static string DownloadTaskStatus_Parsed {
@@ -601,11 +601,47 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parsing.
+        /// </summary>
+        public static string DownloadTaskStatus_Parsing {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Parsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        public static string DownloadTaskStatus_Pending {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Pending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Persisting.
+        /// </summary>
+        public static string DownloadTaskStatus_Persisting {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Persisting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processed.
         /// </summary>
         public static string DownloadTaskStatus_Processed {
             get {
                 return ResourceManager.GetString("DownloadTaskStatus_Processed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing.
+        /// </summary>
+        public static string DownloadTaskStatus_Processing {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Processing", resourceCulture);
             }
         }
         
@@ -2109,6 +2145,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to League Details.
+        /// </summary>
+        public static string XmlFileType_LeagueDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_LeagueDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager Compendium.
         /// </summary>
         public static string XmlFileType_ManagerCompendium {
@@ -2204,6 +2249,51 @@ namespace Hyperar.HPA.Globalization {
         public static string XmlFileType_WorldDetails {
             get {
                 return ResourceManager.GetString("XmlFileType_WorldDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth Avatars.
+        /// </summary>
+        public static string XmlFileType_YouthAvatars {
+            get {
+                return ResourceManager.GetString("XmlFileType_YouthAvatars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth League Details.
+        /// </summary>
+        public static string XmlFileType_YouthLeagueDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_YouthLeagueDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth Player Details.
+        /// </summary>
+        public static string XmlFileType_YouthPlayerDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_YouthPlayerDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth Player List.
+        /// </summary>
+        public static string XmlFileType_YouthPlayerList {
+            get {
+                return ResourceManager.GetString("XmlFileType_YouthPlayerList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth Team Details.
+        /// </summary>
+        public static string XmlFileType_YouthTeamDetails {
+            get {
+                return ResourceManager.GetString("XmlFileType_YouthTeamDetails", resourceCulture);
             }
         }
     }

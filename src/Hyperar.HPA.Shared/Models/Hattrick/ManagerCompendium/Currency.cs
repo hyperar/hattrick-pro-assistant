@@ -2,12 +2,7 @@
 {
     public class Currency
     {
-        public Currency()
-        {
-            this.CurrencyName = string.Empty;
-        }
-
-        public string CurrencyName { get; set; }
+        public string CurrencyName { get; set; } = string.Empty;
 
         public decimal CurrencyRate { get; set; }
     }

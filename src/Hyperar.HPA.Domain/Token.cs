@@ -6,26 +6,18 @@
 
     public class Token : EntityBase, IEntity
     {
-        public Token()
-        {
-            this.User = new User();
-
-            this.SecretValue = string.Empty;
-            this.Value = string.Empty;
-        }
-
-        public DateTime CreatedOn { get; set; }
-
         public DateTime ExpiresOn { get; set; }
+
+        public DateTime GeneratedOn { get; set; }
 
         public ChppScope Scope { get; set; }
 
-        public string SecretValue { get; set; }
+        public string Secret { get; set; } = string.Empty;
 
-        public virtual User User { get; set; }
+        public virtual User User { get; set; } = new User();
 
         public int UserId { get; set; }
 
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
     }
 }

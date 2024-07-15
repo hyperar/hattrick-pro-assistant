@@ -1,70 +1,28 @@
 ﻿namespace Hyperar.HPA.Domain.Senior
 {
     using Domain.Interfaces;
-    using Models = Shared.Models.Hattrick.MatchDetails;
+    using Shared.Enums;
 
-    public class MatchArena : EntityBase, IEntity
+    public class MatchArena : AuditableEntityBase, IAuditableEntity
     {
-        public MatchArena()
-        {
-            this.Match = new Match();
+        public long ArenaHattrickId { get; set; }
 
-            this.Name = string.Empty;
-        }
+        public int AttendanceBasic { get; set; }
 
-        public int? Attendance { get; set; }
+        public int AttendanceRoof { get; set; }
 
-        public int? BasicSeatsSold { get; set; }
+        public int AttendanceTerraces { get; set; }
 
-        public long HattrickId { get; set; }
+        public int AttendanceTotal { get; set; }
 
-        public virtual Match Match { get; set; }
+        public int AttendanceVip { get; set; }
+
+        public virtual Match Match { get; set; } = new Match();
 
         public long MatchHattrickId { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public int? RoofSeatsSold { get; set; }
-
-        public int? TerracesSold { get; set; }
-
-        public int? VipSeatsSold { get; set; }
-
-        public static MatchArena Create(Models.Arena xmlArena, Match match)
-        {
-            return new MatchArena
-            {
-                Attendance = xmlArena.SoldTotal,
-                BasicSeatsSold = xmlArena.SoldBasic,
-                HattrickId = xmlArena.ArenaId,
-                Match = match,
-                Name = xmlArena.ArenaName,
-                RoofSeatsSold = xmlArena.SoldRoof,
-                TerracesSold = xmlArena.SoldTerraces,
-                VipSeatsSold = xmlArena.SoldVip
-            };
-        }
-
-        public bool HasChanged(Models.Arena xmlArena)
-        {
-            return this.Attendance != xmlArena.SoldTotal
-                || this.BasicSeatsSold != xmlArena.SoldBasic
-                || this.HattrickId != xmlArena.ArenaId
-                || this.Name != xmlArena.ArenaName
-                || this.RoofSeatsSold != xmlArena.SoldRoof
-                || this.TerracesSold != xmlArena.SoldTerraces
-                || this.VipSeatsSold != xmlArena.SoldVip;
-        }
-
-        public void Update(Models.Arena xmlArena)
-        {
-            this.Attendance = xmlArena.SoldTotal;
-            this.BasicSeatsSold = xmlArena.SoldBasic;
-            this.HattrickId = xmlArena.ArenaId;
-            this.Name = xmlArena.ArenaName;
-            this.RoofSeatsSold = xmlArena.SoldRoof;
-            this.TerracesSold = xmlArena.SoldTerraces;
-            this.VipSeatsSold = xmlArena.SoldVip;
-        }
+        public Weather Weather { get; set; }
     }
 }

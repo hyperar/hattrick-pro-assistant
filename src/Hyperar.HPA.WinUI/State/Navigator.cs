@@ -2,6 +2,7 @@
 {
     using System;
     using CommunityToolkit.Mvvm.ComponentModel;
+    using Hyperar.HPA.WinUI.Enums;
     using WinUI.State.Interface;
     using WinUI.ViewModels;
 
@@ -11,7 +12,13 @@
 
         private ViewModelBase? currentPage;
 
-        public event Action? StateChanged;
+        private ViewType pageType;
+
+        public event Action? CanNavigateChanged;
+
+        public event Action? CurrentPageChanged;
+
+        public event Action? PageTypeChanged;
 
         public bool CanNavigate
         {
@@ -19,11 +26,12 @@
             {
                 return this.canNavigate;
             }
+
             private set
             {
                 this.canNavigate = value;
 
-                this.StateChanged?.Invoke();
+                this.CanNavigateChanged?.Invoke();
             }
         }
 
@@ -38,13 +46,38 @@
             {
                 this.currentPage = value;
 
-                this.StateChanged?.Invoke();
+                this.CurrentPageChanged?.Invoke();
+            }
+        }
+
+        public ViewType PageType
+        {
+            get
+            {
+                return this.pageType;
+            }
+
+            set
+            {
+                this.pageType = value;
+
+                this.PageTypeChanged?.Invoke();
             }
         }
 
         public void ResumeNavigation()
         {
             this.CanNavigate = true;
+        }
+
+        public void SetCurrentPage(ViewModelBase? currentPage)
+        {
+            this.CurrentPage = currentPage;
+        }
+
+        public void SetPageType(ViewType viewType)
+        {
+            this.PageType = viewType;
         }
 
         public void SuspendNavigation()

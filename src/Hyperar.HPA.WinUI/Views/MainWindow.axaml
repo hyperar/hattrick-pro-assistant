@@ -61,7 +61,7 @@
 
                         <ListBox.Styles>
 
-                            <Style Selector="ListBoxItem">
+                            <Style Selector="ListBoxItem" x:DataType="m:MenuItemTemplate">
 
                                 <Setter Property="Padding" Value="12 8" />
                                 <Setter Property="Cursor" Value="Hand" />

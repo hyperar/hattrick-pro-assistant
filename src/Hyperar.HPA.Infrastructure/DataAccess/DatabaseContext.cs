@@ -1,6 +1,7 @@
 ﻿namespace Hyperar.HPA.Infrastructure.DataAccess
 {
     using System;
+    using System.Data;
     using System.Diagnostics;
     using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,7 @@
                 throw new InvalidOperationException(nameof(this.BeginTransactionAsync));
             }
 
-            await this.Database.BeginTransactionAsync();
+            await this.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
         }
 
         public void Cancel()
