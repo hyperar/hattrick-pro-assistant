@@ -46,18 +46,20 @@
             IViewModelFactory viewModelFactory,
             ViewType viewType) : base(navigator)
         {
-            this.Navigator.StateChanged += this.Navigator_StateChanged;
+            this.Navigator.CanNavigateChanged += this.Navigator_CanNavigateChanged;
+            this.Navigator.CurrentPageChanged += this.Navigator_CurrentPageChanged;
+            this.Navigator.PageTypeChanged += this.Navigator_PageChanged;
 
             this.MenuItems = new ObservableCollection<MenuItemTemplate>
             {
                 new MenuItemTemplate(Globalization.Translations.Home, ViewType.Home, HomeIconKey),
                 new MenuItemTemplate(Globalization.Translations.Players, ViewType.Players,PlayersIconKey),
-                //new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches, MatchesIconKey),
+                new MenuItemTemplate(Globalization.Translations.Matches, ViewType.Matches, MatchesIconKey),
                 new MenuItemTemplate(Globalization.Translations.TeamSelection, ViewType.TeamSelection, TeamSelectionIconKey),
                 new MenuItemTemplate(Globalization.Translations.Download, ViewType.Download, DownloadIconKey),
-                //new MenuItemTemplate(Globalization.Translations.Settings, ViewType.Settings, "SettingsIcon"),
+                new MenuItemTemplate(Globalization.Translations.Settings, ViewType.Settings, SettingsIconKey),
                 new MenuItemTemplate(Globalization.Translations.Authorization, ViewType.Authorization, AuthorizationIconKey),
-                //new MenuItemTemplate(Globalization.Translations.About, ViewType.About, "AboutIcon")
+                new MenuItemTemplate(Globalization.Translations.About, ViewType.About, AboutIconKey)
             };
 
             this.UpdateCurrentPageCommand = new UpdateCurrentPageCommand(navigator, viewModelFactory);
@@ -87,15 +89,26 @@
 
         public void Dispose()
         {
-            this.Navigator.StateChanged -= this.Navigator_StateChanged;
+            this.Navigator.CanNavigateChanged -= this.Navigator_CanNavigateChanged;
+            this.Navigator.CurrentPageChanged -= this.Navigator_CurrentPageChanged;
+            this.Navigator.PageTypeChanged -= this.Navigator_PageChanged;
 
             GC.SuppressFinalize(this);
         }
 
-        private void Navigator_StateChanged()
+        private void Navigator_CanNavigateChanged()
         {
             this.OnPropertyChanged(nameof(this.CanNavigate));
+        }
+
+        private void Navigator_CurrentPageChanged()
+        {
             this.OnPropertyChanged(nameof(this.CurrentPage));
+        }
+
+        private void Navigator_PageChanged()
+        {
+            this.SelectedItem = this.MenuItems.SingleOrDefault(x => x.ViewType == this.Navigator.PageType);
         }
 
         partial void OnSelectedItemChanged(MenuItemTemplate? value)

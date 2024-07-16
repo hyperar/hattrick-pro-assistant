@@ -4,11 +4,6 @@
 
     public class Country
     {
-        public Country()
-        {
-            this.RegionList = new List<IdName>();
-        }
-
         public bool Available { get; set; }
 
         public string? CountryCode { get; set; }
@@ -23,7 +18,7 @@
 
         public string? DateFormat { get; set; }
 
-        public List<IdName> RegionList { get; set; }
+        public List<IdName> RegionList { get; set; } = new List<IdName>();
 
         public string? TimeFormat { get; set; }
     }

@@ -2,30 +2,19 @@
 {
     public class Team
     {
-        public Team()
-        {
-            this.Arena = new IdName();
-            this.Country = new IdName();
-            this.League = new League();
-            this.LeagueLevelUnit = new IdName();
-            this.Region = new IdName();
+        public IdName Arena { get; set; } = new IdName();
 
-            this.TeamName = string.Empty;
-        }
+        public IdName Country { get; set; } = new IdName();
 
-        public IdName Arena { get; set; }
+        public League League { get; set; } = new League();
 
-        public IdName Country { get; set; }
+        public IdName LeagueLevelUnit { get; set; } = new IdName();
 
-        public League League { get; set; }
-
-        public IdName LeagueLevelUnit { get; set; }
-
-        public IdName Region { get; set; }
+        public IdName Region { get; set; } = new IdName();
 
         public long TeamId { get; set; }
 
-        public string TeamName { get; set; }
+        public string TeamName { get; set; } = string.Empty;
 
         public YouthTeam? YouthTeam { get; set; }
     }

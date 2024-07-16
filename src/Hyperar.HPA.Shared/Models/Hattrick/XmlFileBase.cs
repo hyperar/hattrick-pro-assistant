@@ -12,7 +12,7 @@
 
         public DateTime FetchedDate { get; set; }
 
-        public string FileName { get; set; }
+        public string FileName { get; set; } = string.Empty;
 
         public long UserId { get; set; }
 

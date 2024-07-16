@@ -2,17 +2,11 @@
 {
     public class StartingPlayer
     {
-        public StartingPlayer()
-        {
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
-        }
-
         public int? Behaviour { get; set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         public string? NickName { get; set; }
 

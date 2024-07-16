@@ -4,12 +4,7 @@
 
     public class Team
     {
-        public Team()
-        {
-            this.Players = new List<Player>();
-        }
-
-        public List<Player> Players { get; set; }
+        public List<Player> Players { get; set; } = new List<Player>();
 
         public long TeamId { get; set; }
     }

@@ -41,7 +41,7 @@
 
             ArgumentNullException.ThrowIfNull(team, nameof(team));
 
-            return team.Players.Where(x => x.HattrickId != x.Team.CoachPlayerId)
+            return team.Players.Where(x => x.HattrickId != x.Team.Trainer?.HattrickId)
                                .OrderByDescending(x => x.ShirtNumber.HasValue)
                                .ThenBy(x => x.ShirtNumber)
                                .Select(x => Convert(x, team.Manager.CurrencyRate))
@@ -70,7 +70,7 @@
                 ShirtNumber = player.ShirtNumber,
                 AgeYears = player.AgeYears,
                 AgeDays = player.AgeDays,
-                AskingPrice = (long)((player.AskingPrice ?? 0) / currencyRate),
+                //AskingPrice = (long)((player.AskingPrice ?? 0) / currencyRate),
                 NextBirthDay = player.NextBirthDay,
                 TotalSkillIndex = player.TotalSkillIndex,
                 Country = new Country
@@ -88,13 +88,13 @@
                 HonestyLevel = player.Honesty,
                 LeadershipLevel = player.Leadership,
                 BookingStatus = player.BookingStatus,
-                HealthStatus = player.Health,
+                HealthStatus = player.HealthStatus,
                 FormLevel = currentSkills.Form,
                 FormLevelDelta = GetPlayerSkillDelta(currentSkills.Form, previousSkills?.Form),
                 StaminaLevel = currentSkills.Stamina,
                 StaminaLevelDelta = GetPlayerSkillDelta(currentSkills.Stamina, previousSkills?.Stamina),
-                KeeperLevel = currentSkills.Keeper,
-                KeeperLevelDelta = GetPlayerSkillDelta(currentSkills.Keeper, previousSkills?.Keeper),
+                KeeperLevel = currentSkills.Goalkeeping,
+                KeeperLevelDelta = GetPlayerSkillDelta(currentSkills.Goalkeeping, previousSkills?.Goalkeeping),
                 DefendingLevel = currentSkills.Defending,
                 DefendingLevelDelta = GetPlayerSkillDelta(currentSkills.Defending, previousSkills?.Defending),
                 PlaymakingLevel = currentSkills.Playmaking,
@@ -111,25 +111,25 @@
                 LoyaltyLevelDelta = GetPlayerSkillDelta(currentSkills.Loyalty, previousSkills?.Loyalty),
                 ExperienceLevel = currentSkills.Experience,
                 ExperienceLevelDelta = GetPlayerSkillDelta(currentSkills.Experience, previousSkills?.Experience),
-                SeasonLeagueGoals = player.CurrentSeasonLeagueGoals,
-                SeasonCupGoals = player.CurrentSeasonCupGoals,
-                SeasonFriendlyGoals = player.CurrentSeasonFriendlyGoals,
+                SeasonLeagueGoals = player.SeasonLeagueGoals,
+                SeasonCupGoals = player.SeasonCupGoals,
+                SeasonFriendlyGoals = player.SeasonFriendlyGoals,
                 CareerLeagueGoals = player.CareerGoals,
                 CareerHattricks = player.CareerHattricks,
                 GoalsOnTeam = player.GoalsOnTeam,
                 MatchesOnTeam = player.MatchesOnTeam,
-                WinningBid = (long)((player.WinningBid ?? 0) / currencyRate),
+                //WinningBid = (long)((player.WinningBid ?? 0) / currencyRate),
                 AvatarBytes = player.AvatarBytes ?? Array.Empty<byte>(),
-                MatchesRating = player.Matches.OrderByDescending(x => x.Date)
-                                              .Select(x => new MatchRating()
-                                              {
-                                                  AverageRating = x.AverageRating,
-                                                  Date = x.Date,
-                                                  EndOfMatchRating = x.EndOfMatchRating,
-                                                  RatingStars = x.CalculatedRating.Split(",")
-                                                                                  .ToList(),
-                                                  Role = x.Role
-                                              }).ToList(),
+                //MatchesRating = player.Matches.OrderByDescending(x => x.Date)
+                //                              .Select(x => new MatchRating()
+                //                              {
+                //                                  AverageRating = x.AverageRating,
+                //                                  Date = x.Date,
+                //                                  EndOfMatchRating = x.EndOfMatchRating,
+                //                                  RatingStars = x.CalculatedRating.Split(",")
+                //                                                                  .ToList(),
+                //                                  Role = x.Role
+                //                              }).ToList(),
             };
         }
 

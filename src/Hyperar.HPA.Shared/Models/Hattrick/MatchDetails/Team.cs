@@ -2,13 +2,6 @@
 {
     public class Team
     {
-        public Team()
-        {
-            this.DressUri = string.Empty;
-            this.Formation = string.Empty;
-            this.TeamName = string.Empty;
-        }
-
         public string? DressUri { get; set; }
 
         public string? Formation { get; set; }
@@ -51,6 +44,6 @@
 
         public long TeamId { get; set; }
 
-        public string TeamName { get; set; }
+        public string TeamName { get; set; } = string.Empty;
     }
 }

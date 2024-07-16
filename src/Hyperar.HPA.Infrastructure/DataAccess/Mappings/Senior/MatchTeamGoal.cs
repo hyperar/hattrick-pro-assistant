@@ -4,43 +4,45 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class MatchTeamGoal : EntityBase<Domain.Senior.MatchTeamGoal>, IEntityTypeConfiguration<Domain.Senior.MatchTeamGoal>, IEntityMapping<Domain.Senior.MatchTeamGoal>
+    internal class MatchTeamGoal : AuditableEntityBase<Domain.Senior.MatchTeamGoal>, IEntityTypeConfiguration<Domain.Senior.MatchTeamGoal>, IEntityMapping<Domain.Senior.MatchTeamGoal>
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.MatchTeamGoal> builder)
         {
-            builder.Property(p => p.Index)
-                .HasColumnOrder(1)
+            builder.Property(p => p.Minute)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
+            builder.Property(p => p.MatchPart)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.Int)
+                .HasMaxLength(20)
+                .IsRequired();
+
             builder.Property(p => p.PlayerHattrickId)
-                .HasColumnOrder(2)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.BigInt)
                 .IsRequired();
 
             builder.Property(p => p.PlayerName)
-                .HasColumnOrder(3)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.NVarChar)
                 .HasMaxLength(256)
                 .IsRequired();
 
             builder.Property(p => p.HomeTeamScore)
-                .HasColumnOrder(4)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
             builder.Property(p => p.AwayTeamScore)
-                .HasColumnOrder(5)
-                .HasColumnType(Constants.ColumnType.Int)
-                .IsRequired();
-
-            builder.Property(p => p.Minute)
-                .HasColumnOrder(6)
-               .HasColumnType(Constants.ColumnType.Int)
-               .IsRequired();
-
-            builder.Property(p => p.MatchPart)
-                .HasColumnOrder(7)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
         }
@@ -49,14 +51,38 @@
         {
             builder.HasOne(m => m.MatchTeam)
                 .WithMany(m => m.Goals)
-                .HasForeignKey(m => m.MatchTeamId)
-                .HasConstraintName("FK_Senior_MatchTeamGoal_MatchTeam")
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasConstraintName("FK_MatchTeamGoal_MatchTeam")
+                .HasForeignKey(m => new { m.TeamHattrickId, m.MatchHattrickId })
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.MatchTeamGoal> builder)
         {
             builder.ToTable(Constants.TableName.MatchTeamGoal, Constants.Schema.Senior);
+        }
+
+        protected override void MapBaseProperties(EntityTypeBuilder<Domain.Senior.MatchTeamGoal> builder)
+        {
+            builder.HasKey(p => new { p.TeamHattrickId, p.MatchHattrickId, p.Index });
+
+            builder.Property(p => p.TeamHattrickId)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(p => p.MatchHattrickId)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(p => p.Index)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.Int)
+                .IsRequired();
         }
     }
 }

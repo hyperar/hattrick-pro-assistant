@@ -4,11 +4,6 @@
 
     public class Trophy
     {
-        public Trophy()
-        {
-            this.LeagueLevelUnitName = string.Empty;
-        }
-
         public int? CupLeagueLevel { get; set; }
 
         public int? CupLevel { get; set; }
@@ -23,7 +18,7 @@
 
         public long LeagueLevelUnitId { get; set; }
 
-        public string LeagueLevelUnitName { get; set; }
+        public string LeagueLevelUnitName { get; set; } = string.Empty;
 
         public int TrophySeason { get; set; }
 

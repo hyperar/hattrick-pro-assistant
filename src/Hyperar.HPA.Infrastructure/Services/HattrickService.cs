@@ -6,8 +6,8 @@
     using Application.Interfaces;
     using Application.Models;
     using Application.Services;
-    using Hyperar.OauthCore.Consumer;
-    using Hyperar.OauthCore.Framework;
+    using Hyperar.OAuthCore.Consumer;
+    using Hyperar.OAuthCore.Framework;
     using Microsoft.Extensions.Configuration;
 
     public class HattrickService : IHattrickService
@@ -32,12 +32,12 @@
 
         private readonly IConfiguration configuration;
 
-        private readonly IProtectedResourceUrlBuilder protectedResourceUrlBuilder;
+        private readonly IProtectedResourceUrlFactory protectedResourceUrlFactory;
 
-        public HattrickService(IConfiguration configuration, IProtectedResourceUrlBuilder protectedResourceUrlBuilder)
+        public HattrickService(IConfiguration configuration, IProtectedResourceUrlFactory protectedResourceUrlFactory)
         {
             this.configuration = configuration;
-            this.protectedResourceUrlBuilder = protectedResourceUrlBuilder;
+            this.protectedResourceUrlFactory = protectedResourceUrlFactory;
         }
 
         public async Task<string> CheckTokenAsync(string token, string tokenSecret, CancellationToken cancellationToken)
@@ -72,7 +72,7 @@
             return await ReadResponseStreamAsync(responseStream);
         }
 
-        public async Task<GetAccessTokenResponse> GetAccessTokenAsync(GetAccessTokenRequest request)
+        public Task<GetAccessTokenResponse> GetAccessTokenAsync(GetAccessTokenRequest request)
         {
             ArgumentNullException.ThrowIfNull(request, nameof(request));
 
@@ -86,38 +86,43 @@
                 TokenSecret = request.RequestToken.TokenSecret
             };
 
-            IToken accessToken = await Task.Run(() => session.ExchangeRequestTokenForAccessToken(
+            IToken accessToken = session.ExchangeRequestTokenForAccessToken(
                 requestToken,
                 HttpMethod.Get.ToString(),
-                request.VerificationCode));
+                request.VerificationCode);
 
-            return new GetAccessTokenResponse(
-                accessToken.Token,
-                accessToken.TokenSecret,
-                DateTime.Now,
-                DateTime.MaxValue);
+            return Task.FromResult(
+                new GetAccessTokenResponse(
+                    accessToken.Token,
+                    accessToken.TokenSecret,
+                    DateTime.Now,
+                    DateTime.MaxValue));
         }
 
-        public async Task<GetAuthorizationUrlResponse> GetAuthorizationUrlAsync()
+        public Task<GetAuthorizationUrlResponse> GetAuthorizationUrlAsync()
         {
             OAuthSession session = this.CreateOAuthSession();
 
             ArgumentNullException.ThrowIfNull(session, nameof(session));
 
-            IToken requestToken = await Task.Run(() => session.GetRequestToken(HttpMethod.Get.ToString()));
+            IToken requestToken = session.GetRequestToken(HttpMethod.Get.ToString());
 
             ArgumentNullException.ThrowIfNull(requestToken, nameof(requestToken));
 
-            string url = await Task.Run(() => session.GetUserAuthorizationUrlForToken(requestToken));
+            string url = session.GetUserAuthorizationUrlForToken(requestToken);
 
             ArgumentNullException.ThrowIfNull(url, nameof(url));
 
-            return new GetAuthorizationUrlResponse(url, requestToken.Token, requestToken.TokenSecret);
+            return Task.FromResult(
+                new GetAuthorizationUrlResponse(
+                    url,
+                    requestToken.Token,
+                    requestToken.TokenSecret));
         }
 
         public async Task<string> GetProtectedResourceAsync(GetProtectedResourceRequest request, CancellationToken cancellationToken)
         {
-            string url = this.protectedResourceUrlBuilder.BuildUrl(request.FileType, request.Parameters);
+            string url = this.protectedResourceUrlFactory.BuildUrl(request.FileType, request.Parameters);
 
             ArgumentException.ThrowIfNullOrEmpty(url, nameof(url));
 

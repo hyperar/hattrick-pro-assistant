@@ -6,22 +6,15 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.Arena = new Arena();
-            this.AwayTeam = new IdName();
-            this.HomeTeam = new IdName();
-            this.Team = new Team();
+        { }
 
-            this.SourceSystem = string.Empty;
-        }
+        public IdName Arena { get; set; } = new IdName();
 
-        public Arena Arena { get; set; }
+        public IdName AwayTeam { get; set; } = new IdName();
 
-        public IdName AwayTeam { get; set; }
+        public IdName HomeTeam { get; set; } = new IdName();
 
-        public IdName HomeTeam { get; set; }
-
-        public long MatchContextId { get; set; }
+        public long? MatchContextId { get; set; }
 
         public DateTime MatchDate { get; set; }
 
@@ -29,8 +22,8 @@
 
         public int MatchType { get; set; }
 
-        public string SourceSystem { get; set; }
+        public string SourceSystem { get; set; } = string.Empty;
 
-        public Team Team { get; set; }
+        public Team Team { get; set; } = new Team();
     }
 }

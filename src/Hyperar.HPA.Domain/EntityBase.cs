@@ -2,7 +2,7 @@
 {
     using Domain.Interfaces;
 
-    public abstract class EntityBase : IEntity
+    public abstract class EntityBase : AuditableEntityBase, IEntity, IAuditableEntity
     {
         public int Id { get; set; }
     }

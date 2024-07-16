@@ -6,12 +6,10 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.Team = new Team();
-        }
+        { }
 
         public bool IsYouth { get; set; }
 
-        public Team Team { get; set; }
+        public Team Team { get; set; } = new Team();
     }
 }

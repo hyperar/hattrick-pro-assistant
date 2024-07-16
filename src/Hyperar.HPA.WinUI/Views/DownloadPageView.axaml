@@ -131,7 +131,8 @@
 
             <Button Command="{Binding ExecuteDownloadCommand}"
                     IsEnabled="{Binding DownloadProgressReport.CanDownload, FallbackValue=true}"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Width="125">
 
                 <StackPanel Orientation="Horizontal"
                             Spacing="5">
@@ -145,7 +146,8 @@
 
             <Button Command="{Binding CancelDownloadCommand}"
                     IsEnabled="{Binding DownloadProgressReport.IsDownloading, FallbackValue=false}"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Width="125">
 
                 <StackPanel Orientation="Horizontal"
                             Spacing="5">

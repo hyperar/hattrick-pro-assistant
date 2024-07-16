@@ -2,12 +2,7 @@
 {
     public class Staff
     {
-        public Staff()
-        {
-            this.Avatar = new Avatar();
-        }
-
-        public Avatar Avatar { get; set; }
+        public Avatar Avatar { get; set; } = new Avatar();
 
         public long StaffId { get; set; }
     }

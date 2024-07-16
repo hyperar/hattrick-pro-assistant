@@ -5,64 +5,39 @@
 
     public class Team
     {
-        public Team()
-        {
-            this.Arena = new IdName();
-            this.BotStatus = new BotStatus();
-            this.Country = new IdName();
-            this.Fanclub = new Fanclub();
-            this.Flags = new Flags();
-            this.Guestbook = new Guestbook();
-            this.League = new IdName();
-            this.LeagueLevelUnit = new LeagueLevelUnit();
-            this.MySupporters = new MySupporters();
-            this.PowerRating = new Rating();
-            this.Region = new IdName();
-            this.SupportedTeams = new SupportedTeams();
-            this.Trainer = new Trainer();
+        public IdName Arena { get; set; } = new IdName();
 
-            this.DressAlternateUri = string.Empty;
-            this.DressUri = string.Empty;
-            this.HomePage = string.Empty;
-            this.LogoUrl = string.Empty;
-            this.ShortTeamName = string.Empty;
-            this.TeamName = string.Empty;
-            this.YouthTeamName = string.Empty;
-        }
+        public BotStatus BotStatus { get; set; } = new BotStatus();
 
-        public IdName Arena { get; set; }
-
-        public BotStatus BotStatus { get; set; }
-
-        public IdName Country { get; set; }
+        public IdName Country { get; set; } = new IdName();
 
         public Cup? Cup { get; set; }
 
-        public string DressAlternateUri { get; set; }
+        public string DressAlternateUri { get; set; } = string.Empty;
 
-        public string DressUri { get; set; }
+        public string DressUri { get; set; } = string.Empty;
 
-        public Fanclub Fanclub { get; set; }
+        public Fanclub Fanclub { get; set; } = new Fanclub();
 
-        public Flags Flags { get; set; }
+        public Flags Flags { get; set; } = new Flags();
 
         public DateTime FoundedDate { get; set; }
 
         public long? FriendlyTeamId { get; set; }
 
-        public Guestbook Guestbook { get; set; }
+        public Guestbook Guestbook { get; set; } = new Guestbook();
 
-        public string HomePage { get; set; }
+        public string HomePage { get; set; } = string.Empty;
 
         public bool IsPrimaryClub { get; set; }
 
-        public IdName League { get; set; }
+        public IdName League { get; set; } = new IdName();
 
-        public LeagueLevelUnit LeagueLevelUnit { get; set; }
+        public LeagueLevelUnit LeagueLevelUnit { get; set; } = new LeagueLevelUnit();
 
-        public string LogoUrl { get; set; }
+        public string LogoUrl { get; set; } = string.Empty;
 
-        public MySupporters MySupporters { get; set; }
+        public MySupporters MySupporters { get; set; } = new MySupporters();
 
         public int? NumberOfUndefeated { get; set; }
 
@@ -74,30 +49,30 @@
 
         public bool PossibleToChallengeWeekend { get; set; }
 
-        public Rating PowerRating { get; set; }
+        public Rating PowerRating { get; set; } = new Rating();
 
         public PressAnnouncement? PressAnnouncement { get; set; }
 
-        public IdName Region { get; set; }
+        public IdName Region { get; set; } = new IdName();
 
-        public string ShortTeamName { get; set; }
+        public string ShortTeamName { get; set; } = string.Empty;
 
-        public SupportedTeams SupportedTeams { get; set; }
+        public SupportedTeams SupportedTeams { get; set; } = new SupportedTeams();
 
         public TeamColors? TeamColors { get; set; } = null;
 
         public long TeamId { get; set; }
 
-        public string TeamName { get; set; }
+        public string TeamName { get; set; } = string.Empty;
 
         public int? TeamRank { get; set; }
 
-        public Trainer Trainer { get; set; }
+        public Trainer Trainer { get; set; } = new Trainer();
 
         public List<Trophy>? TrophyList { get; set; }
 
         public long YouthTeamId { get; set; }
 
-        public string YouthTeamName { get; set; }
+        public string YouthTeamName { get; set; } = string.Empty;
     }
 }

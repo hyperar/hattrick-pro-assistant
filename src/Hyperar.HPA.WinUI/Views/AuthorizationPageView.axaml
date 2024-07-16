@@ -85,7 +85,8 @@
                             HorizontalAlignment="Center">
 
                     <Button Command="{Binding GetAccessTokenCommand}"
-                            IsEnabled="{Binding CanGetAccessToken}">
+                            IsEnabled="{Binding CanGetAccessToken}"
+                            Width="150">
 
                         <StackPanel Orientation="Horizontal" Spacing="5">
 
@@ -98,7 +99,8 @@
 
                     <Button Command="{Binding RevokeAccessTokenCommand}"
                             HorizontalAlignment="Center"
-                            IsEnabled="{Binding CanRevokeAccessToken}">
+                            IsEnabled="{Binding CanRevokeAccessToken}"
+                            Width="150">
 
                         <StackPanel Orientation="Horizontal" Spacing="5">
 

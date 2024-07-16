@@ -14,7 +14,6 @@
     <UserControl.Resources>
 
         <converters:ByteArrayToBitmapConverter x:Key="byteArrayToBitmapConverter" />
-        <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/NoTeamLogo.png" x:Key="noTeamLogo" />
 
     </UserControl.Resources>
 
@@ -61,8 +60,7 @@
                                Height="130"
                                Stretch="UniformToFill"
                                Source="{Binding LogoBytes,
-                                            Converter={StaticResource byteArrayToBitmapConverter},
-                                            ConverterParameter={StaticResource noTeamLogo}}"
+                                            Converter={StaticResource byteArrayToBitmapConverter}}"
                                Width="105" />
 
                         <TextBlock Classes="label"

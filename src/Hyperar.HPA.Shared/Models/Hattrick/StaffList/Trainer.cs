@@ -4,11 +4,6 @@
 
     public class Trainer
     {
-        public Trainer()
-        {
-            this.Name = string.Empty;
-        }
-
         public int Age { get; set; }
 
         public int AgeDays { get; set; }
@@ -21,7 +16,7 @@
 
         public int Leadership { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public long TrainerId { get; set; }
 

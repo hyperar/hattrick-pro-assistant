@@ -26,7 +26,9 @@
 
             if (parameter is ViewType viewType)
             {
-                this.navigator.CurrentPage = await this.viewModelFactory.CreateViewModelAsync(viewType);
+                this.navigator.SetCurrentPage(
+                    await this.viewModelFactory.CreateViewModelAsync(
+                        viewType));
             }
         }
     }

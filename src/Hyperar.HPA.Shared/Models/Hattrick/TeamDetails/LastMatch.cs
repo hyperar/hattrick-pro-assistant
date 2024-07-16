@@ -4,17 +4,11 @@
 
     public class LastMatch
     {
-        public LastMatch()
-        {
-            this.LastMatchAwayTeamName = string.Empty;
-            this.LastMatchHomeTeamName = string.Empty;
-        }
-
         public int LastMatchAwayGoals { get; set; }
 
         public long LastMatchAwayTeamId { get; set; }
 
-        public string LastMatchAwayTeamName { get; set; }
+        public string LastMatchAwayTeamName { get; set; } = string.Empty;
 
         public DateTime LastMatchDate { get; set; }
 
@@ -22,7 +16,7 @@
 
         public long LastMatchHomeTeamId { get; set; }
 
-        public string LastMatchHomeTeamName { get; set; }
+        public string LastMatchHomeTeamName { get; set; } = string.Empty;
 
         public long LastMatchId { get; set; }
     }

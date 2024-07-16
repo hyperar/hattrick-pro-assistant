@@ -6,16 +6,12 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.Match = new Match();
-            this.SourceSystem = string.Empty;
-            this.UserSupporterTier = string.Empty;
-        }
+        { }
 
-        public Match Match { get; set; }
+        public Match Match { get; set; } = new Match();
 
-        public string SourceSystem { get; set; }
+        public string SourceSystem { get; set; } = string.Empty;
 
-        public string UserSupporterTier { get; set; }
+        public string UserSupporterTier { get; set; } = string.Empty;
     }
 }

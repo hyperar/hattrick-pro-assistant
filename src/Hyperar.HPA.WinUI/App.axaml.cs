@@ -59,7 +59,6 @@ namespace Hyperar.HPA.WinUI
                 desktop.MainWindow = mainWindow;
 
                 mainWindow.Show();
-
                 splashScreenWindow.Close();
             }
         }

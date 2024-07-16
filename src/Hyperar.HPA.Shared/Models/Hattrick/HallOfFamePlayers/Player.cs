@@ -4,12 +4,6 @@
 
     public class Player
     {
-        public Player()
-        {
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
-        }
-
         public int Age { get; set; }
 
         public DateTime ArrivalDate { get; set; }
@@ -18,13 +12,13 @@
 
         public int ExpertType { get; set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         public int HofAge { get; set; }
 
         public DateTime HofDate { get; set; }
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         public DateTime NextBirthday { get; set; }
 

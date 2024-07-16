@@ -5,7 +5,7 @@
     using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
-    public class HattrickRepository<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IHattrickRepository<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity
+    public class HattrickRepository<TEntity> : AuditableRepository<TEntity>, IAuditableRepository<TEntity>, IHattrickRepository<TEntity> where TEntity : HattrickEntityBase, IHattrickEntity
     {
         public HattrickRepository(IDatabaseContext context) : base(context)
         {

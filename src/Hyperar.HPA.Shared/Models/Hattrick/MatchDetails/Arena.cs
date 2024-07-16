@@ -2,14 +2,9 @@
 {
     public class Arena
     {
-        public Arena()
-        {
-            this.ArenaName = string.Empty;
-        }
-
         public long ArenaId { get; set; }
 
-        public string ArenaName { get; set; }
+        public string ArenaName { get; set; } = string.Empty;
 
         public int? SoldBasic { get; set; }
 

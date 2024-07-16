@@ -56,10 +56,10 @@
             Domain.Token newToken = new Domain.Token
             {
                 User = storedUser,
-                CreatedOn = DateTime.Now,
+                GeneratedOn = DateTime.Now,
                 ExpiresOn = DateTime.MaxValue,
                 Value = token,
-                SecretValue = tokenSecret
+                Secret = tokenSecret
             };
 
             await this.tokenRepository.InsertAsync(newToken);

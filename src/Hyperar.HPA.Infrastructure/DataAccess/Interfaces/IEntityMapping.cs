@@ -4,6 +4,8 @@
 
     public interface IEntityMapping<TEntity> where TEntity : class
     {
+        void MapAuditProperties(EntityTypeBuilder<TEntity> builder);
+
         void MapProperties(EntityTypeBuilder<TEntity> builder);
 
         void MapRelationships(EntityTypeBuilder<TEntity> builder);

@@ -6,48 +6,51 @@
 
     internal class Token : EntityBase<Domain.Token>, IEntityTypeConfiguration<Domain.Token>, IEntityMapping<Domain.Token>
     {
-        public override sealed void MapProperties(EntityTypeBuilder<Domain.Token> builder)
+        public override void MapProperties(EntityTypeBuilder<Domain.Token> builder)
         {
+            builder.Property(p => p.Value)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(128)
+                .IsRequired();
+
+            builder.Property(p => p.Secret)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.NVarChar)
+                .HasMaxLength(128)
+                .IsRequired();
+
             builder.Property(p => p.Scope)
-                .HasColumnOrder(1)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.Value)
-                .HasColumnOrder(2)
-                .HasColumnType(Constants.ColumnType.NVarChar)
-                .HasMaxLength(128)
-                .IsRequired()
-                .IsUnicode();
-
-            builder.Property(p => p.SecretValue)
-                .HasColumnOrder(3)
-                .HasColumnType(Constants.ColumnType.NVarChar)
-                .HasMaxLength(128)
-                .IsRequired()
-                .IsUnicode();
-
-            builder.Property(p => p.CreatedOn)
-                .HasColumnOrder(4)
+            builder.Property(p => p.GeneratedOn)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
 
             builder.Property(p => p.ExpiresOn)
-                .HasColumnOrder(5)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.DateTime)
                 .IsRequired();
         }
 
-        public override sealed void MapRelationships(EntityTypeBuilder<Domain.Token> builder)
+        public override void MapRelationships(EntityTypeBuilder<Domain.Token> builder)
         {
             builder.HasOne(m => m.User)
                 .WithOne(m => m.Token)
-                .HasForeignKey<Domain.Token>(m => m.UserId)
                 .HasConstraintName("FK_Token_User")
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey<Domain.Token>(m => m.UserId)
+                .IsRequired();
         }
 
-        public override sealed void MapTable(EntityTypeBuilder<Domain.Token> builder)
+        public override void MapTable(EntityTypeBuilder<Domain.Token> builder)
         {
             builder.ToTable(Constants.TableName.Token);
         }

@@ -15,9 +15,11 @@
             this.IsInitialized = false;
         }
 
-        public virtual async Task InitializeAsync()
+        public virtual Task InitializeAsync()
         {
-            await Task.Run(() => this.IsInitialized = true);
+            this.IsInitialized = true;
+
+            return Task.CompletedTask;
         }
     }
 }

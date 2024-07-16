@@ -4,18 +4,12 @@
 
     public class StaffList
     {
-        public StaffList()
-        {
-            this.StaffMembers = new List<Staff>();
-            this.Trainer = new Trainer();
-        }
-
-        public List<Staff> StaffMembers { get; set; }
+        public List<Staff> StaffMembers { get; set; } = new List<Staff>();
 
         public long TotalCost { get; set; }
 
         public long TotalStaffMembers { get; set; }
 
-        public Trainer Trainer { get; set; }
+        public Trainer Trainer { get; set; } = new Trainer();
     }
 }

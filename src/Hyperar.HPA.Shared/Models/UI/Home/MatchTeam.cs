@@ -7,7 +7,7 @@
             this.Name = string.Empty;
         }
 
-        public long HattrckId { get; set; }
+        public long HattrickId { get; set; }
 
         public string Name { get; set; }
     }

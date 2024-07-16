@@ -4,26 +4,16 @@
 
     public class Team
     {
-        public Team()
-        {
-            this.League = new IdName();
-            this.LeagueLevelUnit = new LeagueLevelUnit();
-            this.MatchList = new List<Match>();
+        public IdName League { get; set; } = new IdName();
 
-            this.ShortTeamName = string.Empty;
-            this.TeamName = string.Empty;
-        }
+        public LeagueLevelUnit? LeagueLevelUnit { get; set; } = new LeagueLevelUnit();
 
-        public IdName League { get; set; }
+        public List<Match> MatchList { get; set; } = new List<Match>();
 
-        public LeagueLevelUnit LeagueLevelUnit { get; set; }
-
-        public List<Match> MatchList { get; set; }
-
-        public string ShortTeamName { get; set; }
+        public string? ShortTeamName { get; set; } = string.Empty;
 
         public long TeamId { get; set; }
 
-        public string TeamName { get; set; }
+        public string TeamName { get; set; } = string.Empty;
     }
 }

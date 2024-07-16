@@ -6,10 +6,8 @@
     public class HattrickData : XmlFileBase, IXmlFile
     {
         public HattrickData(string fileName) : base(fileName)
-        {
-            this.Arena = new Arena();
-        }
+        { }
 
-        public Arena Arena { get; set; }
+        public Arena Arena { get; set; } = new Arena();
     }
 }

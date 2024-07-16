@@ -10,16 +10,20 @@
     {
         private readonly IDatabaseContext databaseContext;
 
+        private readonly IHattrickRepository<Domain.League> leagueRepository;
+
         private readonly IHattrickRepository<Domain.Senior.Team> teamRepository;
 
         private readonly IRepository<Domain.User> userRepository;
 
         public TeamSelectionViewService(
             IDatabaseContext databaseContext,
+            IHattrickRepository<Domain.League> leagueRepository,
             IHattrickRepository<Domain.Senior.Team> teamRepository,
             IRepository<Domain.User> userRepository)
         {
             this.databaseContext = databaseContext;
+            this.leagueRepository = leagueRepository;
             this.teamRepository = teamRepository;
             this.userRepository = userRepository;
         }
@@ -30,42 +34,58 @@
 
             ArgumentNullException.ThrowIfNull(user, nameof(user));
 
-            long lastSelectedTeamId = user.LastSelectedTeamHattrickId ?? 0;
+            if (user.Manager == null)
+            {
+                return Array.Empty<Team>();
+            }
 
-            return await this.teamRepository.Query()
-                                            .OrderByDescending(x => x.IsPrimary)
-                                            .OrderBy(x => x.Name)
-                                            .Select(x => new Team
-                                            {
-                                                HattrickId = x.HattrickId,
-                                                Name = x.Name,
-                                                LogoBytes = x.LogoBytes,
-                                                HomeMatchKitBytes = x.HomeMatchKitBytes,
-                                                AwayMatchKitBytes = x.AwayMatchKitBytes,
-                                                IsSelected = x.HattrickId == lastSelectedTeamId,
-                                                League = new League
-                                                {
-                                                    HattrickId = x.League.HattrickId,
-                                                    Name = x.League.Name,
-                                                    FlagBytes = x.League.FlagBytes
-                                                },
-                                                Country = new Country
-                                                {
-                                                    HattrickId = x.Region.Country.HattrickId,
-                                                    Name = x.Region.Country.Name,
-                                                    FlagBytes = x.Region.Country.League.FlagBytes
-                                                },
-                                                Region = new Region
-                                                {
-                                                    HattrickId = x.Region.HattrickId,
-                                                    Name = x.Region.Name
-                                                },
-                                                Series = new Series
-                                                {
-                                                    HattrickId = x.SeriesHattrickId,
-                                                    Name = x.SeriesName
-                                                }
-                                            }).ToArrayAsync();
+            long lastSelectedTeamId = user.SelectedTeamHattrickId ?? 0;
+
+            var teamList = new List<Team>();
+
+            foreach (var team in user.Manager.SeniorTeams)
+            {
+                var league = await this.leagueRepository.GetByHattrickIdAsync(team.LeagueHattrickId);
+
+                ArgumentNullException.ThrowIfNull(league, nameof(league));
+
+                var series = team.Series.Single(x => x.Season == team.League.Season);
+
+                teamList.Add(
+                    new Team
+                    {
+                        HattrickId = team.HattrickId,
+                        Name = team.Name,
+                        LogoBytes = team.LogoBytes,
+                        HomeMatchKitBytes = team.HomeMatchKitBytes,
+                        AwayMatchKitBytes = team.AwayMatchKitBytes,
+                        IsSelected = team.HattrickId == lastSelectedTeamId,
+                        League = new League
+                        {
+                            HattrickId = team.League.HattrickId,
+                            Name = team.League.Name,
+                            FlagBytes = team.League.FlagBytes
+                        },
+                        Country = new Country
+                        {
+                            HattrickId = team.Region.Country.HattrickId,
+                            Name = team.Region.Country.Name,
+                            FlagBytes = team.Region.Country.League.FlagBytes
+                        },
+                        Region = new Region
+                        {
+                            HattrickId = team.Region.HattrickId,
+                            Name = team.Region.Name
+                        },
+                        Series = new Series
+                        {
+                            HattrickId = series.SeriesHattrickId,
+                            Name = team.Name
+                        }
+                    });
+            }
+
+            return teamList.ToArray();
         }
 
         public async Task SetSelectedTeamAsync(long teamHattrickId)
@@ -74,7 +94,7 @@
 
             ArgumentNullException.ThrowIfNull(user, nameof(user));
 
-            user.LastSelectedTeamHattrickId = teamHattrickId;
+            user.SelectedTeamHattrickId = teamHattrickId;
 
             this.userRepository.Update(user);
 

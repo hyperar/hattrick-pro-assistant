@@ -5,18 +5,11 @@
 
     public class Match
     {
-        public Match()
-        {
-            this.Arena = new Arena();
-            this.AwayTeam = new Team();
-            this.HomeTeam = new Team();
-        }
-
         public int? AddedMinutes { get; set; }
 
-        public Arena Arena { get; set; }
+        public Arena Arena { get; set; } = new Arena();
 
-        public Team AwayTeam { get; set; }
+        public Team AwayTeam { get; set; } = new Team();
 
         public List<Booking>? Bookings { get; set; }
 
@@ -28,7 +21,7 @@
 
         public DateTime? FinishedDate { get; set; }
 
-        public Team HomeTeam { get; set; }
+        public Team HomeTeam { get; set; } = new Team();
 
         public List<Injury>? Injuries { get; set; }
 

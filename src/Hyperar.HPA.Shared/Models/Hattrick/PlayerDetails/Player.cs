@@ -4,18 +4,6 @@
 
     public class Player
     {
-        public Player()
-        {
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
-            this.PlayerLanguage = string.Empty;
-            this.NativeLeagueName = string.Empty;
-
-            this.OwningTeam = new OwningTeam();
-            this.MotherClub = new MotherClub();
-            this.PlayerSkills = new PlayerSkills();
-        }
-
         public int Age { get; set; }
 
         public int AgeDays { get; set; }
@@ -40,7 +28,7 @@
 
         public int Experience { get; set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         public int FriendliesGoals { get; set; }
 
@@ -54,7 +42,7 @@
 
         public LastMatch? LastMatch { get; set; }
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         public int Leadership { get; set; }
 
@@ -64,7 +52,7 @@
 
         public int MatchesCurrentTeam { get; set; }
 
-        public MotherClub MotherClub { get; set; }
+        public IdName MotherClub { get; set; } = new IdName();
 
         public bool MotherClubBonus { get; set; }
 
@@ -72,7 +60,7 @@
 
         public long NativeLeagueId { get; set; }
 
-        public string NativeLeagueName { get; set; }
+        public string NativeLeagueName { get; set; } = string.Empty;
 
         public DateTime NextBirthDay { get; set; }
 
@@ -80,7 +68,7 @@
 
         public string? OwnerNotes { get; set; }
 
-        public OwningTeam OwningTeam { get; set; }
+        public OwningTeam OwningTeam { get; set; } = new OwningTeam();
 
         public int PlayerCategoryId { get; set; }
 
@@ -88,13 +76,13 @@
 
         public long PlayerId { get; set; }
 
-        public string PlayerLanguage { get; set; }
+        public string PlayerLanguage { get; set; } = string.Empty;
 
         public long PlayerLanguageId { get; set; }
 
         public int? PlayerNumber { get; set; }
 
-        public PlayerSkills PlayerSkills { get; set; }
+        public PlayerSkills PlayerSkills { get; set; } = new PlayerSkills();
 
         public long Salary { get; set; }
 

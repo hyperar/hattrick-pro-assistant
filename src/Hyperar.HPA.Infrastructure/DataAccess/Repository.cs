@@ -6,7 +6,7 @@
     using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
-    public class Repository<TEntity> : RepositoryBase<TEntity>, IRepositoryBase<TEntity>, IRepository<TEntity> where TEntity : EntityBase, IEntity
+    public class Repository<TEntity> : AuditableRepository<TEntity>, IAuditableRepository<TEntity>, IRepository<TEntity> where TEntity : EntityBase, IEntity
     {
         public Repository(IDatabaseContext context) : base(context)
         {

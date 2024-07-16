@@ -285,20 +285,32 @@
   <data name="DownloadTaskStatus_Downloaded" xml:space="preserve">
     <value>Downloaded</value>
   </data>
+  <data name="DownloadTaskStatus_Downloading" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
   <data name="DownloadTaskStatus_Error" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="DownloadTaskStatus_Finished" xml:space="preserve">
     <value>Finished</value>
   </data>
-  <data name="DownloadTaskStatus_NotStarted" xml:space="preserve">
-    <value>Not Started</value>
-  </data>
   <data name="DownloadTaskStatus_Parsed" xml:space="preserve">
     <value>Parsed</value>
   </data>
+  <data name="DownloadTaskStatus_Parsing" xml:space="preserve">
+    <value>Parsing</value>
+  </data>
+  <data name="DownloadTaskStatus_Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="DownloadTaskStatus_Persisting" xml:space="preserve">
+    <value>Persisting</value>
+  </data>
   <data name="DownloadTaskStatus_Processed" xml:space="preserve">
     <value>Processed</value>
+  </data>
+  <data name="DownloadTaskStatus_Processing" xml:space="preserve">
+    <value>Processing</value>
   </data>
   <data name="DownloadTaskType_CheckToken" xml:space="preserve">
     <value>Check Token</value>
@@ -803,6 +815,9 @@ Found: '{1}'.</value>
   <data name="XmlFileType_HallOfFamePlayers" xml:space="preserve">
     <value>Hall Of Fame Players</value>
   </data>
+  <data name="XmlFileType_LeagueDetails" xml:space="preserve">
+    <value>League Details</value>
+  </data>
   <data name="XmlFileType_ManagerCompendium" xml:space="preserve">
     <value>Manager Compendium</value>
   </data>
@@ -835,5 +850,20 @@ Found: '{1}'.</value>
   </data>
   <data name="XmlFileType_WorldDetails" xml:space="preserve">
     <value>World Details</value>
+  </data>
+  <data name="XmlFileType_YouthAvatars" xml:space="preserve">
+    <value>Youth Avatars</value>
+  </data>
+  <data name="XmlFileType_YouthLeagueDetails" xml:space="preserve">
+    <value>Youth League Details</value>
+  </data>
+  <data name="XmlFileType_YouthPlayerDetails" xml:space="preserve">
+    <value>Youth Player Details</value>
+  </data>
+  <data name="XmlFileType_YouthPlayerList" xml:space="preserve">
+    <value>Youth Player List</value>
+  </data>
+  <data name="XmlFileType_YouthTeamDetails" xml:space="preserve">
+    <value>Youth Team Details</value>
   </data>
 </root>

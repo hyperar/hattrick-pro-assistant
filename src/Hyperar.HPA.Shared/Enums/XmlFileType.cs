@@ -2,36 +2,52 @@
 {
     public enum XmlFileType : int
     {
-        ArenaDetails = 1,
+        ArenaDetails,
 
-        Avatars = 2,
+        Avatars,
 
-        CheckToken = 3,
+        CheckToken,
 
-        Club = 4,
+        Club,
 
-        HallOfFamePlayers = 5,
+        HallOfFamePlayers,
 
-        ManagerCompendium = 6,
+        LeagueDetails,
 
-        MatchDetails = 7,
+        LeagueFixtures,
 
-        Matches = 8,
+        ManagerCompendium,
 
-        MatchArchive = 9,
+        MatchDetails,
 
-        MatchLineUp = 10,
+        Matches,
 
-        Players = 11,
+        MatchArchive,
 
-        PlayerDetails = 12,
+        MatchLineUp,
 
-        StaffAvatars = 13,
+        Players,
 
-        StaffList = 14,
+        PlayerDetails,
 
-        TeamDetails = 15,
+        StaffAvatars,
 
-        WorldDetails = 16
+        StaffList,
+
+        TeamDetails,
+
+        WorldDetails,
+
+        YouthAvatars,
+
+        YouthLeagueDetails,
+
+        YouthLeagueFixtures,
+
+        YouthPlayerDetails,
+
+        YouthPlayerList,
+
+        YouthTeamDetails
     }
 }

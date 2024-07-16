@@ -1,20 +1,22 @@
 ﻿namespace Hyperar.HPA.Infrastructure.DataAccess.Mappings.Senior
 {
-    using Infrastructure.DataAccess.Interfaces;
+    using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal class MatchTeamLineUp : EntityBase<Domain.Senior.MatchTeamLineUp>, IEntityTypeConfiguration<Domain.Senior.MatchTeamLineUp>, IEntityMapping<Domain.Senior.MatchTeamLineUp>
+    internal class MatchTeamLineUp : AuditableEntityBase<Domain.Senior.MatchTeamLineUp>, IEntityTypeConfiguration<Domain.Senior.MatchTeamLineUp>, IEntityMapping<Domain.Senior.MatchTeamLineUp>
     {
         public override void MapProperties(EntityTypeBuilder<Domain.Senior.MatchTeamLineUp> builder)
         {
             builder.Property(p => p.Experience)
-                .HasColumnOrder(1)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
 
-            builder.Property(p => p.Style)
-                .HasColumnOrder(2)
+            builder.Property(p => p.PlayStyle)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
         }
@@ -23,14 +25,31 @@
         {
             builder.HasOne(m => m.MatchTeam)
                 .WithOne(m => m.LineUp)
-                .HasForeignKey<Domain.Senior.MatchTeamLineUp>(m => m.MatchTeamId)
-                .HasConstraintName("FK_Senior_MatchTeamLineUp_MatchTeam")
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasConstraintName("FK_MatchTeamLineUp_MatchTeam")
+                .HasForeignKey<Domain.Senior.MatchTeamLineUp>(m => new { m.TeamHattrickId, m.MatchHattrickId })
+                .IsRequired();
         }
 
         public override void MapTable(EntityTypeBuilder<Domain.Senior.MatchTeamLineUp> builder)
         {
             builder.ToTable(Constants.TableName.MatchTeamLineUp, Constants.Schema.Senior);
+        }
+
+        protected override void MapBaseProperties(EntityTypeBuilder<Domain.Senior.MatchTeamLineUp> builder)
+        {
+            builder.HasKey(p => new { p.TeamHattrickId, p.MatchHattrickId });
+
+            builder.Property(p => p.TeamHattrickId)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
+
+            builder.Property(p => p.MatchHattrickId)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.BigInt)
+                .IsRequired();
         }
     }
 }

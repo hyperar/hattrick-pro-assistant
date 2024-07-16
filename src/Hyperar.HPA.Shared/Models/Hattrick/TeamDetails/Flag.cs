@@ -2,16 +2,10 @@
 {
     public class Flag
     {
-        public Flag()
-        {
-            this.CountryCode = string.Empty;
-            this.LeagueName = string.Empty;
-        }
-
-        public string CountryCode { get; set; }
+        public string CountryCode { get; set; } = string.Empty;
 
         public long LeagueId { get; set; }
 
-        public string LeagueName { get; set; }
+        public string LeagueName { get; set; } = string.Empty;
     }
 }

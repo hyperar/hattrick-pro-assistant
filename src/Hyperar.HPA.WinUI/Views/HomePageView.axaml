@@ -19,12 +19,12 @@
         <converters:EnumToImageConverter x:Key="enumToImageConverter" />
         <converters:EnumToTranslatedStringConverter x:Key="enumToTranslatedStringConverter" />
         <converters:EqualToBooleanConverter x:Key="equalToBooleanConverter" />
+        <converters:HealthStatusToColorConverter x:Key="healthStatusToColorConverter" />
         <converters:HealthStatusToImageConverter x:Key="healthStatusToImageConverter" />
         <converters:HealthStatusToTranslatedStringConverter x:Key="healthStatusToTranslatedStringConverter" />
         <converters:HealthStatusToValueStringConverter x:Key="healthStatusToValueStringConverter" />
         <converters:NotEqualToBooleanConverter x:Key="notEqualToBooleanConverter" />
-        <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/NoManagerAvatar.png" x:Key="noManagerAvatar" />
-        <Image Source="avares://Hyperar.HPA.WinUI/Assets/Images/NoTeamLogo.png" x:Key="noTeamLogo" />
+        
 
     </UserControl.Resources>
 
@@ -68,8 +68,7 @@
                        Grid.Row="0"
                        Height="130"
                        Source="{Binding Team.LogoBytes,
-                                Converter={StaticResource byteArrayToBitmapConverter},
-                                ConverterParameter={StaticResource noTeamLogo}}"
+                                Converter={StaticResource byteArrayToBitmapConverter}}"
                        Stretch="UniformToFill"
                        Width="105" />
 
@@ -163,6 +162,7 @@
                     <Style Selector="TextBlock.label">
 
                         <Setter Property="Padding" Value="5 0" />
+
                     </Style>
 
                 </Grid.Styles>
@@ -172,8 +172,7 @@
                        Grid.Row="0"
                        Height="155"
                        Source="{Binding Team.Manager.AvatarBytes,
-                                Converter={StaticResource byteArrayToBitmapConverter},
-                                ConverterParameter={StaticResource noManagerAvatar}}"
+                                Converter={StaticResource byteArrayToBitmapConverter}}"
                        Stretch="None"
                        Width="110" />
 
@@ -651,6 +650,8 @@
 
                                 <PathIcon Data="{Binding HealthStatus,
                                                  Converter={StaticResource healthStatusToImageConverter}}"
+                                          Foreground="{Binding HealthStatus,
+                                                       Converter={StaticResource healthStatusToColorConverter}}"
                                           Height="16"
                                           Width="16" />
 
@@ -672,6 +673,7 @@
 
                             <PathIcon Data="{StaticResource MotherClubBonusIcon}"
                                       IsVisible="{Binding HasMotherClubBonus}"
+                                      Foreground="#DD4140"
                                       Height="16"
                                       ToolTip.Tip="{x:Static globalization:Translations.MotherClubBonusToolTip}"
                                       Width="16" />

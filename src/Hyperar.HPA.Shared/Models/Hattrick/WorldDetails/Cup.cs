@@ -2,11 +2,6 @@
 {
     public class Cup
     {
-        public Cup()
-        {
-            this.CupName = string.Empty;
-        }
-
         public long CupId { get; set; }
 
         public int CupLeagueLevel { get; set; }
@@ -15,7 +10,7 @@
 
         public int CupLevelIndex { get; set; }
 
-        public string CupName { get; set; }
+        public string CupName { get; set; } = string.Empty;
 
         public int MatchRound { get; set; }
 

@@ -16,6 +16,7 @@
             {
                 return this.isExecuting;
             }
+
             set
             {
                 this.isExecuting = value;
