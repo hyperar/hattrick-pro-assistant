@@ -86,6 +86,8 @@
                     await this.mediator.Send(request, cancellationToken);
                 }
 
+                await this.userService.SetUserDefaultTeamIsNull();
+
                 await this.userService.UpdateUserLastDownloadDate();
             }
             catch (OperationCanceledException)
@@ -96,7 +98,7 @@
                     .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
                     .ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 hasErrors = true;
 

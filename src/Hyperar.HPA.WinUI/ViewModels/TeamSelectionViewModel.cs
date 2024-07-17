@@ -13,17 +13,13 @@
     {
         private readonly ITeamSelectionViewService teamSelectionViewService;
 
-        private readonly ITeamSelector teamSelector;
-
         [ObservableProperty]
         private ICollection<Team> teams;
 
         public TeamSelectionViewModel(
             INavigator navigator,
-            ITeamSelector teamSelector,
             ITeamSelectionViewService teamSelectionViewService) : base(navigator)
         {
-            this.teamSelector = teamSelector;
             this.teamSelectionViewService = teamSelectionViewService;
 
             this.teams = new List<Team>();
@@ -33,7 +29,7 @@
         {
             this.Teams = new List<Team>(await this.teamSelectionViewService.GetTeamsAsync());
 
-            if (this.teamSelector.SelectedTeamHattrickId != 0)
+            if (this.Navigator.SelectedTeamHattrickId != 0)
             {
                 this.Navigator.ResumeNavigation();
             }
@@ -46,9 +42,9 @@
         {
             this.Navigator.SuspendNavigation();
 
-            this.teamSelector.SetSelectedTeam(selectedTeamHattrickId);
-
             await this.teamSelectionViewService.SetSelectedTeamAsync(selectedTeamHattrickId);
+
+            this.Navigator.SetSelectedTeam(selectedTeamHattrickId);
 
             this.Navigator.SetPageType(ViewType.Home);
         }

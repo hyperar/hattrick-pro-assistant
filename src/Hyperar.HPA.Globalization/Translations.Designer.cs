@@ -880,6 +880,24 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Youth Matches.
+        /// </summary>
+        public static string JuniorMatches {
+            get {
+                return ResourceManager.GetString("JuniorMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth Players.
+        /// </summary>
+        public static string JuniorPlayers {
+            get {
+                return ResourceManager.GetString("JuniorPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keeper.
         /// </summary>
         public static string KeeperHeader {

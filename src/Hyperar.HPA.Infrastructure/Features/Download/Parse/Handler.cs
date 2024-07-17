@@ -6,6 +6,7 @@
     using Application.Features;
     using Application.Interfaces;
     using Constants;
+    using Hyperar.HPA.Application.Features.Download;
     using MediatR;
     using Services;
     using Shared.Enums;

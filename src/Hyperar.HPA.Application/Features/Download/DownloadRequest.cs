@@ -1,4 +1,4 @@
-﻿namespace Hyperar.HPA.Application.Features
+﻿namespace Hyperar.HPA.Application.Features.Download
 {
     using System;
     using Application.Interfaces;

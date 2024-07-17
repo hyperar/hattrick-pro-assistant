@@ -1,8 +1,11 @@
 ﻿namespace Hyperar.HPA.WinUI.ExtensionMethods.HostBuilder
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using Application.Services;
+    using MediatR;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using WinUI.Enums;
@@ -24,6 +27,8 @@
                 services.AddTransient<CreateViewModelAsync<PlayersViewModel>>(services => () => CreatePlayersViewModelAsync(services));
                 services.AddTransient<CreateViewModelAsync<SettingsViewModel>>(services => () => CreateSettingsViewModelAsync(services));
                 services.AddTransient<CreateViewModelAsync<TeamSelectionViewModel>>(services => () => CreateTeamSelectionViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<JuniorMatchesViewModel>>(services => () => CreateJuniorMatchesViewModelAsync(services));
+                services.AddTransient<CreateViewModelAsync<JuniorPlayersViewModel>>(services => () => CreateJuniorPlayersViewModelAsync(services));
 
                 services.AddSingleton<CreateViewModelAsync<MainViewModel>>(services => () => CreateMainViewModelAsync(services));
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
@@ -74,8 +79,29 @@
         {
             HomeViewModel viewModel = new HomeViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<ITeamSelector>(),
                 services.CreateScope().ServiceProvider.GetRequiredService<IHomeViewService>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
+        }
+
+        private static async Task<JuniorMatchesViewModel> CreateJuniorMatchesViewModelAsync(IServiceProvider services)
+        {
+            JuniorMatchesViewModel viewModel = new JuniorMatchesViewModel(
+                services.GetRequiredService<INavigator>());
+
+            await viewModel.InitializeAsync();
+
+            return viewModel;
+        }
+
+        private static async Task<JuniorPlayersViewModel> CreateJuniorPlayersViewModelAsync(IServiceProvider services)
+        {
+            IServiceScope scope = services.CreateScope();
+
+            JuniorPlayersViewModel viewModel = new JuniorPlayersViewModel(
+                services.GetRequiredService<INavigator>());
 
             await viewModel.InitializeAsync();
 
@@ -84,45 +110,16 @@
 
         private static async Task<MainViewModel> CreateMainViewModelAsync(IServiceProvider services)
         {
-            using (IServiceScope scope = services.CreateScope())
-            {
-                // Scoped.
-                IUserService userService = scope.ServiceProvider.GetRequiredService<IUserService>();
+            // Singleton
+            IViewModelFactory viewModelFactory = services.GetRequiredService<IViewModelFactory>();
+            INavigator navigator = services.GetRequiredService<INavigator>();
+            IServiceScopeFactory serviceScopeFactory = services.GetRequiredService<IServiceScopeFactory>();
 
-                // Singleton
-                IViewModelFactory viewModelFactory = services.GetRequiredService<IViewModelFactory>();
-                INavigator navigator = services.GetRequiredService<INavigator>();
-                ITeamSelector teamSelector = services.GetRequiredService<ITeamSelector>();
+            var viewModel = new MainViewModel(navigator, serviceScopeFactory, viewModelFactory);
 
-                Domain.User user = await userService.GetUserAsync();
+            await viewModel.InitializeAsync();
 
-                ArgumentNullException.ThrowIfNull(user, nameof(user));
-
-                ViewType viewType;
-
-                if (user.Token == null)
-                {
-                    viewType = ViewType.Authorization;
-                }
-                else if (user.LastDownloadDate == null)
-                {
-                    viewType = ViewType.Download;
-                }
-                else if (user.SelectedTeamHattrickId == null)
-                {
-                    viewType = ViewType.TeamSelection;
-                }
-                else
-                {
-                    ArgumentNullException.ThrowIfNull(user.SelectedTeamHattrickId, nameof(user.SelectedTeamHattrickId));
-
-                    teamSelector.SetSelectedTeam(user.SelectedTeamHattrickId.Value);
-
-                    viewType = ViewType.Home;
-                }
-
-                return new MainViewModel(navigator, viewModelFactory, viewType);
-            }
+            return viewModel;
         }
 
         private static async Task<MatchesViewModel> CreateMatchesViewModelAsync(IServiceProvider services)
@@ -141,7 +138,6 @@
 
             PlayersViewModel viewModel = new PlayersViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<ITeamSelector>(),
                 scope.ServiceProvider.GetRequiredService<IPlayersViewService>());
 
             await viewModel.InitializeAsync();
@@ -165,7 +161,6 @@
         {
             TeamSelectionViewModel viewModel = new TeamSelectionViewModel(
                 services.GetRequiredService<INavigator>(),
-                services.GetRequiredService<ITeamSelector>(),
                 services.CreateScope().ServiceProvider.GetRequiredService<ITeamSelectionViewService>());
 
             await viewModel.InitializeAsync();

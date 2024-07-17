@@ -12,8 +12,6 @@
     {
         private readonly IPlayersViewService playersViewService;
 
-        private readonly ITeamSelector teamSelector;
-
         [ObservableProperty]
         private List<Player> players;
 
@@ -22,13 +20,11 @@
 
         public PlayersViewModel(
             INavigator navigator,
-            ITeamSelector teamSelector,
             IPlayersViewService playersViewService) : base(navigator)
         {
             this.Currency = new Currency();
             this.players = new List<Player>();
             this.playersViewService = playersViewService;
-            this.teamSelector = teamSelector;
         }
 
         public Currency Currency { get; set; }
@@ -36,7 +32,7 @@
         public override async Task InitializeAsync()
         {
             this.Currency = await this.playersViewService.GetManagerCurrencyAsync();
-            this.Players = (await this.playersViewService.GetPlayersAsync(this.teamSelector.SelectedTeamHattrickId)).ToList();
+            this.Players = (await this.playersViewService.GetPlayersAsync(this.Navigator.SelectedTeamHattrickId)).ToList();
 
             this.Navigator.ResumeNavigation();
 

@@ -90,16 +90,13 @@
                 return;
             }
 
-            if (user.SelectedTeamHattrickId == null)
-            {
-                this.Navigator.SetPageType(ViewType.TeamSelection);
-            }
-            else
-            {
-                this.Navigator.SetPageType(ViewType.Home);
+            ArgumentNullException.ThrowIfNull(user.SelectedTeamHattrickId, nameof(user.SelectedTeamHattrickId));
 
-                this.Navigator.ResumeNavigation();
-            }
+            this.Navigator.SetSelectedTeam(user.SelectedTeamHattrickId.Value);
+
+            this.Navigator.SetPageType(ViewType.Home);
+
+            this.Navigator.ResumeNavigation();
         }
     }
 }
