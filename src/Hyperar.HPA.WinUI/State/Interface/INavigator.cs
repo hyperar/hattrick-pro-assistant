@@ -8,11 +8,11 @@
     {
         event Action? CanNavigateChanged;
 
-        event Action? SelectedTeamChanged;
-
         event Action? CurrentPageChanged;
 
         event Action? PageTypeChanged;
+
+        event Action? SelectedTeamChanged;
 
         bool CanNavigate { get; }
 
@@ -22,6 +22,8 @@
 
         long SelectedTeamHattrickId { get; }
 
+        public void RebuildMenu();
+
         void ResumeNavigation();
 
         void SetCurrentPage(ViewModelBase? currentPage);
@@ -29,8 +31,6 @@
         void SetPageType(ViewType viewType);
 
         public void SetSelectedTeam(long selectedTeamHattrickId);
-
-        public void RebuildMenu();
 
         void SuspendNavigation();
     }

@@ -1,14 +1,10 @@
 ﻿namespace Hyperar.HPA.WinUI.ExtensionMethods.HostBuilder
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Application.Services;
-    using MediatR;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using WinUI.Enums;
     using WinUI.State.Interface;
     using WinUI.ViewModels;
     using WinUI.ViewModels.Interface;

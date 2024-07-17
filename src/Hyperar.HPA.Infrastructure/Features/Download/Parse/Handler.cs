@@ -3,7 +3,6 @@
     using System.Text;
     using System.Xml;
     using Application;
-    using Application.Features;
     using Application.Interfaces;
     using Constants;
     using Hyperar.HPA.Application.Features.Download;

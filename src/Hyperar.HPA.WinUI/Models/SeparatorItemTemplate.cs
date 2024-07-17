@@ -4,7 +4,6 @@
     using Avalonia;
     using Avalonia.Controls;
     using Avalonia.Media;
-    using WinUI.Enums;
 
     internal class SeparatorItemTemplate : MenuItemTemplate
     {
