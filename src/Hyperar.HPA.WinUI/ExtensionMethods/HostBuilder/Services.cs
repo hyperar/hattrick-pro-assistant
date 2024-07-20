@@ -24,7 +24,6 @@
                 services.AddScoped<ITeamSelectionViewService, TeamSelectionViewService>();
 
                 // Scoped services.
-                //services.AddScoped<IDownloadService, DownloadService>();
                 services.AddScoped<IUserService, UserService>();
             });
 

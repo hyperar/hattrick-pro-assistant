@@ -99,6 +99,8 @@
 
             var user = await this.userService.GetUserAsync();
 
+            this.Navigator.RebuildMenu();
+
             if (user.LastDownloadDate == null)
             {
                 this.Navigator.SetPageType(ViewType.Download);

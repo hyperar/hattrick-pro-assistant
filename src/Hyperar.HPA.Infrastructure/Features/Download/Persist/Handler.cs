@@ -4,9 +4,9 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Application;
-    using Application.Features;
     using Application.Interfaces;
     using Domain.Interfaces;
+    using Hyperar.HPA.Application.Features.Download;
     using MediatR;
     using Shared.Enums;
 

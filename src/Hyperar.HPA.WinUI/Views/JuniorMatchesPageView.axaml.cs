@@ -2,9 +2,9 @@ namespace Hyperar.HPA.WinUI.Views
 {
     using Avalonia.Controls;
 
-    public partial class TeamSelectionPageView : UserControl
+    public partial class JuniorMatchesPageView : UserControl
     {
-        public TeamSelectionPageView()
+        public JuniorMatchesPageView()
         {
             this.InitializeComponent();
         }

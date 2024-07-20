@@ -16,6 +16,10 @@
 
         Players,
 
+        JuniorMatches,
+
+        JuniorPlayers,
+
         Settings,
 
         TeamSelection

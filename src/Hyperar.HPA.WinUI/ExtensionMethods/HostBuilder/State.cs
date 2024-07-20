@@ -12,7 +12,6 @@
             host.ConfigureServices(services =>
             {
                 services.AddSingleton<INavigator, Navigator>();
-                services.AddSingleton<ITeamSelector, TeamSelector>();
             });
 
             return host;

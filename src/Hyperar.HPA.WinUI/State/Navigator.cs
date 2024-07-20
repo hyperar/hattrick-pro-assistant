@@ -14,11 +14,15 @@
 
         private ViewType pageType;
 
+        private long selectedTeamHattrickId;
+
         public event Action? CanNavigateChanged;
 
         public event Action? CurrentPageChanged;
 
         public event Action? PageTypeChanged;
+
+        public event Action? SelectedTeamChanged;
 
         public bool CanNavigate
         {
@@ -42,7 +46,7 @@
                 return this.currentPage;
             }
 
-            set
+            private set
             {
                 this.currentPage = value;
 
@@ -57,12 +61,32 @@
                 return this.pageType;
             }
 
-            set
+            private set
             {
                 this.pageType = value;
 
                 this.PageTypeChanged?.Invoke();
             }
+        }
+
+        public long SelectedTeamHattrickId
+        {
+            get
+            {
+                return this.selectedTeamHattrickId;
+            }
+
+            private set
+            {
+                this.selectedTeamHattrickId = value;
+
+                this.SelectedTeamChanged?.Invoke();
+            }
+        }
+
+        public void RebuildMenu()
+        {
+            this.SelectedTeamChanged?.Invoke();
         }
 
         public void ResumeNavigation()
@@ -78,6 +102,11 @@
         public void SetPageType(ViewType viewType)
         {
             this.PageType = viewType;
+        }
+
+        public void SetSelectedTeam(long selectedTeamHattrickId)
+        {
+            this.SelectedTeamHattrickId = selectedTeamHattrickId;
         }
 
         public void SuspendNavigation()

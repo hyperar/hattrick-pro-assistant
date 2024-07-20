@@ -1,8 +1,8 @@
 ﻿namespace Hyperar.HPA.Infrastructure
 {
     using Application;
-    using Application.Features;
     using Application.Interfaces;
+    using Hyperar.HPA.Application.Features.Download;
     using Shared.Enums;
     using Shared.Models.UI.Download;
 

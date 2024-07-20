@@ -67,13 +67,29 @@
             await this.context.SaveAsync();
         }
 
+        public async Task SetUserDefaultTeamIsNull()
+        {
+            Domain.User user = await this.userRepository.Query().SingleAsync();
+
+            ArgumentNullException.ThrowIfNull(user.Manager, nameof(user.Manager));
+
+            if (user.SelectedTeamHattrickId == null)
+            {
+                user.SelectedTeamHattrickId = user.Manager.SeniorTeams.Single(x => x.IsPrimary).HattrickId;
+
+                this.userRepository.Update(user);
+
+                await this.context.SaveAsync();
+            }
+        }
+
         public async Task UpdateUserLastDownloadDate()
         {
-            Domain.User storedUser = await this.userRepository.Query().SingleAsync();
+            Domain.User user = await this.userRepository.Query().SingleAsync();
 
-            storedUser.LastDownloadDate = DateTime.Now;
+            user.LastDownloadDate = DateTime.Now;
 
-            this.userRepository.Update(storedUser);
+            this.userRepository.Update(user);
 
             await this.context.SaveAsync();
         }

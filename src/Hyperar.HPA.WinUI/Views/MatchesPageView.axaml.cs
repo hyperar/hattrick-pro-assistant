@@ -1,11 +1,12 @@
-namespace Hyperar.HPA.WinUI;
-
-using Avalonia.Controls;
-
-public partial class MatchesPageView : UserControl
+namespace Hyperar.HPA.WinUI.Views
 {
-    public MatchesPageView()
+    using Avalonia.Controls;
+
+    public partial class MatchesPageView : UserControl
     {
-        this.InitializeComponent();
+        public MatchesPageView()
+        {
+            this.InitializeComponent();
+        }
     }
 }

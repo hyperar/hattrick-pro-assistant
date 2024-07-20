@@ -4,6 +4,7 @@ namespace Hyperar.HPA.WinUI
     using System.Collections.Generic;
     using Avalonia.Controls;
     using Avalonia.Controls.Templates;
+    using Hyperar.HPA.WinUI.Views;
     using WinUI.ViewModels;
 
     public class ViewLocator : IDataTemplate
@@ -15,6 +16,8 @@ namespace Hyperar.HPA.WinUI
             this.RegisterViewFactory<HomeViewModel, HomePageView>();
             this.RegisterViewFactory<PlayersViewModel, PlayersPageView>();
             this.RegisterViewFactory<MatchesViewModel, MatchesPageView>();
+            this.RegisterViewFactory<JuniorPlayersViewModel, JuniorPlayersPageView>();
+            this.RegisterViewFactory<JuniorMatchesViewModel, JuniorMatchesPageView>();
             this.RegisterViewFactory<TeamSelectionViewModel, TeamSelectionPageView>();
             this.RegisterViewFactory<DownloadViewModel, DownloadPageView>();
             this.RegisterViewFactory<SettingsViewModel, SettingsPageView>();

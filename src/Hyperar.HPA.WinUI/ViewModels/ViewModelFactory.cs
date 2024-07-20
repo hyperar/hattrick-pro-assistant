@@ -5,8 +5,6 @@
     using WinUI.Enums;
     using WinUI.ViewModels.Interface;
 
-    //internal delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
-
     internal delegate Task<TViewModel> CreateViewModelAsync<TViewModel>() where TViewModel : ViewModelBase;
 
     internal class ViewModelFactory : IViewModelFactory
@@ -18,6 +16,10 @@
         private readonly CreateViewModelAsync<DownloadViewModel> createDownloadViewModelAsync;
 
         private readonly CreateViewModelAsync<HomeViewModel> createHomeViewModelAsync;
+
+        private readonly CreateViewModelAsync<JuniorMatchesViewModel> createJuniorMatchesViewModelAsync;
+
+        private readonly CreateViewModelAsync<JuniorPlayersViewModel> createJuniorPlayersViewModelAsync;
 
         private readonly CreateViewModelAsync<MainViewModel> createMainViewModelAsync;
 
@@ -34,6 +36,8 @@
             CreateViewModelAsync<AuthorizationViewModel> createAuthorizationViewModelAsync,
             CreateViewModelAsync<DownloadViewModel> createDownloadViewModelAsync,
             CreateViewModelAsync<HomeViewModel> createHomeViewModelAsync,
+            CreateViewModelAsync<JuniorMatchesViewModel> createJuniorMatchesViewModelAsync,
+            CreateViewModelAsync<JuniorPlayersViewModel> createJuniorPlayersViewModelAsync,
             CreateViewModelAsync<MainViewModel> createMainViewModelAsync,
             CreateViewModelAsync<MatchesViewModel> createMatchesViewModelAsync,
             CreateViewModelAsync<PlayersViewModel> createPlayersViewModelAsync,
@@ -44,6 +48,8 @@
             this.createAuthorizationViewModelAsync = createAuthorizationViewModelAsync;
             this.createDownloadViewModelAsync = createDownloadViewModelAsync;
             this.createHomeViewModelAsync = createHomeViewModelAsync;
+            this.createJuniorMatchesViewModelAsync = createJuniorMatchesViewModelAsync;
+            this.createJuniorPlayersViewModelAsync = createJuniorPlayersViewModelAsync;
             this.createMainViewModelAsync = createMainViewModelAsync;
             this.createMatchesViewModelAsync = createMatchesViewModelAsync;
             this.createPlayersViewModelAsync = createPlayersViewModelAsync;
@@ -64,6 +70,8 @@
                 ViewType.Authorization => await this.createAuthorizationViewModelAsync(),
                 ViewType.Download => await this.createDownloadViewModelAsync(),
                 ViewType.Home => await this.createHomeViewModelAsync(),
+                ViewType.JuniorMatches => await this.createJuniorMatchesViewModelAsync(),
+                ViewType.JuniorPlayers => await this.createJuniorPlayersViewModelAsync(),
                 ViewType.Matches => await this.createMatchesViewModelAsync(),
                 ViewType.Players => await this.createPlayersViewModelAsync(),
                 ViewType.Settings => await this.createSettingsViewModelAsync(),

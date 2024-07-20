@@ -1,4 +1,4 @@
-namespace Hyperar.HPA.WinUI
+namespace Hyperar.HPA.WinUI.Views
 {
     using System.Linq;
     using Avalonia.Controls;

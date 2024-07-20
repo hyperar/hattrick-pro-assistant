@@ -390,6 +390,12 @@
   <data name="InjuredTooltip" xml:space="preserve">
     <value>Estimated injury time: {0} week(s)</value>
   </data>
+  <data name="JuniorMatches" xml:space="preserve">
+    <value>Youth Matches</value>
+  </data>
+  <data name="JuniorPlayers" xml:space="preserve">
+    <value>Youth Players</value>
+  </data>
   <data name="KeeperHeader" xml:space="preserve">
     <value>Keeper</value>
   </data>

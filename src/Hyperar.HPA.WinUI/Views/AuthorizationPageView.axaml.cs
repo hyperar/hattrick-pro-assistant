@@ -1,11 +1,12 @@
-namespace Hyperar.HPA.WinUI;
-
-using Avalonia.Controls;
-
-public partial class AuthorizationPageView : UserControl
+namespace Hyperar.HPA.WinUI.Views
 {
-    public AuthorizationPageView()
+    using Avalonia.Controls;
+
+    public partial class AuthorizationPageView : UserControl
     {
-        this.InitializeComponent();
+        public AuthorizationPageView()
+        {
+            this.InitializeComponent();
+        }
     }
 }

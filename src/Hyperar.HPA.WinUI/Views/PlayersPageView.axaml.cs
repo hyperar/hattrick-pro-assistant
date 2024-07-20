@@ -1,11 +1,12 @@
-namespace Hyperar.HPA.WinUI;
-
-using Avalonia.Controls;
-
-public partial class PlayersPageView : UserControl
+namespace Hyperar.HPA.WinUI.Views
 {
-    public PlayersPageView()
+    using Avalonia.Controls;
+
+    public partial class PlayersPageView : UserControl
     {
-        this.InitializeComponent();
+        public PlayersPageView()
+        {
+            this.InitializeComponent();
+        }
     }
 }

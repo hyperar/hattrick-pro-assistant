@@ -19,6 +19,8 @@
         {
             this.IsInitialized = true;
 
+            this.Navigator.ResumeNavigation();
+
             return Task.CompletedTask;
         }
     }

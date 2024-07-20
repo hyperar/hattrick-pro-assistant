@@ -10,6 +10,8 @@
 
         Task InsertUserTokenAsync(string token, string tokenSecret);
 
+        Task SetUserDefaultTeamIsNull();
+
         Task UpdateUserLastDownloadDate();
     }
 }

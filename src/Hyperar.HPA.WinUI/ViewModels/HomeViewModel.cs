@@ -11,30 +11,26 @@
     {
         private readonly IHomeViewService homeViewService;
 
-        private readonly ITeamSelector teamSelector;
-
         [ObservableProperty]
         private Team? team;
 
         public HomeViewModel(
             INavigator navigator,
-            ITeamSelector teamSelector,
             IHomeViewService homeViewService) : base(navigator)
         {
             this.homeViewService = homeViewService;
-            this.teamSelector = teamSelector;
         }
 
         public Currency? Currency { get; set; }
 
         public override async Task InitializeAsync()
         {
-            ArgumentNullException.ThrowIfNull(this.teamSelector.SelectedTeamHattrickId, nameof(this.teamSelector.SelectedTeamHattrickId));
+            ArgumentNullException.ThrowIfNull(this.Navigator.SelectedTeamHattrickId, nameof(this.Navigator.SelectedTeamHattrickId));
 
             this.Currency = await this.homeViewService.GetManagerCurrencyAsync();
 
             this.Team = await this.homeViewService.GetTeamsOverviewAsync(
-                this.teamSelector.SelectedTeamHattrickId);
+                this.Navigator.SelectedTeamHattrickId);
 
             await base.InitializeAsync();
 

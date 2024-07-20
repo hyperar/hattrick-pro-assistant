@@ -3,9 +3,9 @@
     using System.Text;
     using System.Xml;
     using Application;
-    using Application.Features;
     using Application.Interfaces;
     using Constants;
+    using Hyperar.HPA.Application.Features.Download;
     using MediatR;
     using Services;
     using Shared.Enums;

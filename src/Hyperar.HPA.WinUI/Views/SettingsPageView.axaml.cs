@@ -1,11 +1,12 @@
-namespace Hyperar.HPA.WinUI;
-
-using Avalonia.Controls;
-
-public partial class SettingsPageView : UserControl
+namespace Hyperar.HPA.WinUI.Views
 {
-    public SettingsPageView()
+    using Avalonia.Controls;
+
+    public partial class SettingsPageView : UserControl
     {
-        this.InitializeComponent();
+        public SettingsPageView()
+        {
+            this.InitializeComponent();
+        }
     }
 }

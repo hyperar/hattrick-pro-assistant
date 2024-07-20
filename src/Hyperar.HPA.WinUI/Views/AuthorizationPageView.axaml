@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:Hyperar.HPA.WinUI.ViewModels"
              xmlns:globalization="clr-namespace:Hyperar.HPA.Globalization;assembly=Hyperar.HPA.Globalization"
              x:DataType="vm:AuthorizationViewModel"
-             x:Class="Hyperar.HPA.WinUI.AuthorizationPageView"
+             x:Class="Hyperar.HPA.WinUI.Views.AuthorizationPageView"
              mc:Ignorable="d"
              d:DesignWidth="1600"
              d:DesignHeight="900">

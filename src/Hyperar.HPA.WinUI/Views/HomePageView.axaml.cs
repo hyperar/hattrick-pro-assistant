@@ -1,11 +1,12 @@
-namespace Hyperar.HPA.WinUI;
-
-using Avalonia.Controls;
-
-public partial class HomePageView : UserControl
+namespace Hyperar.HPA.WinUI.Views
 {
-    public HomePageView()
+    using Avalonia.Controls;
+
+    public partial class HomePageView : UserControl
     {
-        this.InitializeComponent();
+        public HomePageView()
+        {
+            this.InitializeComponent();
+        }
     }
 }

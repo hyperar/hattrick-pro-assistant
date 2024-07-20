@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="Hyperar.HPA.WinUI.HomePageView"
+             x:Class="Hyperar.HPA.WinUI.Views.HomePageView"
              xmlns:converters="clr-namespace:Hyperar.HPA.WinUI.Converters"
              xmlns:enums="clr-namespace:Hyperar.HPA.Shared.Enums;assembly=Hyperar.HPA.Shared"
              xmlns:vm="clr-namespace:Hyperar.HPA.WinUI.ViewModels"
@@ -24,7 +24,6 @@
         <converters:HealthStatusToTranslatedStringConverter x:Key="healthStatusToTranslatedStringConverter" />
         <converters:HealthStatusToValueStringConverter x:Key="healthStatusToValueStringConverter" />
         <converters:NotEqualToBooleanConverter x:Key="notEqualToBooleanConverter" />
-        
 
     </UserControl.Resources>
 
