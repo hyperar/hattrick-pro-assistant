@@ -646,6 +646,15 @@ namespace Hyperar.HPA.Globalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Skipped.
+        /// </summary>
+        public static string DownloadTaskStatus_Skipped {
+            get {
+                return ResourceManager.GetString("DownloadTaskStatus_Skipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Token.
         /// </summary>
         public static string DownloadTaskType_CheckToken {

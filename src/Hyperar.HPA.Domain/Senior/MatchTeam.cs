@@ -44,6 +44,8 @@
 
         public long MatchHattrickId { get; set; }
 
+        public byte[] MatchKitBytes { get; set; } = Array.Empty<byte>();
+
         public MatchSectorRating MidfieldRating { get; set; }
 
         public string Name { get; set; } = string.Empty;

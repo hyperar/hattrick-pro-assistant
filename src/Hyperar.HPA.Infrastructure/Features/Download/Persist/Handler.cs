@@ -25,34 +25,43 @@
 
         public async Task Handle(PersistRequest request, CancellationToken cancellationToken)
         {
-            if (request.Task is XmlDownloadTask xmlDownloadTask)
+            try
             {
-                request.Task.Status = DownloadTaskStatus.Persisting;
+                if (request.Task is XmlDownloadTask xmlDownloadTask)
+                {
+                    request.Task.Status = DownloadTaskStatus.Persisting;
 
-                Services.DownloadViewService.ReportProgress(
-                    request.Task,
-                    request.TaskList,
-                    true,
-                    request.Progress);
+                    Services.DownloadViewService.ReportProgress(
+                        request.Task,
+                        request.TaskList,
+                        true,
+                        request.Progress);
 
-                var persister = this.persisterFactory.GetPersister(xmlDownloadTask);
+                    var persister = this.persisterFactory.GetPersister(xmlDownloadTask);
 
-                await persister.PersistAsync(xmlDownloadTask, cancellationToken);
+                    await persister.PersistAsync(xmlDownloadTask, cancellationToken);
 
-                await this.databaseContext.SaveAsync();
+                    await this.databaseContext.SaveAsync();
 
-                request.Task.Status = DownloadTaskStatus.Finished;
-
-                Services.DownloadViewService.ReportProgress(
-                    request.Task,
-                    request.TaskList,
-                    true,
-                    request.Progress);
+                    request.Task.Status = DownloadTaskStatus.Finished;
+                }
+                else
+                {
+                    throw new ArgumentException(nameof(request));
+                }
             }
-            else
+            catch
             {
-                throw new ArgumentException(nameof(request));
+                request.Task.Status = DownloadTaskStatus.Error;
+
+                throw;
             }
+
+            Services.DownloadViewService.ReportProgress(
+                request.Task,
+                request.TaskList,
+                true,
+                request.Progress);
         }
     }
 }

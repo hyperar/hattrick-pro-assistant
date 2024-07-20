@@ -6,7 +6,7 @@
 
     public interface IDownloadViewService
     {
-        Task UpdateFromHattrickAsync(
+        Task<bool> UpdateFromHattrickAsync(
             DownloadSettings settings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken);

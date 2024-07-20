@@ -312,6 +312,9 @@
   <data name="DownloadTaskStatus_Processing" xml:space="preserve">
     <value>Processing</value>
   </data>
+  <data name="DownloadTaskStatus_Skipped" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
   <data name="DownloadTaskType_CheckToken" xml:space="preserve">
     <value>Check Token</value>
   </data>

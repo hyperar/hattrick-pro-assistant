@@ -140,6 +140,12 @@
                     this.GetColumnOrder())
                 .HasColumnType(Constants.ColumnType.Int)
                 .IsRequired();
+
+            builder.Property(p => p.MatchKitBytes)
+                .HasColumnOrder(
+                    this.GetColumnOrder())
+                .HasColumnType(Constants.ColumnType.VarBinary)
+                .IsRequired();
         }
 
         public override void MapRelationships(EntityTypeBuilder<Domain.Senior.MatchTeam> builder)

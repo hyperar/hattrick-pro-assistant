@@ -26,61 +26,70 @@
 
         public async Task Handle(ParseRequest request, CancellationToken cancellationToken)
         {
-            if (request.Task is XmlDownloadTask xmlDownloadTask)
+            try
             {
-                request.Task.Status = DownloadTaskStatus.Parsing;
-
-                DownloadViewService.ReportProgress(
-                    request.Task,
-                    request.TaskList,
-                    true,
-                    request.Progress);
-
-                ArgumentException.ThrowIfNullOrWhiteSpace(xmlDownloadTask.Response, nameof(xmlDownloadTask.Response));
-
-                IXmlFile result;
-
-                using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xmlDownloadTask.Response)))
+                if (request.Task is XmlDownloadTask xmlDownloadTask)
                 {
-                    XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
-                    {
-                        Async = true,
-                        CloseInput = true,
-                        IgnoreComments = true,
-                        IgnoreProcessingInstructions = true,
-                        IgnoreWhitespace = true
-                    };
-
-                    using (var reader = XmlReader.Create(memoryStream, xmlReaderSettings))
-                    {
-                        reader.ReadToFollowing(NodeName.FileName);
-
-                        result = this.entityFactory.CreateEntity(await reader.ReadElementContentAsStringAsync());
-
-                        result.Version = await reader.ReadXmlValueAsDecimalAsync();
-                        result.UserId = await reader.ReadXmlValueAsLongAsync();
-                        result.FetchedDate = await reader.ReadXmlValueAsDateTimeAsync();
-
-                        var parser = this.parserFactory.GetParser(xmlDownloadTask);
-
-                        await parser.ParseAsync(reader, result, cancellationToken);
-
-                        xmlDownloadTask.XmlFile = result;
-                    }
-
-                    request.Task.Status = DownloadTaskStatus.Parsed;
+                    request.Task.Status = DownloadTaskStatus.Parsing;
 
                     DownloadViewService.ReportProgress(
                         request.Task,
                         request.TaskList,
                         true,
                         request.Progress);
+
+                    ArgumentException.ThrowIfNullOrWhiteSpace(xmlDownloadTask.Response, nameof(xmlDownloadTask.Response));
+
+                    IXmlFile result;
+
+                    using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(xmlDownloadTask.Response)))
+                    {
+                        XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
+                        {
+                            Async = true,
+                            CloseInput = true,
+                            IgnoreComments = true,
+                            IgnoreProcessingInstructions = true,
+                            IgnoreWhitespace = true
+                        };
+
+                        using (var reader = XmlReader.Create(memoryStream, xmlReaderSettings))
+                        {
+                            reader.ReadToFollowing(NodeName.FileName);
+
+                            result = this.entityFactory.CreateEntity(await reader.ReadElementContentAsStringAsync());
+
+                            result.Version = await reader.ReadXmlValueAsDecimalAsync();
+                            result.UserId = await reader.ReadXmlValueAsLongAsync();
+                            result.FetchedDate = await reader.ReadXmlValueAsDateTimeAsync();
+
+                            var parser = this.parserFactory.GetParser(xmlDownloadTask);
+
+                            await parser.ParseAsync(reader, result, cancellationToken);
+
+                            xmlDownloadTask.XmlFile = result;
+                        }
+
+                        request.Task.Status = DownloadTaskStatus.Parsed;
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException(nameof(request));
                 }
             }
-            else
+            catch
             {
-                throw new ArgumentException(nameof(request));
+                request.Task.Status = DownloadTaskStatus.Error;
+
+                throw;
             }
+
+            DownloadViewService.ReportProgress(
+                request.Task,
+                request.TaskList,
+                true,
+                request.Progress);
         }
     }
 }

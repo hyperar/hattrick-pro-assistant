@@ -10,7 +10,7 @@
     using Shared.ExtensionMethods;
     using Models = Shared.Models.Hattrick;
 
-    public class MatchDetails : IPersisterStrategy
+    public class MatchDetails : DownloadTaskStrategyBase, IPersisterStrategy
     {
         private readonly IAuditableRepository<Domain.Junior.MatchArena> juniorMatchArenaRepository;
 
@@ -154,7 +154,7 @@
         }
 
         private async Task ProcessFinishedMatchFileAsync(
-                    Models.MatchDetails.Match xmlMatch,
+            Models.MatchDetails.Match xmlMatch,
             MatchSystem matchSystem,
             long teamId,
             CancellationToken cancellationToken)
@@ -247,14 +247,16 @@
                     MatchTeamLocation.Home,
                     xmlMatch.PossessionFirstHalfHome.Value,
                     xmlMatch.PossessionSecondHalfHome.Value,
-                    seniorMatch);
+                    seniorMatch,
+                    cancellationToken);
 
                 var awayMatchTeam = await this.ProcessSeniorMatchTeamAsync(
                     xmlMatch.AwayTeam,
                     MatchTeamLocation.Away,
                     xmlMatch.PossessionFirstHalfAway.Value,
                     xmlMatch.PossessionSecondHalfAway.Value,
-                    seniorMatch);
+                    seniorMatch,
+                    cancellationToken);
 
                 foreach (var xmlEvent in xmlMatch.EventList)
                 {
@@ -675,8 +677,10 @@
             MatchTeamLocation teamLocation,
             int firstHalfPossession,
             int secondHalfPossession,
-            Domain.Senior.Match seniorMatch)
+            Domain.Senior.Match seniorMatch,
+            CancellationToken cancellationToken)
         {
+            ArgumentNullException.ThrowIfNull(xmlTeam.DressUri, nameof(xmlTeam.DressUri));
             ArgumentNullException.ThrowIfNull(xmlTeam.Formation, nameof(xmlTeam.Formation));
             ArgumentNullException.ThrowIfNull(xmlTeam.TacticType, nameof(xmlTeam.TacticType));
             ArgumentNullException.ThrowIfNull(xmlTeam.TacticSkill, nameof(xmlTeam.TacticSkill));
@@ -701,6 +705,10 @@
 
             if (matchTeam == null)
             {
+                var matchKitBytes = await GetImageBytesFromCacheAsync(xmlTeam.DressUri, cancellationToken);
+
+                ArgumentNullException.ThrowIfNull(matchKitBytes, nameof(matchKitBytes));
+
                 matchTeam = await this.seniorMatchTeamRepository.InsertAsync(
                     new Domain.Senior.MatchTeam
                     {
@@ -728,6 +736,7 @@
                         ChancesOnRight = xmlTeam.NrOfChancesRight.Value,
                         SpecialEventChances = xmlTeam.NrOfChancesSpecialEvents.Value,
                         OtherChances = xmlTeam.NrOfChancesOther.Value,
+                        MatchKitBytes = matchKitBytes,
                         Match = seniorMatch
                     });
             }

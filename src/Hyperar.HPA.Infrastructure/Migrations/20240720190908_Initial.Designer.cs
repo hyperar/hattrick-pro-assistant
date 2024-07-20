@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hyperar.HPA.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240715173935_Initial")]
+    [Migration("20240720190908_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -1800,7 +1800,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime")
-                        .HasColumnOrder(24);
+                        .HasColumnOrder(25);
 
                     b.Property<int>("DefenseIndirectSetPiecesRating")
                         .HasColumnType("int")
@@ -1827,6 +1827,11 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     b.Property<int>("Location")
                         .HasColumnType("int")
                         .HasColumnOrder(2);
+
+                    b.Property<byte[]>("MatchKitBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(23);
 
                     b.Property<int>("MidfieldRating")
                         .HasColumnType("int")

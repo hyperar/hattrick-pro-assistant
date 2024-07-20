@@ -22,6 +22,8 @@
 
         Error,
 
-        Canceled
+        Canceled,
+
+        Skipped
     }
 }

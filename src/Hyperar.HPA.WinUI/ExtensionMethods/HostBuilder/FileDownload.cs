@@ -20,6 +20,7 @@
                 services.AddScoped<Infrastructure.Features.Download.Extract.Strategies.Default>();
                 services.AddScoped<Infrastructure.Features.Download.Extract.Strategies.ManagerCompendium>();
                 services.AddScoped<Infrastructure.Features.Download.Extract.Strategies.MatchArchive>();
+                services.AddScoped<Infrastructure.Features.Download.Extract.Strategies.MatchDetails>();
                 services.AddScoped<Infrastructure.Features.Download.Extract.Strategies.Matches>();
                 services.AddScoped<Infrastructure.Features.Download.Extract.Strategies.Players>();
                 services.AddScoped<Infrastructure.Features.Download.Extract.Strategies.TeamDetails>();

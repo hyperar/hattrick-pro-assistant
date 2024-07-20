@@ -61,7 +61,7 @@
                     completedTaskCount));
         }
 
-        public async Task UpdateFromHattrickAsync(
+        public async Task<bool> UpdateFromHattrickAsync(
             DownloadSettings downloadSettings,
             IProgress<ProcessReport> progress,
             CancellationToken cancellationToken)
@@ -94,18 +94,25 @@
             {
                 isCanceled = true;
 
-                _ = downloadTasks.Where(x => x.Status != DownloadTaskStatus.Finished)
-                    .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
-                    .ToList();
+                downloadTasks.Where(x => x.Status != DownloadTaskStatus.Finished)
+                    .ToList()
+                    .ForEach(x => x.Status = DownloadTaskStatus.Canceled);
+                //_ = downloadTasks.Where(x => x.Status != DownloadTaskStatus.Finished)
+                //    .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
+                //    .ToList();
             }
+#if DEBUG
+            catch (Exception ex)
+#else
             catch
+#endif
             {
                 hasErrors = true;
 
-                _ = downloadTasks.Where(x => x.Status != DownloadTaskStatus.Error
-                                          && x.Status != DownloadTaskStatus.Finished)
-                    .Select(x => { x.Status = DownloadTaskStatus.Canceled; return x; })
-                    .ToList();
+                downloadTasks.Where(x => x.Status != DownloadTaskStatus.Finished
+                                      && x.Status != DownloadTaskStatus.Error)
+                    .ToList()
+                    .ForEach(x => x.Status = DownloadTaskStatus.Skipped);
             }
             finally
             {
@@ -122,6 +129,8 @@
                     false,
                     progress);
             }
+
+            return !hasErrors && !isCanceled;
         }
     }
 }

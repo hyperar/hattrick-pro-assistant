@@ -71,7 +71,7 @@
                 this.DownloadProgressReport = report;
             });
 
-            await this.downloadViewService.UpdateFromHattrickAsync(
+            bool success = await this.downloadViewService.UpdateFromHattrickAsync(
                 new DownloadSettings
                 {
                     DownloadFullMatchArchive = this.DownloadFullMatchArchive,
@@ -85,18 +85,16 @@
 
             var user = await this.userService.GetUserAsync();
 
-            if (user.LastDownloadDate == null)
+            if (success)
             {
-                return;
+                ArgumentNullException.ThrowIfNull(user.SelectedTeamHattrickId, nameof(user.SelectedTeamHattrickId));
+
+                this.Navigator.SetSelectedTeam(user.SelectedTeamHattrickId.Value);
+
+                this.Navigator.SetPageType(ViewType.Home);
+
+                this.Navigator.ResumeNavigation(); 
             }
-
-            ArgumentNullException.ThrowIfNull(user.SelectedTeamHattrickId, nameof(user.SelectedTeamHattrickId));
-
-            this.Navigator.SetSelectedTeam(user.SelectedTeamHattrickId.Value);
-
-            this.Navigator.SetPageType(ViewType.Home);
-
-            this.Navigator.ResumeNavigation();
         }
     }
 }

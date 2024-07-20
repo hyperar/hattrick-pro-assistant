@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,197 +8,6 @@ namespace Hyperar.HPA.Infrastructure.Migrations
     /// <inheritdoc />
     public partial class Initial : Migration
     {
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Arena",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "LeagueCup");
-
-            migrationBuilder.DropTable(
-                name: "LeagueSchedule");
-
-            migrationBuilder.DropTable(
-                name: "MatchArena",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchArena",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchEvent",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchEvent",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchReferee",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamBooking",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamBooking",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamGoal",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamGoal",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamInjury",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamInjury",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpPlayer",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpPlayer",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpStartingPlayer",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpStartingPlayer",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpSubstitution",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUpSubstitution",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "PlayerMatch",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "PlayerMatch",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "PlayerSkillSet",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "PlayerSkillSet",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "SeriesTeam",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "SeriesTeam",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "StaffMember",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Token");
-
-            migrationBuilder.DropTable(
-                name: "Trainer",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "UpcomingMatch",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "UpcomingMatch",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUp",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeamLineUp",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Player",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "Player",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Series",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "Series",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeam",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "MatchTeam",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Match",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "Match",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Team",
-                schema: "junior");
-
-            migrationBuilder.DropTable(
-                name: "Team",
-                schema: "senior");
-
-            migrationBuilder.DropTable(
-                name: "Manager");
-
-            migrationBuilder.DropTable(
-                name: "Region");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
-                name: "Currency");
-
-            migrationBuilder.DropTable(
-                name: "League");
-        }
-
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -869,6 +679,7 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                     ChancesOnRight = table.Column<int>(type: "int", nullable: false),
                     SpecialEventChances = table.Column<int>(type: "int", nullable: false),
                     OtherChances = table.Column<int>(type: "int", nullable: false),
+                    MatchKitBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -1956,6 +1767,197 @@ namespace Hyperar.HPA.Infrastructure.Migrations
                 schema: "senior",
                 table: "UpcomingMatch",
                 column: "TeamHattrickId");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Arena",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "LeagueCup");
+
+            migrationBuilder.DropTable(
+                name: "LeagueSchedule");
+
+            migrationBuilder.DropTable(
+                name: "MatchArena",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchArena",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchEvent",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchEvent",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchReferee",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamBooking",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamBooking",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamGoal",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamGoal",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamInjury",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamInjury",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpPlayer",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpPlayer",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpStartingPlayer",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpStartingPlayer",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpSubstitution",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUpSubstitution",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "PlayerMatch",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "PlayerMatch",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "PlayerSkillSet",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "PlayerSkillSet",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "SeriesTeam",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "SeriesTeam",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "StaffMember",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Token");
+
+            migrationBuilder.DropTable(
+                name: "Trainer",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "UpcomingMatch",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "UpcomingMatch",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUp",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeamLineUp",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Player",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "Player",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Series",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "Series",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeam",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "MatchTeam",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Match",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "Match",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Team",
+                schema: "junior");
+
+            migrationBuilder.DropTable(
+                name: "Team",
+                schema: "senior");
+
+            migrationBuilder.DropTable(
+                name: "Manager");
+
+            migrationBuilder.DropTable(
+                name: "Region");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Country");
+
+            migrationBuilder.DropTable(
+                name: "Currency");
+
+            migrationBuilder.DropTable(
+                name: "League");
         }
     }
 }
